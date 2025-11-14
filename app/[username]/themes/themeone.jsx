@@ -300,20 +300,20 @@ export default function Themeone({userDetails,userLinks,bgcolor}) {
               <h3 className="text-2xl font-bold text-white mb-6">Follow Me</h3>
               <div className="flex gap-4 flex-wrap">
                 {[
-                  { name: "linkedin", url: userDetails.socials.linkedin, icon: "/icons/link.svg" },
-                  { name: "github", url: userDetails.socials.github, icon: "/icons/github.svg" },
-                  { name: "facebook", url: userDetails.socials.fb, icon: "/icons/fb.svg" },
-                  { name: "whatsapp", url: userDetails.socials.whatsapp, icon: "/icons/wts.svg" },
-                  { name: "tiktok", url: userDetails.socials.tiktok, icon: "/icons/tiktok.svg" },
-                  { name: "reddit", url: userDetails.socials.reddit, icon: "/icons/reddit.svg" },
-                  { name: "twitch", url: userDetails.socials.twitch, icon: "/icons/twitch.svg" },
-                  { name: "instagram", url: userDetails.socials.instagram, icon: "/icons/ins.svg" },
-                  { name: "snapchat", url: userDetails.socials.snapchat, icon: "/icons/snap.svg" },
-                  { name: "twitter", url: userDetails.socials.twitter, icon: "/icons/twit.svg" },
-                  { name: "youtube", url: userDetails.socials.youtube, icon: "/icons/yt.svg" },
-                  { name: "telegram", url: userDetails.socials.telegram, icon: "/icons/tele.svg" },
-                  { name: "tiktok", url: userDetails.socials.tik, icon: "/icons/tik.svg" },
-                  { name: "google", url: userDetails.socials.google, icon: "/icons/google.svg" },
+                  { name: "linkedin", url: userDetails.socials.linkedin, icon: "/Icons/link.svg" },
+                  { name: "github", url: userDetails.socials.github, icon: "/Icons/github.svg" },
+                  { name: "facebook", url: userDetails.socials.fb, icon: "/Icons/fb.svg" },
+                  { name: "whatsapp", url: userDetails.socials.whatsapp, icon: "/Icons/wts.svg" },
+                  { name: "tiktok", url: userDetails.socials.tiktok, icon: "/Icons/tiktok.svg" },
+                  { name: "reddit", url: userDetails.socials.reddit, icon: "/Icons/reddit.svg" },
+                  { name: "twitch", url: userDetails.socials.twitch, icon: "/Icons/twitch.svg" },
+                  { name: "instagram", url: userDetails.socials.instagram, icon: "/Icons/ins.svg" },
+                  { name: "snapchat", url: userDetails.socials.snapchat, icon: "/Icons/snap.svg" },
+                  { name: "twitter", url: userDetails.socials.twitter, icon: "/Icons/twit.svg" },
+                  { name: "youtube", url: userDetails.socials.youtube, icon: "/Icons/yt.svg" },
+                  { name: "telegram", url: userDetails.socials.telegram, icon: "/Icons/tele.svg" },
+                  { name: "tiktok", url: userDetails.socials.tik, icon: "/Icons/tik.svg" },
+                  { name: "google", url: userDetails.socials.google, icon: "/Icons/google.svg" },
                 ]
                   .filter((item) => item.url)
                   .map((item,i) => (
