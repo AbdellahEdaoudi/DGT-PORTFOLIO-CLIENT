@@ -161,7 +161,6 @@ export default function ThemeFive({ userDetails, userLinks }) {
             </div>
           </section>
           )}
-          
 
           {/* Projects */}
           {userDetails.projects?.length > 0 && (
@@ -169,7 +168,6 @@ export default function ThemeFive({ userDetails, userLinks }) {
               <h2 className="text-3xl sm:text-4xl font-extrabold mb-10 text-center text-white">
                 Featured Projects
               </h2>
-          
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 {userDetails.projects.map((project, i) => (
                   <div
@@ -251,7 +249,7 @@ export default function ThemeFive({ userDetails, userLinks }) {
         
       )}
       {/* Footer */}
-         {userDetails && (
+         {userDetails.socials?.length > 0 && (
             <footer className="border-t border-emerald-500/20 bg-black/50 backdrop-blur-md py-12 px-6">
               <div className="max-w-5xl mx-auto text-center">
                 <div className="flex justify-center gap-6 mb-6 flex-wrap">

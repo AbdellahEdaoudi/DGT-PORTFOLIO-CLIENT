@@ -210,7 +210,8 @@ export default function ThemeFour({ userDetails, userLinks }) {
             )}
 
             {/* Footer */}
-            <footer className="border-t border-emerald-500/20 bg-black/50 backdrop-blur-md py-12 px-6">
+            {userDetails.socials?.length > 0 && (
+              <footer className="border-t border-emerald-500/20 bg-black/50 backdrop-blur-md py-12 px-6">
               <div className="max-w-5xl mx-auto text-center">
                 <div className="flex justify-center gap-6 mb-6 flex-wrap">
                   {[
@@ -246,7 +247,7 @@ export default function ThemeFour({ userDetails, userLinks }) {
                 <p className="text-gray-400">© {new Date().getFullYear()} {userDetails.fullname}. All rights reserved.</p>
               </div>
             </footer>
-              
+            ) }
           </div>
         </div>
       )}
