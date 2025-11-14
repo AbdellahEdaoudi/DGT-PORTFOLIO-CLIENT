@@ -1,0 +1,331 @@
+"use client"
+import { useState } from "react"
+import { Github, Linkedin, Mail, Code2, Briefcase, CheckCircle2, Copy } from "lucide-react"
+import QrcodeProfile from "../components/QrcodeProfile"
+import UserLinks from "../components/UserLinks"
+import MagicalLoader from "../../Components/MagicalLoader"
+
+export default function ThemeThree({ userDetails, userLinks }) {
+  const [activeTab, setActiveTab] = useState("about")
+  const [copied, setCopied] = useState(false);
+  const [showQR, setShowQR] = useState(false);
+  const [expanded, setExpanded] = useState(false);
+  const CLIENT_URL = process.env.NEXT_PUBLIC_CLIENT_URL || "http://localhost:3000"
+
+  const copyProfileLink = () => {
+    const urlToCopy = `${CLIENT_URL}/${userDetails.username}`
+    navigator.clipboard.writeText(urlToCopy).then(() => {
+      setCopied(true)
+      setTimeout(() => setCopied(false), 2000)
+    })
+  }
+  if (!userDetails || !userLinks) {return <MagicalLoader />}
+
+  return (
+    <div className="min-h-screen bg-gradient-to-br from-indigo-900 via-purple-900 to-pink-900 text-white overflow-hidden">
+      {/* Floating orbs */}
+      <div className="fixed inset-0 -z-10 overflow-hidden">
+        <div className="absolute top-0 left-0 w-96 h-96 bg-pink-500 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob"></div>
+        <div
+          className="absolute top-0 right-0 w-96 h-96 bg-purple-500 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob"
+          style={{ animationDelay: "2s" }}
+        ></div>
+        <div
+          className="absolute -bottom-8 left-20 w-96 h-96 bg-blue-500 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob"
+          style={{ animationDelay: "4s" }}
+        ></div>
+      </div>
+
+      <div className="relative z-10">
+        {/* Header */}
+        <header className="pt-7 px-6 pb-8">
+          <div className="max-w-5xl mx-auto">
+            {/* Toolbar */}
+            <div className="flex justify-between items-center mb-7 md:mb-8">
+              <h1 className="text-2xl font-bold">Portfolio</h1>
+              <div className="flex gap-3">
+                {/* Copy Link */}
+                <button
+                  title="Copy Link Profile"
+                  onClick={copyProfileLink}
+                  className="flex items-center gap-2 px-4 py-2 bg-white/10 hover:bg-white/20 rounded-lg text-white transition-all duration-300 backdrop-blur-md border border-white/10"
+                >
+                  {copied ? <CheckCircle2 /> : <Copy />}
+                </button>
+                {/* QR Code */}
+                <div
+                  onClick={() => setShowQR(!showQR)}
+                  className="flex items-center gap-2 px-2 bg-white/10 hover:bg-white/20 rounded-lg text-white transition-all duration-300 backdrop-blur-md border border-white/10"
+                >
+                  <QrcodeProfile path={`/${userDetails?.username}`} userDetails={userDetails} />
+                </div>
+                {/* User Links */}
+                <div className="flex items-center gap-2 px-2 bg-white/10 hover:bg-white/20 rounded-lg text-white transition-all duration-300 backdrop-blur-md border border-white/10">
+                  <UserLinks userLinks={userLinks} />
+                </div>
+              </div>
+            </div>
+
+            {/* Header Content */}
+            <div className="flex flex-col-reverse md:flex-row gap-8 items-center justify-between mb-4">
+              <div>
+                <h1 className="text-4xl md:text-6xl font-black mb-4">{userDetails?.fullname}</h1>
+                <p className="text-2xl text-pink-200 font-semibold">{userDetails?.category}</p>
+                <p className="text-gray-300 mt-4 max-w-lg leading-relaxed">{userDetails?.about}</p>
+              </div>
+              <div className="relative">
+                <div className="absolute inset-0 bg-gradient-to-br from-pink-500 to-purple-600 rounded-3xl blur-2xl opacity-75"></div>
+                <img
+                  src={userDetails?.urlimage}
+                  alt={userDetails?.fullname}
+                  className="relative imganim md:w-72 md:mb-5 md:h-72 w-40 h-40 rounded-lg object-cover border-4 border-white/20"
+                />
+              </div>
+            </div>
+
+            {/* Tabs */}
+            <div className="flex gap-2  border-b border-white/10 flex-wrap">
+              {[
+                { key: "about", label: "About" },
+                { key: "services", label: "Services", condition: userDetails?.services?.length > 0 },
+                { key: "experience", label: "Experience", condition: userDetails?.experience?.length > 0 },
+                { key: "projects", label: "Projects", condition: userDetails?.projects?.length > 0 },
+                { key: "skills", label: "Skills", condition: userDetails?.skills?.length > 0 },
+                { key: "education", label: "Education", condition: userDetails?.education?.length > 0 },
+              ]
+                .filter((tab) => tab.condition !== false)
+                .map((tab) => (
+                  <button
+                    key={tab.key}
+                    onClick={() => setActiveTab(tab.key)}
+                    className={`px-6 py-3 font-semibold border-b-2 transition capitalize ${
+                      activeTab === tab.key
+                        ? "border-pink-500 text-pink-300"
+                        : "border-transparent text-gray-400 hover:text-white"
+                    }`}
+                  >
+                    {tab.label}
+                  </button>
+                ))}
+            </div>
+          </div>
+        </header>
+
+        {/* Content */}
+        {userDetails && (
+        <div>
+          <div className="px-6">
+            <div className="max-w-5xl mx-auto pb-20">
+              {/* About */}
+              {activeTab === "about" && (
+                <div className="grid md:grid-cols-2 gap-8">
+                  <div>
+                    <h3 className="text-2xl font-black mb-6">About Me</h3>
+                    <p className="text-gray-300 leading-relaxed mb-6">{userDetails.about}</p>
+                    <div className="space-y-4">
+                      {userDetails.country && (
+                        <div className="flex gap-4">
+                          <span className="text-pink-400 font-bold">Location:</span>
+                          <span className="text-gray-300">{userDetails.country}</span>
+                        </div>
+                      )}
+                      {userDetails.email && (
+                        <div className="flex gap-4">
+                          <span className="text-pink-400 font-bold">Email:</span>
+                          <a href={`mailto:${userDetails.email}`} className="text-gray-300 hover:text-pink-300 transition">
+                            {userDetails.email}
+                          </a>
+                        </div>
+                      )}
+                      {userDetails.phoneNumber && (
+                        <div className="flex gap-4">
+                          <span className="text-pink-400 font-bold">Phone:</span>
+                          <span className="text-gray-300">{userDetails.phoneNumber}</span>
+                        </div>
+                      )}
+                    </div>
+                  </div>
+                  <div>
+                    <h3 className="text-2xl font-black mb-6">Languages</h3>
+                    <div className="space-y-3">
+                      {userDetails.languages?.map((lang, i) => (
+                        <div
+                          key={i}
+                          className="p-4 bg-white/10 backdrop-blur-md rounded-lg border border-white/20 hover:border-pink-500/50 transition"
+                        >
+                          <p className="text-gray-200">{lang}</p>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              )}
+
+              {/* Services */}
+              {activeTab === "services" && (
+                <div className="grid md:grid-cols-2 gap-6">
+                  {userDetails.services?.map((service, i) => (
+                    <div
+                      key={i}
+                      className="p-6 bg-white/10 border border-pink-500/30 rounded-lg hover:border-pink-400/60 transition hover:scale-105 transform"
+                    >
+                      <p className="text-gray-200">{service}</p>
+                    </div>
+                  ))}
+                </div>
+              )}
+
+              {/* Projects */}
+              {activeTab === "projects" && (
+                <div className="space-y-6">
+                  {userDetails.projects?.map((project, i) => (
+                    <div
+                      key={i}
+                      className="group p-8 bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl hover:border-pink-500/50 hover:bg-white/15 transition"
+                    >
+                      <div className="flex justify-between items-start mb-4">
+                        <h3 className="text-2xl font-bold text-pink-300 group-hover:text-pink-200 transition">
+                          {project.title}
+                        </h3>
+                        {project.image && (
+                          <img src={project.image} alt={project.title} className="w-20 h-20 rounded-lg object-cover" />
+                        )}
+                      </div>
+                      <p onClick={() => setExpanded(!expanded)}
+                            className={`
+                              text-white/80 mb-4 whitespace-pre-line cursor-pointer transition-all duration-300
+                              ${expanded ? "line-clamp-none" : "line-clamp-3"}
+                            `}
+                          >
+                            {project.description}
+                    </p>
+                      <div className="flex flex-wrap gap-2 mb-4">
+                        {project.technologies?.map((tech, i) => (
+                          <span
+                            key={i}
+                            className="px-3 py-1 bg-pink-500/20 border border-pink-500/40 rounded-full text-xs text-pink-200"
+                          >
+                            {tech}
+                          </span>
+                        ))}
+                      </div>
+                      <a
+                        href={project.link}
+                        target="_blank"
+                        className="inline-block px-4 py-2 bg-pink-600 rounded-lg hover:bg-pink-700 transition font-semibold"
+                        rel="noreferrer"
+                      >
+                        View →
+                      </a>
+                    </div>
+                  ))}
+                </div>
+              )}
+
+              {/* Experience */}
+              {activeTab === "experience" && (
+                <div className="space-y-6">
+                  {userDetails.experience?.map((exp, i) => (
+                    <div
+                      key={i}
+                      className="p-8 bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl hover:border-pink-500/50 transition"
+                    >
+                      <div className="flex gap-4 mb-4">
+                        <Briefcase className="text-pink-400 flex-shrink-0" size={24} />
+                        <div className="flex-1">
+                          <h3 className="text-xl font-bold text-pink-300">{exp.role}</h3>
+                          <p className="text-gray-300 font-semibold">{exp.company}</p>
+                          <p className="text-gray-400 text-sm">
+                            {exp.startDate} - {exp.endDate}
+                          </p>
+                        </div>
+                      </div>
+                      <p className="text-sm md:text-base text-gray-300 whitespace-pre-wrap">{exp.description}</p>
+                    </div>
+                  ))}
+                </div>
+              )}
+
+              {/* Skills */}
+              {activeTab === "skills" && (
+                <div className="grid md:grid-cols-2 gap-6">
+                  {userDetails.skills?.map((skill, i) => (
+                    <div
+                      key={i}
+                      className="p-6 bg-gradient-to-br from-pink-500/20 to-purple-500/20 border border-pink-500/30 rounded-lg hover:border-pink-500/60 transition hover:scale-105 transform"
+                    >
+                      <p className="text-gray-200">{skill}</p>
+                    </div>
+                  ))}
+                </div>
+              )}
+
+              {/* Education */}
+              {activeTab === "education" && (
+                <div className="space-y-6 md:mx-40 text-gray-300">
+                  {userDetails.education?.map((edu, i) => (
+                    <div
+                      key={i}
+                      className="p-6 bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl hover:border-pink-500/50 transition"
+                    >
+                      <div className="flex items-center justify-between">
+                        <h3 className="text-xl font-bold">{edu.degree || "Degree"}</h3>
+                        <p className="text-sm mt-1">
+                          {edu.startYear} - {edu.endYear || "Present"}
+                        </p>
+                      </div>
+                      <p className="font-semibold">{edu.school}</p>
+                      {edu.field && <p className="text-sm">{edu.field}</p>}
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
+          </div>
+          {/* Footer */}
+        <footer className="border-t border-white/10 bg-black/30 backdrop-blur-md py-12 px-6">
+          <div className="max-w-5xl mx-auto text-center">
+            <div className="flex justify-center gap-6 mb-6 flex-wrap">
+              {[
+                  { name: "linkedin", url: userDetails.socials.linkedin, icon: "/icons/link.svg" },
+                  { name: "github", url: userDetails.socials.github, icon: "/icons/github.svg" },
+                  { name: "facebook", url: userDetails.socials.fb, icon: "/icons/fb.svg" },
+                  { name: "whatsapp", url: userDetails.socials.whatsapp, icon: "/icons/wts.svg" },
+                  { name: "tiktok", url: userDetails.socials.tiktok, icon: "/icons/tiktok.svg" },
+                  { name: "reddit", url: userDetails.socials.reddit, icon: "/icons/reddit.svg" },
+                  { name: "twitch", url: userDetails.socials.twitch, icon: "/icons/twitch.svg" },
+                  { name: "instagram", url: userDetails.socials.instagram, icon: "/icons/ins.svg" },
+                  { name: "snapchat", url: userDetails.socials.snapchat, icon: "/icons/snap.svg" },
+                  { name: "twitter", url: userDetails.socials.twitter, icon: "/icons/twit.svg" },
+                  { name: "youtube", url: userDetails.socials.youtube, icon: "/icons/yt.svg" },
+                  { name: "telegram", url: userDetails.socials.telegram, icon: "/icons/tele.svg" },
+                  { name: "tiktok", url: userDetails.socials.tik, icon: "/icons/tik.svg" },
+                  { name: "google", url: userDetails.socials.google, icon: "/icons/google.svg" },
+                ]
+                .filter((item) => item.url)
+                .map((item, i) => (
+                  <a href={item.url} key={i} className="p-3 rounded-full bg-white transition">
+                    <img src={item.icon} alt={item.name} className="w-7 h-7" />
+                  </a>
+                ))}
+            </div>
+            <p className="text-gray-400">© {new Date().getFullYear()} {userDetails.fullname}. All rights reserved.</p>
+          </div>
+        </footer>
+        </div>
+        )}
+      </div>
+
+      <style>{`
+        @keyframes blob {
+          0%, 100% { transform: translate(0, 0) scale(1); }
+          33% { transform: translate(30px, -50px) scale(1.1); }
+          66% { transform: translate(-20px, 20px) scale(0.9); }
+        }
+        .animate-blob {
+          animation: blob 7s infinite;
+        }
+      `}</style>
+    </div>
+  )
+}

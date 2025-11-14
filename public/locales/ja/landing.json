@@ -1,0 +1,40 @@
+{
+  "navbar": {
+    "features": "機能",
+    "showcase": "ポートフォリオ",
+    "pricing": "料金"
+  },
+  "hero": {
+    "title1": "あなたのポートフォリオ、",
+    "title2": "向上",
+    "description": "これまでにない方法でキャリア、スキル、プロジェクトを紹介しましょう。印象に残るインタラクティブなポートフォリオを作成し、チャンスへの扉を開きます。",
+    "startBuilding": "作成開始",
+    "watchDemo": "デモを見る"
+  },
+  "features": {
+    "title": "なぜDGT Portfolioを選ぶのか",
+    "description": "最高の作品を紹介し、夢のチャンスをつかむために必要なすべて",
+    "feature1_title": "コード不要のデザイン",
+    "feature1_desc": "一行のコードも書かずに素晴らしいポートフォリオを作成",
+    "feature2_title": "超高速",
+    "feature2_desc": "訪問者を惹きつける高速な読み込み時間",
+    "feature3_title": "簡単なリンク共有",
+    "feature3_desc": "ポートフォリオのリンクをワンクリックでどこでも共有可能"
+  },
+  "cta": {
+    "title": "才能を披露する準備はできましたか？",
+    "description": "今日、夢のポートフォリオを作成している何千ものクリエイターに参加しましょう",
+    "button": "ポートフォリオを作成"
+  },
+  "footer": {
+    "copyright": "全著作権所有。"
+  },
+  "auth": {
+    "updateProfile": "プロフィールを更新",
+    "workLinks": "仕事のリンク",
+    "contactUs": "お問い合わせ",
+    "signOut": "サインアウト",
+    "signIn": "サインイン",
+    "getStarted": "開始する"
+  }
+}

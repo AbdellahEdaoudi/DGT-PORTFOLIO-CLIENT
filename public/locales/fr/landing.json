@@ -1,0 +1,40 @@
+{
+  "navbar": {
+    "features": "Fonctionnalités",
+    "showcase": "Vitrine",
+    "pricing": "Tarifs"
+  },
+  "hero": {
+    "title1": "Votre Portfolio,",
+    "title2": "Élevé",
+    "description": "Présentez votre carrière, vos compétences et vos projets comme jamais auparavant. Créez des portfolios interactifs qui laissent une impression durable et ouvrent des portes aux opportunités.",
+    "startBuilding": "Commencer",
+    "watchDemo": "Voir la démo"
+  },
+  "features": {
+    "title": "Pourquoi choisir DGT Portfolio",
+    "description": "Tout ce dont vous avez besoin pour présenter votre meilleur travail et décrocher vos opportunités de rêve",
+    "feature1_title": "Conception sans code",
+    "feature1_desc": "Créez des portfolios époustouflants sans écrire une seule ligne de code",
+    "feature2_title": "Ultra rapide",
+    "feature2_desc": "Des temps de chargement fulgurants qui maintiennent l'engagement des visiteurs",
+    "feature3_title": "Partage facile des liens",
+    "feature3_desc": "Partagez le lien de votre portfolio n'importe où en un seul clic"
+  },
+  "cta": {
+    "title": "Prêt à mettre en valeur votre talent ?",
+    "description": "Rejoignez des milliers de créateurs qui construisent leur portfolio de rêve dès aujourd'hui",
+    "button": "Créez votre portfolio"
+  },
+  "footer": {
+    "copyright": "Tous droits réservés."
+  },
+  "auth": {
+    "updateProfile": "Mettre à jour le profil",
+    "workLinks": "Liens du portfolio",
+    "contactUs": "Contactez-nous",
+    "signOut": "Se déconnecter",
+    "signIn": "Se connecter",
+    "getStarted": "Commencer"
+  }
+}
