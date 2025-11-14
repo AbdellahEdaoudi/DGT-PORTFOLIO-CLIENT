@@ -295,7 +295,7 @@ export default function Themeone({userDetails,userLinks,bgcolor}) {
             )}
 
             {/* Social Media */}
-            {userDetails.socials && (
+            {userDetails.socials.length > 0 && (
               <div className="mb-12">
               <h3 className="text-2xl font-bold text-white mb-6">Follow Me</h3>
               <div className="flex gap-4 flex-wrap">
