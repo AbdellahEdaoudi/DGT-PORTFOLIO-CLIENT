@@ -3,8 +3,8 @@ import React, { useState } from "react";
 import axios from "axios";
 import { toast } from "react-toastify";
 import { CheckCheck, Loader } from "lucide-react";
-import Themeone from "../../[username]/themes/themeone";
-import ThemeTwo from "../../[username]/themes/themetwo";
+import Themeone from "../../Components/themes/themeone";
+import ThemeTwo from "../../Components/themes/themetwo";
 
 export default function Bgcolor({ userData }) {
   const [bgcolorp, setBgcolorp] = useState(userData.bgcolorp || "#OA3C4D");

@@ -4,7 +4,7 @@ import Image from "next/image";
 import axios from "axios";
 import { toast } from "react-toastify";
 import { Loader, CheckCheck } from "lucide-react";
-import Themeone from "../../[username]/themes/themeone";
+import Themeone from "../../Components/themes/themeone";
 
 export default function Theme({ userData }) {
   const [selectedTheme, setSelectedTheme] = useState(userData.theme || 1);

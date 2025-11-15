@@ -27,7 +27,7 @@
     ".next/types/**/*.ts",
     "**/*.ts",
     "**/*.tsx"
-, "lib/nextAuth.ts", "app/api/auth/[...nextauth]/route.ts", "app/api/sendEmail/route.js", "app/api/send-email/route.js", "app/layout.js", "app/Edit/UpdateProfileForm.jsx", "app/Edit/ArrayFieldEditor.jsx", "app/Edit/EducationEditor.jsx", "app/Edit/ExperienceEditor.jsx", "app/Edit/ProjectsEditor.jsx", "app/(me)/UserProfileDisplay.jsx", "app/[username]/themes/theme-two.jsx", "app/[username]/themes/theme-five.jsx", "app/update-profilee/components/theme-provider.jsx"  ],
+, "lib/nextAuth.ts", "app/api/auth/[...nextauth]/route.ts", "app/api/sendEmail/route.js", "app/api/send-email/route.js", "app/layout.js", "app/Edit/UpdateProfileForm.jsx", "app/Edit/ArrayFieldEditor.jsx", "app/Edit/EducationEditor.jsx", "app/Edit/ExperienceEditor.jsx", "app/Edit/ProjectsEditor.jsx", "app/(me)/UserProfileDisplay.jsx", "app/Components/themes/theme-two.jsx", "app/Components/themes/theme-five.jsx", "app/update-profilee/components/theme-provider.jsx"  ],
   "exclude": [
     "node_modules"
   ]

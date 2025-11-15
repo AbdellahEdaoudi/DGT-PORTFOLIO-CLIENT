@@ -8,8 +8,8 @@ import {
   CheckCircle2,
   Globe,
 } from "lucide-react"
-import QrcodeProfile from "../components/QrcodeProfile"
-import UserLinks from "../components/UserLinks"
+import QrcodeProfile from "../../[username]/components/QrcodeProfile"
+import UserLinks from "../../[username]/components/UserLinks"
 
 export default function Themeone({userDetails,userLinks,bgcolor}) {
   const [copied, setCopied] = useState(false);

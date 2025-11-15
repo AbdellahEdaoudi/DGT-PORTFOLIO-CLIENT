@@ -1,9 +1,9 @@
 "use client"
 import { useState } from "react"
 import { Briefcase, CheckCircle2, Copy, Mail } from "lucide-react"
-import QrcodeProfile from "../components/QrcodeProfile"
-import UserLinks from "../components/UserLinks"
-import MagicalLoader from "../../Components/MagicalLoader"
+import QrcodeProfile from "../../[username]/components/QrcodeProfile"
+import UserLinks from "../../[username]/components/UserLinks"
+import MagicalLoader from "../MagicalLoader"
 
 export default function ThemeTwo({ userDetails, userLinks,bgcolor }) {
   const [activeTab, setActiveTab] = useState("about")

@@ -1,15 +1,15 @@
 "use client"
 import React, { useEffect, useState } from 'react'
-import Themeone from "../Components/themes/themeone"
-import ThemeTwo from "../Components/themes/themetwo"
-import ThemeThree from "../Components/themes/themethree"
-import ThemeFour from "../Components/themes/themefour"
-import ThemeFive from "../Components/themes/themefive"
+import Themeone from "./themes/themeone"
+import ThemeTwo from "./themes/themetwo"
+import ThemeThree from "./themes/themethree"
+import ThemeFour from "./themes/themefour"
+import ThemeFive from "./themes/themefive"
 import axios from 'axios'
-import AccountNotFound from "../Components/AccountNotFound"
-import MagicalLoader from '../Components/MagicalLoader'
+import AccountNotFound from "./AccountNotFound"
+import MagicalLoader from './MagicalLoader'
 
-function Page({ params }) {
+export default function SubdomainClient({username}) {
   const [userDetails, setUserDetails] = useState(null)
   const [userLinks, setUserLinks] = useState([])
   const [loadingUsers, setLoadingUsers] = useState(false)
@@ -20,7 +20,7 @@ function Page({ params }) {
       setLoadingUsers(true)
       setNotFound(false)
       try {
-        const res = await axios.get(`/api/proxy/users/${params.username}`)
+        const res = await axios.get(`/api/proxy/users/${username}`)
         setUserDetails(res.data.user)
         setUserLinks(res.data.links || [])
       } catch (error) {
@@ -34,7 +34,7 @@ function Page({ params }) {
       }
     }
     fetchUsers()
-  }, [params.username])
+  }, [username])
 
   if (loadingUsers) return <MagicalLoader />
   if (notFound) return <AccountNotFound />
@@ -59,5 +59,3 @@ function Page({ params }) {
 
   return <div>{renderTheme()}</div>
 }
-
-export default Page
