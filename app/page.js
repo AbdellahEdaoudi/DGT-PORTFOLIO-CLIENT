@@ -23,14 +23,8 @@ export async function generateMetadata() {
   if (isSubdomain) {
   const res = await fetch(`https://dgt-portfolio-server.vercel.app/users/metauser/${username}`);
   const data = await res.json();
-  const user = data.user;
-  if (!data.status) {
-    return {
-      title: "User Not Found",
-      description: "This portfolio does not exist.",
-    };
-  }
-
+  const user = data?.user;
+  if (data.status) {
   return {
     title: `${user.fullname} - Portfolio`,
     description: user.about,
@@ -52,6 +46,7 @@ export async function generateMetadata() {
       images: [user.urlimage],
     },
   };
+    }
   }
 }
 
