@@ -20,7 +20,7 @@ export async function generateMetadata() {
   };
 }
 
-
+  if (isSubdomain) {
   const res = await fetch(`https://dgt-portfolio-server.vercel.app/users/metauser/${username}`);
   const data = await res.json();
   const user = data.user;
@@ -46,6 +46,7 @@ export async function generateMetadata() {
       images: [user.urlimage],
     },
   };
+  }
 }
 
 
