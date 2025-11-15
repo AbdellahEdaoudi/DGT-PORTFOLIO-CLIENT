@@ -24,6 +24,12 @@ export async function generateMetadata() {
   const res = await fetch(`https://dgt-portfolio-server.vercel.app/users/metauser/${username}`);
   const data = await res.json();
   const user = data.user;
+  if (!user) {
+    return {
+      title: "User Not Found",
+      description: "This portfolio does not exist.",
+    };
+  }
 
   return {
     title: `${user.fullname} - Portfolio`,
