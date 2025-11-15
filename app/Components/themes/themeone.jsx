@@ -10,6 +10,7 @@ import {
 } from "lucide-react"
 import QrcodeProfile from "../../[username]/components/QrcodeProfile"
 import UserLinks from "../../[username]/components/UserLinks"
+import Image from "next/image"
 
 export default function Themeone({userDetails,userLinks,bgcolor}) {
   const [copied, setCopied] = useState(false);
@@ -78,7 +79,7 @@ export default function Themeone({userDetails,userLinks,bgcolor}) {
                 <div className="flex-shrink-0 flex items-center gap-2 ">
                   <div className="relative w-24 h-24 md:w-40 md:h-40">
                     <div className="absolute inset-0 bg-gradient-to-br from-white/20 to-white/5 rounded-full blur-xl"></div>
-                    <img
+                    <Image width={500} height={500}
                       src={userDetails?.urlimage}
                       alt={userDetails?.fullname}
                       className="relative w-full h-full rounded-full object-cover border-4 border-white/30 shadow-2xl"
@@ -206,7 +207,7 @@ export default function Themeone({userDetails,userLinks,bgcolor}) {
                     >
                       <div className="md:flex">
                         {project.image && (
-                          <img
+                          <Image width={500} height={500}
                             src={project.image}
                             alt={project.title}
                             className="w-full md:w-1/3 h-64 md:h-auto object-cover group-hover:scale-110 transition-transform duration-300"
@@ -324,7 +325,7 @@ export default function Themeone({userDetails,userLinks,bgcolor}) {
                       rel="noopener noreferrer"
                       className="p-4 bg-white backdrop-blur-md border border-white/20 rounded-lg  transition-all duration-300"
                     >
-                      <img src={item.icon} alt={item.name} className="w-6 h-6" />
+                      <Image width={500} height={500} src={item.icon} alt={item.name} className="w-6 h-6" />
                     </a>
                   ))}
               </div>

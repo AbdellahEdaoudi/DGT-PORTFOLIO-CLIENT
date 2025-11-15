@@ -49,7 +49,7 @@ export default function Socials({ userData }) {
         {Object.entries(socialIcons).map(([key, icon]) => (
           <div key={key}>
             <label className="text-sm font-medium text-gray-700 mb-2 flex items-center gap-2 capitalize">
-              <img src={icon} alt={key} className="w-5 h-5" /> {key}
+              <Image width={500} height={500} src={icon} alt={key} className="w-5 h-5" /> {key}
             </label>
             <input
               type="url"

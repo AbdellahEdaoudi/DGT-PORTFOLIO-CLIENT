@@ -3,7 +3,7 @@ import { useState } from "react"
 import { Briefcase, CheckCircle2, Copy, Mail } from "lucide-react"
 import QrcodeProfile from "../../[username]/components/QrcodeProfile"
 import UserLinks from "../../[username]/components/UserLinks"
-import MagicalLoader from "../MagicalLoader"
+import Image from "next/image"
 
 export default function ThemeTwo({ userDetails, userLinks,bgcolor }) {
   const [activeTab, setActiveTab] = useState("about")
@@ -63,7 +63,7 @@ export default function ThemeTwo({ userDetails, userLinks,bgcolor }) {
               </div>
               <div className="relative">
                 <div className="absolute bg-gray-50 animate-pulse inset-0 rounded-3xl blur-2xl opacity-75"></div>
-                <img
+                <Image width={500} height={500}
                   src={userDetails?.urlimage}
                   alt={userDetails?.fullname}
                   className="relative imganim md:w-72 md:mb-5 md:h-72 w-40 h-40 rounded-lg object-cover border-4 border-white/20"
@@ -173,7 +173,7 @@ export default function ThemeTwo({ userDetails, userLinks,bgcolor }) {
                         {project.title}
                       </h3>
                       {project.image && (
-                        <img src={project.image} alt={project.title} className="w-20 h-20 rounded-lg object-cover" />
+                        <Image width={500} height={500} src={project.image} alt={project.title} className="w-20 h-20 rounded-lg object-cover" />
                       )}
                     </div>
                     <p onClick={() => setExpanded(!expanded)}
@@ -295,7 +295,7 @@ export default function ThemeTwo({ userDetails, userLinks,bgcolor }) {
                     key={i}
                     className="p-3 bg-white rounded-full transition"
                   >
-                    <img src={item.icon} alt={item.name} className="w-7 h-7" />
+                    <Image width={500} height={500} src={item.icon} alt={item.name} className="w-7 h-7" />
                   </a>
                 ))}
             </div>

@@ -4,6 +4,7 @@ import { Github, Linkedin, Mail, Code2, Briefcase, CheckCircle2, Copy } from "lu
 import QrcodeProfile from "../../[username]/components/QrcodeProfile"
 import UserLinks from "../../[username]/components/UserLinks"
 import MagicalLoader from "../MagicalLoader"
+import Image from "next/image"
 
 export default function ThemeThree({ userDetails, userLinks }) {
   const [activeTab, setActiveTab] = useState("about")
@@ -75,10 +76,10 @@ export default function ThemeThree({ userDetails, userLinks }) {
               </div>
               <div className="relative">
                 <div className="absolute inset-0 bg-gradient-to-br from-pink-500 to-purple-600 rounded-3xl blur-2xl opacity-75"></div>
-                <img
+                <Image width={500} height={500}
                   src={userDetails?.urlimage}
                   alt={userDetails?.fullname}
-                  className="relative imganim md:w-72 md:mb-5 md:h-72 w-40 h-40 rounded-lg object-cover border-4 border-white/20"
+                  className="relative Image width={500} height={500}anim md:w-72 md:mb-5 md:h-72 w-40 h-40 rounded-lg object-cover border-4 border-white/20"
                 />
               </div>
             </div>
@@ -188,7 +189,7 @@ export default function ThemeThree({ userDetails, userLinks }) {
                           {project.title}
                         </h3>
                         {project.image && (
-                          <img src={project.image} alt={project.title} className="w-20 h-20 rounded-lg object-cover" />
+                          <Image width={500} height={500} src={project.image} alt={project.title} className="w-20 h-20 rounded-lg object-cover" />
                         )}
                       </div>
                       <p onClick={() => setExpanded(!expanded)}
@@ -305,7 +306,7 @@ export default function ThemeThree({ userDetails, userLinks }) {
                 .filter((item) => item.url)
                 .map((item, i) => (
                   <a href={item.url} key={i} className="p-3 rounded-full bg-white transition">
-                    <img src={item.icon} alt={item.name} className="w-7 h-7" />
+                    <Image width={500} height={500} src={item.icon} alt={item.name} className="w-7 h-7" />
                   </a>
                 ))}
             </div>

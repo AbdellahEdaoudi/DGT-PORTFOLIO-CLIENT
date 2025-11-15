@@ -4,6 +4,7 @@ import { Github, Linkedin, Mail, ChevronDown, Sparkles, CheckCircle2, Copy } fro
 import QrcodeProfile from "../../[username]/components/QrcodeProfile";
 import UserLinks from "../../[username]/components/UserLinks";
 import MagicalLoader from "../MagicalLoader";
+import Image from "next/image";
 
 export default function ThemeFour({ userDetails, userLinks }) {
   const [expandedProject, setExpandedProject] = useState(-1);
@@ -87,10 +88,10 @@ export default function ThemeFour({ userDetails, userLinks }) {
               </div>
               <div className="relative">
                 <div className="absolute inset-0 bg-gradient-to-r from-emerald-400 via-white to-blue-400 rounded-3xl blur-2xl opacity-75"></div>
-                <img
+                <Image width={500} height={500}
                   src={userDetails?.urlimage}
                   alt={userDetails?.fullname}
-                  className="relative imganim md:w-80 md:h-80 w-40 h-40 rounded-lg object-cover border-4 border-white/20"
+                  className="relative Image width={500} height={500}anim md:w-80 md:h-80 w-40 h-40 rounded-lg object-cover border-4 border-white/20"
                 />
               </div>
             </div>
@@ -153,7 +154,7 @@ export default function ThemeFour({ userDetails, userLinks }) {
 
                         {expandedProject === i && (
                           <div className="mt-4 space-y-4">
-                            {project.image && <img src={project.image || "/placeholder.svg"} alt={project.title} className="w-full rounded-lg" />}
+                            {project.image && <Image width={500} height={500} src={project.image || "/placeholder.svg"} alt={project.title} className="w-full rounded-lg" />}
                             <p className="text-sm md:text-base text-gray-300 whitespace-pre-wrap">{project.description}</p>
                             <div className="flex flex-wrap gap-2">
                               {project.technologies?.map((tech, j) => (
@@ -239,7 +240,7 @@ export default function ThemeFour({ userDetails, userLinks }) {
                         rel="noreferrer"
                         className="p-3 bg-white text-gray-400  transition border rounded-full"
                       >
-                        <img src={social.icon} alt={social.name} className="w-5 h-5" />
+                        <Image width={500} height={500} src={social.icon} alt={social.name} className="w-5 h-5" />
                       </a>
                     )
                   )}

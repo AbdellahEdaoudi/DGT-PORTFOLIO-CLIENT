@@ -1,9 +1,7 @@
 "use client"
-import axios from "axios"
-import { useContext, useEffect, useState } from "react"
+import { useContext, useState } from "react"
 import { MyContext } from "../Context/MyContext"
 import MagicalLoader from "../Components/MagicalLoader"
-import { signIn, useSession } from "next-auth/react"
 import Header from "../Components/header"
 import Userinfo from "./components/Userinfo"
 import About from "./components/About"
@@ -18,25 +16,9 @@ import Socials from "./components/Socials"
 import Theme from "./components/Theme"
 
 export default function UpdateProfilePage() {
-  const { data, status } = useSession()
   const { EmailUser,userDetails,setUserDetails,loadingAll} = useContext(MyContext)
   const [activeTab, setActiveTab] = useState("about")
 
-  // useEffect(() => {
-  //   const fetchUserData = async () => {
-  //     try {
-  //       const response = await axios.get("/api/proxy/users/getUser")
-  //       setUserData(response.data)
-  //     } catch (error) {
-  //       setUserData("error")
-  //       console.error("Error fetching user data:", error)
-  //     }
-  //   }
-  //   if (EmailUser) {
-  //    setUserData(userDetails)
-  //   fetchUserData()
-  //   }
-  // }, [EmailUser])
    if (loadingAll || !EmailUser || !userDetails ) {
     return <MagicalLoader />
   }

@@ -1,5 +1,5 @@
 
-import { ArrowRight, Code2, Zap, Share2 } from "lucide-react"
+import { ArrowRight, Code2, Zap, Share2, Globe2, SquareMousePointer, QrCode, Layout } from "lucide-react"
 import Image from "next/image"
 import ThemeSlideshow from "./ThemeSlideshow"
 import Navbar from "./Navbar"
@@ -7,6 +7,9 @@ import AuthButtons from "./AuthButtons"
 import Link from "next/link"
 
 export default function LandingPage() {
+  // const PORTFOLIO = `http://liam-carter.localhost:3000`
+  // const PORTFOLIO = `https://liam-carter.dgtportfolio.com`
+  const PORTFOLIO = `https://liam-carter.dgtportfolio.vercel.app`
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-black text-white overflow-hidden">
@@ -64,7 +67,7 @@ export default function LandingPage() {
               <Link href={"/update-profile"} className="px-8 py-4 bg-gradient-to-r from-cyan-400 to-purple-500 rounded-full font-semibold hover:shadow-lg hover:shadow-purple-500/50 transition flex items-center gap-2">
                 Start Building <ArrowRight className="w-5 h-5" />
               </Link>
-              <Link href={"/liam-carter"} className="px-8 py-4 border border-purple-500/50 rounded-full hover:bg-purple-500/10 transition">
+              <Link href={PORTFOLIO} className="px-8 py-4 border border-purple-500/50 rounded-full hover:bg-purple-500/10 transition">
                 Watch Demo
               </Link>
             </div>
@@ -90,14 +93,33 @@ export default function LandingPage() {
                 description: "Create stunning portfolios without writing a single line of code",
               },
               {
-                icon: Zap,
-                title: "Lightning Fast",
-                description: "Blazing fast load times that keep visitors engaged",
+                icon: SquareMousePointer,
+                title: "Custom Subdomain",
+                description: (
+                  <>Get a personalized subdomain like <strong>username.dgtportfolio.com</strong> for your portfolio</>
+                ),
+              },
+              {
+                icon: QrCode,
+                title: "QR Code Profile",
+                description: (
+                  <>Generate a QR code for your portfolio that you can download or share instantly</>
+                ),
+              },
+              {
+                icon: Layout,
+                title: "Multiple Themes",
+                description: "Choose from different themes to personalize your portfolio look and feel",
               },
               {
                 icon: Share2,
                 title: "Easy Link Sharing",
                 description: "Share your portfolio link anywhere with just one click",
+              },
+              {
+                icon: Zap,
+                title: "Lightning Fast",
+                description: "Blazing fast load times that keep visitors engaged",
               },
             ].map((feature, i) => (
               <div

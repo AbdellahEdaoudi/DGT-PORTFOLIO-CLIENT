@@ -177,7 +177,7 @@ export default function ThemeFive({ userDetails, userLinks }) {
                     className="group relative overflow-hidden rounded-2xl bg-zinc-900 border border-zinc-700 hover:border-yellow-400/60 shadow-lg hover:shadow-yellow-400/10 transition-all duration-500 cursor-pointer"
                   >
                     {project.image && (
-                      <img
+                      <Image width={500} height={500}
                         src={project.image || "/placeholder.svg"}
                         alt={project.title}
                         className="w-full h-56 object-cover transition-transform duration-500 group-hover:scale-105"
@@ -278,7 +278,7 @@ export default function ThemeFive({ userDetails, userLinks }) {
                         rel="noreferrer"
                         className="p-3 bg-white text-gray-400 transition border rounded-full"
                       >
-                        <img src={social.icon} alt={social.name} className="w-5 h-5" />
+                        <Image width={500} height={500} src={social.icon} alt={social.name} className="w-5 h-5" />
                       </a>
                     )
                   )}

@@ -24,7 +24,6 @@ export default function Theme({ userData }) {
         </p>,
         { autoClose: 1000 }
       );
-      window.location.href = `/${userData.username}`;
     } catch (error) {
       console.error("Error updating theme:", error);
       toast.error("Failed to update theme!");

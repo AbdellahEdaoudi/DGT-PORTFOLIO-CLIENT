@@ -13,7 +13,9 @@ import QRCode from "qrcode.react";
 import { QrCode } from "lucide-react";
 
 function QrcodeProfile({userDetails,path}) {
-  const CLIENT_URL = process.env.NEXT_PUBLIC_CLIENT_URL
+  // const PORTFOLIO = `http://${userDetails?.username}.localhost:3000`
+  // const PORTFOLIO = `https://${userDetails?.username}.dgtportfolio.com`
+  const PORTFOLIO = `https://${userDetails?.username}.dgtportfolio.vercel.app`
   const qrCodeRef = useRef(null);
 
   const DownloadQRCode = () => {
@@ -35,7 +37,7 @@ function QrcodeProfile({userDetails,path}) {
         canvas.toBlob((blob) => {
           const file = new File(
             [blob],
-            `${userDetails.username}.DGTPORTFOLIO.png`,
+            `${userDetails.username}.dgtportfolio.png`,
             { type: "image/png" }
           );
           navigator
@@ -53,7 +55,7 @@ function QrcodeProfile({userDetails,path}) {
   };
 
   const ShareLink = () => {
-    const url = `${CLIENT_URL}${path}`;
+    const url = PORTFOLIO;
 
     if (navigator.share) {
       navigator
@@ -82,7 +84,7 @@ function QrcodeProfile({userDetails,path}) {
               <div className="flex flex-col justify-center items-center  ">
                 <div className={`mb-6 hidden`} ref={qrCodeRef}>
                   <QRCode
-                    value={`${CLIENT_URL}${path}`}
+                    value={PORTFOLIO}
                     size={500}
                     bgColor="#ffffff"
                     fgColor="#000000"
@@ -106,7 +108,7 @@ function QrcodeProfile({userDetails,path}) {
                 <div className="border-2 rounded-md ">
                   <QRCode
                     id="qrcode"
-                    value={`${CLIENT_URL}${path}`}
+                    value={PORTFOLIO}
                     size={200}
                     bgColor="#ffffff"
                     fgColor="#000000"

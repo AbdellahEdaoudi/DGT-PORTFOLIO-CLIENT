@@ -6,7 +6,6 @@ import { BookUser, LogOut, MessageSquare, NotebookText, Settings } from "lucide-
 import Link from "next/link";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import MagicalLoader from "../MagicalLoader";
 
 export default function AuthButtons() {
   const [setting, setSetting] = useState(true);
@@ -14,7 +13,12 @@ export default function AuthButtons() {
   const router = useRouter();
   const user = data?.user;
   const navRef = useRef(null);
-  const { userDetails, EmailUser, loadingAll } = useContext(MyContext);
+  const { userDetails } = useContext(MyContext);
+  // const PORTFOLIO = `http://${userDetails?.username}.localhost:3000`
+  // const PORTFOLIO = `https://${userDetails?.username}.dgtportfolio.com`
+  const PORTFOLIO = `https://${userDetails?.username}.dgtportfolio.vercel.app`
+
+
   // Click Outside to close menus
   useEffect(() => {
     const ClickOutside = (event) => {
@@ -46,7 +50,8 @@ export default function AuthButtons() {
         onClick={()=>{
           setSetting(true)
           if (userDetails?.username) {
-            router.push(`/${userDetails?.username}`)
+            window.open(PORTFOLIO, "_blank");
+            // router.push(`/${userDetails?.username}`)
           }else (
             router.push(`/update-profile`)
           )
