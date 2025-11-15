@@ -90,7 +90,7 @@ export default function AccountNotFound() {
               </Link>
             </Button>
             <Button asChild variant="outline" className="w-full border-[#00a896] text-[#00a896] hover:bg-[#00a896] hover:text-white py-2 px-4 rounded-md transition-all duration-300">
-              <Link href="/contact" className="flex items-center justify-center">
+              <Link href="/support" className="flex items-center justify-center">
                 <LifeBuoy className="mr-2 h-4 w-4" /> Contact Support
               </Link>
             </Button>
