@@ -104,7 +104,7 @@ export default function AuthButtons() {
           </div>
         </Link>
         <Link
-          href={"/contact"}
+          href={"/support"}
           onClick={() => {
             setSetting(!setting);
           }}
