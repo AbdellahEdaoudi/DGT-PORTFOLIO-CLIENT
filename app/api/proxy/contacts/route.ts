@@ -21,10 +21,7 @@ export async function POST(req: Request) {
 
     const backendUrl = process.env.BACKEND_URL;
     const response = await axios.post(`${backendUrl}/contacts`, body, {
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
-      },
+      headers: {Authorization: `Bearer ${token}`},
     });
 
     return NextResponse.json(response.data, { status: response.status });

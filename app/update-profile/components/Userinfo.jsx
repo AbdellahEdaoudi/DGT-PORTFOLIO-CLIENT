@@ -112,7 +112,7 @@ function Userinfo({userData,setUserDetails}) {
                <input
                  type="text"
                  value={username}
-                 onChange={(e) => setUsername(e.target.value.replace(/[/\s]/g, "").toLowerCase())}
+                 onChange={(e) => setUsername(e.target.value.replace(/[.\s/]/g, "").toLowerCase())}
                  required
                  className={`w-full px-4 py-2 border-2 bg-white border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 transition
                   ${errormsg ? "border-red-500 focus:ring-red-500" : "border-gray-300 focus:ring-teal-500"}`}

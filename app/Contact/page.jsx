@@ -32,7 +32,7 @@ export default function ContactForm() {
         return;
     }
     try {
-      await axios.post(`/api/proxy/contacts`, {email:EmailUser,subject, message });
+      await axios.post(`/api/proxy/contacts`, {email:EmailUser,subject,message});
       toast(<p className='flex gap-3 items-center'><CheckCheck className="text-teal-500" /> Message sent successfully!</p>, {
         autoClose: 2000,
       })
