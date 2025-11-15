@@ -40,6 +40,9 @@ export default function RootLayout({ children }) {
       <html className="scroll-smooth" lang="en">
         <Head>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"></link>
+        </Head>
+        <body className={`${prompt.className} min-h-screen scrollbar-none bg-gray-800 g-gradient-to-r from-blue-500 to-purple-500`}>
+        {/* Structured Data Script */}
         <Script type="application/ld+json" id="structured-data">
         {`
         {
@@ -52,8 +55,6 @@ export default function RootLayout({ children }) {
         }
         `}
         </Script>
-        </Head>
-        <body className={`${prompt.className} min-h-screen scrollbar-none bg-gray-800 g-gradient-to-r from-blue-500 to-purple-500`}>
         <NextAuthProvider>
           <MyProvider>
             {children}
