@@ -15,8 +15,8 @@ export default function AuthButtons() {
   const navRef = useRef(null);
   const { userDetails } = useContext(MyContext);
   // const PORTFOLIO = `http://${userDetails?.username}.localhost:3000`
-  // const PORTFOLIO = `https://${userDetails?.username}.dgtportfolio.com`
-  const PORTFOLIO = `https://${userDetails?.username}.dgtportfolio.vercel.app`
+  const PORTFOLIO = `https://${userDetails?.username}.dgtportfolio.com`
+  // const PORTFOLIO = `https://${userDetails?.username}.dgtportfolio.vercel.app`
 
 
   // Click Outside to close menus
@@ -104,7 +104,7 @@ export default function AuthButtons() {
           </div>
         </Link>
         <Link
-          href={"/Contact"}
+          href={"/contact"}
           onClick={() => {
             setSetting(!setting);
           }}

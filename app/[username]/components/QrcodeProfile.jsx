@@ -14,8 +14,8 @@ import { QrCode } from "lucide-react";
 
 function QrcodeProfile({userDetails,path}) {
   // const PORTFOLIO = `http://${userDetails?.username}.localhost:3000`
-  // const PORTFOLIO = `https://${userDetails?.username}.dgtportfolio.com`
-  const PORTFOLIO = `https://${userDetails?.username}.dgtportfolio.vercel.app`
+  const PORTFOLIO = `https://${userDetails?.username}.dgtportfolio.com`
+  // const PORTFOLIO = `https://${userDetails?.username}.dgtportfolio.vercel.app`
   const qrCodeRef = useRef(null);
 
   const DownloadQRCode = () => {

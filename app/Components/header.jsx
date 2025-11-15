@@ -9,10 +9,12 @@ function Header() {
     <div>
         {/* Navigation */}
                <div className="w-full bg-slate-900/90  border-b border-purple-500/20  px-6 py-4 flex justify-between items-center">
-                 <Link href={"/"} className="flex items-center  text-2xl font-bold bg-gradient-to-r from-cyan-400 to-purple-500 bg-clip-text text-transparent cursor-pointer">
+                 <Link href={"/"} className="  text-2xl font-bold bg-gradient-to-r from-cyan-400 to-purple-500 bg-clip-text text-transparent cursor-pointer">
                    {/* <Sparkles className="w-6 h-6 text-white" /> */}
-                   <Image src={"/LogoinQrcode.png"} width={50} height={50} alt="LOGO" />
-                   DGTPortfolio
+                   <h1 className='flex items-center'>
+                    <Image src={"/LogoinQrcode.png"} width={500} height={500} className='w-12 h-10' alt="LOGO" />
+                    DGTPortfolio
+                   </h1>
                  </Link>
                  <AuthButtons />
                </div>

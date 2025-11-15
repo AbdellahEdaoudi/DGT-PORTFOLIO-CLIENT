@@ -8,17 +8,17 @@ export async function generateMetadata() {
   const username = host.split(".")[0];
   const isSubdomain = username && !reserved.includes(username);
 
-  if (!isSubdomain) {
-  return {
-    title: "Dgt Portfolio",
-    description: "Create your professional portfolio easily!",
-    icons: {
-      icon: "/LogoinQrcode.png",       
-      shortcut: "/LogoinQrcode.png", 
-      apple: "/LogoinQrcode.png",   
-    },
-  };
-}
+//   if (!isSubdomain) {
+//   return {
+//     title: "Dgt Portfoliosdd",
+//     description: "Create your professional portfolio easily!",
+//     icons: {
+//       icon: "/LogoinQrcode.png",       
+//       shortcut: "/LogoinQrcode.png", 
+//       apple: "/LogoinQrcode.png",   
+//     },
+//   };
+// }
 
   if (isSubdomain) {
   const res = await fetch(`https://dgt-portfolio-server.vercel.app/users/metauser/${username}`);

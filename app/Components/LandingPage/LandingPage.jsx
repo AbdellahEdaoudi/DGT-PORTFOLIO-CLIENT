@@ -8,8 +8,8 @@ import Link from "next/link"
 
 export default function LandingPage() {
   // const PORTFOLIO = `http://liam-carter.localhost:3000`
-  // const PORTFOLIO = `https://liam-carter.dgtportfolio.com`
-  const PORTFOLIO = `https://liam-carter.dgtportfolio.vercel.app`
+  const PORTFOLIO = `https://liam-carter.dgtportfolio.com`
+  // const PORTFOLIO = `https://liam-carter.dgtportfolio.vercel.app`
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-black text-white overflow-hidden">
@@ -25,21 +25,21 @@ export default function LandingPage() {
       <nav className={`fixed top-0 w-full z-50 transition-all duration-300`}>
           <Navbar>
         <div className="max-w-7xl mx-auto px-6 py-6 flex justify-between items-center">
-          <div className="flex items-center gap- text-2xl font-bold bg-gradient-to-r from-cyan-400 to-purple-500 bg-clip-text text-transparent cursor-pointer">
+          <h1 className="flex items-center gap- text-2xl font-bold bg-gradient-to-r from-cyan-400 to-purple-500 bg-clip-text text-transparent cursor-pointer">
             {/* <Sparkles className="w-6 h-6 text-white" /> */}
-            <Image src={"/LogoinQrcode.png"} width={50} height={50} alt="LOGO" />
+            <Image src={"/LogoinQrcode.png"} width={500} height={500} className="w-12 h-10" alt="DGT Portfolio - Professional Portfolio Builder" />
             DGTPortfolio
-          </div>
+          </h1>
           <div className="hidden md:flex gap-8">
-            <a href="#Features" className="hover:text-cyan-400 transition">
+            <Link href={"#Features"} className="hover:text-cyan-400 transition">
               Features
-            </a>
-            <a href="/liam-carter" className="hover:text-cyan-400 transition">
+            </Link>
+            <Link href={PORTFOLIO} target="_blank" className="hover:text-cyan-400 transition">
               Showcase
-            </a>
-            <a href="#pricing" className="hover:text-cyan-400 transition">
+            </Link>
+            <Link href={"#pricing"} className="hover:text-cyan-400 transition">
               Pricing
-            </a>
+            </Link>
           </div>
           <AuthButtons />
         </div>
@@ -59,7 +59,7 @@ export default function LandingPage() {
                 <span className="text-white">Elevated</span>
               </h1>
               <p className="text-xl text-gray-300 leading-relaxed">
-                Present your career, skills, and projects like never before.
+                Present your career, skills, work links and projects like never before.
                  Create interactive portfolios that leave lasting impressions and open doors to opportunities.
               </p>
             </div>
@@ -67,7 +67,7 @@ export default function LandingPage() {
               <Link href={"/update-profile"} className="px-8 py-4 bg-gradient-to-r from-cyan-400 to-purple-500 rounded-full font-semibold hover:shadow-lg hover:shadow-purple-500/50 transition flex items-center gap-2">
                 Start Building <ArrowRight className="w-5 h-5" />
               </Link>
-              <Link href={PORTFOLIO} className="px-8 py-4 border border-purple-500/50 rounded-full hover:bg-purple-500/10 transition">
+              <Link href={PORTFOLIO} target="_blank" className="px-8 py-4 border border-purple-500/50 rounded-full hover:bg-purple-500/10 transition">
                 Watch Demo
               </Link>
             </div>
