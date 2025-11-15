@@ -3,7 +3,7 @@ import { headers } from 'next/headers'
 import SubdomainClient from "./Components/SubdomainClient"
 
 export async function generateMetadata() {
-  const reserved = ["dgtportfolio","localhost:3000"];
+  const reserved = ["dgtportfolio","localhost:3000","www"];
   const host = headers().get("host");
   const username = host.split(".")[0];
   const isSubdomain = username && !reserved.includes(username);
@@ -24,7 +24,7 @@ export async function generateMetadata() {
   const res = await fetch(`https://dgt-portfolio-server.vercel.app/users/metauser/${username}`);
   const data = await res.json();
   const user = data.user;
-  if (!user) {
+  if (!data.status) {
     return {
       title: "User Not Found",
       description: "This portfolio does not exist.",
@@ -58,7 +58,7 @@ export async function generateMetadata() {
 
 
 export default function Home() {
-  const reserved = ["dgtportfolio","localhost:3000"];
+  const reserved = ["dgtportfolio","localhost:3000","www"];
   const host = headers().get('host');
   const subdomain = host.split('.')[0];
   const isSubdomain = subdomain && !reserved.includes(subdomain);
