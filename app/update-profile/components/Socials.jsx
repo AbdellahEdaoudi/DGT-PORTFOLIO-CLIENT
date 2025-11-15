@@ -1,8 +1,9 @@
 "use client";
 import React, { useState } from "react";
 import { toast } from "react-toastify";
-import { CheckCheck, Loader, Plus, Trash2 } from "lucide-react";
+import { CheckCheck, Loader} from "lucide-react";
 import axios from "axios";
+import Image from "next/image";
 
 export default function Socials({ userData }) {
   const user = userData || {};
