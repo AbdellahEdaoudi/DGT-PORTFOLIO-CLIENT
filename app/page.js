@@ -51,7 +51,6 @@ export async function generateMetadata() {
 }
 
 
-
 export default function Home() {
   const reserved = ["dgtportfolio","localhost:3000","www"];
   const host = headers().get('host');
