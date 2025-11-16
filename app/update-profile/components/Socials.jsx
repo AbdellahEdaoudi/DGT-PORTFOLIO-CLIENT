@@ -44,9 +44,9 @@ export default function Socials({ userData }) {
   };
 
   return (
-    <div className="space-y-4 ">
-      <h3 className="text-lg font-bold text-gray-800 mb-4">Social Media Links</h3>
-      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 ">
+    <div className="space-y-4  ">
+      <h3 className="text-lg font-bold text-gray-800 mb-4">🔗 Social Media Links</h3>
+      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 bg-sky-50 rounded-md p-2 ">
         {Object.entries(socialIcons).map(([key, icon]) => (
           <div key={key}>
             <label className="text-sm font-medium text-gray-700 mb-2 flex items-center gap-2 capitalize">

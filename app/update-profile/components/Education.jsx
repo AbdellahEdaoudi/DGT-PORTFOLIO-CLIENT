@@ -39,12 +39,12 @@ export default function Education({ userData }) {
     <div className="space-y-4">
       <h3 className="text-lg font-bold text-gray-800">🎓 Education</h3>
 
-      <div className="bg-gradient-to-br from-blue-50 to-purple-50 p-4 rounded-xl border border-blue-200 space-y-3">
+      <div className="bg-gradient-to-br from-blue-50 to-purple-50 p-2 md:p-4 rounded-xl border border-blue-200 space-y-3">
         <div className="space-y-2">
           {education.map((edu, index) => (
             <div
               key={index}
-              className="bg-white border border-gray-200 rounded-xl p-4 shadow-sm hover:shadow-md transition-all duration-300 space-y-3"
+              className="bg-white border border-gray-200 rounded-xl p-2 md:p-4 shadow-sm hover:shadow-md transition-all duration-300 space-y-3"
             >
               <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
                 <input

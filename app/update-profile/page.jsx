@@ -47,7 +47,7 @@ export default function UpdateProfilePage() {
         className="flex items-center justify-center pt-4 pb-6 duration-300 min-h-screen"
       >
         <div className="w-full max-w-5xl">
-          <div className="mx-4 px-6 md:px-8 pb-14 bg-white rounded-2xl shadow-2xl space-y-8 pt-8">
+          <div className="md:mx-4 px-2 md:px-8 pb-14 bg-white rounded-2xl shadow-2xl space-y-8 pt-8">
             <Userinfo userData={userDetails} setUserDetails={setUserDetails} />
             <div className="grid grid-cols-3 md:grid-cols-4 gap-2 mb-8">
               {tabs.map((tab) => (

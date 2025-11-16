@@ -39,12 +39,12 @@ export default function Projects({ userData }) {
     <div className="space-y-4">
       <h3 className="text-lg font-bold text-gray-800">🚀 Projects</h3>
 
-      <div className="bg-gradient-to-br from-green-50 to-emerald-50 p-4 rounded-xl border border-green-200 space-y-3">
+      <div className="bg-gradient-to-br from-green-50 to-emerald-50 p-2 md:p-4 rounded-xl border border-green-200 space-y-3">
         <div className="space-y-2">
           {projects.map((proj, index) => (
             <div
               key={index}
-              className="bg-white border border-gray-200 rounded-xl p-4 shadow-sm hover:shadow-md transition-all duration-300 space-y-3"
+              className="bg-white border border-gray-200 rounded-xl p-2 md:p-4 shadow-sm hover:shadow-md transition-all duration-300 space-y-3"
             >
               <input
                 type="text"

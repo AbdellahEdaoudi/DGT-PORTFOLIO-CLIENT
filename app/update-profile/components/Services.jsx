@@ -43,12 +43,12 @@ export default function  Services({userData}) {
   return (
     <div>
         {/* Services - Teal Style */}
-                    <div className="space-y-4">
-                      <h3 className="text-lg font-bold text-gray-800">💼 Services</h3>
-                      <div className="bg-gradient-to-br from-teal-50 to-green-50 p-4 rounded-xl border border-teal-200 space-y-3">
-                        <div className="space-y-2">
-                          {services.map((service, index) => (
-                            <div key={index} className="flex gap-2">
+      <div className="space-y-4">
+        <h3 className="text-lg font-bold text-gray-800">💼 Services</h3>
+        <div className="bg-gradient-to-br from-teal-50 to-green-50 p-2 md:p-4 rounded-xl border border-teal-200 space-y-3">
+          <div className="space-y-2">
+            {services.map((service, index) => (
+              <div key={index} className="flex gap-2">
               <input
                 type="text"
                 value={service}

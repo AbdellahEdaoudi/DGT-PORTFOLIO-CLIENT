@@ -19,7 +19,7 @@ export default function SignInPage() {
         </div>
 
         {/* Loading text with animation */}
-        <p className="text-white text-xl font-semibold">Redirecting to Google Sign-In...</p>
+        <p className="text-white text-xl font-semibold">Redirecting to Sign-In...</p>
         <p className="text-slate-400 text-sm mt-2">
           <span className="inline-block">Please wait</span>
           <span className="inline-block ml-1">

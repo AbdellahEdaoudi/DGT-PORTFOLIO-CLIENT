@@ -7,7 +7,6 @@ import Image from "next/image"
 import MagicalLoader from "../MagicalLoader"
 
 export default function ThemeFive({ userDetails, userLinks }) {
-  const [hoveredProject, setHoveredProject] = useState(null)
   const [copied, setCopied] = useState(false)
   const [showQR, setShowQR] = useState(false)
   const PORTFOLIO = `https://${userDetails?.username}.dgtportfolio.com`
@@ -55,7 +54,7 @@ export default function ThemeFive({ userDetails, userLinks }) {
               </div>
             </div>
 
-            <div className="flex flex-col-reverse md:flex-row items-center md:items-start justify-between gap-8">
+            <div className="flex flex-col md:flex-row items-center md:items-start   gap-8">
               <div className="flex-1 mb-4">
                 <p className="text-yellow-400 font-semibold uppercase tracking-widest mb-2">Hello, I'm</p>
                 <h1 className="text-5xl sm:text-6xl md:text-7xl font-black mb-4 leading-tight">
@@ -86,7 +85,7 @@ export default function ThemeFive({ userDetails, userLinks }) {
 
           {/* About, Services, Info */}
           {userDetails.about?.length > 0 &&(
-            <section className="py-10 border-t border-zinc-800">
+            <section className="py-10 md:border-t border-zinc-800">
             <div className={`grid ${userDetails.services.length > 0 ? "md:grid-cols-3" :"md:grid-cols-3"}  gap-8`}>
               <div>
                 <p className="text-yellow-400 font-bold uppercase tracking-widest mb-2 text-sm">About</p>
@@ -172,8 +171,6 @@ export default function ThemeFive({ userDetails, userLinks }) {
                 {userDetails.projects.map((project, i) => (
                   <div
                     key={i}
-                    onMouseEnter={() => setHoveredProject(i)}
-                    onMouseLeave={() => setHoveredProject(null)}
                     className="group relative overflow-hidden rounded-2xl bg-zinc-900 border border-zinc-700 hover:border-yellow-400/60 shadow-lg hover:shadow-yellow-400/10 transition-all duration-500 cursor-pointer"
                   >
                     {project.image && (

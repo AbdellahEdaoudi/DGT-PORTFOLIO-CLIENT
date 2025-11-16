@@ -39,7 +39,7 @@ export default function Languages({ userData }) {
     <div className="space-y-4">
       <h3 className="text-lg font-bold text-gray-800">🌐 Languages</h3>
 
-      <div className="bg-gradient-to-br from-cyan-50 to-blue-50 p-4 rounded-xl border border-cyan-200 space-y-3">
+      <div className="bg-gradient-to-br from-cyan-50 to-blue-50 p-2 md:p-4 rounded-xl border border-cyan-200 space-y-3">
         <div className="space-y-2">
           {languages.map((lang, index) => (
             <div key={index} className="flex gap-2">
