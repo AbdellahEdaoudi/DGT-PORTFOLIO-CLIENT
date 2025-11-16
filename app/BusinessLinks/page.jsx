@@ -130,7 +130,7 @@ if(!EmailUser || loadingAll){return <MagicalLoader />}
       <div className="flex items-center justify-center">
         <section className='mt-4 p-4 rounded-lg bg-gray-100 w-[110vh] md:mx-0 mx-2 text-gray-800 '>
         <div className='flex items-center justify-around mb-4'>
-          <p className='text-3xl font-semibold text-gray-900'>Work Links</p>
+          <p className='text-3xl font-semibold text-gray-900'>Business Links</p>
           <p onClick={() => {
             setEditLinkId(editLinkId ? null : editLinkId)
             setNamelink("")

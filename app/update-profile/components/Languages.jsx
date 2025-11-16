@@ -46,6 +46,7 @@ export default function Languages({ userData }) {
               <input
                 type="text"
                 value={lang}
+                maxLength={50}
                 onChange={(e) => updateArrayItem(languages, setLanguages, index, e.target.value)}
                 className="flex-1 px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-cyan-500 bg-white transition"
               />
@@ -68,7 +69,7 @@ export default function Languages({ userData }) {
           <Plus size={18} /> Add Language
         </button>
       </div>
-
+      
       <div className="flex justify-end py-4 border-b-2 border-gray-200">
         <button
           onClick={saveLanguages}

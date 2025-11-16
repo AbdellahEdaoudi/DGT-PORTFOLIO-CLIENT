@@ -55,6 +55,7 @@ export default function Socials({ userData }) {
             <input
               type="url"
               value={socials[key] || ""}
+              maxLength={500}
               onChange={(e) => setSocials({ ...socials, [key]: e.target.value })}
               placeholder={`Enter ${key} URL`}
               className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 transition bg-white"

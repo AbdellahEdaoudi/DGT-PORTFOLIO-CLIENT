@@ -100,7 +100,7 @@ export default function AuthButtons() {
           className="bg-gray-700 py-2 border-b flex items-center justify-center border-gray-600 hover:bg-gray-600 transition duration-300 rounded-sm hover:scale-105 text-center mb-2"
         >
           <div className="flex items-center gap-1">
-            <NotebookText /> Work Links
+            <NotebookText /> Business Links
           </div>
         </Link>
         <Link

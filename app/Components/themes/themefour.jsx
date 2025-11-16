@@ -5,6 +5,7 @@ import QrcodeProfile from "../../[username]/components/QrcodeProfile";
 import UserLinks from "../../[username]/components/UserLinks";
 import MagicalLoader from "../MagicalLoader";
 import Image from "next/image";
+import Link from "next/link";
 
 export default function ThemeFour({ userDetails, userLinks }) {
   const [expandedProject, setExpandedProject] = useState(-1);
@@ -39,7 +40,9 @@ export default function ThemeFour({ userDetails, userLinks }) {
           <div className="max-w-5xl mx-auto">
             {/* Toolbar */}
             <div className="flex justify-between items-center mb-8">
-              <h1 className="text-2xl font-bold">Portfolio</h1>
+              <h1 className="text-white text-2xl font-bold cursor-pointer">
+                <Link href={"https://dgtportfolio.com"}>Portfolio</Link>
+              </h1>
               <div className="flex gap-3">
                 {/* Copy Link */}
                 <button

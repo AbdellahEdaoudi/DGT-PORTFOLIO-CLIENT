@@ -5,6 +5,7 @@ import QrcodeProfile from "../../[username]/components/QrcodeProfile"
 import UserLinks from "../../[username]/components/UserLinks"
 import MagicalLoader from "../MagicalLoader"
 import Image from "next/image"
+import Link from "next/link"
 
 export default function ThemeThree({ userDetails, userLinks }) {
   const [activeTab, setActiveTab] = useState("about")
@@ -44,7 +45,9 @@ export default function ThemeThree({ userDetails, userLinks }) {
           <div className="max-w-5xl mx-auto">
             {/* Toolbar */}
             <div className="flex justify-between items-center mb-7 md:mb-8">
-              <h1 className="text-2xl font-bold">Portfolio</h1>
+              <h1 className="text-white text-2xl font-bold cursor-pointer">
+                <Link href={"https://dgtportfolio.com"}>Portfolio</Link>
+              </h1>
               <div className="flex gap-3">
                 {/* Copy Link */}
                 <button

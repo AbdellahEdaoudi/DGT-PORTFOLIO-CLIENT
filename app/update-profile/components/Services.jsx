@@ -52,6 +52,7 @@ export default function  Services({userData}) {
               <input
                 type="text"
                 value={service}
+                maxLength={50}
                 onChange={(e) => updateArrayItem(services, setServices, index, e.target.value)}
                 className="flex-1 px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 bg-white transition"
               />

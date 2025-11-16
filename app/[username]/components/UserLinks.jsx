@@ -23,11 +23,11 @@ function UserLinks({ userLinks = [],language,labels}) {
 
       <AlertDialogContent>
         <AlertDialogHeader>
-          <AlertDialogTitle className="sr-only">Work Links</AlertDialogTitle>
+          <AlertDialogTitle className="sr-only">Business Links</AlertDialogTitle>
           <AlertDialogDescription>
             <div className="rounded-lg text-black">
               <h1 className="text-3xl font-semibold text-center text-gray-800 mb-4">
-               Work Links
+               Business Links
               </h1>
 
               <div className="p-2 space-y-3 overflow-y-auto scrollbar-non max-h-96">
@@ -49,7 +49,7 @@ function UserLinks({ userLinks = [],language,labels}) {
                     ))
                   ) : (
                     <p className="text-center text-gray-500">
-                      No Work Links available.
+                      No Business Links available.
                     </p>
                   )}
                 </div>

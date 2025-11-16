@@ -102,6 +102,7 @@ function Userinfo({userData,setUserDetails}) {
                <input
                  type="text"
                  value={fullname}
+                 maxLength={100}
                  onChange={(e) => setFullname(e.target.value)}
                  required
                  className="w-full px-4 py-2 bg-white border-2 border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 transition"
@@ -112,6 +113,7 @@ function Userinfo({userData,setUserDetails}) {
                <input
                  type="text"
                  value={username}
+                 maxLength={100}
                  onChange={(e) => setUsername(e.target.value.replace(/[.\s/]/g, "").toLowerCase())}
                  required
                  className={`w-full px-4 py-2 border-2 bg-white border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 transition
@@ -126,6 +128,7 @@ function Userinfo({userData,setUserDetails}) {
                <input
                  type="text"
                  value={country}
+                 maxLength={100}
                  onChange={(e) => setCountry(e.target.value)}
                  className="w-full px-4 py-2 border-2 bg-white border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 transition"
                />
@@ -134,6 +137,7 @@ function Userinfo({userData,setUserDetails}) {
                <label className="block text-sm font-bold text-gray-700 mb-2">Phone</label>
                <input
                  type="tel"
+                 maxLength={100}
                  value={phoneNumber}
                  onChange={(e) => setPhoneNumber(e.target.value)}
                  className="w-full px-4 py-2 border-2 bg-white border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 transition"
@@ -143,6 +147,7 @@ function Userinfo({userData,setUserDetails}) {
                <label className="block text-sm font-bold text-gray-700 mb-2">Category</label>
                <input
                  type="text"
+                 maxLength={100}
                  value={category}
                  onChange={(e) => setCategory(e.target.value)}
                  placeholder="e.g. Developer, Designer"

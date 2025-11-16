@@ -5,6 +5,7 @@ import UserLinks from "../../[username]/components/UserLinks"
 import QrcodeProfile from "../../[username]/components/QrcodeProfile"
 import Image from "next/image"
 import MagicalLoader from "../MagicalLoader"
+import Link from "next/link"
 
 export default function ThemeFive({ userDetails, userLinks }) {
   const [copied, setCopied] = useState(false)
@@ -30,7 +31,9 @@ export default function ThemeFive({ userDetails, userLinks }) {
           <section className="pt-8">
             {/* Toolbar */}
             <div className="flex justify-between items-center mb-8 gap-4">
-              <h1 className="text-2xl font-bold">Portfolio</h1>
+              <h1 className="text-white text-2xl font-bold cursor-pointer">
+                <Link href={"https://dgtportfolio.com"}>Portfolio</Link>
+              </h1>
               <div className="flex flex-wrap gap-3">
                 {/* Copy Link */}
                 <button

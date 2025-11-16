@@ -22,7 +22,6 @@ export default function  About({userData}) {
           autoClose: 2000,
         })
     } catch (error) {
-    //   console.error("[v0] Error updating about:", error)
     } finally {
       setLoading(false)
     }

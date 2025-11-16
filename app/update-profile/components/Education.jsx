@@ -50,6 +50,7 @@ export default function Education({ userData }) {
                 <input
                   type="text"
                   placeholder="School/University Name"
+                  maxLength={100}
                   value={edu.school}
                   onChange={(e) =>
                     updateObjectInArray(education, setEducation, index, "school", e.target.value)
@@ -60,6 +61,7 @@ export default function Education({ userData }) {
                   type="text"
                   placeholder="Degree (e.g. Bachelor)"
                   value={edu.degree || ""}
+                  maxLength={100}
                   onChange={(e) =>
                     updateObjectInArray(education, setEducation, index, "degree", e.target.value)
                   }
@@ -69,6 +71,7 @@ export default function Education({ userData }) {
                   type="text"
                   placeholder="Field (e.g. Computer Science)"
                   value={edu.field || ""}
+                  maxLength={100}
                   onChange={(e) =>
                     updateObjectInArray(education, setEducation, index, "field", e.target.value)
                   }
@@ -79,6 +82,7 @@ export default function Education({ userData }) {
                     type="text"
                     placeholder="Start Year"
                     value={edu.startYear || ""}
+                    maxLength={20}
                     onChange={(e) =>
                       updateObjectInArray(education, setEducation, index, "startYear", e.target.value)
                     }
@@ -87,6 +91,7 @@ export default function Education({ userData }) {
                   <input
                     type="text"
                     placeholder="End Year"
+                    maxLength={20}
                     value={edu.endYear || ""}
                     onChange={(e) =>
                       updateObjectInArray(education, setEducation, index, "endYear", e.target.value)

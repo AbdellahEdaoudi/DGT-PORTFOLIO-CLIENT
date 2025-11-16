@@ -52,6 +52,7 @@ export default function Experience({ userData }) {
                   type="text"
                   placeholder="Company Name"
                   value={exp.company}
+                  maxLength={100}
                   onChange={(e) =>
                     updateObjectInArray(experience, setExperience, index, "company", e.target.value)
                   }
@@ -61,6 +62,7 @@ export default function Experience({ userData }) {
                   type="text"
                   placeholder="Job Role"
                   value={exp.role}
+                  maxLength={100}
                   onChange={(e) =>
                     updateObjectInArray(experience, setExperience, index, "role", e.target.value)
                   }
@@ -71,6 +73,7 @@ export default function Experience({ userData }) {
               <textarea
                 placeholder="Job Description"
                 value={exp.description || ""}
+                maxLength={2000}
                 onChange={(e) =>
                   updateObjectInArray(experience, setExperience, index, "description", e.target.value)
                 }
@@ -82,6 +85,7 @@ export default function Experience({ userData }) {
                   type="text"
                   placeholder="Start Date"
                   value={exp.startDate || ""}
+                  maxLength={20}
                   onChange={(e) =>
                     updateObjectInArray(experience, setExperience, index, "startDate", e.target.value)
                   }
@@ -91,6 +95,7 @@ export default function Experience({ userData }) {
                   type="text"
                   placeholder="End Date"
                   value={exp.endDate || ""}
+                  maxLength={20}
                   onChange={(e) =>
                     updateObjectInArray(experience, setExperience, index, "endDate", e.target.value)
                   }

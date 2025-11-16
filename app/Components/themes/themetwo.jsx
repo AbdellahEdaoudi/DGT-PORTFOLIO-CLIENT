@@ -4,6 +4,7 @@ import { Briefcase, CheckCircle2, Copy, Mail } from "lucide-react"
 import QrcodeProfile from "../../[username]/components/QrcodeProfile"
 import UserLinks from "../../[username]/components/UserLinks"
 import Image from "next/image"
+import Link from "next/link"
 
 export default function ThemeTwo({ userDetails, userLinks,bgcolor }) {
   const [activeTab, setActiveTab] = useState("about")
@@ -31,7 +32,9 @@ export default function ThemeTwo({ userDetails, userLinks,bgcolor }) {
         <header className="pt-7 px-6 pb-8">
           <div className="max-w-5xl mx-auto">
             <div className="flex justify-between items-center mb-7 md:mb-8">
-              <h1 className="text-2xl font-bold">Portfolio</h1>
+              <h1 className="text-white text-2xl font-bold cursor-pointer">
+                <Link href={"https://dgtportfolio.com"}>Portfolio</Link>
+              </h1>
               <div className="flex gap-3">
                 {/* Copy Link */}
                 <button

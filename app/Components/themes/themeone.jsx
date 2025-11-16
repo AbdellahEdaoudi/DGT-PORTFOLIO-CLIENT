@@ -11,6 +11,7 @@ import {
 import QrcodeProfile from "../../[username]/components/QrcodeProfile"
 import UserLinks from "../../[username]/components/UserLinks"
 import Image from "next/image"
+import Link from "next/link"
 
 export default function Themeone({userDetails,userLinks,bgcolor}) {
   const [copied, setCopied] = useState(false);
@@ -45,7 +46,9 @@ export default function Themeone({userDetails,userLinks,bgcolor}) {
           <div className="max-w-4xl mx-auto">
             {/* Top toolbar */}
             <div className="flex justify-between items-center mb-10">
-              <h1 className="text-white text-2xl font-bold">Portfolio</h1>
+              <h1 className="text-white text-2xl font-bold cursor-pointer">
+                <Link href={"https://dgtportfolio.com"}>Portfolio</Link>
+              </h1>
               <div className="flex gap-3">
                 {/* // Copy link and QR code buttons */}
                 <button

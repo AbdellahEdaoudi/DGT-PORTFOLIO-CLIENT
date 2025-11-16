@@ -50,6 +50,7 @@ export default function Projects({ userData }) {
                 type="text"
                 placeholder="Project Title"
                 value={proj.title}
+                maxLength={100}
                 onChange={(e) =>
                   updateObjectInArray(projects, setProjects, index, "title", e.target.value)
                 }
@@ -59,6 +60,7 @@ export default function Projects({ userData }) {
               <textarea
                 placeholder="Project Description"
                 value={proj.description || ""}
+                maxLength={2000}
                 onChange={(e) =>
                   updateObjectInArray(projects, setProjects, index, "description", e.target.value)
                 }
@@ -70,6 +72,7 @@ export default function Projects({ userData }) {
                   type="url"
                   placeholder="Project Link"
                   value={proj.link || ""}
+                  maxLength={1000}
                   onChange={(e) =>
                     updateObjectInArray(projects, setProjects, index, "link", e.target.value)
                   }
@@ -79,6 +82,7 @@ export default function Projects({ userData }) {
                   type="url"
                   placeholder="Image URL"
                   value={proj.image || ""}
+                  maxLength={1000}
                   onChange={(e) =>
                     updateObjectInArray(projects, setProjects, index, "image", e.target.value)
                   }
@@ -88,7 +92,7 @@ export default function Projects({ userData }) {
 
               <input
                 type="text"
-                placeholder="Technologies (comma separated)"
+                placeholder="Technologies (comma separated) t1,t2,t3"
                 value={(proj.technologies || []).join(", ")}
                 onChange={(e) =>
                   updateObjectInArray(
@@ -120,6 +124,7 @@ export default function Projects({ userData }) {
                   type="text"
                   placeholder="Start Date"
                   value={proj.startDate || ""}
+                  maxLength={20}
                   onChange={(e) =>
                     updateObjectInArray(projects, setProjects, index, "startDate", e.target.value)
                   }
@@ -129,6 +134,7 @@ export default function Projects({ userData }) {
                   type="text"
                   placeholder="End Date"
                   value={proj.endDate || ""}
+                  maxLength={20}
                   onChange={(e) =>
                     updateObjectInArray(projects, setProjects, index, "endDate", e.target.value)
                   }
