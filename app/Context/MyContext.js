@@ -11,7 +11,6 @@ export const MyProvider = ({ children }) => {
    const {data,status} = useSession()
    const EmailUser = data?.user?.email
    const [loadingAll, setLoadingAll] = useState(true);
-   const CLIENT_URL = process.env.NEXT_PUBLIC_CLIENT_URL ;
    
   
   // Fetch all data
@@ -35,7 +34,6 @@ useEffect(() => {
   return (
     <MyContext.Provider
       value={{
-        CLIENT_URL,
         userDetails,
         setUserDetails,
         userLinks,

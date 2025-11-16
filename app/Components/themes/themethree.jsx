@@ -11,10 +11,11 @@ export default function ThemeThree({ userDetails, userLinks }) {
   const [copied, setCopied] = useState(false);
   const [showQR, setShowQR] = useState(false);
   const [expanded, setExpanded] = useState(false);
-  const CLIENT_URL = process.env.NEXT_PUBLIC_CLIENT_URL || "http://localhost:3000"
+  const PORTFOLIO = `https://${userDetails?.username}.dgtportfolio.com`
+
 
   const copyProfileLink = () => {
-    const urlToCopy = `${CLIENT_URL}/${userDetails.username}`
+    const urlToCopy = PORTFOLIO
     navigator.clipboard.writeText(urlToCopy).then(() => {
       setCopied(true)
       setTimeout(() => setCopied(false), 2000)
