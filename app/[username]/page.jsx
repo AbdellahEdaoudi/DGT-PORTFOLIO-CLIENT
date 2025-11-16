@@ -9,6 +9,8 @@ import axios from 'axios'
 import AccountNotFound from "../Components/AccountNotFound"
 import MagicalLoader from '../Components/MagicalLoader'
 
+export const runtime = 'edge';
+
 function Page({ params }) {
   const [userDetails, setUserDetails] = useState(null)
   const [userLinks, setUserLinks] = useState([])

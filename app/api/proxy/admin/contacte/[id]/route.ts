@@ -4,6 +4,7 @@ import axios from "axios";
 import jwt from "jsonwebtoken";
 import { authOptions } from "../../../../../../lib/nextAuth";
 
+export const runtime = 'edge';
 // DELETE resource by ID
 export async function DELETE(req: Request, { params }: { params: { id: string } }) {
   const session = await getServerSession(authOptions);

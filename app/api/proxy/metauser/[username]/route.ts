@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import axios from "axios";
 
-
+export const runtime = 'edge';
 export async function GET(req: Request, { params }: { params: { username: string } }) {
 
   try {

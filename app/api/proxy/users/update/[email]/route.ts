@@ -4,6 +4,7 @@ import { authOptions } from "../../../../../../lib/nextAuth";
 import axios from "axios";
 import jwt from "jsonwebtoken";
 
+export const runtime = 'edge';
 export async function PUT(req: Request, { params }: { params: { email: string } }) {
   try {
     const session = await getServerSession(authOptions);
