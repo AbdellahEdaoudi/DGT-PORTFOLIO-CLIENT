@@ -73,13 +73,13 @@ export default function ContactForm() {
                   <Mail className="h-6 w-6 mr-3" />
                   <span>dgt.portfolio.ma@gmail.com</span>
                 </div>
-                <div className="flex items-center text-teal-100">
+                <div className="flex items-center text-teal-100 hidden">
                   <Phone className="h-6 w-6 mr-3" />
                   <span>+000000000000</span>
                 </div>
                 <div className="flex items-center text-teal-100">
                   <MapPin className="h-6 w-6 mr-3" />
-                  <span>El-Aaiun,Morocco</span>
+                  <span>United States</span>
                 </div>
               </div>
             </div>
