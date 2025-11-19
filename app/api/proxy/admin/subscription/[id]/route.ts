@@ -5,9 +5,14 @@ import jwt from "jsonwebtoken";
 import { authOptions } from "../../../../../../lib/nextAuth";
 
 export const runtime = 'nodejs';
-// DELETE resource by ID
-export async function DELETE(req: Request, { params }: { params: { id: string } }) {
+
+// DELETE subscription by ID
+export async function DELETE(
+  req: Request,
+  { params }: { params: { id: string } }
+) {
   const session = await getServerSession(authOptions);
+
   if (!session?.user?.email || session?.user?.email !== process.env.EMAIL) {
     return NextResponse.json({ message: "Unauthorized" }, { status: 401 });
   }
@@ -20,12 +25,13 @@ export async function DELETE(req: Request, { params }: { params: { id: string } 
 
   try {
     const backendUrl = process.env.BACKEND_URL;
-    const response = await axios.delete(`${backendUrl}/admin/contacte/${params.id}`, {
+    const response = await axios.delete(`${backendUrl}/api/subscriptions/${params.id}`, {
       headers: { Authorization: `Bearer ${token}` },
     });
+
     return NextResponse.json(response.data, { status: response.status });
   } catch (error: any) {
-    console.error("❌ DELETE Error:", error.response?.data || error.message);
+    console.error("Error deleting subscription:", error.response?.data || error.message);
     return NextResponse.json(
       { message: error.response?.data?.message || error.message },
       { status: error.response?.status || 500 }

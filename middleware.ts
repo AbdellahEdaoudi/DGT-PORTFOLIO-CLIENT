@@ -7,7 +7,7 @@ export default withAuth(async function middleware(request: NextRequest) {
   const pathname = request.nextUrl.pathname;
   const isAuth = await getToken({ req: request });
 
-  const protectedRoutes = ['/BusinessLinks','/update-profile','/support'];
+  const protectedRoutes = ['/BusinessLinks','/update-profile','/support','/subscription','/Admin'];
   const isAuthRoute = pathname.startsWith('/auth');
   const isProtectedRoute = protectedRoutes.some(route => pathname.startsWith(route));
 
@@ -30,5 +30,5 @@ export default withAuth(async function middleware(request: NextRequest) {
 
 // Configuration for matcher
 export const config = {
-  matcher: ['/BusinessLinks','/update-profile','/support','/auth/:path*'],
+  matcher: ['/BusinessLinks','/update-profile','/support','/subscription','/Admin','/auth/:path*'],
 };

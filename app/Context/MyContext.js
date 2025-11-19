@@ -9,7 +9,7 @@ export const MyProvider = ({ children }) => {
    const [userDetails, setUserDetails] = useState(null);
    const [userLinks, setUserLinks] = useState([]);
    const {data,status} = useSession()
-   const EmailUser = data?.user?.email
+   const EmailUser = data?.user?.email || ""
    const [loadingAll, setLoadingAll] = useState(true);
    
   

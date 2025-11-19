@@ -24,7 +24,7 @@ export default function LandingPage() {
       {/* Navigation */}
       <nav className={`fixed top-0 w-full z-50 transition-all duration-300`}>
           <Navbar>
-        <div className="max-w-7xl mx-auto px-6 py-6 flex justify-between items-center">
+        <div className=" mx-auto md:mx-3 px-6 py-6 flex justify-between items-center">
           <h1 className="flex items-center gap- text-2xl font-bold bg-gradient-to-r from-cyan-400 to-purple-500 bg-clip-text text-transparent cursor-pointer">
             {/* <Sparkles className="w-6 h-6 text-white" /> */}
             <Image src={"/LogoinQrcode.png"} width={500} height={500} className="w-12 h-10" alt="DGT Portfolio - Professional Portfolio Builder" />
@@ -47,7 +47,7 @@ export default function LandingPage() {
       </nav>
 
       {/* Hero Section */}
-      <section className="relative pt-32 md:pb-20 px-6">
+      <section className="relative pt-20 md:pt-28 md:mx-5 md:pb-20 px-6">
         <div className="max-w-7xl mx-auto grid md:grid-cols-2 gap-12 items-center">
           <div className="space-y-8">
             <div className="space-y-4">
@@ -58,9 +58,10 @@ export default function LandingPage() {
                 <br />
                 <span className="text-white">Elevated</span>
               </h1>
-              <p className="text-xl text-gray-300 leading-relaxed">
-                Present your career, skills, work links and projects like never before.
-                 Create interactive portfolios that leave lasting impressions and open doors to opportunities.
+              <p className="text-lg  text-gray-300 leading-relaxed">
+                No code, no hassle. Just a clean, modern portfolio in minutes. <br />  
+                Showcase your career, skills, projects, and work links like never before —
+                 leave a lasting impression and unlock new opportunities.
               </p>
             </div>
             <div className="flex gap-4">
@@ -96,7 +97,7 @@ export default function LandingPage() {
                 icon: SquareMousePointer,
                 title: "Custom Subdomain",
                 description: (
-                  <>Get a personalized subdomain like <strong>username.dgtportfolio.com</strong> for your portfolio</>
+                  <>Get a personalized subdomain like <strong>yourname.dgtportfolio.com</strong> for your portfolio</>
                 ),
               },
               {
@@ -143,7 +144,7 @@ export default function LandingPage() {
           <div className="text-center mb-16">
             <h2 className="text-5xl font-bold mb-4">Simple, Transparent Pricing</h2>
             <p className="text-gray-400 max-w-2xl mx-auto">
-              Choose the perfect plan for your digital wallet needs
+              Choose the perfect plan for your creative portfolio
             </p>
           </div>
 
@@ -207,7 +208,7 @@ export default function LandingPage() {
             </div>
           
             {/* CTA Button */}
-            <Link href="/subscribe" className="block ">
+            <Link href="/subscription" className="block">
               <button
                 className={`w-full py-3 px-6 rounded-full font-semibold transition-all duration-300 flex items-center justify-center gap-2 ${
                   plan.highlight

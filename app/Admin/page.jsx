@@ -1,11 +1,12 @@
 "use client"
 
 import { useEffect, useState } from "react"
-import { Users, MessageSquare, Settings, LogOut } from "lucide-react"
+import { Users, MessageSquare, Settings, LogOut, DollarSign } from "lucide-react"
 import AdminSidebar from "./Components/admin-sidebar"
 import UserManagement from "./Components/user-management"
 import ContactManagement from "./Components/contact-management"
 import LinksManagement from "./Components/links-management"
+import SubscriptionManagement from "./Components/SubscriptionManagement"
 import { signOut } from "next-auth/react"
 import axios from "axios"
 import MagicalLoader from "../Components/MagicalLoader"
@@ -94,12 +95,12 @@ export default function AdminDashboard() {
           {activeTab === "overview" && (
             <div className="space-y-8">
               {/* Stats Grid */}
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                 <div className="bg-slate-800/50 border border-purple-500/20 rounded-xl p-6 hover:border-purple-400/50 transition">
                   <div className="flex justify-between items-start">
                     <div>
                       <p className="text-gray-400 text-sm mb-2">Total Users</p>
-                      <p className="text-3xl font-bold">{data.users.length}</p>
+                      <p className="text-3xl font-bold">{data.users?.length}</p>
                     </div>
                     <Users className="w-8 h-8 text-cyan-400" />
                   </div>
@@ -109,11 +110,37 @@ export default function AdminDashboard() {
                   <div className="flex justify-between items-start">
                     <div>
                       <p className="text-gray-400 text-sm mb-2">Messages</p>
-                      <p className="text-3xl font-bold">{data.contacts.length}</p>
+                      <p className="text-3xl font-bold">{data.contacts?.length}</p>
                     </div>
                     <MessageSquare className="w-8 h-8 text-pink-400" />
                   </div>
                 </div>
+
+                <div className="bg-slate-800/50 border border-purple-500/20 rounded-xl p-6 hover:border-purple-400/50 transition">
+  <div className="flex justify-between items-start">
+    <div>
+      <p className="text-gray-400 text-sm mb-2">Subscriptions</p>
+      <p className="text-3xl font-bold">{data.subscription?.length || 0}</p>
+
+      {/* مثال لعدد الاشتراكات ACTIVE */}
+      <p className="text-sm text-green-400 mt-1">
+        Active: {data.subscription?.filter(sub => sub.status === "ACTIVE").length || 0}
+      </p>
+
+      {/* مثال لعدد كل خطة */}
+      <p className="text-sm text-cyan-400 mt-1">
+        Subscribe Monthly: {data.subscription?.filter(sub => sub.nameplan === "Monthly Plan").length || 0}
+      </p>
+      <p className="text-sm text-cyan-400 mt-1">
+        Subscribe 4 Months: {data.subscription?.filter(sub => sub.nameplan === "4-Month Plan").length || 0}
+      </p>
+      <p className="text-sm text-cyan-400 mt-1">
+        Subscribe Yearly: {data.subscription?.filter(sub => sub.nameplan === "Annual Plan").length || 0}
+      </p>
+    </div>
+    <DollarSign className="w-8 h-8 text-green-400" />
+  </div>
+</div>
               </div>
             </div>
           )}
@@ -121,6 +148,7 @@ export default function AdminDashboard() {
           {activeTab === "users" && <UserManagement data={data} setData={setData} />}
           {activeTab === "contacts" && <ContactManagement data={data} setData={setData} />}
           {activeTab === "links" && <LinksManagement links={data.links} />}
+          {activeTab === "subscriptions" && <SubscriptionManagement data={data} setData={setData} />}
         </div>
       </main>
     </div>

@@ -81,16 +81,16 @@ export default function AccountNotFound() {
           </div>
           <h1 className="text-4xl font-bold text-white mb-4">Account Not Found</h1>
           <p className="text-gray-400 text-lg mb-8">
-          We couldn't locate the account you're looking for. It may have been renamed or removed.
+          We couldn't locate the account you're looking for. It might be renamed or the user hasn't subscribed
           </p>
           <div className="space-y-4">
             <Button asChild className="w-full bg-[#00a896] hover:bg-[#008080] text-white py-2 px-4 rounded-md transition-all duration-300 transform hover:scale-105">
-              <Link href="/" className="flex items-center justify-center">
+              <Link href={"https://dgtportfolio.com"} className="flex items-center justify-center">
                 <ArrowLeft className="mr-2 h-4 w-4" /> Return to Home page
               </Link>
             </Button>
             <Button asChild variant="outline" className="w-full border-[#00a896] text-[#00a896] hover:bg-[#00a896] hover:text-white py-2 px-4 rounded-md transition-all duration-300">
-              <Link href="/support" className="flex items-center justify-center">
+              <Link href={"https://dgtportfolio.com/support"} className="flex items-center justify-center">
                 <LifeBuoy className="mr-2 h-4 w-4" /> Contact Support
               </Link>
             </Button>

@@ -1,16 +1,34 @@
 import { NextResponse } from "next/server";
 import axios from "axios";
 
-export const runtime = 'nodejs';
-export async function GET(req: Request, { params }: { params: { username: string } }) {
+export async function GET(
+  req: Request,
+  { params }: { params: { username: string } }
+) {
   try {
     const backendUrl = process.env.BACKEND_URL;
     const response = await axios.get(`${backendUrl}/users/username/${params.username}`);
+    
     return NextResponse.json(response.data, { status: response.status });
   } catch (err: any) {
-    if (err.response && err.response.status === 404) {  
-      return NextResponse.json({ message: "User not found" }, { status: 404 });
+    if (err.response) {
+      const msg = err.response.data?.message;
+      
+      if (msg === "User not found") {
+        return NextResponse.json({ message: msg }, { status: 404 });
+      }
+      
+      if (msg === "No subscription found for this user") {
+        return NextResponse.json({ message: msg }, { status: 404 });
+      }
+      
+      if (msg === "Your subscription is not active. Please renew or subscribe.") {
+        return NextResponse.json({ message: msg }, { status: 403 });
+      }
     }
-    return NextResponse.json({ message: err.message || "error" }, { status: 500 });
+    return NextResponse.json(
+      { message: err.message || "Internal Server Error" },
+      { status: 500 }
+    );
   }
 }

@@ -8,7 +8,7 @@ export const runtime = 'nodejs';
 // DELETE user by ID
 export async function DELETE(req: Request, { params }: { params: { id: string } }) {
   const session = await getServerSession(authOptions);
-  if (!session?.user?.email) {
+  if (!session?.user?.email || session?.user?.email !== process.env.EMAIL ) {
     return NextResponse.json({ message: "Unauthorized" }, { status: 401 });
   }
 

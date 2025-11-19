@@ -4,6 +4,8 @@ import { useState } from "react"
 import { Search, AlertCircle, Loader, X, ExternalLink } from "lucide-react"
 import { toast } from "react-toastify"
 import axios from "axios"
+import { useRouter } from "next/navigation"
+import Image from "next/image"
 
 export default function UserManagement({data,setData}) {
   const [deleteConfirm, setDeleteConfirm] = useState(null)
@@ -12,6 +14,7 @@ export default function UserManagement({data,setData}) {
   const [searchQuery, setSearchQuery] = useState("")
   const [loadingDeleteId, setLoadingDeleteId] = useState(null)
   const [loadingDeleteId2, setLoadingDeleteId2] = useState(null)
+  const router = useRouter()
 
   // Helper: highlight matched text
   const highlightText = (text, query) => {
@@ -109,13 +112,18 @@ export default function UserManagement({data,setData}) {
                 ).map((user) => {
                 const linksCount = data.links.filter((lnk)=>lnk.useremail === user.email).length
                 const linksuser = data.links.filter((lnk)=>lnk.useremail === user.email)
+                const PORTFOLIO = `https://${user?.username}.dgtportfolio.com`
                 return (
                   <tr key={user._id} className="border-b border-purple-500/10 hover:bg-purple-500/10 transition">
-                  <td className="px-6 py-4 text-white font-medium">
-                    {highlightText(user.fullname, searchQuery)}<br />
-                    <span className="text-xs text-gray-300">@{highlightText(user.username, searchQuery)}</span>
+                  <td onClick={() => window.open(PORTFOLIO, "_blank")} className="flex items-center gap-2 cursor-pointer px-6 py-4 text-white font-medium">
+                    <Image src={user?.urlimage} width={40} height={40} className="rounded-lg" alt="Profile User" />
+                    {highlightText(user.fullname, searchQuery)}
                   </td>
-                  <td className="px-6 py-4 text-gray-400">{highlightText(user.email, searchQuery)}</td>
+                  <td className="px-6 py-4 text-gray-400">
+                    {highlightText(user.email, searchQuery)}<br />
+                    <span className="text-xs text-gray-300">@{highlightText(user.username, searchQuery)}</span>
+
+                  </td>
                   <td className="px-6 py-4 text-gray-400">{user.country}</td>
                   <td className="px-6 py-4 text-cyan-400 text-sm">{highlightText(user.category, searchQuery)}</td>
                   <td onClick={() => setSelectedUserLinks(linksuser)} className="px-6 py-4 text-gray-400 cursor-pointer">
