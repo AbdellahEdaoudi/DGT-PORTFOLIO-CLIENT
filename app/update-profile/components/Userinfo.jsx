@@ -2,6 +2,7 @@
 import axios from 'axios'
 import { CheckCheck, Loader } from 'lucide-react'
 import Image from 'next/image'
+import { useRouter } from 'next/navigation'
 import React, { useContext } from 'react'
 import { useState } from 'react'
 import { toast } from 'react-toastify'
@@ -17,6 +18,7 @@ function Userinfo({userData,setUserDetails}) {
     const [country, setCountry] = useState(user.country || "")
     const [category, setCategory] = useState(user.category || "")
     const [errormsg, setErrormsg] = useState("")
+    const router = useRouter()
         // Handle image upload
     const handleImageUpload = (e) => {
         if (e.target && e.target.files && e.target.files.length > 0) {
@@ -82,9 +84,17 @@ function Userinfo({userData,setUserDetails}) {
        <div className="flex flex-col md:flex-row items-start justify-between gap-4 md:gap-8">
          <div className="flex flex-col items-center bg-gradient-to-br from-gray-50 to-gray-100 shadow-xl border-2 border-gray-200 rounded-2xl p-6 w-full md:w-1/3">
            <Image
+            onClick={()=>{
+            const PORTFOLIO = `https://${userData.username}.dgtportfolio.com`
+              if(userData.username){
+                router.push(PORTFOLIO)
+              }else if (!userData.username) {
+                setErrormsg("Username is required to see your personal portfolio")
+              }
+            }}
              src={imagePreview}
              alt="Profile"
-             className="rounded-full w-32 h-32 md:w-40 md:h-40 object-cover border-4 border-teal-500 shadow-lg"
+             className="rounded-full cursor-pointer w-32 h-32 md:w-40 md:h-40 object-cover border-4 border-teal-500 shadow-lg"
              width={160}
              height={160}
            />
@@ -95,14 +105,23 @@ function Userinfo({userData,setUserDetails}) {
          </div>
          {/* User Information */}
          <div className="text-xs md:text-base bg-gradient-to-br from-gray-50 to-gray-100 shadow-xl border-2 border-gray-200 rounded-2xl p-6 w-full md:w-2/3 space-y-4">
-           <h2 className="text-3xl md:block hidden font-bold text-gray-800 text-center mb-6">{fullname || "Your Name"}</h2>
+           <h2 onClick={()=>{
+            const PORTFOLIO = `https://${userData.username}.dgtportfolio.com`
+              if(userData.username){
+                router.push(PORTFOLIO)
+              }else if (!userData.username) {
+                setErrormsg("Username is required to see your personal portfolio")
+              }
+            }} className="text-3xl md:block hidden font-bold text-gray-800 text-center mb-6">
+            {fullname || "Full Name"}
+           </h2>
            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
              <div>
                <label className="block text-sm font-bold text-gray-700 mb-2">Full Name</label>
                <input
                  type="text"
                  value={fullname}
-                 maxLength={100}
+                 maxLength={50}
                  onChange={(e) => setFullname(e.target.value)}
                  required
                  className="w-full px-4 py-2 bg-white border-2 border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 transition"
@@ -113,7 +132,7 @@ function Userinfo({userData,setUserDetails}) {
                <input
                  type="text"
                  value={username}
-                 maxLength={100}
+                 maxLength={30}
                  onChange={(e) => setUsername(e.target.value.replace(/[.\s/]/g, "").toLowerCase())}
                  required
                  className={`w-full px-4 py-2 border-2 bg-white border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 transition
