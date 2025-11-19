@@ -14,23 +14,23 @@ const prompt = Prompt({ subsets: ['latin'], weight: '400' });
 
 export const metadata = {
   title: "Dgt Portfolio - Build Your Professional Portfolio Online",
-  description: "Showcase your skills, projects,Work Links and career with DGT Portfolio. Create interactive portfolios easily and impress potential clients or employers.",
+  description: "No code, no hassle. Just a clean, modern portfolio in minutes.Showcase your career, skills, projects, and work links like never before — leave a lasting impression and unlock new opportunities.",
   icons: {
-    icon: "/logo.png",
-    shortcut: "/logo.png",
-    apple: "/logo.png",
+    icon: "https://dgtportfolio.com/logo.png",
+    shortcut: "https://dgtportfolio.com/logo.png",
+    apple: "https://dgtportfolio.com/logo.png",
   },
   openGraph: {
     title: "DGT Portfolio - Build Your Professional Portfolio Online",
-    description: "Showcase your skills, projects, and career with DGT Portfolio. Create interactive portfolios easily and impress potential clients or employers.",
+    description: "No code, no hassle. Just a clean, modern portfolio in minutes.Showcase your career, skills, projects, and work links like never before — leave a lasting impression and unlock new opportunities.",
     url: "https://dgtportfolio.com",
-    images: ["/logo.png"],
+    images: ["https://dgtportfolio.com/logo.png"],
   },
   twitter: {
     card: "summary_large_image",
     title: "DGT Portfolio - Build Your Professional Portfolio Online",
-    description: "Showcase your skills, projects, and career with DGT Portfolio. Create interactive portfolios easily and impress potential clients or employers.",
-    images: ["/logo.png"],
+    description: "No code, no hassle. Just a clean, modern portfolio in minutes.Showcase your career, skills, projects, and work links like never before — leave a lasting impression and unlock new opportunities.",
+    images: ["https://dgtportfolio.com/logo.png"],
   },
 };
 
@@ -51,8 +51,9 @@ export default function RootLayout({ children }) {
           "name": "DGT Portfolio",
           "url": "https://dgtportfolio.com",
           "keywords": "DGT Portfolio, Portfolio Builder, Professional Portfolio, Showcase Skills, Interactive Portfolio",
-          "description": "Build your professional portfolio with DGT Portfolio. Showcase your skills, work links, projects, and interactive portfolios easily."
-        }
+          "description": "No code, no hassle. Just a clean, modern portfolio in minutes.Showcase your career, skills, projects, and work links like never before — leave a lasting impression and unlock new opportunities.",
+          "image": "https://dgtportfolio.com/logo.png"
+          }
         `}
         </Script>
         <NextAuthProvider>

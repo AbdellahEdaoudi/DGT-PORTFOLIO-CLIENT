@@ -12,7 +12,7 @@ export default function LandingPage() {
   // const PORTFOLIO = `https://liam-carter.dgtportfolio.vercel.app`
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-black text-white overflow-hidden">
+    <div id="top" className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-black text-white overflow-hidden">
       {/* Animated Background */}
       <div className="fixed inset-0 -z-10">
         <div className="absolute inset-0  opacity-5" />
@@ -25,11 +25,13 @@ export default function LandingPage() {
       <nav className={`fixed top-0 w-full z-50 transition-all duration-300`}>
           <Navbar>
         <div className=" mx-auto md:mx-3 px-6 py-6 flex justify-between items-center">
+          <Link href={"#top"}>
           <h1 className="flex items-center gap- text-2xl font-bold bg-gradient-to-r from-cyan-400 to-purple-500 bg-clip-text text-transparent cursor-pointer">
             {/* <Sparkles className="w-6 h-6 text-white" /> */}
             <Image src={"/LogoinQrcode.png"} width={500} height={500} className="w-12 h-10" alt="DGT Portfolio - Professional Portfolio Builder" />
             DGTPortfolio
           </h1>
+          </Link>
           <div className="hidden md:flex gap-8">
             <Link href={"#Features"} className="hover:text-cyan-400 transition">
               Features
