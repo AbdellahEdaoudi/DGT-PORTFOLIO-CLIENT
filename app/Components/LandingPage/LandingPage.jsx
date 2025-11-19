@@ -56,12 +56,15 @@ export default function LandingPage() {
                   Your Portfolio,
                 </span>
                 <br />
-                <span className="text-white">Elevated</span>
+                <span className="text-white">Elevated </span>
               </h1>
               <p className="text-lg  text-gray-300 leading-relaxed">
                 No code, no hassle. Just a clean, modern portfolio in minutes. <br />  
                 Showcase your career, skills, projects, and work links like never before —
                  leave a lasting impression and unlock new opportunities.
+                  <span className=" m-4 text-sm bg-gradient-to-r from-cyan-400 to-purple-500 text-black rounded-full px-3  py-1 font-semibold shadow-lg shadow-cyan-500/30">
+                    Free for 7 days
+                  </span>
               </p>
             </div>
             <div className="flex gap-4">
