@@ -8,7 +8,7 @@ import Link from "next/link"
 
 export default function LandingPage() {
   // const PORTFOLIO = `http://liam-carter.localhost:3000`
-  const PORTFOLIO = `https://liam-carter.dgtportfolio.com`
+     const PORTFOLIO = `https://liam-carter.dgtportfolio.com`
   // const PORTFOLIO = `https://liam-carter.dgtportfolio.vercel.app`
 
   return (
@@ -63,10 +63,10 @@ export default function LandingPage() {
               <p className="text-lg  text-gray-300 leading-relaxed">
                 No code, no hassle. Just a clean, modern portfolio in minutes. <br />  
                 Showcase your career, skills, projects, and work links like never before —
-                 leave a lasting impression and unlock new opportunities.
-                  <span className=" m-4 text-sm bg-gradient-to-r from-cyan-400 to-purple-500 text-black rounded-full px-3  py-1 font-semibold shadow-lg shadow-cyan-500/30">
-                    Free for 7 days
-                  </span>
+                leave a lasting impression and unlock new opportunities.
+                <span className=" m-4 text-sm bg-gradient-to-r from-cyan-400 to-purple-500 text-black rounded-full px-3  py-1 font-semibold shadow-lg shadow-cyan-500/30">
+                  Free for 7 days
+                </span>
               </p>
             </div>
             <div className="flex gap-4">
@@ -231,8 +231,6 @@ export default function LandingPage() {
     </div>
   </section>
       
-
-
       {/* CTA Section */}
       <section className="px-6 py-20 border-t border-purple-500/20">
         <div className="max-w-4xl mx-auto text-center">
