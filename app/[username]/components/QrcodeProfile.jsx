@@ -1,4 +1,4 @@
-import React, {useRef } from "react";
+import React, {useRef, useState } from "react";
 import {
   AlertDialog,
   AlertDialogCancel,
@@ -10,13 +10,15 @@ import {
   AlertDialogTrigger,
 } from "../../../components/ui/alert-dialog";
 import QRCode from "qrcode.react";
-import { QrCode } from "lucide-react";
+import { CheckCircle2, Copy, Download, LinkIcon, QrCode, Share2, X } from "lucide-react";
 
 function QrcodeProfile({userDetails,path}) {
   // const PORTFOLIO = `http://${userDetails?.username}.localhost:3000`
   const PORTFOLIO = `https://${userDetails?.username}.dgtportfolio.com`
   // const PORTFOLIO = `https://${userDetails?.username}.dgtportfolio.vercel.app`
   const qrCodeRef = useRef(null);
+  const [copied, setCopied] = useState(false);
+  
 
   const DownloadQRCode = () => {
     if (qrCodeRef.current) {
@@ -68,6 +70,13 @@ function QrcodeProfile({userDetails,path}) {
       alert("Share not supported on this browser");
     }
   };
+   const copyProfileLink = () => {
+    const urlToCopy = PORTFOLIO
+    navigator.clipboard.writeText(urlToCopy).then(() => {
+      setCopied(true)
+      setTimeout(() => setCopied(false), 2000)
+    })
+  }
 
   return (
     <div>
@@ -79,7 +88,10 @@ function QrcodeProfile({userDetails,path}) {
         </AlertDialogTrigger>
         <AlertDialogContent>
           <AlertDialogHeader>
-            <AlertDialogTitle>QR Code Profile</AlertDialogTitle>
+            <AlertDialogTitle className="flex items-center justify-between">
+              <div>QR Code Profile</div>
+              <AlertDialogCancel><X /></AlertDialogCancel>
+            </AlertDialogTitle>
             <AlertDialogDescription>
               <div className="flex flex-col justify-center items-center  ">
                 <div className={`mb-6 hidden`} ref={qrCodeRef}>
@@ -129,31 +141,61 @@ function QrcodeProfile({userDetails,path}) {
                     }
                   />
                 </div>
-                <div className="flex flex-row gap-3 mt-4">
+                {/* // Copy Link */}
+                <div 
+                  onClick={copyProfileLink} 
+                  className={`
+                     flex items-center justify-between gap-2 mt-4
+                    p-3 mb-4 border rounded-lg 
+                    cursor-pointer transition-all duration-200
+                    hover:bg-gray-50 active:scale-[0.98] select-none
+                    ${copied ? "border-green-500 bg-green-50/50" : "border-gray-200"}
+                  `} >
+              <div className="flex items-center gap-3 overflow-hidden">
+                 <div className={`p-1.5 rounded-md ${copied ? "bg-green-100 text-green-600" : "bg-gray-100 text-gray-500"}`}>
+                    <LinkIcon size={16} />
+                 </div>
+                 <span className={`text-sm font-medium truncate ${copied ? "text-green-700" : "text-gray-600"}`}>
+                  {PORTFOLIO}
+                </span>
+              </div>
+
+              <div className="shrink-0 pl-2">
+                {copied ? (
+                  <CheckCircle2 size={20} className="text-green-600 animate-in zoom-in duration-300" />
+                ) : (
+                  <Copy size={20} className="text-gray-400 hover:text-gray-600" />
+                )}
+              </div>
+               </div>
+                <div className="flex flex-row gap-3">
                   <button
-                    className="p-2 bg-blue-300 rounded-md my-2 text-black font-medium"
+                    className="flex items-center justify-center gap-1 p-2 bg-blue-300 hover:bg-blue-400 transition-colors rounded-md my-2 text-black font-medium"
                     onClick={DownloadQRCode}
                   >
-                    Download QrCode
+                    <Download size={16} />
+                    <span>Download QrCode</span>
                   </button>
                   <button
-                    className="p-2 bg-green-300 rounded-md my-2 text-black font-medium"
+                    className="flex items-center justify-center gap-1 p-2 bg-green-300 hover:bg-green-400 transition-colors rounded-md my-2 text-black font-medium"
                     onClick={ShareQRCode}
                   >
-                    Share Qrcode
+                    <QrCode size={16} />
+                    <span>Share Qrcode</span>
                   </button>
                   <button
-                    className="p-2 bg-green-300 rounded-md my-2 text-black font-medium"
+                    className="flex items-center justify-center gap-1 p-2 bg-yellow-300 hover:bg-yellow-400 transition-colors rounded-md my-2 text-black font-medium"
                     onClick={ShareLink}
                   >
-                    Share Link
+                    <Share2 size={16} />
+                    <span>Share Link</span>
                   </button>
                 </div>
               </div>
             </AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>
-            <AlertDialogCancel>Close</AlertDialogCancel>
+            {/* <AlertDialogCancel>Close</AlertDialogCancel> */}
             {/* <AlertDialogAction>Continue</AlertDialogAction> */}
           </AlertDialogFooter>
         </AlertDialogContent>

@@ -1,6 +1,6 @@
 "use client";
 import React from "react";
-import { Link as LinkIcon } from "lucide-react";
+import { Link as LinkIcon, X } from "lucide-react";
 import {
   AlertDialog,
   AlertDialogCancel,
@@ -26,9 +26,10 @@ function UserLinks({ userLinks = [],language,labels}) {
           <AlertDialogTitle className="sr-only">Business Links</AlertDialogTitle>
           <AlertDialogDescription>
             <div className="rounded-lg text-black">
-              <h1 className="text-3xl font-semibold text-center text-gray-800 mb-4">
-               Business Links
-              </h1>
+              <div className="flex items-center justify-between mx-3 text-3xl font-semibold text-center text-gray-800 mb-4">
+               <span>Business Links</span>
+              <AlertDialogCancel><X /></AlertDialogCancel>
+              </div>
 
               <div className="p-2 space-y-3 overflow-y-auto scrollbar-non max-h-96">
                 <div className="p-2 space-y-3">
@@ -59,7 +60,7 @@ function UserLinks({ userLinks = [],language,labels}) {
         </AlertDialogHeader>
 
         <AlertDialogFooter>
-          <AlertDialogCancel>Close</AlertDialogCancel>
+          {/* <AlertDialogCancel>Close</AlertDialogCancel> */}
         </AlertDialogFooter>
       </AlertDialogContent>
     </AlertDialog>
