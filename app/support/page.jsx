@@ -124,6 +124,7 @@ export default function ContactForm() {
                       onChange={(e) => setMessage(e.target.value)}
                       className="pl-10 pt-2 border-teal-300 focus:border-teal-500 focus:ring-teal-500 w-full"
                       rows={4}
+                      maxLength={500}
                       placeholder="Enter your message"
                       required
                     />
