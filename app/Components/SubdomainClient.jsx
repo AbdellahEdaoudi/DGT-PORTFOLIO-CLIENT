@@ -57,7 +57,7 @@ export default function SubdomainClient({username}) {
   };
 
   fetchUsers();
-}, [username]);
+}, [username,EmailUser]);
 
   if (loadingUsers) return <MagicalLoader />
   if (notFound) return <AccountNotFound />

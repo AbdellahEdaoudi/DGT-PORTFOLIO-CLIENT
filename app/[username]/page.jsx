@@ -57,7 +57,7 @@ function Page({ params }) {
   };
 
   fetchUsers();
-}, [params.username]);
+}, [params.username,EmailUser]);
 
   if (loadingUsers) return <MagicalLoader />
   if (notFound) return <AccountNotFound />
