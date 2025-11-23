@@ -64,20 +64,20 @@ export default function ContactForm() {
           <div className="lg:flex ">
             <div className="lg:w-1/2 bg-teal-800 p-4 lg:p-12">
             <Link href={"/"}>
-            <Image src={"/LogoinQrcode.png"} alt='LOGO' width={100} height={100} className="bg-white p-2 rounded-lg mb-5" />
+            <Image src={"/LogoinQrcode.png"} alt='LOGO' width={130} height={130} className="bg-white p-2 rounded-lg mb-5" />
             </Link>
               <h2 className="text-3xl font-bold text-white mb-6">Get in Touch</h2>
               <p className="text-teal-100 mb-6">We'd love to hear from you. Send us a message and we'll respond as soon as possible.</p>
               <div className="space-y-4">
-                <div className="flex items-center text-teal-100">
+                <div className="fle items-center text-teal-100 hidden">
                   <Mail className="h-6 w-6 mr-3" />
                   <span>dgt.portfolio.ma@gmail.com</span>
                 </div>
-                <div className="fle items-center text-teal-100 hidden">
+                <div className="fle  items-center text-teal-100 hidden">
                   <Phone className="h-6 w-6 mr-3" />
                   <span>+000000000000</span>
                 </div>
-                <div className="flex items-center text-teal-100">
+                <div className="fle items-center hidden text-teal-100">
                   <MapPin className="h-6 w-6 mr-3" />
                   <span>United States</span>
                 </div>

@@ -28,16 +28,6 @@ export const authOptions : AuthOptions={
         strategy :"jwt",
         maxAge : 1 *24 *60 * 60 , // 1 day
     },
-    cookies: {
-      sessionToken: {
-        name: "__Secure-next-auth.session-token",
-        options: {
-          httpOnly: true,
-          sameSite: "strict",
-          secure: true,
-        },
-      },
-    },
     jwt :{
         //jwt
     },
@@ -67,7 +57,7 @@ export const authOptions : AuthOptions={
     return true;
     } catch (error: any) {
       console.error("Error creating user:", error);
-      return "/auth/error";
+      return false;
     }
   },
     },
