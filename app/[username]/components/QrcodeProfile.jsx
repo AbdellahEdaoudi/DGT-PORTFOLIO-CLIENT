@@ -12,7 +12,7 @@ import {
 import QRCode from "qrcode.react";
 import { CheckCircle2, Copy, Download, LinkIcon, QrCode, Share2, X } from "lucide-react";
 
-function QrcodeProfile({userDetails,path}) {
+function QrcodeProfile({userDetails}) {
   // const PORTFOLIO = `http://${userDetails?.username}.localhost:3000`
   const PORTFOLIO = `https://${userDetails?.username}.dgtportfolio.com`
   // const PORTFOLIO = `https://${userDetails?.username}.dgtportfolio.vercel.app`
@@ -86,13 +86,13 @@ function QrcodeProfile({userDetails,path}) {
             <QrCode />
           </div>
         </AlertDialogTrigger>
-        <AlertDialogContent>
+        <AlertDialogContent className="rounded-lg">
           <AlertDialogHeader>
             <AlertDialogTitle className="flex items-center justify-between">
               <div>QR Code Profile</div>
               <AlertDialogCancel><X /></AlertDialogCancel>
             </AlertDialogTitle>
-            <AlertDialogDescription>
+            <AlertDialogDescription asChild>
               <div className="flex flex-col justify-center items-center  ">
                 <div className={`mb-6 hidden`} ref={qrCodeRef}>
                   <QRCode
@@ -152,15 +152,15 @@ function QrcodeProfile({userDetails,path}) {
                     ${copied ? "border-green-500 bg-green-50/50" : "border-gray-200"}
                   `} >
               <div className="flex items-center gap-3 overflow-hidden">
-                 <div className={`p-1.5 rounded-md ${copied ? "bg-green-100 text-green-600" : "bg-gray-100 text-gray-500"}`}>
+                 <div className={`p-1 rounded-md ${copied ? "bg-green-100 text-green-600" : "bg-gray-100 text-gray-500"}`}>
                     <LinkIcon size={16} />
                  </div>
                  <span className={`text-sm font-medium truncate ${copied ? "text-green-700" : "text-gray-600"}`}>
-                  {PORTFOLIO}
+                  {PORTFOLIO.split("//")[1]}
                 </span>
               </div>
 
-              <div className="shrink-0 pl-2">
+              <div className="shrink-0 pl-1">
                 {copied ? (
                   <CheckCircle2 size={20} className="text-green-600 animate-in zoom-in duration-300" />
                 ) : (
@@ -168,13 +168,13 @@ function QrcodeProfile({userDetails,path}) {
                 )}
               </div>
                </div>
-                <div className="flex flex-row gap-3 text-xs md:text-base">
-                  <button
+                <div className="grid grid-cols-2 justify-center gap-2 text-xs md:text-sm">
+                   <button
                     className="flex items-center justify-center gap-1 p-2 bg-blue-300 hover:bg-blue-400 transition-colors rounded-md my-2 text-black font-medium"
                     onClick={DownloadQRCode}
                   >
                     <Download size={16} />
-                    <span>Download QrCode</span>
+                    <span>Download QRCode</span>
                   </button>
                   <button
                     className="flex items-center justify-center gap-1 p-2 bg-green-300 hover:bg-green-400 transition-colors rounded-md my-2 text-black font-medium"
@@ -183,6 +183,7 @@ function QrcodeProfile({userDetails,path}) {
                     <QrCode size={16} />
                     <span>Share Qrcode</span>
                   </button>
+                  
                   <button
                     className="flex items-center justify-center gap-1 p-2 bg-yellow-300 hover:bg-yellow-400 transition-colors rounded-md my-2 text-black font-medium"
                     onClick={ShareLink}
@@ -190,6 +191,14 @@ function QrcodeProfile({userDetails,path}) {
                     <Share2 size={16} />
                     <span>Share Link</span>
                   </button>
+                  <button
+                    className="flex items-center justify-center gap-1 p-2 bg-orange-300 hover:bg-orange-400 transition-colors rounded-md my-2 text-black font-medium"
+                    onClick={copyProfileLink}
+                  >
+                    <Copy size={16} />
+                    <span>Copy Link</span>
+                  </button> 
+                  
                 </div>
               </div>
             </AlertDialogDescription>

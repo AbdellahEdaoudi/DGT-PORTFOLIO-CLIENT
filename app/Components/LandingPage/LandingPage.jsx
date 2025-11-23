@@ -251,7 +251,7 @@ export default function LandingPage() {
 
       {/* Footer */}
       <footer className="border-t border-purple-500/20 px-6 py-12 text-gray-400 text-center">
-        <p> © {new Date().getFullYear()} <span className="font-semibold">DGT Portfolio</span>. All rights reserved.</p>
+        <p> © {new Date().getFullYear()} <span className="font-semibold">DGT PORTFOLIO</span>. All rights reserved.</p>
       </footer>
     </div>
   )

@@ -1,6 +1,6 @@
 'use client';
-import React, { useContext, useState, useEffect } from 'react';
-import {Link, X, Edit3, Trash2, CheckCircle } from 'lucide-react';
+import React, { useContext, useState} from 'react';
+import {Link, X, Edit3, Trash2, CheckCircle, Loader } from 'lucide-react';
 import { MyContext } from '../Context/MyContext';
 import axios from 'axios';
 import { toast } from "react-toastify";
@@ -12,15 +12,13 @@ import MagicalLoader from '../Components/MagicalLoader';
 import Header from '../Components/header';
 
 function EditUserLinks() {
-  const {EmailUser,userDetails,userLinks, setUserLinks,loadingAll} = useContext(MyContext);
+  const {EmailUser,userLinks, setUserLinks,loadingAll} = useContext(MyContext);
   const [loadingAction, setLoadingAction] = useState(null); 
   const [confirmOpen, setConfirmOpen] = useState(false);
   const [deleteId, setDeleteId] = useState(null);
   const [namelink, setNamelink] = useState('');
   const [link, setLink] = useState('');
   const [editLinkId, setEditLinkId] = useState(null);
-
-
 
   const AddLink = async (e) => {
     e.preventDefault();
@@ -51,11 +49,13 @@ function EditUserLinks() {
       setLoadingAction(null);
     }
   };
+  
   const EditLink = (lnk) => {
     setEditLinkId(lnk._id);
     setNamelink(lnk.namelink);
     setLink(lnk.link);
   };
+
   const UpdateLink = async (e) => {
     e.preventDefault();
     setLoadingAction('update');
@@ -148,7 +148,7 @@ if(!EmailUser || loadingAll){return <MagicalLoader />}
                 value={namelink}
                 onChange={(e) => setNamelink(e.target.value)}
                 required
-                maxLength={50}
+                maxLength={100}
                 placeholder='Titel'
                 className="mt-1 w-full px-3 py-2 border border-gray-300 bg-gray-50 rounded-md shadow-sm focus:ring-teal-500 focus:border-teal-500 sm:text-sm"
               />
@@ -157,6 +157,7 @@ if(!EmailUser || loadingAll){return <MagicalLoader />}
               <input
                 type="url"
                 value={link}
+                maxLength={100}
                 onChange={(e) => setLink(e.target.value)}
                 required
                 placeholder='Link URL'
@@ -169,7 +170,7 @@ if(!EmailUser || loadingAll){return <MagicalLoader />}
               className="w-full bg-teal-5 bg-sky-700 text-white px-4 py-2 rounded hover:bg-teal-600 transition duration-300"
             >
               {loadingAction === 'add' || loadingAction === 'update' ? (
-                <i className="fa fa-spinner fa-spin"></i>
+                <div className='flex items-center justify-center'><Loader size={24} className="animate-spin"/></div>
               ) : editLinkId ? "Update" : "Add Link"}
             </button>
           </form>
@@ -209,7 +210,7 @@ if(!EmailUser || loadingAll){return <MagicalLoader />}
                       }}
                    disabled={loadingAction !== null}
                    className='text-red-500 border p-1 rounded-full ring-1'>
-                      {loadingAction === `delete-${lnk._id}` ? <i className="fa fa-spinner fa-spin"></i> : <Trash2 />}
+                      {loadingAction === `delete-${lnk._id}` ? <div className='flex items-center justify-center'><Loader size={18} className="animate-spin"/></div> : <Trash2 />}
                    </button>
                    </div>
                    </div>
