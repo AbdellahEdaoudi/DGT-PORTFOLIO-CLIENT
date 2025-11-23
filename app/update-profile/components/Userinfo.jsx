@@ -81,7 +81,7 @@ function Userinfo({userData,setUserDetails}) {
   return (
     <form >
       {/* Profile Image Section */}
-       <div className="flex flex-col md:flex-row items-start justify-between gap-4 md:gap-8">
+       <div className="flex flex-col md:flex-row items-start justify-between gap-2 md:gap-8">
          <div className="flex flex-col items-center bg-gradient-to-br from-gray-50 to-gray-100 shadow-xl border-2 border-gray-200 rounded-2xl p-6 w-full md:w-1/3">
            <Image
             onClick={()=>{
@@ -115,7 +115,7 @@ function Userinfo({userData,setUserDetails}) {
             }} className="text-3xl md:block hidden font-bold text-gray-800 text-center mb-6">
             {fullname || "Full Name"}
            </h2>
-           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+           <div className="grid grid-cols-2 gap-4">
              <div>
                <label className="block text-sm font-bold text-gray-700 mb-2">Full Name</label>
                <input
@@ -162,7 +162,8 @@ function Userinfo({userData,setUserDetails}) {
                  className="w-full px-4 py-2 border-2 bg-white border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 transition"
                />
              </div>
-             <div className="md:col-span-2">
+           </div>
+           <div className="md:col-span-2">
                <label className="block text-sm font-bold text-gray-700 mb-2">Category</label>
                <input
                  type="text"
@@ -173,7 +174,6 @@ function Userinfo({userData,setUserDetails}) {
                  className="w-full px-4 py-2 bg-white border-2 border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 transition"
                />
              </div>
-           </div>
          </div>
        </div>
        {/* Submit Button */}
