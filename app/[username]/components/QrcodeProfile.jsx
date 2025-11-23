@@ -168,7 +168,7 @@ function QrcodeProfile({userDetails,path}) {
                 )}
               </div>
                </div>
-                <div className="flex flex-row gap-3">
+                <div className="flex flex-row gap-3 text-xs md:text-base">
                   <button
                     className="flex items-center justify-center gap-1 p-2 bg-blue-300 hover:bg-blue-400 transition-colors rounded-md my-2 text-black font-medium"
                     onClick={DownloadQRCode}

@@ -13,7 +13,7 @@ const inter = Inter({ subsets: ['latin'] });
 const prompt = Prompt({ subsets: ['latin'], weight: '400' });
 
 export const metadata = {
-  title: "DGT PORTFOLIO - Build Your Professional Portfolio Online",
+  title: "DGT PORTFOLIO – BUILD YOUR PROFESSIONAL PORTFOLIO ONLINE",
   description: "No code, no hassle. Just a clean, modern portfolio in minutes.Showcase your career, skills, projects, and work links like never before — leave a lasting impression and unlock new opportunities.",
   icons: {
     icon: "https://dgtportfolio.com/logo.png",
@@ -21,14 +21,14 @@ export const metadata = {
     apple: "https://dgtportfolio.com/logo.png",
   },
   openGraph: {
-    title: "DGT PORTFOLIO - Build Your Professional Portfolio Online",
+    title: "DGT PORTFOLIO – BUILD YOUR PROFESSIONAL PORTFOLIO ONLINE",
     description: "No code, no hassle. Just a clean, modern portfolio in minutes.Showcase your career, skills, projects, and work links like never before — leave a lasting impression and unlock new opportunities.",
     url: "https://dgtportfolio.com",
     images: ["https://dgtportfolio.com/logo.png"],
   },
   twitter: {
     card: "summary_large_image",
-    title: "DGT PORTFOLIO - Build Your Professional Portfolio Online",
+    title: "DGT PORTFOLIO – BUILD YOUR PROFESSIONAL PORTFOLIO ONLINE",
     description: "No code, no hassle. Just a clean, modern portfolio in minutes.Showcase your career, skills, projects, and work links like never before — leave a lasting impression and unlock new opportunities.",
     images: ["https://dgtportfolio.com/logo.png"],
   },
@@ -48,7 +48,7 @@ export default function RootLayout({ children }) {
         {
           "@context": "https://schema.org",
           "@type": "WebSite",
-          "name": "DGT Portfolio",
+          "name": "DGT PORTFOLIO",
           "url": "https://dgtportfolio.com",
           "keywords": "DGT Portfolio, Portfolio Builder, Professional Portfolio, Showcase Skills, Interactive Portfolio",
           "description": "No code, no hassle. Just a clean, modern portfolio in minutes.Showcase your career, skills, projects, and work links like never before — leave a lasting impression and unlock new opportunities.",
