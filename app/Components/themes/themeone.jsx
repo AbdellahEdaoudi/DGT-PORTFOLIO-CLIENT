@@ -28,7 +28,7 @@ export default function Themeone({userDetails,userLinks,bgcolor}) {
   }
   return (
     <div
-      className="b min-h-screen relative overflow-hidden"
+      className="b min-h-screen relative overflow-hidden "
       style={{ backgroundColor: bgcolor || userDetails?.bgcolorp || "#OA3C4D" }}
     >
         
@@ -40,7 +40,7 @@ export default function Themeone({userDetails,userLinks,bgcolor}) {
       </div>
 
       {/* Main content */}
-      <div className="relative z-10">
+      <div className="relative z-10 ">
         {/* Header section */}
         <section className="pt-8 px-4 sm:px-6 lg:px-8">
           <div className="max-w-4xl mx-auto">
@@ -143,7 +143,7 @@ export default function Themeone({userDetails,userLinks,bgcolor}) {
                   {userDetails.services.map((service, idx) => (
                     <div
                       key={idx}
-                      className="bg-white/10 backdrop-blur-md border border-white/20 rounded-xl p-4 md:p-6 hover:bg-white/15 transition-all duration-300 hover:scale-105"
+                      className="text-sm md:text-base bg-white/10 backdrop-blur-md border border-white/20 rounded-xl p-4 md:p-6 hover:bg-white/15 transition-all duration-300 hover:scale-105"
                     >
                       <p className=" text-white/90 leading-relaxed">{service}</p>
                     </div>
