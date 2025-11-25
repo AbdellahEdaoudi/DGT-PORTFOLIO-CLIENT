@@ -4,7 +4,6 @@ import axios from "axios";
 import jwt from "jsonwebtoken";
 import { authOptions } from "../../../../../../lib/nextAuth";
 
-export const runtime = 'nodejs';
 // DELETE user by ID
 export async function DELETE(req: Request, { params }: { params: { id: string } }) {
   const session = await getServerSession(authOptions);

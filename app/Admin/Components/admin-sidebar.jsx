@@ -1,5 +1,5 @@
 "use client"
-import { LayoutDashboard, Users, MessageSquare, Settings, Link2, DollarSign } from "lucide-react"
+import { LayoutDashboard, Users, MessageSquare, Settings, Link2, DollarSign, TagIcon } from "lucide-react"
 
 export default function AdminSidebar({ activeTab, setActiveTab }) {
   const menuItems = [
@@ -8,6 +8,7 @@ export default function AdminSidebar({ activeTab, setActiveTab }) {
     { id: "contacts", label: "Messages", icon: MessageSquare },
     { id: "links", label: "Links", icon: Link2 },
     { id: "subscriptions", label: "Subscriptions", icon: DollarSign },
+    { id: "promo", label: "Promo Codes", icon: TagIcon },
   ]
 
   return (

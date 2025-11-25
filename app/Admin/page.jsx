@@ -7,6 +7,7 @@ import UserManagement from "./Components/user-management"
 import ContactManagement from "./Components/contact-management"
 import LinksManagement from "./Components/links-management"
 import SubscriptionManagement from "./Components/SubscriptionManagement"
+import PromoCodeManagement from "./Components/promo-management"
 import { signOut } from "next-auth/react"
 import axios from "axios"
 import MagicalLoader from "../Components/MagicalLoader"
@@ -149,6 +150,8 @@ export default function AdminDashboard() {
           {activeTab === "contacts" && <ContactManagement data={data} setData={setData} />}
           {activeTab === "links" && <LinksManagement links={data.links} />}
           {activeTab === "subscriptions" && <SubscriptionManagement data={data} setData={setData} />}
+          {activeTab === "promo" && (<PromoCodeManagement data={data} setData={setData} />)}
+
         </div>
       </main>
     </div>
