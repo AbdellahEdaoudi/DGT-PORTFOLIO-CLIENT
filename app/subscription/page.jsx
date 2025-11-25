@@ -86,12 +86,12 @@ export default function SubscriptionPage() {
       <Header />
       {/* Promo Code Section */}
       <div className="flex flex-col items-center justify-center my-8 gap-2">
-        <div className="flex items-center shadow-lg shadow-purple-500/10 rounded-full">
+        <div className="flex items-center shadow-lg shadow-purple-500/10 rounded-full ">
           <input
             type="text"
             placeholder="Enter Promo Code"
             maxLength={30}
-            className="bg-slate-800/80 text-white border border-r-0 border-purple-500/30 rounded-l-full px-6 py-3 focus:outline-none focus:border-purple-500 w-64 placeholder-gray-400 transition-all"
+            className="w-56 md:w-64 bg-slate-800/80 text-white border border-r-0 border-purple-500/30 rounded-l-full px-6 py-3 focus:outline-none focus:border-purple-500  placeholder-gray-400 transition-all"
             value={promoCode}
             onChange={(e) => setPromoCode(e.target.value)}
           />
@@ -121,10 +121,10 @@ export default function SubscriptionPage() {
           "client-id": process.env.NEXT_PUBLIC_PAYPAL_CLIENT_ID,
           currency: "USD",
           intent: "subscription",
-          // vault: true,
+          vault: true,
         }}
       >
-        <div className="mx-auto grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div className="mx-auto grid grid-cols-1  md:grid-cols-2 lg:grid-cols-3 gap-8">
           {uiPlans.map((uiPlan, index) => {
             const plan = plans[index];
             if (!plan) return null;
@@ -169,8 +169,7 @@ export default function SubscriptionPage() {
                       alert("An error occurred while saving the subscription. Please try again or contact support.");
                     }
                     window.location.href = "/success"
-                  }}
-                />
+                  }}/>
               </div>
             );
           })}
