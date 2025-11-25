@@ -8,7 +8,7 @@ import Link from "next/link"
 
 export default function LandingPage() {
   // const PORTFOLIO = `http://liam-carter.localhost:3000`
-     const PORTFOLIO = `https://liam-carter.dgtportfolio.com`
+  const PORTFOLIO = `https://liam-carter.dgtportfolio.com`
   // const PORTFOLIO = `https://liam-carter.dgtportfolio.vercel.app`
 
   return (
@@ -23,29 +23,29 @@ export default function LandingPage() {
 
       {/* Navigation */}
       <nav className={`fixed top-0 w-full z-50 transition-all duration-300`}>
-          <Navbar>
-        <div className=" mx-auto md:mx-3 px-6 py-6 flex justify-between items-center">
-          <Link href={"/"}>
-          <h1 className="flex items-center gap-0.5 text-2xl font-bold bg-gradient-to-r from-cyan-400 to-purple-500 bg-clip-text text-transparent cursor-pointer">
-            {/* <Sparkles className="w-6 h-6 text-white" /> */}
-            <Image src={"/LogoinQrcode.png"} width={500} height={500} className="w-12 h-10" alt="DGT Portfolio - Professional Portfolio Builder" />
-            DGTPortfolio
-          </h1>
-          </Link>
-          <div className="hidden md:flex gap-8">
-            <Link href={"#Features"} className="hover:text-cyan-400 transition">
-              Features
+        <Navbar>
+          <div className=" mx-auto md:mx-3 px-6 py-6 flex justify-between items-center">
+            <Link href={"/"}>
+              <h1 className="flex items-center gap-0.5 text-2xl font-bold bg-gradient-to-r from-cyan-400 to-purple-500 bg-clip-text text-transparent cursor-pointer">
+                {/* <Sparkles className="w-6 h-6 text-white" /> */}
+                <Image src={"/LogoinQrcode.png"} width={500} height={500} className="w-12 h-10" alt="DGT Portfolio - Professional Portfolio Builder" />
+                DGTPortfolio
+              </h1>
             </Link>
-            <Link href={PORTFOLIO} target="_blank" className="hover:text-cyan-400 transition">
-              Showcase
-            </Link>
-            <Link href={"#pricing"} className="hover:text-cyan-400 transition">
-              Pricing
-            </Link>
+            <div className="hidden md:flex gap-8">
+              <Link href={"#Features"} className="hover:text-cyan-400 transition">
+                Features
+              </Link>
+              <Link href={PORTFOLIO} target="_blank" className="hover:text-cyan-400 transition">
+                Showcase
+              </Link>
+              <Link href={"#pricing"} className="hover:text-cyan-400 transition">
+                Pricing
+              </Link>
+            </div>
+            <AuthButtons />
           </div>
-          <AuthButtons />
-        </div>
-          </Navbar>
+        </Navbar>
       </nav>
 
       {/* Hero Section */}
@@ -61,8 +61,8 @@ export default function LandingPage() {
                 <span className="text-white">Elevated </span>
               </h1>
               <p className="text-lg  text-gray-300 leading-relaxed">
-                No code, no hassle. Just a clean, modern portfolio in minutes. <br />  
-                Showcase your career, skills, projects, and work links like never before —
+                No code, no hassle. Build a clean, modern portfolio in minutes. <br />
+                Showcase your career, skills, projects, and work links like never before
                 leave a lasting impression and unlock new opportunities.
                 <span className=" m-4 text-sm bg-gradient-to-r from-cyan-400 to-purple-500 text-black rounded-full px-3  py-1 font-semibold shadow-lg shadow-cyan-500/30">
                   Free for 7 days
@@ -129,7 +129,7 @@ export default function LandingPage() {
               },
             ].map((feature, i) => (
               <div
-                key={i} 
+                key={i}
                 className={`p-8 rounded-2xl border transition-all duration-300 cursor-pointer 
                      hover:bg-purple-500/20 hover:border-purple-400 hover:shadow-lg hover:shadow-purple-500/20"
                      bg-slate-800/50 border-purple-500/20 
@@ -142,7 +142,7 @@ export default function LandingPage() {
           </div>
         </div>
       </section>
-        {/* Pricing / Offers Section */}
+      {/* Pricing / Offers Section */}
       <section id="pricing" className="px-6 py-20 border-t border-purple-500/20">
         <div className="max-w-6xl mx-auto">
           {/* Header */}
@@ -153,84 +153,82 @@ export default function LandingPage() {
             </p>
           </div>
 
-      {/* Pricing Cards */}
-      <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
-        {[
-          {
-            name: "Monthly Plan",
-            description: "$10 for the month after",
-            price: "$1",
-            period: "/first month",
-            cta: "Subscribe Monthly",
-            highlight: false,
-          },
-          {
-            name: "4-Month Plan",
-            description: "Great mid‑term offer",
-            price: "$30",
-            period: "/4 months",
-            cta: "Subscribe 4 Months",
-            highlight: false,
-          },
-          {
-            name: "Annual Plan",
-            description: "Best value",
-            price: "$60",
-            period: "/year",
-            cta: "Subscribe Yearly",
-            highlight: true,
-          },
-        ].map((plan, index) => (
-          <div
-            key={index}
-            className={`relative p-8 rounded-2xl border transition-all duration-300 ${
-              plan.highlight
-                ? "bg-gradient-to-br from-cyan-500/20 to-purple-500/20 border-cyan-400/50 shadow-lg shadow-cyan-500/20 md:scale-105"
-                : "bg-slate-800/50 border-purple-500/20 hover:border-purple-400/50 hover:bg-purple-500/10"
-            }`}
-          >
-            {/* Badge */}
-            {plan.highlight && (
-              <div className="absolute -top-4 left-1/2 -translate-x-1/2">
-                <span className="bg-gradient-to-r from-cyan-400 to-purple-500 text-black px-4 py-1 rounded-full text-sm font-semibold">
-                  Recommended
-                </span>
-              </div>
-            )}
-  
-            {/* Plan Name */}
-            <h3 className="text-2xl font-bold mb-2">{plan.name}</h3>
-            <p className="text-gray-400 text-sm mb-6">{plan.description}</p>
-          
-            {/* Price */}
-            <div className="mb-8">
-              <div className="flex items-baseline gap-2">
-                <span className="text-5xl font-bold bg-gradient-to-r from-cyan-400 to-purple-400 bg-clip-text text-transparent">
-                  {plan.price}
-                </span>
-                <span className="text-gray-400">{plan.period}</span>
-              </div>
-            </div>
-          
-            {/* CTA Button */}
-            <Link href="/subscription" className="block">
-              <button
-                className={`w-full py-3 px-6 rounded-full font-semibold transition-all duration-300 flex items-center justify-center gap-2 ${
-                  plan.highlight
-                    ? "bg-gradient-to-r from-cyan-400 to-purple-500 text-black hover:shadow-lg hover:shadow-cyan-500/50"
-                    : "border border-purple-500/50 text-white hover:bg-purple-500/20 hover:border-purple-400"
-                }`}
+          {/* Pricing Cards */}
+          <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+            {[
+              {
+                name: "Monthly Plan",
+                description: "$10 for the month after",
+                price: "$1",
+                period: "/first month",
+                cta: "Subscribe Monthly",
+                highlight: false,
+              },
+              {
+                name: "4-Month Plan",
+                description: "Great mid‑term offer",
+                price: "$30",
+                period: "/4 months",
+                cta: "Subscribe 4 Months",
+                highlight: false,
+              },
+              {
+                name: "Annual Plan",
+                description: "Best value",
+                price: "$60",
+                period: "/year",
+                cta: "Subscribe Yearly",
+                highlight: true,
+              },
+            ].map((plan, index) => (
+              <div
+                key={index}
+                className={`relative p-8 rounded-2xl border transition-all duration-300 ${plan.highlight
+                    ? "bg-gradient-to-br from-cyan-500/20 to-purple-500/20 border-cyan-400/50 shadow-lg shadow-cyan-500/20 md:scale-105"
+                    : "bg-slate-800/50 border-purple-500/20 hover:border-purple-400/50 hover:bg-purple-500/10"
+                  }`}
               >
-                {plan.cta}
-                <ArrowRight className="w-4 h-4" />
-              </button>
-            </Link>
+                {/* Badge */}
+                {plan.highlight && (
+                  <div className="absolute -top-4 left-1/2 -translate-x-1/2">
+                    <span className="bg-gradient-to-r from-cyan-400 to-purple-500 text-black px-4 py-1 rounded-full text-sm font-semibold">
+                      Recommended
+                    </span>
+                  </div>
+                )}
+
+                {/* Plan Name */}
+                <h3 className="text-2xl font-bold mb-2">{plan.name}</h3>
+                <p className="text-gray-400 text-sm mb-6">{plan.description}</p>
+
+                {/* Price */}
+                <div className="mb-8">
+                  <div className="flex items-baseline gap-2">
+                    <span className="text-5xl font-bold bg-gradient-to-r from-cyan-400 to-purple-400 bg-clip-text text-transparent">
+                      {plan.price}
+                    </span>
+                    <span className="text-gray-400">{plan.period}</span>
+                  </div>
+                </div>
+
+                {/* CTA Button */}
+                <Link href="/subscription" className="block">
+                  <button
+                    className={`w-full py-3 px-6 rounded-full font-semibold transition-all duration-300 flex items-center justify-center gap-2 ${plan.highlight
+                        ? "bg-gradient-to-r from-cyan-400 to-purple-500 text-black hover:shadow-lg hover:shadow-cyan-500/50"
+                        : "border border-purple-500/50 text-white hover:bg-purple-500/20 hover:border-purple-400"
+                      }`}
+                  >
+                    {plan.cta}
+                    <ArrowRight className="w-4 h-4" />
+                  </button>
+                </Link>
+              </div>
+            ))}
           </div>
-        ))}
-      </div>
-    </div>
-  </section>
-      
+        </div>
+      </section>
+
       {/* CTA Section */}
       <section className="px-6 py-20 border-t border-purple-500/20">
         <div className="max-w-4xl mx-auto text-center">
@@ -240,10 +238,10 @@ export default function LandingPage() {
               Join thousands of creators building their dream portfolios today
             </p>
             <Link className="text-sm md:text-base" href={"/update-profile"}>
-            <button
-             className=" px-10 py-4 bg-gradient-to-r from-cyan-400 to-purple-500 rounded-full font-semibold hover:shadow-lg hover:shadow-purple-500/50 transition flex items-center gap-2 mx-auto">
-              Create Your Portfolio <ArrowRight className="w-5 h-5" />
-            </button>
+              <button
+                className=" px-10 py-4 bg-gradient-to-r from-cyan-400 to-purple-500 rounded-full font-semibold hover:shadow-lg hover:shadow-purple-500/50 transition flex items-center gap-2 mx-auto">
+                Create Your Portfolio <ArrowRight className="w-5 h-5" />
+              </button>
             </Link>
           </div>
         </div>
@@ -251,7 +249,7 @@ export default function LandingPage() {
 
       {/* Footer */}
       <footer className="border-t border-purple-500/20 px-6 py-12 text-gray-400 text-center">
-        <p> © {new Date().getFullYear()} <span className="font-semibold">DGT PORTFOLIO</span>. All rights reserved.</p>
+        <p> © {new Date().getFullYear()} <span className="font-semibold">DGT Portfolio</span>. All rights reserved.</p>
       </footer>
     </div>
   )

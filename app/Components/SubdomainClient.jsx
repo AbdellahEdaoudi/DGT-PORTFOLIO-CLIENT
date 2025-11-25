@@ -10,55 +10,55 @@ import AccountNotFound from "./AccountNotFound"
 import MagicalLoader from './MagicalLoader'
 import { MyContext } from '../Context/MyContext'
 
-export default function SubdomainClient({username}) {
+export default function SubdomainClient({ username }) {
   const [userDetails, setUserDetails] = useState(null)
   const [userLinks, setUserLinks] = useState([])
   const [loadingUsers, setLoadingUsers] = useState(true)
-  const {EmailUser} = useContext(MyContext)
+  const { EmailUser } = useContext(MyContext)
   const [notFound, setNotFound] = useState(false)
 
   useEffect(() => {
-  const fetchUsers = async () => {
-    try {
-      const res = await axios.get(`/api/proxy/users/${username}`);
+    const fetchUsers = async () => {
+      try {
+        const res = await axios.get(`/api/proxy/users/${username}`);
 
-      setUserDetails(res.data.user);
-      setUserLinks(res.data.links || []);
+        setUserDetails(res.data.user);
+        setUserLinks(res.data.links || []);
 
-    } catch (error) {
-      if (error.response) {
+      } catch (error) {
+        if (error.response) {
           const msg = error.response.data.message;
           const ownerEmail = error.response.data.email || "not found";
-        if (error.response.status === 404) {
-          if (msg === "User not found") {
+          if (error.response.status === 404) {
+            if (msg === "User not found") {
+              setNotFound(true);
+            } else if (msg === "No subscription found for this user" && EmailUser !== ownerEmail) {
+              // setNoSubscription(true);
+              setNotFound(true);
+            } else if (msg === "No subscription found for this user" && EmailUser === ownerEmail) {
+              alert("No subscription was found for your account. Please subscribe to continue.");
+              window.location.href = "https://dgtportfolio.com/subscription"
+            }
+          } else if (error.response.status === 403 && EmailUser !== ownerEmail) {
+            // setSubscriptionInactive(true);
             setNotFound(true);
-          } else if (msg === "No subscription found for this user" && EmailUser !== ownerEmail) {
-            // setNoSubscription(true);
-            setNotFound(true);
-          } else if (msg === "No subscription found for this user" && EmailUser === ownerEmail) {
-            alert("No subscription was found for your account. Please subscribe to continue.");
+          } else if (error.response.status === 403 && EmailUser === ownerEmail) {
+            alert("Your subscription has expired or is inactive. Please renew it to regain access.");
             window.location.href = "https://dgtportfolio.com/subscription"
+          } else {
+            console.error("Error fetching user details:", error);
           }
-        } else if (error.response.status === 403  && EmailUser !== ownerEmail) {
-          // setSubscriptionInactive(true);
-            setNotFound(true);
-        } else if (error.response.status === 403  && EmailUser === ownerEmail) {
-          alert("Your subscription has expired or is inactive. Please renew it to regain access.");
-          window.location.href = "https://dgtportfolio.com/subscription"
         } else {
-          console.error("Error fetching user details:", error);
+          console.error("Network error:", error);
         }
-      } else {
-        console.error("Network error:", error);
+      } finally {
+        setLoadingUsers(false);
       }
-    } finally {
-      setLoadingUsers(false);
-    }
-  };
+    };
 
-  fetchUsers();
-}, [username,EmailUser]);
-
+    fetchUsers();
+  }, [username, EmailUser]);
+  
   if (loadingUsers) return <MagicalLoader />
   if (notFound) return <AccountNotFound />
 
@@ -76,7 +76,7 @@ export default function SubdomainClient({username}) {
         return <ThemeFive userDetails={userDetails} userLinks={userLinks} />
       default:
         return userDetails ? <Themeone userDetails={userDetails} userLinks={userLinks} /> :
-        <MagicalLoader />
+          <MagicalLoader />
     }
   }
 
