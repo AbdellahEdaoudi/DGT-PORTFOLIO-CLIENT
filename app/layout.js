@@ -11,13 +11,15 @@ const inter = Inter({ subsets: ['latin'] });
 const prompt = Prompt({ subsets: ['latin'], weight: '400' });
 
 export const metadata = {
+  metadataBase: new URL('https://dgtportfolio.com'),
   title: "DGT Portfolio – Build Your Professional Portfolio Online",
   description: "No code, no hassle. Build a clean, modern portfolio in minutes. Showcase your career, skills, projects, and work links like never before—leave a lasting impression and unlock new opportunities.",
   keywords: ["DGT Portfolio", "Portfolio Builder", "Professional Portfolio", "Showcase Skills", "Interactive Portfolio", "No Code Portfolio"],
+  manifest: "/site.webmanifest",
   icons: {
-    icon: "https://dgtportfolio.com/logo.png",
-    shortcut: "https://dgtportfolio.com/logo.png",
-    apple: "https://dgtportfolio.com/logo.png",
+    icon: "/logo.png",
+    shortcut: "/logo.png",
+    apple: "/logo.png",
   },
   openGraph: {
     title: "DGT Portfolio – Build Your Professional Portfolio Online",
@@ -26,9 +28,7 @@ export const metadata = {
     siteName: "DGT Portfolio",
     images: [
       {
-        url: "https://dgtportfolio.com/logo.png",
-        width: 800,
-        height: 600,
+        url: "/logo.png",
         alt: "DGT Portfolio Logo",
       },
     ],
@@ -39,7 +39,7 @@ export const metadata = {
     card: "summary_large_image",
     title: "DGT Portfolio – Build Your Professional Portfolio Online",
     description: "No code, no hassle. Build a clean, modern portfolio in minutes. Showcase your career, skills, projects, and work links like never before—leave a lasting impression and unlock new opportunities.",
-    images: ["https://dgtportfolio.com/logo.png"],
+    images: ["/logo.png"],
   },
 };
 
@@ -56,16 +56,31 @@ export default function RootLayout({ children }) {
           type="application/ld+json"
           id="structured-data"
           dangerouslySetInnerHTML={{
-            __html: JSON.stringify({
-              "@context": "https://schema.org",
-              "@type": "WebSite",
-              "name": "DGT Portfolio",
-              "alternateName": "DGT Portfolio Builder",
-              "url": "https://dgtportfolio.com",
-              "keywords": "DGT Portfolio, Portfolio Builder, Professional Portfolio, Showcase Skills, Interactive Portfolio, No Code Portfolio",
-              "description": "No code, no hassle. Build a clean, modern portfolio in minutes. Showcase your career, skills, projects, and work links like never before—leave a lasting impression and unlock new opportunities.",
-              "image": "https://dgtportfolio.com/logo.png"
-            })
+            __html: JSON.stringify([
+              {
+                "@context": "https://schema.org",
+                "@type": "WebSite",
+                "name": "DGT Portfolio",
+                "alternateName": "DGT Portfolio Builder",
+                "url": "https://dgtportfolio.com",
+                "potentialAction": {
+                  "@type": "SearchAction",
+                  "target": "https://dgtportfolio.com/search?q={search_term_string}",
+                  "query-input": "required name=search_term_string"
+                }
+              },
+              {
+                "@context": "https://schema.org",
+                "@type": "Organization",
+                "name": "DGT Portfolio",
+                "url": "https://dgtportfolio.com",
+                "logo": "https://dgtportfolio.com/logo.png",
+                "sameAs": [
+                  "https://twitter.com/dgtportfolio",
+                  "https://www.linkedin.com/company/dgtportfolio"
+                ]
+              }
+            ])
           }}
         />
         <NextAuthProvider>

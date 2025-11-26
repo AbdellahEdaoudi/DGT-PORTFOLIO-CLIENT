@@ -1,0 +1,22 @@
+{
+    "name": "DGT Portfolio",
+    "short_name": "DGT Portfolio",
+    "description": "Build Your Professional Portfolio Online - No code, no hassle",
+    "start_url": "/",
+    "display": "standalone",
+    "background_color": "#ffffff",
+    "theme_color": "#3b82f6",
+    "icons": [
+        {
+            "src": "/logo.png",
+            "sizes": "512x512",
+            "type": "image/png",
+            "purpose": "any maskable"
+        },
+        {
+            "src": "/logo.png",
+            "sizes": "192x192",
+            "type": "image/png"
+        }
+    ]
+}

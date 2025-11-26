@@ -22,31 +22,29 @@ export default function LandingPage() {
       </div>
 
       {/* Navigation */}
-      <nav className={`fixed top-0 w-full z-50 transition-all duration-300`}>
-        <Navbar>
-          <div className=" mx-auto md:mx-3 px-6 py-6 flex justify-between items-center">
-            <Link href={"/"}>
-              <h1 className="flex items-center gap-0.5 text-2xl font-bold bg-gradient-to-r from-cyan-400 to-purple-500 bg-clip-text text-transparent cursor-pointer">
-                {/* <Sparkles className="w-6 h-6 text-white" /> */}
-                <Image src={"/LogoinQrcode.png"} width={500} height={500} className="w-12 h-10" alt="DGT Portfolio - Professional Portfolio Builder" />
-                DGTPortfolio
-              </h1>
-            </Link>
-            <div className="hidden md:flex gap-8">
-              <Link href={"#Features"} className="hover:text-cyan-400 transition">
-                Features
-              </Link>
-              <Link href={PORTFOLIO} target="_blank" className="hover:text-cyan-400 transition">
-                Showcase
-              </Link>
-              <Link href={"#pricing"} className="hover:text-cyan-400 transition">
-                Pricing
-              </Link>
+      <Navbar>
+        <div className=" mx-auto md:mx-3 px-6 py-6 flex justify-between items-center">
+          <Link href={"/"}>
+            <div className="flex items-center gap-0.5 text-2xl font-bold bg-gradient-to-r from-cyan-400 to-purple-500 bg-clip-text text-transparent cursor-pointer">
+              {/* <Sparkles className="w-6 h-6 text-white" /> */}
+              <Image src={"/LogoinQrcode.png"} width={500} height={500} className="w-12 h-10" alt="DGT Portfolio - Professional Portfolio Builder" />
+              DGTPortfolio
             </div>
-            <AuthButtons />
+          </Link>
+          <div className="hidden md:flex gap-8">
+            <Link href={"#Features"} className="hover:text-cyan-400 transition">
+              Features
+            </Link>
+            <Link href={PORTFOLIO} target="_blank" className="hover:text-cyan-400 transition">
+              Showcase
+            </Link>
+            <Link href={"#pricing"} className="hover:text-cyan-400 transition">
+              Pricing
+            </Link>
           </div>
-        </Navbar>
-      </nav>
+          <AuthButtons />
+        </div>
+      </Navbar>
 
       {/* Hero Section */}
       <section className="relative pt-20 md:pt-28 md:mx-5 md:pb-20 px-6">
@@ -184,8 +182,8 @@ export default function LandingPage() {
               <div
                 key={index}
                 className={`relative p-8 rounded-2xl border transition-all duration-300 ${plan.highlight
-                    ? "bg-gradient-to-br from-cyan-500/20 to-purple-500/20 border-cyan-400/50 shadow-lg shadow-cyan-500/20 md:scale-105"
-                    : "bg-slate-800/50 border-purple-500/20 hover:border-purple-400/50 hover:bg-purple-500/10"
+                  ? "bg-gradient-to-br from-cyan-500/20 to-purple-500/20 border-cyan-400/50 shadow-lg shadow-cyan-500/20 md:scale-105"
+                  : "bg-slate-800/50 border-purple-500/20 hover:border-purple-400/50 hover:bg-purple-500/10"
                   }`}
               >
                 {/* Badge */}
@@ -215,8 +213,8 @@ export default function LandingPage() {
                 <Link href="/subscription" className="block">
                   <button
                     className={`w-full py-3 px-6 rounded-full font-semibold transition-all duration-300 flex items-center justify-center gap-2 ${plan.highlight
-                        ? "bg-gradient-to-r from-cyan-400 to-purple-500 text-black hover:shadow-lg hover:shadow-cyan-500/50"
-                        : "border border-purple-500/50 text-white hover:bg-purple-500/20 hover:border-purple-400"
+                      ? "bg-gradient-to-r from-cyan-400 to-purple-500 text-black hover:shadow-lg hover:shadow-cyan-500/50"
+                      : "border border-purple-500/50 text-white hover:bg-purple-500/20 hover:border-purple-400"
                       }`}
                   >
                     {plan.cta}
