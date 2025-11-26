@@ -165,7 +165,7 @@ export default function Themeone({userDetails,userLinks,bgcolor}) {
                       className="bg-white/10 backdrop-blur-md border border-white/20 rounded-xl p-6 hover:bg-white/15 transition-all duration-300"
                     >
                       <div className="flex  justify-between items-start mb-2">
-                        <h4 className="text-sm md:text-2xl font-bold text-white">{exp.role}</h4>
+                        <h4 className="text-md md:text-2xl font-bold text-white">{exp.role}</h4>
                         <span className="text-sm text-white/60">
                           {exp.startDate} - {exp.endDate}
                         </span>
@@ -218,9 +218,9 @@ export default function Themeone({userDetails,userLinks,bgcolor}) {
                           />
                         )}
                         <div className="p-6 flex-1">
-                          <h4 className="text-xl font-bold text-white mb-2">{project.title}</h4>
+                          <h4 className="text-lg md:text-xl font-bold text-white mb-2">{project.title}</h4>
                           <p onClick={() => setExpanded(!expanded)}
-                            className={`
+                            className={` text-sm md:text-base
                               text-white/80 mb-4 whitespace-pre-line cursor-pointer transition-all duration-300
                               ${expanded ? "line-clamp-none" : "line-clamp-3"}
                             `}
@@ -231,7 +231,7 @@ export default function Themeone({userDetails,userLinks,bgcolor}) {
                             {project.technologies?.map((tech, i) => (
                               <span
                                 key={i}
-                                className="px-3 py-1 bg-white/10 border border-white/20 rounded-full text-xs text-white/80"
+                                className=" px-3 py-1 bg-white/10 border border-white/20 rounded-full text-xs text-white/80"
                               >
                                 {tech}
                               </span>
@@ -264,7 +264,7 @@ export default function Themeone({userDetails,userLinks,bgcolor}) {
                   {userDetails.education.map((edu, idx) => (
                     <div
                       key={idx}
-                      className="bg-white/10 backdrop-blur-md border border-white/20 rounded-xl p-6 hover:bg-white/15 transition-all duration-300"
+                      className="bg-white/10 backdrop-blur-md border border-white/20 rounded-xl p-4 md:p-6 hover:bg-white/15 transition-all duration-300"
                     >
                       <div className="  mb-2">
                         <div className="flex items-center justify-between">
