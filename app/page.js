@@ -15,7 +15,7 @@ export async function generateMetadata() {
       return {
         title: `${user.fullname} – Portfolio`,
         description: user.about || `Check out ${user.fullname}'s professional portfolio. View projects, skills, and contact information.`,
-        keywords: [`${user.fullname}`, "Portfolio", "Professional", "Projects", "Skills"],
+        keywords: [`${user.fullname}`, `${user.category}`, "Portfolio", "Professional", "Projects", "Skills"],
         icons: {
           icon: user.urlimage,
           shortcut: user.urlimage,
