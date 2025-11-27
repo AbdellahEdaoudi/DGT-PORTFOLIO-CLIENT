@@ -16,7 +16,7 @@ import Socials from "./components/Socials"
 import Theme from "./components/Theme"
 
 export default function UpdateProfilePage() {
-  const { EmailUser,userDetails,setUserDetails,loadingAll} = useContext(MyContext)
+  const { EmailUser,userLinks,userDetails,setUserDetails,loadingAll} = useContext(MyContext)
   const [activeTab, setActiveTab] = useState("about")
 
    if (loadingAll || !EmailUser || !userDetails ) {
@@ -65,7 +65,7 @@ export default function UpdateProfilePage() {
               ))}
             </div>
               <div className="text-xs md:text-base">
-                {userDetails && CurrentComponent && <CurrentComponent setUserDetails={setUserDetails} userData={userDetails} />}
+                {userDetails && CurrentComponent && <CurrentComponent setUserDetails={setUserDetails} userData={userDetails} userLinks={userLinks} />}
               </div>
           </div>
         </div>

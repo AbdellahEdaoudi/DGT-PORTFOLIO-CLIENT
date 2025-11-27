@@ -39,33 +39,37 @@ export default function ThemeThree({ userDetails, userLinks }) {
         ></div>
       </div>
 
-      <div className="relative z-10">
+      <div className="relative z-10 px-3 md:px-6">
         {/* Header */}
-        <header className="pt-7 px-6 pb-8">
-          <div className="max-w-5xl mx-auto">
-            {/* Toolbar */}
-            <div className="flex justify-between items-center mb-7 md:mb-8">
+        <header className="pt-7 pb-8">
+          <div className="max-w-4xl mx-auto">
+            {/* Top toolbar */}
+            <div className="flex justify-between items-center mb-10">
               <h1 className="text-white text-2xl font-bold cursor-pointer">
                 <Link href={"https://dgtportfolio.com"}>Portfolio</Link>
               </h1>
               <div className="flex gap-3">
-                {/* Copy Link */}
+                {/* // Copy link and QR code buttons */}
                 <button
                   title="Copy Link Profile"
                   onClick={copyProfileLink}
                   className="flex items-center gap-2 px-4 py-2 bg-white/10 hover:bg-white/20 rounded-lg text-white transition-all duration-300 backdrop-blur-md border border-white/10"
                 >
-                  {copied ? <CheckCircle2 /> : <Copy />}
+                  {copied ? <CheckCircle2 size={18} /> : <Copy size={18} />}
+                  {/* {copied ? "Copied" : "Copy Link"} */}
+                  {copied}
                 </button>
-                {/* QR Code */}
+                 {/* // Qrcode */}
                 <div
                   onClick={() => setShowQR(!showQR)}
+                  className="flex items-center gap-2 px-2 cursor-pointer bg-white/10 hover:bg-white/20 rounded-lg text-white transition-all duration-300 backdrop-blur-md border border-white/10"
+                >
+                <QrcodeProfile path={`/${userDetails?.username}`} userDetails={userDetails} />
+                </div>
+                {/* // User Links */}
+                <div
                   className="flex items-center gap-2 px-2 bg-white/10 hover:bg-white/20 rounded-lg text-white transition-all duration-300 backdrop-blur-md border border-white/10"
                 >
-                  <QrcodeProfile path={`/${userDetails?.username}`} userDetails={userDetails} />
-                </div>
-                {/* User Links */}
-                <div className="flex items-center gap-2 px-2 bg-white/10 hover:bg-white/20 rounded-lg text-white transition-all duration-300 backdrop-blur-md border border-white/10">
                   <UserLinks userLinks={userLinks} />
                 </div>
               </div>
@@ -79,11 +83,11 @@ export default function ThemeThree({ userDetails, userLinks }) {
                 <p className="text-gray-300 mt-4 max-w-lg leading-relaxed">{userDetails?.about}</p>
               </div>
               <div className="relative">
-                <div className="absolute inset-0 bg-gradient-to-br from-pink-500 to-purple-600 rounded-3xl blur-2xl opacity-75"></div>
+                <div className="absolute bg-gray-50 animate-pulse inset-0 rounded-3xl blur-2xl opacity-75"></div>
                 <Image width={500} height={500}
                   src={userDetails?.urlimage}
                   alt={userDetails?.fullname}
-                  className="relative Image width={500} height={500}anim md:w-72 md:mb-5 md:h-72 w-40 h-40 rounded-lg object-cover border-4 border-white/20"
+                  className="relative imganim md:w-72 md:mb-5 md:h-80 w-52 h-56 rounded-lg object-cover border-4 border-white/20"
                 />
               </div>
             </div>
@@ -118,9 +122,7 @@ export default function ThemeThree({ userDetails, userLinks }) {
 
         {/* Content */}
         {userDetails && (
-        <div>
-          <div className="px-6">
-            <div className="max-w-5xl mx-auto pb-20">
+            <div className="max-w-5xl mx-auto  pb-14">
               {/* About */}
               {activeTab === "about" && (
                 <div className="grid md:grid-cols-2 gap-8">
@@ -165,14 +167,13 @@ export default function ThemeThree({ userDetails, userLinks }) {
                   </div>
                 </div>
               )}
-
               {/* Services */}
               {activeTab === "services" && (
-                <div className="grid md:grid-cols-2 gap-6">
+                <div className="grid md:grid-cols-2 gap-4 md:gap-6">
                   {userDetails.services?.map((service, i) => (
                     <div
                       key={i}
-                      className="p-6 bg-white/10 border border-pink-500/30 rounded-lg hover:border-pink-400/60 transition hover:scale-105 transform"
+                      className="p-3 md:p-6 bg-white/10 border border-pink-500/30 rounded-lg hover:border-pink-400/60 transition hover:scale-105 transform"
                     >
                       <p className="text-gray-200">{service}</p>
                     </div>
@@ -186,7 +187,7 @@ export default function ThemeThree({ userDetails, userLinks }) {
                   {userDetails.projects?.map((project, i) => (
                     <div
                       key={i}
-                      className="group p-8 bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl hover:border-pink-500/50 hover:bg-white/15 transition"
+                      className="group p-4 md:p-8 bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl hover:border-pink-500/50 hover:bg-white/15 transition"
                     >
                       <div className="flex justify-between items-start mb-4">
                         <h3 className="text-2xl font-bold text-pink-300 group-hover:text-pink-200 transition">
@@ -233,7 +234,7 @@ export default function ThemeThree({ userDetails, userLinks }) {
                   {userDetails.experience?.map((exp, i) => (
                     <div
                       key={i}
-                      className="p-8 bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl hover:border-pink-500/50 transition"
+                      className="p-4 md:p-8 bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl hover:border-pink-500/50 transition"
                     >
                       <div className="flex gap-4 mb-4">
                         <Briefcase className="text-pink-400 flex-shrink-0" size={24} />
@@ -253,11 +254,11 @@ export default function ThemeThree({ userDetails, userLinks }) {
 
               {/* Skills */}
               {activeTab === "skills" && (
-                <div className="grid md:grid-cols-2 gap-6">
+                <div className="grid md:grid-cols-2 gap-4 md:gap-6">
                   {userDetails.skills?.map((skill, i) => (
                     <div
                       key={i}
-                      className="p-6 bg-gradient-to-br from-pink-500/20 to-purple-500/20 border border-pink-500/30 rounded-lg hover:border-pink-500/60 transition hover:scale-105 transform"
+                      className="p-4 md:p-6 bg-gradient-to-br from-pink-500/20 to-purple-500/20 border border-pink-500/30 rounded-lg hover:border-pink-500/60 transition hover:scale-105 transform"
                     >
                       <p className="text-gray-200">{skill}</p>
                     </div>
@@ -271,7 +272,7 @@ export default function ThemeThree({ userDetails, userLinks }) {
                   {userDetails.education?.map((edu, i) => (
                     <div
                       key={i}
-                      className="p-6 bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl hover:border-pink-500/50 transition"
+                      className="p-4 md:p-6 bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl hover:border-pink-500/50 transition"
                     >
                       <div className="flex items-center justify-between">
                         <h3 className="text-xl font-bold">{edu.degree || "Degree"}</h3>
@@ -286,9 +287,10 @@ export default function ThemeThree({ userDetails, userLinks }) {
                 </div>
               )}
             </div>
-          </div>
-          {/* Footer */}
-        <footer className="border-t border-white/10 bg-black/30 backdrop-blur-md py-12 px-6">
+        )}
+      </div>
+      {/* Footer */}
+        <footer className="border-t border-white/10 bg-black/30 backdrop-blur-md py-8 md:py-12">
           <div className="max-w-5xl mx-auto text-center">
             <div className="flex justify-center gap-6 mb-6 flex-wrap">
               {[
@@ -317,9 +319,6 @@ export default function ThemeThree({ userDetails, userLinks }) {
             <p className="text-gray-400">© {new Date().getFullYear()} {userDetails.fullname}. All rights reserved.</p>
           </div>
         </footer>
-        </div>
-        )}
-      </div>
 
       <style>{`
         @keyframes blob {

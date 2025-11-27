@@ -82,7 +82,7 @@ function QrcodeProfile({userDetails}) {
     <div>
       <AlertDialog>
         <AlertDialogTrigger>
-          <div className="flex p-2 rounded-full w-10 cursor-pointer  duration-200  ">
+          <div className="flex p-2 rounded-full w-10   duration-200  ">
             <QrCode />
           </div>
         </AlertDialogTrigger>

@@ -25,34 +25,38 @@ export default function ThemeTwo({ userDetails, userLinks,bgcolor }) {
   return (
     <div
       style={{ backgroundColor:bgcolor || userDetails?.bgcolorp || "#0E201D" }}
-      className="min-h-screen text-white overflow-hidden"
-    >
-      <div className="relative z-10">
+      className="min-h-screen text-white overflow-hidden">
+      <div className="relative z-10 px-4 md:px-6">
         {/* Header */}
-        <header className="pt-7 px-6 pb-8">
-          <div className="max-w-5xl mx-auto">
-            <div className="flex justify-between items-center mb-7 md:mb-8">
+        <header className="pt-7 pb-8">
+          <div className="max-w-4xl mx-auto">
+            {/* Top toolbar */}
+            <div className="flex justify-between items-center mb-10">
               <h1 className="text-white text-2xl font-bold cursor-pointer">
                 <Link href={"https://dgtportfolio.com"}>Portfolio</Link>
               </h1>
               <div className="flex gap-3">
-                {/* Copy Link */}
+                {/* // Copy link and QR code buttons */}
                 <button
                   title="Copy Link Profile"
                   onClick={copyProfileLink}
                   className="flex items-center gap-2 px-4 py-2 bg-white/10 hover:bg-white/20 rounded-lg text-white transition-all duration-300 backdrop-blur-md border border-white/10"
                 >
-                  {copied ? <CheckCircle2 /> : <Copy />}
+                  {copied ? <CheckCircle2 size={18} /> : <Copy size={18} />}
+                  {/* {copied ? "Copied" : "Copy Link"} */}
+                  {copied}
                 </button>
-                {/* QR Code */}
+                 {/* // Qrcode */}
                 <div
                   onClick={() => setShowQR(!showQR)}
+                  className="flex items-center gap-2 px-2 cursor-pointer bg-white/10 hover:bg-white/20 rounded-lg text-white transition-all duration-300 backdrop-blur-md border border-white/10"
+                >
+                <QrcodeProfile path={`/${userDetails?.username}`} userDetails={userDetails} />
+                </div>
+                {/* // User Links */}
+                <div
                   className="flex items-center gap-2 px-2 bg-white/10 hover:bg-white/20 rounded-lg text-white transition-all duration-300 backdrop-blur-md border border-white/10"
                 >
-                  <QrcodeProfile path={`/${userDetails?.username}`} userDetails={userDetails} />
-                </div>
-                {/* User Links */}
-                <div className="flex items-center gap-2 px-2 bg-white/10 hover:bg-white/20 rounded-lg text-white transition-all duration-300 backdrop-blur-md border border-white/10">
                   <UserLinks userLinks={userLinks} />
                 </div>
               </div>
@@ -70,7 +74,7 @@ export default function ThemeTwo({ userDetails, userLinks,bgcolor }) {
                 <Image width={500} height={500}
                   src={userDetails?.urlimage}
                   alt={userDetails?.fullname}
-                  className="relative imganim md:w-72 md:mb-5 md:h-72 w-40 h-40 rounded-lg object-cover border-4 border-white/20"
+                  className="relative imganim md:w-72 md:mb-5 md:h-80 w-52 h-56 rounded-lg object-cover border-4 border-white/20"
                 />
               </div>
             </div>
@@ -104,7 +108,6 @@ export default function ThemeTwo({ userDetails, userLinks,bgcolor }) {
         </header>
 
         {/* Content */}
-        <div className="px-6">
           <div className="max-w-5xl mx-auto pb-20">
             {/* About */}
             {activeTab === "about" && (
@@ -156,21 +159,20 @@ export default function ThemeTwo({ userDetails, userLinks,bgcolor }) {
                 {userDetails.services?.map((service, i) => (
                   <div
                     key={i}
-                    className="p-6 bg-white/20 border border-gray-500/30 rounded-lg hover:border-gray-400/60 transition hover:scale-105 transform"
+                    className="p-3 md:p-6 bg-white/20 border border-gray-500/30 rounded-lg hover:border-gray-400/60 transition hover:scale-105 transform"
                   >
                     <p className="text-gray-200">{service}</p>
                   </div>
                 ))}
               </div>
             )}
-
              {/* Projects */}
             {activeTab === "projects" && (
               <div className="space-y-6">
                 {userDetails.projects?.map((project, i) => (
                   <div
                     key={i}
-                    className="group p-8 bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl hover:border-gray-400/50 hover:bg-white/15 transition"
+                    className="group p-4 md:p-8 bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl hover:border-gray-400/50 hover:bg-white/15 transition"
                   >
                     <div className="flex justify-between items-start mb-4">
                       <h3 className="text-2xl font-bold text-gray-300 group-hover:text-gray-100 transition">
@@ -210,14 +212,13 @@ export default function ThemeTwo({ userDetails, userLinks,bgcolor }) {
                 ))}
               </div>
             )}
-
              {/* Experience */}
             {activeTab === "experience" && (
               <div className="space-y-6">
                 {userDetails.experience?.map((exp, i) => (
                   <div
                     key={i}
-                    className="p-8 bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl hover:border-gray-400/50 transition"
+                    className="p-4 md:p-8 bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl hover:border-gray-400/50 transition"
                   >
                     <div className="flex gap-4 mb-4">
                       <Briefcase className="text-gray-400 flex-shrink-0" size={24} />
@@ -241,7 +242,7 @@ export default function ThemeTwo({ userDetails, userLinks,bgcolor }) {
                 {userDetails.skills?.map((skill, i) => (
                   <div
                     key={i}
-                    className="p-6 bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl hover:border-gray-400/50 transition"
+                    className="p-3 md:p-6 bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl hover:border-gray-400/50 transition"
                   >
                     <p className="text-gray-200">{skill}</p>
                   </div>
@@ -255,7 +256,7 @@ export default function ThemeTwo({ userDetails, userLinks,bgcolor }) {
                 {userDetails.education?.map((edu, i) => (
                   <div
                     key={i}
-                    className="p-6 bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl hover:border-pink-500/50 transition"
+                    className="p-3 md:p-6 bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl hover:border-pink-500/50 transition"
                   >
                     <div className="flex items-center justify-between">
                       <h3 className="text-xl font-bold">{edu.degree || "Degree"}</h3>
@@ -270,10 +271,8 @@ export default function ThemeTwo({ userDetails, userLinks,bgcolor }) {
               </div>
             )}
           </div>
-        </div>
-
         {/* Footer */}
-        <footer className="border-t border-white/10 bg-black/30 backdrop-blur-md py-12 px-6">
+        <footer className="border-t border-white/10 bg-black/30 backdrop-blur-md py-8 md:py-12">
           <div className="max-w-5xl mx-auto text-center">
             <div className="flex justify-center gap-6 mb-6 flex-wrap">
               {[
@@ -297,7 +296,7 @@ export default function ThemeTwo({ userDetails, userLinks,bgcolor }) {
                   <a
                     href={item.url}
                     key={i}
-                    className="p-3 bg-white rounded-full transition"
+                    className="p-3 bg-white rounded-full transition hover:scale-105 duration-300"
                   >
                     <Image width={500} height={500} src={item.icon} alt={item.name} className="w-7 h-7" />
                   </a>

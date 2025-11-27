@@ -34,9 +34,9 @@ export default function ThemeFour({ userDetails, userLinks }) {
             <div className="absolute bottom-20 right-1/3 w-96 h-96 bg-blue-500/20 rounded-full mix-blend-screen blur-3xl animate-pulse" style={{ animationDelay: "2s" }}></div>
           </div>
 
-          <div className="relative z-10">
+          <div className="relative z-10 px-4 md:px-6">
             {/* Header */}
-        <header className="pt-7 px-6 pb-8">
+        <header className="pt-7 pb-8">
           <div className="max-w-5xl mx-auto">
             {/* Toolbar */}
             <div className="flex justify-between items-center mb-8">
@@ -67,7 +67,7 @@ export default function ThemeFour({ userDetails, userLinks }) {
             </div>
 
             {/* Header Content */}
-            <div className="flex flex-col-reverse md:flex-row gap-8 items-center justify-between mb-10">
+            <div className="flex flex-col-reverse md:flex-row gap-8 md:items-start items-center justify-between">
               <div>
                 <h1 className="text-5xl md:text-6xl font-black mb-4">{userDetails?.fullname}</h1>
                 <p className="text-2xl text-emerald-300 font-semibold mb-6 flex items-center  gap-2">
@@ -75,7 +75,7 @@ export default function ThemeFour({ userDetails, userLinks }) {
                   {userDetails.category}
                   <Sparkles size={24} />
                 </p>
-                <div className="text-gray-300 mt-4 max-w-lg leading-relaxed">
+                <div className=" text-gray-300 mt-4 max-w-lg leading-relaxed">
                  {userDetails?.about}
                 <div className="grid md:grid-cols-2 gap-4 mt-6">
                   {userDetails.country && (
@@ -95,7 +95,7 @@ export default function ThemeFour({ userDetails, userLinks }) {
                 <Image width={500} height={500}
                   src={userDetails?.urlimage}
                   alt={userDetails?.fullname}
-                  className="relative Image width={500} height={500}anim md:w-80 md:h-80 w-40 h-40 rounded-lg object-cover border-4 border-white/20"
+                  className="relative imganim md:w-80 md:h-80 w-52 h-56 rounded-lg object-cover border-4 border-white/20"
                 />
               </div>
             </div>
@@ -105,7 +105,7 @@ export default function ThemeFour({ userDetails, userLinks }) {
 
             {/* Services */}
             {userDetails.services?.length > 0 && (
-              <section className="py-10 px-6 border-t border-emerald-500/20">
+              <section className="py-10 border-t border-emerald-500/20">
                 <div className="max-w-5xl mx-auto">
                   <h2 className="text-4xl font-black mb-6">Services</h2>
                   <div className="grid md:grid-cols-2 gap-6">
@@ -121,12 +121,12 @@ export default function ThemeFour({ userDetails, userLinks }) {
 
             {/* Experience */}
             {userDetails.experience?.length > 0 && (
-              <section className="py-10 px-6 border-t border-emerald-500/20">
+              <section className="py-10 border-t border-emerald-500/20">
                 <div className="max-w-5xl mx-auto">
                   <h2 className="text-4xl font-black mb-6">Experience</h2>
                   <div className="space-y-6">
                     {userDetails.experience.map((exp, i) => (
-                      <div key={i} className="p-6 bg-emerald-500/10 border border-emerald-500/30 rounded-xl hover:border-emerald-500/60 transition">
+                      <div key={i} className="p-5 md:p-6 bg-emerald-500/10 border border-emerald-500/30 rounded-xl hover:border-emerald-500/60 transition">
                         <h3 className="text-xl md:text-2xl font-bold text-emerald-300">{exp.role}</h3>
                         <p className="text-emerald-400 font-semibold">{exp.company}</p>
                         <p className="text-gray-400 text-sm">{exp.startDate} - {exp.endDate}</p>
@@ -138,10 +138,9 @@ export default function ThemeFour({ userDetails, userLinks }) {
                 </div>
               </section>
             )}
-
             {/* Projects */}
             {userDetails.projects?.length > 0 && (
-              <section className="py-10 px-6 border-t border-emerald-500/20">
+              <section className="py-10 border-t border-emerald-500/20">
                 <div className="max-w-5xl mx-auto">
                   <h2 className="text-4xl font-black mb-6">Projects</h2>
                   <div className="space-y-6">
@@ -159,7 +158,10 @@ export default function ThemeFour({ userDetails, userLinks }) {
                         {expandedProject === i && (
                           <div className="mt-4 space-y-4">
                             {project.image && <Image width={500} height={500} src={project.image || "/placeholder.svg"} alt={project.title} className="w-full rounded-lg" />}
-                            <p className="text-sm md:text-base text-gray-300 whitespace-pre-wrap">{project.description}</p>
+                            <p className="text-sm md:text-base text-gray-300 whitespace-pre-wrap">
+                              <span className="font-semibold">Description :</span><br />
+                              {project.description}
+                            </p>
                             <div className="flex flex-wrap gap-2">
                               {project.technologies?.map((tech, j) => (
                                 <span key={j} className="px-3 py-1 bg-emerald-500/20 border border-emerald-500/40 rounded-full text-xs text-emerald-300">{tech}</span>
@@ -181,12 +183,12 @@ export default function ThemeFour({ userDetails, userLinks }) {
 
             {/* Skills */}
             {userDetails.skills?.length > 0 && (
-              <section className="py-10 px-6 border-t border-emerald-500/20">
+              <section className="py-10 border-t border-emerald-500/20">
                 <div className="max-w-5xl mx-auto">
                   <h2 className="text-4xl font-black mb-6">Skills</h2>
                   <div className="grid md:grid-cols-2 gap-4">
                     {userDetails.skills.map((skill, i) => (
-                      <div key={i} className="p-6 rounded-xl bg-emerald-500/10 border border-emerald-500/30 hover:border-emerald-500/60 transition">
+                      <div key={i} className="p-4 md:p-6 rounded-xl bg-emerald-500/10 border border-emerald-500/30 hover:border-emerald-500/60 transition">
                         <p className="text-gray-200">{skill}</p>
                       </div>
                     ))}
@@ -197,7 +199,7 @@ export default function ThemeFour({ userDetails, userLinks }) {
 
             {/* Languages */}
             {userDetails.languages?.length > 0 && (
-              <section className="py-10 px-6 border-t border-emerald-500/20">
+              <section className="py-10 border-t border-emerald-500/20">
                 <div className="max-w-5xl mx-auto">
                   <h2 className="text-4xl font-black mb-6">Languages</h2>
                   <div className="flex flex-wrap gap-4">

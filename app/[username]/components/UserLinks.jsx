@@ -12,7 +12,7 @@ import {
   AlertDialogTrigger,
 } from "../../../components/ui/alert-dialog";
 
-function UserLinks({ userLinks = [],language,labels}) {
+function UserLinks({ userLinks = [], language, labels }) {
   return (
     <AlertDialog>
       <AlertDialogTrigger>
@@ -24,11 +24,11 @@ function UserLinks({ userLinks = [],language,labels}) {
       <AlertDialogContent>
         <AlertDialogHeader>
           <AlertDialogTitle className="sr-only">Business Links</AlertDialogTitle>
-          <AlertDialogDescription>
+          <AlertDialogDescription asChild>
             <div className="rounded-lg text-black">
               <div className="flex items-center justify-between mx-3 text-3xl font-semibold text-center text-gray-800 mb-4">
-               <span>Business Links</span>
-              <AlertDialogCancel><X /></AlertDialogCancel>
+                <span>Business Links</span>
+                <AlertDialogCancel><X /></AlertDialogCancel>
               </div>
 
               <div className="p-2 space-y-3 overflow-y-auto scrollbar-non max-h-96">

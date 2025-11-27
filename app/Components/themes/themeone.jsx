@@ -7,6 +7,7 @@ import {
   Copy,
   CheckCircle2,
   Globe,
+  Briefcase,
 } from "lucide-react"
 import QrcodeProfile from "../../[username]/components/QrcodeProfile"
 import UserLinks from "../../[username]/components/UserLinks"
@@ -63,7 +64,7 @@ export default function Themeone({userDetails,userLinks,bgcolor}) {
                  {/* // Qrcode */}
                 <div
                   onClick={() => setShowQR(!showQR)}
-                  className="flex items-center gap-2 px-2 bg-white/10 hover:bg-white/20 rounded-lg text-white transition-all duration-300 backdrop-blur-md border border-white/10"
+                  className="flex items-center gap-2 px-2 cursor-pointer bg-white/10 hover:bg-white/20 rounded-lg text-white transition-all duration-300 backdrop-blur-md border border-white/10"
                 >
                 <QrcodeProfile path={`/${userDetails?.username}`} userDetails={userDetails} />
                 </div>
@@ -159,22 +160,25 @@ export default function Themeone({userDetails,userLinks,bgcolor}) {
                   ⭐ Work Experience
                 </h3>
                 <div className="space-y-6">
-                  {userDetails.experience.map((exp, idx) => (
-                    <div
-                      key={idx}
-                      className="bg-white/10 backdrop-blur-md border border-white/20 rounded-xl p-6 hover:bg-white/15 transition-all duration-300"
-                    >
-                      <div className="flex  justify-between items-start mb-2">
-                        <h4 className="text-md md:text-2xl font-bold text-white">{exp.role}</h4>
-                        <span className="text-sm text-white/60">
+                {userDetails.experience?.map((exp, i) => (
+                  <div
+                    key={i}
+                    className="p-4 md:p-8 bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl hover:border-gray-400/50 transition"
+                  >
+                    <div className="flex gap-4 mb-4">
+                      <Briefcase className="text-gray-400 flex-shrink-0" size={24} />
+                      <div className="flex-1">
+                        <h3 className="text-xl font-bold text-gray-300">{exp.role}</h3>
+                        <p className="text-gray-300 font-semibold">{exp.company}</p>
+                        <p className="text-gray-400 text-sm">
                           {exp.startDate} - {exp.endDate}
-                        </span>
+                        </p>
                       </div>
-                      <p className="text-white/80 md:text-xl font-semibold mb-3">{exp.company}</p>
-                      <p className="text-sm md:text-base text-white/70 whitespace-pre-wrap">{exp.description}</p>
                     </div>
-                  ))}
-                </div>
+                    <p className="text-sm md:text-base text-gray-300 whitespace-pre-wrap">{exp.description}</p>
+                  </div>
+                ))}
+              </div>
               </div>
             )}
 
