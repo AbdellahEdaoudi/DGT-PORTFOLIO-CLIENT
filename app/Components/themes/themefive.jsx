@@ -110,7 +110,7 @@ export default function ThemeFive({ userDetails, userLinks }) {
               <div>
                 <p className="text-yellow-400 font-bold uppercase tracking-widest mb-2 text-sm">Info</p>
                 <div className="space-y-2 text-sm">
-                  <div>
+                  <div className={!userDetails.country && "hidden"}>
                     <p className="text-gray-500 uppercase mb-1">Location</p>
                     <p className="text-white">{userDetails.country}</p>
                   </div>
@@ -120,7 +120,7 @@ export default function ThemeFive({ userDetails, userLinks }) {
                       {userDetails.email}
                     </a>
                   </div>
-                  <div>
+                  <div className={`${!userDetails.phoneNumber && "hidden"}`}>
                     <p className="text-gray-500 uppercase mb-1">Phone</p>
                     <p className="text-white">{userDetails.phoneNumber}</p>
                   </div>

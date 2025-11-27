@@ -26,9 +26,9 @@ export default function ThemeTwo({ userDetails, userLinks,bgcolor }) {
     <div
       style={{ backgroundColor:bgcolor || userDetails?.bgcolorp || "#0E201D" }}
       className="min-h-screen text-white overflow-hidden">
-      <div className="relative z-10 px-4 md:px-6">
+      <div className="relative z-10 ">
         {/* Header */}
-        <header className="pt-7 pb-8">
+        <header className="pt-7 pb-8 px-4 md:px-6">
           <div className="max-w-4xl mx-auto">
             {/* Top toolbar */}
             <div className="flex justify-between items-center mb-10">
@@ -108,10 +108,10 @@ export default function ThemeTwo({ userDetails, userLinks,bgcolor }) {
         </header>
 
         {/* Content */}
-          <div className="max-w-5xl mx-auto pb-20">
+          <div className="max-w-5xl mx-auto pb-20 px-4 md:px-6">
             {/* About */}
             {activeTab === "about" && (
-              <div className="grid md:grid-cols-2 gap-8">
+              <div className={`grid ${userDetails?.languages?.length !== 0 && "md:grid-cols-2"} gap-8`}>
                 <div>
                   <h3 className="text-2xl font-black mb-6">About Me</h3>
                   <p className="text-gray-300 leading-relaxed mb-6">{userDetails.about}</p>
@@ -138,7 +138,8 @@ export default function ThemeTwo({ userDetails, userLinks,bgcolor }) {
                     )}
                   </div>
                 </div>
-                <div>
+                {userDetails.languages?.length > 0 && (
+                  <div>
                   <h3 className="text-2xl font-black mb-6">Languages</h3>
                   <div className="space-y-3">
                     {userDetails.languages?.map((lang, i) => (
@@ -151,6 +152,7 @@ export default function ThemeTwo({ userDetails, userLinks,bgcolor }) {
                     ))}
                   </div>
                 </div>
+                )}
               </div>
             )}
             {/* Services */}

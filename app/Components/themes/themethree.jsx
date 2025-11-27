@@ -125,7 +125,7 @@ export default function ThemeThree({ userDetails, userLinks }) {
             <div className="max-w-5xl mx-auto  pb-14">
               {/* About */}
               {activeTab === "about" && (
-                <div className="grid md:grid-cols-2 gap-8">
+                <div className={`grid ${userDetails?.languages?.length !== 0 && "md:grid-cols-2"} gap-8`}>
                   <div>
                     <h3 className="text-2xl font-black mb-6">About Me</h3>
                     <p className="text-gray-300 leading-relaxed mb-6">{userDetails.about}</p>
@@ -152,7 +152,8 @@ export default function ThemeThree({ userDetails, userLinks }) {
                       )}
                     </div>
                   </div>
-                  <div>
+                  {userDetails?.languages?.length > 0 && (
+                    <div>
                     <h3 className="text-2xl font-black mb-6">Languages</h3>
                     <div className="space-y-3">
                       {userDetails.languages?.map((lang, i) => (
@@ -165,6 +166,7 @@ export default function ThemeThree({ userDetails, userLinks }) {
                       ))}
                     </div>
                   </div>
+                  )}
                 </div>
               )}
               {/* Services */}
