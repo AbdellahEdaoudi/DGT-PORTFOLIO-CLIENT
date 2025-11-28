@@ -1,0 +1,93 @@
+{
+  "fullname": "Adam Carter",
+  "email": "adam.carter.dev@gmail.com",
+  "username": "adam-carter",
+  "phoneNumber": "",
+  "country": "Canada",
+  "category": "Software Developer",
+  "urlimage": "https://res.cloudinary.com/dvq120lcn/image/upload/v1725826386/opwxdb0gip8jirbae5ff.jpg",
+  "about": "Software Developer from Canada passionate about building\nperformant, reliable, and elegant web applications. Skilled in\nReact, Next.js, and NestJS, I focus on delivering digital solutions\nthat blend innovation with simplicity.",
+  "bgcolorp": "#050f15",
+  "languages": [
+    "English : Native",
+    "French : Intermediate"
+  ],
+  "services": [
+    "I build fast, secure, and scalable web applications using modern technologies like Next.js and NestJS.",
+    "I design beautiful and responsive interfaces focused on usability and performance.",
+    "I develop APIs, handle integrations, and ensure clean, maintainable backend architectures."
+  ],
+  "skills": [
+    "Frontend: React.js, Next.js, TypeScript, Tailwind CSS",
+    "Backend: Node.js, NestJS, Express.js",
+    "Databases: MongoDB, PostgreSQL",
+    "Tools: Git, Docker, Vercel, Postman",
+    "Soft Skills: Teamwork, Communication, Problem Solving, Attention to Detail"
+  ],
+  "education": [
+    {
+      "school": "University of Toronto",
+      "degree": "Bachelor’s Degree",
+      "field": "Computer Science",
+      "startYear": "2018",
+      "endYear": "2022",
+      "_id": {
+        "$oid": "69113126bd7f3000c9495155"
+      }
+    }
+  ],
+  "experience": [
+    {
+      "company": "NorthCode Labs",
+      "role": "Software Developer",
+      "description": "● Developed web applications using the MERN stack and NestJS.\n● Designed and integrated RESTful APIs for multiple client projects.\n● Implemented authentication, role-based access, and data security using JWT.\n● Collaborated with UI/UX designers to create high-quality interfaces.\n● Deployed applications on Vercel and AWS for scalability.",
+      "startDate": "Jan 2023",
+      "endDate": "Present",
+      "_id": {
+        "$oid": "69113126bd7f3000c9495156"
+      }
+    }
+  ],
+  "projects": [
+    {
+      "title": "TaskFlow – Productivity Dashboard",
+      "description": "TaskFlow is a productivity dashboard that helps teams and individuals organize their tasks, track progress, and manage time efficiently...",
+      "link": "https://github.com/adamcarterdev/taskflow",
+      "image": "https://images.unsplash.com/photo-1556761175-5973dc0f32e7",
+      "technologies": [
+        "Next.js",
+        "NestJS",
+        "MongoDB",
+        "JWT",
+        "Tailwind CSS",
+        "Chart.js"
+      ],
+      "startDate": "Apr 2024",
+      "endDate": "Aug 2024",
+      "_id": {
+        "$oid": "69113126bd7f3000c9495157"
+      }
+    }
+  ],
+  "socials": {
+    "github": "https://github.com/adamcarterdev",
+    "linkedin": "https://www.linkedin.com/in/adamcarterdev",
+    "fb": "",
+    "instagram": "",
+    "twitter": "https://twitter.com/adamcarterdev",
+    "youtube": "",
+    "telegram": "",
+    "snapchat": "",
+    "whatsapp": "",
+    "tiktok": "",
+    "reddit": "",
+    "twitch": ""
+  },
+  "__v": 0,
+  "updatedAt": {
+    "$date": "2025-11-19T14:47:58.233Z"
+  },
+  "createdAt": {
+    "$date": "2025-11-19T14:47:57.256Z"
+  }
+}

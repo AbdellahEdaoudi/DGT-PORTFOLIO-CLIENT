@@ -1,6 +1,5 @@
 "use client";
 import React, { useState } from "react";
-import Image from "next/image";
 import axios from "axios";
 import { toast } from "react-toastify";
 import { Loader, CheckCheck } from "lucide-react";
@@ -9,8 +8,9 @@ import ThemeTwo from "../../Components/themes/themetwo";
 import ThemeThree from "../../Components/themes/themethree";
 import ThemeFour from "../../Components/themes/themefour";
 import ThemeFive from "../../Components/themes/themefive";
+import adam from "../../../public/adam.json"
 
-export default function Theme({ userData,userLinks }) {
+export default function Theme({ userData, userLinks }) {
   const [selectedTheme, setSelectedTheme] = useState(userData.theme || 1);
   const [loading, setLoading] = useState(false);
   const [pendingTheme, setPendingTheme] = useState(null);
@@ -39,66 +39,49 @@ export default function Theme({ userData,userLinks }) {
   return (
     <div className="space-y-4">
       <div className="flex  items-center justify-between">
-      <h3 className="text-lg font-bold text-gray-800">🧩 Select Theme</h3>
-      <div className="flex justify-center">
-        <button
-          onClick={handleSave}
-          className={`px-6 py-2 font-semibold rounded-lg text-white transition-all shadow-lg ${
-            loading
+        <h3 className="text-lg font-bold text-gray-800">🧩 Select Theme</h3>
+        <div className="flex justify-center">
+          <button
+            onClick={handleSave}
+            className={`px-6 py-2 font-semibold rounded-lg text-white transition-all shadow-lg ${loading
               ? "bg-gray-400 cursor-not-allowed"
               : "bg-gradient-to-r from-green-400 to-blue-500 hover:from-green-500 hover:to-blue-600"
-          }`}
-        >
-          {loading ? (
-            <Loader size={20} className="animate-spin inline-block" />
-          ) : (
-            "Save"
-          )}
-        </button>
+              }`}
+          >
+            {loading ? (
+              <Loader size={20} className="animate-spin inline-block" />
+            ) : (
+              "Save"
+            )}
+          </button>
+        </div>
       </div>
-      </div>
-      <div className="grid grid-cols-2  md:grid-cols-5 gap-4">
+      <div className="grid grid-cols-3  md:grid-cols-5 gap-4">
         {[1, 2, 3, 4, 5].map((num) => (
-          <button
+          <div
             key={num}
-            type="button"
             onClick={() => setPendingTheme(num)}
-            className={`border-4 rounded-xl overflow-hidden transition-all duration-300 ${
-              pendingTheme === num
-                ? "border-yellow-400 scale-105"
-                : selectedTheme === num
+            className={`border-4 rounded-xl overflow-hidden transition-all duration-300 cursor-pointer ${pendingTheme === num
+              ? "border-yellow-400 scale-105"
+              : selectedTheme === num
                 ? "border-green-500"
                 : "border-transparent hover:border-gray-300"
-            }`}
+              }`}
           >
-            <Image
-              src={`/themes/image${num}.png`}
-              alt={`Theme ${num}`}
-              width={200}
-              height={120}
-              className="w-full object-cover rounded-lg h-full md:h-28"
-            />
-          </button>
+            <div className="w-full h-28 md:h-28 relative overflow-hidden bg-gray-900 pointer-events-none">
+              <div className="absolute top-0 left-0 w-[1200px] origin-top-left transform scale-[0.11] md:scale-[0.14] h-[800px]">
+                {num === 1 && <Themeone userDetails={adam} userLinks={userLinks} />}
+                {num === 2 && <ThemeTwo userDetails={adam} userLinks={userLinks} />}
+                {num === 3 && <ThemeThree userDetails={adam} userLinks={userLinks} />}
+                {num === 4 && <ThemeFour userDetails={adam} userLinks={userLinks} />}
+                {num === 5 && <ThemeFive userDetails={adam} userLinks={userLinks} />}
+              </div>
+            </div>
+          </div>
         ))}
       </div>
-      {pendingTheme && (
-        <div>
-          {pendingTheme === 1 ? (
-            <Themeone userDetails={userData} userLinks={userLinks} />
-          ) : pendingTheme === 2 ? (
-            <ThemeTwo userDetails={userData} userLinks={userLinks} />
-          ) : pendingTheme === 3 ? (
-            <ThemeThree userDetails={userData} userLinks={userLinks} />
-          ) : pendingTheme === 4 ? (
-            <ThemeFour userDetails={userData} userLinks={userLinks} />
-          ) : pendingTheme === 5 ? (
-            <ThemeFive userDetails={userData} userLinks={userLinks} />
-          ) : (
-            <Themeone />
-          )}
-        </div>
-      )}
-      
+
+      {/* Preview Section Removed as requested */}
     </div>
   );
 }

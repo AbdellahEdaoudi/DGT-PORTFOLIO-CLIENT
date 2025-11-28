@@ -1,27 +1,19 @@
 "use client"
 
 import { useState, useEffect, useRef, useCallback } from "react"
-import Image from "next/image"
-
-const slides = [
-  { imageUrl: "/themes/image1.png" },
-  { imageUrl: "/themes/image2.png" },
-  { imageUrl: "/themes/image3.png" },
-  { imageUrl: "/themes/image4.png" },
-  { imageUrl: "/themes/image5.png" },
-]
+import Themeone from "../themes/themeone"
+import ThemeTwo from "../themes/themetwo"
+import ThemeThree from "../themes/themethree"
+import ThemeFour from "../themes/themefour"
+import ThemeFive from "../themes/themefive"
+import adam from "../../../public/adam.json"
 
 export default function ThemeSlideshow() {
   const [currentIndex, setCurrentIndex] = useState(0)
-  const [fade, setFade] = useState(true)
   const timerRef = useRef(null)
 
   const nextSlide = useCallback(() => {
-    setFade(false)
-    setTimeout(() => {
-      setCurrentIndex((prev) => (prev + 1) % slides.length)
-      setFade(true)
-    }, 500)
+    setCurrentIndex((prev) => (prev + 1) % 5)
   }, [])
 
   useEffect(() => {
@@ -29,27 +21,51 @@ export default function ThemeSlideshow() {
     return () => clearInterval(timerRef.current)
   }, [nextSlide])
 
+  const themes = [
+    { Component: Themeone, id: 1 },
+    { Component: ThemeTwo, id: 2 },
+    { Component: ThemeThree, id: 3 },
+    { Component: ThemeFour, id: 4 },
+    { Component: ThemeFive, id: 5 },
+  ]
+
+  // Mock user links for preview
+  const userLinks = [
+    { platform: "github", url: "https://github.com" },
+    { platform: "linkedin", url: "https://linkedin.com" }
+  ]
+
   return (
-    <div className="relative h-96 rounded-lg overflow-hidden">
-      {slides.map((slide, index) => (
-        <div
-          key={index}
-          className={`absolute inset-0 transition-opacity duration-700 ease-in-out ${
-            index === currentIndex ? "opacity-100 z-10" : "opacity-0 z-0"
-          }`}
-        >
-          <Image
-            src={slide.imageUrl}
-            alt={`Theme ${index + 1}`}
-            width={700}
-            height={700}
-            className="object-cover rounded-lg"
-            priority={index === 0}
+    <div className="relative md:block hidden h-96 rounded-lg overflow-hidden bg-gray-900 border border-white/10 shadow-2xl">
+      {themes.map((theme, index) => {
+        const ThemeComponent = theme.Component
+        return (
+          <div
+            key={index}
+            className={`absolute inset-0 transition-opacity duration-1000 ease-in-out pointer-events-none ${index === currentIndex ? "opacity-100 z-10" : "opacity-0 z-0"
+              }`}
+          >
+            <div className="w-full h-full relative overflow-hidden">
+              {/* Scaling container to fit the theme into the slideshow box */}
+              <div className="absolute top-0 left-0 w-[1070px] origin-top-left transform scale-[0.3] md:scale-[0.5] h-[1000px]">
+                <ThemeComponent userDetails={adam} userLinks={userLinks} />
+              </div>
+            </div>
+          </div>
+        )
+      })}
+
+      {/* Navigation Dots */}
+      <div className="absolute bottom-4 left-1/2 -translate-x-1/2 z-20 flex gap-2">
+        {themes.map((_, index) => (
+          <button
+            key={index}
+            onClick={() => setCurrentIndex(index)}
+            className={`w-2 h-2 rounded-full transition-all duration-300 ${index === currentIndex ? "bg-white w-6" : "bg-white/50 hover:bg-white/80"
+              }`}
           />
-          {/* Optional gradient overlay for better visibility */}
-          <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent hidden" />
-        </div>
-      ))}
+        ))}
+      </div>
     </div>
   )
 }

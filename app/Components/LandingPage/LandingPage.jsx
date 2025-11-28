@@ -7,9 +7,9 @@ import AuthButtons from "./AuthButtons"
 import Link from "next/link"
 
 export default function LandingPage() {
-  // const PORTFOLIO = `http://liam-carter.localhost:3000`
-  const PORTFOLIO = `https://liam-carter.dgtportfolio.com`
-  // const PORTFOLIO = `https://liam-carter.dgtportfolio.vercel.app`
+  // const PORTFOLIO = `http://adam-carter.localhost:3000`
+  const PORTFOLIO = `https://adam-carter.dgtportfolio.com`
+  // const PORTFOLIO = `https://adam-carter.dgtportfolio.vercel.app`
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-black text-white overflow-hidden">
@@ -47,7 +47,7 @@ export default function LandingPage() {
       </Navbar>
 
       {/* Hero Section */}
-      <section className="relative pt-20 md:pt-28 md:mx-5 md:pb-20 px-6">
+      <section className="relative pt-20 md:pt-28 md:mx-5 md:pb-20 px-6 mb-8">
         <div className="max-w-7xl mx-auto grid md:grid-cols-2 gap-12 items-center">
           <div className="space-y-8">
             <div className="space-y-4">

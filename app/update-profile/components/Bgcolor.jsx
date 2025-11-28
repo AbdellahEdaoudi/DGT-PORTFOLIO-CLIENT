@@ -54,15 +54,7 @@ export default function Bgcolor({ userData }) {
           )}
         </button>
       </div>
-        {
-        userData.theme === 1 ? (
           <Themeone userDetails={userData} bgcolor={bgcolorp} />
-        ) : userData.theme === 2 ? (
-          <ThemeTwo userDetails={userData} bgcolor={bgcolorp} />
-        ) : (
-          <Themeone userDetails={userData} bgcolor={bgcolorp} />
-        )
-      }
     </div>
   );
 }

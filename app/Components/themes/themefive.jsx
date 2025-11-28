@@ -1,6 +1,6 @@
 "use client"
 import { useState } from "react"
-import {ArrowUpRight, Zap, Mail, Copy, CheckCircle2 } from "lucide-react"
+import { ArrowUpRight, Zap, Mail, Copy, CheckCircle2, Briefcase, GraduationCap } from "lucide-react"
 import UserLinks from "../../[username]/components/UserLinks"
 import QrcodeProfile from "../../[username]/components/QrcodeProfile"
 import Image from "next/image"
@@ -21,17 +21,24 @@ export default function ThemeFive({ userDetails, userLinks }) {
       setTimeout(() => setCopied(false), 2000)
     })
   }
-  if (!userDetails || !userLinks) {return <MagicalLoader />}
+  if (!userDetails || !userLinks) { return <MagicalLoader /> }
 
   return (
-    <div className="min-h-screen bg-zinc-900 text-white overflow-x-hidden">
+    <div className="min-h-screen bg-zinc-950 text-white overflow-x-hidden relative">
+      {/* Animated Background */}
+      <div className="fixed inset-0 -z-10">
+        <div className="absolute inset-0 bg-gradient-to-br from-zinc-900 via-zinc-950 to-black"></div>
+        <div className="absolute top-20 left-1/4 w-96 h-96 bg-yellow-500/10 rounded-full mix-blend-screen blur-3xl animate-pulse"></div>
+        <div className="absolute bottom-20 right-1/4 w-96 h-96 bg-orange-500/10 rounded-full mix-blend-screen blur-3xl animate-pulse" style={{ animationDelay: "2s" }}></div>
+      </div>
+
       {userDetails && (
-        <div className="md:px-20 px-4">
+        <div className="relative z-10 md:px-20 px-4">
           {/* Hero Section */}
-          <section className="pt-8">
+          <section className="pt-8 pb-12">
             {/* Toolbar */}
-            <div className="flex justify-between items-center mb-8 gap-4">
-              <h1 className="text-white text-2xl font-bold cursor-pointer">
+            <div className="flex justify-between items-center mb-12 gap-4">
+              <h1 className="text-white text-2xl font-bold cursor-pointer hover:text-yellow-400 transition">
                 <Link href={"https://dgtportfolio.com"}>Portfolio</Link>
               </h1>
               <div className="flex flex-wrap gap-3">
@@ -39,134 +46,157 @@ export default function ThemeFive({ userDetails, userLinks }) {
                 <button
                   title="Copy Link Profile"
                   onClick={copyProfileLink}
-                  className="flex items-center gap-2 px-4 py-2 bg-white/10 hover:bg-white/20 rounded-lg text-white transition-all duration-300 backdrop-blur-md border border-white/10"
+                  className="flex items-center gap-2 px-4 py-2 bg-white/10 hover:bg-yellow-500/20 rounded-lg text-white transition-all duration-300 backdrop-blur-md border border-white/10 hover:border-yellow-500/50"
                 >
-                  {copied ? <CheckCircle2 /> : <Copy />}
+                  {copied ? <CheckCircle2 className="text-yellow-400" /> : <Copy />}
                 </button>
                 {/* QR Code */}
                 <div
                   onClick={() => setShowQR(!showQR)}
-                  className="flex items-center gap-2 px-2 bg-white/10 hover:bg-white/20 rounded-lg text-white transition-all duration-300 backdrop-blur-md border border-white/10"
+                  className="flex items-center gap-2 px-2 bg-white/10 hover:bg-yellow-500/20 rounded-lg text-white transition-all duration-300 backdrop-blur-md border border-white/10 hover:border-yellow-500/50 cursor-pointer"
                 >
                   <QrcodeProfile path={`/${userDetails?.username}`} userDetails={userDetails} />
                 </div>
                 {/* User Links */}
-                <div className="flex items-center gap-2 px-2 bg-white/10 hover:bg-white/20 rounded-lg text-white transition-all duration-300 backdrop-blur-md border border-white/10">
+                <div className="flex items-center gap-2 px-2 bg-white/10 hover:bg-yellow-500/20 rounded-lg text-white transition-all duration-300 backdrop-blur-md border border-white/10 hover:border-yellow-500/50">
                   <UserLinks userLinks={userLinks} />
                 </div>
               </div>
             </div>
 
-            <div className="flex flex-col md:flex-row items-center md:items-start   gap-8">
+            <div className="flex flex-col md:flex-row items-center md:items-start gap-12">
               <div className="flex-1 mb-4">
-                <p className="text-yellow-400 font-semibold uppercase tracking-widest mb-2">Hello, I'm</p>
-                <h1 className="text-5xl sm:text-6xl md:text-7xl font-black mb-4 leading-tight">
+                <p className="text-yellow-400 font-semibold uppercase tracking-widest mb-3 text-sm animate-pulse">Hello, I'm</p>
+                <h1 className="text-5xl sm:text-6xl md:text-7xl font-black mb-6 leading-tight">
                   {userDetails.fullname.split(" ")[0]}{" "}
-                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 to-orange-500">
+                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 via-orange-500 to-yellow-600 animate-gradient">
                     {userDetails.fullname.split(" ")[1]}
                   </span>
                 </h1>
-                <p className="text-2xl text-yellow-400 font-bold mb-4">{userDetails.category}</p>
-                <p className="text-md md:block hidden text-gray-300 mb-6 leading-relaxed max-w-lg">{userDetails.about}</p>
+                <p className="text-2xl text-yellow-400 font-bold mb-6 flex items-center gap-2">
+                  <Briefcase size={28} className="text-yellow-500" />
+                  {userDetails.category}
+                </p>
+                <p className="text-md md:block hidden text-gray-300 mb-8 leading-relaxed max-w-lg">
+                  {userDetails.about}
+                </p>
                 <a
                   href={`mailto:${userDetails.email}`}
-                  className="inline-block px-6 py-3 bg-gradient-to-r from-yellow-500 to-orange-600 rounded-lg font-bold text-black hover:shadow-lg hover:shadow-yellow-500/50 transition transform hover:scale-105"
+                  className="inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-yellow-500 to-orange-600 rounded-xl font-bold text-black hover:shadow-2xl hover:shadow-yellow-500/50 transition-all duration-300 transform hover:scale-105 hover:-translate-y-1"
                 >
+                  <Mail size={20} />
                   Let's Talk
                 </a>
               </div>
-              <div className="relative flex-shrink-0">
-                <div className="absolute inset-0 bg-gradient-to-br from-yellow-500/20 to-orange-600/20 rounded-3xl blur-2xl"></div>
-                <Image width={300} height={300}
+              <div className="relative flex-shrink-0 group">
+                <div className="absolute inset-0 bg-gradient-to-br from-yellow-500/30 to-orange-600/30 rounded-3xl blur-3xl group-hover:blur-2xl transition-all duration-500"></div>
+                <div className="absolute -inset-1 bg-gradient-to-r from-yellow-500 to-orange-600 rounded-3xl opacity-20 group-hover:opacity-40 transition-opacity duration-500"></div>
+                <Image width={320} height={320}
                   src={userDetails.urlimage}
                   alt={userDetails.fullname}
-                  className="relative rounded-3xl border-2 border-yellow-500/30"
+                  className="relative rounded-3xl border-2 border-yellow-500/40 group-hover:border-yellow-500/60 transition-all duration-500 shadow-2xl"
                 />
               </div>
             </div>
           </section>
 
           {/* About, Services, Info */}
-          {userDetails.about?.length > 0 &&(
-            <section className="py-10 md:border-t border-zinc-800">
-            <div className={`grid ${userDetails.services.length > 0 ? "md:grid-cols-3" :"md:grid-cols-3"}  gap-8`}>
-              <div>
-                <p className="text-yellow-400 font-bold uppercase tracking-widest mb-2 text-sm">About</p>
-                <h2 className="text-3xl sm:text-4xl font-black mb-4">Who I am</h2>
-                <p className="text-gray-300 leading-relaxed">{userDetails.about}</p>
-              </div>
-              {userDetails.services.length > 0 && (
-                <div>
-                <p className="text-yellow-400 font-bold uppercase tracking-widest mb-2 text-sm">Services</p>
-                <div className="space-y-3">
-                  {userDetails.services?.map((service, i) => (
-                    <div key={i} className="p-3 bg-zinc-800 rounded-lg border border-zinc-700 hover:border-yellow-500/50 transition">
-                      <p className="text-gray-200 text-sm">{service}</p>
+          {userDetails.about?.length > 0 && (
+            <section className="py-12 border-t border-zinc-800/50">
+              <div className={`grid ${userDetails.services.length > 0 ? "md:grid-cols-3" : "md:grid-cols-2"}  gap-8`}>
+                <div className="group p-6 bg-gradient-to-br from-zinc-800/30 to-zinc-900/30 rounded-2xl border border-zinc-700/50 hover:border-yellow-500/50 transition-all duration-300 hover:shadow-lg hover:shadow-yellow-500/10">
+                  <p className="text-yellow-400 font-bold uppercase tracking-widest mb-3 text-xs">About</p>
+                  <h2 className="text-3xl sm:text-4xl font-black mb-4 group-hover:text-yellow-400 transition">Who I am</h2>
+                  <p className="text-gray-300 leading-relaxed">{userDetails.about}</p>
+                </div>
+                {userDetails.services.length > 0 && (
+                  <div className="group p-6 bg-gradient-to-br from-zinc-800/30 to-zinc-900/30 rounded-2xl border border-zinc-700/50 hover:border-yellow-500/50 transition-all duration-300 hover:shadow-lg hover:shadow-yellow-500/10">
+                    <p className="text-yellow-400 font-bold uppercase tracking-widest mb-3 text-xs">Services</p>
+                    <div className="space-y-3">
+                      {userDetails.services?.map((service, i) => (
+                        <div key={i} className="p-3 bg-zinc-800/50 rounded-lg border border-zinc-700/50 hover:border-yellow-500/50 hover:bg-zinc-800 transition-all duration-200">
+                          <p className="text-gray-200 text-sm">{service}</p>
+                        </div>
+                      ))}
                     </div>
-                  ))}
+                  </div>
+                )}
+                <div className="group p-6 bg-gradient-to-br from-zinc-800/30 to-zinc-900/30 rounded-2xl border border-zinc-700/50 hover:border-yellow-500/50 transition-all duration-300 hover:shadow-lg hover:shadow-yellow-500/10">
+                  <p className="text-yellow-400 font-bold uppercase tracking-widest mb-3 text-xs">Info</p>
+                  <div className="space-y-4 text-sm">
+                    {userDetails.country && (
+                      <div>
+                        <p className="text-gray-500 uppercase mb-1 text-xs tracking-wider">Location</p>
+                        <p className="text-white font-semibold">{userDetails.country}</p>
+                      </div>
+                    )}
+                    <div>
+                      <p className="text-gray-500 uppercase mb-1 text-xs tracking-wider">Email</p>
+                      <a href={`mailto:${userDetails.email}`} className="text-yellow-400 hover:text-yellow-300 transition font-semibold break-all">
+                        {userDetails.email}
+                      </a>
+                    </div>
+                    {userDetails.phoneNumber && (
+                      <div>
+                        <p className="text-gray-500 uppercase mb-1 text-xs tracking-wider">Phone</p>
+                        <p className="text-white font-semibold">{userDetails.phoneNumber}</p>
+                      </div>
+                    )}
+                  </div>
                 </div>
               </div>
-              )}
-              <div>
-                <p className="text-yellow-400 font-bold uppercase tracking-widest mb-2 text-sm">Info</p>
-                <div className="space-y-2 text-sm">
-                  <div className={!userDetails.country && "hidden"}>
-                    <p className="text-gray-500 uppercase mb-1">Location</p>
-                    <p className="text-white">{userDetails.country}</p>
-                  </div>
-                  <div>
-                    <p className="text-gray-500 uppercase mb-1">Email</p>
-                    <a href={`mailto:${userDetails.email}`} className="text-yellow-400 hover:text-yellow-300 transition">
-                      {userDetails.email}
-                    </a>
-                  </div>
-                  <div className={`${!userDetails.phoneNumber && "hidden"}`}>
-                    <p className="text-gray-500 uppercase mb-1">Phone</p>
-                    <p className="text-white">{userDetails.phoneNumber}</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </section>
+            </section>
           )}
-          
+
           {/* Experience */}
           {userDetails.experience?.length > 0 && (
-            <section className="py-10 border-t border-zinc-800">
-              <h2 className="text-3xl sm:text-4xl font-black mb-8">Experience</h2>
-              <div className="space-y-4">
+            <section className="py-12 border-t border-zinc-800/50">
+              <div className="flex items-center gap-3 mb-8">
+                <Briefcase className="text-yellow-400" size={32} />
+                <h2 className="text-3xl sm:text-4xl font-black">Experience</h2>
+              </div>
+              <div className="space-y-6">
                 {userDetails.experience.map((exp, i) => (
-                  <div key={i} className="p-4 sm:p-6 bg-zinc-800/50 border border-zinc-700 rounded-lg hover:border-yellow-500/50 transition">
-                    <h3 className="text-xl sm:text-2xl font-bold text-yellow-400 mb-1">{exp.role}</h3>
-                    <p className="text-gray-300 mb-1">{exp.company}</p>
-                    <p className="text-gray-500 text-sm mb-2">{exp.startDate} - {exp.endDate}</p>
-                    <p className="text-gray-300 text-sm whitespace-pre-wrap">{exp.description}</p>
+                  <div key={i} className="group relative p-6 bg-gradient-to-br from-zinc-800/40 to-zinc-900/40 border border-zinc-700/50 rounded-2xl hover:border-yellow-500/60 hover:shadow-xl hover:shadow-yellow-500/10 transition-all duration-300 overflow-hidden">
+                    {/* Decorative element */}
+                    <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-bl from-yellow-500/10 to-transparent rounded-bl-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+
+                    <div className="relative z-10">
+                      <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-2 mb-3">
+                        <h3 className="text-xl sm:text-2xl font-bold text-yellow-400 group-hover:text-yellow-300 transition">{exp.role}</h3>
+                        <p className="text-gray-400 text-sm whitespace-nowrap">{exp.startDate} - {exp.endDate}</p>
+                      </div>
+                      <p className="text-gray-200 font-semibold mb-3 text-lg">{exp.company}</p>
+                      <p className="text-gray-300 text-sm whitespace-pre-wrap leading-relaxed">{exp.description}</p>
+                    </div>
                   </div>
                 ))}
               </div>
             </section>
           )}
+
           {/* Skills */}
           {userDetails.skills?.length > 0 && (
-          <section className="py-10 border-t border-zinc-800">
-            <h2 className="text-3xl sm:text-4xl font-black mb-8">Skills</h2>
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
-              {userDetails.skills?.map((skill, i) => (
-                <div
-                  key={i}
-                  className="group p-4 sm:p-6 bg-zinc-800/50 rounded-lg border border-zinc-700 hover:border-yellow-500/50 hover:bg-zinc-800 transition cursor-pointer"
-                >
-                  <Zap className="mb-2 text-yellow-400 opacity-0 group-hover:opacity-100 transition" size={20} />
-                  <p className="text-sm text-gray-300 group-hover:text-yellow-300 transition">{skill}</p>
-                </div>
-              ))}
-            </div>
-          </section>
+            <section className="py-12 border-t border-zinc-800/50">
+              <h2 className="text-3xl sm:text-4xl font-black mb-8">Skills & Expertise</h2>
+              <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
+                {userDetails.skills?.map((skill, i) => (
+                  <div
+                    key={i}
+                    className="group relative p-5 bg-gradient-to-br from-zinc-800/40 to-zinc-900/40 rounded-xl border border-zinc-700/50 hover:border-yellow-500/60 hover:bg-zinc-800/60 transition-all duration-300 cursor-pointer overflow-hidden"
+                  >
+                    <div className="absolute inset-0 bg-gradient-to-r from-yellow-500/0 via-yellow-500/10 to-yellow-500/0 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                    <Zap className="mb-2 text-yellow-400 opacity-0 group-hover:opacity-100 transition-all duration-300 transform group-hover:scale-110" size={20} />
+                    <p className="text-sm text-gray-300 group-hover:text-yellow-300 transition font-medium relative z-10">{skill}</p>
+                  </div>
+                ))}
+              </div>
+            </section>
           )}
 
           {/* Projects */}
           {userDetails.projects?.length > 0 && (
-            <section className="py-12 border-t border-zinc-700">
+            <section className="py-12 border-t border-zinc-800/50">
               <h2 className="text-3xl sm:text-4xl font-extrabold mb-10 text-center text-white">
                 Featured Projects
               </h2>
@@ -174,50 +204,53 @@ export default function ThemeFive({ userDetails, userLinks }) {
                 {userDetails.projects.map((project, i) => (
                   <div
                     key={i}
-                    className="group relative overflow-hidden rounded-2xl bg-zinc-900 border border-zinc-700 hover:border-yellow-400/60 shadow-lg hover:shadow-yellow-400/10 transition-all duration-500 cursor-pointer"
+                    className="group relative overflow-hidden rounded-2xl bg-gradient-to-br from-zinc-800/40 to-zinc-900/40 border border-zinc-700/50 hover:border-yellow-400/60 shadow-lg hover:shadow-2xl hover:shadow-yellow-400/20 transition-all duration-500 cursor-pointer"
                   >
                     {project.image && (
-                      <Image width={500} height={500}
-                        src={project.image || "/placeholder.svg"}
-                        alt={project.title}
-                        className="w-full h-56 object-cover transition-transform duration-500 group-hover:scale-105"
-                      />
+                      <div className="relative overflow-hidden">
+                        <Image width={500} height={500}
+                          src={project.image || "/placeholder.svg"}
+                          alt={project.title}
+                          className="w-full h-56 object-cover transition-transform duration-700 group-hover:scale-110"
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-t from-zinc-900 via-transparent to-transparent opacity-60"></div>
+                      </div>
                     )}
                     <div className="p-6">
-                      <h3 className="text-xl font-bold mb-2 text-yellow-400 group-hover:text-yellow-300 transition">
+                      <h3 className="text-xl font-bold mb-3 text-yellow-400 group-hover:text-yellow-300 transition">
                         {project.title}
                       </h3>
-                  
+
                       <p
                         onClick={() => setExpanded(expanded === i ? null : i)}
-                        className={`text-sm text-gray-300 leading-relaxed mb-4 cursor-pointer transition-all duration-300 whitespace-pre-wrap ${
-                          expanded === i ? "line-clamp-none" : "line-clamp-3"
-                        }`}
+                        className={`text-sm text-gray-300 leading-relaxed mb-4 cursor-pointer transition-all duration-300 whitespace-pre-wrap ${expanded === i ? "line-clamp-none" : "line-clamp-3"
+                          }`}
                       >
                         {project.description}
                       </p>
-                      
-                      {/* التقنيات */}
+
+                      {/* Technologies */}
                       <div className="flex flex-wrap gap-2 mb-4">
                         {project.technologies?.map((tech, j) => (
                           <span
                             key={j}
-                            className="px-2 py-1 bg-zinc-800 border border-zinc-700 rounded-full text-xs text-yellow-400"
+                            className="px-3 py-1 bg-zinc-800/60 border border-zinc-700/50 rounded-full text-xs text-yellow-400 hover:border-yellow-500/50 transition"
                           >
                             {tech}
                           </span>
                         ))}
                       </div>
-                      
-                      {/* الرابط */}
+
+                      {/* Link */}
                       {project.link && (
                         <a
                           href={project.link}
                           target="_blank"
                           rel="noreferrer"
-                          className="inline-flex items-center gap-2 text-yellow-400 hover:text-yellow-300 font-semibold transition"
+                          className="inline-flex items-center gap-2 text-yellow-400 hover:text-yellow-300 font-semibold transition group/link"
                         >
-                          View Project <ArrowUpRight size={16} />
+                          View Project
+                          <ArrowUpRight size={16} className="transform group-hover/link:translate-x-1 group-hover/link:-translate-y-1 transition-transform" />
                         </a>
                       )}
                     </div>
@@ -227,67 +260,126 @@ export default function ThemeFive({ userDetails, userLinks }) {
             </section>
           )}
 
+          {/* Education */}
+          {userDetails.education?.length > 0 && (
+            <section className="py-12 border-t border-zinc-800/50">
+              <div className="flex items-center gap-3 mb-8">
+                <GraduationCap className="text-yellow-400" size={32} />
+                <h2 className="text-3xl sm:text-4xl font-black text-white">Education</h2>
+              </div>
 
-          {/* Languages (improved design) */}
-            {userDetails.languages?.length > 0 && (
-              <section className="py-10 border-t border-zinc-800">
-                <h2 className="text-3xl sm:text-4xl font-black mb-6">Languages</h2>
-                <div className="flex flex-wrap gap-4">
-                  {userDetails.languages.map((lang, i) => (
-                    <div
-                      key={i}
-                      className="relative group px-4 hover:border-yellow-300 py-2 rounded-xl cursor-pointer overflow-hidden border border-zinc-700 bg-zinc-800/60 text-gray-200 font-semibold transition"
-                    >
-                      <span className="relative z-10">{lang}</span>
+              <div className="space-y-6">
+                {userDetails.education.map((edu, i) => (
+                  <div
+                    key={i}
+                    className="group relative p-6 bg-gradient-to-br from-zinc-800/40 to-zinc-900/40 border border-zinc-700/50 rounded-2xl 
+                               hover:border-yellow-500/60 hover:shadow-xl hover:shadow-yellow-500/10 transition-all duration-300 overflow-hidden"
+                  >
+                    {/* Decorative gradient overlay */}
+                    <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-bl from-yellow-500/10 to-transparent rounded-bl-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+
+                    {/* Animated border effect */}
+                    <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-yellow-500/0 via-yellow-500/5 to-yellow-500/0 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+
+                    <div className="relative z-10">
+                      {/* Header with degree and dates */}
+                      <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-2 mb-3">
+                        <h3 className="text-xl sm:text-2xl font-bold text-yellow-400 group-hover:text-yellow-300 transition-colors">
+                          {edu.degree}
+                        </h3>
+                        <div className="flex items-center gap-2 text-gray-400 text-sm sm:text-base">
+                          <span className="whitespace-nowrap">{edu.startYear} - {edu.endYear}</span>
+                        </div>
+                      </div>
+
+                      {/* School name */}
+                      <p className="text-gray-200 font-semibold text-base sm:text-lg mb-3">{edu.school}</p>
+
+                      {/* Field of study */}
+                      {edu.field && (
+                        <div className="p-4 bg-zinc-900/50 rounded-xl border border-zinc-700/50 mb-3">
+                          <p className="text-xs text-gray-500 uppercase tracking-wider mb-2">Field of Study</p>
+                          <p className="text-sm sm:text-base text-gray-300 leading-relaxed">
+                            {edu.field}
+                          </p>
+                        </div>
+                      )}
+
+                      {/* Description */}
+                      {edu.description && (
+                        <div className="p-4 bg-zinc-900/30 rounded-xl border-l-4 border-yellow-500/50">
+                          <p className="text-sm text-gray-400 whitespace-pre-wrap leading-relaxed">
+                            {edu.description}
+                          </p>
+                        </div>
+                      )}
                     </div>
-                  ))}
-                </div>
-              </section>
-            )}
+                  </div>
+                ))}
+              </div>
+            </section>
+          )}
+
+          {/* Languages */}
+          {userDetails.languages?.length > 0 && (
+            <section className="py-12 border-t border-zinc-800/50">
+              <h2 className="text-3xl sm:text-4xl font-black mb-8">Languages</h2>
+              <div className="flex flex-wrap gap-4">
+                {userDetails.languages.map((lang, i) => (
+                  <div
+                    key={i}
+                    className="group relative px-6 py-3 rounded-xl cursor-pointer overflow-hidden border border-zinc-700/50 bg-gradient-to-br from-zinc-800/40 to-zinc-900/40 hover:border-yellow-400/60 transition-all duration-300"
+                  >
+                    <div className="absolute inset-0 bg-gradient-to-r from-yellow-500/0 via-yellow-500/10 to-yellow-500/0 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                    <span className="relative z-10 text-gray-200 group-hover:text-yellow-300 font-semibold transition">{lang}</span>
+                  </div>
+                ))}
+              </div>
+            </section>
+          )}
 
         </div>
-        
+
       )}
       {/* Footer */}
-         {userDetails.socials && (
-            <footer className="border-t border-emerald-500/20 bg-black/50 backdrop-blur-md py-12 px-6">
-              <div className="max-w-5xl mx-auto text-center">
-                <div className="flex justify-center gap-6 mb-6 flex-wrap">
-                  {[
-                  { name: "linkedin", url: userDetails.socials.linkedin, icon: "/Icons/link.svg" },
-                  { name: "github", url: userDetails.socials.github, icon: "/Icons/github.svg" },
-                  { name: "facebook", url: userDetails.socials.fb, icon: "/Icons/fb.svg" },
-                  { name: "whatsapp", url: userDetails.socials.whatsapp, icon: "/Icons/wts.svg" },
-                  { name: "tiktok", url: userDetails.socials.tiktok, icon: "/Icons/tiktok.svg" },
-                  { name: "reddit", url: userDetails.socials.reddit, icon: "/Icons/reddit.svg" },
-                  { name: "twitch", url: userDetails.socials.twitch, icon: "/Icons/twitch.svg" },
-                  { name: "instagram", url: userDetails.socials.instagram, icon: "/Icons/ins.svg" },
-                  { name: "snapchat", url: userDetails.socials.snapchat, icon: "/Icons/snap.svg" },
-                  { name: "twitter", url: userDetails.socials.twitter, icon: "/Icons/twit.svg" },
-                  { name: "youtube", url: userDetails.socials.youtube, icon: "/Icons/yt.svg" },
-                  { name: "telegram", url: userDetails.socials.telegram, icon: "/Icons/tele.svg" },
-                  { name: "tiktok", url: userDetails.socials.tik, icon: "/Icons/tik.svg" },
-                  { name: "google", url: userDetails.socials.google, icon: "/Icons/google.svg" },
-                ].filter((item) => item.url)
-                  .map((social, i) => 
-                    social.url && (
-                      <a
-                        key={i}
-                        href={social.url}
-                        target="_blank"
-                        rel="noreferrer"
-                        className="p-3 bg-white text-gray-400 transition border rounded-full"
-                      >
-                        <Image width={500} height={500} src={social.icon} alt={social.name} className="w-5 h-5" />
-                      </a>
-                    )
-                  )}
-                </div>
-                <p className="text-gray-400">© {new Date().getFullYear()} {userDetails.fullname}. All rights reserved.</p>
-              </div>
+      {userDetails?.socials && (
+        <footer className="relative z-10 border-t border-zinc-800/50 bg-black/50 backdrop-blur-md py-12 px-6 mt-12">
+          <div className="max-w-5xl mx-auto text-center">
+            <div className="flex justify-center gap-6 mb-6 flex-wrap">
+              {[
+                { name: "linkedin", url: userDetails.socials.linkedin, icon: "/Icons/link.svg" },
+                { name: "github", url: userDetails.socials.github, icon: "/Icons/github.svg" },
+                { name: "facebook", url: userDetails.socials.fb, icon: "/Icons/fb.svg" },
+                { name: "whatsapp", url: userDetails.socials.whatsapp, icon: "/Icons/wts.svg" },
+                { name: "tiktok", url: userDetails.socials.tiktok, icon: "/Icons/tiktok.svg" },
+                { name: "reddit", url: userDetails.socials.reddit, icon: "/Icons/reddit.svg" },
+                { name: "twitch", url: userDetails.socials.twitch, icon: "/Icons/twitch.svg" },
+                { name: "instagram", url: userDetails.socials.instagram, icon: "/Icons/ins.svg" },
+                { name: "snapchat", url: userDetails.socials.snapchat, icon: "/Icons/snap.svg" },
+                { name: "twitter", url: userDetails.socials.twitter, icon: "/Icons/twit.svg" },
+                { name: "youtube", url: userDetails.socials.youtube, icon: "/Icons/yt.svg" },
+                { name: "telegram", url: userDetails.socials.telegram, icon: "/Icons/tele.svg" },
+                { name: "google", url: userDetails.socials.google, icon: "/Icons/google.svg" },
+              ].filter((item) => item.url)
+                .map((social, i) =>
+                  social.url && (
+                    <a
+                      key={i}
+                      href={social.url}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="group p-2 md:p-3 bg-zinc-800/50 hover:bg-yellow-500/20 transition-all duration-300 border border-zinc-700/50 hover:border-yellow-500/50 rounded-full transform hover:scale-110"
+                    >
+                      <Image width={25} height={25} src={social.icon} alt={social.name} className="w-6 h-6 group-hover:brightness-125 transition" />
+                    </a>
+                  )
+                )}
+            </div>
+            <p className="text-gray-400">© {new Date().getFullYear()} {userDetails.fullname}. All rights reserved.</p>
+          </div>
         </footer>
-         )}
-         
+      )}
+
     </div>
   )
 }

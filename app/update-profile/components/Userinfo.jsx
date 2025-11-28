@@ -153,6 +153,7 @@ function Userinfo({ userData, setUserDetails }) {
             className="rounded-full cursor-pointer w-32 h-32 md:w-40 md:h-40 object-cover border-4 border-teal-500 shadow-lg"
             width={160}
             height={160}
+            priority
           />
           <label className="mt-4 bg-gradient-to-r from-teal-400 to-green-500 hover:from-teal-500 hover:to-green-600 text-white font-semibold rounded-full px-6 py-2 cursor-pointer transition duration-300 transform hover:scale-105">
             Upload Image
