@@ -1,6 +1,6 @@
 "use client"
 import { useState } from "react"
-import { ChevronDown, Sparkles, CheckCircle2, Copy, Briefcase, GraduationCap, Code, Globe } from "lucide-react"
+import { Sparkles, CheckCircle2, Copy, Briefcase, GraduationCap, Code, Globe } from "lucide-react"
 import QrcodeProfile from "../../[username]/components/QrcodeProfile";
 import UserLinks from "../../[username]/components/UserLinks";
 import MagicalLoader from "../MagicalLoader";
@@ -26,21 +26,13 @@ export default function ThemeFour({ userDetails, userLinks }) {
   return (
     <div>
       {userDetails && (
-        <div className="min-h-screen bg-slate-950 text-white overflow-hidden relative">
-          {/* Enhanced Animated background */}
-          <div className="fixed inset-0 -z-10">
-            <div className="absolute inset-0 bg-gradient-to-br from-emerald-900/30 via-slate-950 to-blue-900/30"></div>
-            <div className="absolute top-20 left-1/3 w-96 h-96 bg-emerald-500/20 rounded-full mix-blend-screen blur-3xl animate-pulse"></div>
-            <div className="absolute bottom-20 right-1/3 w-96 h-96 bg-blue-500/20 rounded-full mix-blend-screen blur-3xl animate-pulse" style={{ animationDelay: "2s" }}></div>
-            <div className="absolute top-1/2 left-1/2 w-96 h-96 bg-purple-500/10 rounded-full mix-blend-screen blur-3xl animate-pulse" style={{ animationDelay: "4s" }}></div>
-          </div>
-
-          <div className="relative z-10 px-4 md:px-6">
+        <div className="min-h-screen bg-slate-950 text-white overflow-hidden">
+          <div className="px-4 md:px-6">
             {/* Header */}
             <header className="pt-7 pb-12">
               <div className="max-w-5xl mx-auto">
                 {/* Toolbar */}
-                <div className="flex justify-between items-center mb-12">
+                <div className="relative z-50 flex justify-between  items-center mb-12">
                   <h1 className="text-white text-2xl font-bold cursor-pointer hover:text-emerald-400 transition-colors">
                     <Link href={"https://dgtportfolio.com"}>Portfolio</Link>
                   </h1>
@@ -69,14 +61,14 @@ export default function ThemeFour({ userDetails, userLinks }) {
 
                 {/* Header Content */}
                 <div className="flex flex-col-reverse md:flex-row gap-12 md:items-start items-center justify-between">
-                  <div className="flex-1">
-                    <h1 className="text-5xl md:text-6xl font-black mb-6 leading-tight">{userDetails?.fullname}</h1>
-                    <p className="text-2xl text-emerald-300 font-semibold mb-8 flex items-center gap-2 animate-pulse">
+                  <div className="">
+                    <h1 className="text-5xl md:text-6xl font-black mb-5">{userDetails?.fullname}</h1>
+                    <p className="text-2xl text-emerald-300 font-semibold mb-5 flex items-center gap-2 animate-pulse">
                       <Sparkles size={24} className="text-emerald-400" />
                       {userDetails.category}
                       <Sparkles size={24} className="text-emerald-400" />
                     </p>
-                    <div className="text-gray-300 mt-4 max-w-lg leading-relaxed">
+                    <div className="text-gray-300 mt-4 max-w-lg">
                       <p className="mb-6">{userDetails?.about}</p>
                       <div className="p-4 md:p-6 bg-white/5 backdrop-blur-sm rounded-xl border border-white/10">
                         {userDetails.email && (
@@ -116,7 +108,7 @@ export default function ThemeFour({ userDetails, userLinks }) {
 
             {/* Services */}
             {userDetails.services?.length > 0 && (
-              <section className="py-12 border-t border-emerald-500/20">
+              <section className="py-8 border-t border-emerald-500/20">
                 <div className="max-w-5xl mx-auto">
                   <div className="flex items-center gap-3 mb-8">
                     <Briefcase className="text-emerald-400" size={32} />
@@ -136,7 +128,7 @@ export default function ThemeFour({ userDetails, userLinks }) {
 
             {/* Experience */}
             {userDetails.experience?.length > 0 && (
-              <section className="py-12 border-t border-emerald-500/20">
+              <section className="py-8 border-t border-emerald-500/20">
                 <div className="max-w-5xl mx-auto">
                   <div className="flex items-center gap-3 mb-8">
                     <Briefcase className="text-emerald-400" size={32} />
@@ -169,7 +161,7 @@ export default function ThemeFour({ userDetails, userLinks }) {
             )}
             {/* Skills */}
             {userDetails.skills?.length > 0 && (
-              <section className="py-12 border-t border-emerald-500/20">
+              <section className="py-8 border-t border-emerald-500/20">
                 <div className="max-w-5xl mx-auto">
                   <div className="flex items-center gap-3 mb-8">
                     <Code className="text-emerald-400" size={32} />
@@ -189,7 +181,7 @@ export default function ThemeFour({ userDetails, userLinks }) {
 
             {/* Projects */}
             {userDetails.projects && userDetails.projects.length > 0 && (
-              <section className="py-12 border-t border-emerald-500/20">
+              <section className="py-8 border-t border-emerald-500/20">
                 <div className="max-w-5xl mx-auto">
                   <h2 className="text-4xl font-black mb-8 text-center">Featured Projects</h2>
                   <div className="space-y-6">
@@ -251,7 +243,7 @@ export default function ThemeFour({ userDetails, userLinks }) {
             {/* Education */}
             {
               userDetails.education?.length > 0 && (
-                <section className="py-12 border-t border-emerald-500/20">
+                <section className="py-8 border-t border-emerald-500/20">
                   <div className="max-w-5xl mx-auto">
                     <div className="flex items-center gap-3 mb-8">
                       <GraduationCap className="text-emerald-400" size={32} />
@@ -296,7 +288,7 @@ export default function ThemeFour({ userDetails, userLinks }) {
             {/* Languages */}
             {
               userDetails.languages?.length > 0 && (
-                <section className="py-12 border-t border-emerald-500/20">
+                <section className="py-8 border-t border-emerald-500/20">
                   <div className="max-w-5xl mx-auto">
                     <div className="flex items-center gap-3 mb-8">
                       <Globe className="text-emerald-400" size={32} />
@@ -318,7 +310,6 @@ export default function ThemeFour({ userDetails, userLinks }) {
               )
             }
           </div>
-
         </div>
       )}
     </div>

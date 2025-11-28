@@ -45,11 +45,11 @@ function UserLinks({ userLinks = [], language, labels }) {
                         <p className="p-2 border border-gray-300 rounded-full text-teal-600">
                           <LinkIcon />
                         </p>
-                        <p className="text-sm break-all">{lnk.namelink}</p>
+                        <p className="text-sm break-all text-black">{lnk.namelink}</p>
                       </a>
                     ))
                   ) : (
-                    <p className="text-center text-gray-500">
+                    <p className="text-center text-black">
                       No Business Links available.
                     </p>
                   )}

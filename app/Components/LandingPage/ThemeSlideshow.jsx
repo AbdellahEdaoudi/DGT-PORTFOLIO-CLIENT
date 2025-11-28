@@ -22,11 +22,11 @@ export default function ThemeSlideshow() {
   }, [nextSlide])
 
   const themes = [
-    { Component: Themeone, id: 1 },
     { Component: ThemeTwo, id: 2 },
     { Component: ThemeThree, id: 3 },
     { Component: ThemeFour, id: 4 },
     { Component: ThemeFive, id: 5 },
+    { Component: Themeone, id: 1 },
   ]
 
   // Mock user links for preview
@@ -36,7 +36,7 @@ export default function ThemeSlideshow() {
   ]
 
   return (
-    <div className="relative md:block hidden h-96 rounded-lg overflow-hidden bg-gray-900 border border-white/10 shadow-2xl">
+    <div className="relative md:block hidden h-96 rounded-lg overflow-hidden ">
       {themes.map((theme, index) => {
         const ThemeComponent = theme.Component
         return (
@@ -47,7 +47,7 @@ export default function ThemeSlideshow() {
           >
             <div className="w-full h-full relative overflow-hidden">
               {/* Scaling container to fit the theme into the slideshow box */}
-              <div className="absolute top-0 left-0 w-[1070px] origin-top-left transform scale-[0.3] md:scale-[0.5] h-[1000px]">
+              <div className="absolute top-0 left-0 w-[1400px] origin-top-left  transform scale-[0.3] md:scale-[0.40] h-[1000px]">
                 <ThemeComponent userDetails={adam} userLinks={userLinks} />
               </div>
             </div>

@@ -45,7 +45,6 @@ export default function LandingPage() {
           <AuthButtons />
         </div>
       </Navbar>
-
       {/* Hero Section */}
       <section className="relative pt-20 md:pt-28 md:mx-5 md:pb-20 px-6 mb-8">
         <div className="max-w-7xl mx-auto grid md:grid-cols-2 gap-12 items-center">

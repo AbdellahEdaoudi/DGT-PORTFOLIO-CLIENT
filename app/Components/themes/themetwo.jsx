@@ -244,7 +244,7 @@ export default function ThemeTwo({ userDetails, userLinks, bgcolor }) {
                         )}
                         <div className="flex-1 p-4 md:p-8">
                           <div className="flex justify-between items-start mb-4">
-                            <h3 className="text-2xl text-white group-hover:text-blue-300 transition-colors">
+                            <h3 className="text-2xl font-semibold text-white group-hover:text-blue-300 transition-colors">
                               {project.title}
                             </h3>
                             {project.link && (
@@ -261,7 +261,7 @@ export default function ThemeTwo({ userDetails, userLinks, bgcolor }) {
 
                           <p
                             onClick={() => setExpanded(expanded === i ? null : i)}
-                            className={`text-gray-300 whitespace-pre-wrap mb-6 leading-relaxed cursor-pointer hover:text-white transition-colors ${expanded === i ? "line-clamp-none" : "line-clamp-3"
+                            className={`text-gray-300 whitespace-pre-wrap mb-6 leading-relaxed cursor-pointer hover:text-white transition-colors ${expanded === i ? "line-clamp-none" : "line-clamp-4"
                               }`}
                           >
                             {project.description}

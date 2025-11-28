@@ -37,7 +37,7 @@ export default function ThemeThree({ userDetails, userLinks }) {
           className="absolute -bottom-32 left-1/3 w-[600px] h-[600px] bg-indigo-600/20 rounded-full mix-blend-screen filter blur-[100px] opacity-30 animate-blob"
           style={{ animationDelay: "4s" }}
         ></div>
-        <div className="absolute inset-0 bg-[url('/noise.png')] opacity-5 mix-blend-overlay"></div>
+        <div className="absolute inset-0 bg-[url('/ ')] opacity-5 mix-blend-overlay"></div>
       </div>
 
       <div className="relative z-10 px-4 md:px-8 max-w-6xl mx-auto">
@@ -45,7 +45,7 @@ export default function ThemeThree({ userDetails, userLinks }) {
         <header className="pt-8 pb-10">
           {/* Toolbar */}
                 <div className="flex justify-between items-center mb-8">
-                  <h1 className="text-white text-2xl font-bold cursor-pointer hover:text-emerald-400 transition-colors">
+                  <h1 className="text-white text-2xl font-bold cursor-pointer hover:text-pink-400 transition-colors">
                     <Link href={"https://dgtportfolio.com"}>Portfolio</Link>
                   </h1>
                   <div className="flex gap-3">
@@ -53,26 +53,26 @@ export default function ThemeThree({ userDetails, userLinks }) {
                     <button
                       title="Copy Link Profile"
                       onClick={copyProfileLink}
-                      className="flex items-center gap-2 px-4 py-2 bg-white/10 hover:bg-emerald-500/20 rounded-lg text-white transition-all duration-300 backdrop-blur-md border border-white/10 hover:border-emerald-500/50"
+                      className="flex items-center gap-2 px-4 py-2 bg-white/10 hover:bg-pink-500/20 rounded-lg text-white transition-all duration-300 backdrop-blur-md border border-white/10 hover:border-pink-500/50"
                     >
-                      {copied ? <CheckCircle2 className="text-emerald-400" /> : <Copy />}
+                      {copied ? <CheckCircle2 className="text-pink-400" /> : <Copy />}
                     </button>
                     {/* QR Code */}
                     <div
                       onClick={() => setShowQR(!showQR)}
-                      className="flex items-center gap-2 px-2 bg-white/10 hover:bg-emerald-500/20 rounded-lg text-white transition-all duration-300 backdrop-blur-md border border-white/10 hover:border-emerald-500/50 cursor-pointer"
+                      className="flex items-center gap-2 px-2 bg-white/10 hover:bg-pink-500/20 rounded-lg text-white transition-all duration-300 backdrop-blur-md border border-white/10 hover:border-pink-500/50 cursor-pointer"
                     >
                       <QrcodeProfile path={`/${userDetails?.username}`} userDetails={userDetails} />
                     </div>
                     {/* User Links */}
-                    <div className="flex items-center gap-2 px-2 bg-white/10 hover:bg-emerald-500/20 rounded-lg text-white transition-all duration-300 backdrop-blur-md border border-white/10 hover:border-emerald-500/50">
+                    <div className="flex items-center gap-2 px-2 bg-white/10 hover:bg-pink-500/20 rounded-lg text-white transition-all duration-300 backdrop-blur-md border border-white/10 hover:border-pink-500/50">
                       <UserLinks userLinks={userLinks} />
                     </div>
                   </div>
                 </div>
 
           {/* Hero Section */}
-          <div className="flex flex-col-reverse md:flex-row gap-10 items-center justify-between mb-12">
+          <div className="flex flex-col-reverse md:flex-row gap-10 items-center justify-between mb-8">
             <div className="flex-1 text-center md:text-left">
               <div className="inline-block px-3 py-1 mb-4 text-xs tracking-wider text-pink-300 uppercase bg-pink-500/10 rounded-full border border-pink-500/20">
                 Welcome to my world
