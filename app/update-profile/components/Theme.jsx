@@ -6,7 +6,7 @@ import { Loader, CheckCheck } from "lucide-react";
 import Image from "next/image";
 
 
-export default function Theme({ userData, userLinks }) {
+export default function Theme({ userData, userLinks,setUserDetails}) {
   const [selectedTheme, setSelectedTheme] = useState(userData.theme || 1);
   const [loading, setLoading] = useState(false);
   const [pendingTheme, setPendingTheme] = useState(null);
@@ -18,6 +18,7 @@ export default function Theme({ userData, userLinks }) {
       await axios.put(`/api/proxy/users/update/theme`, { theme: pendingTheme });
       setSelectedTheme(pendingTheme);
       setPendingTheme(null);
+      setUserDetails({ ...userData, theme: pendingTheme });
       toast(
         <p className="flex gap-2 items-center">
           <CheckCheck className="text-green-500" /> Saved successfully!

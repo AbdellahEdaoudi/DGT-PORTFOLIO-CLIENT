@@ -58,7 +58,7 @@ export default function UpdateProfilePage() {
                     activeTab === tab.id
                       ? "bg-teal-600 text-white"
                       : "bg-gray-200 text-gray-700 hover:bg-gray-300"
-                  }`}
+                  } ${userDetails.theme !== 1 && tab.id === "bgcolor" ? "hidden" : ""}`}
                 >
                   {tab.label}
                 </button>
