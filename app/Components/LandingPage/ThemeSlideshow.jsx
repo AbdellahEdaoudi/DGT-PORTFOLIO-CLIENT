@@ -1,5 +1,5 @@
 "use client"
-
+import Image from "next/image"
 import { useState, useEffect, useRef, useCallback } from "react"
 
 
@@ -41,7 +41,9 @@ export default function ThemeSlideshow() {
             }`}
         >
           <div className="w-full h-full relative overflow-hidden">
-            <img
+            <Image
+              width={1920}
+              height={1080}
               src={theme.image}
               alt={`Theme ${theme.id}`}
               className="w-full h-full object-cover object-top"

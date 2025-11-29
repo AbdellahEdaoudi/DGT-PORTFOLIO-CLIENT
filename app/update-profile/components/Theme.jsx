@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import { toast } from "react-toastify";
 import { Loader, CheckCheck } from "lucide-react";
+import Image from "next/image";
 
 
 export default function Theme({ userData, userLinks }) {
@@ -64,9 +65,11 @@ export default function Theme({ userData, userLinks }) {
               }`}
           >
             <div className="w-full h-28 md:h-28 relative overflow-hidden bg-gray-900 pointer-events-none">
-              <img
+              <Image
                 src={`/themes/theme${num}.png`}
                 alt={`Theme ${num}`}
+                width={1920}
+                height={1080}
                 className="w-full h-full object-cover object-top"
               />
             </div>
