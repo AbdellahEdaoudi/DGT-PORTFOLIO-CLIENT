@@ -5,6 +5,12 @@ import ThemeTwo from "./themes/themetwo"
 import ThemeThree from "./themes/themethree"
 import ThemeFour from "./themes/themefour"
 import ThemeFive from "./themes/themefive"
+import ThemeSix from "./themes/themesix"
+import ThemeSeven from "./themes/theme seven"
+import ThemeEight from "./themes/themeeight"
+import ThemeNine from "./themes/themeneight"
+import ThemeTen from "./themes/themeten"
+import ThemeEleven from "./themes/themeeleven"
 import axios from 'axios'
 import AccountNotFound from "./AccountNotFound"
 import MagicalLoader from './MagicalLoader'
@@ -74,6 +80,18 @@ export default function SubdomainClient({ username }) {
         return <ThemeFour userDetails={userDetails} userLinks={userLinks} />
       case 5:
         return <ThemeFive userDetails={userDetails} userLinks={userLinks} />
+      case 6:
+        return <ThemeSix userDetails={userDetails} userLinks={userLinks} />
+      case 7:
+        return <ThemeSeven userDetails={userDetails} userLinks={userLinks} />
+      case 8:
+        return <ThemeEight userDetails={userDetails} userLinks={userLinks} />
+      case 9:
+        return <ThemeNine userDetails={userDetails} userLinks={userLinks} />
+      case 10:
+        return <ThemeTen userDetails={userDetails} userLinks={userLinks} />
+      case 11:
+        return <ThemeEleven userDetails={userDetails} userLinks={userLinks} />
       default:
         return userDetails ? <Themeone userDetails={userDetails} userLinks={userLinks} /> :
           <MagicalLoader />
