@@ -1,6 +1,6 @@
 "use client"
 import { useState } from "react"
-import { Sparkles, CheckCircle2, Copy, Briefcase, GraduationCap, Code, Globe } from "lucide-react"
+import { Sparkles, CheckCircle2, Copy, Briefcase, GraduationCap, Code, Globe, Share2 } from "lucide-react"
 import QrcodeProfile from "../../[username]/components/QrcodeProfile";
 import UserLinks from "../../[username]/components/UserLinks";
 import MagicalLoader from "../MagicalLoader";
@@ -309,7 +309,61 @@ export default function ThemeFour({ userDetails, userLinks }) {
                 </section>
               )
             }
+
+            {/* Social Media */}
+            {userDetails.socials && Object.keys(userDetails.socials).length > 0 && (
+              <section className="py-8 border-t border-emerald-500/20">
+                <div className="max-w-5xl mx-auto">
+                  <div className="flex items-center gap-3 mb-8">
+                    <Share2 className="text-emerald-400" size={30} />
+                    <h2 className="text-3xl font-black">Follow Me</h2>
+                  </div>
+                  <div className="flex gap-4 flex-wrap">
+                    {[
+                      { name: "linkedin", url: userDetails.socials.linkedin, icon: "/Icons/link.svg" },
+                      { name: "github", url: userDetails.socials.github, icon: "/Icons/github.svg" },
+                      { name: "facebook", url: userDetails.socials.fb, icon: "/Icons/fb.svg" },
+                      { name: "whatsapp", url: userDetails.socials.whatsapp, icon: "/Icons/wts.svg" },
+                      { name: "tiktok", url: userDetails.socials.tiktok, icon: "/Icons/tiktok.svg" },
+                      { name: "reddit", url: userDetails.socials.reddit, icon: "/Icons/reddit.svg" },
+                      { name: "twitch", url: userDetails.socials.twitch, icon: "/Icons/twitch.svg" },
+                      { name: "instagram", url: userDetails.socials.instagram, icon: "/Icons/ins.svg" },
+                      { name: "snapchat", url: userDetails.socials.snapchat, icon: "/Icons/snap.svg" },
+                      { name: "twitter", url: userDetails.socials.twitter, icon: "/Icons/twit.svg" },
+                      { name: "youtube", url: userDetails.socials.youtube, icon: "/Icons/yt.svg" },
+                      { name: "telegram", url: userDetails.socials.telegram, icon: "/Icons/tele.svg" },
+                      { name: "tiktok", url: userDetails.socials.tik, icon: "/Icons/tik.svg" },
+                      { name: "google", url: userDetails.socials.google, icon: "/Icons/google.svg" },
+                    ]
+                      .filter((item) => item.url)
+                      .map((item, i) => (
+                        <a
+                          key={i}
+                          href={item.url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="group relative p-3 bg-gradient-to-br from-emerald-500/10 to-blue-500/10 border border-emerald-500/30 rounded-xl hover:border-emerald-500/60 hover:shadow-lg hover:shadow-emerald-500/20 transition-all duration-300 overflow-hidden"
+                        >
+                          <div className="absolute inset-0 bg-gradient-to-r from-emerald-500/0 via-emerald-500/10 to-emerald-500/0 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                          <Image width={500} height={500} src={item.icon} alt={item.name} className="w-7 h-7 relative z-10" />
+                        </a>
+                      ))}
+                  </div>
+                </div>
+              </section>
+            )}
+
+            {/* Footer */}
+            <footer className="border-t border-emerald-500/20 bg-slate-950/50 backdrop-blur-md mt-12">
+              <div className="max-w-5xl mx-auto px-4 py-8 text-center">
+                <p className="text-gray-400">
+                  © {new Date().getFullYear()} {userDetails?.fullname}. All rights reserved.
+                </p>
+              </div>
+            </footer>
           </div>
+
+
         </div>
       )}
     </div>

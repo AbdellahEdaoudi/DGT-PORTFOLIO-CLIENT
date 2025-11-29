@@ -397,7 +397,7 @@ export default function ThemeTwo({ userDetails, userLinks, bgcolor }) {
                 ))}
             </div>
             <p className="text-gray-500 text-sm">
-              © {new Date().getFullYear()} {userDetails.fullname}. Crafted with <span className="text-blue-500">♥</span>
+              © {new Date().getFullYear()} {userDetails.fullname}. All Rights Reserved.
             </p>
           </div>
         </footer>

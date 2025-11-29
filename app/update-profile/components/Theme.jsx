@@ -3,12 +3,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import { toast } from "react-toastify";
 import { Loader, CheckCheck } from "lucide-react";
-import Themeone from "../../Components/themes/themeone";
-import ThemeTwo from "../../Components/themes/themetwo";
-import ThemeThree from "../../Components/themes/themethree";
-import ThemeFour from "../../Components/themes/themefour";
-import ThemeFive from "../../Components/themes/themefive";
-import adam from "../../../public/adam.json"
+
 
 export default function Theme({ userData, userLinks }) {
   const [selectedTheme, setSelectedTheme] = useState(userData.theme || 1);
@@ -57,7 +52,7 @@ export default function Theme({ userData, userLinks }) {
         </div>
       </div>
       <div className="grid grid-cols-3  md:grid-cols-5 gap-4">
-        {[1, 2, 3, 4, 5].map((num) => (
+        {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11].map((num) => (
           <div
             key={num}
             onClick={() => setPendingTheme(num)}
@@ -69,13 +64,11 @@ export default function Theme({ userData, userLinks }) {
               }`}
           >
             <div className="w-full h-28 md:h-28 relative overflow-hidden bg-gray-900 pointer-events-none">
-              <div className="absolute top-0 left-0 w-[1200px] origin-top-left transform scale-[0.11] md:scale-[0.14] h-[800px]">
-                {num === 1 && <Themeone userDetails={adam} userLinks={userLinks} />}
-                {num === 2 && <ThemeTwo userDetails={adam} userLinks={userLinks} />}
-                {num === 3 && <ThemeThree userDetails={adam} userLinks={userLinks} />}
-                {num === 4 && <ThemeFour userDetails={adam} userLinks={userLinks} />}
-                {num === 5 && <ThemeFive userDetails={adam} userLinks={userLinks} />}
-              </div>
+              <img
+                src={`/themes/theme${num}.png`}
+                alt={`Theme ${num}`}
+                className="w-full h-full object-cover object-top"
+              />
             </div>
           </div>
         ))}

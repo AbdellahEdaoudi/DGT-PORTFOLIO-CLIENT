@@ -397,7 +397,7 @@ export default function ThemeThree({ userDetails, userLinks }) {
                 ))}
             </div>
             <p className="text-gray-500 text-sm">
-              © {new Date().getFullYear()} {userDetails.fullname}. Crafted with <span className="text-pink-500">♥</span>
+              © {new Date().getFullYear()} {userDetails.fullname}. All Rights Reserved.
             </p>
           </div>
         </footer>
