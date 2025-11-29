@@ -33,7 +33,7 @@ export default function ThemeSlideshow() {
 
 
   return (
-    <div className="relative h-96 rounded-lg overflow-hidden ">
+    <div className="relative md:h-96 h-72 rounded-lg overflow-hidden ">
       {themes.map((theme, index) => (
         <div
           key={index}
