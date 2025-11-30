@@ -46,6 +46,7 @@ export const authOptions : AuthOptions={
         email: user.email,
         urlimage: UrlImage,
         bgcolorp:"#OA3C4D",
+        username:user.email?.split("@")[0],
         theme:1
       }, {
         headers: { Authorization: `Bearer ${token}` },
