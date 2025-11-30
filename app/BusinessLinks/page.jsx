@@ -1,10 +1,10 @@
 'use client';
-import React, { useContext, useState} from 'react';
-import {Link, X, Edit3, Trash2, CheckCircle, Loader } from 'lucide-react';
+import React, { useContext, useState } from 'react';
+import { Link, X, Edit3, Trash2, CheckCircle, Loader } from 'lucide-react';
 import { MyContext } from '../Context/MyContext';
 import axios from 'axios';
 import { toast } from "react-toastify";
-import ParticleComponent  from "../Components/ParticleComponent"
+import ParticleComponent from "../Components/ParticleComponent"
 import DOMPurify from 'dompurify';
 import WarningModal from "./Pages/WarningModal"
 import ConfirmModal from "./Pages/ConfirmModal"
@@ -12,8 +12,8 @@ import MagicalLoader from '../Components/MagicalLoader';
 import Header from '../Components/header';
 
 function EditUserLinks() {
-  const {EmailUser,userLinks, setUserLinks,loadingAll} = useContext(MyContext);
-  const [loadingAction, setLoadingAction] = useState(null); 
+  const { EmailUser, userLinks, setUserLinks, loadingAll } = useContext(MyContext);
+  const [loadingAction, setLoadingAction] = useState(null);
   const [confirmOpen, setConfirmOpen] = useState(false);
   const [deleteId, setDeleteId] = useState(null);
   const [namelink, setNamelink] = useState('');
@@ -26,12 +26,12 @@ function EditUserLinks() {
     const regex = /<script.*?>.*?<\/script>|<iframe.*?>.*?<\/iframe>|javascript:|eval\(|alert\(|document\.cookie|window\.location|<a\s+href=["']?javascript:.*?["']?/i;
 
     if (regex.test(link) || regex.test(namelink)) {
-        setLoadingAction(null);
-        document.getElementById('my_modal_2').showModal();
-        return;
+      setLoadingAction(null);
+      document.getElementById('my_modal_2').showModal();
+      return;
     }
-    
-     try {
+
+    try {
       const sanitizedLink = DOMPurify.sanitize(link);
       const response = await axios.post(`/api/proxy/links`, {
         useremail: EmailUser,
@@ -49,7 +49,7 @@ function EditUserLinks() {
       setLoadingAction(null);
     }
   };
-  
+
   const EditLink = (lnk) => {
     setEditLinkId(lnk._id);
     setNamelink(lnk.namelink);
@@ -62,11 +62,11 @@ function EditUserLinks() {
     const regex = /<script.*?>.*?<\/script>|<iframe.*?>.*?<\/iframe>|javascript:|eval\(|alert\(|document\.cookie|window\.location|<a\s+href=["']?javascript:.*?["']?/i;
 
     if (regex.test(link) || regex.test(namelink)) {
-        setLoadingAction(null);
-        document.getElementById('my_modal_2').showModal();
-        return;
+      setLoadingAction(null);
+      document.getElementById('my_modal_2').showModal();
+      return;
     }
-  
+
     try {
       const sanitizedLink = DOMPurify.sanitize(link);
       const response = await axios.put(`/api/proxy/links/${editLinkId}`, {
@@ -74,15 +74,15 @@ function EditUserLinks() {
         namelink,
         link: sanitizedLink
       });
-      setUserLinks(prevLinks => 
+      setUserLinks(prevLinks =>
         prevLinks.map(item => (item._id === editLinkId ? response.data.data : item))
       );
       toast(
-      <p className="flex gap-3 items-center">
-        <CheckCircle /> Updated Successfully
-      </p>,
-      { autoClose: 3000 }
-    );
+        <p className="flex gap-3 items-center">
+          <CheckCircle /> Updated Successfully
+        </p>,
+        { autoClose: 3000 }
+      );
       setEditLinkId(null);
       setLink('');
       setNamelink('');
@@ -93,131 +93,132 @@ function EditUserLinks() {
       setLoadingAction(null);
     }
   };
-  
+
   const handleConfirmDelete = async () => {
-  setConfirmOpen(false);
-  if (!deleteId) return;
-  setLoadingAction(`delete-${deleteId}`);
-  try {
-    await axios.delete(`/api/proxy/links/${deleteId}`);
-    setUserLinks(prev => prev.filter(item => item._id !== deleteId));
-    setEditLinkId(null);
-    setNamelink('');
-    setLink('');
-    toast("Link deleted successfully!");
-  } catch (error) {
-    console.error('There was an error deleting the link!', error);
-    toast.error('Failed to delete the link.');
-  } finally {
-    setLoadingAction(null);
+    setConfirmOpen(false);
+    if (!deleteId) return;
+    setLoadingAction(`delete-${deleteId}`);
+    try {
+      await axios.delete(`/api/proxy/links/${deleteId}`);
+      setUserLinks(prev => prev.filter(item => item._id !== deleteId));
+      setEditLinkId(null);
+      setNamelink('');
+      setLink('');
+      toast("Link deleted successfully!");
+    } catch (error) {
+      console.error('There was an error deleting the link!', error);
+      toast.error('Failed to delete the link.');
+    } finally {
+      setLoadingAction(null);
+      setDeleteId(null);
+    }
+  };
+
+  const handleCancelDelete = () => {
+    setConfirmOpen(false);
     setDeleteId(null);
-  }
-};
-
-const handleCancelDelete = () => {
-  setConfirmOpen(false);
-  setDeleteId(null);
-};
+  };
 
 
-if(!EmailUser || loadingAll){return <MagicalLoader />}
+  if (!EmailUser || loadingAll) { return <MagicalLoader /> }
 
-  
+
   return (
     <div className={`bg-cyan-950 min-h-screen pb-12 justify-center`}>
       <Header />
       {/* UserLinks */}
       <div className="flex items-center justify-center">
         <section className='mt-4 p-4 rounded-lg bg-gray-100 w-[110vh] md:mx-0 mx-2 text-gray-800 '>
-        <div className='flex items-center justify-around mb-4'>
-          <p className='text-3xl font-semibold text-gray-900'>Business Links</p>
-          <p onClick={() => {
-            setEditLinkId(editLinkId ? null : editLinkId)
-            setNamelink("")
-            setLink("")
-          }} className='border p-2 rounded-full cursor-pointer bg-gray-700 hover:bg-gray-800 duration-300 g-gradient-to-r from-teal-500 to-teal-700 text-white'>
-            <X />
-          </p>
-        </div>
-        {/* Add or Update Links */}
-        <div className={` max-w-md mx-auto p-4 bg-white rounded-lg `}>
-          <form onSubmit={editLinkId ? UpdateLink : AddLink} className="space-y-4">
-            <div>
-              <input
-                type="text"
-                value={namelink}
-                onChange={(e) => setNamelink(e.target.value)}
-                required
-                maxLength={100}
-                placeholder='Titel'
-                className="mt-1 w-full px-3 py-2 border border-gray-300 bg-gray-50 rounded-md shadow-sm focus:ring-teal-500 focus:border-teal-500 sm:text-sm"
-              />
-            </div>
-            <div>
-              <input
-                type="url"
-                value={link}
-                maxLength={100}
-                onChange={(e) => setLink(e.target.value)}
-                required
-                placeholder='Link URL'
-                className="mt-1 bg-gray-50 w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-teal-500 focus:border-teal-500 sm:text-sm"
-              />
-            </div>
-            <button
-              disabled={loadingAction !== null}
-              type="submit"
-              className="w-full bg-teal-5 bg-sky-700 text-white px-4 py-2 rounded hover:bg-teal-600 transition duration-300"
-            >
-              {loadingAction === 'add' || loadingAction === 'update' ? (
-                <div className='flex items-center justify-center'><Loader size={24} className="animate-spin"/></div>
-              ) : editLinkId ? "Update" : "Add Link"}
-            </button>
-          </form>
-          <WarningModal />
-        </div>
-        {/* Links */}
-        <div className='p-2 space-y-3 grid grid-cols-1'>
-          {(loadingAll) ? (
-            <div className='space-y-3 mt-3'>
-              {[1,2,3,4].map((mp,i)=>{
-                return(
-                  <div key={i} className='w-full h-16 bg-gray-400 animate-pulse rounded-lg'>
+          <div className='flex items-center justify-around mb-4'>
+            <p className='text-3xl font-semibold text-gray-900'>Business Links</p>
+            <p onClick={() => {
+              setEditLinkId(editLinkId ? null : editLinkId)
+              setNamelink("")
+              setLink("")
+            }} className='border p-2 rounded-full cursor-pointer bg-gray-700 hover:bg-gray-800 duration-300 g-gradient-to-r from-teal-500 to-teal-700 text-white'>
+              <X />
+            </p>
+          </div>
+          {/* Add or Update Links */}
+          <div className={` max-w-md mx-auto p-4 bg-white rounded-lg `}>
+            <form onSubmit={editLinkId ? UpdateLink : AddLink} className="space-y-4">
+              <div>
+                <input
+                  type="text"
+                  value={namelink}
+                  onChange={(e) => setNamelink(e.target.value)}
+                  required
+                  placeholder="e.g., My Website"
+                  maxLength={100}
+                  className="mt-1 w-full px-3 py-2 border border-gray-300 bg-gray-50 rounded-md shadow-sm focus:ring-teal-500 focus:border-teal-500 sm:text-sm"
+                />
+              </div>
+              <div>
+                <input
+                  type="url"
+                  value={link}
+                  placeholder="https://example.com"
+                  maxLength={100}
+                  onChange={(e) => setLink(e.target.value)}
+                  required
+                  className="mt-1 bg-gray-50 w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-teal-500 focus:border-teal-500 sm:text-sm"
+                />
+              </div>
+              <button
+                disabled={loadingAction !== null}
+                type="submit"
+                className="w-full bg-teal-5 bg-sky-700 text-white px-4 py-2 rounded hover:bg-teal-600 transition duration-300"
+              >
+                {loadingAction === 'add' || loadingAction === 'update' ? (
+                  <div className='flex items-center justify-center'><Loader size={24} className="animate-spin" /></div>
+                ) : editLinkId ? "Update" : "Add Link"}
+              </button>
+            </form>
+            <WarningModal />
+          </div>
+          {/* Links */}
+          <div className='p-2 space-y-3 grid grid-cols-1'>
+            {(loadingAll) ? (
+              <div className='space-y-3 mt-3'>
+                {[1, 2, 3, 4].map((mp, i) => {
+                  return (
+                    <div key={i} className='w-full h-16 bg-gray-400 animate-pulse rounded-lg'>
 
-                  </div>
-                )
-              })}
-            </div>
-          ) :
-            userLinks
-              .map((lnk, i) => (
-                <div key={i} className='flex justify-between ring-1 items-center  p-2 border rounded-md'>
-                  <div className=' flex items-center gap-3'>
-                  <p className='p-2 border border-gray-300 rounded-full text-teal-600'>
-                     <Link />
-                   </p>
-                   <p className='text-xs md:text-sm break-all mr-3'>{lnk.namelink}</p>
-                  </div>
-                  <div className=' flex space-x-3'>
-                   <button onClick={() =>{
-                    EditLink(lnk);window.scrollTo(0, 0);}} 
-                   className='text-blue-500 border p-1 rounded-full ring-1'>
-                     <Edit3 />
-                   </button>
-                   <button onClick={() =>{
-                       setDeleteId(lnk._id), 
-                       setConfirmOpen(true)
+                    </div>
+                  )
+                })}
+              </div>
+            ) :
+              userLinks
+                .map((lnk, i) => (
+                  <div key={i} className='flex justify-between ring-1 items-center  p-2 border rounded-md'>
+                    <div className=' flex items-center gap-3'>
+                      <p className='p-2 border border-gray-300 rounded-full text-teal-600'>
+                        <Link />
+                      </p>
+                      <p className='text-xs md:text-sm break-all mr-3'>{lnk.namelink}</p>
+                    </div>
+                    <div className=' flex space-x-3'>
+                      <button onClick={() => {
+                        EditLink(lnk); window.scrollTo(0, 0);
                       }}
-                   disabled={loadingAction !== null}
-                   className='text-red-500 border p-1 rounded-full ring-1'>
-                      {loadingAction === `delete-${lnk._id}` ? <div className='flex items-center justify-center'><Loader size={18} className="animate-spin"/></div> : <Trash2 />}
-                   </button>
-                   </div>
-                   </div>
-              ))
-          }
-        </div>
-      </section>
+                        className='text-blue-500 border p-1 rounded-full ring-1'>
+                        <Edit3 />
+                      </button>
+                      <button onClick={() => {
+                        setDeleteId(lnk._id),
+                          setConfirmOpen(true)
+                      }}
+                        disabled={loadingAction !== null}
+                        className='text-red-500 border p-1 rounded-full ring-1'>
+                        {loadingAction === `delete-${lnk._id}` ? <div className='flex items-center justify-center'><Loader size={18} className="animate-spin" /></div> : <Trash2 />}
+                      </button>
+                    </div>
+                  </div>
+                ))
+            }
+          </div>
+        </section>
       </div>
       <ConfirmModal
         isOpen={confirmOpen}
