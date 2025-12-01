@@ -26,6 +26,7 @@ export default function ThemeNine({ userDetails, userLinks, bgcolor }) {
     return (
         <div
             style={{ backgroundColor: "#1C120D" }}
+            dir={userDetails?.displayLanguage === 'ar' ? 'rtl' : 'ltr'}
             className="min-h-screen text-white overflow-hidden relative"
         >
             {/* Background Effects (Orange/Amber based) */}
@@ -366,7 +367,9 @@ export default function ThemeNine({ userDetails, userLinks, bgcolor }) {
                 </main>
 
                 {/* Footer */}
-                <footer className="border-t border-white/10 py-12">
+                <footer 
+                dir={userDetails?.displayLanguage === 'ar' ? 'rtl' : 'ltr'}
+                className="border-t border-white/10 py-12">
                     <div className="flex flex-col items-center gap-8">
                         <div className="flex flex-wrap justify-center gap-4">
                             {[

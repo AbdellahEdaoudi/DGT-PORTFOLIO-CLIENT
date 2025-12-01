@@ -26,6 +26,7 @@ export default function ThemeEight({ userDetails, userLinks, bgcolor }) {
     return (
         <div
             style={{ backgroundColor: "#14140B" }}
+            dir={userDetails?.displayLanguage === 'ar' ? 'rtl' : 'ltr'}
             className="min-h-screen text-white overflow-hidden relative"
         >
             {/* Background Effects (Yellow/Gold based) */}

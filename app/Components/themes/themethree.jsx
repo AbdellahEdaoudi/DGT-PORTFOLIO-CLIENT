@@ -27,7 +27,9 @@ export default function ThemeThree({ userDetails, userLinks }) {
   if (!userDetails || !userLinks) { return <MagicalLoader /> }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-indigo-950 via-purple-950 to-pink-950 text-white overflow-hidden relative">
+    <div 
+    dir={userDetails?.displayLanguage === 'ar' ? 'rtl' : 'ltr'}
+    className="min-h-screen bg-gradient-to-br from-indigo-950 via-purple-950 to-pink-950 text-white overflow-hidden relative">
       {/* Enhanced Floating orbs background */}
       <div className="fixed inset-0 -z-10 overflow-hidden pointer-events-none">
         <div className="absolute top-0 left-0 w-[500px] h-[500px] bg-pink-600/20 rounded-full mix-blend-screen filter blur-[100px] opacity-30 animate-blob"></div>

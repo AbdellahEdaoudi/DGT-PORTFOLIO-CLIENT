@@ -40,7 +40,9 @@ export default function ThemeEleven({ userDetails, userLinks }) {
     }, []);
 
     return (
-        <div className="min-h-screen bg-[#050510] text-cyan-50 font-mono overflow-x-hidden relative selection:bg-cyan-500 selection:text-black">
+        <div 
+        dir={userDetails?.displayLanguage === 'ar' ? 'rtl' : 'ltr'}
+        className="min-h-screen bg-[#050510] text-cyan-50 font-mono overflow-x-hidden relative selection:bg-cyan-500 selection:text-black">
 
             {/* Space Background */}
             <div className="fixed inset-0 z-0 pointer-events-none">

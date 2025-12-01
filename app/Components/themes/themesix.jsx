@@ -26,6 +26,7 @@ export default function ThemeSix({ userDetails, userLinks, bgcolor }) {
     return (
         <div
             style={{ backgroundColor: "#0D1C13" }}
+            dir={userDetails?.displayLanguage === 'ar' ? 'rtl' : 'ltr'}
             className="min-h-screen text-white overflow-hidden relative"
         >
             {/* Background Effects (Green/Emerald based) */}

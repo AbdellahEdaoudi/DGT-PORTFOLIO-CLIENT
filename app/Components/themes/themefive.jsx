@@ -35,7 +35,8 @@ export default function ThemeFive({ userDetails, userLinks }) {
       </div>
 
       {userDetails && (
-        <div className="relative z-10 md:px-20 px-4">
+        <div dir={userDetails?.displayLanguage === 'ar' ? 'rtl' : 'ltr'}
+        className="relative z-10 md:px-20 px-4">
           {/* Hero Section */}
           <section className="pt-8 pb-12">
             {/* Toolbar */}
@@ -345,7 +346,9 @@ export default function ThemeFive({ userDetails, userLinks }) {
       )}
       {/* Footer */}
       {userDetails.socials && Object.values(userDetails.socials).some(url => url) && (
-        <footer className="relative z-10 border-t border-zinc-800/50 bg-black/50 backdrop-blur-md py-12 px-6 mt-12">
+        <footer 
+        dir={userDetails?.displayLanguage === 'ar' ? 'rtl' : 'ltr'}
+        className="relative z-10 border-t border-zinc-800/50 bg-black/50 backdrop-blur-md py-12 px-6 mt-12">
           <div className="max-w-5xl mx-auto text-center">
             <div className="flex justify-center gap-6 mb-6 flex-wrap">
               {[

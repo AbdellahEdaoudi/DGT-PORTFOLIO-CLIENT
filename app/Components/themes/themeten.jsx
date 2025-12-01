@@ -24,7 +24,9 @@ export default function ThemeTen({ userDetails, userLinks }) {
     }
 
     return (
-        <div className="min-h-screen bg-[#020617] text-slate-200 overflow-hidden relative selection:bg-indigo-500 selection:text-white">
+        <div 
+        dir={userDetails?.displayLanguage === 'ar' ? 'rtl' : 'ltr'}
+        className="min-h-screen bg-[#020617] text-slate-200 overflow-hidden relative selection:bg-indigo-500 selection:text-white">
 
             {/* Background Effects (Dark/Indigo based) */}
             <div className="fixed inset-0 -z-10 overflow-hidden pointer-events-none">

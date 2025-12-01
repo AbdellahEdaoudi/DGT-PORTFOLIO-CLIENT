@@ -28,7 +28,7 @@ export default function ThemeFour({ userDetails, userLinks }) {
   return (
     <div>
       {userDetails && (
-        <div className="min-h-screen bg-slate-950 text-white overflow-hidden">
+        <div dir={userDetails?.displayLanguage === 'ar' ? 'rtl' : 'ltr'} className="min-h-screen bg-slate-950 text-white overflow-hidden">
           <div className="px-4 md:px-6">
             {/* Header */}
             <header className="pt-7 pb-12">
@@ -314,7 +314,9 @@ export default function ThemeFour({ userDetails, userLinks }) {
 
             {/* Social Media */}
             {userDetails.socials && Object.values(userDetails.socials).some(url => url) && (
-              <section className="py-8 border-t border-emerald-500/20">
+              <section 
+              dir={userDetails?.displayLanguage === 'ar' ? 'rtl' : 'ltr'}
+              className="py-8 border-t border-emerald-500/20">
                 <div className="max-w-5xl mx-auto">
                   <div className="flex items-center gap-3 mb-8">
                     <Share2 className="text-emerald-400" size={30} />

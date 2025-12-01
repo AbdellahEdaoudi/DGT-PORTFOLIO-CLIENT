@@ -26,6 +26,7 @@ export default function ThemeTwo({ userDetails, userLinks, bgcolor }) {
   return (
     <div
       style={{ backgroundColor: "#0D131C" }}
+      dir={userDetails?.displayLanguage === 'ar' ? 'rtl' : 'ltr'}
       className="min-h-screen text-white overflow-hidden relative"
     >
       {/* Background Effects (Blue/Cyan based) */}
@@ -398,7 +399,7 @@ export default function ThemeTwo({ userDetails, userLinks, bgcolor }) {
                   </a>
                 ))}
             </div>
-            <p className="text-gray-500 text-sm">
+            <p dir={userDetails?.displayLanguage === 'ar' ? 'rtl' : 'ltr'} className="text-gray-500 text-sm">
               © {new Date().getFullYear()} {userDetails.fullname}. {t('allRightsReserved')}.
             </p>
           </div>

@@ -26,6 +26,7 @@ export default function ThemeSeven({ userDetails, userLinks, bgcolor }) {
     return (
         <div
             style={{ backgroundColor: "#1C0D0D" }}
+            dir={userDetails?.displayLanguage === 'ar' ? 'rtl' : 'ltr'}
             className="min-h-screen text-white overflow-hidden relative"
         >
             {/* Background Effects (Red/Orange based) */}

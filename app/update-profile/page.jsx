@@ -25,18 +25,153 @@ export default function UpdateProfilePage() {
   }
 
   const tabs = [
-    { id: "about", label: "📝 About", component: About },
-    { id: "skills", label: "💡 Skills", component: Skills },
-    { id: "services", label: "💼 Services", component: Services },
-    { id: "education", label: "🎓 Education", component: Education },
-    { id: "experience", label: "⭐ Experience", component: Experience },
-    { id: "projects", label: "🚀 Projects", component: Projects },
-    { id: "languages", label: "🌐 Languages", component: Languages },
-    { id: "socials", label: "🔗 Socials", component: Socials },
-    { id: "bgcolor", label: "🎨 Bgcolor", component: Bgcolor },
-    { id: "theme", label: "🧩 theme", component: Theme },
-    { id: "displayLanguage", label: "🌍 Display Lang", component: DisplayLanguage },
-  ]
+    {
+      id: "about",
+      label: {
+        en: "📝 About",
+        fr: "📝 À propos",
+        ar: "📝 نبذة",
+        de: "📝 Über",
+        ru: "📝 Обо мне",
+        ja: "📝 について",
+        zh: "📝 关于",
+      },
+      component: About,
+    },
+    {
+      id: "skills",
+      label: {
+        en: "💡 Skills",
+        fr: "💡 Compétences",
+        ar: "💡 المهارات",
+        de: "💡 Fähigkeiten",
+        ru: "💡 Навыки",
+        ja: "💡 スキル",
+        zh: "💡 技能",
+      },
+      component: Skills,
+    },
+    {
+      id: "services",
+      label: {
+        en: "💼 Services",
+        fr: "💼 Services",
+        ar: "💼 الخدمات",
+        de: "💼 Dienstleistungen",
+        ru: "💼 Услуги",
+        ja: "💼 サービス",
+        zh: "💼 服务",
+      },
+      component: Services,
+    },
+    {
+      id: "education",
+      label: {
+        en: "🎓 Education",
+        fr: "🎓 Éducation",
+        ar: "🎓 التعليم",
+        de: "🎓 Bildung",
+        ru: "🎓 Образование",
+        ja: "🎓 学歴",
+        zh: "🎓 教育",
+      },
+      component: Education,
+    },
+    {
+      id: "experience",
+      label: {
+        en: "⭐ Experience",
+        fr: "⭐ Expérience",
+        ar: "⭐ الخبرة",
+        de: "⭐ Erfahrung",
+        ru: "⭐ Опыт",
+        ja: "⭐ 経験",
+        zh: "⭐ 经验",
+      },
+      component: Experience,
+    },
+    {
+      id: "projects",
+      label: {
+        en: "🚀 Projects",
+        fr: "🚀 Projets",
+        ar: "🚀 المشاريع",
+        de: "🚀 Projekte",
+        ru: "🚀 Проекты",
+        ja: "🚀 プロジェクト",
+        zh: "🚀 项目",
+      },
+      component: Projects,
+    },
+    {
+      id: "languages",
+      label: {
+        en: "🌐 Languages",
+        fr: "🌐 Langues",
+        ar: "🌐 اللغات",
+        de: "🌐 Sprachen",
+        ru: "🌐 Языки",
+        ja: "🌐 言語",
+        zh: "🌐 语言",
+      },
+      component: Languages,
+    },
+    {
+      id: "socials",
+      label: {
+        en: "🔗 Socials",
+        fr: "🔗 Réseaux sociaux",
+        ar: "🔗 الشبكات الاجتماعية",
+        de: "🔗 Soziale Medien",
+        ru: "🔗 Соцсети",
+        ja: "🔗 ソーシャル",
+        zh: "🔗 社交",
+      },
+      component: Socials,
+    },
+    {
+      id: "bgcolor",
+      label: {
+        en: "🎨 Bgcolor",
+        fr: "🎨 Couleur de fond",
+        ar: "🎨 لون الخلفية",
+        de: "🎨 Hintergrundfarbe",
+        ru: "🎨 Цвет фона",
+        ja: "🎨 背景色",
+        zh: "🎨 背景颜色",
+      },
+      component: Bgcolor,
+    },
+    {
+      id: "theme",
+      label: {
+        en: "🧩 Theme",
+        fr: "🧩 Thème",
+        ar: "🧩 السمة",
+        de: "🧩 Thema",
+        ru: "🧩 Тема",
+        ja: "🧩 テーマ",
+        zh: "🧩 主题",
+      },
+      component: Theme,
+    },
+    {
+      id: "displayLanguage",
+      label: {
+        en: "🌍 Display Lang",
+        fr: "🌍 Langue d'affichage",
+        ar: "🌍 لغة العرض",
+        de: "🌍 Anzeigesprache",
+        ru: "🌍 Язык отображения",
+        ja: "🌍 表示言語",
+        zh: "🌍 显示语言",
+      },
+      component: DisplayLanguage,
+    },
+  ].map((tab) => ({
+    ...tab,
+    label: tab.label[userDetails?.displayLanguage || "en"],
+  }))
 
   const currentTab = tabs.find((tab) => tab.id === activeTab)
   const CurrentComponent = currentTab?.component
@@ -46,6 +181,7 @@ export default function UpdateProfilePage() {
       <Header />
       <div
         style={{ backgroundColor: userDetails.bgcolorp }}
+        dir={userDetails?.displayLanguage === 'ar' ? 'rtl' : 'ltr'}
         className="flex items-center justify-center pt-4 pb-6 duration-300 min-h-screen"
       >
         <div className="w-full max-w-5xl">

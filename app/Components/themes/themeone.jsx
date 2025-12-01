@@ -33,6 +33,7 @@ export default function Themeone({ userDetails, userLinks, bgcolor }) {
     <div
       className="b min-h-screen relative overflow-hidden "
       style={{ backgroundColor: bgcolor || userDetails?.bgcolorp || "#OA3C4D" }}
+      dir={userDetails?.displayLanguage === 'ar' ? 'rtl' : 'ltr'}
     >
 
       <div className="">
