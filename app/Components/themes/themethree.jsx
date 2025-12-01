@@ -6,8 +6,10 @@ import UserLinks from "../../[username]/components/UserLinks"
 import MagicalLoader from "../MagicalLoader"
 import Image from "next/image"
 import Link from "next/link"
+import { useTranslation } from "../../lib/translations"
 
 export default function ThemeThree({ userDetails, userLinks }) {
+  const { t } = useTranslation(userDetails?.displayLanguage || 'en')
   const [activeTab, setActiveTab] = useState("about")
   const [copied, setCopied] = useState(false);
   const [showQR, setShowQR] = useState(false);
@@ -44,32 +46,32 @@ export default function ThemeThree({ userDetails, userLinks }) {
         {/* Header */}
         <header className="pt-8 pb-10">
           {/* Toolbar */}
-                <div className="flex justify-between items-center mb-8">
-                  <h1 className="text-white text-2xl font-bold cursor-pointer hover:text-pink-400 transition-colors">
-                    <Link href={"https://dgtportfolio.com"}>Portfolio</Link>
-                  </h1>
-                  <div className="flex gap-3">
-                    {/* Copy Link */}
-                    <button
-                      title="Copy Link Profile"
-                      onClick={copyProfileLink}
-                      className="flex items-center gap-2 px-4 py-2 bg-white/10 hover:bg-pink-500/20 rounded-lg text-white transition-all duration-300 backdrop-blur-md border border-white/10 hover:border-pink-500/50"
-                    >
-                      {copied ? <CheckCircle2 className="text-pink-400" /> : <Copy />}
-                    </button>
-                    {/* QR Code */}
-                    <div
-                      onClick={() => setShowQR(!showQR)}
-                      className="flex items-center gap-2 px-2 bg-white/10 hover:bg-pink-500/20 rounded-lg text-white transition-all duration-300 backdrop-blur-md border border-white/10 hover:border-pink-500/50 cursor-pointer"
-                    >
-                      <QrcodeProfile path={`/${userDetails?.username}`} userDetails={userDetails} />
-                    </div>
-                    {/* User Links */}
-                    <div className="flex items-center gap-2 px-2 bg-white/10 hover:bg-pink-500/20 rounded-lg text-white transition-all duration-300 backdrop-blur-md border border-white/10 hover:border-pink-500/50">
-                      <UserLinks userLinks={userLinks} />
-                    </div>
-                  </div>
-                </div>
+          <div className="flex justify-between items-center mb-8">
+            <h1 className="text-white text-2xl font-bold cursor-pointer hover:text-pink-400 transition-colors">
+              <Link href={"https://dgtportfolio.com"}>{t('portfolio')}</Link>
+            </h1>
+            <div className="flex gap-3">
+              {/* Copy Link */}
+              <button
+                title={t('copyLink')}
+                onClick={copyProfileLink}
+                className="flex items-center gap-2 px-4 py-2 bg-white/10 hover:bg-pink-500/20 rounded-lg text-white transition-all duration-300 backdrop-blur-md border border-white/10 hover:border-pink-500/50"
+              >
+                {copied ? <CheckCircle2 className="text-pink-400" /> : <Copy />}
+              </button>
+              {/* QR Code */}
+              <div
+                onClick={() => setShowQR(!showQR)}
+                className="flex items-center gap-2 px-2 bg-white/10 hover:bg-pink-500/20 rounded-lg text-white transition-all duration-300 backdrop-blur-md border border-white/10 hover:border-pink-500/50 cursor-pointer"
+              >
+                <QrcodeProfile path={`/${userDetails?.username}`} userDetails={userDetails} />
+              </div>
+              {/* User Links */}
+              <div className="flex items-center gap-2 px-2 bg-white/10 hover:bg-pink-500/20 rounded-lg text-white transition-all duration-300 backdrop-blur-md border border-white/10 hover:border-pink-500/50">
+                <UserLinks userLinks={userLinks} />
+              </div>
+            </div>
+          </div>
 
           {/* Hero Section */}
           <div className="flex flex-col-reverse md:flex-row gap-10 items-center justify-between mb-8">
@@ -105,12 +107,12 @@ export default function ThemeThree({ userDetails, userLinks }) {
           <div className="flex justify-center md:justify-start pb-2">
             <div className="flex flex-wrap justify-center md:justify-start gap-2 p-1 bg-white/5 backdrop-blur-xl rounded-2xl border border-white/10 w-full md:w-auto">
               {[
-                { key: "about", label: "About", icon: User },
-                { key: "services", label: "Services", icon: Layers, condition: userDetails?.services?.length > 0 },
-                { key: "experience", label: "Experience", icon: Briefcase, condition: userDetails?.experience?.length > 0 },
-                { key: "projects", label: "Projects", icon: Code2, condition: userDetails?.projects?.length > 0 },
-                { key: "skills", label: "Skills", icon: Zap, condition: userDetails?.skills?.length > 0 },
-                { key: "education", label: "Education", icon: GraduationCap, condition: userDetails?.education?.length > 0 },
+                { key: "about", label: t('about'), icon: User },
+                { key: "services", label: t('services'), icon: Layers, condition: userDetails?.services?.length > 0 },
+                { key: "experience", label: t('experience'), icon: Briefcase, condition: userDetails?.experience?.length > 0 },
+                { key: "projects", label: t('projects'), icon: Code2, condition: userDetails?.projects?.length > 0 },
+                { key: "skills", label: t('skills'), icon: Zap, condition: userDetails?.skills?.length > 0 },
+                { key: "education", label: t('education'), icon: GraduationCap, condition: userDetails?.education?.length > 0 },
               ]
                 .filter((tab) => tab.condition !== false)
                 .map((tab) => {
@@ -142,7 +144,7 @@ export default function ThemeThree({ userDetails, userLinks }) {
                 <div className="grid md:grid-cols-2 gap-4 md:gap-8">
                   <div className="bg-white/5 backdrop-blur-md rounded-3xl p-5 md:p-8 border border-white/10 hover:border-pink-500/30 transition-all duration-300">
                     <h3 className="text-2xl mb-6 flex items-center gap-2 text-white">
-                      <User className="text-pink-400" /> Personal Info
+                      <User className="text-pink-400" /> {t('aboutMe')}
                     </h3>
                     <div className="space-y-4 md:space-y-6">
                       {userDetails.email && (
@@ -164,7 +166,7 @@ export default function ThemeThree({ userDetails, userLinks }) {
                             <Globe size={20} />
                           </div>
                           <div>
-                            <p className="text-sm text-gray-400">Location</p>
+                            <p className="text-sm text-gray-400">{t('country')}</p>
                             <p className="text-white">{userDetails.country}</p>
                           </div>
                         </div>
@@ -175,7 +177,7 @@ export default function ThemeThree({ userDetails, userLinks }) {
                             <Briefcase size={20} />
                           </div>
                           <div>
-                            <p className="text-sm text-gray-400">Phone</p>
+                            <p className="text-sm text-gray-400">{t('phone')}</p>
                             <p className="text-white">{userDetails.phoneNumber}</p>
                           </div>
                         </div>
@@ -186,7 +188,7 @@ export default function ThemeThree({ userDetails, userLinks }) {
                   {userDetails?.languages?.length > 0 && (
                     <div className="bg-white/5 backdrop-blur-md rounded-3xl p-8 border border-white/10 hover:border-pink-500/30 transition-all duration-300">
                       <h3 className="text-2xl mb-6 flex items-center gap-2 text-white">
-                        <Globe className="text-purple-400" /> Languages
+                        <Globe className="text-purple-400" /> {t('languages')}
                       </h3>
                       <div className="grid gap-3">
                         {userDetails.languages?.map((lang, i) => (
@@ -343,10 +345,10 @@ export default function ThemeThree({ userDetails, userLinks }) {
                       </div>
                       <div className="relative z-10">
                         <div className="flex items-center justify-between">
-                        <h3 className="text-xl text-white mb-2">{edu.degree || "Degree"}</h3>
+                          <h3 className="text-xl text-white mb-2">{edu.degree || "Degree"}</h3>
                           <span className="inline-block px-3 py-1 mb-4 text-xs text-pink-300 bg-pink-500/10 rounded-full border border-pink-500/20">
-                          {edu.startYear} - {edu.endYear || "Present"}
-                        </span>
+                            {edu.startYear} - {edu.endYear || "Present"}
+                          </span>
                         </div>
                         <p className="text-lg text-purple-300 mb-4">{edu.school}</p>
                         {edu.field && (
@@ -397,7 +399,7 @@ export default function ThemeThree({ userDetails, userLinks }) {
                 ))}
             </div>
             <p className="text-gray-500 text-sm">
-              © {new Date().getFullYear()} {userDetails.fullname}. All Rights Reserved.
+              © {new Date().getFullYear()} {userDetails.fullname}. {t('allRightsReserved')}.
             </p>
           </div>
         </footer>

@@ -6,8 +6,10 @@ import UserLinks from "../../[username]/components/UserLinks";
 import MagicalLoader from "../MagicalLoader";
 import Image from "next/image";
 import Link from "next/link";
+import { useTranslation } from "../../lib/translations";
 
 export default function ThemeFour({ userDetails, userLinks }) {
+  const { t } = useTranslation(userDetails?.displayLanguage || 'en')
   const [copied, setCopied] = useState(false);
   const [expanded, setExpanded] = useState(false);
   const [showQR, setShowQR] = useState(false);
@@ -34,12 +36,12 @@ export default function ThemeFour({ userDetails, userLinks }) {
                 {/* Toolbar */}
                 <div className="relative z-50 flex justify-between  items-center mb-12">
                   <h1 className="text-white text-2xl font-bold cursor-pointer hover:text-emerald-400 transition-colors">
-                    <Link href={"https://dgtportfolio.com"}>Portfolio</Link>
+                    <Link href={"https://dgtportfolio.com"}>{t('portfolio')}</Link>
                   </h1>
                   <div className="flex gap-3">
                     {/* Copy Link */}
                     <button
-                      title="Copy Link Profile"
+                      title={t('copyLink')}
                       onClick={copyProfileLink}
                       className="flex items-center gap-2 px-4 py-2 bg-white/10 hover:bg-emerald-500/20 rounded-lg text-white transition-all duration-300 backdrop-blur-md border border-white/10 hover:border-emerald-500/50"
                     >
@@ -79,13 +81,13 @@ export default function ThemeFour({ userDetails, userLinks }) {
                         )}
                         {userDetails.country && (
                           <div className="flex gap-2 items-start">
-                            <span className="font-bold text-emerald-400 whitespace-nowrap">Location:</span>
+                            <span className="font-bold text-emerald-400 whitespace-nowrap">{t('country')}:</span>
                             <span className="text-gray-300">{userDetails.country}</span>
                           </div>
                         )}
                         {userDetails.phoneNumber && (
                           <div className="flex gap-2 items-start">
-                            <span className="font-bold text-emerald-400 whitespace-nowrap">Phone:</span>
+                            <span className="font-bold text-emerald-400 whitespace-nowrap">{t('phone')}:</span>
                             <span className="text-gray-300">{userDetails.phoneNumber}</span>
                           </div>
                         )}
@@ -112,7 +114,7 @@ export default function ThemeFour({ userDetails, userLinks }) {
                 <div className="max-w-5xl mx-auto">
                   <div className="flex items-center gap-3 mb-8">
                     <Briefcase className="text-emerald-400" size={32} />
-                    <h2 className="text-4xl font-black">Services</h2>
+                    <h2 className="text-4xl font-black">{t('services')}</h2>
                   </div>
                   <div className="grid md:grid-cols-2 gap-6">
                     {userDetails.services.map((service, i) => (
@@ -132,7 +134,7 @@ export default function ThemeFour({ userDetails, userLinks }) {
                 <div className="max-w-5xl mx-auto">
                   <div className="flex items-center gap-3 mb-8">
                     <Briefcase className="text-emerald-400" size={32} />
-                    <h2 className="text-4xl font-black">Experience</h2>
+                    <h2 className="text-4xl font-black">{t('experience')}</h2>
                   </div>
                   <div className="space-y-6">
                     {userDetails.experience.map((exp, i) => (
@@ -147,7 +149,7 @@ export default function ThemeFour({ userDetails, userLinks }) {
                           </div>
                           <p className="text-emerald-400 font-semibold mb-3 text-lg">{exp.company}</p>
                           <div className="mt-3 p-4 bg-slate-900/50 rounded-lg border-l-4 border-emerald-500/50">
-                            <p className="text-xs text-gray-500 uppercase tracking-wider mb-2">Description</p>
+                            <p className="text-xs text-gray-500 uppercase tracking-wider mb-2">{t('description')}</p>
                             <p className={` text-gray-300 text-sm whitespace-pre-wrap leading-relaxed`}>
                               {exp.description}
                             </p>
@@ -165,7 +167,7 @@ export default function ThemeFour({ userDetails, userLinks }) {
                 <div className="max-w-5xl mx-auto">
                   <div className="flex items-center gap-3 mb-8">
                     <Code className="text-emerald-400" size={32} />
-                    <h2 className="text-4xl font-black">Skills</h2>
+                    <h2 className="text-4xl font-black">{t('skills')}</h2>
                   </div>
                   <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4">
                     {userDetails.skills.map((skill, i) => (
@@ -183,7 +185,7 @@ export default function ThemeFour({ userDetails, userLinks }) {
             {userDetails.projects && userDetails.projects.length > 0 && (
               <section className="py-8 border-t border-emerald-500/20">
                 <div className="max-w-5xl mx-auto">
-                  <h2 className="text-4xl font-black mb-8 text-center">Featured Projects</h2>
+                  <h2 className="text-4xl font-black mb-8 text-center">{t('projects')}</h2>
                   <div className="space-y-6">
                     {userDetails.projects.map((project, idx) => (
                       <div
@@ -228,7 +230,7 @@ export default function ThemeFour({ userDetails, userLinks }) {
                                 className="inline-flex items-center gap-2 px-6 py-2 bg-emerald-600/20 hover:bg-emerald-600/40 border border-emerald-500/50 rounded-lg text-emerald-300 transition-all duration-300 font-medium"
                               >
                                 <Globe size={18} />
-                                View Project
+                                {t('viewProject')}
                               </a>
                             )}
                           </div>
@@ -247,7 +249,7 @@ export default function ThemeFour({ userDetails, userLinks }) {
                   <div className="max-w-5xl mx-auto">
                     <div className="flex items-center gap-3 mb-8">
                       <GraduationCap className="text-emerald-400" size={32} />
-                      <h2 className="text-4xl font-black">Education</h2>
+                      <h2 className="text-4xl font-black">{t('education')}</h2>
                     </div>
                     <div className="space-y-6">
                       {userDetails.education.map((edu, i) => (
@@ -270,7 +272,7 @@ export default function ThemeFour({ userDetails, userLinks }) {
 
                             {edu.field && (
                               <div className="p-4 bg-slate-900/50 rounded-lg border-l-4 border-emerald-500/50">
-                                <p className="text-xs text-gray-500 uppercase tracking-wider mb-2">Field of Study</p>
+                                <p className="text-xs text-gray-500 uppercase tracking-wider mb-2">{t('field')}</p>
                                 <p className="text-sm md:text-base text-gray-300 leading-relaxed">
                                   {edu.field}
                                 </p>
@@ -292,7 +294,7 @@ export default function ThemeFour({ userDetails, userLinks }) {
                   <div className="max-w-5xl mx-auto">
                     <div className="flex items-center gap-3 mb-8">
                       <Globe className="text-emerald-400" size={32} />
-                      <h2 className="text-4xl font-black">Languages</h2>
+                      <h2 className="text-4xl font-black">{t('languages')}</h2>
                     </div>
                     <div className="flex flex-wrap gap-4">
                       {userDetails.languages.map((lang, i) => (
@@ -316,7 +318,7 @@ export default function ThemeFour({ userDetails, userLinks }) {
                 <div className="max-w-5xl mx-auto">
                   <div className="flex items-center gap-3 mb-8">
                     <Share2 className="text-emerald-400" size={30} />
-                    <h2 className="text-3xl font-black">Follow Me</h2>
+                    <h2 className="text-3xl font-black">{t('followMe')}</h2>
                   </div>
                   <div className="flex gap-4 flex-wrap">
                     {[
@@ -357,7 +359,7 @@ export default function ThemeFour({ userDetails, userLinks }) {
             <footer className="border-t border-emerald-500/20 bg-slate-950/50 backdrop-blur-md mt-12">
               <div className="max-w-5xl mx-auto px-4 py-8 text-center">
                 <p className="text-gray-400">
-                  © {new Date().getFullYear()} {userDetails?.fullname}. All rights reserved.
+                  © {new Date().getFullYear()} {userDetails?.fullname}. {t('allRightsReserved')}.
                 </p>
               </div>
             </footer>

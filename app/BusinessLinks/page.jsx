@@ -10,9 +10,11 @@ import WarningModal from "./Pages/WarningModal"
 import ConfirmModal from "./Pages/ConfirmModal"
 import MagicalLoader from '../Components/MagicalLoader';
 import Header from '../Components/header';
+import { useTranslation } from '../lib/translations';
 
 function EditUserLinks() {
-  const { EmailUser, userLinks, setUserLinks, loadingAll } = useContext(MyContext);
+  const { EmailUser, userLinks, setUserLinks, loadingAll, userDetails } = useContext(MyContext);
+  const { t } = useTranslation(userDetails?.displayLanguage || 'en');
   const [loadingAction, setLoadingAction] = useState(null);
   const [confirmOpen, setConfirmOpen] = useState(false);
   const [deleteId, setDeleteId] = useState(null);
@@ -39,12 +41,12 @@ function EditUserLinks() {
         link: sanitizedLink
       });
       setUserLinks(prevLinks => [response.data.data, ...prevLinks]);
-      toast(" added successfully!");
+      toast(t('linkAddedSuccessfully'));
       setLink('');
       setNamelink('');
     } catch (error) {
       console.error('There was an error adding the link!', error);
-      toast.error('Failed to add link.');
+      toast.error(t('failedToAddLink'));
     } finally {
       setLoadingAction(null);
     }
@@ -79,7 +81,7 @@ function EditUserLinks() {
       );
       toast(
         <p className="flex gap-3 items-center">
-          <CheckCircle /> Updated Successfully
+          <CheckCircle /> {t('linkUpdatedSuccessfully')}
         </p>,
         { autoClose: 3000 }
       );
@@ -88,7 +90,7 @@ function EditUserLinks() {
       setNamelink('');
     } catch (error) {
       console.error('There was an error updating the link!', error);
-      toast.error('Failed to update link.');
+      toast.error(t('failedToUpdateLink'));
     } finally {
       setLoadingAction(null);
     }
@@ -104,10 +106,10 @@ function EditUserLinks() {
       setEditLinkId(null);
       setNamelink('');
       setLink('');
-      toast("Link deleted successfully!");
+      toast(t('linkDeletedSuccessfully'));
     } catch (error) {
       console.error('There was an error deleting the link!', error);
-      toast.error('Failed to delete the link.');
+      toast.error(t('failedToDeleteLink'));
     } finally {
       setLoadingAction(null);
       setDeleteId(null);
@@ -130,7 +132,7 @@ function EditUserLinks() {
       <div className="flex items-center justify-center">
         <section className='mt-4 p-4 rounded-lg bg-gray-100 w-[110vh] md:mx-0 mx-2 text-gray-800 '>
           <div className='flex items-center justify-around mb-4'>
-            <p className='text-3xl font-semibold text-gray-900'>Business Links</p>
+            <p className='text-3xl font-semibold text-gray-900'>{t('businessLinks')}</p>
             <p onClick={() => {
               setEditLinkId(editLinkId ? null : editLinkId)
               setNamelink("")
@@ -148,7 +150,7 @@ function EditUserLinks() {
                   value={namelink}
                   onChange={(e) => setNamelink(e.target.value)}
                   required
-                  placeholder="e.g., My Website"
+                  placeholder={t('exampleWebsite')}
                   maxLength={100}
                   className="mt-1 w-full px-3 py-2 border border-gray-300 bg-gray-50 rounded-md shadow-sm focus:ring-teal-500 focus:border-teal-500 sm:text-sm"
                 />
@@ -157,7 +159,7 @@ function EditUserLinks() {
                 <input
                   type="url"
                   value={link}
-                  placeholder="https://example.com"
+                  placeholder={t('exampleUrl')}
                   maxLength={100}
                   onChange={(e) => setLink(e.target.value)}
                   required
@@ -171,7 +173,7 @@ function EditUserLinks() {
               >
                 {loadingAction === 'add' || loadingAction === 'update' ? (
                   <div className='flex items-center justify-center'><Loader size={24} className="animate-spin" /></div>
-                ) : editLinkId ? "Update" : "Add Link"}
+                ) : editLinkId ? t('updateLink') : t('addLink')}
               </button>
             </form>
             <WarningModal />
@@ -224,7 +226,7 @@ function EditUserLinks() {
         isOpen={confirmOpen}
         onConfirm={handleConfirmDelete}
         onCancel={handleCancelDelete}
-        message="Are you sure you want to delete this link?"
+        message={t('deleteLinkConfirm')}
       />
     </div>
   );

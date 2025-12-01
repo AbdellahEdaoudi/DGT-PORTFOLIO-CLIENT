@@ -14,12 +14,13 @@ import Projects from "./components/Projects"
 import Bgcolor from "./components/Bgcolor"
 import Socials from "./components/Socials"
 import Theme from "./components/Theme"
+import DisplayLanguage from "./components/DisplayLanguage"
 
 export default function UpdateProfilePage() {
-  const { EmailUser,userLinks,userDetails,setUserDetails,loadingAll} = useContext(MyContext)
+  const { EmailUser, userLinks, userDetails, setUserDetails, loadingAll } = useContext(MyContext)
   const [activeTab, setActiveTab] = useState("about")
 
-   if (loadingAll || !EmailUser || !userDetails ) {
+  if (loadingAll || !EmailUser || !userDetails) {
     return <MagicalLoader />
   }
 
@@ -34,6 +35,7 @@ export default function UpdateProfilePage() {
     { id: "socials", label: "🔗 Socials", component: Socials },
     { id: "bgcolor", label: "🎨 Bgcolor", component: Bgcolor },
     { id: "theme", label: "🧩 theme", component: Theme },
+    { id: "displayLanguage", label: "🌍 Display Lang", component: DisplayLanguage },
   ]
 
   const currentTab = tabs.find((tab) => tab.id === activeTab)
@@ -54,19 +56,18 @@ export default function UpdateProfilePage() {
                 <button
                   key={tab.id}
                   onClick={() => setActiveTab(tab.id)}
-                  className={`md:px-4 py-2 rounded-lg font-semibold transition-all text-sm md:text-base ${
-                    activeTab === tab.id
-                      ? "bg-teal-600 text-white"
-                      : "bg-gray-200 text-gray-700 hover:bg-gray-300"
-                  } ${userDetails.theme !== 1 && tab.id === "bgcolor" ? "hidden" : ""}`}
+                  className={`md:px-4 py-2 rounded-lg font-semibold transition-all text-sm md:text-base ${activeTab === tab.id
+                    ? "bg-teal-600 text-white"
+                    : "bg-gray-200 text-gray-700 hover:bg-gray-300"
+                    } ${userDetails.theme !== 1 && tab.id === "bgcolor" ? "hidden" : ""}`}
                 >
                   {tab.label}
                 </button>
               ))}
             </div>
-              <div className="text-xs md:text-base">
-                {userDetails && CurrentComponent && <CurrentComponent setUserDetails={setUserDetails} userData={userDetails} userLinks={userLinks} />}
-              </div>
+            <div className="text-xs md:text-base">
+              {userDetails && CurrentComponent && <CurrentComponent setUserDetails={setUserDetails} userData={userDetails} userLinks={userLinks} />}
+            </div>
           </div>
         </div>
       </div>

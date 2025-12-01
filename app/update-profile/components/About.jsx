@@ -4,8 +4,10 @@ import { CheckCheck, Loader } from 'lucide-react'
 import React from 'react'
 import { useState } from 'react'
 import { toast } from 'react-toastify'
+import { useTranslation } from '../../lib/translations'
 
 export default function About({ userData }) {
+  const { t } = useTranslation(userData?.displayLanguage || 'en')
   const [about, setabout] = useState(userData?.about || "")
   const [loading, setLoading] = useState(false)
 
@@ -18,7 +20,7 @@ export default function About({ userData }) {
         about,
       })
       toast(<p className='flex gap-3 items-center'><CheckCheck className="text-teal-500" />
-        Saved successfully!</p>, {
+        {t('savedSuccessfully')}</p>, {
         autoClose: 2000,
       })
     } catch (error) {
@@ -31,12 +33,12 @@ export default function About({ userData }) {
     <div>
       {/* Summary */}
       <div>
-        <label className="block text-lg font-bold text-gray-800 mb-3">📝 Summary</label>
+        <label className="block text-lg font-bold text-gray-800 mb-3">📝 {t('summary')}</label>
         <textarea
           value={about}
           maxLength={500}
           onChange={(e) => setabout(e.target.value)}
-          placeholder="Tell us about yourself..."
+          placeholder={t('tellUsAboutYourself')}
           className="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 h-56 transition bg-white"
         />
       </div>
@@ -49,10 +51,10 @@ export default function About({ userData }) {
         >
           {loading ? (
             <>
-              <Loader size={20} className="animate-spin" /> Saving...
+              <Loader size={20} className="animate-spin" /> {t('saving')}
             </>
           ) : (
-            "💾 Save"
+            `💾 ${t('save')}`
           )}
         </button>
       </div>

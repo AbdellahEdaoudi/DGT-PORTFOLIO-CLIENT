@@ -4,7 +4,10 @@ import React, { useState } from "react";
 import { toast } from "react-toastify";
 import { CheckCheck, Loader, Plus, Trash2 } from "lucide-react";
 
+import { useTranslation } from "../../lib/translations";
+
 export default function Projects({ userData }) {
+  const { t } = useTranslation(userData?.displayLanguage || 'en');
   const [projects, setProjects] = useState(userData.projects || []);
   const [loading, setLoading] = useState(false);
 
@@ -23,13 +26,13 @@ export default function Projects({ userData }) {
       await axios.put(`/api/proxy/users/update/projects`, { projects });
       toast(
         <p className="flex gap-3 items-center">
-          <CheckCheck className="text-green-500" /> Saved successfully!
+          <CheckCheck className="text-green-500" /> {t('savedSuccessfully')}
         </p>,
         { autoClose: 2000 }
       );
     } catch (error) {
       console.error("Error updating projects:", error);
-      toast.error("Failed to update projects!");
+      toast.error(t('errorMessage'));
     } finally {
       setLoading(false);
     }
@@ -37,7 +40,7 @@ export default function Projects({ userData }) {
 
   return (
     <div className="space-y-4">
-      <h3 className="text-lg font-bold text-gray-800">🚀 Projects</h3>
+      <h3 className="text-lg font-bold text-gray-800">🚀 {t('projects')}</h3>
 
       <div className="bg-gradient-to-br from-green-50 to-emerald-50 p-2 md:p-4 rounded-xl border border-green-200 space-y-3">
         <div className="space-y-2">
@@ -48,7 +51,7 @@ export default function Projects({ userData }) {
             >
               <input
                 type="text"
-                placeholder="Project Title"
+                placeholder={t('projectTitle')}
                 value={proj.title}
                 maxLength={100}
                 onChange={(e) =>
@@ -58,7 +61,7 @@ export default function Projects({ userData }) {
               />
 
               <textarea
-                placeholder="Project Description"
+                placeholder={t('projectDescription')}
                 value={proj.description || ""}
                 maxLength={2000}
                 onChange={(e) =>
@@ -70,7 +73,7 @@ export default function Projects({ userData }) {
               <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
                 <input
                   type="url"
-                  placeholder="Project Link"
+                  placeholder={t('projectLink')}
                   value={proj.link || ""}
                   maxLength={1000}
                   onChange={(e) =>
@@ -80,7 +83,7 @@ export default function Projects({ userData }) {
                 />
                 <input
                   type="url"
-                  placeholder="Image URL"
+                  placeholder={t('projectImage')}
                   value={proj.image || ""}
                   maxLength={1000}
                   onChange={(e) =>
@@ -92,7 +95,7 @@ export default function Projects({ userData }) {
 
               <input
                 type="text"
-                placeholder="Technologies (comma separated) t1,t2,t3"
+                placeholder={t('technologies')}
                 value={(proj.technologies || []).join(", ")}
                 onChange={(e) =>
                   updateObjectInArray(
@@ -122,7 +125,7 @@ export default function Projects({ userData }) {
               <div className="grid grid-cols-2 gap-2">
                 <input
                   type="text"
-                  placeholder="Start Date"
+                  placeholder={t('startDate')}
                   value={proj.startDate || ""}
                   maxLength={20}
                   onChange={(e) =>
@@ -132,7 +135,7 @@ export default function Projects({ userData }) {
                 />
                 <input
                   type="text"
-                  placeholder="End Date"
+                  placeholder={t('endDate')}
                   value={proj.endDate || ""}
                   maxLength={20}
                   onChange={(e) =>
@@ -147,7 +150,7 @@ export default function Projects({ userData }) {
                 onClick={() => removeArrayItem(projects, setProjects, index)}
                 className="w-full hover:bg-red-100 rounded-lg p-1 transition-colors flex items-center justify-center gap-2"
               >
-                <Trash2 size={18} className="text-red-500" /> Delete
+                <Trash2 size={18} className="text-red-500" /> {t('delete')}
               </button>
             </div>
           ))}
@@ -168,7 +171,7 @@ export default function Projects({ userData }) {
           }
           className="w-full bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-600 hover:to-emerald-700 text-white py-2 rounded-lg flex items-center justify-center gap-2 transition-all duration-300"
         >
-          <Plus size={18} /> Add Project
+          <Plus size={18} /> {t('addProject')}
         </button>
       </div>
 
@@ -180,10 +183,10 @@ export default function Projects({ userData }) {
         >
           {loading ? (
             <>
-              <Loader size={20} className="animate-spin" /> Saving...
+              <Loader size={20} className="animate-spin" /> {t('saving')}
             </>
           ) : (
-            "💾 Save"
+            `💾 ${t('save')}`
           )}
         </button>
       </div>

@@ -4,7 +4,10 @@ import React, { useState } from "react"
 import { toast } from "react-toastify"
 import { CheckCheck, Loader, Plus, Trash2 } from "lucide-react"
 
+import { useTranslation } from "../../lib/translations"
+
 export default function Skills({ userData }) {
+  const { t } = useTranslation(userData?.displayLanguage || 'en')
   const [skills, setSkills] = useState(userData.skills || [])
   const [loading, setLoading] = useState(false)
 
@@ -28,13 +31,13 @@ export default function Skills({ userData }) {
       await axios.put(`/api/proxy/users/update/skills`, { skills })
       toast(
         <p className="flex gap-3 items-center">
-          <CheckCheck className="text-purple-500" /> Saved successfully!
+          <CheckCheck className="text-purple-500" /> {t('savedSuccessfully')}
         </p>,
         { autoClose: 2000 }
       )
     } catch (error) {
       console.error("Error updating skills:", error)
-      toast.error("Failed to update skills!")
+      toast.error(t('errorMessage'))
     } finally {
       setLoading(false)
     }
@@ -42,7 +45,7 @@ export default function Skills({ userData }) {
 
   return (
     <div className="space-y-4">
-      <h3 className="text-lg font-bold text-gray-800">💡 Skills</h3>
+      <h3 className="text-lg font-bold text-gray-800">💡 {t('skills')}</h3>
       <div className="bg-gradient-to-br from-purple-50 to-pink-50 p-2 md:p-4 rounded-xl border border-purple-200 space-y-3">
         <div className="space-y-2">
           {skills.map((skill, index) => (
@@ -52,7 +55,7 @@ export default function Skills({ userData }) {
                 value={skill}
                 maxLength={130}
                 onChange={(e) => updateArrayItem(skills, setSkills, index, e.target.value)}
-                placeholder="Enter a skill"
+                placeholder={t('skillName')}
                 className="flex-1 px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 bg-white transition"
               />
               <button
@@ -70,7 +73,7 @@ export default function Skills({ userData }) {
           onClick={() => addArrayItem(skills, setSkills, "")}
           className="w-full bg-gradient-to-r from-purple-500 to-pink-600 hover:from-purple-600 hover:to-pink-700 text-white py-2 rounded-lg flex items-center justify-center gap-2 transition-all duration-300"
         >
-          <Plus size={18} /> Add Skill
+          <Plus size={18} /> {t('addSkill')}
         </button>
       </div>
       <div className="flex justify-end py-4 border-b-2 border-gray-200">
@@ -81,10 +84,10 @@ export default function Skills({ userData }) {
         >
           {loading ? (
             <>
-              <Loader size={20} className="animate-spin" /> Saving...
+              <Loader size={20} className="animate-spin" /> {t('saving')}
             </>
           ) : (
-            "💾 Save"
+            `💾 ${t('save')}`
           )}
         </button>
       </div>

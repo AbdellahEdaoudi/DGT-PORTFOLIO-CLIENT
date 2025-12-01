@@ -9,8 +9,10 @@ import QrcodeProfile from "../../[username]/components/QrcodeProfile"
 import UserLinks from "../../[username]/components/UserLinks"
 import Image from "next/image"
 import Link from "next/link"
+import { useTranslation } from "../../lib/translations"
 
 export default function ThemeEleven({ userDetails, userLinks }) {
+    const { t } = useTranslation(userDetails?.displayLanguage || 'en')
     const [copied, setCopied] = useState(false);
     const [showQR, setShowQR] = useState(false);
     const PORTFOLIO = `https://${userDetails?.username}.dgtportfolio.com`
@@ -69,7 +71,7 @@ export default function ThemeEleven({ userDetails, userLinks }) {
                     <div className="flex items-center gap-2">
                         <Rocket className="text-cyan-400" />
                         <Link href="https://dgtportfolio.com" className="text-lg md:text-xl font-bold tracking-widest uppercase text-cyan-400 hover:text-cyan-300 shadow-cyan-500/50 drop-shadow-[0_0_5px_rgba(34,211,238,0.8)]">
-                            <span className="text-white">PORTFOLIO</span>
+                            <span className="text-white">{t('portfolio')}</span>
                         </Link>
                     </div>
 
@@ -83,7 +85,7 @@ export default function ThemeEleven({ userDetails, userLinks }) {
                         <div onClick={() => setShowQR(!showQR)} className="cursor-pointer px-2 py-2 border border-cyan-500/30 bg-cyan-950/30 rounded hover:bg-cyan-500/20 transition-all text-cyan-400 font-bold text-xs flex items-center">
                             <UserLinks userLinks={userLinks} />
                         </div>
-                        
+
                     </div>
                 </header>
 

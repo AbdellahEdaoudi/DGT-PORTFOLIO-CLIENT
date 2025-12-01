@@ -6,7 +6,9 @@ import { useRouter } from 'next/navigation'
 import React, { useContext } from 'react'
 import { useState } from 'react'
 import { toast } from 'react-toastify'
+import { useTranslation } from '../../lib/translations'
 function Userinfo({ userData, setUserDetails }) {
+  const { t } = useTranslation(userData?.displayLanguage || 'en')
   const user = userData || {}
   const [imagePreview, setImagePreview] = useState(user.urlimage || "")
   const [imageFile, setImageFile] = useState(null)
@@ -90,7 +92,7 @@ function Userinfo({ userData, setUserDetails }) {
   // Submit form
   const UpUserInfo = async (e) => {
     if (!username) {
-      return setErrormsg("Username already exists")
+      return setErrormsg(t('usernameExists'))
     }
     e.preventDefault();
     setLoading(true);
@@ -108,7 +110,7 @@ function Userinfo({ userData, setUserDetails }) {
 
       await axios.put(`/api/proxy/users/update/user-info`, formData);
       toast(<p className='flex gap-3 items-center'><CheckCheck className="text-teal-500" />
-        Saved successfully!
+        {t('savedSuccessfully')}
       </p>, {
         autoClose: 2000,
       })
@@ -127,7 +129,7 @@ function Userinfo({ userData, setUserDetails }) {
       if (error.response?.data?.error) {
         setErrormsg(error.response.data.error)
       } else if (error.response?.status === 400) {
-        setErrormsg("Username already exists")
+        setErrormsg(t('usernameExists'))
       }
       // console.error("Error updating profile:", error);
     } finally {
@@ -145,7 +147,7 @@ function Userinfo({ userData, setUserDetails }) {
               if (userData.username) {
                 router.push(PORTFOLIO)
               } else if (!userData.username) {
-                setErrormsg("Username is required to see your personal portfolio")
+                setErrormsg(t('usernameRequired'))
               }
             }}
             src={imagePreview}
@@ -156,7 +158,7 @@ function Userinfo({ userData, setUserDetails }) {
             priority
           />
           <label className="mt-4 bg-gradient-to-r from-teal-400 to-green-500 hover:from-teal-500 hover:to-green-600 text-white font-semibold rounded-full px-6 py-2 cursor-pointer transition duration-300 transform hover:scale-105">
-            Upload Image
+            {t('uploadImage')}
             <input type="file" accept="image/*" onChange={handleImageUpload} className="hidden" />
           </label>
         </div>
@@ -167,14 +169,14 @@ function Userinfo({ userData, setUserDetails }) {
             if (userData.username) {
               router.push(PORTFOLIO)
             } else if (!userData.username) {
-              setErrormsg("Username is required to see your personal portfolio")
+              setErrormsg(t('usernameRequired'))
             }
           }} className="text-3xl md:block hidden font-bold text-gray-800 text-center mb-6">
-            {fullname || "Full Name"}
+            {fullname || t('fullName')}
           </h2>
           <div className="grid grid-cols-2 gap-4">
             <div>
-              <label className="block text-sm font-bold text-gray-700 mb-2">Full Name</label>
+              <label className="block text-sm font-bold text-gray-700 mb-2">{t('fullName')}</label>
               <input
                 type="text"
                 value={fullname}
@@ -185,7 +187,7 @@ function Userinfo({ userData, setUserDetails }) {
               />
             </div>
             <div>
-              <label className="block text-sm font-bold text-gray-700 mb-2">Username</label>
+              <label className="block text-sm font-bold text-gray-700 mb-2">{t('username')}</label>
               <input
                 type="text"
                 value={username}
@@ -200,7 +202,7 @@ function Userinfo({ userData, setUserDetails }) {
               )}
             </div>
             <div>
-              <label className="block text-sm font-bold text-gray-700 mb-2">Country</label>
+              <label className="block text-sm font-bold text-gray-700 mb-2">{t('country')}</label>
               <input
                 type="text"
                 value={country}
@@ -210,7 +212,7 @@ function Userinfo({ userData, setUserDetails }) {
               />
             </div>
             <div>
-              <label className="block text-sm font-bold text-gray-700 mb-2">Phone</label>
+              <label className="block text-sm font-bold text-gray-700 mb-2">{t('phone')}</label>
               <input
                 type="tel"
                 maxLength={100}
@@ -221,13 +223,13 @@ function Userinfo({ userData, setUserDetails }) {
             </div>
           </div>
           <div className="md:col-span-2">
-            <label className="block text-sm font-bold text-gray-700 mb-2">Specialization</label>
+            <label className="block text-sm font-bold text-gray-700 mb-2">{t('specialization')}</label>
             <input
               type="text"
               maxLength={100}
               value={category}
               onChange={(e) => setCategory(e.target.value)}
-              placeholder="e.g. Developer, Designer"
+              placeholder={t('exampleSpecialization')}
               className="w-full px-4 py-2 bg-white border-2 border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 transition"
             />
           </div>
@@ -242,10 +244,10 @@ function Userinfo({ userData, setUserDetails }) {
         >
           {loading ? (
             <>
-              <Loader size={20} className="animate-spin" /> Saving...
+              <Loader size={20} className="animate-spin" /> {t('saving')}
             </>
           ) : (
-            "💾 Save"
+            `💾 ${t('save')}`
           )}
         </button>
       </div>

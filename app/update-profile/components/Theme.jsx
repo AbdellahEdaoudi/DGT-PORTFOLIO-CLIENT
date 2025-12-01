@@ -6,7 +6,10 @@ import { Loader, CheckCheck } from "lucide-react";
 import Image from "next/image";
 
 
-export default function Theme({ userData, userLinks,setUserDetails}) {
+import { useTranslation } from "../../lib/translations";
+
+export default function Theme({ userData, userLinks, setUserDetails }) {
+  const { t } = useTranslation(userData?.displayLanguage || 'en');
   const [selectedTheme, setSelectedTheme] = useState(userData.theme || 1);
   const [loading, setLoading] = useState(false);
   const [pendingTheme, setPendingTheme] = useState(null);
@@ -21,13 +24,13 @@ export default function Theme({ userData, userLinks,setUserDetails}) {
       setUserDetails({ ...userData, theme: pendingTheme });
       toast(
         <p className="flex gap-2 items-center">
-          <CheckCheck className="text-green-500" /> Saved successfully!
+          <CheckCheck className="text-green-500" /> {t('savedSuccessfully')}
         </p>,
         { autoClose: 1000 }
       );
     } catch (error) {
       console.error("Error updating theme:", error);
-      toast.error("Failed to update theme!");
+      toast.error(t('errorMessage'));
     } finally {
       setLoading(false);
     }
@@ -36,7 +39,7 @@ export default function Theme({ userData, userLinks,setUserDetails}) {
   return (
     <div className="space-y-4">
       <div className="flex  items-center justify-between">
-        <h3 className="text-lg font-bold text-gray-800">🧩 Select Theme</h3>
+        <h3 className="text-lg font-bold text-gray-800">🧩 {t('selectTheme')}</h3>
         <div className="flex justify-center">
           <button
             onClick={handleSave}
@@ -48,7 +51,7 @@ export default function Theme({ userData, userLinks,setUserDetails}) {
             {loading ? (
               <Loader size={20} className="animate-spin inline-block" />
             ) : (
-              "Save"
+              t('save')
             )}
           </button>
         </div>

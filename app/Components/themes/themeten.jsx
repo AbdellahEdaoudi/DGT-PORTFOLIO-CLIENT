@@ -5,8 +5,10 @@ import QrcodeProfile from "../../[username]/components/QrcodeProfile"
 import UserLinks from "../../[username]/components/UserLinks"
 import Image from "next/image"
 import Link from "next/link"
+import { useTranslation } from "../../lib/translations"
 
 export default function ThemeTen({ userDetails, userLinks }) {
+    const { t } = useTranslation(userDetails?.displayLanguage || 'en')
     const [activeTab, setActiveTab] = useState("about")
     const [copied, setCopied] = useState(false);
     const [showQR, setShowQR] = useState(false);
@@ -44,12 +46,12 @@ export default function ThemeTen({ userDetails, userLinks }) {
                     {/* Toolbar */}
                     <div className="flex justify-between items-center mb-8">
                         <h1 className="text-slate-100 text-2xl font-bold cursor-pointer hover:text-indigo-400 transition-colors">
-                            <Link href={"https://dgtportfolio.com"}>Portfolio</Link>
+                            <Link href={"https://dgtportfolio.com"}>{t('portfolio')}</Link>
                         </h1>
                         <div className="flex gap-3">
                             {/* Copy Link */}
                             <button
-                                title="Copy Link Profile"
+                                title={t('copyLink')}
                                 onClick={copyProfileLink}
                                 className="flex items-center gap-2 px-4 py-2 bg-slate-800/50 hover:bg-slate-700 rounded-lg text-slate-300 transition-all duration-300 border border-slate-700 hover:border-indigo-500/50"
                             >
@@ -103,12 +105,12 @@ export default function ThemeTen({ userDetails, userLinks }) {
                     <div className="flex justify-center md:justify-start pb-2">
                         <div className="flex flex-wrap justify-center md:justify-start gap-2 p-1 bg-slate-900/50 backdrop-blur-xl rounded-2xl border border-slate-800 w-full md:w-auto">
                             {[
-                                { key: "about", label: "About", icon: User },
-                                { key: "services", label: "Services", icon: Layers, condition: userDetails?.services?.length > 0 },
-                                { key: "experience", label: "Experience", icon: Briefcase, condition: userDetails?.experience?.length > 0 },
-                                { key: "projects", label: "Projects", icon: Code2, condition: userDetails?.projects?.length > 0 },
-                                { key: "skills", label: "Skills", icon: Zap, condition: userDetails?.skills?.length > 0 },
-                                { key: "education", label: "Education", icon: GraduationCap, condition: userDetails?.education?.length > 0 },
+                                { key: "about", label: t('about'), icon: User },
+                                { key: "services", label: t('services'), icon: Layers, condition: userDetails?.services?.length > 0 },
+                                { key: "experience", label: t('experience'), icon: Briefcase, condition: userDetails?.experience?.length > 0 },
+                                { key: "projects", label: t('projects'), icon: Code2, condition: userDetails?.projects?.length > 0 },
+                                { key: "skills", label: t('skills'), icon: Zap, condition: userDetails?.skills?.length > 0 },
+                                { key: "education", label: t('education'), icon: GraduationCap, condition: userDetails?.education?.length > 0 },
                             ]
                                 .filter((tab) => tab.condition !== false)
                                 .map((tab) => {
@@ -140,7 +142,7 @@ export default function ThemeTen({ userDetails, userLinks }) {
                                 <div className="grid md:grid-cols-2 gap-4 md:gap-8">
                                     <div className="bg-slate-900/50 backdrop-blur-md rounded-3xl p-5 md:p-8 border border-slate-800 shadow-lg">
                                         <h3 className="text-2xl mb-6 flex items-center gap-2 text-white">
-                                            <User className="text-indigo-500" /> Personal Info
+                                            <User className="text-indigo-500" /> {t('aboutMe')}
                                         </h3>
                                         <div className="space-y-4 md:space-y-6">
                                             {userDetails.email && (
@@ -162,7 +164,7 @@ export default function ThemeTen({ userDetails, userLinks }) {
                                                         <Globe size={20} />
                                                     </div>
                                                     <div>
-                                                        <p className="text-sm text-slate-400">Location</p>
+                                                        <p className="text-sm text-slate-400">{t('country')}</p>
                                                         <p className="text-slate-200 font-medium">{userDetails.country}</p>
                                                     </div>
                                                 </div>
@@ -173,7 +175,7 @@ export default function ThemeTen({ userDetails, userLinks }) {
                                                         <Briefcase size={20} />
                                                     </div>
                                                     <div>
-                                                        <p className="text-sm text-slate-400">Phone</p>
+                                                        <p className="text-sm text-slate-400">{t('phone')}</p>
                                                         <p className="text-slate-200 font-medium">{userDetails.phoneNumber}</p>
                                                     </div>
                                                 </div>
@@ -184,7 +186,7 @@ export default function ThemeTen({ userDetails, userLinks }) {
                                     {userDetails?.languages?.length > 0 && (
                                         <div className="bg-slate-900/50 backdrop-blur-md rounded-3xl p-8 border border-slate-800 shadow-lg">
                                             <h3 className="text-2xl mb-6 flex items-center gap-2 text-white">
-                                                <Globe className="text-violet-500" /> Languages
+                                                <Globe className="text-violet-500" /> {t('languages')}
                                             </h3>
                                             <div className="grid gap-3">
                                                 {userDetails.languages?.map((lang, i) => (
@@ -394,7 +396,7 @@ export default function ThemeTen({ userDetails, userLinks }) {
                                 ))}
                         </div>
                         <p className="text-slate-500 text-sm">
-                            © {new Date().getFullYear()} {userDetails.fullname}. All Rights Reserved.
+                            © {new Date().getFullYear()} {userDetails.fullname}. {t('allRightsReserved')}.
                         </p>
                     </div>
                 </footer>

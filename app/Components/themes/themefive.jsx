@@ -6,8 +6,10 @@ import QrcodeProfile from "../../[username]/components/QrcodeProfile"
 import Image from "next/image"
 import MagicalLoader from "../MagicalLoader"
 import Link from "next/link"
+import { useTranslation } from "../../lib/translations"
 
 export default function ThemeFive({ userDetails, userLinks }) {
+  const { t } = useTranslation(userDetails?.displayLanguage || 'en')
   const [copied, setCopied] = useState(false)
   const [showQR, setShowQR] = useState(false)
   const PORTFOLIO = `https://${userDetails?.username}.dgtportfolio.com`
@@ -39,12 +41,12 @@ export default function ThemeFive({ userDetails, userLinks }) {
             {/* Toolbar */}
             <div className="flex justify-between items-center mb-12 gap-4">
               <h1 className="text-white text-2xl font-bold cursor-pointer hover:text-yellow-400 transition">
-                <Link href={"https://dgtportfolio.com"}>Portfolio</Link>
+                <Link href={"https://dgtportfolio.com"}>{t('portfolio')}</Link>
               </h1>
               <div className="flex flex-wrap gap-3">
                 {/* Copy Link */}
                 <button
-                  title="Copy Link Profile"
+                  title={t('copyLink')}
                   onClick={copyProfileLink}
                   className="flex items-center gap-2 px-4 py-2 bg-white/10 hover:bg-yellow-500/20 rounded-lg text-white transition-all duration-300 backdrop-blur-md border border-white/10 hover:border-yellow-500/50"
                 >
@@ -66,7 +68,7 @@ export default function ThemeFive({ userDetails, userLinks }) {
 
             <div className="flex flex-col md:flex-row items-center md:items-start gap-12">
               <div className="flex-1 mb-4">
-                <p className="text-yellow-400 font-semibold uppercase tracking-widest mb-3 text-sm animate-pulse">Hello, I'm</p>
+                <p className="text-yellow-400 font-semibold uppercase tracking-widest mb-3 text-sm animate-pulse">{t('helloIm')}</p>
                 <h1 className="text-5xl sm:text-6xl md:text-7xl font-black mb-6 leading-tight">
                   {userDetails.fullname.split(" ")[0]}{" "}
                   <span className="text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 via-orange-500 to-yellow-600 animate-gradient">
@@ -85,7 +87,7 @@ export default function ThemeFive({ userDetails, userLinks }) {
                   className="inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-yellow-500 to-orange-600 rounded-xl font-bold text-black hover:shadow-2xl hover:shadow-yellow-500/50 transition-all duration-300 transform hover:scale-105 hover:-translate-y-1"
                 >
                   <Mail size={20} />
-                  Let's Talk
+                  {t('letsTalk')}
                 </a>
               </div>
               <div className="relative flex-shrink-0 group">
@@ -105,13 +107,13 @@ export default function ThemeFive({ userDetails, userLinks }) {
             <section className="py-12 border-t border-zinc-800/50">
               <div className={`grid ${userDetails.services.length > 0 ? "md:grid-cols-3" : "md:grid-cols-2"}  gap-8`}>
                 <div className="group p-6 bg-gradient-to-br from-zinc-800/30 to-zinc-900/30 rounded-2xl border border-zinc-700/50 hover:border-yellow-500/50 transition-all duration-300 hover:shadow-lg hover:shadow-yellow-500/10">
-                  <p className="text-yellow-400 font-bold uppercase tracking-widest mb-3 text-xs">About</p>
-                  <h2 className="text-3xl sm:text-4xl font-black mb-4 group-hover:text-yellow-400 transition">Who I am</h2>
+                  <p className="text-yellow-400 font-bold uppercase tracking-widest mb-3 text-xs">{t('about')}</p>
+                  <h2 className="text-3xl sm:text-4xl font-black mb-4 group-hover:text-yellow-400 transition">{t('whoIam')}</h2>
                   <p className="text-gray-300 leading-relaxed">{userDetails.about}</p>
                 </div>
                 {userDetails.services.length > 0 && (
                   <div className="group p-6 bg-gradient-to-br from-zinc-800/30 to-zinc-900/30 rounded-2xl border border-zinc-700/50 hover:border-yellow-500/50 transition-all duration-300 hover:shadow-lg hover:shadow-yellow-500/10">
-                    <p className="text-yellow-400 font-bold uppercase tracking-widest mb-3 text-xs">Services</p>
+                    <p className="text-yellow-400 font-bold uppercase tracking-widest mb-3 text-xs">{t('services')}</p>
                     <div className="space-y-3">
                       {userDetails.services?.map((service, i) => (
                         <div key={i} className="p-3 bg-zinc-800/50 rounded-lg border border-zinc-700/50 hover:border-yellow-500/50 hover:bg-zinc-800 transition-all duration-200">
@@ -122,11 +124,11 @@ export default function ThemeFive({ userDetails, userLinks }) {
                   </div>
                 )}
                 <div className="group p-6 bg-gradient-to-br from-zinc-800/30 to-zinc-900/30 rounded-2xl border border-zinc-700/50 hover:border-yellow-500/50 transition-all duration-300 hover:shadow-lg hover:shadow-yellow-500/10">
-                  <p className="text-yellow-400 font-bold uppercase tracking-widest mb-3 text-xs">Info</p>
+                  <p className="text-yellow-400 font-bold uppercase tracking-widest mb-3 text-xs">{t('info')}</p>
                   <div className="space-y-4 text-sm">
                     {userDetails.country && (
                       <div>
-                        <p className="text-gray-500 uppercase mb-1 text-xs tracking-wider">Location</p>
+                        <p className="text-gray-500 uppercase mb-1 text-xs tracking-wider">{t('country')}</p>
                         <p className="text-white font-semibold">{userDetails.country}</p>
                       </div>
                     )}
@@ -138,7 +140,7 @@ export default function ThemeFive({ userDetails, userLinks }) {
                     </div>
                     {userDetails.phoneNumber && (
                       <div>
-                        <p className="text-gray-500 uppercase mb-1 text-xs tracking-wider">Phone</p>
+                        <p className="text-gray-500 uppercase mb-1 text-xs tracking-wider">{t('phone')}</p>
                         <p className="text-white font-semibold">{userDetails.phoneNumber}</p>
                       </div>
                     )}
@@ -153,7 +155,7 @@ export default function ThemeFive({ userDetails, userLinks }) {
             <section className="py-12 border-t border-zinc-800/50">
               <div className="flex items-center gap-3 mb-8">
                 <Briefcase className="text-yellow-400" size={32} />
-                <h2 className="text-3xl sm:text-4xl font-black">Experience</h2>
+                <h2 className="text-3xl sm:text-4xl font-black">{t('experience')}</h2>
               </div>
               <div className="space-y-6">
                 {userDetails.experience.map((exp, i) => (
@@ -178,7 +180,7 @@ export default function ThemeFive({ userDetails, userLinks }) {
           {/* Skills */}
           {userDetails.skills?.length > 0 && (
             <section className="py-12 border-t border-zinc-800/50">
-              <h2 className="text-3xl sm:text-4xl font-black mb-8">Skills & Expertise</h2>
+              <h2 className="text-3xl sm:text-4xl font-black mb-8">{t('skills')}</h2>
               <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
                 {userDetails.skills?.map((skill, i) => (
                   <div
@@ -198,7 +200,7 @@ export default function ThemeFive({ userDetails, userLinks }) {
           {userDetails.projects?.length > 0 && (
             <section className="py-12 border-t border-zinc-800/50">
               <h2 className="text-3xl sm:text-4xl font-extrabold mb-10 text-center text-white">
-                Featured Projects
+                {t('projects')}
               </h2>
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 {userDetails.projects.map((project, i) => (
@@ -249,7 +251,7 @@ export default function ThemeFive({ userDetails, userLinks }) {
                           rel="noreferrer"
                           className="inline-flex items-center gap-2 text-yellow-400 hover:text-yellow-300 font-semibold transition group/link"
                         >
-                          View Project
+                          {t('viewProject')}
                           <ArrowUpRight size={16} className="transform group-hover/link:translate-x-1 group-hover/link:-translate-y-1 transition-transform" />
                         </a>
                       )}
@@ -265,7 +267,7 @@ export default function ThemeFive({ userDetails, userLinks }) {
             <section className="py-12 border-t border-zinc-800/50">
               <div className="flex items-center gap-3 mb-8">
                 <GraduationCap className="text-yellow-400" size={32} />
-                <h2 className="text-3xl sm:text-4xl font-black text-white">Education</h2>
+                <h2 className="text-3xl sm:text-4xl font-black text-white">{t('education')}</h2>
               </div>
 
               <div className="space-y-6">
@@ -298,7 +300,7 @@ export default function ThemeFive({ userDetails, userLinks }) {
                       {/* Field of study */}
                       {edu.field && (
                         <div className="p-4 bg-zinc-900/50 rounded-xl border border-zinc-700/50 mb-3">
-                          <p className="text-xs text-gray-500 uppercase tracking-wider mb-2">Field of Study</p>
+                          <p className="text-xs text-gray-500 uppercase tracking-wider mb-2">{t('field')}</p>
                           <p className="text-sm sm:text-base text-gray-300 leading-relaxed">
                             {edu.field}
                           </p>
@@ -323,7 +325,7 @@ export default function ThemeFive({ userDetails, userLinks }) {
           {/* Languages */}
           {userDetails.languages?.length > 0 && (
             <section className="py-12 border-t border-zinc-800/50">
-              <h2 className="text-3xl sm:text-4xl font-black mb-8">Languages</h2>
+              <h2 className="text-3xl sm:text-4xl font-black mb-8">{t('languages')}</h2>
               <div className="flex flex-wrap gap-4">
                 {userDetails.languages.map((lang, i) => (
                   <div
@@ -375,7 +377,7 @@ export default function ThemeFive({ userDetails, userLinks }) {
                   )
                 )}
             </div>
-            <p className="text-gray-400">© {new Date().getFullYear()} {userDetails.fullname}. All rights reserved.</p>
+            <p className="text-gray-400">© {new Date().getFullYear()} {userDetails.fullname}. {t('allRightsReserved')}.</p>
           </div>
         </footer>
       )}

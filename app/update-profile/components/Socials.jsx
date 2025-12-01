@@ -1,11 +1,14 @@
 "use client";
 import React, { useState } from "react";
 import { toast } from "react-toastify";
-import { CheckCheck, Loader} from "lucide-react";
+import { CheckCheck, Loader } from "lucide-react";
 import axios from "axios";
 import Image from "next/image";
 
+import { useTranslation } from "../../lib/translations";
+
 export default function Socials({ userData }) {
+  const { t } = useTranslation(userData?.displayLanguage || 'en');
   const user = userData || {};
   const [socials, setSocials] = useState(user.socials || {});
   const socialIcons = {
@@ -31,13 +34,13 @@ export default function Socials({ userData }) {
       await axios.put("/api/proxy/users/update/socials", { socials });
       toast(
         <p className="flex gap-3 items-center">
-          <CheckCheck className="text-teal-500" /> Saved successfully!
+          <CheckCheck className="text-teal-500" /> {t('savedSuccessfully')}
         </p>,
         { autoClose: 2000 }
       );
     } catch (error) {
       console.error("Error updating socials:", error);
-      toast.error("Failed to update social links!");
+      toast.error(t('errorMessage'));
     } finally {
       setLoading(false);
     }
@@ -45,7 +48,7 @@ export default function Socials({ userData }) {
 
   return (
     <div className="space-y-4  ">
-      <h3 className="text-lg font-bold text-gray-800 mb-4">🔗 Social Media Links</h3>
+      <h3 className="text-lg font-bold text-gray-800 mb-4">🔗 {t('socialMediaLinks')}</h3>
       <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 bg-sky-50 rounded-md p-2 ">
         {Object.entries(socialIcons).map(([key, icon]) => (
           <div key={key}>
@@ -57,7 +60,7 @@ export default function Socials({ userData }) {
               value={socials[key] || ""}
               maxLength={500}
               onChange={(e) => setSocials({ ...socials, [key]: e.target.value })}
-              placeholder={`Enter ${key} URL`}
+              placeholder={`${t('enterUrl')} (${key})`}
               className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 transition bg-white"
             />
           </div>
@@ -71,10 +74,10 @@ export default function Socials({ userData }) {
         >
           {loading ? (
             <>
-              <Loader size={20} className="animate-spin" /> Saving...
+              <Loader size={20} className="animate-spin" /> {t('saving')}
             </>
           ) : (
-            "💾 Save"
+            `💾 ${t('save')}`
           )}
         </button>
       </div>

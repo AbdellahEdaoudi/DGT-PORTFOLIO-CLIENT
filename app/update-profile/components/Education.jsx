@@ -4,7 +4,10 @@ import React, { useState } from "react";
 import { toast } from "react-toastify";
 import { CheckCheck, Loader, Plus, Trash2 } from "lucide-react";
 
+import { useTranslation } from "../../lib/translations";
+
 export default function Education({ userData }) {
+  const { t } = useTranslation(userData?.displayLanguage || 'en');
   const [education, setEducation] = useState(userData.education || []);
   const [loading, setLoading] = useState(false);
 
@@ -23,13 +26,13 @@ export default function Education({ userData }) {
       await axios.put(`/api/proxy/users/update/education`, { education });
       toast(
         <p className="flex gap-3 items-center">
-          <CheckCheck className="text-blue-500" /> Saved successfully!
+          <CheckCheck className="text-blue-500" /> {t('savedSuccessfully')}
         </p>,
         { autoClose: 2000 }
       );
     } catch (error) {
       console.error("Error updating education:", error);
-      toast.error("Failed to update education!");
+      toast.error(t('errorMessage'));
     } finally {
       setLoading(false);
     }
@@ -37,7 +40,7 @@ export default function Education({ userData }) {
 
   return (
     <div className="space-y-4">
-      <h3 className="text-lg font-bold text-gray-800">🎓 Education</h3>
+      <h3 className="text-lg font-bold text-gray-800">🎓 {t('education')}</h3>
 
       <div className="bg-gradient-to-br from-blue-50 to-purple-50 p-2 md:p-4 rounded-xl border border-blue-200 space-y-3">
         <div className="space-y-2">
@@ -49,7 +52,7 @@ export default function Education({ userData }) {
               <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
                 <input
                   type="text"
-                  placeholder="School/University Name"
+                  placeholder={t('school')}
                   maxLength={100}
                   value={edu.school}
                   onChange={(e) =>
@@ -59,7 +62,7 @@ export default function Education({ userData }) {
                 />
                 <input
                   type="text"
-                  placeholder="Degree (e.g. Bachelor)"
+                  placeholder={t('degree')}
                   value={edu.degree || ""}
                   maxLength={100}
                   onChange={(e) =>
@@ -69,7 +72,7 @@ export default function Education({ userData }) {
                 />
                 <input
                   type="text"
-                  placeholder="Field (e.g. Computer Science)"
+                  placeholder={t('field')}
                   value={edu.field || ""}
                   maxLength={100}
                   onChange={(e) =>
@@ -80,7 +83,7 @@ export default function Education({ userData }) {
                 <div className="grid grid-cols-2 gap-2">
                   <input
                     type="text"
-                    placeholder="Start Year"
+                    placeholder={t('startYear')}
                     value={edu.startYear || ""}
                     maxLength={20}
                     onChange={(e) =>
@@ -90,7 +93,7 @@ export default function Education({ userData }) {
                   />
                   <input
                     type="text"
-                    placeholder="End Year"
+                    placeholder={t('endYear')}
                     maxLength={20}
                     value={edu.endYear || ""}
                     onChange={(e) =>
@@ -106,7 +109,7 @@ export default function Education({ userData }) {
                 onClick={() => removeArrayItem(education, setEducation, index)}
                 className="w-full hover:bg-red-100 rounded-lg p-1 transition-colors flex items-center justify-center gap-2"
               >
-                <Trash2 size={18} className="text-red-500" /> Delete
+                <Trash2 size={18} className="text-red-500" /> {t('delete')}
               </button>
             </div>
           ))}
@@ -125,7 +128,7 @@ export default function Education({ userData }) {
           }
           className="w-full bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white py-2 rounded-lg flex items-center justify-center gap-2 transition-all duration-300"
         >
-          <Plus size={18} /> Add Education
+          <Plus size={18} /> {t('addEducation')}
         </button>
       </div>
 
@@ -137,10 +140,10 @@ export default function Education({ userData }) {
         >
           {loading ? (
             <>
-              <Loader size={20} className="animate-spin" /> Saving...
+              <Loader size={20} className="animate-spin" /> {t('saving')}
             </>
           ) : (
-            "💾 Save"
+            `💾 ${t('save')}`
           )}
         </button>
       </div>

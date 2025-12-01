@@ -6,23 +6,26 @@ import { CheckCheck, Loader } from "lucide-react";
 import Themeone from "../../Components/themes/themeone";
 import ThemeTwo from "../../Components/themes/themetwo";
 
+import { useTranslation } from "../../lib/translations";
+
 export default function Bgcolor({ userData }) {
+  const { t } = useTranslation(userData?.displayLanguage || 'en');
   const [bgcolorp, setBgcolorp] = useState(userData.bgcolorp || "#OA3C4D");
   const [loading, setLoading] = useState(false);
 
   const saveBackgroundColor = async () => {
     setLoading(true);
     try {
-      await axios.put(`/api/proxy/users/update/bgcolor`, {bgcolorp});
+      await axios.put(`/api/proxy/users/update/bgcolor`, { bgcolorp });
       toast(
         <p className="flex gap-3 items-center">
-          <CheckCheck /> Saved successfully!
+          <CheckCheck /> {t('savedSuccessfully')}
         </p>,
         { autoClose: 2000 }
       );
     } catch (error) {
       console.error("Error updating background color:", error);
-      toast.error("Failed to update background color!");
+      toast.error(t('errorMessage'));
     } finally {
       setLoading(false);
     }
@@ -31,7 +34,7 @@ export default function Bgcolor({ userData }) {
   return (
     <div className="">
       <div>
-        <label className="block text-lg font-bold text-gray-800 mb-3">🎨 Background Color</label>
+        <label className="block text-lg font-bold text-gray-800 mb-3">🎨 {t('backgroundColor')}</label>
         <input
           type="color"
           value={bgcolorp}
@@ -47,14 +50,14 @@ export default function Bgcolor({ userData }) {
         >
           {loading ? (
             <>
-              <Loader size={20} className="animate-spin" /> Saving...
+              <Loader size={20} className="animate-spin" /> {t('saving')}
             </>
           ) : (
-            "💾 Save"
+            `💾 ${t('save')}`
           )}
         </button>
       </div>
-          <Themeone userDetails={userData} bgcolor={bgcolorp} />
+      <Themeone userDetails={userData} bgcolor={bgcolorp} />
     </div>
   );
 }

@@ -4,7 +4,10 @@ import React, { useState } from "react";
 import { toast } from "react-toastify";
 import { CheckCheck, Loader, Plus, Trash2 } from "lucide-react";
 
+import { useTranslation } from "../../lib/translations";
+
 export default function Experience({ userData }) {
+  const { t } = useTranslation(userData?.displayLanguage || 'en');
   const [experience, setExperience] = useState(userData.experience || []);
   const [loading, setLoading] = useState(false);
 
@@ -24,13 +27,13 @@ export default function Experience({ userData }) {
       await axios.put(`/api/proxy/users/update/experience`, { experience });
       toast(
         <p className="flex gap-3 items-center">
-          <CheckCheck className="text-amber-500" /> Saved successfully!
+          <CheckCheck className="text-amber-500" /> {t('savedSuccessfully')}
         </p>,
         { autoClose: 2000 }
       );
     } catch (error) {
       console.error("Error updating experience:", error);
-      toast.error("Failed to update experience!");
+      toast.error(t('errorMessage'));
     } finally {
       setLoading(false);
     }
@@ -38,7 +41,7 @@ export default function Experience({ userData }) {
 
   return (
     <div className="space-y-4">
-      <h3 className="text-lg font-bold text-gray-800">⭐ Experience</h3>
+      <h3 className="text-lg font-bold text-gray-800">⭐ {t('experience')}</h3>
 
       <div className="bg-gradient-to-br from-amber-50 to-orange-50 p-2 md:p-4 rounded-xl border border-amber-200 space-y-3">
         <div className="space-y-2">
@@ -50,7 +53,7 @@ export default function Experience({ userData }) {
               <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
                 <input
                   type="text"
-                  placeholder="Company Name"
+                  placeholder={t('company')}
                   value={exp.company}
                   maxLength={100}
                   onChange={(e) =>
@@ -60,7 +63,7 @@ export default function Experience({ userData }) {
                 />
                 <input
                   type="text"
-                  placeholder="Job Role"
+                  placeholder={t('role')}
                   value={exp.role}
                   maxLength={100}
                   onChange={(e) =>
@@ -71,7 +74,7 @@ export default function Experience({ userData }) {
               </div>
 
               <textarea
-                placeholder="Job Description"
+                placeholder={t('description')}
                 value={exp.description || ""}
                 maxLength={2000}
                 onChange={(e) =>
@@ -83,7 +86,7 @@ export default function Experience({ userData }) {
               <div className="grid grid-cols-2 gap-2">
                 <input
                   type="text"
-                  placeholder="Start Date"
+                  placeholder={t('startDate')}
                   value={exp.startDate || ""}
                   maxLength={20}
                   onChange={(e) =>
@@ -93,7 +96,7 @@ export default function Experience({ userData }) {
                 />
                 <input
                   type="text"
-                  placeholder="End Date"
+                  placeholder={t('endDate')}
                   value={exp.endDate || ""}
                   maxLength={20}
                   onChange={(e) =>
@@ -108,7 +111,7 @@ export default function Experience({ userData }) {
                 onClick={() => removeArrayItem(experience, setExperience, index)}
                 className="w-full hover:bg-red-100 rounded-lg p-1 transition-colors flex items-center justify-center gap-2"
               >
-                <Trash2 size={18} className="text-red-500" /> Delete
+                <Trash2 size={18} className="text-red-500" /> {t('delete')}
               </button>
             </div>
           ))}
@@ -127,7 +130,7 @@ export default function Experience({ userData }) {
           }
           className="w-full bg-gradient-to-r from-amber-500 to-orange-600 hover:from-amber-600 hover:to-orange-700 text-white py-2 rounded-lg flex items-center justify-center gap-2 transition-all duration-300"
         >
-          <Plus size={18} /> Add Experience
+          <Plus size={18} /> {t('addExperience')}
         </button>
       </div>
 
@@ -139,10 +142,10 @@ export default function Experience({ userData }) {
         >
           {loading ? (
             <>
-              <Loader size={20} className="animate-spin" /> Saving...
+              <Loader size={20} className="animate-spin" /> {t('saving')}
             </>
           ) : (
-            "💾 Save"
+            `💾 ${t('save')}`
           )}
         </button>
       </div>

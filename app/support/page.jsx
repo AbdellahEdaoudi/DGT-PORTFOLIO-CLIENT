@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useContext,useState } from 'react';
+import React, { useContext, useState } from 'react';
 import axios from 'axios';
 import { MyContext } from '../Context/MyContext';
 import { toast } from 'react-toastify';
@@ -13,13 +13,15 @@ import MagicalLoader from '../Components/MagicalLoader';
 import Image from 'next/image';
 import Link from 'next/link';
 import Header from '../Components/header';
+import { useTranslation } from '../lib/translations';
 
 export default function ContactForm() {
   const [subject, setSubject] = useState('')
   const [message, setMessage] = useState('')
   const [loading, setLoading] = useState(false)
-  const {EmailUser} = useContext(MyContext)
-   
+  const { EmailUser, userDetails } = useContext(MyContext)
+  const { t } = useTranslation(userDetails?.displayLanguage || 'en')
+
 
   const sendContact = async (e) => {
     e.preventDefault()
@@ -28,23 +30,23 @@ export default function ContactForm() {
 
     if (regex.test(subject) || regex.test(message)) {
       setLoading(false)
-        document.getElementById('my_modal_2').showModal();
-        return;
+      document.getElementById('my_modal_2').showModal();
+      return;
     }
     try {
-      await axios.post(`/api/proxy/contacts`, {email:EmailUser,subject,message});
-      toast(<p className='flex gap-3 items-center'><CheckCheck className="text-teal-500" /> Message sent successfully!</p>, {
+      await axios.post(`/api/proxy/contacts`, { email: EmailUser, subject, message });
+      toast(<p className='flex gap-3 items-center'><CheckCheck className="text-teal-500" /> {t('successMessage')}</p>, {
         autoClose: 2000,
       })
       setMessage('')
     } catch (error) {
       console.error('Error adding contact:', error)
       if (error.response && error.response.status === 429) {
-        toast.error(<p className='flex gap-3 items-center'>Too many requests! Please try again later.</p>, {
+        toast.error(<p className='flex gap-3 items-center'>{t('tooManyRequests')}</p>, {
           autoClose: 2000,
         })
       } else {
-        toast.error(<p className='flex gap-3 items-center'>An error occurred while sending the message.</p>, {
+        toast.error(<p className='flex gap-3 items-center'>{t('errorMessage')}</p>, {
           autoClose: 2000,
         })
       }
@@ -53,7 +55,7 @@ export default function ContactForm() {
     }
   }
   if (!EmailUser) {
-    return <MagicalLoader />  
+    return <MagicalLoader />
   }
 
   return (
@@ -63,11 +65,11 @@ export default function ContactForm() {
         <div className="bg-white rounded-xl shadow-2xl overflow-hidden">
           <div className="lg:flex ">
             <div className="lg:w-1/2 bg-teal-800 p-4 lg:p-12">
-            <Link href={"/"}>
-            <Image src={"/LogoinQrcode.png"} alt='LOGO' width={130} height={130} className="bg-white p-2 rounded-lg mb-5" />
-            </Link>
-              <h2 className="text-3xl font-bold text-white mb-6">Get in Touch</h2>
-              <p className="text-teal-100 mb-6">We'd love to hear from you. Send us a message and we'll respond as soon as possible.</p>
+              <Link href={"/"}>
+                <Image src={"/LogoinQrcode.png"} alt='LOGO' width={130} height={130} className="bg-white p-2 rounded-lg mb-5" />
+              </Link>
+              <h2 className="text-3xl font-bold text-white mb-6">{t('getInTouch')}</h2>
+              <p className="text-teal-100 mb-6">{t('weLoveToHear')}</p>
               <div className="space-y-4">
                 <div className="fle items-center text-teal-100 hidden">
                   <Mail className="h-6 w-6 mr-3" />
@@ -84,10 +86,10 @@ export default function ContactForm() {
               </div>
             </div>
             <div className="lg:w-1/2 p-8 lg:p-8">
-              <h2 className="text-3xl font-bold text-teal-800 mb-6">Contact Support</h2>
+              <h2 className="text-3xl font-bold text-teal-800 mb-6">{t('contactSupport')}</h2>
               <form onSubmit={sendContact} className="space-y-6">
                 <div>
-                  <label htmlFor="email" className="block text-sm font-medium text-teal-600 mb-1">Email :</label>
+                  <label htmlFor="email" className="block text-sm font-medium text-teal-600 mb-1">{t('email')} :</label>
                   <div className="relative">
                     <Input
                       type="email"
@@ -102,7 +104,7 @@ export default function ContactForm() {
                   </div>
                 </div>
                 <div>
-                  <label htmlFor="number" className="block text-sm font-medium text-teal-600 mb-1">Subject :</label>
+                  <label htmlFor="number" className="block text-sm font-medium text-teal-600 mb-1">{t('subject')} :</label>
                   <div className="relative">
                     <Input
                       type="tel"
@@ -116,7 +118,7 @@ export default function ContactForm() {
                   </div>
                 </div>
                 <div>
-                  <label htmlFor="message" className="block text-sm font-medium text-teal-600 mb-1">Message :</label>
+                  <label htmlFor="message" className="block text-sm font-medium text-teal-600 mb-1">{t('message')} :</label>
                   <div className="relative">
                     <Textarea
                       id="message"
@@ -139,10 +141,10 @@ export default function ContactForm() {
                   {loading ? (
                     <>
                       <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                      Sending
+                      {t('sending')}
                     </>
                   ) : (
-                    "Send Message"
+                    t('sendMessage')
                   )}
                 </Button>
               </form>
