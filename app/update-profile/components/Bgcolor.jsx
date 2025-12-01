@@ -32,7 +32,7 @@ export default function Bgcolor({ userData }) {
   };
 
   return (
-    <div className="">
+    <div className="" dir={userData?.displayLanguage === 'ar' ? 'rtl' : 'ltr'}>
       <div>
         <label className="block text-lg font-bold text-gray-800 mb-3">🎨 {t('backgroundColor')}</label>
         <input

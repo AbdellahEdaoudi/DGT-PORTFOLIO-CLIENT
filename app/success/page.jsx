@@ -11,7 +11,7 @@ export default function Success() {
   const { t } = useTranslation(userDetails?.displayLanguage || 'en');
 
   return (
-    <main className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-black flex items-center justify-center px-6">
+    <main className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-black flex items-center justify-center px-6" dir={userDetails?.displayLanguage === 'ar' ? 'rtl' : 'ltr'}>
       <div className="w-full max-w-md">
         <div className="relative bg-slate-800/80 border border-green-500/40 rounded-2xl p-10 backdrop-blur-md shadow-xl text-center">
 

@@ -37,7 +37,7 @@ export default function Theme({ userData, userLinks, setUserDetails }) {
   };
 
   return (
-    <div className="space-y-4">
+    <div className="space-y-4" dir={userData?.displayLanguage === 'ar' ? 'rtl' : 'ltr'}>
       <div className="flex  items-center justify-between">
         <h3 className="text-lg font-bold text-gray-800">🧩 {t('selectTheme')}</h3>
         <div className="flex justify-center">

@@ -39,7 +39,7 @@ export default function Languages({ userData }) {
   };
 
   return (
-    <div className="space-y-4">
+    <div className="space-y-4" dir={userData?.displayLanguage === 'ar' ? 'rtl' : 'ltr'}>
       <h3 className="text-lg font-bold text-gray-800">🌐 {t('languages')}</h3>
 
       <div className="bg-gradient-to-br from-cyan-50 to-blue-50 p-2 md:p-4 rounded-xl border border-cyan-200 space-y-3">

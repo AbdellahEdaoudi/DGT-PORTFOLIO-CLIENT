@@ -59,7 +59,7 @@ export default function ContactForm() {
   }
 
   return (
-    <div className="bg-cyan-950 min-h-screen flex flex-col ">
+    <div className="bg-cyan-950 min-h-screen flex flex-col" dir={userDetails?.displayLanguage === 'ar' ? 'rtl' : 'ltr'}>
       <div className="w-full"><Header /></div>
       <div className="relative  w-full max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 my-4">
         <div className="bg-white rounded-xl shadow-2xl overflow-hidden">

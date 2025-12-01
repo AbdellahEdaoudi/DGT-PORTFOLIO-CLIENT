@@ -7,6 +7,7 @@ import React, { useContext } from 'react'
 import { useState } from 'react'
 import { toast } from 'react-toastify'
 import { useTranslation } from '../../lib/translations'
+
 function Userinfo({ userData, setUserDetails }) {
   const { t } = useTranslation(userData?.displayLanguage || 'en')
   const user = userData || {}
@@ -136,8 +137,9 @@ function Userinfo({ userData, setUserDetails }) {
       setLoading(false);
     }
   };
+
   return (
-    <form >
+    <form dir={userData?.displayLanguage === 'ar' ? 'rtl' : 'ltr'}>
       {/* Profile Image Section */}
       <div className="flex flex-col md:flex-row items-start justify-between gap-2 md:gap-8">
         <div className="flex flex-col items-center bg-gradient-to-br from-gray-50 to-gray-100 shadow-xl border-2 border-gray-200 rounded-2xl p-6 w-full md:w-1/3">

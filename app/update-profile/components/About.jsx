@@ -30,7 +30,7 @@ export default function About({ userData }) {
   }
 
   return (
-    <div>
+    <div dir={userData?.displayLanguage === 'ar' ? 'rtl' : 'ltr'}>
       {/* Summary */}
       <div>
         <label className="block text-lg font-bold text-gray-800 mb-3">📝 {t('summary')}</label>

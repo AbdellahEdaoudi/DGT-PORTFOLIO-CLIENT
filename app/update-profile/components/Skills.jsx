@@ -44,7 +44,7 @@ export default function Skills({ userData }) {
   }
 
   return (
-    <div className="space-y-4">
+    <div className="space-y-4" dir={userData?.displayLanguage === 'ar' ? 'rtl' : 'ltr'}>
       <h3 className="text-lg font-bold text-gray-800">💡 {t('skills')}</h3>
       <div className="bg-gradient-to-br from-purple-50 to-pink-50 p-2 md:p-4 rounded-xl border border-purple-200 space-y-3">
         <div className="space-y-2">

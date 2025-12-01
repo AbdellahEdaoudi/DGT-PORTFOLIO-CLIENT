@@ -40,7 +40,7 @@ export default function Experience({ userData }) {
   };
 
   return (
-    <div className="space-y-4">
+    <div className="space-y-4" dir={userData?.displayLanguage === 'ar' ? 'rtl' : 'ltr'}>
       <h3 className="text-lg font-bold text-gray-800">⭐ {t('experience')}</h3>
 
       <div className="bg-gradient-to-br from-amber-50 to-orange-50 p-2 md:p-4 rounded-xl border border-amber-200 space-y-3">

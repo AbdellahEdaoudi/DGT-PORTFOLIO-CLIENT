@@ -43,7 +43,7 @@ export default function Services({ userData }) {
   }
 
   return (
-    <div>
+    <div dir={userData?.displayLanguage === 'ar' ? 'rtl' : 'ltr'}>
       {/* Services - Teal Style */}
       <div className="space-y-4">
         <h3 className="text-lg font-bold text-gray-800">💼 {t('services')}</h3>

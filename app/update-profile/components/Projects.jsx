@@ -39,7 +39,7 @@ export default function Projects({ userData }) {
   };
 
   return (
-    <div className="space-y-4">
+    <div className="space-y-4" dir={userData?.displayLanguage === 'ar' ? 'rtl' : 'ltr'}>
       <h3 className="text-lg font-bold text-gray-800">🚀 {t('projects')}</h3>
 
       <div className="bg-gradient-to-br from-green-50 to-emerald-50 p-2 md:p-4 rounded-xl border border-green-200 space-y-3">
