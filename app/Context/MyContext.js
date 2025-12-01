@@ -1,6 +1,7 @@
 "use client"
 import axios from 'axios';
 import { useSession } from 'next-auth/react';
+import { useRouter } from 'next/navigation';
 import { createContext, useEffect, useState } from 'react';
 
 export const MyContext = createContext();
@@ -11,17 +12,27 @@ export const MyProvider = ({ children }) => {
    const {data,status} = useSession()
    const EmailUser = data?.user?.email || ""
    const [loadingAll, setLoadingAll] = useState(true);
+   const router = useRouter();
    
   
   // Fetch all data
 useEffect(() => {
   const fetchAllData = async () => {
     try {
-      const res = await axios.get(`/api/proxy/alldata`);
+      const res = await axios.get(`/api/proxy/alldata`, {
+        validateStatus: () => true
+      });
+
+      if (res.status === 401) {
+        router.push("/api/auth/signin");
+        return;
+      }
+
       setUserDetails(res.data.users || null);
-      setUserLinks(res.data.links || [] );
+      setUserLinks(res.data.links || []);
+      
     } catch (error) {
-      console.error("Error fetching all data:", error);
+      console.error("Error fetching your data:", error);
     } finally {
       setLoadingAll(false);
     }
@@ -29,6 +40,7 @@ useEffect(() => {
 
   if (EmailUser) fetchAllData();
 }, [EmailUser]);
+
 
 
   return (
