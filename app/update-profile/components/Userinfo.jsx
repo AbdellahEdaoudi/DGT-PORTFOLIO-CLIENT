@@ -202,6 +202,11 @@ function Userinfo({ userData, setUserDetails }) {
               {errormsg && (
                 <p className="mt-1 text-red-500 text-sm font-medium">{errormsg}</p>
               )}
+              {username ? (
+                <p className="mt-1 ml-2 text-blue-500 text-xs font-medium">{`${username}.dgtportfolio.com`}</p>
+              ) : (
+                <p className="mt-1 ml-2 text-blue-500 text-xs font-medium">{`${t('username')}.dgtportfolio.com`}</p>
+              )}
             </div>
             <div>
               <label className="block text-sm font-bold text-gray-700 mb-2">{t('country')}</label>
