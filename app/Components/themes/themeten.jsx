@@ -68,7 +68,7 @@ export default function ThemeTen({ userDetails, userLinks }) {
                             </div>
                             {/* User Links */}
                             <div className="flex items-center gap-2 px-2 bg-slate-800/50 hover:bg-slate-700 rounded-lg text-slate-300 transition-all duration-300 border border-slate-700 hover:border-indigo-500/50">
-                                <UserLinks userLinks={userLinks} />
+                                <UserLinks lang={userDetails?.displayLanguage} userLinks={userLinks} />
                             </div>
                         </div>
                     </div>

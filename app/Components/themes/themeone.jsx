@@ -75,7 +75,7 @@ export default function Themeone({ userDetails, userLinks, bgcolor }) {
                   <div
                     className="flex items-center gap-2 px-2 bg-white/10 hover:bg-white/20 rounded-lg text-white transition-all duration-300 backdrop-blur-md border border-white/10"
                   >
-                    <UserLinks userLinks={userLinks} />
+                    <UserLinks lang={userDetails?.displayLanguage} userLinks={userLinks} />
                   </div>
                 </div>
               </div>

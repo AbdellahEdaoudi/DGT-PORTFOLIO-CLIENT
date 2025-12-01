@@ -85,7 +85,7 @@ export default function ThemeEleven({ userDetails, userLinks }) {
                             <QrcodeProfile path={`/${userDetails?.username}`} userDetails={userDetails} />
                         </div>
                         <div onClick={() => setShowQR(!showQR)} className="cursor-pointer px-2 py-2 border border-cyan-500/30 bg-cyan-950/30 rounded hover:bg-cyan-500/20 transition-all text-cyan-400 font-bold text-xs flex items-center">
-                            <UserLinks userLinks={userLinks} />
+                            <UserLinks lang={userDetails?.displayLanguage} userLinks={userLinks} />
                         </div>
 
                     </div>

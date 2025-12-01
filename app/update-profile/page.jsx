@@ -147,7 +147,7 @@ export default function UpdateProfilePage() {
       label: {
         en: "🧩 Theme",
         fr: "🧩 Thème",
-        ar: "🧩 السمة",
+        ar: "🧩 القوالب",
         de: "🧩 Thema",
         ru: "🧩 Тема",
         ja: "🧩 テーマ",

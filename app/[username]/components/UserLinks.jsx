@@ -12,7 +12,41 @@ import {
   AlertDialogTrigger,
 } from "../../../components/ui/alert-dialog";
 
-function UserLinks({ userLinks = [], language, labels }) {
+const translations = {
+  en: {
+    businessLinks: "Business Links",
+    noBusinessLinks: "No Business Links available.",
+  },
+  fr: {
+    businessLinks: "Liens Commerciaux",
+    noBusinessLinks: "Aucun lien commercial disponible.",
+  },
+  ar: {
+    businessLinks: "روابط الأعمال",
+    noBusinessLinks: "لا توجد روابط عمل متاحة.",
+  },
+  de: {
+    businessLinks: "Geschäftslinks",
+    noBusinessLinks: "Keine Geschäftslinks verfügbar.",
+  },
+  ru: {
+    businessLinks: "Бизнес-ссылки",
+    noBusinessLinks: "Нет доступных бизнес-ссылок.",
+  },
+  ja: {
+    businessLinks: "ビジネスリンク",
+    noBusinessLinks: "利用可能なビジネスリンクはありません。",
+  },
+  zh: {
+    businessLinks: "商业链接",
+    noBusinessLinks: "无可用商业链接。",
+  },
+};
+
+function UserLinks({ userLinks = [], lang }) {
+  const currentLanguage = lang || "en"; // Prioritize 'lang' for translation, then 'language', default to English
+  const t = translations[currentLanguage] || translations.en; // Fallback to English
+
   return (
     <AlertDialog>
       <AlertDialogTrigger>
@@ -23,19 +57,23 @@ function UserLinks({ userLinks = [], language, labels }) {
 
       <AlertDialogContent>
         <AlertDialogHeader>
-          <AlertDialogTitle className="sr-only">Business Links</AlertDialogTitle>
+          <AlertDialogTitle className="sr-only">{t.businessLinks}</AlertDialogTitle>
           <AlertDialogDescription asChild>
-            <div className="rounded-lg text-black">
+            <div 
+            dir={currentLanguage === 'ar' ? 'rtl' : 'ltr'}
+            className="rounded-lg text-black">
               <div className="flex items-center justify-between mx-3 text-3xl font-semibold text-center text-gray-800 mb-4">
-                <span>Business Links</span>
+                <span>{t.businessLinks}</span>
                 <AlertDialogCancel><X /></AlertDialogCancel>
               </div>
 
-              <div className="p-2 space-y-3 overflow-y-auto scrollbar-non max-h-96">
+              <div 
+              dir={currentLanguage === 'ar' ? 'rtl' : 'ltr'}
+              className="p-2 space-y-3 overflow-y-auto scrollbar-non max-h-96">
                 <div className="p-2 space-y-3">
                   {userLinks.length > 0 ? (
                     userLinks.map((lnk, i) => (
-                      <a dir={`${language === "ar" && "rtl"}`}
+                      <a dir={`${currentLanguage === "ar" ? "rtl" : "ltr"}`}
                         href={lnk.link}
                         target="_blank"
                         rel="noopener noreferrer"
@@ -50,7 +88,7 @@ function UserLinks({ userLinks = [], language, labels }) {
                     ))
                   ) : (
                     <p className="text-center text-black">
-                      No Business Links available.
+                      {t.noBusinessLinks}
                     </p>
                   )}
                 </div>

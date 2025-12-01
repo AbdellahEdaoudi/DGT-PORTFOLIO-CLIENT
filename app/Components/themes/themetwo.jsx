@@ -69,7 +69,7 @@ export default function ThemeTwo({ userDetails, userLinks, bgcolor }) {
               </div>
               {/* User Links */}
               <div className="flex items-center gap-2 px-2 bg-white/10 hover:bg-blue-500/20 rounded-lg text-white transition-all duration-300 backdrop-blur-md border border-white/10 hover:border-blue-500/50">
-                <UserLinks userLinks={userLinks} />
+                <UserLinks lang={userDetails?.displayLanguage} userLinks={userLinks} />
               </div>
             </div>
           </div>

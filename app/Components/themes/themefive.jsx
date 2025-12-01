@@ -62,7 +62,7 @@ export default function ThemeFive({ userDetails, userLinks }) {
                 </div>
                 {/* User Links */}
                 <div className="flex items-center gap-2 px-2 bg-white/10 hover:bg-yellow-500/20 rounded-lg text-white transition-all duration-300 backdrop-blur-md border border-white/10 hover:border-yellow-500/50">
-                  <UserLinks userLinks={userLinks} />
+                  <UserLinks lang={userDetails?.displayLanguage} userLinks={userLinks} />
                 </div>
               </div>
             </div>
