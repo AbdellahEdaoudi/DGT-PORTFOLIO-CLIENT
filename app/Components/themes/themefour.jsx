@@ -311,7 +311,7 @@ export default function ThemeFour({ userDetails, userLinks }) {
             }
 
             {/* Social Media */}
-            {userDetails.socials && Object.keys(userDetails.socials).length > 0 && (
+            {userDetails.socials && Object.values(userDetails.socials).some(url => url) && (
               <section className="py-8 border-t border-emerald-500/20">
                 <div className="max-w-5xl mx-auto">
                   <div className="flex items-center gap-3 mb-8">

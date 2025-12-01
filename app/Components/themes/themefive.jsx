@@ -342,7 +342,7 @@ export default function ThemeFive({ userDetails, userLinks }) {
 
       )}
       {/* Footer */}
-      {userDetails.socials && Object.keys(userDetails.socials).length > 0  && (
+      {userDetails.socials && Object.values(userDetails.socials).some(url => url) && (
         <footer className="relative z-10 border-t border-zinc-800/50 bg-black/50 backdrop-blur-md py-12 px-6 mt-12">
           <div className="max-w-5xl mx-auto text-center">
             <div className="flex justify-center gap-6 mb-6 flex-wrap">

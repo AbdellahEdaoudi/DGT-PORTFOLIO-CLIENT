@@ -221,7 +221,7 @@ function Userinfo({ userData, setUserDetails }) {
             </div>
           </div>
           <div className="md:col-span-2">
-            <label className="block text-sm font-bold text-gray-700 mb-2">Category</label>
+            <label className="block text-sm font-bold text-gray-700 mb-2">Specialization</label>
             <input
               type="text"
               maxLength={100}

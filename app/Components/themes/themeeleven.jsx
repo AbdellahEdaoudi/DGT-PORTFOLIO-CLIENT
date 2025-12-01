@@ -230,7 +230,7 @@ export default function ThemeEleven({ userDetails, userLinks }) {
                         )}
 
                         {/* Socials Module */}
-                        {userDetails?.socials && Object.keys(userDetails.socials).length > 0 && (
+                        {userDetails.socials && Object.values(userDetails.socials).some(url => url) && (
                             <section>
                                 <h3 className="text-cyan-400 text-sm uppercase tracking-widest mb-4 flex items-center gap-2">
                                     <span className="w-8 h-[1px] bg-cyan-500"></span>
