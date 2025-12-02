@@ -2,7 +2,7 @@
 import axios from "axios";
 import React, { useState } from "react";
 import { toast } from "react-toastify";
-import { CheckCheck, Loader, Plus, Trash2 } from "lucide-react";
+import { ArrowUp, ArrowDown, CheckCheck, Loader, Plus, Trash2 } from "lucide-react";
 
 import { useTranslation } from "../../lib/translations";
 
@@ -18,6 +18,20 @@ export default function Projects({ userData }) {
     const updated = [...array];
     updated[index] = { ...updated[index], [key]: value };
     setArray(updated);
+  };
+
+  const moveItemUp = (index) => {
+    if (index === 0) return;
+    const newProjects = [...projects];
+    [newProjects[index - 1], newProjects[index]] = [newProjects[index], newProjects[index - 1]];
+    setProjects(newProjects);
+  };
+
+  const moveItemDown = (index) => {
+    if (index === projects.length - 1) return;
+    const newProjects = [...projects];
+    [newProjects[index], newProjects[index + 1]] = [newProjects[index + 1], newProjects[index]];
+    setProjects(newProjects);
   };
 
   const saveProjects = async () => {
@@ -145,13 +159,33 @@ export default function Projects({ userData }) {
                 />
               </div>
 
-              <button
-                type="button"
-                onClick={() => removeArrayItem(projects, setProjects, index)}
-                className="w-full hover:bg-red-100 rounded-lg p-1 transition-colors flex items-center justify-center gap-2"
-              >
-                <Trash2 size={18} className="text-red-500" /> {t('delete')}
-              </button>
+              <div className="flex flex-row-reverse gap-2">
+                <button
+                  type="button"
+                  onClick={() => moveItemUp(index)}
+                  disabled={index === 0}
+                  className="p-2 hover:bg-gray-100 rounded-lg transition-colors disabled:opacity-30 disabled:cursor-not-allowed"
+                  title={t('moveUp') || "Move Up"}
+                >
+                  <ArrowUp size={18} className="text-gray-600" />
+                </button>
+                <button
+                  type="button"
+                  onClick={() => moveItemDown(index)}
+                  disabled={index === projects.length - 1}
+                  className="p-2 hover:bg-gray-100 rounded-lg transition-colors disabled:opacity-30 disabled:cursor-not-allowed"
+                  title={t('moveDown') || "Move Down"}
+                >
+                  <ArrowDown size={18} className="text-gray-600" />
+                </button>
+                <button
+                  type="button"
+                  onClick={() => removeArrayItem(projects, setProjects, index)}
+                  className="flex-1 hover:bg-red-100 rounded-lg p-1 transition-colors flex items-center justify-center gap-2"
+                >
+                  <Trash2 size={18} className="text-red-500" /> {t('delete')}
+                </button>
+              </div>
             </div>
           ))}
         </div>

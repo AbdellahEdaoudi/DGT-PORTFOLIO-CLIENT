@@ -2,7 +2,7 @@
 import axios from "axios";
 import React, { useState } from "react";
 import { toast } from "react-toastify";
-import { CheckCheck, Loader, Plus, Trash2 } from "lucide-react";
+import { ArrowUp, ArrowDown, CheckCheck, Loader, Plus, Trash2 } from "lucide-react";
 
 import { useTranslation } from "../../lib/translations";
 
@@ -18,6 +18,20 @@ export default function Education({ userData }) {
     const updated = [...array];
     updated[index] = { ...updated[index], [key]: value };
     setArray(updated);
+  };
+
+  const moveItemUp = (index) => {
+    if (index === 0) return;
+    const newEducation = [...education];
+    [newEducation[index - 1], newEducation[index]] = [newEducation[index], newEducation[index - 1]];
+    setEducation(newEducation);
+  };
+
+  const moveItemDown = (index) => {
+    if (index === education.length - 1) return;
+    const newEducation = [...education];
+    [newEducation[index], newEducation[index + 1]] = [newEducation[index + 1], newEducation[index]];
+    setEducation(newEducation);
   };
 
   const saveEducation = async () => {
@@ -104,13 +118,33 @@ export default function Education({ userData }) {
                 </div>
               </div>
 
-              <button
-                type="button"
-                onClick={() => removeArrayItem(education, setEducation, index)}
-                className="w-full hover:bg-red-100 rounded-lg p-1 transition-colors flex items-center justify-center gap-2"
-              >
-                <Trash2 size={18} className="text-red-500" /> {t('delete')}
-              </button>
+              <div className="flex flex-row-reverse gap-2">
+                <button
+                  type="button"
+                  onClick={() => moveItemUp(index)}
+                  disabled={index === 0}
+                  className="p-2 hover:bg-gray-100 rounded-lg transition-colors disabled:opacity-30 disabled:cursor-not-allowed"
+                  title={t('moveUp') || "Move Up"}
+                >
+                  <ArrowUp size={18} className="text-gray-600" />
+                </button>
+                <button
+                  type="button"
+                  onClick={() => moveItemDown(index)}
+                  disabled={index === education.length - 1}
+                  className="p-2 hover:bg-gray-100 rounded-lg transition-colors disabled:opacity-30 disabled:cursor-not-allowed"
+                  title={t('moveDown') || "Move Down"}
+                >
+                  <ArrowDown size={18} className="text-gray-600" />
+                </button>
+                <button
+                  type="button"
+                  onClick={() => removeArrayItem(education, setEducation, index)}
+                  className="flex-1 hover:bg-red-100 rounded-lg p-1 transition-colors flex items-center justify-center gap-2"
+                >
+                  <Trash2 size={18} className="text-red-500" /> {t('delete')}
+                </button>
+              </div>
             </div>
           ))}
         </div>
