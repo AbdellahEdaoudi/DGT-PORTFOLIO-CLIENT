@@ -1,6 +1,8 @@
 "use client"
 import axios from 'axios'
-import { CheckCheck, Loader } from 'lucide-react'
+import { CheckCheck, Loader, FileDown } from 'lucide-react'
+import { PDFDownloadLink } from '@react-pdf/renderer'
+import ResumePdf from './ResumePdf'
 import Image from 'next/image'
 import { useRouter } from 'next/navigation'
 import React, { useContext } from 'react'
@@ -243,7 +245,24 @@ function Userinfo({ userData, setUserDetails }) {
         </div>
       </div>
       {/* Submit Button */}
-      <div className="flex justify-end py-4 border-b-2 border-gray-200">
+      <div className="flex justify-end py-4 border-b-2 border-gray-200 gap-4">
+        <PDFDownloadLink
+          document={<ResumePdf userData={userData} />}
+          fileName={`${userData?.username || 'resume'}.pdf`}
+          className="bg-gradient-to-r from-blue-500 to-indigo-600 hover:from-blue-600 hover:to-indigo-700 text-white font-bold px-8 py-3 rounded-lg transition-all duration-300 flex items-center gap-2 transform hover:scale-105 shadow-lg"
+        >
+          {({ blob, url, loading, error }) =>
+            loading ? (
+              <>
+                <Loader size={20} className="animate-spin" /> {t('loading') || 'Loading...'}
+              </>
+            ) : (
+              <>
+                <FileDown size={20} /> {t('downloadCV') || 'Download CV'}
+              </>
+            )
+          }
+        </PDFDownloadLink>
         <button onClick={UpUserInfo}
           type="submit"
           disabled={loading}
