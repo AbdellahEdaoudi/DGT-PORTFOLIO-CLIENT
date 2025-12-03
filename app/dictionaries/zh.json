@@ -1,0 +1,89 @@
+{
+    "navbar": {
+        "features": "功能",
+        "showcase": "展示",
+        "pricing": "定价",
+        "auth": {
+            "signIn": "登录",
+            "getStarted": "开始使用",
+            "updateProfile": "更新个人资料",
+            "businessLinks": "商业链接",
+            "support": "支持",
+            "signOut": "登出"
+        }
+    },
+    "hero": {
+        "title_part1": "您的作品集，",
+        "title_part2": "提升",
+        "description": "无需代码，无需麻烦。在几分钟内构建一个干净、现代的作品集。以前所未有的方式展示您的职业生涯、技能、项目和工作链接。留下持久的印象并开启新的机会。",
+        "free_trial": "免费7天",
+        "start_building": "开始构建",
+        "watch_demo": "观看演示"
+    },
+    "features": {
+        "title": "为什么选择DGT Portfolio？",
+        "subtitle": "展示您最佳作品并获得梦想机会所需的一切",
+        "items": [
+            {
+                "title": "无代码设计",
+                "description": "无需编写一行代码即可创建令人惊叹的作品集"
+            },
+            {
+                "title": "自定义子域名",
+                "description": "为您的作品集获取个性化子域名，如<strong>yourname.dgtportfolio.com</strong>"
+            },
+            {
+                "title": "二维码个人资料",
+                "description": "为您的作品集生成二维码，可以立即下载或分享"
+            },
+            {
+                "title": "多种主题",
+                "description": "从不同主题中选择以个性化您的作品集外观"
+            },
+            {
+                "title": "轻松链接分享",
+                "description": "只需一键即可在任何地方分享您的作品集链接"
+            },
+            {
+                "title": "闪电般快速",
+                "description": "闪电般的加载时间让访客保持参与"
+            }
+        ]
+    },
+    "pricing": {
+        "title": "简单、透明的定价",
+        "subtitle": "为您的创意作品集选择完美的计划",
+        "plans": [
+            {
+                "name": "月度计划",
+                "description": "下个月10美元",
+                "price": "1美元",
+                "period": "/首月",
+                "cta": "按月订阅"
+            },
+            {
+                "name": "4个月计划",
+                "description": "超值中期优惠",
+                "price": "30美元",
+                "period": "/4个月",
+                "cta": "订阅4个月"
+            },
+            {
+                "name": "年度计划",
+                "description": "最佳价值",
+                "price": "60美元",
+                "period": "/年",
+                "cta": "按年订阅",
+                "badge": "推荐"
+            }
+        ]
+    },
+    "cta": {
+        "title": "准备好展示您的才华了吗？",
+        "subtitle": "加入数千名今天正在构建梦想作品集的创作者",
+        "button": "创建您的作品集"
+    },
+    "footer": {
+        "rights": "版权所有。"
+    }
+}

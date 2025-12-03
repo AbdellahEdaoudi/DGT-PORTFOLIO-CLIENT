@@ -1,0 +1,89 @@
+{
+    "navbar": {
+        "features": "Características",
+        "showcase": "Galería",
+        "pricing": "Precios",
+        "auth": {
+            "signIn": "Iniciar Sesión",
+            "getStarted": "Empezar",
+            "updateProfile": "Actualizar Perfil",
+            "businessLinks": "Enlaces de Negocios",
+            "support": "Soporte",
+            "signOut": "Cerrar Sesión"
+        }
+    },
+    "hero": {
+        "title_part1": "Tu Portafolio,",
+        "title_part2": "Elevado",
+        "description": "Sin código, sin complicaciones. Construye un portafolio limpio y moderno en minutos. Muestra tu carrera, habilidades, proyectos y enlaces de trabajo como nunca antes. Deja una impresión duradera y desbloquea nuevas oportunidades.",
+        "free_trial": "Gratis por 7 días",
+        "start_building": "Comenzar a Construir",
+        "watch_demo": "Ver Demo"
+    },
+    "features": {
+        "title": "¿Por qué elegir DGT Portfolio?",
+        "subtitle": "Todo lo que necesitas para mostrar tu mejor trabajo y conseguir las oportunidades de tus sueños",
+        "items": [
+            {
+                "title": "Diseño Sin Código",
+                "description": "Crea portafolios impresionantes sin escribir una sola línea de código"
+            },
+            {
+                "title": "Subdominio Personalizado",
+                "description": "Obtén un subdominio personalizado como <strong>tu-nombre.dgtportfolio.com</strong> para tu portafolio"
+            },
+            {
+                "title": "Perfil con Código QR",
+                "description": "Genera un código QR para tu portafolio que puedes descargar o compartir al instante"
+            },
+            {
+                "title": "Múltiples Temas",
+                "description": "Elige entre diferentes temas para personalizar el aspecto de tu portafolio"
+            },
+            {
+                "title": "Fácil Compartir Enlaces",
+                "description": "Comparte el enlace de tu portafolio en cualquier lugar con un solo clic"
+            },
+            {
+                "title": "Rápido como el Rayo",
+                "description": "Tiempos de carga ultrarrápidos que mantienen a los visitantes comprometidos"
+            }
+        ]
+    },
+    "pricing": {
+        "title": "Precios Simples y Transparentes",
+        "subtitle": "Elige el plan perfecto para tu portafolio creativo",
+        "plans": [
+            {
+                "name": "Plan Mensual",
+                "description": "$10 por el mes siguiente",
+                "price": "$1",
+                "period": "/primer mes",
+                "cta": "Suscribirse Mensualmente"
+            },
+            {
+                "name": "Plan de 4 Meses",
+                "description": "Gran oferta a medio plazo",
+                "price": "$30",
+                "period": "/4 meses",
+                "cta": "Suscribirse 4 Meses"
+            },
+            {
+                "name": "Plan Anual",
+                "description": "Mejor valor",
+                "price": "$60",
+                "period": "/año",
+                "cta": "Suscribirse Anualmente",
+                "badge": "Recomendado"
+            }
+        ]
+    },
+    "cta": {
+        "title": "¿Listo para mostrar tu talento?",
+        "subtitle": "Únete a miles de creadores que construyen sus portafolios de ensueño hoy",
+        "button": "Crea Tu Portafolio"
+    },
+    "footer": {
+        "rights": "Todos los derechos reservados."
+    }
+}

@@ -8,7 +8,7 @@ function Header() {
   return (
     <div>
         {/* Navigation */}
-               <div className="w-full bg-slate-900/90  border-b border-purple-500/20  px-6 py-4 flex justify-between items-center">
+               <div className="w-full bg-slate-900  border-b border-purple-500/20  px-6 py-4 flex justify-between items-center">
                  <Link href={"/"} className="  text-2xl font-bold bg-gradient-to-r from-cyan-400 to-purple-500 bg-clip-text text-transparent cursor-pointer">
                    {/* <Sparkles className="w-6 h-6 text-white" /> */}
                    <h1 className='flex items-center'>

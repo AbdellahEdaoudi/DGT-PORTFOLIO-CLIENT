@@ -1,0 +1,89 @@
+{
+    "navbar": {
+        "features": "Fonctionnalités",
+        "showcase": "Galerie",
+        "pricing": "Tarifs",
+        "auth": {
+            "signIn": "Se connecter",
+            "getStarted": "Commencer",
+            "updateProfile": "Mettre à jour le profil",
+            "businessLinks": "Liens professionnels",
+            "support": "Support",
+            "signOut": "Se déconnecter"
+        }
+    },
+    "hero": {
+        "title_part1": "Votre Portfolio,",
+        "title_part2": "Élevé",
+        "description": "Sans code, sans tracas. Créez un portfolio propre et moderne en quelques minutes. Présentez votre carrière, vos compétences, vos projets et vos liens professionnels comme jamais auparavant. Laissez une impression durable et débloquez de nouvelles opportunités.",
+        "free_trial": "Gratuit pendant 7 jours",
+        "start_building": "Commencer à créer",
+        "watch_demo": "Voir la démo"
+    },
+    "features": {
+        "title": "Pourquoi choisir DGT Portfolio ?",
+        "subtitle": "Tout ce dont vous avez besoin pour présenter votre meilleur travail et décrocher les opportunités de vos rêves",
+        "items": [
+            {
+                "title": "Conception sans code",
+                "description": "Créez des portfolios époustouflants sans écrire une seule ligne de code"
+            },
+            {
+                "title": "Sous-domaine personnalisé",
+                "description": "Obtenez un sous-domaine personnalisé comme <strong>votrenom.dgtportfolio.com</strong> pour votre portfolio"
+            },
+            {
+                "title": "Profil QR Code",
+                "description": "Générez un code QR pour votre portfolio que vous pouvez télécharger ou partager instantanément"
+            },
+            {
+                "title": "Thèmes multiples",
+                "description": "Choisissez parmi différents thèmes pour personnaliser l'apparence de votre portfolio"
+            },
+            {
+                "title": "Partage de liens facile",
+                "description": "Partagez le lien de votre portfolio n'importe où en un seul clic"
+            },
+            {
+                "title": "Ultra rapide",
+                "description": "Des temps de chargement ultra rapides qui maintiennent l'engagement des visiteurs"
+            }
+        ]
+    },
+    "pricing": {
+        "title": "Tarification simple et transparente",
+        "subtitle": "Choisissez le plan parfait pour votre portfolio créatif",
+        "plans": [
+            {
+                "name": "Plan mensuel",
+                "description": "10 $ pour le mois suivant",
+                "price": "1 $",
+                "period": "/premier mois",
+                "cta": "S'abonner mensuellement"
+            },
+            {
+                "name": "Plan 4 mois",
+                "description": "Excellente offre à moyen terme",
+                "price": "30 $",
+                "period": "/4 mois",
+                "cta": "S'abonner 4 mois"
+            },
+            {
+                "name": "Plan annuel",
+                "description": "Meilleur rapport qualité-prix",
+                "price": "60 $",
+                "period": "/an",
+                "cta": "S'abonner annuellement",
+                "badge": "Recommandé"
+            }
+        ]
+    },
+    "cta": {
+        "title": "Prêt à présenter votre talent ?",
+        "subtitle": "Rejoignez des milliers de créateurs qui construisent leurs portfolios de rêve aujourd'hui",
+        "button": "Créez votre portfolio"
+    },
+    "footer": {
+        "rights": "Tous droits réservés."
+    }
+}

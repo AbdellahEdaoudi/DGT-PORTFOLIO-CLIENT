@@ -2,6 +2,7 @@ import LandingPage from "./Components/LandingPage/LandingPage";
 import { headers } from 'next/headers'
 import SubdomainClient from "./Components/SubdomainClient"
 import { notFound } from "next/navigation";
+import { getDictionary } from "./dictionaries/get-dictionary";
 
 export async function generateMetadata() {
   const reserved = ["dgtportfolio", "localhost:3000", "www"];
@@ -121,6 +122,8 @@ export default async function Home() {
     };
   }
 
+  const dict = await getDictionary('en');
+
   return (
     <div>
       {userSchema && (
@@ -132,7 +135,7 @@ export default async function Home() {
       {isSubdomain ? (
         <SubdomainClient username={subdomain} />
       ) : (
-        <LandingPage />
+        <LandingPage dict={dict} />
       )}
     </div>
   );

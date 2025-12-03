@@ -1,0 +1,89 @@
+{
+    "navbar": {
+        "features": "機能",
+        "showcase": "ギャラリー",
+        "pricing": "料金",
+        "auth": {
+            "signIn": "サインイン",
+            "getStarted": "始める",
+            "updateProfile": "プロフィールを更新",
+            "businessLinks": "ビジネスリンク",
+            "support": "サポート",
+            "signOut": "サインアウト"
+        }
+    },
+    "hero": {
+        "title_part1": "あなたのポートフォリオ、",
+        "title_part2": "向上",
+        "description": "コード不要、手間なし。数分でクリーンでモダンなポートフォリオを構築できます。キャリア、スキル、プロジェクト、仕事のリンクをこれまでにない方法で紹介しましょう。永続的な印象を残し、新しい機会を開きます。",
+        "free_trial": "7日間無料",
+        "start_building": "構築を始める",
+        "watch_demo": "デモを見る"
+    },
+    "features": {
+        "title": "DGT Portfolioを選ぶ理由",
+        "subtitle": "最高の作品を紹介し、夢の機会を手に入れるために必要なすべて",
+        "items": [
+            {
+                "title": "コード不要のデザイン",
+                "description": "一行のコードも書かずに素晴らしいポートフォリオを作成"
+            },
+            {
+                "title": "カスタムサブドメイン",
+                "description": "ポートフォリオ用に<strong>yourname.dgtportfolio.com</strong>のようなパーソナライズされたサブドメインを取得"
+            },
+            {
+                "title": "QRコードプロフィール",
+                "description": "ポートフォリオ用のQRコードを生成し、即座にダウンロードまたは共有"
+            },
+            {
+                "title": "複数のテーマ",
+                "description": "さまざまなテーマから選択して、ポートフォリオの外観をパーソナライズ"
+            },
+            {
+                "title": "簡単なリンク共有",
+                "description": "ワンクリックでポートフォリオリンクをどこでも共有"
+            },
+            {
+                "title": "超高速",
+                "description": "訪問者を引き付ける超高速の読み込み時間"
+            }
+        ]
+    },
+    "pricing": {
+        "title": "シンプルで透明な料金",
+        "subtitle": "クリエイティブなポートフォリオに最適なプランを選択",
+        "plans": [
+            {
+                "name": "月額プラン",
+                "description": "翌月10ドル",
+                "price": "1ドル",
+                "period": "/初月",
+                "cta": "月額で購読"
+            },
+            {
+                "name": "4ヶ月プラン",
+                "description": "素晴らしい中期オファー",
+                "price": "30ドル",
+                "period": "/4ヶ月",
+                "cta": "4ヶ月購読"
+            },
+            {
+                "name": "年間プラン",
+                "description": "最高の価値",
+                "price": "60ドル",
+                "period": "/年",
+                "cta": "年間購読",
+                "badge": "おすすめ"
+            }
+        ]
+    },
+    "cta": {
+        "title": "才能を披露する準備はできましたか？",
+        "subtitle": "今日、夢のポートフォリオを構築している何千ものクリエイターに参加しましょう",
+        "button": "ポートフォリオを作成"
+    },
+    "footer": {
+        "rights": "全著作権所有。"
+    }
+}
