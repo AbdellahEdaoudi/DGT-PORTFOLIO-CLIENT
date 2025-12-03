@@ -57,34 +57,34 @@ export default function ThemeThree({ userDetails, userLinks }) {
             <div className="flex gap-3">
               {/* Copy Link */}
               <PDFDownloadLink
-               document={<ResumePdf userData={userDetails} />}
-               title={(() => {
-                       const translations = {
-                         en: 'Download CV',
-                         fr: 'Télécharger CV',
-                         ar: 'تحميل السيرة الذاتية',
-                         de: 'Lebenslauf herunterladen',
-                         ru: 'Скачать резюме',
-                         ja: '履歴書をダウンロード',
-                         zh: '下载简历',
-                       };
-                       return translations[userDetails?.displayLanguage] || translations['en']
-                     })()}
-               fileName={`cv.${userDetails?.username || 'resume'}.pdf`}
-               className=" text-white bg-white/10 hover:bg-white/20 font-bold px-5 py-3 rounded-lg transition-all duration-300 flex items-center gap-2 transform hover:scale-105 shadow-lg"
-             >
-               {({ blob, url, loading, error }) =>
-                 loading ? (
-                   <>
-                     <Loader size={20} className="animate-spin" /> {t('loading') || 'Loading...'}
-                   </>
-                 ) : (
-                   <>
-                     <FileDown size={20} />
-                   </>
-                 )
-               }
-             </PDFDownloadLink>
+                document={<ResumePdf userData={userDetails} />}
+                title={(() => {
+                  const translations = {
+                    en: 'Download CV',
+                    fr: 'Télécharger CV',
+                    ar: 'تحميل السيرة الذاتية',
+                    de: 'Lebenslauf herunterladen',
+                    ru: 'Скачать резюме',
+                    ja: '履歴書をダウンロード',
+                    zh: '下载简历',
+                  };
+                  return translations[userDetails?.displayLanguage] || translations['en']
+                })()}
+                fileName={`cv.${userDetails?.username || 'resume'}.pdf`}
+                className=" text-white bg-white/10 hover:bg-white/20 font-bold px-5 py-3 rounded-lg transition-all duration-300 flex items-center gap-2 transform hover:scale-105 shadow-lg"
+              >
+                {({ blob, url, loading, error }) =>
+                  loading ? (
+                    <>
+                      <Loader size={20} className="animate-spin" /> {t('loading') || 'Loading...'}
+                    </>
+                  ) : (
+                    <>
+                      <FileDown size={20} />
+                    </>
+                  )
+                }
+              </PDFDownloadLink>
               {/* QR Code */}
               <div
                 onClick={() => setShowQR(!showQR)}
@@ -101,7 +101,7 @@ export default function ThemeThree({ userDetails, userLinks }) {
 
           {/* Hero Section */}
           <div className="flex flex-col-reverse md:flex-row gap-10 items-center justify-between mb-8">
-            <div className="flex-1 text-center md:text-left">
+            <div className={`flex-1 text-center  ${userDetails?.displayLanguage === 'ar' ? 'md:text-right' : 'md:text-left'}`}>
               <div className="inline-block px-3 py-1 mb-4 text-xs tracking-wider text-pink-300 uppercase bg-pink-500/10 rounded-full border border-pink-500/20">
                 Welcome to my world
               </div>
@@ -113,7 +113,7 @@ export default function ThemeThree({ userDetails, userLinks }) {
                 {userDetails?.category}
                 <Sparkles size={24} className="text-purple-400" />
               </p>
-              <p className="text-md text-left text-gray-300 max-w-2xl leading-relaxed mx-auto md:mx-0">
+              <p className={`text-md  text-gray-300 max-w-2xl leading-relaxed mx-auto md:mx-0 ${userDetails?.displayLanguage === 'ar' ? 'text-right' : 'text-left'}`}>
                 {userDetails?.about}
               </p>
             </div>
@@ -366,7 +366,7 @@ export default function ThemeThree({ userDetails, userLinks }) {
                       key={i}
                       className="relative p-4 md:p-8 bg-white/5 backdrop-blur-md border border-white/10 rounded-3xl hover:border-pink-500/30 transition-all duration-300 group overflow-hidden"
                     >
-                      <div className="absolute top-0 right-0 p-8 opacity-10 group-hover:opacity-20 transition-opacity transform group-hover:scale-110 duration-500">
+                      <div className={`absolute top-0 ${userDetails.displayLanguage === "ar" ? "left-0" : "right-0"} p-8 opacity-10 group-hover:opacity-20 transition-opacity transform group-hover:scale-110 duration-500 ${edu.field ? "" : "hidden"}`}>
                         <GraduationCap size={100} />
                       </div>
                       <div className="relative z-10">

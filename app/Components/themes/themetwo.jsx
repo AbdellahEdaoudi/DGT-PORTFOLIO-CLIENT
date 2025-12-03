@@ -365,7 +365,7 @@ export default function ThemeTwo({ userDetails, userLinks, bgcolor }) {
                       key={i}
                       className="relative p-4 md:p-8 bg-white/5 backdrop-blur-md border border-white/10 rounded-3xl hover:border-blue-500/30 transition-all duration-300 group overflow-hidden"
                     >
-                      <div className="absolute top-0 right-0 p-8 opacity-10 group-hover:opacity-20 transition-opacity transform group-hover:scale-110 duration-500">
+                      <div className={`absolute top-0 ${userDetails.displayLanguage === "ar" ? "left-0" : "right-0"} p-8 opacity-10 group-hover:opacity-20 transition-opacity transform group-hover:scale-110 duration-500 ${edu.field ? "" : "hidden"}`}>
                         <GraduationCap size={100} />
                       </div>
                       <div className="relative z-10">

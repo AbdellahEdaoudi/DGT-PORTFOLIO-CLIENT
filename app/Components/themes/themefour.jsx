@@ -164,17 +164,25 @@ export default function ThemeFour({ userDetails, userLinks }) {
                     {userDetails.experience.map((exp, i) => (
                       <div key={i} className="group relative p-6 bg-gradient-to-br from-emerald-500/10 to-blue-500/10 border border-emerald-500/30 rounded-xl hover:border-emerald-500/60 hover:shadow-xl hover:shadow-emerald-500/20 transition-all duration-300 overflow-hidden">
                         {/* Decorative element */}
-                        <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-bl from-emerald-400/20 to-transparent rounded-bl-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                        {userDetails.displayLanguage === "ar" ? (
+                          <div className="absolute top-0 left-0 w-32 h-32 bg-gradient-to-bl from-emerald-400/20 to-transparent rounded-br-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                        ) : (
+                          <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-bl from-emerald-400/20 to-transparent rounded-bl-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                        )}
 
                         <div className="relative z-10">
                           <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-2 mb-3">
                             <h3 className="text-xl md:text-2xl font-bold text-emerald-300 group-hover:text-emerald-200 transition">{exp.role}</h3>
-                            <p className="text-gray-400 text-sm whitespace-nowrap">{exp.startDate} - {exp.endDate}</p>
+                            <span className={`text-gray-400 text-sm ${userDetails.displayLanguage === "ar" ? "flex gap-1" : "flex flex-row-reverse gap-1"}`}>
+                            <p>{exp.startDate}</p>
+                            <p> - </p>
+                            <p>{exp.endDate}</p>
+                          </span>
                           </div>
                           <p className="text-emerald-400 font-semibold mb-3 text-lg">{exp.company}</p>
-                          <div className="mt-3 p-4 bg-slate-900/50 rounded-lg border-l-4 border-emerald-500/50">
+                          <div className={`mt-3 p-4 bg-slate-900/50 rounded-lg  border-emerald-500/50 ${userDetails.displayLanguage === "ar" ? "border-r-4" : "border-l-4"}`}>
                             <p className="text-xs text-gray-500 uppercase tracking-wider mb-2">{t('description')}</p>
-                            <p className={` text-gray-300 text-sm whitespace-pre-wrap leading-relaxed`}>
+                            <p className={`text-gray-300 text-sm whitespace-pre-wrap leading-relaxed`}>
                               {exp.description}
                             </p>
                           </div>
@@ -209,7 +217,7 @@ export default function ThemeFour({ userDetails, userLinks }) {
             {userDetails.projects && userDetails.projects.length > 0 && (
               <section className="py-8 border-t border-emerald-500/20">
                 <div className="max-w-5xl mx-auto">
-                  <h2 className="text-4xl font-black mb-8 text-center">{t('projects')}</h2>
+                  <h2 className="text-4xl font-black mb-8 text-center md:text-start">{t('projects')}</h2>
                   <div className="space-y-6">
                     {userDetails.projects.map((project, idx) => (
                       <div
@@ -224,10 +232,10 @@ export default function ThemeFour({ userDetails, userLinks }) {
                                 alt={project.title}
                                 className="w-full h-64 md:h-full object-cover group-hover:scale-110 transition-transform duration-500"
                               />
-                              <div className="absolute inset-0 bg-gradient-to-r from-slate-950/50 via-transparent to-transparent"></div>
+                              <div className="absolute inset-0 bg-gradient-to-r from-slate-950/50 via-transparent to-transparent group-hover:scale-110 transition-transform duration-500"></div>
                             </div>
                           )}
-                          <div className="p-6 flex-1">
+                          <div className={`py-6 flex-1 px-6 group-hover:px-8 transition-all duration-300`}>
                             <h3 className="text-2xl font-bold text-emerald-300 mb-3 group-hover:text-emerald-200 transition">{project.title}</h3>
                             <p onClick={() => setExpanded(expanded === idx ? null : idx)}
                               className={`text-sm md:text-base text-gray-300 mb-4 whitespace-pre-line cursor-pointer transition-all duration-300 leading-relaxed
@@ -282,8 +290,11 @@ export default function ThemeFour({ userDetails, userLinks }) {
                           className="group relative p-6 bg-gradient-to-br from-emerald-500/10 to-blue-500/10 border border-emerald-500/30 rounded-xl hover:border-emerald-500/60 hover:shadow-xl hover:shadow-emerald-500/20 transition-all duration-300 overflow-hidden"
                         >
                           {/* Decorative corner accent */}
+                          {userDetails.displayLanguage === "ar" ? (
+                          <div className="absolute top-0 left-0 w-32 h-32 bg-gradient-to-bl from-emerald-400/20 to-transparent rounded-br-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                        ) : (
                           <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-bl from-emerald-400/20 to-transparent rounded-bl-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-
+                        )}
                           <div className="relative z-10">
                             <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-2 mb-3">
                               <h3 className="text-xl md:text-2xl font-bold text-emerald-300 group-hover:text-emerald-200 transition">{edu.degree}</h3>
@@ -295,7 +306,7 @@ export default function ThemeFour({ userDetails, userLinks }) {
                             <p className="text-emerald-400 font-semibold text-lg mb-3">{edu.school}</p>
 
                             {edu.field && (
-                              <div className="p-4 bg-slate-900/50 rounded-lg border-l-4 border-emerald-500/50">
+                              <div className={`p-4 bg-slate-900/50 rounded-lg ${userDetails.displayLanguage === "ar" ? "border-r-4" : "border-l-4"} border-emerald-500/50`}>
                                 <p className="text-xs text-gray-500 uppercase tracking-wider mb-2">{t('field')}</p>
                                 <p className="text-sm md:text-base text-gray-300 leading-relaxed">
                                   {edu.field}

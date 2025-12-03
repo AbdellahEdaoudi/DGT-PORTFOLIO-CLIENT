@@ -560,7 +560,7 @@ export const translations = {
         // Additional
         helloIm: "مرحباً، أنا",
         letsTalk: "لنتحدث",
-        whoIam: "من أنا",
+        whoIam: "نبذة عني",
         info: "معلومات",
         email: "البريد الإلكتروني",
         location: "الموقع",
