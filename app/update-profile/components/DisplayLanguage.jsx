@@ -15,7 +15,7 @@ function DisplayLanguage({ userData, setUserDetails }) {
         try {
             await axios.put(`/api/proxy/users/update/display-language`, { displayLanguage })
             toast(<p className='flex gap-3 items-center'><CheckCheck className="text-teal-500" />
-               updated successfully!
+                updated successfully!
             </p>, {
                 autoClose: 2000,
             })
@@ -34,6 +34,7 @@ function DisplayLanguage({ userData, setUserDetails }) {
         title: {
             en: "🌍 Display Language",
             fr: "🌍 Langue d'affichage",
+            es: "🌍 Idioma de visualización",
             ar: "🌍 لغة العرض",
             de: "🌍 Anzeigesprache",
             ru: "🌍 Язык отображения",
@@ -43,6 +44,7 @@ function DisplayLanguage({ userData, setUserDetails }) {
         description: {
             en: "Choose the language in which your portfolio will be displayed to visitors.",
             fr: "Choisissez la langue dans laquelle votre portfolio sera affiché aux visiteurs.",
+            es: "Elige el idioma en el que se mostrará tu portafolio a los visitantes.",
             ar: "اختر اللغة التي سيتم بها عرض محفظتك للزوار.",
             de: "Wählen Sie die Sprache, in der Ihr Portfolio Besuchern angezeigt werden soll.",
             ru: "Выберите язык, на котором ваше портфолио будет отображаться посетителям.",
@@ -65,6 +67,7 @@ function DisplayLanguage({ userData, setUserDetails }) {
                     {[
                         { value: "en", label: "English", description: "Display portfolio in English" },
                         { value: "fr", label: "Français", description: "Afficher le portfolio en français" },
+                        { value: "es", label: "Español", description: "Mostrar portafolio en español" },
                         { value: "ar", label: "Arabic", description: "عرض المحفظة باللغة العربية" },
                         { value: "de", label: "Deutsch", description: "Portfolio auf Deutsch anzeigen" },
                         { value: "ru", label: "Русский", description: "Показать портфолио на русском" },

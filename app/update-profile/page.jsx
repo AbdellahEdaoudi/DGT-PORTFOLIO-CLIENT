@@ -30,6 +30,7 @@ export default function UpdateProfilePage() {
       label: {
         en: "📝 About",
         fr: "📝 À propos",
+        es: "📝 Acerca de",
         ar: "📝 نبذة",
         de: "📝 Über",
         ru: "📝 Обо мне",
@@ -43,6 +44,7 @@ export default function UpdateProfilePage() {
       label: {
         en: "💡 Skills",
         fr: "💡 Compétences",
+        es: "💡 Habilidades",
         ar: "💡 المهارات",
         de: "💡 Fähigkeiten",
         ru: "💡 Навыки",
@@ -56,6 +58,7 @@ export default function UpdateProfilePage() {
       label: {
         en: "💼 Services",
         fr: "💼 Services",
+        es: "💼 Servicios",
         ar: "💼 الخدمات",
         de: "💼 Dienstleistungen",
         ru: "💼 Услуги",
@@ -69,6 +72,7 @@ export default function UpdateProfilePage() {
       label: {
         en: "🎓 Education",
         fr: "🎓 Éducation",
+        es: "🎓 Educación",
         ar: "🎓 التعليم",
         de: "🎓 Bildung",
         ru: "🎓 Образование",
@@ -82,6 +86,7 @@ export default function UpdateProfilePage() {
       label: {
         en: "⭐ Experience",
         fr: "⭐ Expérience",
+        es: "⭐ Experiencia",
         ar: "⭐ الخبرة",
         de: "⭐ Erfahrung",
         ru: "⭐ Опыт",
@@ -95,6 +100,7 @@ export default function UpdateProfilePage() {
       label: {
         en: "🚀 Projects",
         fr: "🚀 Projets",
+        es: "🚀 Proyectos",
         ar: "🚀 المشاريع",
         de: "🚀 Projekte",
         ru: "🚀 Проекты",
@@ -108,6 +114,7 @@ export default function UpdateProfilePage() {
       label: {
         en: "🌐 Languages",
         fr: "🌐 Langues",
+        es: "🌐 Idiomas",
         ar: "🌐 اللغات",
         de: "🌐 Sprachen",
         ru: "🌐 Языки",
@@ -121,6 +128,7 @@ export default function UpdateProfilePage() {
       label: {
         en: "🔗 Socials",
         fr: "🔗 Réseaux sociaux",
+        es: "🔗 Redes sociales",
         ar: "🔗 الشبكات الاجتماعية",
         de: "🔗 Soziale Medien",
         ru: "🔗 Соцсети",
@@ -134,6 +142,7 @@ export default function UpdateProfilePage() {
       label: {
         en: "🎨 Bgcolor",
         fr: "🎨 Couleur de fond",
+        es: "🎨 Color de fondo",
         ar: "🎨 لون الخلفية",
         de: "🎨 Hintergrundfarbe",
         ru: "🎨 Цвет фона",
@@ -147,6 +156,7 @@ export default function UpdateProfilePage() {
       label: {
         en: "🧩 Theme",
         fr: "🧩 Thème",
+        es: "🧩 Tema",
         ar: "🧩 القوالب",
         de: "🧩 Thema",
         ru: "🧩 Тема",
@@ -160,6 +170,7 @@ export default function UpdateProfilePage() {
       label: {
         en: "🌍 Display Lang",
         fr: "🌍 Langue d'affichage",
+        es: "🌍 Idioma de visualización",
         ar: "🌍 لغة العرض",
         de: "🌍 Anzeigesprache",
         ru: "🌍 Язык отображения",

@@ -1322,6 +1322,194 @@ export const translations = {
         location: "位置",
         skillsAndExpertise: "技能与专长",
     },
+    es: {
+        // Common
+        save: "Guardar",
+        saving: "Guardando...",
+        cancel: "Cancelar",
+        delete: "Eliminar",
+        edit: "Editar",
+        add: "Añadir",
+        update: "Actualizar",
+
+        // Update Profile Tabs
+        about: "Sobre mí",
+        skills: "Habilidades",
+        services: "Servicios",
+        education: "Educación",
+        experience: "Experiencia",
+        projects: "Proyectos",
+        languages: "Idiomas",
+        socials: "Redes Sociales",
+        bgcolor: "Color de fondo",
+        theme: "Tema",
+        displayLanguage: "Idioma de visualización",
+
+        // User Info
+        fullName: "Nombre completo",
+        username: "Nombre de usuario",
+        country: "País",
+        phone: "Teléfono",
+        specialization: "Especialización",
+        uploadImage: "Subir imagen",
+
+        // About Section
+        aboutMe: "Sobre mí",
+        aboutDescription: "Escribe una breve descripción sobre ti",
+        generateWithAI: "Generar con IA",
+
+        // Skills
+        addSkill: "Añadir habilidad",
+        skillName: "Nombre de la habilidad",
+
+        // Services
+        addService: "Añadir servicio",
+        serviceName: "Nombre del servicio",
+
+        // Education
+        addEducation: "Añadir educación",
+        school: "Escuela",
+        degree: "Título",
+        field: "Campo de estudio",
+        startYear: "Año de inicio",
+        endYear: "Año de finalización",
+
+        // Experience
+        addExperience: "Añadir experiencia",
+        company: "Empresa",
+        role: "Rol",
+        description: "Descripción",
+        startDate: "Fecha de inicio",
+        endDate: "Fecha de finalización",
+
+        // Projects
+        addProject: "Añadir proyecto",
+        projectTitle: "Título del proyecto",
+        projectDescription: "Descripción del proyecto",
+        projectLink: "Enlace del proyecto",
+        projectImage: "Imagen del proyecto",
+        technologies: "Tecnologías",
+
+        // Social Media
+        socialMedia: "Redes Sociales",
+        github: "GitHub",
+        linkedin: "LinkedIn",
+        facebook: "Facebook",
+        instagram: "Instagram",
+        twitter: "Twitter",
+        youtube: "YouTube",
+        telegram: "Telegram",
+        snapchat: "Snapchat",
+        whatsapp: "WhatsApp",
+        tiktok: "TikTok",
+        reddit: "Reddit",
+        twitch: "Twitch",
+
+        // Display Language
+        displayLanguageTitle: "Idioma de visualización",
+        displayLanguageDescription: "Elige el idioma en el que se mostrará tu portafolio a los visitantes.",
+        english: "English",
+        french: "Français",
+        arabic: "العربية",
+        german: "Deutsch",
+        russian: "Русский",
+        japanese: "日本語",
+        chinese: "中文",
+        displayInEnglish: "Display portfolio in English",
+        displayInFrench: "Afficher le portfolio en français",
+        displayInArabic: "عرض المحفظة باللغة العربية",
+        displayInGerman: "Portfolio auf Deutsch anzeigen",
+        displayInRussian: "Показать портфолио на русском",
+        displayInJapanese: "ポートフォリオを日本語で表示",
+        displayInChinese: "以中文显示作品集",
+
+        // Subscription
+        subscription: "Suscripción",
+        choosePlan: "Elige tu plan",
+        monthly: "Mensual",
+        yearly: "Anual",
+        subscribe: "Suscribirse",
+        currentPlan: "Plan actual",
+        active: "Activo",
+        inactive: "Inactivo",
+
+        // Success
+        successTitle: "¡Éxito!",
+        successMessage: "Tu acción se completó con éxito.",
+
+        // Themes
+        selectTheme: "Seleccionar tema",
+        themePreview: "Vista previa del tema",
+        portfolio: "Portafolio",
+        copyLink: "Copiar enlace",
+        copied: "Copiado",
+        followMe: "Sígueme",
+        viewProject: "Ver proyecto",
+        workExperience: "Experiencia laboral",
+        allRightsReserved: "Todos los derechos reservados",
+
+        // Update Profile Components
+        summary: "Resumen",
+        tellUsAboutYourself: "Cuéntanos sobre ti...",
+        savedSuccessfully: "¡Guardado con éxito!",
+        businessLinks: "Enlaces comerciales",
+        addLink: "Añadir enlace",
+        linkName: "Nombre del enlace",
+        linkUrl: "URL del enlace",
+        exampleWebsite: "ej. Mi sitio web",
+        exampleUrl: "https://ejemplo.com",
+        updateLink: "Actualizar enlace",
+        deleteLinkConfirm: "¿Estás seguro de que quieres eliminar este enlace?",
+        linkAddedSuccessfully: "¡Enlace añadido con éxito!",
+        linkUpdatedSuccessfully: "¡Enlace actualizado con éxito!",
+        linkDeletedSuccessfully: "¡Enlace eliminado con éxito!",
+        failedToAddLink: "Error al añadir el enlace.",
+        failedToUpdateLink: "Error al actualizar el enlace.",
+        failedToDeleteLink: "Error al eliminar el enlace.",
+
+        // Support Page
+        support: "Soporte",
+        contactSupport: "Contactar soporte",
+        supportMessage: "¿Cómo podemos ayudarte?",
+        sendMessage: "Enviar mensaje",
+        subject: "Asunto",
+        message: "Mensaje",
+        sending: "Enviando...",
+        tooManyRequests: "¡Demasiadas solicitudes! Por favor, inténtalo de nuevo más tarde.",
+        errorMessage: "Ocurrió un error.",
+        getInTouch: "Ponerse en contacto",
+        weLoveToHear: "Nos encantaría saber de ti. Envíanos un mensaje y te responderemos lo antes posible.",
+
+        // Success Page
+        addLanguage: "Añadir idioma",
+        socialMediaLinks: "Enlaces de redes sociales",
+        enterUrl: "Introducir URL",
+        backgroundColor: "Color de fondo",
+        selectTheme: "Seleccionar tema",
+        usernameExists: "El nombre de usuario ya existe",
+        usernameRequired: "Se requiere nombre de usuario para ver tu portafolio personal",
+        uploadImage: "Subir imagen",
+        fullName: "Nombre completo",
+        username: "Nombre de usuario",
+        country: "País",
+        phone: "Teléfono",
+        specialization: "Especialización",
+        exampleSpecialization: "ej. Desarrollador, Diseñador",
+        paymentSuccessful: "¡Pago exitoso!",
+        thankYouForSubscription: "¡Gracias por tu suscripción!",
+        subscriptionActive: "Tu suscripción está activa ahora.",
+        goToHome: "Ir a Inicio",
+        redirecting: "Redirigiendo...",
+
+        // Additional
+        helloIm: "Hola, soy",
+        letsTalk: "Hablemos",
+        whoIam: "Quién soy",
+        info: "Info",
+        email: "Correo electrónico",
+        location: "Ubicación",
+        skillsAndExpertise: "Habilidades y experiencia",
+    },
 };
 
 // Hook to use translations

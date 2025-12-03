@@ -56,34 +56,35 @@ export default function ThemeTwo({ userDetails, userLinks, bgcolor }) {
             <div className="flex gap-3">
               {/* Copy Link */}
               <PDFDownloadLink
-               document={<ResumePdf userData={userDetails} />}
-               fileName={`cv.${userDetails?.username || 'resume'}.pdf`}
-               title={(() => {
-                       const translations = {
-                         en: 'Download CV',
-                         fr: 'Télécharger CV',
-                         ar: 'تحميل السيرة الذاتية',
-                         de: 'Lebenslauf herunterladen',
-                         ru: 'Скачать резюме',
-                         ja: '履歴書をダウンロード',
-                         zh: '下载简历',
-                       };
-                       return translations[userDetails?.displayLanguage] || translations['en']
-                     })()}
-               className=" text-white bg-white/10 hover:bg-white/20 font-bold px-5 py-3 rounded-lg transition-all duration-300 flex items-center gap-2 transform hover:scale-105 shadow-lg"
-             >
-               {({ blob, url, loading, error }) =>
-                 loading ? (
-                   <>
-                     <Loader size={20} className="animate-spin" /> {t('loading') || 'Loading...'}
-                   </>
-                 ) : (
-                   <>
-                     <FileDown size={20} />
-                   </>
-                 )
-               }
-             </PDFDownloadLink>
+                document={<ResumePdf userData={userDetails} />}
+                fileName={`cv.${userDetails?.username || 'resume'}.pdf`}
+                title={(() => {
+                  const translations = {
+                    en: 'Download CV',
+                    fr: 'Télécharger CV',
+                    es: 'Descargar CV',
+                    ar: 'تحميل السيرة الذاتية',
+                    de: 'Lebenslauf herunterladen',
+                    ru: 'Скачать резюме',
+                    ja: '履歴書をダウンロード',
+                    zh: '下载简历',
+                  };
+                  return translations[userDetails?.displayLanguage] || translations['en']
+                })()}
+                className=" text-white bg-white/10 hover:bg-white/20 font-bold px-5 py-3 rounded-lg transition-all duration-300 flex items-center gap-2 transform hover:scale-105 shadow-lg"
+              >
+                {({ blob, url, loading, error }) =>
+                  loading ? (
+                    <>
+                      <Loader size={20} className="animate-spin" /> {t('loading') || 'Loading...'}
+                    </>
+                  ) : (
+                    <>
+                      <FileDown size={20} />
+                    </>
+                  )
+                }
+              </PDFDownloadLink>
               {/* QR Code */}
               <div
                 onClick={() => setShowQR(!showQR)}

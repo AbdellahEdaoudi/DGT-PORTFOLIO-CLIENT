@@ -54,6 +54,7 @@ export default function ThemeFive({ userDetails, userLinks }) {
                        const translations = {
                          en: 'Download CV',
                          fr: 'Télécharger CV',
+                         es: 'Descargar CV',
                          ar: 'تحميل السيرة الذاتية',
                          de: 'Lebenslauf herunterladen',
                          ru: 'Скачать резюме',

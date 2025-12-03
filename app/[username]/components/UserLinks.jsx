@@ -21,6 +21,10 @@ const translations = {
     businessLinks: "Liens Commerciaux",
     noBusinessLinks: "Aucun lien commercial disponible.",
   },
+  es: {
+    businessLinks: "Enlaces de Negocio",
+    noBusinessLinks: "No hay enlaces de negocio disponibles.",
+  },
   ar: {
     businessLinks: "روابط الأعمال",
     noBusinessLinks: "لا توجد روابط عمل متاحة.",
