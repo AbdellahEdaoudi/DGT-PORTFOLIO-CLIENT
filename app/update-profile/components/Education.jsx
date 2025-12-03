@@ -6,7 +6,7 @@ import { ArrowUp, ArrowDown, CheckCheck, Loader, Plus, Trash2 } from "lucide-rea
 
 import { useTranslation } from "../../lib/translations";
 
-export default function Education({ userData }) {
+export default function Education({ userData, setUserDetails }) {
   const { t } = useTranslation(userData?.displayLanguage || 'en');
   const [education, setEducation] = useState(userData.education || []);
   const [loading, setLoading] = useState(false);
@@ -38,6 +38,15 @@ export default function Education({ userData }) {
     setLoading(true);
     try {
       await axios.put(`/api/proxy/users/update/education`, { education });
+
+      // Update global state to reflect changes immediately without refresh
+      if (setUserDetails) {
+        setUserDetails(prev => ({
+          ...prev,
+          education: education
+        }));
+      }
+
       toast(
         <p className="flex gap-3 items-center">
           <CheckCheck className="text-blue-500" /> {t('savedSuccessfully')}

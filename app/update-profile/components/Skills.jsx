@@ -6,7 +6,7 @@ import { CheckCheck, Loader, Plus, Trash2 } from "lucide-react"
 
 import { useTranslation } from "../../lib/translations"
 
-export default function Skills({ userData }) {
+export default function Skills({ userData, setUserDetails }) {
   const { t } = useTranslation(userData?.displayLanguage || 'en')
   const [skills, setSkills] = useState(userData.skills || [])
   const [loading, setLoading] = useState(false)
@@ -29,6 +29,15 @@ export default function Skills({ userData }) {
     setLoading(true)
     try {
       await axios.put(`/api/proxy/users/update/skills`, { skills })
+
+      // Update global state to reflect changes immediately without refresh
+      if (setUserDetails) {
+        setUserDetails(prev => ({
+          ...prev,
+          skills: skills
+        }));
+      }
+
       toast(
         <p className="flex gap-3 items-center">
           <CheckCheck className="text-purple-500" /> {t('savedSuccessfully')}

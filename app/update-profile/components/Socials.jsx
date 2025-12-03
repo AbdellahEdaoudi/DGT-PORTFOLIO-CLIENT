@@ -7,7 +7,7 @@ import Image from "next/image";
 
 import { useTranslation } from "../../lib/translations";
 
-export default function Socials({ userData }) {
+export default function Socials({ userData, setUserDetails }) {
   const { t } = useTranslation(userData?.displayLanguage || 'en');
   const user = userData || {};
   const [socials, setSocials] = useState(user.socials || {});
@@ -32,6 +32,15 @@ export default function Socials({ userData }) {
     setLoading(true);
     try {
       await axios.put("/api/proxy/users/update/socials", { socials });
+
+      // Update global state to reflect changes immediately without refresh
+      if (setUserDetails) {
+        setUserDetails(prev => ({
+          ...prev,
+          socials: socials
+        }));
+      }
+
       toast(
         <p className="flex gap-3 items-center">
           <CheckCheck className="text-teal-500" /> {t('savedSuccessfully')}

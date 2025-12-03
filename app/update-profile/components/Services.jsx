@@ -6,7 +6,7 @@ import { useState } from 'react'
 import { toast } from 'react-toastify'
 import { useTranslation } from '../../lib/translations'
 
-export default function Services({ userData }) {
+export default function Services({ userData, setUserDetails }) {
   const { t } = useTranslation(userData?.displayLanguage || 'en')
   const [services, setServices] = useState(userData.services || [])
   const [loading, setLoading] = useState(false)
@@ -31,6 +31,15 @@ export default function Services({ userData }) {
       await axios.put(`/api/proxy/users/update/services`, {
         services,
       })
+
+      // Update global state to reflect changes immediately without refresh
+      if (setUserDetails) {
+        setUserDetails(prev => ({
+          ...prev,
+          services: services
+        }));
+      }
+
       toast(<p className='flex gap-3 items-center'><CheckCheck className="text-teal-500" />
         {t('savedSuccessfully')}</p>, {
         autoClose: 2000,

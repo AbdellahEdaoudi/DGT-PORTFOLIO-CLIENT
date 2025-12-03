@@ -6,7 +6,7 @@ import { ArrowUp, ArrowDown, CheckCheck, Loader, Plus, Trash2 } from "lucide-rea
 
 import { useTranslation } from "../../lib/translations";
 
-export default function Projects({ userData }) {
+export default function Projects({ userData, setUserDetails }) {
   const { t } = useTranslation(userData?.displayLanguage || 'en');
   const [projects, setProjects] = useState(userData.projects || []);
   const [loading, setLoading] = useState(false);
@@ -38,6 +38,15 @@ export default function Projects({ userData }) {
     setLoading(true);
     try {
       await axios.put(`/api/proxy/users/update/projects`, { projects });
+
+      // Update global state to reflect changes immediately without refresh
+      if (setUserDetails) {
+        setUserDetails(prev => ({
+          ...prev,
+          projects: projects
+        }));
+      }
+
       toast(
         <p className="flex gap-3 items-center">
           <CheckCheck className="text-green-500" /> {t('savedSuccessfully')}

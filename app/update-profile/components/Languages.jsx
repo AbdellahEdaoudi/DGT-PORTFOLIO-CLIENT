@@ -6,7 +6,7 @@ import { CheckCheck, Loader, Plus, Trash2 } from "lucide-react";
 
 import { useTranslation } from "../../lib/translations";
 
-export default function Languages({ userData }) {
+export default function Languages({ userData, setUserDetails }) {
   const { t } = useTranslation(userData?.displayLanguage || 'en');
   const [languages, setLanguages] = useState(userData.languages || []);
   const [loading, setLoading] = useState(false);
@@ -24,6 +24,15 @@ export default function Languages({ userData }) {
     setLoading(true);
     try {
       await axios.put(`/api/proxy/users/update/languages`, { languages });
+
+      // Update global state to reflect changes immediately without refresh
+      if (setUserDetails) {
+        setUserDetails(prev => ({
+          ...prev,
+          languages: languages
+        }));
+      }
+
       toast(
         <p className="flex gap-3 items-center">
           <CheckCheck className="text-cyan-500" /> {t('savedSuccessfully')}

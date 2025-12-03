@@ -6,7 +6,7 @@ import { ArrowUp, ArrowDown, CheckCheck, Loader, Plus, Trash2 } from "lucide-rea
 
 import { useTranslation } from "../../lib/translations";
 
-export default function Experience({ userData }) {
+export default function Experience({ userData, setUserDetails }) {
   const { t } = useTranslation(userData?.displayLanguage || 'en');
   const [experience, setExperience] = useState(userData.experience || []);
   const [loading, setLoading] = useState(false);
@@ -39,6 +39,15 @@ export default function Experience({ userData }) {
     setLoading(true);
     try {
       await axios.put(`/api/proxy/users/update/experience`, { experience });
+
+      // Update global state to reflect changes immediately without refresh
+      if (setUserDetails) {
+        setUserDetails(prev => ({
+          ...prev,
+          experience: experience
+        }));
+      }
+
       toast(
         <p className="flex gap-3 items-center">
           <CheckCheck className="text-amber-500" /> {t('savedSuccessfully')}
