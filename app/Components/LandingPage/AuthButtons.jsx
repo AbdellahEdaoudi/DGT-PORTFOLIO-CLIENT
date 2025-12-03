@@ -2,7 +2,7 @@
 import { signIn, signOut, useSession } from "next-auth/react"
 import { useContext, useState, useEffect, useRef } from "react";
 import { MyContext } from "../../Context/MyContext";
-import { BookUser, LogOut, MessageSquare, NotebookText, Settings } from "lucide-react";
+import { BookUser, LogOut, MessageSquare, NotebookText, Globe, Menu } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
@@ -82,7 +82,7 @@ export default function AuthButtons({ labels }) {
           }}
           className="hover:scale-105 border border-cyan-900 p-2 rounded-lg bg-cyan-700  text-white duration-300 cursor-pointer"
         >
-          <Settings />
+          <Menu />
         </span>
         {/* SETTING [] */}
         <nav
@@ -110,6 +110,17 @@ export default function AuthButtons({ labels }) {
           >
             <div className="flex items-center gap-1">
               <NotebookText /> {t.businessLinks}
+            </div>
+          </Link>
+          <Link
+            href={"/custom-domain"}
+            onClick={() => {
+              setSetting(!setting);
+            }}
+            className="bg-gray-700 py-2 border-b flex items-center justify-center border-gray-600 hover:bg-gray-600 transition duration-300 rounded-sm hover:scale-105 text-center mb-2"
+          >
+            <div className="flex items-center gap-1">
+              <Globe /> Custom Domain
             </div>
           </Link>
           <Link

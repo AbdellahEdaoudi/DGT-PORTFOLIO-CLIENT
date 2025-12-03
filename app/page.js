@@ -52,17 +52,41 @@ export async function generateMetadata() {
 }
 
 
+
 export default async function Home() {
-  const reserved = ["dgtportfolio", "localhost:3000", "www"];
+  const reserved = ["dgtportfolio", "localhost:3000", "www", "localhost"];
   const host = headers().get('host');
   const subdomain = host.split('.')[0];
-  const isSubdomain = subdomain && !reserved.includes(subdomain);
 
+  let username = null;
   let userSchema = null;
 
-  if (isSubdomain) {
+  // Check if it's a custom domain (not dgtportfolio.com)
+  if (!host.includes('dgtportfolio.com') && !host.includes('localhost:3000')) {
     try {
-      const res = await fetch(`https://dgt-portfolio-server.vercel.app/users/metauser/${subdomain}`, { next: { revalidate: 3600 } });
+      const res = await fetch(`https://dgt-portfolio-server.vercel.app/api/custom-domain/user/${host}`, { next: { revalidate: 3600 } });
+
+      if (res.ok) {
+        const data = await res.json();
+        if (data.status && data.user) {
+          username = data.user.username;
+        }
+      }
+    } catch (error) {
+      console.error("Error fetching custom domain:", error);
+    }
+  }
+
+  // Check if it's a subdomain
+  const isSubdomain = subdomain && !reserved.includes(subdomain);
+
+  if (!username && isSubdomain) {
+    username = subdomain;
+  }
+
+  if (username) {
+    try {
+      const res = await fetch(`https://dgt-portfolio-server.vercel.app/users/metauser/${username}`, { next: { revalidate: 3600 } });
 
       if (res.status === 404) {
         notFound();
@@ -76,12 +100,11 @@ export default async function Home() {
           "@context": "https://schema.org",
           "@type": "Person",
           "name": user.fullname,
-          "jobTitle": user.category || "Professional", // Assuming category holds the job title like 'Full Stack Developer'
+          "jobTitle": user.category || "Professional",
           "image": user.urlimage,
-          "url": `https://${subdomain}.dgtportfolio.com`,
+          "url": `https://${username}.dgtportfolio.com`,
           "description": user.about,
           "sameAs": [
-            // Add social links if they exist in the user object
             user.socials?.linkedin,
             user.socials?.github,
             user.socials?.twitter,
@@ -93,7 +116,7 @@ export default async function Home() {
             user.socials?.reddit,
             user.socials?.twitch,
             user.socials?.snapchat,
-          ].filter(Boolean) // Remove undefined/null values
+          ].filter(Boolean)
         };
       }
     } catch (error) {
@@ -132,8 +155,8 @@ export default async function Home() {
           dangerouslySetInnerHTML={{ __html: JSON.stringify(userSchema) }}
         />
       )}
-      {isSubdomain ? (
-        <SubdomainClient username={subdomain} />
+      {username ? (
+        <SubdomainClient username={username} />
       ) : (
         <LandingPage dict={dict} />
       )}
