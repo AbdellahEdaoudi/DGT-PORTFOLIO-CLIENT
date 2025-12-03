@@ -8,12 +8,16 @@ import {
   CheckCircle2,
   Globe,
   Briefcase,
+  FileDown,
+  Loader,
 } from "lucide-react"
 import QrcodeProfile from "../../[username]/components/QrcodeProfile"
 import UserLinks from "../../[username]/components/UserLinks"
 import Image from "next/image"
 import Link from "next/link"
 import { useTranslation } from "../../lib/translations"
+import { PDFDownloadLink } from "@react-pdf/renderer"
+import ResumePdf from "../../update-profile/components/ResumePdf"
 
 export default function Themeone({ userDetails, userLinks, bgcolor }) {
   const { t } = useTranslation(userDetails?.displayLanguage || 'en')
@@ -55,15 +59,35 @@ export default function Themeone({ userDetails, userLinks, bgcolor }) {
                 </h1>
                 <div className="flex gap-3">
                   {/* // Copy link and QR code buttons */}
-                  <button
-                    title={t('copyLink')}
-                    onClick={copyProfileLink}
-                    className="flex items-center gap-2 px-4 py-2 bg-white/10 hover:bg-white/20 rounded-lg text-white transition-all duration-300 backdrop-blur-md border border-white/10"
-                  >
-                    {copied ? <CheckCircle2 size={18} /> : <Copy size={18} />}
-                    {/* {copied ? "Copied" : "Copy Link"} */}
-                    {copied}
-                  </button>
+                  <PDFDownloadLink
+                   document={<ResumePdf userData={userDetails} />}
+                   title={(() => {
+                       const translations = {
+                         en: 'Download CV',
+                         fr: 'Télécharger CV',
+                         ar: 'تحميل السيرة الذاتية',
+                         de: 'Lebenslauf herunterladen',
+                         ru: 'Скачать резюме',
+                         ja: '履歴書をダウンロード',
+                         zh: '下载简历',
+                       };
+                       return translations[userDetails?.displayLanguage] || translations['en']
+                     })()}
+                   fileName={`cv.${userDetails?.username || 'resume'}.pdf`}
+                   className=" text-white bg-white/10 hover:bg-white/20 font-bold px-5 py-3 rounded-lg transition-all duration-300 flex items-center gap-2 transform hover:scale-105 shadow-lg"
+                 >
+                   {({ blob, url, loading, error }) =>
+                     loading ? (
+                       <>
+                         <Loader size={20} className="animate-spin" /> {t('loading') || 'Loading...'}
+                       </>
+                     ) : (
+                       <>
+                         <FileDown size={20} />
+                       </>
+                     )
+                   }
+                 </PDFDownloadLink>
                   {/* // Qrcode */}
                   <div
                     onClick={() => setShowQR(!showQR)}

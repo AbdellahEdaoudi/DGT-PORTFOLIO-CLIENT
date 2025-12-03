@@ -1,12 +1,14 @@
 "use client"
 import { useState } from "react"
-import { ArrowUpRight, Zap, Mail, Copy, CheckCircle2, Briefcase, GraduationCap } from "lucide-react"
+import { ArrowUpRight, Zap, Mail, Copy, CheckCircle2, Briefcase, GraduationCap, Loader, FileDown } from "lucide-react"
 import UserLinks from "../../[username]/components/UserLinks"
 import QrcodeProfile from "../../[username]/components/QrcodeProfile"
 import Image from "next/image"
 import MagicalLoader from "../MagicalLoader"
 import Link from "next/link"
 import { useTranslation } from "../../lib/translations"
+import { PDFDownloadLink } from "@react-pdf/renderer"
+import ResumePdf from "../../update-profile/components/ResumePdf"
 
 export default function ThemeFive({ userDetails, userLinks }) {
   const { t } = useTranslation(userDetails?.displayLanguage || 'en')
@@ -46,13 +48,35 @@ export default function ThemeFive({ userDetails, userLinks }) {
               </h1>
               <div className="flex flex-wrap gap-3">
                 {/* Copy Link */}
-                <button
-                  title={t('copyLink')}
-                  onClick={copyProfileLink}
-                  className="flex items-center gap-2 px-4 py-2 bg-white/10 hover:bg-yellow-500/20 rounded-lg text-white transition-all duration-300 backdrop-blur-md border border-white/10 hover:border-yellow-500/50"
-                >
-                  {copied ? <CheckCircle2 className="text-yellow-400" /> : <Copy />}
-                </button>
+                <PDFDownloadLink
+                   document={<ResumePdf userData={userDetails} />}
+                   title={(() => {
+                       const translations = {
+                         en: 'Download CV',
+                         fr: 'Télécharger CV',
+                         ar: 'تحميل السيرة الذاتية',
+                         de: 'Lebenslauf herunterladen',
+                         ru: 'Скачать резюме',
+                         ja: '履歴書をダウンロード',
+                         zh: '下载简历',
+                       };
+                       return translations[userDetails?.displayLanguage] || translations['en']
+                     })()}
+                   fileName={`cv.${userDetails?.username || 'resume'}.pdf`}
+                   className=" text-white bg-white/10 hover:bg-white/20 font-bold px-5 py-3 rounded-lg transition-all duration-300 flex items-center gap-2 transform hover:scale-105 shadow-lg"
+                 >
+                   {({ blob, url, loading, error }) =>
+                     loading ? (
+                       <>
+                         <Loader size={20} className="animate-spin" /> {t('loading') || 'Loading...'}
+                       </>
+                     ) : (
+                       <>
+                         <FileDown size={20} />
+                       </>
+                     )
+                   }
+                 </PDFDownloadLink>
                 {/* QR Code */}
                 <div
                   onClick={() => setShowQR(!showQR)}

@@ -1,11 +1,13 @@
 "use client"
 import { useState } from "react"
-import { Github, Linkedin, Mail, Code2, Briefcase, CheckCircle2, Copy, GraduationCap, Globe, Sparkles, User, Layers, Zap } from "lucide-react"
+import { Github, Linkedin, Mail, Code2, Briefcase, CheckCircle2, Copy, GraduationCap, Globe, Sparkles, User, Layers, Zap, Loader, FileDown } from "lucide-react"
 import QrcodeProfile from "../../[username]/components/QrcodeProfile"
 import UserLinks from "../../[username]/components/UserLinks"
 import Image from "next/image"
 import Link from "next/link"
 import { useTranslation } from "../../lib/translations"
+import { PDFDownloadLink } from "@react-pdf/renderer"
+import ResumePdf from "../../update-profile/components/ResumePdf"
 
 export default function ThemeTwo({ userDetails, userLinks, bgcolor }) {
   const { t } = useTranslation(userDetails?.displayLanguage || 'en')
@@ -53,13 +55,35 @@ export default function ThemeTwo({ userDetails, userLinks, bgcolor }) {
             </h1>
             <div className="flex gap-3">
               {/* Copy Link */}
-              <button
-                title={t('copyLink')}
-                onClick={copyProfileLink}
-                className="flex items-center gap-2 px-4 py-2 bg-white/10 hover:bg-blue-500/20 rounded-lg text-white transition-all duration-300 backdrop-blur-md border border-white/10 hover:border-blue-500/50"
-              >
-                {copied ? <CheckCircle2 className="text-blue-400" /> : <Copy />}
-              </button>
+              <PDFDownloadLink
+               document={<ResumePdf userData={userDetails} />}
+               fileName={`cv.${userDetails?.username || 'resume'}.pdf`}
+               title={(() => {
+                       const translations = {
+                         en: 'Download CV',
+                         fr: 'Télécharger CV',
+                         ar: 'تحميل السيرة الذاتية',
+                         de: 'Lebenslauf herunterladen',
+                         ru: 'Скачать резюме',
+                         ja: '履歴書をダウンロード',
+                         zh: '下载简历',
+                       };
+                       return translations[userDetails?.displayLanguage] || translations['en']
+                     })()}
+               className=" text-white bg-white/10 hover:bg-white/20 font-bold px-5 py-3 rounded-lg transition-all duration-300 flex items-center gap-2 transform hover:scale-105 shadow-lg"
+             >
+               {({ blob, url, loading, error }) =>
+                 loading ? (
+                   <>
+                     <Loader size={20} className="animate-spin" /> {t('loading') || 'Loading...'}
+                   </>
+                 ) : (
+                   <>
+                     <FileDown size={20} />
+                   </>
+                 )
+               }
+             </PDFDownloadLink>
               {/* QR Code */}
               <div
                 onClick={() => setShowQR(!showQR)}
@@ -75,8 +99,8 @@ export default function ThemeTwo({ userDetails, userLinks, bgcolor }) {
           </div>
 
           {/* Hero Section */}
-          <div className="flex flex-col-reverse md:flex-row gap-10 items-center justify-between mb-8">
-            <div className="flex-1 text-center md:text-left">
+          <div className={`flex flex-col-reverse md:flex-row gap-10 items-center justify-between mb-8`}>
+            <div className={`flex-1 text-center  ${userDetails?.displayLanguage === 'ar' ? 'md:text-right' : 'md:text-left'}`}>
               <div className="inline-block px-3 py-1 mb-4 text-xs tracking-wider text-blue-300 uppercase bg-blue-500/10 rounded-full border border-blue-500/20">
                 Welcome to my world
               </div>
@@ -88,7 +112,7 @@ export default function ThemeTwo({ userDetails, userLinks, bgcolor }) {
                 {userDetails?.category}
                 <Sparkles size={24} className="text-cyan-400" />
               </p>
-              <p className="text-md text-left text-gray-300 max-w-2xl leading-relaxed mx-auto md:mx-0">
+              <p className={`text-md  text-gray-300 max-w-2xl leading-relaxed mx-auto md:mx-0 ${userDetails?.displayLanguage === 'ar' ? 'text-right' : 'text-left'}`}>
                 {userDetails?.about}
               </p>
             </div>
