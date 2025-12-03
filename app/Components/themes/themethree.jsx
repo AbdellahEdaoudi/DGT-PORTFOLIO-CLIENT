@@ -27,9 +27,9 @@ export default function ThemeThree({ userDetails, userLinks }) {
   if (!userDetails || !userLinks) { return <MagicalLoader /> }
 
   return (
-    <div 
-    dir={userDetails?.displayLanguage === 'ar' ? 'rtl' : 'ltr'}
-    className="min-h-screen bg-gradient-to-br from-indigo-950 via-purple-950 to-pink-950 text-white overflow-hidden relative">
+    <div
+      dir={userDetails?.displayLanguage === 'ar' ? 'rtl' : 'ltr'}
+      className="min-h-screen bg-gradient-to-br from-indigo-950 via-purple-950 to-pink-950 text-white overflow-hidden relative">
       {/* Enhanced Floating orbs background */}
       <div className="fixed inset-0 -z-10 overflow-hidden pointer-events-none">
         <div className="absolute top-0 left-0 w-[500px] h-[500px] bg-pink-600/20 rounded-full mix-blend-screen filter blur-[100px] opacity-30 animate-blob"></div>
@@ -354,9 +354,12 @@ export default function ThemeThree({ userDetails, userLinks }) {
                         </div>
                         <p className="text-lg text-purple-300 mb-4">{edu.school}</p>
                         {edu.field && (
-                          <p className="text-gray-400 text-sm leading-relaxed border-t border-white/10 pt-4 mt-4">
-                            {edu.field}
-                          </p>
+                          <div className="p-4 bg-slate-900/50 rounded-lg border-l-4 border-purple-500/50">
+                            <p className="text-xs text-gray-500 uppercase tracking-wider mb-2">{t('field')}</p>
+                            <p className="text-sm md:text-base text-gray-300 leading-relaxed">
+                              {edu.field}
+                            </p>
+                          </div>
                         )}
                       </div>
                     </div>

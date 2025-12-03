@@ -118,7 +118,7 @@ export default function Projects({ userData, setUserDetails }) {
 
               <input
                 type="text"
-                placeholder={t('technologies')}
+                placeholder={t('technologies')+" (e.g. t1,t2,t3)"}
                 value={(proj.technologies || []).join(", ")}
                 onChange={(e) =>
                   updateObjectInArray(

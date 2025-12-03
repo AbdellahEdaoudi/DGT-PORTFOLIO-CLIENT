@@ -258,7 +258,19 @@ function Userinfo({ userData, setUserDetails }) {
               </>
             ) : (
               <>
-                <FileDown size={20} /> {t('downloadCV') || 'Download CV'}
+                <FileDown size={20} />
+                {(() => {
+                  const translations = {
+                    en: 'Download CV',
+                    fr: 'Télécharger CV',
+                    ar: 'تحميل السيرة الذاتية',
+                    de: 'Lebenslauf herunterladen',
+                    ru: 'Скачать резюме',
+                    ja: '履歴書をダウンロード',
+                    zh: '下载简历',
+                  };
+                  return translations[userData?.displayLanguage] || translations['en'];
+                })()}
               </>
             )
           }

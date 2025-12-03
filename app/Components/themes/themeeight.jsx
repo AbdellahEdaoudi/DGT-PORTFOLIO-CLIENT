@@ -353,9 +353,12 @@ export default function ThemeEight({ userDetails, userLinks, bgcolor }) {
                                                 </div>
                                                 <p className="text-lg text-amber-300 mb-4">{edu.school}</p>
                                                 {edu.field && (
-                                                    <p className="text-gray-400 text-sm leading-relaxed border-t border-white/10 pt-4 mt-4">
-                                                        {edu.field}
-                                                    </p>
+                                                    <div className="p-4 bg-slate-900/50 rounded-lg border-l-4 border-amber-500/50">
+                                                        <p className="text-xs text-gray-500 uppercase tracking-wider mb-2">{t('field')}</p>
+                                                        <p className="text-sm md:text-base text-gray-300 leading-relaxed">
+                                                            {edu.field}
+                                                        </p>
+                                                    </div>
                                                 )}
                                             </div>
                                         </div>

@@ -40,9 +40,9 @@ export default function ThemeEleven({ userDetails, userLinks }) {
     }, []);
 
     return (
-        <div 
-        dir={userDetails?.displayLanguage === 'ar' ? 'rtl' : 'ltr'}
-        className="min-h-screen bg-[#050510] text-cyan-50 font-mono overflow-x-hidden relative selection:bg-cyan-500 selection:text-black">
+        <div
+            dir={userDetails?.displayLanguage === 'ar' ? 'rtl' : 'ltr'}
+            className="min-h-screen bg-[#050510] text-cyan-50 font-mono overflow-x-hidden relative selection:bg-cyan-500 selection:text-black">
 
             {/* Space Background */}
             <div className="fixed inset-0 z-0 pointer-events-none">
@@ -110,9 +110,19 @@ export default function ThemeEleven({ userDetails, userLinks }) {
                             </div>
                         </div>
 
-                        <div className="text-center lg:text-left">
+                        <div  className={`text-center ${userDetails?.displayLanguage === 'ar' ? 'lg:text-right' : 'lg:text-left'}`}>
                             <div className="inline-block px-2 py-1 mb-2 border border-cyan-500/50 text-xs text-cyan-400 uppercase tracking-[0.2em] bg-cyan-950/50">
-                                Identity Verified
+                                {
+                                    {
+                                        en: 'Verified',
+                                        fr: 'Vérifié',
+                                        ar: 'متحقق',
+                                        de: 'Verifiziert',
+                                        ru: 'Проверено',
+                                        ja: '認証済み',
+                                        zh: '已验证',
+                                    }[userDetails?.displayLanguage] || 'Verified'
+                                }
                             </div>
                             <h1 className="text-3xl md:text-5xl font-bold mb-2 text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-purple-400 drop-shadow-[0_0_10px_rgba(34,211,238,0.5)]">
                                 {userDetails?.fullname}
@@ -143,7 +153,7 @@ export default function ThemeEleven({ userDetails, userLinks }) {
                             <section>
                                 <h3 className="text-cyan-400 text-sm uppercase tracking-widest mb-4 flex items-center gap-2">
                                     <span className="w-8 h-[1px] bg-cyan-500"></span>
-                                    System Capabilities
+                                    {t('services')}
                                 </h3>
                                 <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
                                     {userDetails.services.map((service, i) => (
@@ -161,16 +171,22 @@ export default function ThemeEleven({ userDetails, userLinks }) {
                             <section>
                                 <h3 className="text-cyan-400 text-sm uppercase tracking-widest mb-4 flex items-center gap-2">
                                     <span className="w-8 h-[1px] bg-cyan-500"></span>
-                                    Mission Log
+                                    {t('experience')}
                                 </h3>
                                 <div className="space-y-4">
                                     {userDetails.experience.map((exp, i) => (
-                                        <div key={i} className="relative pl-6 border-l border-cyan-500/30 pb-4 last:pb-0">
-                                            <div className="absolute -left-[5px] top-1 w-2.5 h-2.5 bg-black border border-cyan-500 rounded-full"></div>
+                                        <div key={i} className={`${userDetails.displayLanguage === "ar" ? "border-r pr-6" : "border-l pl-6"} relative   border-cyan-500/30 pb-4 last:pb-0`}>
+                                            {userDetails.displayLanguage === "ar" ? (
+                                                <div className="absolute -right-[5px] top-1 w-2.5 h-2.5 bg-black border border-cyan-500 rounded-full"></div>
+                                            ) : (
+                                                <div className="absolute -left-[5px] top-1 w-2.5 h-2.5 bg-black border border-cyan-500 rounded-full"></div>
+                                            )}
                                             <div className="flex flex-col sm:flex-row justify-between items-start mb-1 gap-1">
                                                 <h4 className="text-lg font-bold text-white">{exp.role}</h4>
-                                                <span className="text-xs text-cyan-400 font-mono border border-cyan-500/30 px-2 py-0.5 rounded bg-cyan-950/30 whitespace-nowrap">
-                                                    {exp.startDate} - {exp.endDate}
+                                                <span className={`${userDetails.displayLanguage === "ar" ? "flex gap-1" : "flex flex-row-reverse gap-1"} text-xs text-cyan-400 font-mono border border-cyan-500/30 px-2 py-0.5 rounded bg-cyan-950/30 whitespace-nowrap`}>
+                                                     <p>{exp.startDate}</p>
+                                                     <p> - </p>
+                                                     <p>{exp.endDate}</p>
                                                 </span>
                                             </div>
                                             <p className="text-purple-300 text-sm mb-2">{exp.company}</p>
@@ -186,7 +202,7 @@ export default function ThemeEleven({ userDetails, userLinks }) {
                             <section>
                                 <h3 className="text-cyan-400 text-sm uppercase tracking-widest mb-4 flex items-center gap-2">
                                     <span className="w-8 h-[1px] bg-cyan-500"></span>
-                                    Deployed Projects
+                                    {t('projects')}
                                 </h3>
                                 <div className="grid gap-4">
                                     {userDetails.projects.map((project, i) => (
@@ -199,7 +215,17 @@ export default function ThemeEleven({ userDetails, userLinks }) {
                                             <div className="flex-1">
                                                 <div className="flex justify-between items-start">
                                                     <h4 className="font-bold text-cyan-50 text-lg group-hover:text-cyan-400 transition-colors">{project.title}</h4>
-                                                    {project.link && <a href={project.link} target="_blank" className="text-cyan-500 hover:text-white"><ArrowUpRight size={18} /></a>}
+                                                    {project.link && (
+                                                        <a
+                                                            href={project.link}
+                                                            target="_blank"
+                                                            rel="noopener noreferrer"
+                                                            className="flex items-center gap-1 text-cyan-400 hover:text-white hover:underline transition-colors text-sm whitespace-nowrap"
+                                                        >
+                                                            {t('viewProject')}
+                                                            <ArrowUpRight size={16} />
+                                                        </a>
+                                                    )}
                                                 </div>
                                                 <p className="text-sm text-cyan-100/60 mt-1 line-clamp-2">{project.description}</p>
                                                 <div className="flex gap-2 mt-3 flex-wrap">
@@ -221,7 +247,7 @@ export default function ThemeEleven({ userDetails, userLinks }) {
                             <section>
                                 <h3 className="text-cyan-400 text-sm uppercase tracking-widest mb-4 flex items-center gap-2">
                                     <span className="w-8 h-[1px] bg-cyan-500"></span>
-                                    Tech Stack
+                                    {t('skills')}
                                 </h3>
                                 <div className="flex flex-wrap gap-2">
                                     {userDetails.skills.map((skill, i) => (
@@ -238,7 +264,7 @@ export default function ThemeEleven({ userDetails, userLinks }) {
                             <section>
                                 <h3 className="text-cyan-400 text-sm uppercase tracking-widest mb-4 flex items-center gap-2">
                                     <span className="w-8 h-[1px] bg-cyan-500"></span>
-                                    Communication Channels
+                                    {t('followMe')}
                                 </h3>
                                 <div className="flex flex-wrap gap-4">
                                     {[

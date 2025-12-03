@@ -505,7 +505,7 @@ export const translations = {
         allRightsReserved: "جميع الحقوق محفوظة",
 
         // Update Profile Components
-        summary: "ملخص",
+        summary: "نبذة عنك",
         tellUsAboutYourself: "أخبرنا عن نفسك...",
         savedSuccessfully: "تم الحفظ بنجاح!",
         businessLinks: "روابط العمل",

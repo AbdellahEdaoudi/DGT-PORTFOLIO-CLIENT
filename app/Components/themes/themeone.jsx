@@ -273,7 +273,7 @@ export default function Themeone({ userDetails, userLinks, bgcolor }) {
                             key={idx}
                             className="bg-white/10 backdrop-blur-md border border-white/20 rounded-xl p-4 md:p-6 hover:bg-white/15 transition-all duration-300"
                           >
-                            <div className="  mb-2">
+                            <div className="mb-2">
                               <div className="flex items-center justify-between">
                                 <h4 className="text-xl font-bold text-white">{edu.degree}</h4>
                                 <span className="text-sm text-white/60">
@@ -282,7 +282,14 @@ export default function Themeone({ userDetails, userLinks, bgcolor }) {
                               </div>
                               <p className="text-white/80 font-semibold">{edu.school}</p>
                             </div>
-                            <p className="text-white/70">{edu.field}</p>
+                            {edu.field && (
+                              <div className="mt-3 p-4 bg-black/30 rounded-lg border-l-4 border-white/30">
+                                <p className="text-xs text-gray-400 uppercase tracking-wider mb-2">{t('field')}</p>
+                                <p className="text-sm md:text-base text-white/80 leading-relaxed">
+                                  {edu.field}
+                                </p>
+                              </div>
+                            )}
                           </div>
                         ))}
                       </div>
@@ -305,6 +312,7 @@ export default function Themeone({ userDetails, userLinks, bgcolor }) {
                       </div>
                     </div>
                   )}
+
                   {/* Social Media */}
                   {userDetails.socials && Object.values(userDetails.socials).some(url => url) && (
                     <div className="mb-12">

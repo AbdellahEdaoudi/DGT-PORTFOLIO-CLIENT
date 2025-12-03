@@ -24,9 +24,9 @@ export default function ThemeTen({ userDetails, userLinks }) {
     }
 
     return (
-        <div 
-        dir={userDetails?.displayLanguage === 'ar' ? 'rtl' : 'ltr'}
-        className="min-h-screen bg-[#020617] text-slate-200 overflow-hidden relative selection:bg-indigo-500 selection:text-white">
+        <div
+            dir={userDetails?.displayLanguage === 'ar' ? 'rtl' : 'ltr'}
+            className="min-h-screen bg-[#020617] text-slate-200 overflow-hidden relative selection:bg-indigo-500 selection:text-white">
 
             {/* Background Effects (Dark/Indigo based) */}
             <div className="fixed inset-0 -z-10 overflow-hidden pointer-events-none">
@@ -351,9 +351,12 @@ export default function ThemeTen({ userDetails, userLinks }) {
                                                 </div>
                                                 <p className="text-lg text-indigo-400 font-medium mb-4">{edu.school}</p>
                                                 {edu.field && (
-                                                    <p className="text-slate-400 text-sm leading-relaxed border-t border-slate-800 pt-4 mt-4">
-                                                        {edu.field}
-                                                    </p>
+                                                    <div className="p-4 bg-slate-800/50 rounded-lg border-l-4 border-indigo-500/50">
+                                                        <p className="text-xs text-slate-500 uppercase tracking-wider mb-2">{t('field')}</p>
+                                                        <p className="text-sm md:text-base text-slate-300 leading-relaxed">
+                                                            {edu.field}
+                                                        </p>
+                                                    </div>
                                                 )}
                                             </div>
                                         </div>
