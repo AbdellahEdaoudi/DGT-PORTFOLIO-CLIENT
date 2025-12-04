@@ -9,6 +9,7 @@ import Link from "next/link"
 import { useTranslation } from "../../lib/translations"
 import { PDFDownloadLink } from "@react-pdf/renderer"
 import ResumePdf from "../../update-profile/components/ResumePdf"
+import ImageModal from "../ImageModal"
 
 export default function ThemeThree({ userDetails, userLinks }) {
   const { t } = useTranslation(userDetails?.displayLanguage || 'en')
@@ -16,6 +17,7 @@ export default function ThemeThree({ userDetails, userLinks }) {
   const [copied, setCopied] = useState(false);
   const [showQR, setShowQR] = useState(false);
   const [expanded, setExpanded] = useState(false);
+  const [selectedImage, setSelectedImage] = useState(null);
   const PORTFOLIO = `https://${userDetails?.username}.dgtportfolio.com`
 
 
@@ -32,6 +34,11 @@ export default function ThemeThree({ userDetails, userLinks }) {
     <div
       dir={userDetails?.displayLanguage === 'ar' ? 'rtl' : 'ltr'}
       className="min-h-screen bg-gradient-to-br from-indigo-950 via-purple-950 to-pink-950 text-white overflow-hidden relative">
+      <ImageModal
+        isOpen={!!selectedImage}
+        onClose={() => setSelectedImage(null)}
+        imageSrc={selectedImage}
+      />
       {/* Enhanced Floating orbs background */}
       <div className="fixed inset-0 -z-10 overflow-hidden pointer-events-none">
         <div className="absolute top-0 left-0 w-[500px] h-[500px] bg-pink-600/20 rounded-full mix-blend-screen filter blur-[100px] opacity-30 animate-blob"></div>
@@ -266,9 +273,10 @@ export default function ThemeThree({ userDetails, userLinks }) {
                               height={500}
                               src={project.image}
                               alt={project.title}
-                              className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                              onClick={() => setSelectedImage(project.image)}
+                              className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 cursor-pointer"
                             />
-                            <div className="absolute inset-0 bg-gradient-to-r from-purple-900/50 to-transparent mix-blend-multiply"></div>
+                            <div className="absolute inset-0 bg-gradient-to-r from-purple-900/50 to-transparent mix-blend-multiply pointer-events-none"></div>
                           </div>
                         )}
                         <div className="flex-1 p-4 md:p-8">

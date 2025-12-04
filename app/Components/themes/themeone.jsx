@@ -18,12 +18,14 @@ import Link from "next/link"
 import { useTranslation } from "../../lib/translations"
 import { PDFDownloadLink } from "@react-pdf/renderer"
 import ResumePdf from "../../update-profile/components/ResumePdf"
+import ImageModal from "../ImageModal"
 
 export default function Themeone({ userDetails, userLinks, bgcolor }) {
   const { t } = useTranslation(userDetails?.displayLanguage || 'en')
   const [copied, setCopied] = useState(false);
   const [showQR, setShowQR] = useState(false);
   const [expanded, setExpanded] = useState(false);
+  const [selectedImage, setSelectedImage] = useState(null);
   const PORTFOLIO = `https://${userDetails?.username}.dgtportfolio.com`
 
   const copyProfileLink = () => {
@@ -41,6 +43,11 @@ export default function Themeone({ userDetails, userLinks, bgcolor }) {
     >
 
       <div className="">
+        <ImageModal
+          isOpen={!!selectedImage}
+          onClose={() => setSelectedImage(null)}
+          imageSrc={selectedImage}
+        />
         {/* Animated background */}
         <div className="absolute inset-0 overflow-hidden">
           <div className="absolute top-0 left-1/4 w-96 h-96 bg-white/5 rounded-full blur-3xl"></div>
@@ -246,7 +253,8 @@ export default function Themeone({ userDetails, userLinks, bgcolor }) {
                                 <Image width={500} height={500}
                                   src={project.image}
                                   alt={project.title}
-                                  className="w-full md:w-1/3 h-64 md:h-auto object-cover group-hover:scale-110 transition-transform duration-300"
+                                  onClick={() => setSelectedImage(project.image)}
+                                  className="w-full md:w-1/3 h-64 md:h-auto object-cover group-hover:scale-110 transition-transform duration-300 cursor-pointer"
                                 />
                               )}
                               <div className="p-6 flex-1">

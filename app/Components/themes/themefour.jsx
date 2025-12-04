@@ -9,12 +9,14 @@ import Link from "next/link";
 import { useTranslation } from "../../lib/translations";
 import { PDFDownloadLink } from "@react-pdf/renderer";
 import ResumePdf from "../../update-profile/components/ResumePdf";
+import ImageModal from "../ImageModal";
 
 export default function ThemeFour({ userDetails, userLinks }) {
   const { t } = useTranslation(userDetails?.displayLanguage || 'en')
   const [copied, setCopied] = useState(false);
   const [expanded, setExpanded] = useState(false);
   const [showQR, setShowQR] = useState(false);
+  const [selectedImage, setSelectedImage] = useState(null);
   const PORTFOLIO = `https://${userDetails?.username}.dgtportfolio.com`
 
 
@@ -31,6 +33,11 @@ export default function ThemeFour({ userDetails, userLinks }) {
     <div>
       {userDetails && (
         <div dir={userDetails?.displayLanguage === 'ar' ? 'rtl' : 'ltr'} className="min-h-screen bg-slate-950 text-white overflow-hidden">
+          <ImageModal
+            isOpen={!!selectedImage}
+            onClose={() => setSelectedImage(null)}
+            imageSrc={selectedImage}
+          />
           <div className="px-4 md:px-6">
             {/* Header */}
             <header className="pt-7 pb-12">
@@ -43,35 +50,35 @@ export default function ThemeFour({ userDetails, userLinks }) {
                   <div className="flex gap-3">
                     {/* Copy Link */}
                     <PDFDownloadLink
-                   document={<ResumePdf userData={userDetails} />}
-                   title={(() => {
-                       const translations = {
-                         en: 'Download CV',
-                         fr: 'Télécharger CV',
-                         es: 'Descargar CV',
-                         ar: 'تحميل السيرة الذاتية',
-                         de: 'Lebenslauf herunterladen',
-                         ru: 'Скачать резюме',
-                         ja: '履歴書をダウンロード',
-                         zh: '下载简历',
-                       };
-                       return translations[userDetails?.displayLanguage] || translations['en']
-                     })()}
-                   fileName={`cv.${userDetails?.username || 'resume'}.pdf`}
-                   className=" text-white bg-white/10 hover:bg-white/20 font-bold px-5 py-3 rounded-lg transition-all duration-300 flex items-center gap-2 transform hover:scale-105 shadow-lg"
-                 >
-                   {({ blob, url, loading, error }) =>
-                     loading ? (
-                       <>
-                         <Loader size={20} className="animate-spin" /> {t('loading') || 'Loading...'}
-                       </>
-                     ) : (
-                       <>
-                         <FileDown size={20} />
-                       </>
-                     )
-                   }
-                 </PDFDownloadLink>
+                      document={<ResumePdf userData={userDetails} />}
+                      title={(() => {
+                        const translations = {
+                          en: 'Download CV',
+                          fr: 'Télécharger CV',
+                          es: 'Descargar CV',
+                          ar: 'تحميل السيرة الذاتية',
+                          de: 'Lebenslauf herunterladen',
+                          ru: 'Скачать резюме',
+                          ja: '履歴書をダウンロード',
+                          zh: '下载简历',
+                        };
+                        return translations[userDetails?.displayLanguage] || translations['en']
+                      })()}
+                      fileName={`cv.${userDetails?.username || 'resume'}.pdf`}
+                      className=" text-white bg-white/10 hover:bg-white/20 font-bold px-5 py-3 rounded-lg transition-all duration-300 flex items-center gap-2 transform hover:scale-105 shadow-lg"
+                    >
+                      {({ blob, url, loading, error }) =>
+                        loading ? (
+                          <>
+                            <Loader size={20} className="animate-spin" /> {t('loading') || 'Loading...'}
+                          </>
+                        ) : (
+                          <>
+                            <FileDown size={20} />
+                          </>
+                        )
+                      }
+                    </PDFDownloadLink>
                     {/* QR Code */}
                     <div
                       onClick={() => setShowQR(!showQR)}
@@ -175,10 +182,10 @@ export default function ThemeFour({ userDetails, userLinks }) {
                           <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-2 mb-3">
                             <h3 className="text-xl md:text-2xl font-bold text-emerald-300 group-hover:text-emerald-200 transition">{exp.role}</h3>
                             <span className={`text-gray-400 text-sm ${userDetails.displayLanguage === "ar" ? "flex gap-1" : "flex flex-row-reverse gap-1"}`}>
-                            <p>{exp.startDate}</p>
-                            <p> - </p>
-                            <p>{exp.endDate}</p>
-                          </span>
+                              <p>{exp.startDate}</p>
+                              <p> - </p>
+                              <p>{exp.endDate}</p>
+                            </span>
                           </div>
                           <p className="text-emerald-400 font-semibold mb-3 text-lg">{exp.company}</p>
                           <div className={`mt-3 p-4 bg-slate-900/50 rounded-lg  border-emerald-500/50 ${userDetails.displayLanguage === "ar" ? "border-r-4" : "border-l-4"}`}>
@@ -231,9 +238,10 @@ export default function ThemeFour({ userDetails, userLinks }) {
                               <Image width={500} height={500}
                                 src={project.image}
                                 alt={project.title}
-                                className="w-full h-64 md:h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                                onClick={() => setSelectedImage(project.image)}
+                                className="w-full h-64 md:h-full object-cover group-hover:scale-110 transition-transform duration-500 cursor-pointer"
                               />
-                              <div className="absolute inset-0 bg-gradient-to-r from-slate-950/50 via-transparent to-transparent group-hover:scale-110 transition-transform duration-500"></div>
+                              <div className="absolute inset-0 bg-gradient-to-r from-slate-950/50 via-transparent to-transparent group-hover:scale-110 transition-transform duration-500 pointer-events-none"></div>
                             </div>
                           )}
                           <div className={`py-6 flex-1 px-6 group-hover:px-8 transition-all duration-300`}>
@@ -292,10 +300,10 @@ export default function ThemeFour({ userDetails, userLinks }) {
                         >
                           {/* Decorative corner accent */}
                           {userDetails.displayLanguage === "ar" ? (
-                          <div className="absolute top-0 left-0 w-32 h-32 bg-gradient-to-bl from-emerald-400/20 to-transparent rounded-br-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                        ) : (
-                          <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-bl from-emerald-400/20 to-transparent rounded-bl-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                        )}
+                            <div className="absolute top-0 left-0 w-32 h-32 bg-gradient-to-bl from-emerald-400/20 to-transparent rounded-br-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                          ) : (
+                            <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-bl from-emerald-400/20 to-transparent rounded-bl-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                          )}
                           <div className="relative z-10">
                             <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-2 mb-3">
                               <h3 className="text-xl md:text-2xl font-bold text-emerald-300 group-hover:text-emerald-200 transition">{edu.degree}</h3>
@@ -350,9 +358,9 @@ export default function ThemeFour({ userDetails, userLinks }) {
 
             {/* Social Media */}
             {userDetails.socials && Object.values(userDetails.socials).some(url => url) && (
-              <section 
-              dir={userDetails?.displayLanguage === 'ar' ? 'rtl' : 'ltr'}
-              className="py-8 border-t border-emerald-500/20">
+              <section
+                dir={userDetails?.displayLanguage === 'ar' ? 'rtl' : 'ltr'}
+                className="py-8 border-t border-emerald-500/20">
                 <div className="max-w-5xl mx-auto">
                   <div className="flex items-center gap-3 mb-8">
                     <Share2 className="text-emerald-400" size={30} />

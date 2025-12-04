@@ -9,6 +9,7 @@ import Link from "next/link"
 import { useTranslation } from "../../lib/translations"
 import { PDFDownloadLink } from "@react-pdf/renderer"
 import ResumePdf from "../../update-profile/components/ResumePdf"
+import ImageModal from "../ImageModal"
 
 export default function ThemeFive({ userDetails, userLinks }) {
   const { t } = useTranslation(userDetails?.displayLanguage || 'en')
@@ -16,6 +17,7 @@ export default function ThemeFive({ userDetails, userLinks }) {
   const [showQR, setShowQR] = useState(false)
   const PORTFOLIO = `https://${userDetails?.username}.dgtportfolio.com`
   const [expanded, setExpanded] = useState(false);
+  const [selectedImage, setSelectedImage] = useState(null);
 
 
   const copyProfileLink = () => {
@@ -38,7 +40,12 @@ export default function ThemeFive({ userDetails, userLinks }) {
 
       {userDetails && (
         <div dir={userDetails?.displayLanguage === 'ar' ? 'rtl' : 'ltr'}
-        className="relative z-10 md:px-20 px-4">
+          className="relative z-10 md:px-20 px-4">
+          <ImageModal
+            isOpen={!!selectedImage}
+            onClose={() => setSelectedImage(null)}
+            imageSrc={selectedImage}
+          />
           {/* Hero Section */}
           <section className="pt-8 pb-12">
             {/* Toolbar */}
@@ -49,35 +56,35 @@ export default function ThemeFive({ userDetails, userLinks }) {
               <div className="flex flex-wrap gap-3">
                 {/* Copy Link */}
                 <PDFDownloadLink
-                   document={<ResumePdf userData={userDetails} />}
-                   title={(() => {
-                       const translations = {
-                         en: 'Download CV',
-                         fr: 'Télécharger CV',
-                         es: 'Descargar CV',
-                         ar: 'تحميل السيرة الذاتية',
-                         de: 'Lebenslauf herunterladen',
-                         ru: 'Скачать резюме',
-                         ja: '履歴書をダウンロード',
-                         zh: '下载简历',
-                       };
-                       return translations[userDetails?.displayLanguage] || translations['en']
-                     })()}
-                   fileName={`cv.${userDetails?.username || 'resume'}.pdf`}
-                   className=" text-white bg-white/10 hover:bg-white/20 font-bold px-5 py-3 rounded-lg transition-all duration-300 flex items-center gap-2 transform hover:scale-105 shadow-lg"
-                 >
-                   {({ blob, url, loading, error }) =>
-                     loading ? (
-                       <>
-                         <Loader size={20} className="animate-spin" /> {t('loading') || 'Loading...'}
-                       </>
-                     ) : (
-                       <>
-                         <FileDown size={20} />
-                       </>
-                     )
-                   }
-                 </PDFDownloadLink>
+                  document={<ResumePdf userData={userDetails} />}
+                  title={(() => {
+                    const translations = {
+                      en: 'Download CV',
+                      fr: 'Télécharger CV',
+                      es: 'Descargar CV',
+                      ar: 'تحميل السيرة الذاتية',
+                      de: 'Lebenslauf herunterladen',
+                      ru: 'Скачать резюме',
+                      ja: '履歴書をダウンロード',
+                      zh: '下载简历',
+                    };
+                    return translations[userDetails?.displayLanguage] || translations['en']
+                  })()}
+                  fileName={`cv.${userDetails?.username || 'resume'}.pdf`}
+                  className=" text-white bg-white/10 hover:bg-white/20 font-bold px-5 py-3 rounded-lg transition-all duration-300 flex items-center gap-2 transform hover:scale-105 shadow-lg"
+                >
+                  {({ blob, url, loading, error }) =>
+                    loading ? (
+                      <>
+                        <Loader size={20} className="animate-spin" /> {t('loading') || 'Loading...'}
+                      </>
+                    ) : (
+                      <>
+                        <FileDown size={20} />
+                      </>
+                    )
+                  }
+                </PDFDownloadLink>
                 {/* QR Code */}
                 <div
                   onClick={() => setShowQR(!showQR)}
@@ -197,10 +204,10 @@ export default function ThemeFive({ userDetails, userLinks }) {
                       <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-2 mb-3">
                         <h3 className="text-xl sm:text-2xl font-bold text-yellow-400 group-hover:text-yellow-300 transition">{exp.role}</h3>
                         <span className={`text-gray-400 text-sm ${userDetails.displayLanguage === "ar" ? "flex gap-1" : "flex flex-row-reverse gap-1"}`}>
-                            <p>{exp.startDate}</p>
-                            <p> - </p>
-                            <p>{exp.endDate}</p>
-                          </span>
+                          <p>{exp.startDate}</p>
+                          <p> - </p>
+                          <p>{exp.endDate}</p>
+                        </span>
                       </div>
                       <p className="text-gray-200 font-semibold mb-3 text-lg">{exp.company}</p>
                       <p className="text-xs text-gray-500 uppercase tracking-wider mb-2">{t('description')}</p>
@@ -248,9 +255,10 @@ export default function ThemeFive({ userDetails, userLinks }) {
                             <Image width={500} height={500}
                               src={project.image}
                               alt={project.title}
-                              className="w-full h-64 md:h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                              onClick={() => setSelectedImage(project.image)}
+                              className="w-full h-64 md:h-full object-cover group-hover:scale-110 transition-transform duration-500 cursor-pointer"
                             />
-                            <div className="absolute inset-0 bg-gradient-to-r from-slate-950/50 via-transparent to-transparent group-hover:scale-110 transition-transform duration-500"></div>
+                            <div className="absolute inset-0 bg-gradient-to-r from-slate-950/50 via-transparent to-transparent group-hover:scale-110 transition-transform duration-500 pointer-events-none"></div>
                           </div>
                         )}
                         <div className={`py-6 flex-1 px-6 group-hover:px-8 transition-all duration-300`}>
@@ -380,9 +388,9 @@ export default function ThemeFive({ userDetails, userLinks }) {
       )}
       {/* Footer */}
       {userDetails.socials && Object.values(userDetails.socials).some(url => url) && (
-        <footer 
-        dir={userDetails?.displayLanguage === 'ar' ? 'rtl' : 'ltr'}
-        className="relative z-10 border-t border-zinc-800/50 bg-black/50 backdrop-blur-md py-12 px-6 mt-12">
+        <footer
+          dir={userDetails?.displayLanguage === 'ar' ? 'rtl' : 'ltr'}
+          className="relative z-10 border-t border-zinc-800/50 bg-black/50 backdrop-blur-md py-12 px-6 mt-12">
           <div className="max-w-5xl mx-auto text-center">
             <div className="flex justify-center gap-6 mb-6 flex-wrap">
               {[

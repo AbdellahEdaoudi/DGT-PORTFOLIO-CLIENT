@@ -14,11 +14,13 @@ import Link from "next/link"
 import { useTranslation } from "../../lib/translations"
 import { PDFDownloadLink } from "@react-pdf/renderer"
 import ResumePdf from "../../update-profile/components/ResumePdf"
+import ImageModal from "../ImageModal"
 
 export default function ThemeEleven({ userDetails, userLinks }) {
     const { t } = useTranslation(userDetails?.displayLanguage || 'en')
     const [copied, setCopied] = useState(false);
     const [showQR, setShowQR] = useState(false);
+    const [selectedImage, setSelectedImage] = useState(null);
     const PORTFOLIO = `https://${userDetails?.username}.dgtportfolio.com`
 
     const copyProfileLink = () => {
@@ -47,6 +49,11 @@ export default function ThemeEleven({ userDetails, userLinks }) {
         <div
             dir={userDetails?.displayLanguage === 'ar' ? 'rtl' : 'ltr'}
             className="min-h-screen bg-[#050510] text-cyan-50 font-mono overflow-x-hidden relative selection:bg-cyan-500 selection:text-black">
+            <ImageModal
+                isOpen={!!selectedImage}
+                onClose={() => setSelectedImage(null)}
+                imageSrc={selectedImage}
+            />
 
             {/* Space Background */}
             <div className="fixed inset-0 z-0 pointer-events-none">
@@ -83,35 +90,35 @@ export default function ThemeEleven({ userDetails, userLinks }) {
 
                     <div className="flex gap-4">
                         <PDFDownloadLink
-                   document={<ResumePdf userData={userDetails} />}
-                   fileName={`cv.${userDetails?.username || 'resume'}.pdf`}
-                   title={(() => {
-                       const translations = {
-                         en: 'Download CV',
-                         fr: 'Télécharger CV',
-                         es: 'Descargar CV',
-                         ar: 'تحميل السيرة الذاتية',
-                         de: 'Lebenslauf herunterladen',
-                         ru: 'Скачать резюме',
-                         ja: '履歴書をダウンロード',
-                         zh: '下载简历',
-                       };
-                       return translations[userDetails?.displayLanguage] || translations['en']
-                     })()}
-                   className=" text-white bg-white/10 hover:bg-white/20 font-bold px-5 py-3 rounded-lg transition-all duration-300 flex items-center gap-2 transform hover:scale-105 shadow-lg"
-                 >
-                   {({ blob, url, loading, error }) =>
-                     loading ? (
-                       <>
-                         <Loader size={20} className="animate-spin" /> {t('loading') || 'Loading...'}
-                       </>
-                     ) : (
-                       <>
-                         <FileDown size={20} />
-                       </>
-                     )
-                   }
-                 </PDFDownloadLink>
+                            document={<ResumePdf userData={userDetails} />}
+                            fileName={`cv.${userDetails?.username || 'resume'}.pdf`}
+                            title={(() => {
+                                const translations = {
+                                    en: 'Download CV',
+                                    fr: 'Télécharger CV',
+                                    es: 'Descargar CV',
+                                    ar: 'تحميل السيرة الذاتية',
+                                    de: 'Lebenslauf herunterladen',
+                                    ru: 'Скачать резюме',
+                                    ja: '履歴書をダウンロード',
+                                    zh: '下载简历',
+                                };
+                                return translations[userDetails?.displayLanguage] || translations['en']
+                            })()}
+                            className="cursor-pointer px-5 py-2 border border-cyan-500/30 bg-cyan-950/30 rounded hover:bg-cyan-500/20 transition-all text-cyan-400 font-bold text-xs flex items-center"
+                        >
+                            {({ blob, url, loading, error }) =>
+                                loading ? (
+                                    <div>
+                                        <Loader size={20} className="animate-spin" /> {t('loading') || 'Loading...'}
+                                    </div>
+                                ) : (
+                                    <div>
+                                        <FileDown size={20} />
+                                    </div>
+                                )
+                            }
+                        </PDFDownloadLink>
                         <div onClick={() => setShowQR(!showQR)} className="cursor-pointer px-2 py-2 border border-cyan-500/30 bg-cyan-950/30 rounded hover:bg-cyan-500/20 transition-all text-cyan-400 font-bold text-xs flex items-center">
                             <QrcodeProfile path={`/${userDetails?.username}`} userDetails={userDetails} />
                         </div>
@@ -141,7 +148,7 @@ export default function ThemeEleven({ userDetails, userLinks }) {
                             </div>
                         </div>
 
-                        <div  className={`text-center ${userDetails?.displayLanguage === 'ar' ? 'lg:text-right' : 'lg:text-left'}`}>
+                        <div className={`text-center ${userDetails?.displayLanguage === 'ar' ? 'lg:text-right' : 'lg:text-left'}`}>
                             <div className="inline-block px-2 py-1 mb-2 border border-cyan-500/50 text-xs text-cyan-400 uppercase tracking-[0.2em] bg-cyan-950/50">
                                 {
                                     {
@@ -215,9 +222,9 @@ export default function ThemeEleven({ userDetails, userLinks }) {
                                             <div className="flex flex-col sm:flex-row justify-between items-start mb-1 gap-1">
                                                 <h4 className="text-lg font-bold text-white">{exp.role}</h4>
                                                 <span className={`${userDetails.displayLanguage === "ar" ? "flex gap-1" : "flex flex-row-reverse gap-1"} text-xs text-cyan-400 font-mono border border-cyan-500/30 px-2 py-0.5 rounded bg-cyan-950/30 whitespace-nowrap`}>
-                                                     <p>{exp.startDate}</p>
-                                                     <p> - </p>
-                                                     <p>{exp.endDate}</p>
+                                                    <p>{exp.startDate}</p>
+                                                    <p> - </p>
+                                                    <p>{exp.endDate}</p>
                                                 </span>
                                             </div>
                                             <p className="text-purple-300 text-sm mb-2">{exp.company}</p>
@@ -240,7 +247,7 @@ export default function ThemeEleven({ userDetails, userLinks }) {
                                         <div key={i} className="flex flex-col sm:flex-row gap-4 bg-black/40 border border-cyan-500/20 p-4 hover:border-cyan-500/50 transition-all group">
                                             {project.image && (
                                                 <div className="w-full sm:w-24 h-48 sm:h-24 bg-cyan-900/20 flex-shrink-0 overflow-hidden border border-cyan-500/20">
-                                                    <Image src={project.image} alt={project.title} width={300} height={300} className="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity grayscale group-hover:grayscale-0" />
+                                                    <Image src={project.image} alt={project.title} width={300} height={300} onClick={() => setSelectedImage(project.image)} className="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity grayscale group-hover:grayscale-0 cursor-pointer" />
                                                 </div>
                                             )}
                                             <div className="flex-1">
