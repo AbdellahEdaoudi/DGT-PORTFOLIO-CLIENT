@@ -10,6 +10,7 @@ import MagicalLoader from '../Components/MagicalLoader';
 export default function CustomDomainPage() {
     const { userDetails } = useContext(MyContext);
     const [customDomain, setCustomDomain] = useState('');
+    const [isSaved, setIsSaved] = useState(false);
     const [isVerified, setIsVerified] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
     const [isFetching, setIsFetching] = useState(true);
@@ -25,6 +26,7 @@ export default function CustomDomainPage() {
             const res = await axios.get(`/api/proxy/custom-domain/settings/${userDetails.email}`);
             if (res.data.status) {
                 setCustomDomain(res.data.data.customDomain || '');
+                setIsSaved(!!res.data.data.customDomain);
                 setIsVerified(res.data.data.customDomainVerified || false);
             }
         } catch (e) { console.error(e); }
@@ -40,6 +42,7 @@ export default function CustomDomainPage() {
             });
             if (res.data.status) {
                 toast.success(res.data.message);
+                setIsSaved(true);
                 setIsVerified(false);
             } else toast.error(res.data.message);
         } catch (e) { toast.error(e.response?.data?.message || 'Error'); }
@@ -64,6 +67,7 @@ export default function CustomDomainPage() {
         try {
             await axios.delete(`/api/proxy/custom-domain/remove`);
             setCustomDomain('');
+            setIsSaved(false);
             setIsVerified(false);
             toast.success('Domain removed successfully');
         } catch (e) { toast.error('Error removing domain'); }
@@ -91,7 +95,7 @@ export default function CustomDomainPage() {
                                 <input
                                     type="text"
                                     value={customDomain}
-                                    onChange={(e) => setCustomDomain(e.target.value)}
+                                    onChange={(e) => { setCustomDomain(e.target.value); setIsSaved(false); }}
                                     placeholder="example.com"
                                     className="w-full bg-slate-900/80 border border-slate-600 rounded-xl px-5 py-4 text-lg focus:ring-2 focus:ring-cyan-500 focus:border-transparent transition-all outline-none"
                                     disabled={isVerified || isLoading}
@@ -109,7 +113,7 @@ export default function CustomDomainPage() {
                         </div>
                     </div>
 
-                    {customDomain && (
+                    {isSaved && (
                         <div className="animate-in fade-in slide-in-from-top-4 duration-500">
                             <div className={`p-5 rounded-xl flex items-center gap-4 border ${isVerified ? 'bg-green-500/10 border-green-500/20 text-green-400' : 'bg-amber-500/10 border-amber-500/20 text-amber-400'} mb-6`}>
                                 {isVerified ? <CheckCircle className="w-6 h-6 flex-shrink-0" /> : <AlertCircle className="w-6 h-6 flex-shrink-0" />}
@@ -141,13 +145,31 @@ export default function CustomDomainPage() {
                                         <Globe className="w-5 h-5 text-cyan-400" />
                                         DNS Configuration
                                     </h3>
-                                    <p className="text-slate-400 mb-6 text-sm">
-                                        Log in to your domain provider (e.g., Namecheap, GoDaddy) and add an <strong>A Record</strong> pointing to your server's IP address, or configure it according to your hosting provider's instructions.
-                                    </p>
+                                    <div className="space-y-4 mb-6 text-sm text-slate-300">
+                                        <p>To connect your domain, please follow these steps:</p>
+                                        <ol className="list-decimal list-inside space-y-2 ml-2">
+                                            <li>Log in to your domain provider (e.g., Namecheap, GoDaddy).</li>
+                                            <li>Navigate to the <strong>DNS Management</strong> section.</li>
+                                            <li>Add an <strong>A Record</strong> with the following details:
+                                                <ul className="list-disc list-inside ml-6 mt-1 text-slate-400">
+                                                    <li><strong>Type:</strong> A</li>
+                                                    <li><strong>Name:</strong> @ (or leave blank)</li>
+                                                    <li><strong>Value:</strong> 76.76.21.21</li>
+                                                </ul>
+                                            </li>
+                                            <li>(Optional) If using a subdomain (e.g., www), add a <strong>CNAME Record</strong>:
+                                                <ul className="list-disc list-inside ml-6 mt-1 text-slate-400">
+                                                    <li><strong>Type:</strong> CNAME</li>
+                                                    <li><strong>Name:</strong> www</li>
+                                                    <li><strong>Value:</strong> cname.vercel-dns.com</li>
+                                                </ul>
+                                            </li>
+                                        </ol>
+                                    </div>
 
-                                    <div className="bg-amber-500/10 border border-amber-500/20 rounded-lg p-4 mb-6">
-                                        <p className="text-amber-400 text-sm">
-                                            <strong>Note:</strong> The DNS configuration depends on your hosting setup. Make sure your domain has a valid A Record that resolves correctly.
+                                    <div className="bg-blue-500/10 border border-blue-500/20 rounded-lg p-4 mb-6">
+                                        <p className="text-blue-400 text-sm">
+                                            <strong>Note:</strong> DNS changes can take up to 48 hours to propagate globally, though it usually happens much faster.
                                         </p>
                                     </div>
 
