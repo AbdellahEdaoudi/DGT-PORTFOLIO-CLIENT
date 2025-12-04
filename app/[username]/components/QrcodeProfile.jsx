@@ -121,7 +121,7 @@ const translations = {
 };
 
 function QrcodeProfile({ userDetails }) {
-  const PORTFOLIO = `https://${userDetails?.username}.dgtportfolio.com`;
+  const PORTFOLIO = userDetails?.customDomain && userDetails?.customDomainVerified ? `https://${userDetails?.customDomain}` : `https://${userDetails?.username}.dgtportfolio.com`;
   const qrCodeRef = useRef(null);
   const [copied, setCopied] = useState(false);
 
