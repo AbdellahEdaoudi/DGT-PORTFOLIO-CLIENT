@@ -12,7 +12,7 @@ const prompt = Prompt({ subsets: ['latin'], weight: '400' });
 
 export const metadata = {
   metadataBase: new URL('https://dgtportfolio.com'),
-  title: "Build Your Professional Portfolio Online - DGT Portfolio",
+  title: "DGT Portfolio - Build Your Professional Portfolio Online",
   description: "No code, no hassle. Build a clean, modern portfolio in minutes. Showcase your career, skills, projects, and work links like never before—leave a lasting impression and unlock new opportunities.",
   keywords: ["DGT Portfolio", "Portfolio Builder", "Professional Portfolio", "Showcase Skills", "Interactive Portfolio", "No Code Portfolio"],
   manifest: "/site.webmanifest",

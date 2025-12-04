@@ -9,11 +9,15 @@ export async function generateMetadata() {
   const host = headers().get("host");
   const subdomain = host.split(".")[0];
   let username = null;
+  const backendUrl = process.env.NEXT_PUBLIC_BACKEND_URL || 'http://localhost:9999';
 
   // 1. Check Custom Domain
   if (!host.includes('dgtportfolio.com') && !host.includes('localhost:3000')) {
     try {
-      const res = await fetch(`https://dgt-portfolio-server.vercel.app/api/custom-domain/user/${host}`, { next: { revalidate: 3600 } });
+      const res = await fetch(`${backendUrl}/api/custom-domain/user/${host}`, {
+        next: { revalidate: 3600 },
+        cache: 'no-store'
+      });
       if (res.ok) {
         const data = await res.json();
         if (data.status && data.user) {
@@ -32,7 +36,7 @@ export async function generateMetadata() {
   }
 
   if (username) {
-    const res = await fetch(`https://dgt-portfolio-server.vercel.app/users/metauser/${username}`);
+    const res = await fetch(`${backendUrl}/users/metauser/${username}`, { cache: 'no-store' });
     const data = await res.json();
     const user = data?.user;
     if (data.status) {
@@ -79,6 +83,7 @@ export default async function Home() {
   const reserved = ["dgtportfolio", "localhost:3000", "www", "localhost"];
   const host = headers().get('host');
   const subdomain = host.split('.')[0];
+  const backendUrl = process.env.NEXT_PUBLIC_BACKEND_URL || 'http://localhost:5000';
 
   let username = null;
   let userSchema = null;
@@ -86,7 +91,10 @@ export default async function Home() {
   // Check if it's a custom domain (not dgtportfolio.com)
   if (!host.includes('dgtportfolio.com') && !host.includes('localhost:3000')) {
     try {
-      const res = await fetch(`https://dgt-portfolio-server.vercel.app/api/custom-domain/user/${host}`, { next: { revalidate: 3600 } });
+      const res = await fetch(`${backendUrl}/api/custom-domain/user/${host}`, {
+        next: { revalidate: 3600 },
+        cache: 'no-store'
+      });
 
       if (res.ok) {
         const data = await res.json();
@@ -108,7 +116,10 @@ export default async function Home() {
 
   if (username) {
     try {
-      const res = await fetch(`https://dgt-portfolio-server.vercel.app/users/metauser/${username}`, { next: { revalidate: 3600 } });
+      const res = await fetch(`${backendUrl}/users/metauser/${username}`, {
+        next: { revalidate: 3600 },
+        cache: 'no-store'
+      });
 
       if (res.status === 404) {
         notFound();
