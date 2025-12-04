@@ -30,7 +30,7 @@ export async function generateMetadata() {
   if (isCustomDomain) {
     try {
       const res = await fetch(
-        `${backendUrl}/api/custom-domain/user/${host}`,
+        `${backendUrl}/api/custom-domain/by-domain/${host}`,
         { cache: "no-store" }
       );
 
@@ -113,7 +113,7 @@ export default async function Home() {
 
   if (isCustomDomain) {
     const res = await fetch(
-      `${backendUrl}/api/custom-domain/user/${host}`,
+      `${backendUrl}/api/custom-domain/by-domain/${host}`,
       { cache: "no-store" }
     );
     const data = await res.json();
