@@ -83,7 +83,7 @@ export async function generateMetadata() {
 
   // Default Metadata
   return {
-    title: "DGT Portfolio – Build Your Professional Portfolio",
+    title: "َAbdellah – Build Your Professional Portfolio",
     description: "Create a stunning portfolio in minutes.",
   };
 }
