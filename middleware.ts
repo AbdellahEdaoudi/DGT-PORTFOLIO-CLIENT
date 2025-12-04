@@ -56,6 +56,7 @@ export default withAuth(async function middleware(request: NextRequest) {
     '/support',
     '/subscription',
     '/Admin',
+    '/custom-domain',
   ];
   const isProtected = protectedRoutes.some((route) => pathname.startsWith(route));
 
