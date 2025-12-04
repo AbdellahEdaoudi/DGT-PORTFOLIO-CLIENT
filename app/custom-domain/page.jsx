@@ -157,13 +157,6 @@ export default function CustomDomainPage() {
                                                     <li><strong>Value:</strong> 76.76.21.21</li>
                                                 </ul>
                                             </li>
-                                            <li>(Optional) If using a subdomain (e.g., www), add a <strong>CNAME Record</strong>:
-                                                <ul className="list-disc list-inside ml-4 sm:ml-6 mt-2 space-y-1 text-slate-400 bg-slate-950/50 p-3 rounded-lg border border-slate-800">
-                                                    <li><strong>Type:</strong> CNAME</li>
-                                                    <li><strong>Name:</strong> www</li>
-                                                    <li><strong>Value:</strong> cname.vercel-dns.com</li>
-                                                </ul>
-                                            </li>
                                         </ol>
                                     </div>
 
@@ -196,8 +189,8 @@ export default function CustomDomainPage() {
 
             {/* Confirmation Modal */}
             {showRemoveModal && (
-                <div className="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-end sm:items-center justify-center z-50 p-4 animate-in fade-in duration-200">
-                    <div className="bg-slate-800 rounded-t-2xl sm:rounded-2xl p-6 max-w-md w-full border border-slate-700 shadow-2xl animate-in slide-in-from-bottom-10 sm:zoom-in-95 duration-200">
+                <div className="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-50 p-4 animate-in fade-in duration-200">
+                    <div className="bg-slate-800 rounded-2xl p-6 max-w-md w-full border border-slate-700 shadow-2xl animate-in zoom-in-95 duration-200">
                         <div className="flex items-start gap-4 mb-6">
                             <div className="w-12 h-12 rounded-full bg-red-500/10 flex items-center justify-center flex-shrink-0">
                                 <AlertCircle className="w-6 h-6 text-red-400" />
