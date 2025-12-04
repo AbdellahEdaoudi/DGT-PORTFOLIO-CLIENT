@@ -63,6 +63,11 @@ export async function generateMetadata() {
       return {
         title: `${user.fullname} – Portfolio`,
         description: user.about || `Check out ${user.fullname}'s professional portfolio.`,
+        icons: {
+          icon: user.urlimage,
+          shortcut: user.urlimage,
+          apple: user.urlimage,
+        },
         openGraph: {
           title: `${user.fullname} – Portfolio`,
           description: user.about,

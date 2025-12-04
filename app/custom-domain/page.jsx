@@ -153,7 +153,7 @@ export default function CustomDomainPage() {
                                             <li>Add an <strong>A Record</strong> with the following details:
                                                 <ul className="list-disc list-inside ml-4 sm:ml-6 mt-2 space-y-1 text-slate-400 bg-slate-950/50 p-3 rounded-lg border border-slate-800">
                                                     <li><strong>Type:</strong> A</li>
-                                                    <li><strong>Name:</strong> @ (or leave blank)</li>
+                                                    <li><strong>Name:</strong> @ </li>
                                                     <li><strong>Value:</strong> 76.76.21.21</li>
                                                 </ul>
                                             </li>
