@@ -24,8 +24,9 @@ export async function POST(req: Request) {
     return NextResponse.json(response.data, { status: response.status });
   } catch (error: any) {
     console.error("Error setting custom domain:", error.response?.data || error.message);
+    // Return the actual backend error response
     return NextResponse.json(
-      { message: "Failed to set custom domain", error: error.response?.data || error.message },
+      error.response?.data || { status: false, message: "Failed to set custom domain" },
       { status: error.response?.status || 500 }
     );
   }

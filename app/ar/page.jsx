@@ -2,7 +2,7 @@ import LandingPage from "../Components/LandingPage/LandingPage"
 import { getDictionary } from "../dictionaries/get-dictionary"
 
 export const metadata = {
-    title: "DGT Portfolio - أنشئ محفظتك الرقمية الاحترافية | بدون كود",
+    title: "أنشئ محفظتك الرقمية الاحترافية - DGT Portfolio | بدون كود",
     description: "بدون كود، بدون تعقيدات. أنشئ محفظة رقمية احترافية نظيفة وعصرية في دقائق. اعرض مسيرتك المهنية ومهاراتك ومشاريعك وروابط أعمالك بطريقة لم تحدث من قبل. تجربة مجانية لمدة 7 أيام. احصل على نطاقك الفرعي المخصص اليوم!",
     keywords: ["محفظة رقمية", "بورتفوليو", "محفظة احترافية", "إنشاء محفظة", "محفظة بدون كود", "صفحة شخصية احترافية", "ملف تعريفي رقمي", "نطاق فرعي مخصص", "محفظة برمز QR", "محفظة مجانية", "قوالب محفظة", "سيرة ذاتية رقمية", "portfolio عربي", "موقع شخصي احترافي"],
     authors: [{ name: "DGT Portfolio" }],
@@ -20,7 +20,7 @@ export const metadata = {
         },
     },
     openGraph: {
-        title: "DGT Portfolio - أنشئ محفظتك الرقمية الاحترافية",
+        title: "أنشئ محفظتك الرقمية الاحترافية - DGT Portfolio",
         description: "بدون كود، بدون تعقيدات. أنشئ محفظة رقمية احترافية نظيفة وعصرية في دقائق. اعرض مسيرتك المهنية ومهاراتك ومشاريعك وروابط أعمالك بطريقة لم تحدث من قبل.",
         url: "https://dgtportfolio.com/ar",
         siteName: "DGT Portfolio",
@@ -35,7 +35,7 @@ export const metadata = {
     },
     twitter: {
         card: "summary_large_image",
-        title: "DGT Portfolio - أنشئ محفظتك الرقمية الاحترافية",
+        title: "أنشئ محفظتك الرقمية الاحترافية - DGT Portfolio",
         description: "بدون كود، بدون تعقيدات. أنشئ محفظة رقمية احترافية في دقائق.",
         images: ["https://dgtportfolio.com/logo.png"],
         creator: "@dgtportfolio",

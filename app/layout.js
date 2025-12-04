@@ -12,7 +12,7 @@ const prompt = Prompt({ subsets: ['latin'], weight: '400' });
 
 export const metadata = {
   metadataBase: new URL('https://dgtportfolio.com'),
-  title: "DGT Portfolio – Build Your Professional Portfolio Online",
+  title: "Build Your Professional Portfolio Online - DGT Portfolio",
   description: "No code, no hassle. Build a clean, modern portfolio in minutes. Showcase your career, skills, projects, and work links like never before—leave a lasting impression and unlock new opportunities.",
   keywords: ["DGT Portfolio", "Portfolio Builder", "Professional Portfolio", "Showcase Skills", "Interactive Portfolio", "No Code Portfolio"],
   manifest: "/site.webmanifest",
@@ -22,7 +22,7 @@ export const metadata = {
     apple: "/logo.png",
   },
   openGraph: {
-    title: "DGT Portfolio – Build Your Professional Portfolio Online",
+    title: "Build Your Professional Portfolio Online - DGT Portfolio",
     description: "No code, no hassle. Build a clean, modern portfolio in minutes. Showcase your career, skills, projects, and work links like never before—leave a lasting impression and unlock new opportunities.",
     url: "https://dgtportfolio.com",
     siteName: "DGT Portfolio",
@@ -37,7 +37,7 @@ export const metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "DGT Portfolio – Build Your Professional Portfolio Online",
+    title: "Build Your Professional Portfolio Online - DGT Portfolio",
     description: "No code, no hassle. Build a clean, modern portfolio in minutes. Showcase your career, skills, projects, and work links like never before—leave a lasting impression and unlock new opportunities.",
     images: ["/logo.png"],
   },

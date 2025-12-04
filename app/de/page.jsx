@@ -2,7 +2,7 @@ import LandingPage from "../Components/LandingPage/LandingPage"
 import { getDictionary } from "../dictionaries/get-dictionary"
 
 export const metadata = {
-    title: "DGT Portfolio - Erstellen Sie Ihr professionelles Portfolio online | Kein Code",
+    title: "Erstellen Sie Ihr professionelles Portfolio online - DGT Portfolio | Kein Code",
     description: "Kein Code, kein Aufwand. Erstellen Sie in wenigen Minuten ein sauberes, modernes Portfolio. Präsentieren Sie Ihre Karriere, Fähigkeiten, Projekte und Arbeitslinks wie nie zuvor. 7 Tage kostenlose Testversion. Holen Sie sich heute Ihre benutzerdefinierte Subdomain!",
     keywords: ["Portfolio-Ersteller", "Online-Portfolio", "professionelles Portfolio", "Portfolio ohne Code", "Portfolio-Website", "Portfolio erstellen", "Portfolio-Generator", "benutzerdefinierte Subdomain", "QR-Code-Portfolio", "kostenloses Portfolio", "Portfolio-Vorlagen", "digitales Portfolio"],
     authors: [{ name: "DGT Portfolio" }],
@@ -20,7 +20,7 @@ export const metadata = {
         },
     },
     openGraph: {
-        title: "DGT Portfolio - Erstellen Sie Ihr professionelles Portfolio online",
+        title: "Erstellen Sie Ihr professionelles Portfolio online - DGT Portfolio",
         description: "Kein Code, kein Aufwand. Erstellen Sie in wenigen Minuten ein sauberes, modernes Portfolio. Präsentieren Sie Ihre Karriere, Fähigkeiten, Projekte und Arbeitslinks wie nie zuvor.",
         url: "https://dgtportfolio.com/de",
         siteName: "DGT Portfolio",
@@ -35,7 +35,7 @@ export const metadata = {
     },
     twitter: {
         card: "summary_large_image",
-        title: "DGT Portfolio - Erstellen Sie Ihr professionelles Portfolio online",
+        title: "Erstellen Sie Ihr professionelles Portfolio online - DGT Portfolio",
         description: "Kein Code, kein Aufwand. Erstellen Sie in wenigen Minuten ein sauberes, modernes Portfolio.",
         images: ["https://dgtportfolio.com/logo.png"],
         creator: "@dgtportfolio",

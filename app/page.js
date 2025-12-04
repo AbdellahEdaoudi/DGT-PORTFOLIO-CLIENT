@@ -5,11 +5,33 @@ import { notFound } from "next/navigation";
 import { getDictionary } from "./dictionaries/get-dictionary";
 
 export async function generateMetadata() {
-  const reserved = ["dgtportfolio", "localhost:3000", "www"];
+  const reserved = ["dgtportfolio", "localhost:3000", "www", "localhost"];
   const host = headers().get("host");
-  const username = host.split(".")[0];
-  const isSubdomain = username && !reserved.includes(username);
-  if (isSubdomain) {
+  const subdomain = host.split(".")[0];
+  let username = null;
+
+  // 1. Check Custom Domain
+  if (!host.includes('dgtportfolio.com') && !host.includes('localhost:3000')) {
+    try {
+      const res = await fetch(`https://dgt-portfolio-server.vercel.app/api/custom-domain/user/${host}`, { next: { revalidate: 3600 } });
+      if (res.ok) {
+        const data = await res.json();
+        if (data.status && data.user) {
+          username = data.user.username;
+        }
+      }
+    } catch (error) {
+      console.error("Metadata: Error fetching custom domain:", error);
+    }
+  }
+
+  // 2. Check Subdomain
+  const isSubdomain = subdomain && !reserved.includes(subdomain);
+  if (!username && isSubdomain) {
+    username = subdomain;
+  }
+
+  if (username) {
     const res = await fetch(`https://dgt-portfolio-server.vercel.app/users/metauser/${username}`);
     const data = await res.json();
     const user = data?.user;
@@ -26,7 +48,7 @@ export async function generateMetadata() {
         openGraph: {
           title: `${user.fullname} – Portfolio`,
           description: user.about || `Check out ${user.fullname}'s professional portfolio. View projects, skills, and contact information.`,
-          url: `https://${username}.dgtportfolio.com`,
+          url: `https://${host}`,
           siteName: "DGT Portfolio",
           images: [
             {
@@ -44,7 +66,7 @@ export async function generateMetadata() {
           images: [user.urlimage],
         },
         alternates: {
-          canonical: `https://${username}.dgtportfolio.com`,
+          canonical: `https://${host}`,
         },
       };
     }

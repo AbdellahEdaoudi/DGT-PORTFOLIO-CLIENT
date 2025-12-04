@@ -2,20 +2,25 @@
 import { useState, useEffect, useContext } from 'react';
 import { MyContext } from '../Context/MyContext';
 import { toast } from 'react-toastify';
-import { Globe, CheckCircle, AlertCircle, Copy, ExternalLink } from 'lucide-react';
+import { Globe, CheckCircle, AlertCircle, ExternalLink, Loader2, Trash2, X } from 'lucide-react';
 import axios from 'axios';
+import Header from '../Components/header';
+import MagicalLoader from '../Components/MagicalLoader';
 
 export default function CustomDomainPage() {
     const { userDetails } = useContext(MyContext);
     const [customDomain, setCustomDomain] = useState('');
     const [isVerified, setIsVerified] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
+    const [isFetching, setIsFetching] = useState(true);
+    const [showRemoveModal, setShowRemoveModal] = useState(false);
 
     useEffect(() => {
         if (userDetails?.email) fetchSettings();
     }, [userDetails]);
 
     const fetchSettings = async () => {
+        setIsFetching(true);
         try {
             const res = await axios.get(`/api/proxy/custom-domain/settings/${userDetails.email}`);
             if (res.data.status) {
@@ -23,6 +28,7 @@ export default function CustomDomainPage() {
                 setIsVerified(res.data.data.customDomainVerified || false);
             }
         } catch (e) { console.error(e); }
+        finally { setIsFetching(false); }
     };
 
     const handleSave = async () => {
@@ -30,7 +36,6 @@ export default function CustomDomainPage() {
         setIsLoading(true);
         try {
             const res = await axios.post(`/api/proxy/custom-domain/set`, {
-                email: userDetails.email,
                 customDomain: customDomain.toLowerCase()
             });
             if (res.data.status) {
@@ -44,7 +49,7 @@ export default function CustomDomainPage() {
     const handleVerify = async () => {
         setIsLoading(true);
         try {
-            const res = await axios.post(`/api/proxy/custom-domain/verify`, { email: userDetails.email });
+            const res = await axios.post(`/api/proxy/custom-domain/verify`, {});
             if (res.data.status) {
                 toast.success(res.data.message);
                 setIsVerified(true);
@@ -53,69 +58,112 @@ export default function CustomDomainPage() {
         finally { setIsLoading(false); }
     };
 
-    const handleRemove = async () => {
-        if (!confirm('Remove domain?')) return;
+    const confirmRemove = async () => {
+        setIsLoading(true);
+        setShowRemoveModal(false);
         try {
-            await axios.delete(`/api/proxy/custom-domain/remove`, { data: { email: userDetails.email } });
+            await axios.delete(`/api/proxy/custom-domain/remove`);
             setCustomDomain('');
             setIsVerified(false);
-            toast.success('Removed');
-        } catch (e) { toast.error('Error'); }
+            toast.success('Domain removed successfully');
+        } catch (e) { toast.error('Error removing domain'); }
+        finally { setIsLoading(false); }
     };
 
-    return (
-        <div className="min-h-screen bg-slate-900 text-white p-6">
-            <div className="max-w-3xl mx-auto">
-                <h1 className="text-3xl font-bold mb-2 text-cyan-400">Custom Domain</h1>
-                <p className="text-gray-400 mb-8">Connect your own domain to your portfolio.</p>
+    if (isFetching) {
+        return <MagicalLoader />;
+    }
 
-                <div className="bg-slate-800 rounded-xl p-6 border border-slate-700">
-                    <div className="mb-6">
-                        <label className="block text-sm font-bold mb-2">Your Domain</label>
-                        <div className="flex gap-2">
-                            <input
-                                type="text"
-                                value={customDomain}
-                                onChange={(e) => setCustomDomain(e.target.value)}
-                                placeholder="example.com"
-                                className="flex-1 bg-slate-900 border border-slate-600 rounded-lg px-4 py-3"
-                                disabled={isVerified}
-                            />
+    return (
+        <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-white">
+            <Header />
+            <div className="max-w-3xl mx-auto pt-4 px-6">
+                <div className="mb-8 text-center">
+                    <h1 className="text-4xl font-bold mb-2 bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent">Custom Domain</h1>
+                    <p className="text-slate-400 text-lg">Connect your own domain to your portfolio instantly.</p>
+                </div>
+
+                <div className="bg-slate-800/50 backdrop-blur-xl rounded-2xl p-8 border border-slate-700/50 shadow-xl">
+                    <div className="mb-8">
+                        <label className="block text-sm font-semibold text-slate-300 mb-2 ml-1">Your Domain Name</label>
+                        <div className="flex gap-3">
+                            <div className="relative flex-1">
+                                <input
+                                    type="text"
+                                    value={customDomain}
+                                    onChange={(e) => setCustomDomain(e.target.value)}
+                                    placeholder="example.com"
+                                    className="w-full bg-slate-900/80 border border-slate-600 rounded-xl px-5 py-4 text-lg focus:ring-2 focus:ring-cyan-500 focus:border-transparent transition-all outline-none"
+                                    disabled={isVerified || isLoading}
+                                />
+                            </div>
                             {!isVerified && (
-                                <button onClick={handleSave} disabled={isLoading} className="bg-cyan-600 px-6 rounded-lg font-bold">
-                                    {isLoading ? '...' : 'Save'}
+                                <button
+                                    onClick={handleSave}
+                                    disabled={isLoading}
+                                    className="bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-500 hover:to-blue-500 text-white px-8 rounded-xl font-bold transition-all disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2 shadow-lg shadow-cyan-900/20"
+                                >
+                                    {isLoading ? <Loader2 className="w-5 h-5 animate-spin" /> : 'Save'}
                                 </button>
                             )}
                         </div>
                     </div>
 
                     {customDomain && (
-                        <div className="mb-6">
-                            <div className={`p-4 rounded-lg flex items-center gap-2 ${isVerified ? 'bg-green-900/30 text-green-400' : 'bg-yellow-900/30 text-yellow-400'}`}>
-                                {isVerified ? <CheckCircle /> : <AlertCircle />}
-                                <span className="font-bold">{isVerified ? 'Active & Verified' : 'Pending Verification'}</span>
+                        <div className="animate-in fade-in slide-in-from-top-4 duration-500">
+                            <div className={`p-5 rounded-xl flex items-center gap-4 border ${isVerified ? 'bg-green-500/10 border-green-500/20 text-green-400' : 'bg-amber-500/10 border-amber-500/20 text-amber-400'} mb-6`}>
+                                {isVerified ? <CheckCircle className="w-6 h-6 flex-shrink-0" /> : <AlertCircle className="w-6 h-6 flex-shrink-0" />}
+                                <div>
+                                    <h3 className="font-bold text-lg">{isVerified ? 'Domain Active & Verified' : 'Verification Pending'}</h3>
+                                    <p className="text-sm opacity-80">{isVerified ? 'Your domain is correctly configured and live.' : 'Please configure your DNS settings to verify ownership.'}</p>
+                                </div>
                             </div>
 
-                            {isVerified && (
-                                <div className="mt-4 flex gap-2">
-                                    <button onClick={() => window.open(`https://${customDomain}`, '_blank')} className="flex-1 bg-slate-700 py-2 rounded-lg">Visit Site</button>
-                                    <button onClick={handleRemove} className="flex-1 bg-red-900/50 text-red-400 py-2 rounded-lg">Remove</button>
+                            {isVerified ? (
+                                <div className="flex gap-3">
+                                    <button
+                                        onClick={() => window.open(`https://${customDomain}`, '_blank')}
+                                        className="flex-1 bg-slate-700 hover:bg-slate-600 text-white py-3 rounded-xl font-semibold transition-colors flex items-center justify-center gap-2"
+                                    >
+                                        <ExternalLink className="w-4 h-4" /> Visit Site
+                                    </button>
+                                    <button
+                                        onClick={() => setShowRemoveModal(true)}
+                                        disabled={isLoading}
+                                        className="flex-1 bg-red-500/10 hover:bg-red-500/20 text-red-400 border border-red-500/20 py-3 rounded-xl font-semibold transition-colors flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
+                                    >
+                                        {isLoading ? <Loader2 className="w-4 h-4 animate-spin" /> : <><Trash2 className="w-4 h-4" /> Remove Domain</>}
+                                    </button>
                                 </div>
-                            )}
+                            ) : (
+                                <div className="bg-slate-900/80 p-6 rounded-xl border border-slate-700/50">
+                                    <h3 className="font-bold text-lg mb-4 flex items-center gap-2">
+                                        <Globe className="w-5 h-5 text-cyan-400" />
+                                        DNS Configuration
+                                    </h3>
+                                    <p className="text-slate-400 mb-6 text-sm">
+                                        Log in to your domain provider (e.g., Namecheap, GoDaddy) and add an <strong>A Record</strong> pointing to your server's IP address, or configure it according to your hosting provider's instructions.
+                                    </p>
 
-                            {!isVerified && (
-                                <div className="mt-6 bg-slate-900 p-4 rounded-lg">
-                                    <h3 className="font-bold mb-3">DNS Configuration</h3>
-                                    <p className="text-sm text-gray-400 mb-4">Go to your domain provider (Namecheap, GoDaddy...) and add this record:</p>
-
-                                    <div className="grid grid-cols-3 gap-4 text-sm font-mono bg-black/30 p-3 rounded">
-                                        <div>Type: <span className="text-cyan-400">A Record</span></div>
-                                        <div>Host: <span className="text-cyan-400">@</span></div>
-                                        <div>Value: <span className="text-cyan-400">76.76.21.21</span></div>
+                                    <div className="bg-amber-500/10 border border-amber-500/20 rounded-lg p-4 mb-6">
+                                        <p className="text-amber-400 text-sm">
+                                            <strong>Note:</strong> The DNS configuration depends on your hosting setup. Make sure your domain has a valid A Record that resolves correctly.
+                                        </p>
                                     </div>
 
-                                    <button onClick={handleVerify} disabled={isLoading} className="w-full mt-4 bg-cyan-600 py-3 rounded-lg font-bold hover:bg-cyan-500">
-                                        Verify DNS
+                                    <button
+                                        onClick={handleVerify}
+                                        disabled={isLoading}
+                                        className="w-full bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-500 hover:to-blue-500 text-white py-4 rounded-xl font-bold transition-all shadow-lg shadow-cyan-900/20 flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
+                                    >
+                                        {isLoading ? (
+                                            <>
+                                                <Loader2 className="w-5 h-5 animate-spin" />
+                                                Verifying DNS...
+                                            </>
+                                        ) : (
+                                            'Verify DNS Configuration'
+                                        )}
                                     </button>
                                 </div>
                             )}
@@ -123,6 +171,48 @@ export default function CustomDomainPage() {
                     )}
                 </div>
             </div>
+
+            {/* Confirmation Modal */}
+            {showRemoveModal && (
+                <div className="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-50 p-4 animate-in fade-in duration-200">
+                    <div className="bg-slate-800 rounded-2xl p-6 max-w-md w-full border border-slate-700 shadow-2xl animate-in zoom-in-95 duration-200">
+                        <div className="flex items-start gap-4 mb-6">
+                            <div className="w-12 h-12 rounded-full bg-red-500/10 flex items-center justify-center flex-shrink-0">
+                                <AlertCircle className="w-6 h-6 text-red-400" />
+                            </div>
+                            <div className="flex-1">
+                                <h3 className="text-xl font-bold text-white mb-2">Remove Custom Domain?</h3>
+                                <p className="text-slate-400 text-sm leading-relaxed">
+                                    Are you sure you want to remove <span className="text-cyan-400 font-semibold">{customDomain}</span>?
+                                    This action will disconnect your custom domain from your portfolio.
+                                </p>
+                            </div>
+                            <button
+                                onClick={() => setShowRemoveModal(false)}
+                                className="text-slate-400 hover:text-white transition-colors"
+                            >
+                                <X className="w-5 h-5" />
+                            </button>
+                        </div>
+
+                        <div className="flex gap-3">
+                            <button
+                                onClick={() => setShowRemoveModal(false)}
+                                className="flex-1 bg-slate-700 hover:bg-slate-600 text-white py-3 rounded-xl font-semibold transition-colors"
+                            >
+                                Cancel
+                            </button>
+                            <button
+                                onClick={confirmRemove}
+                                className="flex-1 bg-red-600 hover:bg-red-500 text-white py-3 rounded-xl font-semibold transition-colors flex items-center justify-center gap-2"
+                            >
+                                <Trash2 className="w-4 h-4" />
+                                Remove
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            )}
         </div>
     );
 }

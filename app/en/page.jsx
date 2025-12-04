@@ -2,7 +2,7 @@ import LandingPage from "../Components/LandingPage/LandingPage"
 import { getDictionary } from "../dictionaries/get-dictionary"
 
 export const metadata = {
-    title: "DGT Portfolio - Build Your Professional Portfolio Online | No Code Required",
+    title: "Build Your Professional Portfolio Online - DGT Portfolio | No Code Required",
     description: "No code, no hassle. Build a clean, modern portfolio in minutes. Showcase your career, skills, projects, and work links like never before. Free 7-day trial. Get your custom subdomain today!",
     keywords: ["portfolio builder", "online portfolio", "professional portfolio", "no code portfolio", "portfolio website", "create portfolio", "portfolio maker", "custom subdomain", "QR code portfolio", "free portfolio", "portfolio templates", "digital portfolio"],
     authors: [{ name: "DGT Portfolio" }],
@@ -20,7 +20,7 @@ export const metadata = {
         },
     },
     openGraph: {
-        title: "DGT Portfolio - Build Your Professional Portfolio Online",
+        title: "Build Your Professional Portfolio Online - DGT Portfolio",
         description: "No code, no hassle. Build a clean, modern portfolio in minutes. Showcase your career, skills, projects, and work links like never before.",
         url: "https://dgtportfolio.com/en",
         siteName: "DGT Portfolio",
@@ -35,7 +35,7 @@ export const metadata = {
     },
     twitter: {
         card: "summary_large_image",
-        title: "DGT Portfolio - Build Your Professional Portfolio Online",
+        title: "Build Your Professional Portfolio Online - DGT Portfolio",
         description: "No code, no hassle. Build a clean, modern portfolio in minutes.",
         images: ["https://dgtportfolio.com/logo.png"],
         creator: "@dgtportfolio",

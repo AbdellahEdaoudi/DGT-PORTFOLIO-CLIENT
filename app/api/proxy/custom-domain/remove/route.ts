@@ -16,11 +16,9 @@ export async function DELETE(req: Request) {
   );
 
   try {
-    const data = await req.json();
     const backendUrl = process.env.BACKEND_URL;
     const response = await axios.delete(`${backendUrl}/api/custom-domain/remove`, {
-      headers: { Authorization: `Bearer ${token}` },
-      data: data
+      headers: { Authorization: `Bearer ${token}` }
     });
     return NextResponse.json(response.data, { status: response.status });
   } catch (error: any) {
