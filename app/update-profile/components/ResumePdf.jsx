@@ -122,7 +122,101 @@ const styles = StyleSheet.create({
     },
 });
 
+const translations = {
+    en: {
+        summary: "Professional Summary",
+        experience: "Experience",
+        skills: "Skills",
+        projects: "Projects",
+        education: "Education",
+        languages: "Languages",
+        viewProject: "View Project",
+        nameFallback: "Your Name",
+        titleFallback: "Professional Title"
+    },
+    fr: {
+        summary: "Résumé Professionnel",
+        experience: "Expérience",
+        skills: "Compétences",
+        projects: "Projets",
+        education: "Éducation",
+        languages: "Langues",
+        viewProject: "Voir le projet",
+        nameFallback: "Votre Nom",
+        titleFallback: "Titre Professionnel"
+    },
+    ar: {
+        summary: "نبذة",
+        experience: "الخبرة",
+        skills: "المهارات",
+        projects: "المشاريع",
+        education: "التعليم",
+        languages: "اللغات",
+        viewProject: "عرض المشروع",
+        nameFallback: "الاسم",
+        titleFallback: "المسمى الوظيفي"
+    },
+    de: {
+        summary: "Berufliche Zusammenfassung",
+        experience: "Berufserfahrung",
+        skills: "Fähigkeiten",
+        projects: "Projekte",
+        education: "Ausbildung",
+        languages: "Sprachen",
+        viewProject: "Projekt ansehen",
+        nameFallback: "Ihr Name",
+        titleFallback: "Berufsbezeichnung"
+    },
+    ru: {
+        summary: "Профессиональное резюме",
+        experience: "Опыт работы",
+        skills: "Навыки",
+        projects: "Проекты",
+        education: "Образование",
+        languages: "Языки",
+        viewProject: "Посмотреть проект",
+        nameFallback: "Ваше Имя",
+        titleFallback: "Профессиональный заголовок"
+    },
+    ja: {
+        summary: "職務要約",
+        experience: "職歴",
+        skills: "スキル",
+        projects: "プロジェクト",
+        education: "学歴",
+        languages: "言語",
+        viewProject: "プロジェクトを見る",
+        nameFallback: "氏名",
+        titleFallback: "職種"
+    },
+    zh: {
+        summary: "专业摘要",
+        experience: "工作经验",
+        skills: "技能",
+        projects: "项目",
+        education: "教育",
+        languages: "语言",
+        viewProject: "查看项目",
+        nameFallback: "姓名",
+        titleFallback: "职位"
+    },
+    es: {
+        summary: "Resumen Profesional",
+        experience: "Experiencia",
+        skills: "Habilidades",
+        projects: "Proyectos",
+        education: "Educación",
+        languages: "Idiomas",
+        viewProject: "Ver Proyecto",
+        nameFallback: "Su Nombre",
+        titleFallback: "Título Profesional"
+    }
+};
+
 const ResumePdf = ({ userData }) => {
+    const lang = userData?.displayLanguage || 'en';
+    const t = translations[lang] || translations['en'];
+
     const formatDate = (dateString) => {
         if (!dateString) return '';
         return dateString;
@@ -134,8 +228,8 @@ const ResumePdf = ({ userData }) => {
                 {/* Header */}
                 <View style={styles.header}>
                     <View style={styles.headerLeft}>
-                        <Text style={styles.name}>{userData?.fullname || 'Your Name'}</Text>
-                        <Text style={styles.title}>{userData?.category || 'Professional Title'}</Text>
+                        <Text style={styles.name}>{userData?.fullname || t.nameFallback}</Text>
+                        <Text style={styles.title}>{userData?.category || t.titleFallback}</Text>
 
                         <View style={styles.contactRow}>
                             {userData?.email && (
@@ -165,7 +259,7 @@ const ResumePdf = ({ userData }) => {
                 {/* Summary */}
                 {userData?.about && (
                     <View style={styles.section}>
-                        <Text style={styles.sectionTitle}>Professional Summary</Text>
+                        <Text style={styles.sectionTitle}>{t.summary}</Text>
                         <Text style={styles.description}>{userData.about}</Text>
                     </View>
                 )}
@@ -173,7 +267,7 @@ const ResumePdf = ({ userData }) => {
                 {/* Experience */}
                 {userData?.experience && userData.experience.length > 0 && (
                     <View style={styles.section}>
-                        <Text style={styles.sectionTitle}>Experience</Text>
+                        <Text style={styles.sectionTitle}>{t.experience}</Text>
                         {userData.experience.map((exp, index) => (
                             <View key={index} style={styles.item}>
                                 <View style={styles.itemHeader}>
@@ -192,7 +286,7 @@ const ResumePdf = ({ userData }) => {
                 {/* Skills */}
                 {userData?.skills && userData.skills.length > 0 && (
                     <View style={styles.section}>
-                        <Text style={styles.sectionTitle}>Skills</Text>
+                        <Text style={styles.sectionTitle}>{t.skills}</Text>
                         <View style={styles.skillContainer}>
                             {userData.skills.map((skill, index) => (
                                 <Text key={index} style={styles.skillBadge}>
@@ -206,14 +300,14 @@ const ResumePdf = ({ userData }) => {
                 {/* Projects */}
                 {userData?.projects && userData.projects.length > 0 && (
                     <View style={styles.section}>
-                        <Text style={styles.sectionTitle}>Projects</Text>
+                        <Text style={styles.sectionTitle}>{t.projects}</Text>
                         {userData.projects.map((proj, index) => (
                             <View key={index} style={styles.item}>
                                 <View style={styles.itemHeader}>
                                     <Text style={styles.itemTitle}>{proj.title}</Text>
                                     {proj.link && (
                                         <Link src={proj.link} style={{ ...styles.link, fontSize: 9 }}>
-                                            View Project
+                                            {t.viewProject}
                                         </Link>
                                     )}
                                 </View>
@@ -233,7 +327,7 @@ const ResumePdf = ({ userData }) => {
                 {/* Education */}
                 {userData?.education && userData.education.length > 0 && (
                     <View style={styles.section}>
-                        <Text style={styles.sectionTitle}>Education</Text>
+                        <Text style={styles.sectionTitle}>{t.education}</Text>
                         {userData.education.map((edu, index) => (
                             <View key={index} style={styles.item}>
                                 <View style={styles.itemHeader}>
@@ -251,7 +345,7 @@ const ResumePdf = ({ userData }) => {
                 {/* Languages */}
                 {userData?.languages && userData.languages.length > 0 && (
                     <View style={styles.section}>
-                        <Text style={styles.sectionTitle}>Languages</Text>
+                        <Text style={styles.sectionTitle}>{t.languages}</Text>
                         <View style={styles.skillContainer}>
                             {userData.languages.map((lang, index) => (
                                 <Text key={index} style={styles.skillBadge}>
