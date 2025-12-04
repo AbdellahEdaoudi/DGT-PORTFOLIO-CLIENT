@@ -81,16 +81,16 @@ export default function CustomDomainPage() {
     return (
         <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-white">
             <Header />
-            <div className="max-w-3xl mx-auto pt-4 px-6">
+            <div className="max-w-3xl mx-auto pt-4 px-4 sm:px-6">
                 <div className="mb-8 text-center">
-                    <h1 className="text-4xl font-bold mb-2 bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent">Custom Domain</h1>
-                    <p className="text-slate-400 text-lg">Connect your own domain to your portfolio instantly.</p>
+                    <h1 className="text-3xl sm:text-4xl font-bold mb-3 bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent">Custom Domain</h1>
+                    <p className="text-slate-400 text-base sm:text-lg">Connect your own domain to your portfolio instantly.</p>
                 </div>
 
-                <div className="bg-slate-800/50 backdrop-blur-xl rounded-2xl p-8 border border-slate-700/50 shadow-xl">
+                <div className="bg-slate-800/50 backdrop-blur-xl rounded-2xl p-5 sm:p-8 border border-slate-700/50 shadow-xl">
                     <div className="mb-8">
                         <label className="block text-sm font-semibold text-slate-300 mb-2 ml-1">Your Domain Name</label>
-                        <div className="flex gap-3">
+                        <div className="flex flex-col sm:flex-row gap-3">
                             <div className="relative flex-1">
                                 <input
                                     type="text"
@@ -105,7 +105,7 @@ export default function CustomDomainPage() {
                                 <button
                                     onClick={handleSave}
                                     disabled={isLoading}
-                                    className="bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-500 hover:to-blue-500 text-white px-8 rounded-xl font-bold transition-all disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2 shadow-lg shadow-cyan-900/20"
+                                    className="bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-500 hover:to-blue-500 text-white px-8 py-4 sm:py-0 rounded-xl font-bold transition-all disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2 shadow-lg shadow-cyan-900/20"
                                 >
                                     {isLoading ? <Loader2 className="w-5 h-5 animate-spin" /> : 'Save'}
                                 </button>
@@ -115,16 +115,16 @@ export default function CustomDomainPage() {
 
                     {isSaved && (
                         <div className="animate-in fade-in slide-in-from-top-4 duration-500">
-                            <div className={`p-5 rounded-xl flex items-center gap-4 border ${isVerified ? 'bg-green-500/10 border-green-500/20 text-green-400' : 'bg-amber-500/10 border-amber-500/20 text-amber-400'} mb-6`}>
-                                {isVerified ? <CheckCircle className="w-6 h-6 flex-shrink-0" /> : <AlertCircle className="w-6 h-6 flex-shrink-0" />}
+                            <div className={`p-4 sm:p-5 rounded-xl flex flex-col sm:flex-row items-start sm:items-center gap-4 border ${isVerified ? 'bg-green-500/10 border-green-500/20 text-green-400' : 'bg-amber-500/10 border-amber-500/20 text-amber-400'} mb-6`}>
+                                {isVerified ? <CheckCircle className="w-6 h-6 flex-shrink-0 mt-1 sm:mt-0" /> : <AlertCircle className="w-6 h-6 flex-shrink-0 mt-1 sm:mt-0" />}
                                 <div>
                                     <h3 className="font-bold text-lg">{isVerified ? 'Domain Active & Verified' : 'Verification Pending'}</h3>
-                                    <p className="text-sm opacity-80">{isVerified ? 'Your domain is correctly configured and live.' : 'Please configure your DNS settings to verify ownership.'}</p>
+                                    <p className="text-sm opacity-80 leading-relaxed">{isVerified ? 'Your domain is correctly configured and live.' : 'Please configure your DNS settings to verify ownership.'}</p>
                                 </div>
                             </div>
 
                             {isVerified ? (
-                                <div className="flex gap-3">
+                                <div className="flex flex-col sm:flex-row gap-3">
                                     <button
                                         onClick={() => window.open(`https://${customDomain}`, '_blank')}
                                         className="flex-1 bg-slate-700 hover:bg-slate-600 text-white py-3 rounded-xl font-semibold transition-colors flex items-center justify-center gap-2"
@@ -140,25 +140,25 @@ export default function CustomDomainPage() {
                                     </button>
                                 </div>
                             ) : (
-                                <div className="bg-slate-900/80 p-6 rounded-xl border border-slate-700/50">
+                                <div className="bg-slate-900/80 p-5 sm:p-6 rounded-xl border border-slate-700/50">
                                     <h3 className="font-bold text-lg mb-4 flex items-center gap-2">
                                         <Globe className="w-5 h-5 text-cyan-400" />
                                         DNS Configuration
                                     </h3>
                                     <div className="space-y-4 mb-6 text-sm text-slate-300">
                                         <p>To connect your domain, please follow these steps:</p>
-                                        <ol className="list-decimal list-inside space-y-2 ml-2">
+                                        <ol className="list-decimal list-inside space-y-3 sm:space-y-2 ml-1 sm:ml-2">
                                             <li>Log in to your domain provider (e.g., Namecheap, GoDaddy).</li>
                                             <li>Navigate to the <strong>DNS Management</strong> section.</li>
                                             <li>Add an <strong>A Record</strong> with the following details:
-                                                <ul className="list-disc list-inside ml-6 mt-1 text-slate-400">
+                                                <ul className="list-disc list-inside ml-4 sm:ml-6 mt-2 space-y-1 text-slate-400 bg-slate-950/50 p-3 rounded-lg border border-slate-800">
                                                     <li><strong>Type:</strong> A</li>
                                                     <li><strong>Name:</strong> @ (or leave blank)</li>
                                                     <li><strong>Value:</strong> 76.76.21.21</li>
                                                 </ul>
                                             </li>
                                             <li>(Optional) If using a subdomain (e.g., www), add a <strong>CNAME Record</strong>:
-                                                <ul className="list-disc list-inside ml-6 mt-1 text-slate-400">
+                                                <ul className="list-disc list-inside ml-4 sm:ml-6 mt-2 space-y-1 text-slate-400 bg-slate-950/50 p-3 rounded-lg border border-slate-800">
                                                     <li><strong>Type:</strong> CNAME</li>
                                                     <li><strong>Name:</strong> www</li>
                                                     <li><strong>Value:</strong> cname.vercel-dns.com</li>
@@ -196,8 +196,8 @@ export default function CustomDomainPage() {
 
             {/* Confirmation Modal */}
             {showRemoveModal && (
-                <div className="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-50 p-4 animate-in fade-in duration-200">
-                    <div className="bg-slate-800 rounded-2xl p-6 max-w-md w-full border border-slate-700 shadow-2xl animate-in zoom-in-95 duration-200">
+                <div className="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-end sm:items-center justify-center z-50 p-4 animate-in fade-in duration-200">
+                    <div className="bg-slate-800 rounded-t-2xl sm:rounded-2xl p-6 max-w-md w-full border border-slate-700 shadow-2xl animate-in slide-in-from-bottom-10 sm:zoom-in-95 duration-200">
                         <div className="flex items-start gap-4 mb-6">
                             <div className="w-12 h-12 rounded-full bg-red-500/10 flex items-center justify-center flex-shrink-0">
                                 <AlertCircle className="w-6 h-6 text-red-400" />
@@ -217,7 +217,7 @@ export default function CustomDomainPage() {
                             </button>
                         </div>
 
-                        <div className="flex gap-3">
+                        <div className="flex flex-col-reverse sm:flex-row gap-3">
                             <button
                                 onClick={() => setShowRemoveModal(false)}
                                 className="flex-1 bg-slate-700 hover:bg-slate-600 text-white py-3 rounded-xl font-semibold transition-colors"
