@@ -60,25 +60,54 @@ export async function generateMetadata() {
     const data = await res.json();
     if (data.status && data.user) {
       const user = data.user;
+      const portfolioUrl = user.customDomainVerified
+        ? `https://${host}`
+        : `https://${username}.dgtportfolio.com`;
+
       return {
         title: `${user.fullname} – Portfolio`,
         description: user.about || `Check out ${user.fullname}'s professional portfolio.`,
+        keywords: [user.fullname, user.category, 'portfolio', 'professional', ...(user.skills || [])],
+        authors: [{ name: user.fullname }],
+        creator: user.fullname,
+        publisher: 'DGT Portfolio',
         icons: {
           icon: user.urlimage,
           shortcut: user.urlimage,
           apple: user.urlimage,
         },
         openGraph: {
+          type: 'profile',
           title: `${user.fullname} – Portfolio`,
-          description: user.about,
-          url: `${user.customDomainVerified ? `https://${host}` : `https://${username}.dgtportfolio.com`}`,
-          images: [user.urlimage],
+          description: user.about || `Check out ${user.fullname}'s professional portfolio.`,
+          url: portfolioUrl,
+          siteName: 'DGT Portfolio',
+          locale: user.displayLanguage === 'ar' ? 'ar_AR' : 'en_US',
+          images: [
+            {
+              url: user.urlimage,
+              alt: `${user.fullname}'s Profile Picture`,
+              type: 'image/jpeg',
+            },
+          ],
         },
         twitter: {
           card: 'summary_large_image',
           title: `${user.fullname} – Portfolio`,
-          description: user.about,
+          description: user.about || `Check out ${user.fullname}'s professional portfolio.`,
           images: [user.urlimage],
+          creator: user.socials?.twitter || undefined,
+        },
+        robots: {
+          index: true,
+          follow: true,
+          googleBot: {
+            index: true,
+            follow: true,
+            'max-video-preview': -1,
+            'max-image-preview': 'large',
+            'max-snippet': -1,
+          },
         },
       };
     }
