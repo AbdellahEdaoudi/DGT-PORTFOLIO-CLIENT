@@ -35,9 +35,16 @@ export default withAuth(async function middleware(request: NextRequest) {
             url.pathname = `/${data.user.username}${pathname}`;
           }
 
-          const response = NextResponse.rewrite(url);
+          const requestHeaders = new Headers(request.headers);
+          requestHeaders.set('x-current-host', hostname);
 
-          // ✅ Pass host via cookie AND header
+          const response = NextResponse.rewrite(url, {
+            request: {
+              headers: requestHeaders,
+            },
+          });
+
+          // ✅ Pass host via cookie AND header (for client/response)
           response.cookies.set('x-current-host', hostname, { path: '/' });
           response.headers.set('x-current-host', hostname);
 
