@@ -1,5 +1,4 @@
 import UserPortfolio from "../Components/UserPortfolio";
-import { notFound } from "next/navigation";
 import { generateUserMetadata } from "../lib/metadata";
 import { fetchUserData } from "../lib/userUtils";
 

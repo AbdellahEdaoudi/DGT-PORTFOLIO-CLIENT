@@ -1,5 +1,7 @@
 "use client"
 import React, { useContext, useEffect, useState } from 'react'
+import axios from 'axios'
+import { MyContext } from '../Context/MyContext'
 import Themeone from "./themes/themeone"
 import ThemeTwo from "./themes/themetwo"
 import ThemeThree from "./themes/themethree"
@@ -11,10 +13,8 @@ import ThemeEight from "./themes/themeeight"
 import ThemeNine from "./themes/themenine"
 import ThemeTen from "./themes/themeten"
 import ThemeEleven from "./themes/themeeleven"
-import axios from 'axios'
 import AccountNotFound from "./AccountNotFound"
 import MagicalLoader from './MagicalLoader'
-import { MyContext } from '../Context/MyContext'
 
 export default function UserPortfolio({ params }) {
     const [userDetails, setUserDetails] = useState(null)

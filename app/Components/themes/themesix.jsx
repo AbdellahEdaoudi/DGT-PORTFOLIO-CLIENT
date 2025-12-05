@@ -10,7 +10,7 @@ import { PDFDownloadLink } from "@react-pdf/renderer"
 import ResumePdf from "../../update-profile/components/ResumePdf"
 import ImageModal from "../ImageModal"
 
-export default function ThemeSix({ userDetails, userLinks, bgcolor }) {
+export default function ThemeSix({ userDetails, userLinks}) {
     const { t } = useTranslation(userDetails?.displayLanguage || 'en')
     const [activeTab, setActiveTab] = useState("about")
     const [copied, setCopied] = useState(false);
