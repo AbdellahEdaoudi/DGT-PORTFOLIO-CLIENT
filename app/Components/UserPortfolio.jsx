@@ -16,7 +16,7 @@ import AccountNotFound from "./AccountNotFound"
 import MagicalLoader from './MagicalLoader'
 import { MyContext } from '../Context/MyContext'
 
-function UserPortfolio({ params }) {
+export default function UserPortfolio({ params }) {
     const [userDetails, setUserDetails] = useState(null)
     const [userLinks, setUserLinks] = useState([])
     const [loadingUsers, setLoadingUsers] = useState(true)
@@ -101,4 +101,4 @@ function UserPortfolio({ params }) {
     return <div>{renderTheme()}</div>
 }
 
-export default UserPortfolio
+
