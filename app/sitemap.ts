@@ -73,7 +73,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     if (response.ok) {
       const data = await response.json()
       const usernames: string[] = data.usernames || []
-      const customDomains: Array<{username: string, customDomain: string}> = data.customDomains || []
       
       // Add subdomain URLs for all users
       userPages = usernames.map((username) => ({
@@ -82,16 +81,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         changeFrequency: 'weekly' as const,
         priority: 0.9,
       }))
-
-      // Add custom domain URLs for users with verified custom domains
-      const customDomainPages: MetadataRoute.Sitemap = customDomains.map((item) => ({
-        url: `https://${item.customDomain}`,
-        lastModified: new Date(),
-        changeFrequency: 'weekly' as const,
-        priority: 0.95,
-      }))
-
-      userPages = [...userPages, ...customDomainPages]
     }
   } catch (error) {
     console.error('Error fetching users for sitemap:', error)
