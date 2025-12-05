@@ -71,7 +71,7 @@ export async function generateMetadata() {
         openGraph: {
           title: `${user.fullname} – Portfolio`,
           description: user.about,
-          url: `https://${host}`,
+          url: `${user.customDomainVerified ? `https://${host}` : `https://${username}.dgtportfolio.com`}`,
           images: [user.urlimage],
         },
         twitter: {
@@ -152,7 +152,7 @@ export default async function Home() {
           name: user.fullname,
           jobTitle: user.category,
           image: user.urlimage,
-          url: `https://${host}`,
+          url: `${user.customDomainVerified ? `https://${host}` : `https://${username}.dgtportfolio.com`}`,
           description: user.about,
           sameAs: Object.values(user.socials || {}).filter(Boolean),
         };
