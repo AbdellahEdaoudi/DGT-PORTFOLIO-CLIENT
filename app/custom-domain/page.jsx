@@ -16,6 +16,7 @@ export default function CustomDomainPage() {
     const [isFetching, setIsFetching] = useState(true);
     const [showRemoveModal, setShowRemoveModal] = useState(false);
 
+    useEffect(() => {
     const fetchSettings = async () => {
         setIsFetching(true);
         try {
@@ -25,13 +26,16 @@ export default function CustomDomainPage() {
                 setIsSaved(!!res.data.data.customDomain);
                 setIsVerified(res.data.data.customDomainVerified || false);
             }
-        } catch (e) { console.error(e); }
-        finally { setIsFetching(false); }
+        } catch (e) {
+            console.error(e);
+        } finally {
+            setIsFetching(false);
+        }
     };
 
-    useEffect(() => {
-        fetchSettings();
-    }, [EmailUser]);
+    fetchSettings();
+}, [EmailUser]);
+
 
     const handleSave = async () => {
         if (!customDomain) return toast.error('Enter a domain');
