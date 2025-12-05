@@ -407,20 +407,18 @@ export default function ThemeSix({ userDetails, userLinks }) {
                     <div className="flex flex-col items-center gap-8">
                         <div className="flex flex-wrap justify-center gap-4">
                             {[
-                                { name: "linkedin", url: userDetails.socials?.linkedin, icon: "/Icons/linkedin.svg" },
-                                { name: "github", url: userDetails.socials?.github, icon: "/Icons/github.svg" },
-                                { name: "facebook", url: userDetails.socials?.fb, icon: "/Icons/fb.svg" },
-                                { name: "whatsapp", url: userDetails.socials?.whatsapp, icon: "/Icons/wts.svg" },
-                                { name: "tiktok", url: userDetails.socials?.tiktok, icon: "/Icons/tiktok.svg" },
-                                { name: "reddit", url: userDetails.socials?.reddit, icon: "/Icons/reddit.svg" },
-                                { name: "twitch", url: userDetails.socials?.twitch, icon: "/Icons/twitch.svg" },
-                                { name: "instagram", url: userDetails.socials?.instagram, icon: "/Icons/ins.svg" },
-                                { name: "snapchat", url: userDetails.socials?.snapchat, icon: "/Icons/snap.svg" },
-                                { name: "twitter", url: userDetails.socials?.twitter, icon: "/Icons/twit.svg" },
-                                { name: "youtube", url: userDetails.socials?.youtube, icon: "/Icons/youtube.svg" },
-                                { name: "telegram", url: userDetails.socials?.telegram, icon: "/Icons/tele.svg" },
-                                { name: "tiktok", url: userDetails.socials?.tik, icon: "/Icons/tiktok.svg" },
-                                { name: "google", url: userDetails.socials?.google, icon: "/Icons/google.svg" },
+                                { name: "linkedin", url: userDetails.socials?.linkedin, icon: "/icons/linkedin.svg" },
+                                { name: "github", url: userDetails.socials?.github, icon: "/icons/github.svg" },
+                                { name: "facebook", url: userDetails.socials?.fb, icon: "/icons/facebook.svg" },
+                                { name: "whatsapp", url: userDetails.socials?.whatsapp, icon: "/icons/whatsapp.svg" },
+                                { name: "tiktok", url: userDetails.socials?.tiktok, icon: "/icons/tiktok.svg" },
+                                { name: "reddit", url: userDetails.socials?.reddit, icon: "/icons/reddit.svg" },
+                                { name: "twitch", url: userDetails.socials?.twitch, icon: "/icons/twitch.svg" },
+                                { name: "instagram", url: userDetails.socials?.instagram, icon: "/icons/instagram.svg" },
+                                { name: "snapchat", url: userDetails.socials?.snapchat, icon: "/icons/snapchat.svg" },
+                                { name: "twitter", url: userDetails.socials?.twitter, icon: "/icons/twitter.svg" },
+                                { name: "youtube", url: userDetails.socials?.youtube, icon: "/icons/youtube.svg" },
+                                { name: "telegram", url: userDetails.socials?.telegram, icon: "/icons/telegram.svg" },
                             ]
                                 .filter((item) => item.url)
                                 .map((item, i) => (
