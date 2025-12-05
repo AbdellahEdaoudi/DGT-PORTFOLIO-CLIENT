@@ -1,0 +1,12 @@
+# Allow all search engines to crawl the site
+User-agent: *
+
+# Disallow admin pages
+Disallow: /Admin
+Disallow: /Admin/
+
+# Allow everything else
+Allow: /
+
+# Sitemap location
+Sitemap: https://dgtportfolio.com/sitemap.xml
