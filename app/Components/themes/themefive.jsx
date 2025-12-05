@@ -90,7 +90,7 @@ export default function ThemeFive({ userDetails, userLinks }) {
                   onClick={() => setShowQR(!showQR)}
                   className="flex items-center gap-2 px-2 bg-white/10 hover:bg-yellow-500/20 rounded-lg text-white transition-all duration-300 backdrop-blur-md border border-white/10 hover:border-yellow-500/50 cursor-pointer"
                 >
-                  <QrcodeProfile path={`/${userDetails?.username}`} userDetails={userDetails} />
+                  <QrcodeProfile userDetails={userDetails} />
                 </div>
                 {/* User Links */}
                 <div className="flex items-center gap-2 px-2 bg-white/10 hover:bg-yellow-500/20 rounded-lg text-white transition-all duration-300 backdrop-blur-md border border-white/10 hover:border-yellow-500/50">

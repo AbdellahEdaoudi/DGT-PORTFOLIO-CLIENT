@@ -101,7 +101,7 @@ export default function Themeone({ userDetails, userLinks, bgcolor }) {
                     onClick={() => setShowQR(!showQR)}
                     className="flex items-center gap-2 px-2 cursor-pointer bg-white/10 hover:bg-white/20 rounded-lg text-white transition-all duration-300 backdrop-blur-md border border-white/10"
                   >
-                    <QrcodeProfile path={`/${userDetails?.username}`} userDetails={userDetails} />
+                    <QrcodeProfile userDetails={userDetails} />
                   </div>
                   {/* // User Links */}
                   <div

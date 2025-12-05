@@ -10,7 +10,7 @@ import { PDFDownloadLink } from "@react-pdf/renderer"
 import ResumePdf from "../../update-profile/components/ResumePdf"
 import ImageModal from "../ImageModal"
 
-export default function ThemeTwo({ userDetails, userLinks}) {
+export default function ThemeTwo({ userDetails, userLinks }) {
   const { t } = useTranslation(userDetails?.displayLanguage || 'en')
   const [activeTab, setActiveTab] = useState("about")
   const [copied, setCopied] = useState(false);
@@ -97,7 +97,7 @@ export default function ThemeTwo({ userDetails, userLinks}) {
                 onClick={() => setShowQR(!showQR)}
                 className="flex items-center gap-2 px-2 bg-white/10 hover:bg-blue-500/20 rounded-lg text-white transition-all duration-300 backdrop-blur-md border border-white/10 hover:border-blue-500/50 cursor-pointer"
               >
-                <QrcodeProfile path={`/${userDetails?.username}`} userDetails={userDetails} />
+                <QrcodeProfile userDetails={userDetails} />
               </div>
               {/* User Links */}
               <div className="flex items-center gap-2 px-2 bg-white/10 hover:bg-blue-500/20 rounded-lg text-white transition-all duration-300 backdrop-blur-md border border-white/10 hover:border-blue-500/50">

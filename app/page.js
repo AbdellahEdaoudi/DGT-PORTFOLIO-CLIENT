@@ -90,8 +90,8 @@ export async function generateMetadata() {
           canonical: `https://${host}`,
         },
       };
+    }
   }
-}
 }
 export default async function Home() {
   const host = headers().get("host");
@@ -104,7 +104,7 @@ export default async function Home() {
   let userSchema = null;
   if (isSubdomain) {
     try {
-      const res = await fetch(`https://dgt-portfolio-server.vercel.app/users/metauser/${subdomain}`, { next: { revalidate: 3600 } });
+      const res = await fetch(`https://dgt-portfolio-server.vercel.app/users/metauser/${username}`, { next: { revalidate: 3600 } });
       const data = await res.json();
       const user = data?.user;
       if (!user) {

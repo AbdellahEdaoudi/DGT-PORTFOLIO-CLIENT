@@ -1,5 +1,4 @@
 "use client"
-
 import { useState, useEffect } from 'react'
 import { Button } from "../../components/ui/button"
 import { ArrowLeft, LifeBuoy, User } from "lucide-react"

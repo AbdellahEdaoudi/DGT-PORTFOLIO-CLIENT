@@ -98,7 +98,7 @@ export default function ThemeThree({ userDetails, userLinks }) {
                 onClick={() => setShowQR(!showQR)}
                 className="flex items-center gap-2 px-2 bg-white/10 hover:bg-pink-500/20 rounded-lg text-white transition-all duration-300 backdrop-blur-md border border-white/10 hover:border-pink-500/50 cursor-pointer"
               >
-                <QrcodeProfile path={`/${userDetails?.username}`} userDetails={userDetails} />
+                <QrcodeProfile userDetails={userDetails} />
               </div>
               {/* User Links */}
               <div className="flex items-center gap-2 px-2 bg-white/10 hover:bg-pink-500/20 rounded-lg text-white transition-all duration-300 backdrop-blur-md border border-white/10 hover:border-pink-500/50">

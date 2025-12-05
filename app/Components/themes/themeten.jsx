@@ -97,7 +97,7 @@ export default function ThemeTen({ userDetails, userLinks }) {
                                 onClick={() => setShowQR(!showQR)}
                                 className="flex items-center gap-2 px-2 bg-slate-800/50 hover:bg-slate-700 rounded-lg text-slate-300 transition-all duration-300 border border-slate-700 hover:border-indigo-500/50 cursor-pointer"
                             >
-                                <QrcodeProfile path={`/${userDetails?.username}`} userDetails={userDetails} />
+                                <QrcodeProfile userDetails={userDetails} />
                             </div>
                             {/* User Links */}
                             <div className="flex items-center gap-2 px-2 bg-slate-800/50 hover:bg-slate-700 rounded-lg text-slate-300 transition-all duration-300 border border-slate-700 hover:border-indigo-500/50">
