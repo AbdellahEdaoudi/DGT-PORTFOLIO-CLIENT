@@ -394,7 +394,7 @@ export default function ThemeFive({ userDetails, userLinks }) {
           <div className="max-w-5xl mx-auto text-center">
             <div className="flex justify-center gap-6 mb-6 flex-wrap">
               {[
-                { name: "linkedin", url: userDetails.socials.linkedin, icon: "/Icons/link.svg" },
+                { name: "linkedin", url: userDetails.socials.linkedin, icon: "/Icons/linkedin.svg" },
                 { name: "github", url: userDetails.socials.github, icon: "/Icons/github.svg" },
                 { name: "facebook", url: userDetails.socials.fb, icon: "/Icons/fb.svg" },
                 { name: "whatsapp", url: userDetails.socials.whatsapp, icon: "/Icons/wts.svg" },
@@ -404,7 +404,7 @@ export default function ThemeFive({ userDetails, userLinks }) {
                 { name: "instagram", url: userDetails.socials.instagram, icon: "/Icons/ins.svg" },
                 { name: "snapchat", url: userDetails.socials.snapchat, icon: "/Icons/snap.svg" },
                 { name: "twitter", url: userDetails.socials.twitter, icon: "/Icons/twit.svg" },
-                { name: "youtube", url: userDetails.socials.youtube, icon: "/Icons/yt.svg" },
+                { name: "youtube", url: userDetails.socials.youtube, icon: "/Icons/youtube.svg" },
                 { name: "telegram", url: userDetails.socials.telegram, icon: "/Icons/tele.svg" },
                 { name: "google", url: userDetails.socials.google, icon: "/Icons/google.svg" },
               ].filter((item) => item.url)

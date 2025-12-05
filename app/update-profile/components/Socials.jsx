@@ -13,14 +13,14 @@ export default function Socials({ userData, setUserDetails }) {
   const [socials, setSocials] = useState(user.socials || {});
   const socialIcons = {
     github: "Icons/github.svg",
-    linkedin: "Icons/link.svg",
+    linkedin: "Icons/linkedin.svg",
     twitter: "Icons/twit.svg",
-    youtube: "Icons/yt.svg",
+    youtube: "Icons/youtube.svg",
     reddit: "Icons/reddit.svg",
     fb: "Icons/fb.svg",
     whatsapp: "Icons/wts.svg",
     telegram: "Icons/tele.svg",
-    tiktok: "Icons/tik.svg",
+    tiktok: "Icons/tiktok.svg",
     instagram: "Icons/ins.svg",
     twitch: "Icons/twitch.svg",
     snapchat: "Icons/snap.svg",
