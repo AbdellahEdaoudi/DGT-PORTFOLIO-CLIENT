@@ -10,6 +10,7 @@ export function generateUserMetadata(user, url) {
     const portfolioUrl = url || `https://${user.username}.dgtportfolio.com`;
 
     return {
+        metadataBase: new URL(portfolioUrl),
         title: `${user.fullname} – Portfolio`,
         description: user.about || `Check out ${user.fullname}'s professional portfolio.`,
         keywords: [
@@ -23,9 +24,9 @@ export function generateUserMetadata(user, url) {
         creator: user.fullname,
         publisher: 'DGT Portfolio',
         icons: {
-            icon: user.urlimage,
-            shortcut: user.urlimage,
-            apple: user.urlimage,
+            icon: user.urlimage || '/favicon.ico',
+            shortcut: user.urlimage || '/favicon.ico',
+            apple: user.urlimage || '/favicon.ico',
         },
         openGraph: {
             type: 'profile',
@@ -36,7 +37,7 @@ export function generateUserMetadata(user, url) {
             locale: user.displayLanguage === 'ar' ? 'ar_AR' : 'en_US',
             images: [
                 {
-                    url: user.urlimage,
+                    url: user.urlimage || '/logo.png',
                     alt: `${user.fullname}'s Profile Picture`,
                 },
             ],
@@ -45,7 +46,7 @@ export function generateUserMetadata(user, url) {
             card: 'summary_large_image',
             title: `${user.fullname} – Portfolio`,
             description: user.about || `Check out ${user.fullname}'s professional portfolio.`,
-            images: [user.urlimage],
+            images: [user.urlimage || '/logo.png'],
             creator: user.socials?.twitter || undefined,
         },
         robots: {
