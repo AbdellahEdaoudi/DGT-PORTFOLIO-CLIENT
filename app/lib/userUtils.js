@@ -48,22 +48,25 @@ export async function getUsernameFromHost(host, backendUrl) {
  * @returns {Promise<Object|null>} User object or null
  */
 export async function fetchUserData(username, backendUrl) {
-    if (!username) return null;
+  if (!username) return null;
 
-    try {
-        const res = await fetch(`${backendUrl}/users/metauser/${username}`, {
-            cache: 'no-store',
-        });
+  try {
+    const res = await fetch(`${backendUrl}/users/metauser/${username}`, {
+      // SSR friendly caching
+      next: { revalidate: 60 },
+    });
 
-        if (res.status === 404) return null;
+    if (!res.ok) return null;
 
-        const data = await res.json();
-        if (data.status && data.user) {
-            return data.user;
-        }
-    } catch (err) {
-        console.error('Error fetching user data:', err);
+    const data = await res.json();
+
+    if (data.status && data.user) {
+      return data.user;
     }
+  } catch (err) {
+    console.error("Error fetching user data:", err);
+  }
 
-    return null;
+  return null;
 }
+

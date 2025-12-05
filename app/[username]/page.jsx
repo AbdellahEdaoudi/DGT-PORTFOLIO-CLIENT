@@ -1,37 +1,40 @@
-import React from 'react'
-import UserPortfolio from "../Components/UserPortfolio"
-import { notFound } from 'next/navigation';
-import { generateUserMetadata } from '../lib/metadata';
+import UserPortfolio from "../Components/UserPortfolio";
+import { notFound } from "next/navigation";
+import { generateUserMetadata } from "../lib/metadata";
+import { fetchUserData } from "../lib/userUtils";
 
-import { headers } from 'next/headers';
-import { fetchUserData } from '../lib/userUtils';
-
+// ===========================
+// 1️⃣  Generate Metadata (SSR)
+// ===========================
 export async function generateMetadata({ params }) {
-  const headerStore = headers();
-  const host = headerStore.get('x-current-host') || headerStore.get('host');
-  const backendUrl = process.env.NEXT_PUBLIC_BACKEND_URL || 'https://dgt-portfolio-server.vercel.app';
+  const backendUrl =
+    process.env.NEXT_PUBLIC_BACKEND_URL ||
+    "https://dgt-portfolio-server.vercel.app";
 
-  // 3️⃣ Fetch User Metadata
-  if (params.username) {
-    const user = await fetchUserData(params.username, backendUrl);
+  const username = params.username;
 
-    if (!user) return;
-
-    // Determine portfolio URL
-    let portfolioUrl = `https://dgtportfolio.com/${params.username}`;
-
-    // If accessing via custom domain (not dgtportfolio.com), use the host as the URL
-    if (host && !host.includes('dgtportfolio.com')) {
-      portfolioUrl = `https://${host}`;
-    }
-
-    // Use utility function
-    return generateUserMetadata(user, portfolioUrl);
+  if (!username) {
+    return {
+      title: "User Not Found",
+      description: "This portfolio does not exist.",
+    };
   }
+
+  // Fetch user data
+  const user = await fetchUserData(username, backendUrl);
+  if (!user) return notFound();
+
+  // Build canonical public URL
+  // لأن هذا المسار خاص فقط بـ: https://dgtportfolio.com/username
+  const portfolioUrl = `https://dgtportfolio.com/${username}`;
+
+  // Return metadata (OpenGraph + Twitter + Robots + Icons...)
+  return generateUserMetadata(user, portfolioUrl);
 }
 
-function Page({ params }) {
-  return <UserPortfolio params={params} />
+// ===========================
+// 2️⃣ Page Component
+// ===========================
+export default function Page({ params }) {
+  return <UserPortfolio params={params} />;
 }
-
-export default Page
