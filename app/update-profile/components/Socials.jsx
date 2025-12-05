@@ -12,18 +12,18 @@ export default function Socials({ userData, setUserDetails }) {
   const user = userData || {};
   const [socials, setSocials] = useState(user.socials || {});
   const socialIcons = {
-    github: "Icons/github.svg",
-    linkedin: "Icons/linkedin.svg",
-    twitter: "Icons/twitter.svg",
-    youtube: "Icons/youtube.svg",
-    reddit: "Icons/reddit.svg",
-    fb: "Icons/facebook.svg",
-    whatsapp: "Icons/whatsapp.svg",
-    telegram: "Icons/telegram.svg",
-    tiktok: "Icons/tiktok.svg",
-    instagram: "Icons/instagram.svg",
-    twitch: "Icons/twitch.svg",
-    snapchat: "Icons/snapchat.svg",
+    github: "/icons/github.svg",
+    linkedin: "/icons/linkedin.svg",
+    twitter: "/icons/twitter.svg",
+    youtube: "/icons/youtube.svg",
+    reddit: "/icons/reddit.svg",
+    fb: "/icons/facebook.svg",
+    whatsapp: "/icons/whatsapp.svg",
+    telegram: "/icons/telegram.svg",
+    tiktok: "/icons/tiktok.svg",
+    instagram: "/icons/instagram.svg",
+    twitch: "/icons/twitch.svg",
+    snapchat: "/icons/snapchat.svg",
   };
 
   const [loading, setLoading] = useState(false);
