@@ -49,7 +49,7 @@ export default function ThemeSeven({ userDetails, userLinks, bgcolor }) {
                     className="absolute -bottom-32 left-1/3 w-[600px] h-[600px] bg-rose-600/10 rounded-full mix-blend-screen filter blur-[100px] opacity-30 animate-blob"
                     style={{ animationDelay: "4s" }}
                 ></div>
-                <div className="absolute inset-0 bg-[url('')] opacity-5 mix-blend-overlay"></div>
+                <div className="absolute inset-0  opacity-5 mix-blend-overlay"></div>
             </div>
 
             <div className="relative z-10 px-4 md:px-8 max-w-6xl mx-auto">

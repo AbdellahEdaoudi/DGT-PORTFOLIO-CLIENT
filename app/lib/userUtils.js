@@ -47,26 +47,26 @@ export async function getUsernameFromHost(host, backendUrl) {
  * @param {string} backendUrl - Backend API URL
  * @returns {Promise<Object|null>} User object or null
  */
-export async function fetchUserData(username, backendUrl) {
+export async function fetchUserData(username) {
   if (!username) return null;
+    const backendUrl =
+      process.env.NEXT_PUBLIC_BACKEND_URL ||
+      "https://dgt-portfolio-server.vercel.app";
 
   try {
     const res = await fetch(`${backendUrl}/users/metauser/${username}`, {
       // SSR friendly caching
       next: { revalidate: 60 },
     });
-
-    if (!res.ok) return null;
-
     const data = await res.json();
-
     if (data.status && data.user) {
       return data.user;
+    }else{
+      return null;
     }
   } catch (err) {
     console.error("Error fetching user data:", err);
+    return null;
   }
-
-  return null;
 }
 
