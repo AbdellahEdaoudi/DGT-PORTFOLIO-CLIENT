@@ -1,7 +1,6 @@
 "use client"
 import axios from 'axios';
 import { useSession } from 'next-auth/react';
-import { useRouter } from 'next/navigation';
 import { createContext, useEffect, useState } from 'react';
 
 export const MyContext = createContext();
@@ -11,9 +10,7 @@ export const MyProvider = ({ children }) => {
    const [userLinks, setUserLinks] = useState([]);
    const {data,status} = useSession()
    const EmailUser = data?.user?.email || ""
-   const [loadingAll, setLoadingAll] = useState(true);
-   const router = useRouter();
-   
+   const [loadingAll, setLoadingAll] = useState(true);   
   
   // Fetch all data
 useEffect(() => {
@@ -24,7 +21,7 @@ useEffect(() => {
       });
 
       if (res.status === 401) {
-        router.push("/api/auth/signin");
+        window.location.href = "/api/auth/signin";
         return;
       }
 

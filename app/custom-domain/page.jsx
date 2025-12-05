@@ -8,7 +8,7 @@ import Header from '../Components/header';
 import MagicalLoader from '../Components/MagicalLoader';
 
 export default function CustomDomainPage() {
-    const { userDetails } = useContext(MyContext);
+    const {EmailUser} = useContext(MyContext);
     const [customDomain, setCustomDomain] = useState('');
     const [isSaved, setIsSaved] = useState(false);
     const [isVerified, setIsVerified] = useState(false);
@@ -16,14 +16,10 @@ export default function CustomDomainPage() {
     const [isFetching, setIsFetching] = useState(true);
     const [showRemoveModal, setShowRemoveModal] = useState(false);
 
-    useEffect(() => {
-        if (userDetails?.email) fetchSettings();
-    }, [userDetails]);
-
     const fetchSettings = async () => {
         setIsFetching(true);
         try {
-            const res = await axios.get(`/api/proxy/custom-domain/settings/${userDetails.email}`);
+            const res = await axios.get(`/api/proxy/custom-domain/settings/${EmailUser}`);
             if (res.data.status) {
                 setCustomDomain(res.data.data.customDomain || '');
                 setIsSaved(!!res.data.data.customDomain);
@@ -32,6 +28,10 @@ export default function CustomDomainPage() {
         } catch (e) { console.error(e); }
         finally { setIsFetching(false); }
     };
+
+    useEffect(() => {
+        fetchSettings();
+    }, [EmailUser]);
 
     const handleSave = async () => {
         if (!customDomain) return toast.error('Enter a domain');

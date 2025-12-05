@@ -242,9 +242,9 @@ const ResumePdf = ({ userData }) => {
                                 <Text style={styles.contactItem}>• {userData.country}</Text>
                             )}
                             {userData?.username && (
-                                <Link 
-                                src={`${userData.customDomainVerified ? `https://${userData.customDomain}` : `https://${userData.username}.dgtportfolio.com`}`} 
-                                style={styles.contactItem}>
+                                <Link
+                                    src={`${userData.customDomainVerified ? `https://${userData.customDomain}` : `https://${userData.username}.dgtportfolio.com`}`}
+                                    style={styles.contactItem}>
                                     <Text style={styles.link}>• {userData.username}.dgtportfolio.com</Text>
                                 </Link>
                             )}
@@ -254,6 +254,7 @@ const ResumePdf = ({ userData }) => {
                         <Image
                             src={userData.urlimage}
                             style={styles.profileImage}
+                            alt={`${userData?.fullname || 'Profile'} photo`}
                         />
                     )}
                 </View>
