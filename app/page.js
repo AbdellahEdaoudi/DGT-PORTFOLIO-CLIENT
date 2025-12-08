@@ -19,13 +19,13 @@ function getDomainFlags(host) {
   const username = host.split(".")[0];
   const reserved = ["dgtportfolio", "localhost:3000", "www"];
   const isSubdomain =
+    !host.startsWith("dgtportfolio") &&
     host.endsWith("dgtportfolio.com") &&
     host !== "dgtportfolio.com" &&
     username &&
     !reserved.includes(username);
-  const isOwnDomain =
-    host.endsWith("dgtportfolio.com") || host.endsWith("localhost:3000");
-  const isExternalCustomDomain = !isSubdomain && !isOwnDomain;
+  const isCustomDomain = host.includes("dgtportfolio.vercel.app") && host.includes("dgtportfolio.com") && host.includes("localhost");
+  const isExternalCustomDomain = !isSubdomain && !isCustomDomain;
   return { username, isSubdomain, isExternalCustomDomain };
 }
 
