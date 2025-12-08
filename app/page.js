@@ -7,7 +7,7 @@ import { getDictionary } from "./dictionaries/get-dictionary";
 
 async function fetchUserData(url) {
   try {
-    const res = await fetch(url, { next: { revalidate: 3600 } });
+    const res = await fetch(url);
     const data = await res.json();
     return data?.status ? data.user : null;
   } catch (error) {
@@ -17,26 +17,38 @@ async function fetchUserData(url) {
 
 function getDomainFlags(host) {
   const reserved = ["dgtportfolio", "localhost:3000", "www"];
+  // isSubdomain
   const isSubdomain =
-    (!host.startsWith("dgtportfolio") || !host.startsWith("localhost:3000")) &&
-    (host.endsWith("dgtportfolio.com") || host.endsWith("localhost:3000"))&&
-    host !== "dgtportfolio.com" &&
-    !reserved.includes(host.split(".")[0]);
-  const isCustomDomain = host.includes("dgtportfolio.vercel.app") || host.includes("dgtportfolio.com") || host.includes("localhost");
-  const isExternalCustomDomain = !isSubdomain && !isCustomDomain;
+  host.endsWith("dgtportfolio.com") &&
+  host !== "dgtportfolio.com" &&
+  host !== "localhost:3000" &&
+  !reserved.includes(host.split(".")[0]);
+  // isExternalCustomDomain
+  const isExternalCustomDomain = !isSubdomain && 
+        !host.includes("dgtportfolio.com") && 
+        !host.includes("localhost") &&
+        !host.includes("dgtportfolio.vercel.app");
   return {isSubdomain, isExternalCustomDomain };
 }
 
 export async function generateMetadata() {
-  const host = headers().get("host");
+  const host = "abdellah-edaoudi.dgtportfolio.com"
+  // const host = "abdellah-edaoudi.site"
+  // const host = headers().get("host");
   const { isSubdomain, isExternalCustomDomain } = getDomainFlags(host);
   console.log("isSubdomain : "+ isSubdomain);
   console.log("isExternalCustomDomain : "+ isExternalCustomDomain);
   let user = null;
   if (isSubdomain) {
     user = await fetchUserData(`https://dgt-portfolio-server.vercel.app/users/metauser/${host.split(".")[0]}`);
+    console.log("user : "+ user);
+    console.log("user JSON:", JSON.stringify(user, null, 2));
+    console.log("user fullname:", user.fullname);
   } else if (isExternalCustomDomain) {
     user = await fetchUserData(`https://dgt-portfolio-server.vercel.app/users/metacustomdomain/${host}`);
+    console.log("user : "+ user);
+    console.log("user JSON:", JSON.stringify(user, null, 2));
+    console.log("user fullname:", user.fullname);
   }
 
   if (user) {
