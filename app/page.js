@@ -24,7 +24,7 @@ function getDomainFlags(host) {
     host !== "dgtportfolio.com" &&
     username &&
     !reserved.includes(username);
-  const isCustomDomain = host.includes("dgtportfolio.vercel.app") && host.includes("dgtportfolio.com") && host.includes("localhost");
+  const isCustomDomain = host.includes("dgtportfolio.vercel.app") || host.includes("dgtportfolio.com") || host.includes("localhost");
   const isExternalCustomDomain = !isSubdomain && !isCustomDomain;
   return { username, isSubdomain, isExternalCustomDomain };
 }
@@ -32,7 +32,9 @@ function getDomainFlags(host) {
 export async function generateMetadata() {
   const host = headers().get("host") || "";
   const { username, isSubdomain, isExternalCustomDomain } = getDomainFlags(host);
-
+  console.log("username : "+ username);
+  console.log("isSubdomain : "+ isSubdomain);
+  console.log("isExternalCustomDomain : "+ isExternalCustomDomain);
   let user = null;
   if (isSubdomain) {
     user = await fetchUserData(`https://dgt-portfolio-server.vercel.app/users/metauser/${username}`);
