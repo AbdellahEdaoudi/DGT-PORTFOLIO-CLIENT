@@ -8,11 +8,11 @@ import { getDictionary } from "./dictionaries/get-dictionary";
 export async function generateMetadata() {
   const host = headers().get("host");
   const isOwnDomain = host.endsWith("dgtportfolio.com") || host.endsWith("localhost:3000");
-  const isExternalCustomDomain = !isOwnDomain;
-  console.log("isExternalCustomDomain : ", isExternalCustomDomain + " host : " + host);
   const username = host.split(".")[0];
   const reserved = ["dgtportfolio", "localhost:3000", "www"];
-  const isSubdomain = username && !reserved.includes(username);
+  const isSubdomain = host.endsWith("dgtportfolio.com") && host !== "dgtportfolio.com" && username && !reserved.includes(username);
+  const isExternalCustomDomain = !isSubdomain && !isOwnDomain;
+  console.log("isExternalCustomDomain : ", isExternalCustomDomain + " host : " + host);
   if (isSubdomain) {
     const res = await fetch(`https://dgt-portfolio-server.vercel.app/users/metauser/${username}`);
     const data = await res.json();
@@ -96,11 +96,11 @@ export async function generateMetadata() {
 export default async function Home() {
   const host = headers().get("host");
   const isOwnDomain = host.endsWith("dgtportfolio.com") || host.endsWith("localhost:3000");
-  const isExternalCustomDomain = !isOwnDomain;
-  console.log("isExternalCustomDomain : ", isExternalCustomDomain + " host : " + host);
   const username = host.split(".")[0];
   const reserved = ["dgtportfolio", "localhost:3000", "www"];
-  const isSubdomain = username && !reserved.includes(username);
+  const isSubdomain = host.endsWith("dgtportfolio.com") && host !== "dgtportfolio.com" && username && !reserved.includes(username);
+  const isExternalCustomDomain = !isSubdomain && !isOwnDomain;
+  console.log("isExternalCustomDomain : ", isExternalCustomDomain + " host : " + host);
   let userSchema = null;
   if (isSubdomain) {
     try {
