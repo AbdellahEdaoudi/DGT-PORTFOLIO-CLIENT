@@ -32,9 +32,9 @@ function getDomainFlags(host) {
 }
 
 export async function generateMetadata() {
-  const host = "abdellah-edaoudi.dgtportfolio.com"
+  // const host = "abdellah-edaoudi.dgtportfolio.com"
   // const host = "abdellah-edaoudi.site"
-  // const host = headers().get("host");
+  const host = headers().get("host");
   const { isSubdomain, isExternalCustomDomain } = getDomainFlags(host);
   console.log("isSubdomain : "+ isSubdomain);
   console.log("isExternalCustomDomain : "+ isExternalCustomDomain);
