@@ -44,7 +44,8 @@ export async function generateMetadata() {
     console.log("user : "+ user);
     console.log("user JSON:", JSON.stringify(user, null, 2));
     console.log("user fullname:", user.fullname);
-  } else if (isExternalCustomDomain) {
+  } 
+  if (isExternalCustomDomain) {
     user = await fetchUserData(`https://dgt-portfolio-server.vercel.app/users/metacustomdomain/${host}`);
     console.log("user : "+ user);
     console.log("user JSON:", JSON.stringify(user, null, 2));
@@ -96,7 +97,8 @@ export default async function Home() {
       description: user.about,
       sameAs: Object.values(user.socials || {}).filter(Boolean),
     };
-  } else if (isExternalCustomDomain) {
+  } 
+  if (isExternalCustomDomain) {
     const user = await fetchUserData(`https://dgt-portfolio-server.vercel.app/users/metacustomdomain/${host}`);
     if (!user) return notFound();
     userSchema = {
