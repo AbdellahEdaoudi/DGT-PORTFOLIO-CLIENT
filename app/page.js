@@ -16,28 +16,25 @@ async function fetchUserData(url) {
 }
 
 function getDomainFlags(host) {
-  const username = host.split(".")[0];
   const reserved = ["dgtportfolio", "localhost:3000", "www"];
   const isSubdomain =
-    !host.startsWith("dgtportfolio") &&
-    host.endsWith("dgtportfolio.com") &&
+    (!host.startsWith("dgtportfolio") || !host.startsWith("localhost:3000")) &&
+    (host.endsWith("dgtportfolio.com") || host.endsWith("localhost:3000"))&&
     host !== "dgtportfolio.com" &&
-    username &&
-    !reserved.includes(username);
+    !reserved.includes(host.split(".")[0]);
   const isCustomDomain = host.includes("dgtportfolio.vercel.app") || host.includes("dgtportfolio.com") || host.includes("localhost");
   const isExternalCustomDomain = !isSubdomain && !isCustomDomain;
-  return { username, isSubdomain, isExternalCustomDomain };
+  return {isSubdomain, isExternalCustomDomain };
 }
 
 export async function generateMetadata() {
   const host = headers().get("host") || "";
-  const { username, isSubdomain, isExternalCustomDomain } = getDomainFlags(host);
-  console.log("username : "+ username);
+  const { isSubdomain, isExternalCustomDomain } = getDomainFlags("abdellah-edaoudi.site");
   console.log("isSubdomain : "+ isSubdomain);
   console.log("isExternalCustomDomain : "+ isExternalCustomDomain);
   let user = null;
   if (isSubdomain) {
-    user = await fetchUserData(`https://dgt-portfolio-server.vercel.app/users/metauser/${username}`);
+    user = await fetchUserData(`https://dgt-portfolio-server.vercel.app/users/metauser/${host.split(".")[0]}`);
   } else if (isExternalCustomDomain) {
     user = await fetchUserData(`https://dgt-portfolio-server.vercel.app/users/metacustomdomain/${host}`);
   }
@@ -72,12 +69,11 @@ export async function generateMetadata() {
 
 export default async function Home() {
   const host = headers().get("host") || "";
-  const { username, isSubdomain, isExternalCustomDomain } = getDomainFlags(host);
-
+  const {isSubdomain, isExternalCustomDomain } = getDomainFlags(host);
   let userSchema = null;
 
   if (isSubdomain) {
-    const user = await fetchUserData(`https://dgt-portfolio-server.vercel.app/users/metauser/${username}`);
+    const user = await fetchUserData(`https://dgt-portfolio-server.vercel.app/users/metauser/${host.split(".")[0]}`);
     if (!user) return notFound();
     userSchema = {
       "@context": "https://schema.org",
@@ -118,7 +114,7 @@ export default async function Home() {
   return (
     <div>
       {userSchema && <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(userSchema) }} />}
-      {isSubdomain ? <SubdomainClient username={username} /> : isExternalCustomDomain ? <CustomDomainClient host={host} /> : <LandingPage dict={dict} />}
+      {isSubdomain ? <SubdomainClient username={host.split(".")[0]} /> : isExternalCustomDomain ? <CustomDomainClient host={host} /> : <LandingPage dict={dict} />}
     </div>
   );
 }
