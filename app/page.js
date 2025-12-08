@@ -1,9 +1,10 @@
 import LandingPage from "./Components/LandingPage/LandingPage";
 import { headers } from "next/headers";
-import SubdomainClient from "./Components/SubdomainClient";
-import CustomDomainClient from "./Components/CustomDomainClient";
-import { notFound } from "next/navigation";
 import { getDictionary } from "./dictionaries/get-dictionary";
+import dynamic from 'next/dynamic';
+
+const SubdomainClient = dynamic(() => import('./Components/SubdomainClient'), { ssr: false });
+const CustomDomainClient = dynamic(() => import('./Components/CustomDomainClient'), { ssr: false });
 
 async function fetchUserData(url) {
   try {
@@ -82,20 +83,20 @@ export default async function Home() {
 
   if (isSubdomain) {
     const user = await fetchUserData(`https://dgt-portfolio-server.vercel.app/users/metauser/${host.split(".")[0]}`);
-    if (!user) return notFound();
-    userSchema = {
+    if (user) {
+      userSchema = {
       "@context": "https://schema.org",
       "@type": "Person",
       name: user.fullname,
       jobTitle: user.category || "Professional",
-      url: `https://${user.username}.dgtportfolio.com`,
+      url: `https://${user.username || host.split(".")[0]}.dgtportfolio.com`,
       description: user.about,
       sameAs: Object.values(user.socials || {}).filter(Boolean),
     };
-  }
-  if (isExternalCustomDomain) {
+    }
+  } else if (isExternalCustomDomain) {
     const user = await fetchUserData(`https://dgt-portfolio-server.vercel.app/users/metacustomdomain/${host}`);
-    if (!user) return notFound();
+    if (user) {
     userSchema = {
       "@context": "https://schema.org",
       "@type": "Person",
@@ -105,6 +106,7 @@ export default async function Home() {
       description: user.about,
       sameAs: Object.values(user.socials || {}).filter(Boolean),
     };
+    }
   } else {
     userSchema = {
       "@context": "https://schema.org",
