@@ -1,12 +1,46 @@
 import React from 'react';
-import { Page, Text, View, Document, StyleSheet, Image, Link } from '@react-pdf/renderer';
+import { Page, Text, View, Document, StyleSheet, Image, Link, Font } from '@react-pdf/renderer';
+
+// Register fonts for multilingual support
+Font.register({
+    family: 'Roboto',
+    fonts: [
+        { src: 'https://fonts.gstatic.com/s/roboto/v50/KFOMCnqEu92Fr1ME7kSn66aGLdTylUAMQXC89YmC2DPNWubEbWmT.ttf' }, // Regular
+        { src: 'https://fonts.gstatic.com/s/roboto/v50/KFOMCnqEu92Fr1ME7kSn66aGLdTylUAMQXC89YmC2DPNWuYjammT.ttf', fontWeight: 'bold' }, // Bold
+        { src: 'https://fonts.gstatic.com/s/roboto/v50/KFOKCnqEu92Fr1Mu53ZEC9_Vu3r1gIhOszmOClHrs6ljXfMMLoHQiA8.ttf', fontStyle: 'italic' } // Italic
+    ]
+});
+
+Font.register({
+    family: 'Amiri',
+    fonts: [
+        { src: 'https://fonts.gstatic.com/s/amiri/v30/J7aRnpd8CGxBHqUp.ttf' }, // Regular
+        { src: 'https://fonts.gstatic.com/s/amiri/v30/J7acnpd8CGxBHp2VkZY4.ttf', fontWeight: 'bold' }, // Bold
+        { src: 'https://fonts.gstatic.com/s/amiri/v30/J7afnpd8CGxBHpUrtLY.ttf', fontStyle: 'italic' } // Italic
+    ]
+});
+
+Font.register({
+    family: 'Noto Sans JP',
+    fonts: [
+        { src: 'https://fonts.gstatic.com/s/notosansjp/v55/-F6jfjtqLzI2JPCgQBnw7HFyzSD-AsregP8VFBEj75s.ttf' }, // Regular
+        { src: 'https://fonts.gstatic.com/s/notosansjp/v55/-F6jfjtqLzI2JPCgQBnw7HFyzSD-AsregP8VFPYk75s.ttf', fontWeight: 'bold' } // Bold
+    ]
+});
+
+Font.register({
+    family: 'Noto Sans SC',
+    fonts: [
+        { src: 'https://fonts.gstatic.com/s/notosanssc/v39/k3kCo84MPvpLmixcA63oeAL7Iqp5IZJF9bmaG9_FnYw.ttf' }, // Regular
+        { src: 'https://fonts.gstatic.com/s/notosanssc/v39/k3kCo84MPvpLmixcA63oeAL7Iqp5IZJF9bmaGzjCnYw.ttf', fontWeight: 'bold' } // Bold
+    ]
+});
 
 const styles = StyleSheet.create({
     page: {
         flexDirection: 'column',
         backgroundColor: '#FFFFFF',
         padding: 40,
-        fontFamily: 'Helvetica',
         fontSize: 10,
         lineHeight: 1.5,
         color: '#374151',
@@ -94,7 +128,7 @@ const styles = StyleSheet.create({
     itemDate: {
         fontSize: 9,
         color: '#9CA3AF',
-        fontStyle: 'italic',
+        fontStyle: 'italic', // Default to italic, will be overridden for CJK
     },
     description: {
         fontSize: 10,
@@ -217,6 +251,20 @@ const ResumePdf = ({ userData }) => {
     const lang = userData?.displayLanguage || 'en';
     const t = translations[lang] || translations['en'];
 
+    const getFontFamily = (language) => {
+        switch (language) {
+            case 'ar': return 'Amiri';
+            case 'ja': return 'Noto Sans JP';
+            case 'zh': return 'Noto Sans SC';
+            case 'ru': return 'Roboto';
+            default: return 'Roboto';
+        }
+    };
+
+    const fontFamily = getFontFamily(lang);
+    const direction = lang === 'ar' ? 'rtl' : 'ltr';
+    const disableItalic = ['ja', 'zh'].includes(lang);
+
     const formatDate = (dateString) => {
         if (!dateString) return '';
         return dateString;
@@ -224,7 +272,7 @@ const ResumePdf = ({ userData }) => {
 
     return (
         <Document>
-            <Page size="A4" style={styles.page}>
+            <Page size="A4" style={[styles.page, { fontFamily, direction }]}>
                 {/* Header */}
                 <View style={styles.header}>
                     <View style={styles.headerLeft}>
@@ -275,7 +323,7 @@ const ResumePdf = ({ userData }) => {
                             <View key={index} style={styles.item}>
                                 <View style={styles.itemHeader}>
                                     <Text style={styles.itemTitle}>{exp.role}</Text>
-                                    <Text style={styles.itemDate}>
+                                    <Text style={[styles.itemDate, disableItalic && { fontStyle: 'normal' }]}>
                                         {formatDate(exp.startDate)} - {formatDate(exp.endDate)}
                                     </Text>
                                 </View>
@@ -335,7 +383,7 @@ const ResumePdf = ({ userData }) => {
                             <View key={index} style={styles.item}>
                                 <View style={styles.itemHeader}>
                                     <Text style={styles.itemTitle}>{edu.school}</Text>
-                                    <Text style={styles.itemDate}>
+                                    <Text style={[styles.itemDate, disableItalic && { fontStyle: 'normal' }]}>
                                         {formatDate(edu.startYear)} - {formatDate(edu.endYear)}
                                     </Text>
                                 </View>

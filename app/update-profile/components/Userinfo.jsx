@@ -246,13 +246,20 @@ function Userinfo({ userData, setUserDetails }) {
       </div>
       {/* Submit Button */}
       <div className="flex justify-end py-4 border-b-2 border-gray-200 gap-4">
-        <PDFDownloadLink
+        <PDFDownloadLink 
           document={<ResumePdf userData={userData} />}
           fileName={`cv.${userData?.username || 'resume'}.pdf`}
           className="bg-gradient-to-r from-blue-500 to-indigo-600 hover:from-blue-600 hover:to-indigo-700 text-white font-bold px-8 py-3 rounded-lg transition-all duration-300 flex items-center gap-2 transform hover:scale-105 shadow-lg"
         >
-          {({ blob, url, loading, error }) =>
-            loading ? (
+          {({ blob, url, loading, error }) => {
+            if (error) {
+              return (
+                <>
+                  <span className="text-red-500">{t('errorGeneratingPdf') || 'Error generating PDF'}</span>
+                </>
+              );
+            }
+            return loading ? (
               <>
                 <Loader size={20} className="animate-spin" /> {t('loading') || 'Loading...'}
               </>
@@ -273,8 +280,8 @@ function Userinfo({ userData, setUserDetails }) {
                   return translations[userData?.displayLanguage] || translations['en'];
                 })()}
               </>
-            )
-          }
+            );
+          }}
         </PDFDownloadLink>
         <button onClick={UpUserInfo}
           type="submit"
