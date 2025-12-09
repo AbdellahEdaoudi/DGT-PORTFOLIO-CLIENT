@@ -1,10 +1,11 @@
 "use client"
-import { LayoutDashboard, Users, MessageSquare, Settings, Link2, DollarSign, TagIcon } from "lucide-react"
+import { LayoutDashboard, Users, MessageSquare, Settings, Link2, DollarSign, TagIcon, Clock } from "lucide-react"
 
 export default function AdminSidebar({ activeTab, setActiveTab }) {
   const menuItems = [
     { id: "overview", label: "Overview", icon: LayoutDashboard },
     { id: "users", label: "Users", icon: Users },
+    { id: "expired", label: "Expired Trials", icon: Clock },
     { id: "contacts", label: "Messages", icon: MessageSquare },
     { id: "links", label: "Links", icon: Link2 },
     { id: "subscriptions", label: "Subscriptions", icon: DollarSign },
@@ -28,11 +29,10 @@ export default function AdminSidebar({ activeTab, setActiveTab }) {
             <button
               key={item.id}
               onClick={() => setActiveTab(item.id)}
-              className={`w-full flex items-center gap-3 px-4 py-3 rounded-lg transition ${
-                activeTab === item.id
+              className={`w-full flex items-center gap-3 px-4 py-3 rounded-lg transition ${activeTab === item.id
                   ? "bg-purple-500/30 text-cyan-400 border border-purple-500/50"
                   : "text-gray-400 hover:text-white hover:bg-purple-500/10"
-              }`}
+                }`}
             >
               <Icon className="w-5 h-5" />
               <span className="font-medium">{item.label}</span>
