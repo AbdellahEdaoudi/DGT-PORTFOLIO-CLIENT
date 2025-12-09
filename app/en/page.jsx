@@ -2,9 +2,9 @@ import LandingPage from "../Components/LandingPage/LandingPage"
 import { getDictionary } from "../dictionaries/get-dictionary"
 
 export const metadata = {
-    title: "Build Your Professional Portfolio Online - DGT Portfolio | No Code Required",
+    title: "Build Your Personal Portfolio Online - DGT Portfolio | No Code Required",
     description: "No code, no hassle. Build a clean, modern portfolio in minutes. Showcase your career, skills, projects, and work links like never before. Free 7-day trial. Get your custom subdomain today!",
-    keywords: ["portfolio builder", "online portfolio", "professional portfolio", "no code portfolio", "portfolio website", "create portfolio", "portfolio maker", "custom subdomain", "QR code portfolio", "free portfolio", "portfolio templates", "digital portfolio"],
+    keywords: ["portfolio builder", "online portfolio", "personal portfolio", "no code portfolio", "portfolio website", "create portfolio", "portfolio maker", "custom subdomain", "QR code portfolio", "free portfolio", "portfolio templates", "digital portfolio"],
     authors: [{ name: "DGT Portfolio" }],
     creator: "DGT Portfolio",
     publisher: "DGT Portfolio",
@@ -20,7 +20,7 @@ export const metadata = {
         },
     },
     openGraph: {
-        title: "Build Your Professional Portfolio Online - DGT Portfolio",
+        title: "Build Your Personal Portfolio Online - DGT Portfolio",
         description: "No code, no hassle. Build a clean, modern portfolio in minutes. Showcase your career, skills, projects, and work links like never before.",
         url: "https://dgtportfolio.com/en",
         siteName: "DGT Portfolio",
@@ -29,13 +29,13 @@ export const metadata = {
         images: [
             {
                 url: "https://dgtportfolio.com/logo.png",
-                alt: "DGT Portfolio - Professional Portfolio Builder",
+                alt: "DGT Portfolio - Personal Portfolio Builder",
             },
         ],
     },
     twitter: {
         card: "summary_large_image",
-        title: "Build Your Professional Portfolio Online - DGT Portfolio",
+        title: "Build Your Personal Portfolio Online - DGT Portfolio",
         description: "No code, no hassle. Build a clean, modern portfolio in minutes.",
         images: ["https://dgtportfolio.com/logo.png"],
         creator: "@dgtportfolio",

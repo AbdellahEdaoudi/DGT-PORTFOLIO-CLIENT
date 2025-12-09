@@ -2,9 +2,9 @@ import LandingPage from "../Components/LandingPage/LandingPage"
 import { getDictionary } from "../dictionaries/get-dictionary"
 
 export const metadata = {
-    title: "プロフェッショナルなポートフォリオをオンラインで作成 - DGT Portfolio | コード不要",
+    title: "パーソナルなポートフォリオをオンラインで作成 - DGT Portfolio | コード不要",
     description: "コード不要、手間なし。数分でクリーンでモダンなポートフォリオを構築できます。キャリア、スキル、プロジェクト、仕事のリンクをこれまでにない方法で紹介しましょう。7日間無料トライアル。今すぐカスタムサブドメインを取得！",
-    keywords: ["ポートフォリオ作成", "オンラインポートフォリオ", "プロフェッショナルポートフォリオ", "コード不要ポートフォリオ", "ポートフォリオサイト", "ポートフォリオ制作", "ポートフォリオジェネレーター", "カスタムサブドメイン", "QRコードポートフォリオ", "無料ポートフォリオ", "ポートフォリオテンプレート", "デジタルポートフォリオ"],
+    keywords: ["ポートフォリオ作成", "オンラインポートフォリオ", "パーソナルポートフォリオ", "コード不要ポートフォリオ", "ポートフォリオサイト", "ポートフォリオ制作", "ポートフォリオジェネレーター", "カスタムサブドメイン", "QRコードポートフォリオ", "無料ポートフォリオ", "ポートフォリオテンプレート", "デジタルポートフォリオ"],
     authors: [{ name: "DGT Portfolio" }],
     creator: "DGT Portfolio",
     publisher: "DGT Portfolio",
@@ -20,7 +20,7 @@ export const metadata = {
         },
     },
     openGraph: {
-        title: "プロフェッショナルなポートフォリオをオンラインで作成 - DGT Portfolio",
+        title: "パーソナルなポートフォリオをオンラインで作成 - DGT Portfolio",
         description: "コード不要、手間なし。数分でクリーンでモダンなポートフォリオを構築できます。キャリア、スキル、プロジェクト、仕事のリンクをこれまでにない方法で紹介しましょう。",
         url: "https://dgtportfolio.com/ja",
         siteName: "DGT Portfolio",
@@ -29,13 +29,13 @@ export const metadata = {
         images: [
             {
                 url: "https://dgtportfolio.com/logo.png",
-                alt: "DGT Portfolio - プロフェッショナルポートフォリオ作成ツール",
+                alt: "DGT Portfolio - パーソナルポートフォリオ作成ツール",
             },
         ],
     },
     twitter: {
         card: "summary_large_image",
-        title: "プロフェッショナルなポートフォリオをオンラインで作成 - DGT Portfolio",
+        title: "パーソナルなポートフォリオをオンラインで作成 - DGT Portfolio",
         description: "コード不要、手間なし。数分でクリーンでモダンなポートフォリオを構築できます。",
         images: ["https://dgtportfolio.com/logo.png"],
         creator: "@dgtportfolio",

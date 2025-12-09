@@ -12,12 +12,12 @@ export function generateUserMetadata(user, url) {
     return {
         metadataBase: new URL(portfolioUrl),
         title: `${user.fullname} – Portfolio`,
-        description: user.about || `Check out ${user.fullname}'s professional portfolio.`,
+        description: user.about || `Check out ${user.fullname}'s personal portfolio.`,
         keywords: [
             user.fullname,
             user.category,
             'portfolio',
-            'professional',
+            'personal',
             ...(user.skills || [])
         ],
         authors: [{ name: user.fullname }],
@@ -31,7 +31,7 @@ export function generateUserMetadata(user, url) {
         openGraph: {
             type: 'profile',
             title: `${user.fullname} – Portfolio`,
-            description: user.about || `Check out ${user.fullname}'s professional portfolio.`,
+            description: user.about || `Check out ${user.fullname}'s personal portfolio.`,
             url: portfolioUrl,
             siteName: 'DGT Portfolio',
             locale: user.displayLanguage === 'ar' ? 'ar_AR' : 'en_US',
@@ -45,7 +45,7 @@ export function generateUserMetadata(user, url) {
         twitter: {
             card: 'summary_large_image',
             title: `${user.fullname} – Portfolio`,
-            description: user.about || `Check out ${user.fullname}'s professional portfolio.`,
+            description: user.about || `Check out ${user.fullname}'s personal portfolio.`,
             images: [user.urlimage],
             creator: user.socials?.twitter || user.fullname,
         },

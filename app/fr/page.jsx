@@ -2,9 +2,9 @@ import LandingPage from "../Components/LandingPage/LandingPage"
 import { getDictionary } from "../dictionaries/get-dictionary"
 
 export const metadata = {
-    title: "Créez votre portfolio professionnel en ligne - DGT Portfolio | Sans Code",
+    title: "Créez votre portfolio personnel en ligne - DGT Portfolio | Sans Code",
     description: "Sans code, sans tracas. Créez un portfolio propre et moderne en quelques minutes. Présentez votre carrière, vos compétences, vos projets et vos liens professionnels comme jamais auparavant. Essai gratuit de 7 jours. Obtenez votre sous-domaine personnalisé aujourd'hui!",
-    keywords: ["créateur de portfolio", "portfolio en ligne", "portfolio professionnel", "portfolio sans code", "site web portfolio", "créer portfolio", "générateur de portfolio", "sous-domaine personnalisé", "portfolio code QR", "portfolio gratuit", "modèles portfolio", "portfolio numérique"],
+    keywords: ["créateur de portfolio", "portfolio en ligne", "portfolio personnel", "portfolio sans code", "site web portfolio", "créer portfolio", "générateur de portfolio", "sous-domaine personnalisé", "portfolio code QR", "portfolio gratuit", "modèles portfolio", "portfolio numérique"],
     authors: [{ name: "DGT Portfolio" }],
     creator: "DGT Portfolio",
     publisher: "DGT Portfolio",
@@ -20,7 +20,7 @@ export const metadata = {
         },
     },
     openGraph: {
-        title: "Créez votre portfolio professionnel en ligne - DGT Portfolio",
+        title: "Créez votre portfolio personnel en ligne - DGT Portfolio",
         description: "Sans code, sans tracas. Créez un portfolio propre et moderne en quelques minutes. Présentez votre carrière, vos compétences, vos projets et vos liens professionnels comme jamais auparavant.",
         url: "https://dgtportfolio.com/fr",
         siteName: "DGT Portfolio",
@@ -29,13 +29,13 @@ export const metadata = {
         images: [
             {
                 url: "https://dgtportfolio.com/logo.png",
-                alt: "DGT Portfolio - Créateur de Portfolio Professionnel",
+                alt: "DGT Portfolio - Créateur de Portfolio Personnel",
             },
         ],
     },
     twitter: {
         card: "summary_large_image",
-        title: "Créez votre portfolio professionnel en ligne - DGT Portfolio",
+        title: "Créez votre portfolio personnel en ligne - DGT Portfolio",
         description: "Sans code, sans tracas. Créez un portfolio propre et moderne en quelques minutes.",
         images: ["https://dgtportfolio.com/logo.png"],
         creator: "@dgtportfolio",

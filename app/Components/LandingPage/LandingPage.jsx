@@ -34,7 +34,7 @@ export default function LandingPage({ dict }) {
         <div className=" mx-auto md:mx-3 px-6 py-6 flex justify-between items-center">
           <Link href={"/"}>
             <div className="flex items-center gap-0.5 text-2xl font-bold bg-gradient-to-r from-cyan-400 to-purple-500 bg-clip-text text-transparent cursor-pointer">
-              <Image src={"/LogoinQrcode.png"} width={500} height={500} className="w-12 h-10" alt="DGT Portfolio - Professional Portfolio Builder" />
+              <Image src={"/LogoinQrcode.png"} width={500} height={500} className="w-12 h-10" alt="DGT Portfolio - Personal Portfolio Builder" />
               DGTPortfolio
             </div>
           </Link>
