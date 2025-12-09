@@ -250,6 +250,7 @@ const translations = {
 const ResumePdf = ({ userData }) => {
     const lang = userData?.displayLanguage || 'en';
     const t = translations[lang] || translations['en'];
+    const isRTL = lang === 'ar';
 
     const getFontFamily = (language) => {
         switch (language) {
@@ -262,8 +263,14 @@ const ResumePdf = ({ userData }) => {
     };
 
     const fontFamily = getFontFamily(lang);
-    const direction = lang === 'ar' ? 'rtl' : 'ltr';
     const disableItalic = ['ja', 'zh'].includes(lang);
+
+    // Dynamic Styles Helper
+    const s = (styleName, extra = {}) => {
+        const base = styles[styleName];
+        const rtl = isRTL ? rtlStyles[styleName] : {};
+        return [base, rtl, extra];
+    };
 
     const formatDate = (dateString) => {
         if (!dateString) return '';
@@ -272,14 +279,14 @@ const ResumePdf = ({ userData }) => {
 
     return (
         <Document>
-            <Page size="A4" style={[styles.page, { fontFamily, direction }]}>
+            <Page size="A4" style={[styles.page, { fontFamily }, isRTL ? rtlStyles.page : {}]}>
                 {/* Header */}
-                <View style={styles.header}>
-                    <View style={styles.headerLeft}>
-                        <Text style={styles.name}>{userData?.fullname || t.nameFallback}</Text>
-                        <Text style={styles.title}>{userData?.category || t.titleFallback}</Text>
+                <View style={[styles.header, isRTL ? rtlStyles.header : {}]}>
+                    <View style={s('headerLeft')}>
+                        <Text style={s('name')}>{userData?.fullname || t.nameFallback}</Text>
+                        <Text style={s('title')}>{userData?.category || t.titleFallback}</Text>
 
-                        <View style={styles.contactRow}>
+                        <View style={s('contactRow')}>
                             {userData?.email && (
                                 <Text style={styles.contactItem}>{userData.email}</Text>
                             )}
@@ -310,25 +317,25 @@ const ResumePdf = ({ userData }) => {
                 {/* Summary */}
                 {userData?.about && (
                     <View style={styles.section}>
-                        <Text style={styles.sectionTitle}>{t.summary}</Text>
-                        <Text style={styles.description}>{userData.about}</Text>
+                        <Text style={s('sectionTitle')}>{t.summary}</Text>
+                        <Text style={s('description')}>{userData.about}</Text>
                     </View>
                 )}
 
                 {/* Experience */}
                 {userData?.experience && userData.experience.length > 0 && (
                     <View style={styles.section}>
-                        <Text style={styles.sectionTitle}>{t.experience}</Text>
+                        <Text style={s('sectionTitle')}>{t.experience}</Text>
                         {userData.experience.map((exp, index) => (
                             <View key={index} style={styles.item}>
-                                <View style={styles.itemHeader}>
-                                    <Text style={styles.itemTitle}>{exp.role}</Text>
+                                <View style={s('itemHeader')}>
+                                    <Text style={s('itemTitle')}>{exp.role}</Text>
                                     <Text style={[styles.itemDate, disableItalic && { fontStyle: 'normal' }]}>
                                         {formatDate(exp.startDate)} - {formatDate(exp.endDate)}
                                     </Text>
                                 </View>
-                                <Text style={styles.itemSubtitle}>{exp.company}</Text>
-                                <Text style={styles.description}>{exp.description}</Text>
+                                <Text style={s('itemSubtitle')}>{exp.company}</Text>
+                                <Text style={s('description')}>{exp.description}</Text>
                             </View>
                         ))}
                     </View>
@@ -337,8 +344,8 @@ const ResumePdf = ({ userData }) => {
                 {/* Skills */}
                 {userData?.skills && userData.skills.length > 0 && (
                     <View style={styles.section}>
-                        <Text style={styles.sectionTitle}>{t.skills}</Text>
-                        <View style={styles.skillContainer}>
+                        <Text style={s('sectionTitle')}>{t.skills}</Text>
+                        <View style={s('skillContainer')}>
                             {userData.skills.map((skill, index) => (
                                 <Text key={index} style={styles.skillBadge}>
                                     {skill.name || skill}
@@ -351,20 +358,20 @@ const ResumePdf = ({ userData }) => {
                 {/* Projects */}
                 {userData?.projects && userData.projects.length > 0 && (
                     <View style={styles.section}>
-                        <Text style={styles.sectionTitle}>{t.projects}</Text>
+                        <Text style={s('sectionTitle')}>{t.projects}</Text>
                         {userData.projects.map((proj, index) => (
                             <View key={index} style={styles.item}>
-                                <View style={styles.itemHeader}>
-                                    <Text style={styles.itemTitle}>{proj.title}</Text>
+                                <View style={s('itemHeader')}>
+                                    <Text style={s('itemTitle')}>{proj.title}</Text>
                                     {proj.link && (
                                         <Link src={proj.link} style={{ ...styles.link, fontSize: 9 }}>
                                             {t.viewProject}
                                         </Link>
                                     )}
                                 </View>
-                                <Text style={styles.description}>{proj.description}</Text>
+                                <Text style={s('description')}>{proj.description}</Text>
                                 {proj.technologies && proj.technologies.length > 0 && (
-                                    <View style={{ flexDirection: 'row', flexWrap: 'wrap', gap: 4, marginTop: 4 }}>
+                                    <View style={[styles.skillContainer, isRTL ? rtlStyles.skillContainer : {}]}>
                                         {proj.technologies.map((tech, i) => (
                                             <Text key={i} style={{ fontSize: 8, color: '#6B7280' }}>• {tech}</Text>
                                         ))}
@@ -378,16 +385,16 @@ const ResumePdf = ({ userData }) => {
                 {/* Education */}
                 {userData?.education && userData.education.length > 0 && (
                     <View style={styles.section}>
-                        <Text style={styles.sectionTitle}>{t.education}</Text>
+                        <Text style={s('sectionTitle')}>{t.education}</Text>
                         {userData.education.map((edu, index) => (
                             <View key={index} style={styles.item}>
-                                <View style={styles.itemHeader}>
-                                    <Text style={styles.itemTitle}>{edu.school}</Text>
+                                <View style={s('itemHeader')}>
+                                    <Text style={s('itemTitle')}>{edu.school}</Text>
                                     <Text style={[styles.itemDate, disableItalic && { fontStyle: 'normal' }]}>
                                         {formatDate(edu.startYear)} - {formatDate(edu.endYear)}
                                     </Text>
                                 </View>
-                                <Text style={styles.itemSubtitle}>{edu.degree} {edu.field ? `in ${edu.field}` : ''}</Text>
+                                <Text style={s('itemSubtitle')}>{edu.degree} {edu.field ? `in ${edu.field}` : ''}</Text>
                             </View>
                         ))}
                     </View>
@@ -396,8 +403,8 @@ const ResumePdf = ({ userData }) => {
                 {/* Languages */}
                 {userData?.languages && userData.languages.length > 0 && (
                     <View style={styles.section}>
-                        <Text style={styles.sectionTitle}>{t.languages}</Text>
-                        <View style={styles.skillContainer}>
+                        <Text style={s('sectionTitle')}>{t.languages}</Text>
+                        <View style={s('skillContainer')}>
                             {userData.languages.map((lang, index) => (
                                 <Text key={index} style={styles.skillBadge}>
                                     {lang.language || lang} {lang.level ? `(${lang.level})` : ''}
@@ -411,5 +418,57 @@ const ResumePdf = ({ userData }) => {
         </Document>
     );
 };
+
+// RTL Overrides
+const rtlStyles = StyleSheet.create({
+    page: {
+        direction: 'rtl',
+    },
+    header: {
+        flexDirection: 'row-reverse',
+    },
+    headerLeft: {
+        paddingRight: 0,
+        paddingLeft: 25,
+        alignItems: 'flex-end',
+    },
+    name: {
+        textAlign: 'right',
+        letterSpacing: 0,
+    },
+    title: {
+        textAlign: 'right',
+        letterSpacing: 0,
+    },
+    contactRow: {
+        flexDirection: 'row-reverse',
+        justifyContent: 'flex-start',
+    },
+    sectionTitle: {
+        textAlign: 'right',
+        borderLeftWidth: 0,
+        paddingLeft: 0,
+        borderRightWidth: 3,
+        borderRightColor: '#111827',
+        paddingRight: 8,
+        letterSpacing: 0,
+    },
+    itemHeader: {
+        flexDirection: 'row-reverse',
+    },
+    itemTitle: {
+        textAlign: 'right',
+    },
+    itemSubtitle: {
+        textAlign: 'right',
+    },
+    description: {
+        textAlign: 'right',
+    },
+    skillContainer: {
+        flexDirection: 'row-reverse',
+        justifyContent: 'flex-start',
+    },
+});
 
 export default ResumePdf;
