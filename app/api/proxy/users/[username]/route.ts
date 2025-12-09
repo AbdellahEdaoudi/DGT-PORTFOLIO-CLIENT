@@ -19,7 +19,10 @@ export async function GET(
       }
       
       if (msg === "No subscription found for this user") {
-        return NextResponse.json({ message: msg }, { status: 404 });
+        return NextResponse.json(
+          { message: msg, email: err.response.data?.email }, 
+          { status: 404 }
+        );
       }
       
       if (msg === "Your subscription is not active. Please renew or subscribe.") {

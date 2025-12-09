@@ -20,7 +20,7 @@ function getDomainFlags(host) {
   const reserved = ["dgtportfolio", "localhost:3000", "www"];
   // isSubdomain
   const isSubdomain =
-    host.endsWith("dgtportfolio.com") &&
+    (host.endsWith("dgtportfolio.com") || host.endsWith("localhost:3000")) &&
     host !== "dgtportfolio.com" &&
     host !== "localhost:3000" &&
     !reserved.includes(host.split(".")[0]);
@@ -60,7 +60,7 @@ export async function generateMetadata() {
         url: isSubdomain ? `https://${username}.dgtportfolio.com` : `https://${host}`,
         siteName: "DGT Portfolio",
         images: [{ url: user.urlimage, alt: `${user.fullname}'s Profile Picture` }],
-        locale: "en_US",
+        locale: user.displayLanguage === 'ar' ? 'ar_AR' : 'en_US',
         type: "profile",
       },
       twitter: {

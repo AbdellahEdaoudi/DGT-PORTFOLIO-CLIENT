@@ -1,7 +1,8 @@
-import UserPortfolio from "../Components/UserPortfolio";
+import dynamic from 'next/dynamic';
 import { generateUserMetadata } from "../lib/metadata";
 import { fetchUserData } from "../lib/userUtils";
 
+const UserPortfolio = dynamic(() => import('../Components/UserPortfolio'), { ssr: false });
 
 export async function generateMetadata({ params }) {
 

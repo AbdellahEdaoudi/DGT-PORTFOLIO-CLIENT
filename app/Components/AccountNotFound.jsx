@@ -1,7 +1,7 @@
 "use client"
 import { useState, useEffect } from 'react'
 import { Button } from "../../components/ui/button"
-import { ArrowLeft, LifeBuoy, User } from "lucide-react"
+import { ArrowLeft, LifeBuoy, User, CreditCard } from "lucide-react"
 import Link from "next/link"
 
 export default function AccountNotFound() {
@@ -73,16 +73,21 @@ export default function AccountNotFound() {
       </div>
       <main className="flex-grow flex items-start  justify-center px-4 z-10">
         <div className="max-w-md w-full text-center bg-[#2a2e32] p-8 rounded-lg shadow-2xl backdrop-blur-sm bg-opacity-80">
-        <div className="mb-6 relative">
+          <div className="mb-6 relative">
             <div className="w-24 h-24 mx-auto bg-[#00a896] rounded-full flex items-center justify-center overflow-hidden">
               <User className="text-[#1e2124] w-16 h-16" />
             </div>
           </div>
           <h1 className="text-4xl font-bold text-white mb-4">Account Not Found</h1>
           <p className="text-gray-400 text-lg mb-8">
-          We couldn't locate the account you're looking for. It might be renamed or the user hasn't subscribed
+            We couldn't locate the account you're looking for. It might be renamed or the user hasn't subscribed
           </p>
           <div className="space-y-4">
+            <Button asChild className="w-full bg-gradient-to-r from-purple-600 to-cyan-600 hover:from-purple-500 hover:to-cyan-500 text-white py-2 px-4 rounded-md transition-all duration-300 transform hover:scale-105">
+              <Link href={"https://dgtportfolio.com/subscription"} className="flex items-center justify-center">
+                <CreditCard className="mr-2 h-4 w-4" /> Subscribe Now
+              </Link>
+            </Button>
             <Button asChild className="w-full bg-[#00a896] hover:bg-[#008080] text-white py-2 px-4 rounded-md transition-all duration-300 transform hover:scale-105">
               <Link href={"https://dgtportfolio.com"} className="flex items-center justify-center">
                 <ArrowLeft className="mr-2 h-4 w-4" /> Return to Home page
