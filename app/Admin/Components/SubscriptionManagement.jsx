@@ -48,24 +48,24 @@ export default function SubscriptionManagement({ data, setData }) {
   const filteredSubscriptions = data.subscription?.filter((s) =>
     s.userEmail?.toLowerCase().includes(searchQuery) ||
     s.nameplan?.toLowerCase().includes(searchQuery) ||
-    s.status?.toLowerCase().includes(searchQuery) 
+    s.status?.toLowerCase().includes(searchQuery)
   )
 
   return (
     <div className="space-y-6">
-      <h1 className="text-2xl font-bold">
+      <h1 className="text-xl font-bold">
         Subscriptions ({filteredSubscriptions?.length || 0})
       </h1>
 
       <div className="bg-slate-800/50 border border-purple-500/20 rounded-xl overflow-hidden">
-        <div className="p-4 border-b border-purple-500/20 flex gap-4">
+        <div className="p-3 border-b border-purple-500/20 flex gap-4">
           <div className="flex-1 relative">
-            <Search className="w-5 h-5 absolute left-3 top-3 text-gray-500" />
+            <Search className="w-4 h-4 absolute left-3 top-2.5 text-gray-500" />
             <input
               onChange={(e) => setSearchQuery(e.target.value.toLowerCase())}
               type="text"
               placeholder="Search by email..."
-              className="w-full bg-slate-900/50 border border-purple-500/30 rounded-lg pl-10 pr-4 py-2 text-white placeholder-gray-500 focus:border-cyan-400/50 focus:outline-none transition"
+              className="w-full bg-slate-900/50 border border-purple-500/30 rounded-lg pl-9 pr-3 py-1.5 text-white placeholder-gray-500 focus:border-cyan-400/50 focus:outline-none transition text-sm"
             />
           </div>
         </div>
@@ -74,25 +74,25 @@ export default function SubscriptionManagement({ data, setData }) {
           <table className="w-full">
             <thead>
               <tr className="border-b border-purple-500/20">
-                <th className="px-6 py-4 text-left text-sm font-semibold text-gray-300">
+                <th className="px-4 py-3 text-left text-xs font-semibold text-gray-300">
                   Email
                 </th>
-                <th className="px-6 py-4 text-left text-sm font-semibold text-gray-300">
+                <th className="px-4 py-3 text-left text-xs font-semibold text-gray-300">
                   Plan Name
                 </th>
-                <th className="px-6 py-4 text-left text-sm font-semibold text-gray-300">
+                <th className="px-4 py-3 text-left text-xs font-semibold text-gray-300">
                   Payment Type
                 </th>
-                <th className="px-6 py-4 text-left text-sm font-semibold text-gray-300">
+                <th className="px-4 py-3 text-left text-xs font-semibold text-gray-300">
                   Status
                 </th>
-                <th className="px-6 py-4 text-left text-sm font-semibold text-gray-300">
+                <th className="px-4 py-3 text-left text-xs font-semibold text-gray-300">
                   Expires At
                 </th>
-                <th className="px-6 py-4 text-left text-sm font-semibold text-gray-300">
+                <th className="px-4 py-3 text-left text-xs font-semibold text-gray-300">
                   Created At
                 </th>
-                <th className="px-6 py-4 text-left text-sm font-semibold text-gray-300">
+                <th className="px-4 py-3 text-left text-xs font-semibold text-gray-300">
                   Actions
                 </th>
               </tr>
@@ -104,47 +104,46 @@ export default function SubscriptionManagement({ data, setData }) {
                   key={sub._id}
                   className="border-b border-purple-500/10 hover:bg-purple-500/10 transition"
                 >
-                  <td className="px-6 py-4 text-gray-300">
+                  <td className="px-4 py-2 text-gray-300 text-xs">
                     {highlightText(sub.userEmail, searchQuery)}
                   </td>
 
-                  <td className="px-6 py-4 text-cyan-400 font-medium">
+                  <td className="px-4 py-2 text-cyan-400 font-medium text-xs">
                     {highlightText(sub.nameplan, searchQuery)}
                   </td>
 
-                  <td className="px-6 py-4 text-gray-300">
+                  <td className="px-4 py-2 text-gray-300 text-xs">
                     {sub.paymentType === "subscription" ? "Subscription" : "One-Time"}
                   </td>
 
                   <td
-                    className={`px-6 py-4 font-semibold ${
-                      sub.status === "ACTIVE"
+                    className={`px-4 py-2 font-semibold text-xs ${sub.status === "ACTIVE"
                         ? "text-green-400"
                         : sub.status === "CANCELLED"
-                        ? "text-red-400"
-                        : "text-yellow-400"
-                    }`}
+                          ? "text-red-400"
+                          : "text-yellow-400"
+                      }`}
                   >
                     {highlightText(sub.status, searchQuery)}
                   </td>
 
-                  <td className="px-6 py-4 text-gray-300">
+                  <td className="px-4 py-2 text-gray-300 text-xs">
                     {sub.expiresAt
                       ? new Date(sub.expiresAt).toLocaleDateString()
                       : "—"}
                   </td>
 
-                  <td className="px-6 py-4 text-gray-400">
+                  <td className="px-4 py-2 text-gray-400 text-xs">
                     {new Date(sub.createdAt).toLocaleDateString()}
                   </td>
 
-                  <td className="px-6 py-4">
+                  <td className="px-4 py-2">
                     <button
                       onClick={() => setDeleteConfirm(sub)}
-                      className="px-4 py-2 bg-red-500/20 border border-red-500/50 rounded text-red-400 hover:bg-red-500/30 transition text-sm font-semibold flex items-center justify-center gap-2"
+                      className="px-3 py-1 bg-red-500/20 border border-red-500/50 rounded text-red-400 hover:bg-red-500/30 transition text-xs font-semibold flex items-center justify-center gap-2"
                     >
                       {loadingDeleteId === sub._id ? (
-                        <Loader size={18} className="animate-spin" />
+                        <Loader size={12} className="animate-spin" />
                       ) : (
                         "Delete"
                       )}

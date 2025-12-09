@@ -5,7 +5,7 @@ import { Search, AlertCircle, Loader, Eye, X } from "lucide-react"
 import { toast } from "react-toastify"
 import axios from "axios"
 
-export default function ContactManagement({ data ,setData }) {
+export default function ContactManagement({ data, setData }) {
   const [searchQuery, setSearchQuery] = useState("")
   const [contactsData, setContactsData] = useState(data.contacts)
   const [selectedMessage, setSelectedMessage] = useState(null)
@@ -39,21 +39,21 @@ export default function ContactManagement({ data ,setData }) {
 
   return (
     <div className="space-y-6">
-      <h1 className="text-2xl font-bold">Messages & Contacts ({data.contacts.length})</h1>
+      <h1 className="text-xl font-bold">Messages & Contacts ({data.contacts.length})</h1>
 
       <div className="bg-slate-800/50 border border-purple-500/20 rounded-xl overflow-hidden">
-        <div className="p-4 border-b border-purple-500/20 flex gap-4">
+        <div className="p-3 border-b border-purple-500/20 flex gap-4">
           <div className="flex-1 relative">
-            <Search className="w-5 h-5 absolute left-3 top-3 text-gray-500" />
+            <Search className="w-4 h-4 absolute left-3 top-2.5 text-gray-500" />
             <input
               type="text"
               placeholder="Search messages..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full bg-slate-900/50 border border-purple-500/30 rounded-lg pl-10 pr-4 py-2 text-white placeholder-gray-500 focus:border-cyan-400/50 focus:outline-none transition"
+              className="w-full bg-slate-900/50 border border-purple-500/30 rounded-lg pl-9 pr-3 py-1.5 text-white placeholder-gray-500 focus:border-cyan-400/50 focus:outline-none transition text-sm"
             />
           </div>
-          <div className="text-sm text-gray-400 flex items-center">
+          <div className="text-xs text-gray-400 flex items-center">
             {data.contacts.length} total messages
           </div>
         </div>
@@ -62,10 +62,10 @@ export default function ContactManagement({ data ,setData }) {
           <table className="w-full">
             <thead>
               <tr className="border-b border-purple-500/20">
-                <th className="px-6 py-4 text-left text-sm font-semibold text-gray-300">Email</th>
-                <th className="px-6 py-4 text-left text-sm font-semibold text-gray-300">Subject</th>
-                <th className="px-6 py-4 text-left text-sm font-semibold text-gray-300">Date</th>
-                <th className="px-6 py-4 text-left text-sm font-semibold text-gray-300">Actions</th>
+                <th className="px-4 py-3 text-left text-xs font-semibold text-gray-300">Email</th>
+                <th className="px-4 py-3 text-left text-xs font-semibold text-gray-300">Subject</th>
+                <th className="px-4 py-3 text-left text-xs font-semibold text-gray-300">Date</th>
+                <th className="px-4 py-3 text-left text-xs font-semibold text-gray-300">Actions</th>
               </tr>
             </thead>
             <tbody>
@@ -74,26 +74,26 @@ export default function ContactManagement({ data ,setData }) {
                   key={contact._id}
                   className="border-b border-purple-500/10 hover:bg-purple-500/10 transition"
                 >
-                  <td className="px-6 py-4 text-gray-400">{contact.email}</td>
-                  <td className="px-6 py-4 text-gray-400 truncate max-w-[200px]">
+                  <td className="px-4 py-2 text-gray-400 text-xs">{contact.email}</td>
+                  <td className="px-4 py-2 text-gray-400 truncate max-w-[200px] text-xs">
                     {contact.subject}
                   </td>
-                  <td className="px-6 py-4 text-gray-500 text-sm">
+                  <td className="px-4 py-2 text-gray-500 text-xs">
                     {new Date(contact.createdAt).toLocaleString()}
                   </td>
-                  <td className="px-6 py-4 flex gap-2">
+                  <td className="px-4 py-2 flex gap-2">
                     <button
                       onClick={() => setSelectedMessage(contact)}
-                      className="px-3 py-2 bg-cyan-500/20 border border-cyan-500/50 rounded text-cyan-400 hover:bg-cyan-500/30 transition text-sm font-semibold flex items-center gap-2"
+                      className="px-2 py-1 bg-cyan-500/20 border border-cyan-500/50 rounded text-cyan-400 hover:bg-cyan-500/30 transition text-xs font-semibold flex items-center gap-1"
                     >
-                      <Eye className="w-4 h-4" /> Show
+                      <Eye className="w-3 h-3" /> Show
                     </button>
                     <button
                       onClick={() => setDeleteConfirm(contact._id)}
-                      className="px-3 py-2 bg-red-500/20 border border-red-500/50 rounded text-red-400 hover:bg-red-500/30 transition text-sm font-semibold flex items-center justify-center gap-2"
+                      className="px-2 py-1 bg-red-500/20 border border-red-500/50 rounded text-red-400 hover:bg-red-500/30 transition text-xs font-semibold flex items-center justify-center gap-1"
                     >
                       {loadingDelete === contact._id ? (
-                        <Loader className="animate-spin w-4 h-4" />
+                        <Loader className="animate-spin w-3 h-3" />
                       ) : (
                         "Delete"
                       )}

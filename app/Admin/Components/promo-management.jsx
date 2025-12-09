@@ -81,16 +81,16 @@ export default function PromoCodeManagement({ data, setData }) {
 
   return (
     <div>
-      <h1 className="text-2xl font-bold">
+      <h1 className="text-xl font-bold">
         Promo Code Management ({codes.length})
       </h1>
 
       {/* Search + Add */}
-      <div className="flex gap-4 mt-6 mb-4">
+      <div className="flex gap-4 mt-4 mb-4">
         <div className="flex-1 relative">
-          <Search className="absolute left-3 top-3 w-5 h-5 text-gray-500" />
+          <Search className="absolute left-3 top-2.5 w-4 h-4 text-gray-500" />
           <input
-            className="w-full bg-slate-800/50 border border-purple-500/30 text-white rounded-lg pl-10 pr-4 py-2 placeholder-gray-500 focus:border-cyan-400/50"
+            className="w-full bg-slate-800/50 border border-purple-500/30 text-white rounded-lg pl-9 pr-3 py-1.5 placeholder-gray-500 focus:border-cyan-400/50 text-sm"
             placeholder="Search promo codes..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
@@ -99,9 +99,9 @@ export default function PromoCodeManagement({ data, setData }) {
 
         <button
           onClick={() => setShowCreateModal(true)}
-          className="px-4 py-2 bg-cyan-600 hover:bg-cyan-500 rounded-lg flex items-center gap-2 font-semibold"
+          className="px-3 py-1.5 bg-cyan-600 hover:bg-cyan-500 rounded-lg flex items-center gap-2 font-semibold text-sm"
         >
-          <Plus size={18} /> Add Code
+          <Plus size={16} /> Add Code
         </button>
       </div>
 
@@ -110,16 +110,16 @@ export default function PromoCodeManagement({ data, setData }) {
         <table className="w-full">
           <thead>
             <tr className="border-b border-purple-500/20">
-              <th className="text-left px-6 py-4 text-sm text-gray-300">
+              <th className="text-left px-4 py-3 text-xs text-gray-300">
                 Promo Code
               </th>
-              <th className="text-left px-6 py-4 text-sm text-gray-300">
+              <th className="text-left px-4 py-3 text-xs text-gray-300">
                 Created At
               </th>
-              <th className="text-left px-6 py-4 text-sm text-gray-300">
+              <th className="text-left px-4 py-3 text-xs text-gray-300">
                 Updated At
               </th>
-              <th className="px-6 py-4 text-sm text-gray-300 text-left">
+              <th className="px-4 py-3 text-xs text-gray-300 text-left">
                 Actions
               </th>
             </tr>
@@ -132,22 +132,22 @@ export default function PromoCodeManagement({ data, setData }) {
                   key={item._id}
                   className="border-b border-purple-500/10 hover:bg-purple-500/10 transition"
                 >
-                  <td className="px-6 py-4 font-semibold text-white">
+                  <td className="px-4 py-2 font-semibold text-white text-xs">
                     {highlight(item.code)}
                   </td>
-                  <td className="px-6 py-4 text-sm text-gray-300">
+                  <td className="px-4 py-2 text-xs text-gray-300">
                     {new Date(item.createdAt).toLocaleString()}
                   </td>
-                  <td className="px-6 py-4 text-sm text-gray-300">
+                  <td className="px-4 py-2 text-xs text-gray-300">
                     {new Date(item.updatedAt).toLocaleString()}
                   </td>
-                  <td className="px-6 py-4">
+                  <td className="px-4 py-2">
                     <button
                       onClick={() => setDeleteConfirm(item)}
-                      className="px-4 py-2 bg-red-500/20 border border-red-500/40 rounded text-red-400 hover:bg-red-500/30 transition text-sm"
+                      className="px-3 py-1 bg-red-500/20 border border-red-500/40 rounded text-red-400 hover:bg-red-500/30 transition text-xs"
                     >
                       {loadingDeleteId === item._id ? (
-                        <Loader size={18} className="animate-spin" />
+                        <Loader size={12} className="animate-spin" />
                       ) : (
                         "Delete"
                       )}

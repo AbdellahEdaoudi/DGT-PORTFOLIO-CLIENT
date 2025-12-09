@@ -20,6 +20,7 @@ export default function AdminDashboard() {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [unauthorized, setUnauthorized] = useState(false)
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false); // Mobile sidebar state
 
   useEffect(() => {
     const fetchAdminData = async () => {
@@ -71,76 +72,107 @@ export default function AdminDashboard() {
   return (
     <div>
       {data && (
-        <div className="flex h-screen bg-gradient-to-br from-slate-950 via-slate-900 to-black text-white">
-          <AdminSidebar activeTab={activeTab} setActiveTab={setActiveTab} />
+        <div className="flex h-screen bg-gradient-to-br from-slate-950 via-slate-900 to-black text-white overflow-hidden">
 
-          <main className="flex-1 overflow-auto">
+          {/* Mobile Sidebar Overlay */}
+          {isSidebarOpen && (
+            <div
+              className="fixed inset-0 bg-black/50 z-40 md:hidden backdrop-blur-sm"
+              onClick={() => setIsSidebarOpen(false)}
+            />
+          )}
+
+          {/* Sidebar - mapped to hidden on mobile usually, but we control via classes */}
+          <div className={`
+            fixed md:relative z-50 h-full transition-transform duration-300 transform
+            ${isSidebarOpen ? "translate-x-0" : "-translate-x-full"}
+            md:translate-x-0
+          `}>
+            <AdminSidebar activeTab={activeTab} setActiveTab={(tab) => {
+              setActiveTab(tab);
+              setIsSidebarOpen(false); // Close on selection on mobile
+            }} />
+          </div>
+
+          <main className="flex-1 overflow-auto w-full">
             {/* Header */}
-            <div className="sticky top-0 z-40 border-b border-purple-500/20 bg-slate-900/50 backdrop-blur-sm px-8 py-6">
-              <div className="flex justify-between items-center">
-                <h1 className="text-3xl font-bold bg-gradient-to-r from-cyan-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">
-                  DGT Portfolio Admin
-                </h1>
-                <div className="flex items-center gap-4">
-                  <button className="p-2 hover:bg-purple-500/20 rounded-lg transition">
-                    <Settings className="w-5 h-5" />
+            <div className="sticky top-0 z-30 border-b border-purple-500/20 bg-slate-900/50 backdrop-blur-sm px-4 md:px-6 py-4">
+              <div className="flex justify-between items-center gap-4">
+
+                <div className="flex items-center gap-3">
+                  {/* Hamburger Menu */}
+                  <button
+                    onClick={() => setIsSidebarOpen(!isSidebarOpen)}
+                    className="md:hidden p-1.5 hover:bg-purple-500/20 rounded-lg transition"
+                  >
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-menu"><line x1="4" x2="20" y1="12" y2="12" /><line x1="4" x2="20" y1="6" y2="6" /><line x1="4" x2="20" y1="18" y2="18" /></svg>
                   </button>
-                  <button onClick={() => signOut()} className="p-2 hover:bg-purple-500/20 rounded-lg transition">
-                    <LogOut className="w-5 h-5" />
+
+                  <h1 className="text-lg md:text-xl font-bold bg-gradient-to-r from-cyan-400 via-purple-400 to-pink-400 bg-clip-text text-transparent truncate">
+                    DGT Admin
+                  </h1>
+                </div>
+
+                <div className="flex items-center gap-2 md:gap-3">
+                  <button className="p-1.5 hover:bg-purple-500/20 rounded-lg transition">
+                    <Settings className="w-4 h-4 md:w-5 md:h-5" />
+                  </button>
+                  <button onClick={() => signOut()} className="p-1.5 hover:bg-purple-500/20 rounded-lg transition">
+                    <LogOut className="w-4 h-4 md:w-5 md:h-5" />
                   </button>
                 </div>
               </div>
             </div>
 
             {/* Content */}
-            <div className="p-8">
+            <div className="p-4 md:p-6">
               {activeTab === "overview" && (
-                <div className="space-y-8">
+                <div className="space-y-6">
                   {/* Stats Grid */}
-                  <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                    <div className="bg-slate-800/50 border border-purple-500/20 rounded-xl p-6 hover:border-purple-400/50 transition">
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <div className="bg-slate-800/50 border border-purple-500/20 rounded-xl p-4 hover:border-purple-400/50 transition">
                       <div className="flex justify-between items-start">
                         <div>
-                          <p className="text-gray-400 text-sm mb-2">Total Users</p>
-                          <p className="text-3xl font-bold">{data.users?.length}</p>
+                          <p className="text-gray-400 text-xs mb-1">Total Users</p>
+                          <p className="text-2xl font-bold">{data.users?.length}</p>
                         </div>
-                        <Users className="w-8 h-8 text-cyan-400" />
+                        <Users className="w-6 h-6 text-cyan-400" />
                       </div>
                     </div>
 
-                    <div className="bg-slate-800/50 border border-purple-500/20 rounded-xl p-6 hover:border-purple-400/50 transition">
+                    <div className="bg-slate-800/50 border border-purple-500/20 rounded-xl p-4 hover:border-purple-400/50 transition">
                       <div className="flex justify-between items-start">
                         <div>
-                          <p className="text-gray-400 text-sm mb-2">Messages</p>
-                          <p className="text-3xl font-bold">{data.contacts?.length}</p>
+                          <p className="text-gray-400 text-xs mb-1">Messages</p>
+                          <p className="text-2xl font-bold">{data.contacts?.length}</p>
                         </div>
-                        <MessageSquare className="w-8 h-8 text-pink-400" />
+                        <MessageSquare className="w-6 h-6 text-pink-400" />
                       </div>
                     </div>
 
-                    <div className="bg-slate-800/50 border border-purple-500/20 rounded-xl p-6 hover:border-purple-400/50 transition">
+                    <div className="bg-slate-800/50 border border-purple-500/20 rounded-xl p-4 hover:border-purple-400/50 transition">
                       <div className="flex justify-between items-start">
                         <div>
-                          <p className="text-gray-400 text-sm mb-2">Subscriptions</p>
-                          <p className="text-3xl font-bold">{data.subscription?.length || 0}</p>
+                          <p className="text-gray-400 text-xs mb-1">Subscriptions</p>
+                          <p className="text-2xl font-bold">{data.subscription?.length || 0}</p>
 
                           {/* مثال لعدد الاشتراكات ACTIVE */}
-                          <p className="text-sm text-green-400 mt-1">
+                          <p className="text-xs text-green-400 mt-1">
                             Active: {data.subscription?.filter(sub => sub.status === "ACTIVE").length || 0}
                           </p>
 
                           {/* مثال لعدد كل خطة */}
-                          <p className="text-sm text-cyan-400 mt-1">
-                            Subscribe Monthly: {data.subscription?.filter(sub => sub.nameplan === "Monthly Plan").length || 0}
+                          <p className="text-xs text-cyan-400 mt-0.5">
+                            Monthly: {data.subscription?.filter(sub => sub.nameplan === "Monthly Plan").length || 0}
                           </p>
-                          <p className="text-sm text-cyan-400 mt-1">
-                            Subscribe 4 Months: {data.subscription?.filter(sub => sub.nameplan === "4-Month Plan").length || 0}
+                          <p className="text-xs text-cyan-400 mt-0.5">
+                            4 Months: {data.subscription?.filter(sub => sub.nameplan === "4-Month Plan").length || 0}
                           </p>
-                          <p className="text-sm text-cyan-400 mt-1">
-                            Subscribe Yearly: {data.subscription?.filter(sub => sub.nameplan === "Annual Plan").length || 0}
+                          <p className="text-xs text-cyan-400 mt-0.5">
+                            Yearly: {data.subscription?.filter(sub => sub.nameplan === "Annual Plan").length || 0}
                           </p>
                         </div>
-                        <DollarSign className="w-8 h-8 text-green-400" />
+                        <DollarSign className="w-6 h-6 text-green-400" />
                       </div>
                     </div>
                   </div>

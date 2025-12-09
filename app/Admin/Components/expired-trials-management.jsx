@@ -64,25 +64,25 @@ export default function ExpiredTrialsManagement() {
         <div className="space-y-6 animate-in fade-in duration-500">
             <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
                 <div>
-                    <h2 className="text-2xl font-bold bg-gradient-to-r from-orange-400 to-red-500 bg-clip-text text-transparent">
+                    <h2 className="text-xl font-bold bg-gradient-to-r from-orange-400 to-red-500 bg-clip-text text-transparent">
                         Expired Trial Users
                     </h2>
-                    <p className="text-gray-400 text-sm mt-1">Users registered &gt; 7 days ago without active subscriptions.</p>
+                    <p className="text-gray-400 text-xs mt-0.5">Users registered &gt; 7 days ago without active subscriptions.</p>
                 </div>
                 <div className="flex gap-2">
                     <button
                         onClick={fetchExpiredUsers}
-                        className="p-2 bg-slate-800 rounded-lg hover:bg-slate-700 text-gray-400 transition"
+                        className="p-1.5 bg-slate-800 rounded-lg hover:bg-slate-700 text-gray-400 transition"
                         title="Refresh"
                     >
-                        <RefreshCcw className="w-5 h-5" />
+                        <RefreshCcw className="w-4 h-4" />
                     </button>
                     <button
                         onClick={handleSendBulkEmail}
                         disabled={sending || users.length === 0}
-                        className="flex items-center gap-2 bg-gradient-to-r from-orange-500 to-red-600 hover:from-orange-600 hover:to-red-700 text-white px-6 py-2 rounded-lg transition disabled:opacity-50 disabled:cursor-not-allowed shadow-lg shadow-orange-500/20"
+                        className="flex items-center gap-2 bg-gradient-to-r from-orange-500 to-red-600 hover:from-orange-600 hover:to-red-700 text-white px-4 py-1.5 rounded-lg transition disabled:opacity-50 disabled:cursor-not-allowed shadow-lg shadow-orange-500/20 text-sm"
                     >
-                        {sending ? <CheckCircle className="w-5 h-5 animate-spin" /> : <Mail className="w-5 h-5" />}
+                        {sending ? <CheckCircle className="w-4 h-4 animate-spin" /> : <Mail className="w-4 h-4" />}
                         {sending ? "Sending..." : "Send Bulk Email"}
                     </button>
                 </div>
@@ -128,9 +128,9 @@ export default function ExpiredTrialsManagement() {
                         <tbody className="divide-y divide-gray-800">
                             {filteredUsers.length > 0 ? filteredUsers.map((user) => (
                                 <tr key={user._id || user.email} className="hover:bg-slate-800/50 transition duration-150">
-                                    <td className="px-6 py-4">
+                                    <td className="px-4 py-3">
                                         <div className="flex items-center gap-3">
-                                            <div className="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center text-orange-400 font-bold overflow-hidden border border-gray-700">
+                                            <div className="w-8 h-8 rounded-full bg-slate-800 flex items-center justify-center text-orange-400 font-bold overflow-hidden border border-gray-700 text-xs">
                                                 {user.urlimage ? (
                                                     <img src={user.urlimage} alt={user.fullname} className="w-full h-full object-cover" />
                                                 ) : (
@@ -138,14 +138,14 @@ export default function ExpiredTrialsManagement() {
                                                 )}
                                             </div>
                                             <div>
-                                                <div className="font-medium text-white">{user.fullname || "N/A"}</div>
-                                                <div className="text-sm text-gray-500">{user.email}</div>
+                                                <div className="font-medium text-white text-sm">{user.fullname || "N/A"}</div>
+                                                <div className="text-xs text-gray-500">{user.email}</div>
                                             </div>
                                         </div>
                                     </td>
-                                    <td className="px-6 py-4 text-gray-400">@{user.username || "-"}</td>
-                                    <td className="px-6 py-4 text-gray-400">{user.createdAt ? new Date(user.createdAt).toLocaleDateString() : 'N/A'}</td>
-                                    <td className="px-6 py-4">
+                                    <td className="px-4 py-3 text-gray-400 text-sm">@{user.username || "-"}</td>
+                                    <td className="px-4 py-3 text-gray-400 text-sm">{user.createdAt ? new Date(user.createdAt).toLocaleDateString() : 'N/A'}</td>
+                                    <td className="px-4 py-3">
                                         <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-red-900/20 text-red-400 border border-red-900/40">
                                             Trial Expired
                                         </span>

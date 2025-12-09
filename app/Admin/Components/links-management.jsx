@@ -36,18 +36,18 @@ export default function LinksManagement({ links }) {
 
   return (
     <div className="space-y-6">
-      <h1 className="text-2xl font-bold">Links Management ({links.length})</h1>
+      <h1 className="text-xl font-bold">Links Management ({links.length})</h1>
 
       <div className="bg-slate-800/50 border border-purple-500/20 rounded-xl overflow-hidden">
-        <div className="p-4 border-b border-purple-500/20 flex gap-4">
+        <div className="p-3 border-b border-purple-500/20 flex gap-4">
           <div className="flex-1 relative">
-            <Search className="w-5 h-5 absolute left-3 top-3 text-gray-500" />
+            <Search className="w-4 h-4 absolute left-3 top-2.5 text-gray-500" />
             <input
               type="text"
               placeholder="Search links..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full bg-slate-900/50 border border-purple-500/30 rounded-lg pl-10 pr-4 py-2 text-white placeholder-gray-500 focus:border-cyan-400/50 focus:outline-none transition"
+              className="w-full bg-slate-900/50 border border-purple-500/30 rounded-lg pl-9 pr-3 py-1.5 text-white placeholder-gray-500 focus:border-cyan-400/50 focus:outline-none transition text-sm"
             />
           </div>
         </div>
@@ -56,33 +56,33 @@ export default function LinksManagement({ links }) {
           <table className="w-full">
             <thead>
               <tr className="border-b border-purple-500/20">
-                <th className="px-6 py-4 text-left text-sm font-semibold text-gray-300">Titel</th>
-                <th className="px-6 py-4 text-left text-sm font-semibold text-gray-300">User Email</th>
-                <th className="px-6 py-4 text-left text-sm font-semibold text-gray-300">Link</th>
-                <th className="px-6 py-4 text-left text-sm font-semibold text-gray-300">Actions</th>
+                <th className="px-4 py-3 text-left text-xs font-semibold text-gray-300">Titel</th>
+                <th className="px-4 py-3 text-left text-xs font-semibold text-gray-300">User Email</th>
+                <th className="px-4 py-3 text-left text-xs font-semibold text-gray-300">Link</th>
+                <th className="px-4 py-3 text-left text-xs font-semibold text-gray-300">Actions</th>
               </tr>
             </thead>
             <tbody>
               {filteredLinks.map((link) => (
                 <tr key={link._id} className="border-b border-purple-500/10 hover:bg-purple-500/10 transition">
-                  <td className="px-6 py-4 text-white font-medium">{link.namelink}</td>
-                  <td className="px-6 py-4 text-gray-400">{link.useremail}</td>
-                  <td className="px-6 py-4 text-gray-400">
+                  <td className="px-4 py-2 text-white font-medium text-xs">{link.namelink}</td>
+                  <td className="px-4 py-2 text-gray-400 text-xs">{link.useremail}</td>
+                  <td className="px-4 py-2 text-gray-400 text-xs">
                     <a
-                        href={link.link}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="bg-cyan-500/20 text-cyan-400 hover:bg-cyan-500/30 border border-cyan-500/50 p-2 rounded-lg bg-cyan-300  truncate break-all"
-                      >
-                        Open
-                      </a>
+                      href={link.link}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="bg-cyan-500/20 text-cyan-400 hover:bg-cyan-500/30 border border-cyan-500/50 p-1 rounded bg-cyan-300 truncate break-all px-2 text-xs"
+                    >
+                      Open
+                    </a>
                   </td>
-                  <td className="px-6 py-4">
+                  <td className="px-4 py-2">
                     <button
                       onClick={() => setDeleteConfirm(link._id)}
-                      className="px-3 py-2 bg-red-500/20 border border-red-500/50 rounded text-red-400 hover:bg-red-500/30 transition text-sm font-semibold"
+                      className="px-3 py-1 bg-red-500/20 border border-red-500/50 rounded text-red-400 hover:bg-red-500/30 transition text-xs font-semibold"
                     >
-                      {loadingDelete === link._id ? <Loader size={16} className="animate-spin" /> : "Delete"}
+                      {loadingDelete === link._id ? <Loader size={12} className="animate-spin" /> : "Delete"}
                     </button>
                   </td>
                 </tr>
