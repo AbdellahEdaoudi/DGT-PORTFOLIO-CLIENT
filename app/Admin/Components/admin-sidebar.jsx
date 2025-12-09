@@ -1,5 +1,6 @@
 "use client"
 import { LayoutDashboard, Users, MessageSquare, Settings, Link2, DollarSign, TagIcon, Clock } from "lucide-react"
+import Link from "next/link"
 
 export default function AdminSidebar({ activeTab, setActiveTab }) {
   const menuItems = [
@@ -16,9 +17,9 @@ export default function AdminSidebar({ activeTab, setActiveTab }) {
     <div className="w-56 h-full bg-slate-900/80 border-r border-purple-500/20 backdrop-blur-sm flex flex-col">
       {/* Logo */}
       <div className="px-4 py-4 border-b border-purple-500/20">
-        <div className="text-lg font-bold bg-gradient-to-r from-cyan-400 to-purple-500 bg-clip-text text-transparent">
+        <Link href={"/"} className="text-lg cursor-pointer font-bold bg-gradient-to-r from-cyan-400 to-purple-500 bg-clip-text text-transparent">
           DGT-P Admin
-        </div>
+        </Link>
       </div>
 
       {/* Navigation */}

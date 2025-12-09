@@ -127,7 +127,7 @@ function EditUserLinks() {
 
   return (
     <div className={`bg-cyan-950 min-h-screen pb-12 justify-center`} dir={userDetails?.displayLanguage === 'ar' ? 'rtl' : 'ltr'}>
-      <Header />
+      <Header lang={userDetails?.displayLanguage} />
       {/* UserLinks */}
       <div className="flex items-center justify-center">
         <section className='mt-4 p-4 rounded-lg bg-gray-100 w-[110vh] md:mx-0 mx-2 text-gray-800 '>

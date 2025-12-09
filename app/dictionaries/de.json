@@ -9,7 +9,9 @@
             "updateProfile": "Profil aktualisieren",
             "businessLinks": "Geschäftslinks",
             "support": "Support",
-            "signOut": "Abmelden"
+            "signOut": "Abmelden",
+            "customDomain": "Benutzerdefinierte Domain",
+            "subscriptions": "Abonnements"
         }
     },
     "hero": {

@@ -9,7 +9,9 @@
             "updateProfile": "Mettre à jour le profil",
             "businessLinks": "Liens professionnels",
             "support": "Support",
-            "signOut": "Se déconnecter"
+            "signOut": "Se déconnecter",
+            "customDomain": "Domaine personnalisé",
+            "subscriptions": "Abonnements"
         }
     },
     "hero": {

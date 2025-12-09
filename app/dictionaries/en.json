@@ -9,7 +9,9 @@
             "updateProfile": "Update Profile",
             "businessLinks": "Business Links",
             "support": "Support",
-            "signOut": "Sign Out"
+            "signOut": "Sign Out",
+            "customDomain": "Custom Domain",
+            "subscriptions": "Subscriptions"
         }
     },
     "hero": {

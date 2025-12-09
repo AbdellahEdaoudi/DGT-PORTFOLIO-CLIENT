@@ -189,7 +189,7 @@ export default function UpdateProfilePage() {
 
   return (
     <section>
-      <Header />
+      <Header lang={userDetails?.displayLanguage} />
       <div
         style={{ backgroundColor: userDetails.bgcolorp }}
         dir={userDetails?.displayLanguage === 'ar' ? 'rtl' : 'ltr'}

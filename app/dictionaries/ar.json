@@ -9,7 +9,9 @@
             "updateProfile": "تحديث الملف الشخصي",
             "businessLinks": "روابط الأعمال",
             "support": "الدعم",
-            "signOut": "تسجيل الخروج"
+            "signOut": "تسجيل الخروج",
+            "customDomain": "نطاق فرعي مخصص",
+            "subscriptions": "الاشتراكات"
         }
     },
     "hero": {

@@ -60,7 +60,7 @@ export default function ContactForm() {
 
   return (
     <div className="bg-cyan-950 min-h-screen flex flex-col" dir={userDetails?.displayLanguage === 'ar' ? 'rtl' : 'ltr'}>
-      <div className="w-full"><Header /></div>
+      <div className="w-full"><Header lang={userDetails?.displayLanguage} /></div>
       <div className="relative  w-full max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 my-4">
         <div className="bg-white rounded-xl shadow-2xl overflow-hidden">
           <div className="lg:flex ">
@@ -97,7 +97,7 @@ export default function ContactForm() {
                       value={EmailUser}
                       readOnly
                       className="pl-10 border-teal-300 focus:border-teal-500 focus:ring-teal-500 w-full"
-                      placeholder="Enter your email"
+                      placeholder={t('enterEmail')}
                       required
                     />
                     <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 text-teal-800 h-5 w-5" />
@@ -112,7 +112,7 @@ export default function ContactForm() {
                       value={subject}
                       onChange={(e) => setSubject(e.target.value)}
                       className="pl-10 border-teal-300 focus:border-teal-500 focus:ring-teal-500 w-full"
-                      placeholder="Enter your Subject"
+                      placeholder={t('enterSubject')}
                     />
                     <FolderOpen className="absolute left-3 top-1/2 transform -translate-y-1/2 text-teal-800 h-5 w-5" />
                   </div>
@@ -127,7 +127,7 @@ export default function ContactForm() {
                       className="pl-10 pt-2 border-teal-300 focus:border-teal-500 focus:ring-teal-500 w-full"
                       rows={4}
                       maxLength={500}
-                      placeholder="Enter your message"
+                      placeholder={t('enterMessage')}
                       required
                     />
                     <MessageCircle className="absolute left-3 top-2 text-teal-800 h-5 w-5" />

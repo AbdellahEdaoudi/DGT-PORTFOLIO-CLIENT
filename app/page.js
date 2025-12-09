@@ -85,27 +85,27 @@ export default async function Home() {
     const user = await fetchUserData(`https://dgt-portfolio-server.vercel.app/users/metauser/${host.split(".")[0]}`);
     if (user) {
       userSchema = {
-      "@context": "https://schema.org",
-      "@type": "Person",
-      name: user.fullname,
-      jobTitle: user.category || "Professional",
-      url: `https://${user.username || host.split(".")[0]}.dgtportfolio.com`,
-      description: user.about,
-      sameAs: Object.values(user.socials || {}).filter(Boolean),
-    };
+        "@context": "https://schema.org",
+        "@type": "Person",
+        name: user.fullname,
+        jobTitle: user.category || "Professional",
+        url: `https://${user.username || host.split(".")[0]}.dgtportfolio.com`,
+        description: user.about,
+        sameAs: Object.values(user.socials || {}).filter(Boolean),
+      };
     }
   } else if (isExternalCustomDomain) {
     const user = await fetchUserData(`https://dgt-portfolio-server.vercel.app/users/metacustomdomain/${host}`);
     if (user) {
-    userSchema = {
-      "@context": "https://schema.org",
-      "@type": "Person",
-      name: user.fullname,
-      jobTitle: user.category || "Professional",
-      url: `https://${host}`,
-      description: user.about,
-      sameAs: Object.values(user.socials || {}).filter(Boolean),
-    };
+      userSchema = {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        name: user.fullname,
+        jobTitle: user.category || "Professional",
+        url: `https://${host}`,
+        description: user.about,
+        sameAs: Object.values(user.socials || {}).filter(Boolean),
+      };
     }
   } else {
     userSchema = {

@@ -9,7 +9,9 @@
             "updateProfile": "Обновить профиль",
             "businessLinks": "Бизнес-ссылки",
             "support": "Поддержка",
-            "signOut": "Выйти"
+            "signOut": "Выйти",
+            "customDomain": "Пользовательский домен",
+            "subscriptions": "Подписки"
         }
     },
     "hero": {

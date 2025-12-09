@@ -13,6 +13,7 @@ import { signOut } from "next-auth/react"
 import axios from "axios"
 import MagicalLoader from "../Components/MagicalLoader"
 import Image from "next/image"
+import Link from "next/link"
 
 
 export default function AdminDashboard() {
@@ -108,9 +109,9 @@ export default function AdminDashboard() {
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-menu"><line x1="4" x2="20" y1="12" y2="12" /><line x1="4" x2="20" y1="6" y2="6" /><line x1="4" x2="20" y1="18" y2="18" /></svg>
                   </button>
 
-                  <h1 className="text-lg md:text-xl font-bold bg-gradient-to-r from-cyan-400 via-purple-400 to-pink-400 bg-clip-text text-transparent truncate">
-                    DGT Admin
-                  </h1>
+                  <Link href={"/"} className="text-lg cursor-pointer md:text-xl font-bold bg-gradient-to-r from-cyan-400 via-purple-400 to-pink-400 bg-clip-text text-transparent truncate">
+                    DGT PORTFOLIO
+                  </Link>
                 </div>
 
                 <div className="flex items-center gap-2 md:gap-3">

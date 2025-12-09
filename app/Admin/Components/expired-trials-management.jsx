@@ -1,15 +1,16 @@
 "use client"
 
 import { useState, useEffect } from "react"
-import { Search, Mail, CheckCircle, RefreshCcw } from "lucide-react"
+import { Search, Mail, CheckCircle, RefreshCcw, XCircle } from "lucide-react"
 import axios from "axios"
-import { toast } from "sonner" // Assuming Sonner is configured
+import { toast } from "react-toastify"
 
 export default function ExpiredTrialsManagement() {
     const [users, setUsers] = useState([])
     const [loading, setLoading] = useState(true)
     const [sending, setSending] = useState(false)
     const [filter, setFilter] = useState("")
+    const [showConfirmModal, setShowConfirmModal] = useState(false)
 
     useEffect(() => {
         fetchExpiredUsers()
@@ -22,27 +23,32 @@ export default function ExpiredTrialsManagement() {
             setUsers(res.data)
         } catch (error) {
             console.error("Error fetching expired users:", error)
-            // fallback if toast doesn't work
+            toast.error("Failed to fetch expired users.")
         } finally {
             setLoading(false)
         }
     }
 
-    const handleSendBulkEmail = async () => {
-        if (!users.length) return
-        if (!confirm(`Are you sure you want to send emails to ${users.length} users?`)) return
+    const handleSendBulkEmail = () => {
+        if (!users.length) {
+            toast.info("No users to send emails to.")
+            return
+        }
+        setShowConfirmModal(true)
+    }
 
+    const confirmSendEmails = async () => {
+        setShowConfirmModal(false)
         setSending(true)
         try {
-            // Filter out users who might have been removed or updated in UI state
             const validUsers = users.map(u => ({ email: u.email, username: u.username, fullname: u.fullname }));
             const res = await axios.post("/api/proxy/admin/send-expired-emails", { users: validUsers })
 
-            alert(res.data.message || "Emails sent successfully"); // Fallback alert
+            toast.success(res.data.message || "Emails sent successfully!")
             fetchExpiredUsers(); // Refresh list
         } catch (error) {
             console.error("Error sending emails:", error)
-            alert("Failed to send emails");
+            toast.error("Failed to send emails. Please try again.")
         } finally {
             setSending(false)
         }
@@ -165,6 +171,42 @@ export default function ExpiredTrialsManagement() {
                     </table>
                 </div>
             </div>
+
+            {/* Confirmation Modal */}
+            {showConfirmModal && (
+                <div className="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50 p-4 ">
+                    <div className="bg-slate-900 border border-gray-700 rounded-lg shadow-xl p-6 max-w-sm w-full animate-in zoom-in-95 fade-in-0 duration-300">
+                        <div className="flex justify-between items-center mb-4">
+                            <h3 className="text-lg font-semibold text-white">Confirm Email Send</h3>
+                            <button
+                                onClick={() => setShowConfirmModal(false)}
+                                className="text-gray-400 hover:text-gray-200"
+                                aria-label="Close"
+                            >
+                                <XCircle className="w-5 h-5" />
+                            </button>
+                        </div>
+                        <p className="text-gray-300 mb-6">
+                            Are you sure you want to send emails to <span className="font-bold text-orange-400">{users.length}</span> expired trial users? This action cannot be undone.
+                        </p>
+                        <div className="flex justify-end gap-3">
+                            <button
+                                onClick={() => setShowConfirmModal(false)}
+                                className="px-4 py-2 bg-gray-700 text-white rounded-md hover:bg-gray-600 transition"
+                            >
+                                Cancel
+                            </button>
+                            <button
+                                onClick={confirmSendEmails}
+                                className="px-4 py-2 bg-gradient-to-r from-orange-500 to-red-600 text-white rounded-md hover:from-orange-600 hover:to-red-700 transition"
+                                disabled={sending}
+                            >
+                                {sending ? "Sending..." : "Confirm Send"}
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            )}
         </div>
     )
 }

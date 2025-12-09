@@ -2,7 +2,7 @@
 import { signIn, signOut, useSession } from "next-auth/react"
 import { useContext, useState, useEffect, useRef } from "react";
 import { MyContext } from "../../Context/MyContext";
-import { BookUser, LogOut, MessageSquare, NotebookText, Globe, Menu } from "lucide-react";
+import { BookUser, LogOut, MessageSquare, NotebookText, Globe, Menu, CreditCard } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
@@ -15,6 +15,8 @@ export default function AuthButtons({ labels }) {
     businessLinks: "Business Links",
     support: "Support",
     signOut: "Sign Out",
+    customDomain: "Custom Domain",
+    subscriptions: "Subscriptions",
     ...labels
   }
   const [setting, setSetting] = useState(true);
@@ -120,7 +122,18 @@ export default function AuthButtons({ labels }) {
             className="bg-gray-700 py-2 border-b flex items-center justify-center border-gray-600 hover:bg-gray-600 transition duration-300 rounded-sm hover:scale-105 text-center mb-2"
           >
             <div className="flex items-center gap-1">
-              <Globe /> Custom Domain
+              <Globe /> {t.customDomain}
+            </div>
+          </Link>
+          <Link
+            href={"/subscription"}
+            onClick={() => {
+              setSetting(!setting);
+            }}
+            className="bg-gray-700 py-2 border-b flex items-center justify-center border-gray-600 hover:bg-gray-600 transition duration-300 rounded-sm hover:scale-105 text-center mb-2"
+          >
+            <div className="flex items-center gap-1">
+              <CreditCard /> {t.subscriptions}
             </div>
           </Link>
           <Link

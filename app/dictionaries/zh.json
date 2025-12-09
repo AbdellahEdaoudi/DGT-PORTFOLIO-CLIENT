@@ -9,7 +9,9 @@
             "updateProfile": "更新个人资料",
             "businessLinks": "商业链接",
             "support": "支持",
-            "signOut": "登出"
+            "signOut": "登出",
+            "customDomain": "自定义域名",
+            "subscriptions": "订阅"
         }
     },
     "hero": {

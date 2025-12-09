@@ -9,7 +9,9 @@
             "updateProfile": "プロフィールを更新",
             "businessLinks": "ビジネスリンク",
             "support": "サポート",
-            "signOut": "サインアウト"
+            "signOut": "サインアウト",
+            "customDomain": "カスタムドメイン",
+            "subscriptions": "サブスクリプション"
         }
     },
     "hero": {
