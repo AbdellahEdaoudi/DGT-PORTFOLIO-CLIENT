@@ -1,6 +1,6 @@
 "use client"
 import { useState } from "react"
-import { Github, Linkedin, Mail, Code2, Briefcase, CheckCircle2, Copy, GraduationCap, Globe, Sparkles, User, Layers, Zap, Loader, FileDown } from "lucide-react"
+import { Mail, Code2, Briefcase, GraduationCap, Globe, Sparkles, User, Layers, Zap, Loader, FileDown } from "lucide-react"
 import QrcodeProfile from "../../[username]/components/QrcodeProfile"
 import UserLinks from "../../[username]/components/UserLinks"
 import Image from "next/image"
@@ -13,19 +13,9 @@ import ImageModal from "../ImageModal"
 export default function ThemeTwo({ userDetails, userLinks }) {
   const { t } = useTranslation(userDetails?.displayLanguage || 'en')
   const [activeTab, setActiveTab] = useState("about")
-  const [copied, setCopied] = useState(false);
   const [showQR, setShowQR] = useState(false);
   const [expanded, setExpanded] = useState(false);
   const [selectedImage, setSelectedImage] = useState(null);
-  const PORTFOLIO = `https://${userDetails?.username}.dgtportfolio.com`
-
-  const copyProfileLink = () => {
-    const urlToCopy = PORTFOLIO
-    navigator.clipboard.writeText(urlToCopy).then(() => {
-      setCopied(true)
-      setTimeout(() => setCopied(false), 2000)
-    })
-  }
 
   return (
     <div

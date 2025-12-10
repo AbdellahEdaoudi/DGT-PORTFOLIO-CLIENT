@@ -1,9 +1,8 @@
 "use client"
 import { useState } from "react"
-import { Sparkles, CheckCircle2, Copy, Briefcase, GraduationCap, Code, Globe, Share2, Loader, FileDown } from "lucide-react"
+import { Sparkles, GraduationCap, Code, Globe, Share2, Loader, FileDown } from "lucide-react"
 import QrcodeProfile from "../../[username]/components/QrcodeProfile";
 import UserLinks from "../../[username]/components/UserLinks";
-import MagicalLoader from "../MagicalLoader";
 import Image from "next/image";
 import Link from "next/link";
 import { useTranslation } from "../../lib/translations";
@@ -13,21 +12,9 @@ import ImageModal from "../ImageModal";
 
 export default function ThemeFour({ userDetails, userLinks }) {
   const { t } = useTranslation(userDetails?.displayLanguage || 'en')
-  const [copied, setCopied] = useState(false);
   const [expanded, setExpanded] = useState(false);
   const [showQR, setShowQR] = useState(false);
   const [selectedImage, setSelectedImage] = useState(null);
-  const PORTFOLIO = `https://${userDetails?.username}.dgtportfolio.com`
-
-
-  const copyProfileLink = () => {
-    const urlToCopy = PORTFOLIO
-    navigator.clipboard.writeText(urlToCopy).then(() => {
-      setCopied(true)
-      setTimeout(() => setCopied(false), 2000)
-    })
-  }
-  if (!userDetails || !userLinks) { return <MagicalLoader /> }
 
   return (
     <div>

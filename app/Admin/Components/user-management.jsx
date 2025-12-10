@@ -7,14 +7,58 @@ import axios from "axios"
 import { useRouter } from "next/navigation"
 import Image from "next/image"
 
+import ThemeOne from "../../Components/themes/themeone"
+import ThemeTwo from "../../Components/themes/themetwo"
+import ThemeThree from "../../Components/themes/themethree"
+import ThemeFour from "../../Components/themes/themefour"
+import ThemeFive from "../../Components/themes/themefive"
+import ThemeSix from "../../Components/themes/themesix"
+import ThemeSeven from "../../Components/themes/themeseven"
+import ThemeEight from "../../Components/themes/themeeight"
+import ThemeNine from "../../Components/themes/themenine"
+import ThemeTen from "../../Components/themes/themeten"
+import ThemeEleven from "../../Components/themes/themeeleven"
+
 export default function UserManagement({ data, setData }) {
   const [deleteConfirm, setDeleteConfirm] = useState(null)
   const [deleteConfirm2, setDeleteConfirm2] = useState(null)
   const [selectedUserLinks, setSelectedUserLinks] = useState(null)
+  const [selectedPreviewUser, setSelectedPreviewUser] = useState(null)
   const [searchQuery, setSearchQuery] = useState("")
   const [loadingDeleteId, setLoadingDeleteId] = useState(null)
   const [loadingDeleteId2, setLoadingDeleteId2] = useState(null)
   const router = useRouter()
+
+  // Helper: render theme preview
+  const renderThemePreview = (user) => {
+    const themeId = user.theme || 1;
+    // Prepare mock data from user object to pass to themes if needed, 
+    // assuming themes take 'userDetails' or similar prop.
+    // If themes fetch their own data, you might need to wrap them in a context or pass data explicitly.
+    // Based on previous contexts, themes likely use 'userDetails' from a context or prop.
+    // Here we will pass 'data' prop to the theme if it accepts it.
+
+    // Construct a userDetails object similar to what the themes expect
+    const userDetails = {
+      ...user,
+      // Add other necessary fields if missing from 'user' object but required by themes
+    };
+
+    switch (Number(themeId)) {
+      case 1: return <ThemeOne userDetails={userDetails} />;
+      case 2: return <ThemeTwo userDetails={userDetails} />;
+      case 3: return <ThemeThree userDetails={userDetails} />;
+      case 4: return <ThemeFour userDetails={userDetails} />;
+      case 5: return <ThemeFive userDetails={userDetails} />;
+      case 6: return <ThemeSix userDetails={userDetails} />;
+      case 7: return <ThemeSeven userDetails={userDetails} />;
+      case 8: return <ThemeEight userDetails={userDetails} />;
+      case 9: return <ThemeNine userDetails={userDetails} />;
+      case 10: return <ThemeTen userDetails={userDetails} />;
+      case 11: return <ThemeEleven userDetails={userDetails} />;
+      default: return <ThemeOne userDetails={userDetails} />;
+    }
+  }
 
   // Helper: highlight matched text
   const highlightText = (text, query) => {
@@ -97,6 +141,7 @@ export default function UserManagement({ data, setData }) {
                     <th className="px-4 py-3 text-left text-xs font-semibold text-gray-300">Email</th>
                     <th className="px-4 py-3 text-left text-xs font-semibold text-gray-300">Country</th>
                     <th className="px-4 py-3 text-left text-xs font-semibold text-gray-300">Category</th>
+                    <th className="px-4 py-3 text-left text-xs font-semibold text-gray-300">Joined</th>
                     <th className="px-4 py-3 text-left text-xs font-semibold text-gray-300">Links</th>
                     <th className="px-4 py-3 text-left text-xs font-semibold text-gray-300">Actions</th>
                   </tr>
@@ -115,9 +160,18 @@ export default function UserManagement({ data, setData }) {
                     const PORTFOLIO = `https://${user?.username}.dgtportfolio.com`
                     return (
                       <tr key={user._id} className="border-b border-purple-500/10 hover:bg-purple-500/10 transition">
-                        <td onClick={() => window.open(PORTFOLIO, "_blank")} className="flex items-center gap-2 cursor-pointer px-4 py-2 text-white font-medium">
-                          <Image src={user?.urlimage} width={32} height={32} className="rounded-lg" alt="Profile User" />
-                          <span className="text-sm">{highlightText(user.fullname, searchQuery)}</span>
+                        <td className="px-4 py-2 text-white font-medium">
+                          <div className="flex items-center gap-2">
+                            <div onClick={() => setSelectedPreviewUser(user)} className="cursor-pointer hover:opacity-80 transition">
+                              <Image src={user?.urlimage} width={32} height={32} className="rounded-lg" alt="Profile User" />
+                            </div>
+                            <span
+                              onClick={() => window.open(PORTFOLIO, "_blank")}
+                              className="text-sm cursor-pointer hover:text-cyan-400 transition"
+                            >
+                              {highlightText(user.fullname, searchQuery)}
+                            </span>
+                          </div>
                         </td>
                         <td className="px-4 py-2 text-gray-400 text-xs">
                           {highlightText(user.email, searchQuery)}<br />
@@ -126,6 +180,10 @@ export default function UserManagement({ data, setData }) {
                         </td>
                         <td className="px-4 py-2 text-gray-400 text-xs">{user.country}</td>
                         <td className="px-4 py-2 text-cyan-400 text-xs">{highlightText(user.category, searchQuery)}</td>
+                        <td className="px-4 py-2 text-gray-400 text-xs">
+                          <div>{new Date(user.createdAt).toLocaleDateString('en-GB')}</div>
+                          <div className="text-[10px] text-gray-500">{new Date(user.createdAt).toLocaleTimeString()}</div>
+                        </td>
                         <td onClick={() => setSelectedUserLinks(linksuser)} className="px-4 py-2 text-gray-400 cursor-pointer text-xs">
                           <span className="px-2 py-0.5 bg-purple-500/20 border border-purple-500/50 rounded-full text-xs text-cyan-400 font-semibold">
                             {linksCount}
@@ -273,6 +331,39 @@ export default function UserManagement({ data, setData }) {
           )}
         </div>
       )}
+      {/* Theme Preview Modal */}
+      {selectedPreviewUser && (
+        <div className="fixed inset-0 bg-black/80 backdrop-blur-md flex items-center justify-center z-[100] p-4 animate-in fade-in duration-200">
+          {/* Close Button Fixed outside or absolute top-right */}
+          <button
+            onClick={() => setSelectedPreviewUser(null)}
+            className="absolute top-4 right-4 p-3 bg-white/10 hover:bg-white/20 text-white rounded-full z-[110] backdrop-blur transition-all hover:rotate-90"
+          >
+            <X className="w-6 h-6" />
+          </button>
+
+          <div className="w-full h-full max-w-[1400px] max-h-[90vh] bg-slate-900 rounded-xl overflow-hidden shadow-2xl border border-slate-700 relative flex flex-col">
+            <div className="h-10 bg-slate-800 border-b border-slate-700 flex items-center justify-center px-4 shrink-0">
+              <span className="text-xs text-slate-400 font-mono">
+                Previewing {
+                  ["ThemeOne", "ThemeTwo", "ThemeThree", "ThemeFour",
+                    "ThemeFive", "ThemeSix", "ThemeSeven", "ThemeEight",
+                    "ThemeNine", "ThemeTen", "ThemeEleven"][Number(selectedPreviewUser.theme || 1) - 1] || "ThemeOne"
+                } for {selectedPreviewUser.fullname}
+              </span>
+            </div>
+            <div className="flex-1 overflow-y-auto bg-black relative">
+              {/* 
+                   We need to ensure the theme components can render correctly with just the data prop.
+                   If they rely on specific contexts (MyContext), this might crash or display empty.
+                   Ideally, we wrap this in a Context Provider if needed, but for now passing 'data' prop.
+                 */}
+              {renderThemePreview(selectedPreviewUser)}
+            </div>
+          </div>
+        </div>
+      )}
+
     </div>
 
   )

@@ -1,10 +1,9 @@
 "use client"
 import { useState } from "react"
-import { ArrowUpRight, Zap, Mail, Copy, CheckCircle2, Briefcase, GraduationCap, Loader, FileDown, Globe } from "lucide-react"
+import { Zap, Mail, Briefcase, GraduationCap, Loader, FileDown, Globe } from "lucide-react"
 import UserLinks from "../../[username]/components/UserLinks"
 import QrcodeProfile from "../../[username]/components/QrcodeProfile"
 import Image from "next/image"
-import MagicalLoader from "../MagicalLoader"
 import Link from "next/link"
 import { useTranslation } from "../../lib/translations"
 import { PDFDownloadLink } from "@react-pdf/renderer"
@@ -13,21 +12,9 @@ import ImageModal from "../ImageModal"
 
 export default function ThemeFive({ userDetails, userLinks }) {
   const { t } = useTranslation(userDetails?.displayLanguage || 'en')
-  const [copied, setCopied] = useState(false)
   const [showQR, setShowQR] = useState(false)
-  const PORTFOLIO = `https://${userDetails?.username}.dgtportfolio.com`
   const [expanded, setExpanded] = useState(false);
   const [selectedImage, setSelectedImage] = useState(null);
-
-
-  const copyProfileLink = () => {
-    const urlToCopy = PORTFOLIO
-    navigator.clipboard.writeText(urlToCopy).then(() => {
-      setCopied(true)
-      setTimeout(() => setCopied(false), 2000)
-    })
-  }
-  if (!userDetails || !userLinks) { return <MagicalLoader /> }
 
   return (
     <div className="min-h-screen bg-zinc-950 text-white overflow-x-hidden relative">

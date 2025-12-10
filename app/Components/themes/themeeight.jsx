@@ -13,20 +13,9 @@ import ImageModal from "../ImageModal"
 export default function ThemeEight({ userDetails, userLinks }) {
     const { t } = useTranslation(userDetails?.displayLanguage || 'en')
     const [activeTab, setActiveTab] = useState("about")
-    const [copied, setCopied] = useState(false);
     const [showQR, setShowQR] = useState(false);
     const [expanded, setExpanded] = useState(false);
     const [selectedImage, setSelectedImage] = useState(null);
-    const PORTFOLIO = `https://${userDetails?.username}.dgtportfolio.com`
-
-    const copyProfileLink = () => {
-        const urlToCopy = PORTFOLIO
-        navigator.clipboard.writeText(urlToCopy).then(() => {
-            setCopied(true)
-            setTimeout(() => setCopied(false), 2000)
-        })
-    }
-
     return (
         <div
             style={{ backgroundColor: "#14140B" }}

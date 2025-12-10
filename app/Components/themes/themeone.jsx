@@ -4,8 +4,6 @@ import {
   Mail,
   Phone,
   MapPin,
-  Copy,
-  CheckCircle2,
   Globe,
   Briefcase,
   FileDown,
@@ -22,19 +20,10 @@ import ImageModal from "../ImageModal"
 
 export default function Themeone({ userDetails, userLinks, bgcolor }) {
   const { t } = useTranslation(userDetails?.displayLanguage || 'en')
-  const [copied, setCopied] = useState(false);
   const [showQR, setShowQR] = useState(false);
   const [expanded, setExpanded] = useState(false);
   const [selectedImage, setSelectedImage] = useState(null);
-  const PORTFOLIO = `https://${userDetails?.username}.dgtportfolio.com`
 
-  const copyProfileLink = () => {
-    const urlToCopy = PORTFOLIO
-    navigator.clipboard.writeText(urlToCopy).then(() => {
-      setCopied(true)
-      setTimeout(() => setCopied(false), 2000)
-    })
-  }
   return (
     <div
       className="b min-h-screen relative overflow-hidden "
