@@ -1,6 +1,6 @@
 "use client"
 import { useState } from "react"
-import { Sparkles, GraduationCap, Code, Globe, Share2, Loader, FileDown } from "lucide-react"
+import { Sparkles, GraduationCap, Code, Globe, Share2, Loader, FileDown, Briefcase } from "lucide-react"
 import QrcodeProfile from "../../[username]/components/QrcodeProfile";
 import UserLinks from "../../[username]/components/UserLinks";
 import Image from "next/image";

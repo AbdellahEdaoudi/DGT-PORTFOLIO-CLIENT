@@ -4,6 +4,7 @@ import { useState } from "react"
 import { Search, AlertCircle, Loader, Eye, X, Maximize2, Mail, Type, Calendar, User, Paperclip, Clock } from "lucide-react"
 import { toast } from "react-toastify"
 import axios from "axios"
+import Image from "next/image"
 
 export default function ContactManagement({ data, setData }) {
   const [searchQuery, setSearchQuery] = useState("")
@@ -183,10 +184,12 @@ export default function ContactManagement({ data, setData }) {
 
                   <div className="relative group max-w-md rounded-xl overflow-hidden border border-slate-700 bg-slate-950 shadow-md transition-all hover:shadow-purple-900/10 hover:border-purple-500/30">
                     <div className="aspect-video w-full overflow-hidden bg-slate-900 relative">
-                      <img
+                      <Image
                         src={selectedMessage.attachment}
                         alt="Attachment"
-                        className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                        fill
+                        unoptimized
+                        className="object-cover transition-transform duration-500 group-hover:scale-105"
                       />
                       <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
                         <button
@@ -252,6 +255,7 @@ export default function ContactManagement({ data, setData }) {
             className="relative max-w-5xl max-h-[90vh] w-full h-full flex items-center justify-center"
             onClick={(e) => e.stopPropagation()}
           >
+            {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               src={selectedImage}
               alt="Full Preview"

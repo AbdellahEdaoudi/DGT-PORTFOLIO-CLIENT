@@ -211,7 +211,7 @@ export default function ContactForm() {
                     </label>
                     {attachment && (
                       <div className="relative">
-                        <img src={attachment} alt="Preview" className="h-16 w-16 object-cover rounded-md border border-teal-200" />
+                        <Image src={attachment} alt="Preview" width={64} height={64} unoptimized className="object-cover rounded-md border border-teal-200" />
                         <button
                           type="button"
                           onClick={() => setAttachment(null)}
