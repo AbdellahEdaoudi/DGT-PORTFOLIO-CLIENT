@@ -4,6 +4,7 @@ import { useState, useEffect } from "react"
 import { Search, Mail, CheckCircle, RefreshCcw, XCircle } from "lucide-react"
 import axios from "axios"
 import { toast } from "react-toastify"
+import Image from "next/image"
 
 export default function ExpiredTrialsManagement() {
     const [users, setUsers] = useState([])
@@ -138,7 +139,13 @@ export default function ExpiredTrialsManagement() {
                                         <div className="flex items-center gap-3">
                                             <div className="w-8 h-8 rounded-full bg-slate-800 flex items-center justify-center text-orange-400 font-bold overflow-hidden border border-gray-700 text-xs">
                                                 {user.urlimage ? (
-                                                    <img src={user.urlimage} alt={user.fullname} className="w-full h-full object-cover" />
+                                                    <Image
+                                                        src={user.urlimage}
+                                                        alt={user.fullname || "User avatar"}
+                                                        width={32} // Corresponds to w-8 (8 * 4px = 32px)
+                                                        height={32} // Corresponds to h-8 (8 * 4px = 32px)
+                                                        className="w-full h-full object-cover"
+                                                    />
                                                 ) : (
                                                     user.fullname?.[0]?.toUpperCase() || "?"
                                                 )}
