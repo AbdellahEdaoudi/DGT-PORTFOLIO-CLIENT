@@ -12,6 +12,7 @@ export default function Skills({ userData, setUserDetails }) {
   const [loading, setLoading] = useState(false)
 
   const addArrayItem = (array, setArray, newItem) => {
+    if (array.length >= 10) return;
     setArray([...array, newItem])
   }
 
@@ -79,10 +80,15 @@ export default function Skills({ userData, setUserDetails }) {
         </div>
         <button
           type="button"
-          onClick={() => addArrayItem(skills, setSkills, "")}
-          className="w-full bg-gradient-to-r from-purple-500 to-pink-600 hover:from-purple-600 hover:to-pink-700 text-white py-2 rounded-lg flex items-center justify-center gap-2 transition-all duration-300"
+          disabled={skills.length >= 10}
+          onClick={() => {
+            if (skills.length < 10) {
+              addArrayItem(skills, setSkills, "")
+            }
+          }}
+          className={`w-full text-white py-2 rounded-lg flex items-center justify-center gap-2 transition-all duration-300 ${skills.length >= 10 ? 'bg-gray-400 cursor-not-allowed' : 'bg-gradient-to-r from-purple-500 to-pink-600 hover:from-purple-600 hover:to-pink-700'}`}
         >
-          <Plus size={18} /> {t('addSkill')}
+          <Plus size={18} /> {skills.length >= 10 ? "10 Max" : t('addSkill')}
         </button>
       </div>
       <div className="flex justify-end py-4 border-b-2 border-gray-200">

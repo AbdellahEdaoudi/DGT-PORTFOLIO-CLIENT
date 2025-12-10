@@ -20,6 +20,7 @@ export default function Services({ userData, setUserDetails }) {
   }
   // Helper functions for array management
   const addArrayItem = (array, setArray, newItem) => {
+    if (array.length >= 10) return;
     setArray([...array, newItem])
   }
 
@@ -80,10 +81,15 @@ export default function Services({ userData, setUserDetails }) {
           </div>
           <button
             type="button"
-            onClick={() => addArrayItem(services, setServices, "")}
-            className="w-full bg-gradient-to-r from-teal-500 to-green-600 hover:from-teal-600 hover:to-green-700 text-white py-2 rounded-lg flex items-center justify-center gap-2 transition-all duration-300"
+            disabled={services.length >= 10}
+            onClick={() => {
+              if (services.length < 10) {
+                addArrayItem(services, setServices, "")
+              }
+            }}
+            className={`w-full text-white py-2 rounded-lg flex items-center justify-center gap-2 transition-all duration-300 ${services.length >= 10 ? 'bg-gray-400 cursor-not-allowed' : 'bg-gradient-to-r from-teal-500 to-green-600 hover:from-teal-600 hover:to-green-700'}`}
           >
-            <Plus size={18} /> {t('addService')}
+            <Plus size={18} /> {services.length >= 10 ? "10 Max" : t('addService')}
           </button>
         </div>
       </div>

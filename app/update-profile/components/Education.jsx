@@ -11,7 +11,10 @@ export default function Education({ userData, setUserDetails }) {
   const [education, setEducation] = useState(userData.education || []);
   const [loading, setLoading] = useState(false);
 
-  const addArrayItem = (array, setArray, newItem) => setArray([...array, newItem]);
+  const addArrayItem = (array, setArray, newItem) => {
+    if (array.length >= 10) return;
+    setArray([...array, newItem]);
+  }
   const removeArrayItem = (array, setArray, index) =>
     setArray(array.filter((_, i) => i !== index));
   const updateObjectInArray = (array, setArray, index, key, value) => {
@@ -160,18 +163,21 @@ export default function Education({ userData, setUserDetails }) {
 
         <button
           type="button"
-          onClick={() =>
-            addArrayItem(education, setEducation, {
-              school: "",
-              degree: "",
-              field: "",
-              startYear: "",
-              endYear: "",
-            })
-          }
-          className="w-full bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white py-2 rounded-lg flex items-center justify-center gap-2 transition-all duration-300"
+          disabled={education.length >= 10}
+          onClick={() => {
+            if (education.length < 10) {
+              addArrayItem(education, setEducation, {
+                school: "",
+                degree: "",
+                field: "",
+                startYear: "",
+                endYear: "",
+              })
+            }
+          }}
+          className={`w-full text-white py-2 rounded-lg flex items-center justify-center gap-2 transition-all duration-300 ${education.length >= 10 ? 'bg-gray-400 cursor-not-allowed' : 'bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700'}`}
         >
-          <Plus size={18} /> {t('addEducation')}
+          <Plus size={18} /> {education.length >= 10 ? "10 Max" : t('addEducation')}
         </button>
       </div>
 

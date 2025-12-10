@@ -11,7 +11,10 @@ export default function Languages({ userData, setUserDetails }) {
   const [languages, setLanguages] = useState(userData.languages || []);
   const [loading, setLoading] = useState(false);
 
-  const addArrayItem = (array, setArray, newItem) => setArray([...array, newItem]);
+  const addArrayItem = (array, setArray, newItem) => {
+    if (array.length >= 10) return;
+    setArray([...array, newItem]);
+  }
   const removeArrayItem = (array, setArray, index) =>
     setArray(array.filter((_, i) => i !== index));
   const updateArrayItem = (array, setArray, index, value) => {
@@ -75,10 +78,15 @@ export default function Languages({ userData, setUserDetails }) {
 
         <button
           type="button"
-          onClick={() => addArrayItem(languages, setLanguages, "")}
-          className="w-full bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-600 hover:to-blue-700 text-white py-2 rounded-lg flex items-center justify-center gap-2 transition-all duration-300"
+          disabled={languages.length >= 10}
+          onClick={() => {
+            if (languages.length < 10) {
+              addArrayItem(languages, setLanguages, "")
+            }
+          }}
+          className={`w-full text-white py-2 rounded-lg flex items-center justify-center gap-2 transition-all duration-300 ${languages.length >= 10 ? 'bg-gray-400 cursor-not-allowed' : 'bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-600 hover:to-blue-700'}`}
         >
-          <Plus size={18} /> {t('addLanguage')}
+          <Plus size={18} /> {languages.length >= 10 ? "10 Max" : t('addLanguage')}
         </button>
       </div>
 

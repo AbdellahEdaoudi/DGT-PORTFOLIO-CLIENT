@@ -167,13 +167,13 @@ function EditUserLinks() {
                 />
               </div>
               <button
-                disabled={loadingAction !== null}
+                disabled={loadingAction !== null || (!editLinkId && userLinks.length >= 10)}
                 type="submit"
-                className="w-full bg-teal-5 bg-sky-700 text-white px-4 py-2 rounded hover:bg-teal-600 transition duration-300"
+                className={`w-full text-white px-4 py-2 rounded ${userLinks.length < 10 && "hover:bg-teal-600"} transition duration-300 ${!editLinkId && userLinks.length >= 10 ? 'bg-gray-400 cursor-not-allowed' : 'bg-teal-5 bg-sky-700'}`}
               >
                 {loadingAction === 'add' || loadingAction === 'update' ? (
                   <div className='flex items-center justify-center'><Loader size={24} className="animate-spin" /></div>
-                ) : editLinkId ? t('updateLink') : t('addLink')}
+                ) : editLinkId ? t('updateLink') : (userLinks.length >= 10 ? "10 Max" : t('addLink'))}
               </button>
             </form>
             <WarningModal />

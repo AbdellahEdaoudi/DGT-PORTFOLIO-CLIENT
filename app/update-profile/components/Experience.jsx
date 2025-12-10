@@ -11,7 +11,10 @@ export default function Experience({ userData, setUserDetails }) {
   const [experience, setExperience] = useState(userData.experience || []);
   const [loading, setLoading] = useState(false);
 
-  const addArrayItem = (array, setArray, newItem) => setArray([...array, newItem]);
+  const addArrayItem = (array, setArray, newItem) => {
+    if (array.length >= 10) return;
+    setArray([...array, newItem]);
+  }
   const removeArrayItem = (array, setArray, index) =>
     setArray(array.filter((_, i) => i !== index));
 
@@ -162,18 +165,21 @@ export default function Experience({ userData, setUserDetails }) {
 
         <button
           type="button"
-          onClick={() =>
-            addArrayItem(experience, setExperience, {
-              company: "",
-              role: "",
-              description: "",
-              startDate: "",
-              endDate: "",
-            })
-          }
-          className="w-full bg-gradient-to-r from-amber-500 to-orange-600 hover:from-amber-600 hover:to-orange-700 text-white py-2 rounded-lg flex items-center justify-center gap-2 transition-all duration-300"
+          disabled={experience.length >= 10}
+          onClick={() => {
+            if (experience.length < 10) {
+              addArrayItem(experience, setExperience, {
+                company: "",
+                role: "",
+                description: "",
+                startDate: "",
+                endDate: "",
+              })
+            }
+          }}
+          className={`w-full text-white py-2 rounded-lg flex items-center justify-center gap-2 transition-all duration-300 ${experience.length >= 10 ? 'bg-gray-400 cursor-not-allowed' : 'bg-gradient-to-r from-amber-500 to-orange-600 hover:from-amber-600 hover:to-orange-700'}`}
         >
-          <Plus size={18} /> {t('addExperience')}
+          <Plus size={18} /> {experience.length >= 10 ? "10 Max" : t('addExperience')}
         </button>
       </div>
 
