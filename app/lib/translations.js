@@ -113,7 +113,7 @@ export const translations = {
 
         // Success
         successTitle: "Success!",
-        successMessage: "Your action was completed successfully.",
+        successMessage: "Sent successfully.",
 
         // Themes
         selectTheme: "Select Theme",
@@ -160,6 +160,8 @@ export const translations = {
         enterEmail: "Enter your email",
         enterSubject: "Enter your Subject",
         enterMessage: "Enter your message",
+        attachment: "Attachment",
+        fileTooLarge: "File is too large (max 5MB)",
 
         // Custom Domain
         enterDomain: "Enter a domain",
@@ -336,7 +338,7 @@ export const translations = {
 
         // Success
         successTitle: "Succès!",
-        successMessage: "Votre action a été complétée avec succès.",
+        successMessage: "Envoyé avec succès.",
 
         // Themes
         selectTheme: "Sélectionner un thème",
@@ -383,6 +385,8 @@ export const translations = {
         enterEmail: "Entrez votre email",
         enterSubject: "Entrez votre sujet",
         enterMessage: "Entrez votre message",
+        attachment: "Pièce jointe",
+        fileTooLarge: "Fichier trop volumineux (max 5 Mo)",
 
         // Custom Domain
         enterDomain: "Entrez un domaine",
@@ -559,7 +563,7 @@ export const translations = {
 
         // Success
         successTitle: "نجح!",
-        successMessage: "تم إكمال العملية بنجاح.",
+        successMessage: "تم الإرسال بنجاح.",
 
         // Themes
         selectTheme: "اختر القالب",
@@ -606,6 +610,8 @@ export const translations = {
         enterEmail: "أدخل بريدك الإلكتروني",
         enterSubject: "أدخل الموضوع",
         enterMessage: "أدخل رسالتك",
+        attachment: "مرفق",
+        fileTooLarge: "الملف كبير جدا (الحد الأقصى 5 ميجابايت)",
 
         // Custom Domain
         enterDomain: "أدخل النطاق",
@@ -782,7 +788,7 @@ export const translations = {
 
         // Success
         successTitle: "Erfolg!",
-        successMessage: "Ihre Aktion wurde erfolgreich abgeschlossen.",
+        successMessage: "Erfolgreich gesendet.",
 
         // Themes
         selectTheme: "Thema auswählen",
@@ -1005,7 +1011,7 @@ export const translations = {
 
         // Success
         successTitle: "Успех!",
-        successMessage: "Ваше действие было успешно выполнено.",
+        successMessage: "Отправлено успешно.",
 
         // Themes
         selectTheme: "Выбрать тему",
@@ -1228,7 +1234,7 @@ export const translations = {
 
         // Success
         successTitle: "成功！",
-        successMessage: "操作が正常に完了しました。",
+        successMessage: "送信に成功しました。",
 
         // Themes
         selectTheme: "テーマを選択",
@@ -1451,7 +1457,7 @@ export const translations = {
 
         // Success
         successTitle: "成功！",
-        successMessage: "您的操作已成功完成。",
+        successMessage: "发送成功。",
 
         // Themes
         selectTheme: "选择主题",
@@ -1673,7 +1679,7 @@ export const translations = {
 
         // Success
         successTitle: "¡Éxito!",
-        successMessage: "Tu acción se completó con éxito.",
+        successMessage: "Enviado con éxito.",
 
         // Themes
         selectTheme: "Seleccionar tema",

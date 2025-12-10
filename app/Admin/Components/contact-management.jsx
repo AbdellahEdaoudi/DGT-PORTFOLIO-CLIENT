@@ -1,7 +1,7 @@
 "use client"
 
 import { useState } from "react"
-import { Search, AlertCircle, Loader, Eye, X } from "lucide-react"
+import { Search, AlertCircle, Loader, Eye, X, Maximize2, Mail, Type, Calendar, User, Paperclip, Clock } from "lucide-react"
 import { toast } from "react-toastify"
 import axios from "axios"
 
@@ -11,6 +11,7 @@ export default function ContactManagement({ data, setData }) {
   const [selectedMessage, setSelectedMessage] = useState(null)
   const [deleteConfirm, setDeleteConfirm] = useState(null)
   const [loadingDelete, setLoadingDelete] = useState(null)
+  const [selectedImage, setSelectedImage] = useState(null)
 
   const filteredContacts = data.contacts.filter(
     (c) =>
@@ -27,7 +28,8 @@ export default function ContactManagement({ data, setData }) {
         ...ctc,
         contacts: ctc.contacts.filter((c) => c._id !== id),
       }))
-      toast.success("Message deleted successfully")
+      setSelectedMessage(null) // Close the message modal if it was open
+      toast.info("Message deleted successfully")
     } catch (err) {
       console.error(err)
       toast.error("Error deleting message")
@@ -108,28 +110,153 @@ export default function ContactManagement({ data, setData }) {
 
       {/* Modal عرض الرسالة */}
       {selectedMessage && (
-        <div className="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-50 p-4">
-          <div className="bg-gradient-to-br from-slate-800 to-slate-900 border border-purple-500/30 rounded-2xl max-w-2xl w-full p-8 shadow-2xl max-h-[80vh] overflow-y-auto">
-            <div className="flex justify-between items-start mb-6">
-              <div>
-                <p className="text-gray-400  mt-1">
-                  From :  {selectedMessage.email}
-                </p>
-                <h2 className="text-2xl font-bold text-white">Subject : {selectedMessage.subject}</h2>
+        <div className="fixed inset-0 bg-black/80 backdrop-blur-md flex items-center justify-center z-50 p-4 transition-all duration-300">
+          <div className="bg-slate-900 border border-slate-800 rounded-2xl max-w-3xl w-full shadow-2xl max-h-[85vh] flex flex-col overflow-hidden animate-in fade-in zoom-in-95 duration-200">
+
+            {/* Header */}
+            <div className="flex items-center justify-between p-4 sm:p-6 border-b border-slate-800 bg-slate-900/50">
+              <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4 w-full">
+                <div className="flex items-center gap-4 w-full sm:w-auto">
+                  <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-gradient-to-br from-purple-600 to-indigo-600 flex items-center justify-center shadow-lg shadow-purple-900/20 text-white font-bold text-lg shrink-0">
+                    {selectedMessage.email.charAt(0).toUpperCase()}
+                  </div>
+                  <div className="sm:hidden flex-1 min-w-0">
+                    <h3 className="text-white font-semibold text-sm truncate">
+                      {selectedMessage.email}
+                    </h3>
+                  </div>
+                  <button
+                    onClick={() => setSelectedMessage(null)}
+                    className="sm:hidden p-2 text-slate-400 hover:text-white hover:bg-slate-800 rounded-full transition-all shrink-0"
+                  >
+                    <X className="w-5 h-5" />
+                  </button>
+                </div>
+
+                <div className="w-full sm:w-auto">
+                  <h3 className="hidden sm:flex text-white font-semibold text-base items-center gap-2 break-all">
+                    {selectedMessage.email}
+                  </h3>
+                  <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-slate-400 text-xs mt-1">
+                    <span className="flex items-center gap-1">
+                      <Calendar className="w-3 h-3" />
+                      {new Date(selectedMessage.createdAt).toLocaleDateString()}
+                    </span>
+                    <span className="flex items-center gap-1">
+                      <Clock className="w-3 h-3" />
+                      {new Date(selectedMessage.createdAt).toLocaleTimeString()}
+                    </span>
+                  </div>
+                </div>
               </div>
               <button
                 onClick={() => setSelectedMessage(null)}
-                className="p-2 hover:bg-purple-500/20 rounded transition"
+                className="hidden sm:block p-2 text-slate-400 hover:text-white hover:bg-slate-800 rounded-full transition-all"
               >
-                <X className="w-6 h-6 text-gray-400" />
+                <X className="w-6 h-6" />
               </button>
             </div>
-            <div className="border-t border-purple-500/20 pt-4">
-              <p className="text-gray-400  mb-3">Message:</p>
-              <p className="text-white leading-relaxed whitespace-pre-wrap">
-                {selectedMessage.message}
-              </p>
+
+            {/* Content */}
+            <div className="p-4 sm:p-8 overflow-y-auto custom-scrollbar">
+              <div className="mb-6 sm:mb-8">
+                <span className="text-xs font-bold text-purple-400 tracking-wider uppercase mb-2 block">Subject</span>
+                <h2 className="text-lg sm:text-2xl font-bold text-white leading-tight break-words">
+                  {selectedMessage.subject || "No Subject"}
+                </h2>
+              </div>
+
+              <div className="mb-6 sm:mb-8">
+                <span className="text-xs font-bold text-slate-500 tracking-wider uppercase mb-3 flex items-center gap-2">
+                  <Mail className="w-3 h-3" /> Message Content
+                </span>
+                <div className="bg-slate-950/50 p-4 sm:p-6 rounded-xl border border-slate-800/50 text-slate-300 leading-relaxed text-sm sm:text-base whitespace-pre-wrap break-words break-all">
+                  {selectedMessage.message}
+                </div>
+              </div>
+
+              {selectedMessage.attachment && (
+                <div className="mb-2">
+                  <span className="text-xs font-bold text-slate-500 tracking-wider uppercase mb-3 flex items-center gap-2">
+                    <Paperclip className="w-3 h-3" /> Attachment
+                  </span>
+
+                  <div className="relative group max-w-md rounded-xl overflow-hidden border border-slate-700 bg-slate-950 shadow-md transition-all hover:shadow-purple-900/10 hover:border-purple-500/30">
+                    <div className="aspect-video w-full overflow-hidden bg-slate-900 relative">
+                      <img
+                        src={selectedMessage.attachment}
+                        alt="Attachment"
+                        className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                      />
+                      <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                        <button
+                          onClick={() => setSelectedImage(selectedMessage.attachment)}
+                          className="px-5 py-2.5 bg-white text-slate-900 rounded-full font-bold text-sm shadow-xl transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300 flex items-center gap-2"
+                        >
+                          <Maximize2 className="w-4 h-4" />
+                          View Fullscreen
+                        </button>
+                      </div>
+                    </div>
+                    <div className="p-3 bg-slate-900 border-t border-slate-800 flex items-center justify-between">
+                      <span className="text-xs text-slate-400 font-medium truncate max-w-[200px]">Attached Image</span>
+                      <a
+                        href={selectedMessage.attachment}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-xs font-bold text-purple-400 hover:text-purple-300 flex items-center gap-1"
+                      >
+                        Open Original <Eye className="w-3 h-3" />
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              )}
             </div>
+
+            {/* Footer Actions (Optional) */}
+            <div className="p-4 border-t border-slate-800 bg-slate-900/50 flex flex-col-reverse sm:flex-row justify-end gap-3">
+              <button
+                onClick={() => setSelectedMessage(null)}
+                className="w-full sm:w-auto px-4 py-2 bg-slate-800 text-white hover:bg-slate-700 rounded-lg text-sm font-semibold transition-colors border border-slate-700"
+              >
+                Close
+              </button>
+              <button
+                onClick={() => setDeleteConfirm(selectedMessage._id)}
+                disabled={loadingDelete === selectedMessage._id}
+                className="w-full sm:w-auto px-4 py-2 bg-red-500/10 text-red-400 border border-red-500/20 hover:bg-red-500/20 rounded-lg text-sm font-semibold transition-colors flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
+              >
+                {loadingDelete === selectedMessage._id ? <Loader className="w-4 h-4 animate-spin" /> : "Delete Message"}
+              </button>
+            </div>
+
+          </div>
+        </div>
+      )}
+
+      {/* Image Viewer Modal */}
+      {selectedImage && (
+        <div
+          className="fixed inset-0 bg-black/90 backdrop-blur-md flex items-center justify-center z-[60] p-4 transition-all duration-300 animate-in fade-in"
+          onClick={() => setSelectedImage(null)}
+        >
+          <button
+            onClick={() => setSelectedImage(null)}
+            className="absolute top-4 right-4 p-3 bg-white/10 hover:bg-white/20 rounded-full text-white backdrop-blur-lg transition-all transform hover:scale-110 z-50 pointer-events-auto"
+          >
+            <X className="w-6 h-6" />
+          </button>
+
+          <div
+            className="relative max-w-5xl max-h-[90vh] w-full h-full flex items-center justify-center"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <img
+              src={selectedImage}
+              alt="Full Preview"
+              className="max-w-full max-h-full object-contain rounded-lg shadow-2xl animate-in zoom-in-95 duration-300"
+            />
           </div>
         </div>
       )}
