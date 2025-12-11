@@ -18,6 +18,7 @@ export const translations = {
         experience: "Experience",
         projects: "Projects",
         languages: "Languages",
+        certificates: "Certificates",
         socials: "Socials",
         bgcolor: "Background Color",
         theme: "Theme",
@@ -67,6 +68,17 @@ export const translations = {
         projectLink: "Project Link",
         projectImage: "Project Image",
         technologies: "Technologies",
+
+        // Certificates Section
+        addCertificate: "Add Certificate",
+        certificateDescription: "Certificate Description",
+        imageRequired: "Image is required for each certificate.",
+        maxCertificatesReached: "Maximum limit of 5 certificates reached.",
+        selectCertificateImage: "Select Certificate Image",
+        fileSelected: "File Selected",
+        imageUploaded: "Image Uploaded",
+        view: "View",
+        remove: "Remove",
 
         // Social Media
         socialMedia: "Social Media",
@@ -243,6 +255,7 @@ export const translations = {
         experience: "Expérience",
         projects: "Projets",
         languages: "Langues",
+        certificates: "Certificats",
         socials: "Réseaux sociaux",
         bgcolor: "Couleur de fond",
         theme: "Thème",
@@ -292,6 +305,17 @@ export const translations = {
         projectLink: "Lien du projet",
         projectImage: "Image du projet",
         technologies: "Technologies",
+
+        // Certificates Section
+        addCertificate: "Ajouter un certificat",
+        certificateDescription: "Description du certificat",
+        imageRequired: "L'image est requise pour chaque certificat.",
+        maxCertificatesReached: "Limite maximale de 5 certificats atteinte.",
+        selectCertificateImage: "Sélectionner une image de certificat",
+        fileSelected: "Fichier sélectionné",
+        imageUploaded: "Image téléchargée",
+        view: "Voir",
+        remove: "Retirer",
 
         // Social Media
         socialMedia: "Réseaux sociaux",
@@ -468,6 +492,7 @@ export const translations = {
         experience: "الخبرة",
         projects: "المشاريع",
         languages: "اللغات",
+        certificates: "الشهادات",
         socials: "التواصل الاجتماعي",
         bgcolor: "لون الخلفية",
         theme: "القالب",
@@ -517,6 +542,17 @@ export const translations = {
         projectLink: "رابط المشروع",
         projectImage: "صورة المشروع",
         technologies: "التقنيات",
+
+        // Certificates Section
+        addCertificate: "إضافة شهادة",
+        certificateDescription: "وصف الشهادة",
+        imageRequired: "الصورة مطلوبة لكل شهادة.",
+        maxCertificatesReached: "تم الوصول إلى الحد الأقصى 5 شهادات.",
+        selectCertificateImage: "اختر صورة الشهادة",
+        fileSelected: "تم تحديد الملف",
+        imageUploaded: "تم تحميل الصورة",
+        view: "عرض",
+        remove: "إزالة",
 
         // Social Media
         socialMedia: "وسائل التواصل الاجتماعي",
@@ -693,6 +729,7 @@ export const translations = {
         experience: "Erfahrung",
         projects: "Projekte",
         languages: "Sprachen",
+        certificates: "Zertifikate",
         socials: "Soziale Medien",
         bgcolor: "Hintergrundfarbe",
         theme: "Thema",
@@ -742,6 +779,17 @@ export const translations = {
         projectLink: "Projektlink",
         projectImage: "Projektbild",
         technologies: "Technologien",
+
+        // Certificates Section
+        addCertificate: "Zertifikat hinzufügen",
+        certificateDescription: "Zertifikatsbeschreibung",
+        imageRequired: "Bild ist für jedes Zertifikat erforderlich.",
+        maxCertificatesReached: "Maximales Limit von 5 Zertifikaten erreicht.",
+        selectCertificateImage: "Zertifikatsbild auswählen",
+        fileSelected: "Datei ausgewählt",
+        imageUploaded: "Bild hochgeladen",
+        view: "Ansehen",
+        remove: "Entfernen",
 
         // Social Media
         socialMedia: "Soziale Medien",
@@ -916,6 +964,7 @@ export const translations = {
         experience: "Опыт",
         projects: "Проекты",
         languages: "Языки",
+        certificates: "Сертификаты",
         socials: "Социальные сети",
         bgcolor: "Цвет фона",
         theme: "Тема",
@@ -965,6 +1014,17 @@ export const translations = {
         projectLink: "Ссылка на проект",
         projectImage: "Изображение проекта",
         technologies: "Технологии",
+
+        // Certificates Section
+        addCertificate: "Добавить сертификат",
+        certificateDescription: "Описание сертификата",
+        imageRequired: "Изображение обязательно для каждого сертификата.",
+        maxCertificatesReached: "Достигнут лимит в 5 сертификатов.",
+        selectCertificateImage: "Выбрать изображение сертификата",
+        fileSelected: "Файл выбран",
+        imageUploaded: "Изображение загружено",
+        view: "Посмотреть",
+        remove: "Удалить",
 
         // Social Media
         socialMedia: "Социальные сети",
@@ -1139,6 +1199,7 @@ export const translations = {
         experience: "経験",
         projects: "プロジェクト",
         languages: "言語",
+        certificates: "証明書",
         socials: "ソーシャルメディア",
         bgcolor: "背景色",
         theme: "テーマ",
@@ -1188,6 +1249,17 @@ export const translations = {
         projectLink: "プロジェクトリンク",
         projectImage: "プロジェクト画像",
         technologies: "技術",
+
+        // Certificates Section
+        addCertificate: "証明書を追加",
+        certificateDescription: "証明書の説明",
+        imageRequired: "各証明書には画像が必要です。",
+        maxCertificatesReached: "証明書の上限5枚に達しました。",
+        selectCertificateImage: "証明書画像を選択",
+        fileSelected: "ファイルが選択されました",
+        imageUploaded: "画像がアップロードされました",
+        view: "表示",
+        remove: "削除",
 
         // Social Media
         socialMedia: "ソーシャルメディア",
@@ -1362,6 +1434,7 @@ export const translations = {
         experience: "经验",
         projects: "项目",
         languages: "语言",
+        certificates: "证书",
         socials: "社交媒体",
         bgcolor: "背景颜色",
         theme: "主题",
@@ -1411,6 +1484,17 @@ export const translations = {
         projectLink: "项目链接",
         projectImage: "项目图片",
         technologies: "技术",
+
+        // Certificates Section
+        addCertificate: "添加证书",
+        certificateDescription: "证书描述",
+        imageRequired: "每个证书都需要图片。",
+        maxCertificatesReached: "已达到5个证书的上限。",
+        selectCertificateImage: "选择证书图片",
+        fileSelected: "已选择文件",
+        imageUploaded: "已上传图片",
+        view: "查看",
+        remove: "移除",
 
         // Social Media
         socialMedia: "社交媒体",
@@ -1584,6 +1668,7 @@ export const translations = {
         experience: "Experiencia",
         projects: "Proyectos",
         languages: "Idiomas",
+        certificates: "Certificados",
         socials: "Redes Sociales",
         bgcolor: "Color de fondo",
         theme: "Tema",
@@ -1633,6 +1718,17 @@ export const translations = {
         projectLink: "Enlace del proyecto",
         projectImage: "Imagen del proyecto",
         technologies: "Tecnologías",
+
+        // Certificates Section
+        addCertificate: "Añadir certificado",
+        certificateDescription: "Descripción del certificado",
+        imageRequired: "Se requiere imagen para cada certificado.",
+        maxCertificatesReached: "Se alcanzó el límite máximo de 5 certificados.",
+        selectCertificateImage: "Seleccionar imagen del certificado",
+        fileSelected: "Archivo seleccionado",
+        imageUploaded: "Imagen subida",
+        view: "Ver",
+        remove: "Eliminar",
 
         // Social Media
         socialMedia: "Redes Sociales",

@@ -118,10 +118,7 @@ export default function ThemeFour({ userDetails, userLinks }) {
                     >
                       <X size={28} />
                     </button>
-
-                    <h2 className="text-3xl md:text-5xl font-bold text-white mb-12 opacity-90 tracking-tight">{t('menu') || "Navigation"}</h2>
-
-                    <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6 w-full max-w-5xl mx-auto">
+                    <div dir={`${userDetails?.displayLanguage === 'ar' ? 'rtl' : 'ltr'}`} className={`grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6 w-full max-w-5xl mx-auto ${isNavOpen ? 'opacity-100 visible' : 'opacity-0 invisible pointer-events-none'}`}>
                       {[
                         { id: "services", label: t('services'), icon: "💼", condition: userDetails?.services?.length > 0 },
                         { id: "experience", label: t('workExperience'), icon: "⭐", condition: userDetails?.experience?.length > 0 },
@@ -413,12 +410,6 @@ export default function ThemeFour({ userDetails, userLinks }) {
                           key={i}
                           className="group relative bg-gradient-to-br from-emerald-500/10 to-blue-500/10 border border-emerald-500/30 rounded-xl hover:border-emerald-500/60 hover:shadow-xl hover:shadow-emerald-500/20 transition-all duration-300 overflow-hidden flex flex-col"
                         >
-                          {/* Decorative corner accent */}
-                          {userDetails.displayLanguage === "ar" ? (
-                            <div className="absolute top-0 left-0 w-32 h-32 bg-gradient-to-bl from-emerald-400/20 to-transparent rounded-br-full opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none z-0"></div>
-                          ) : (
-                            <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-bl from-emerald-400/20 to-transparent rounded-bl-full opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none z-0"></div>
-                          )}
 
                           {cert.cfimage && (
                             <div className="relative h-56 w-full bg-slate-900/50 overflow-hidden cursor-pointer border-b border-emerald-500/20 flex items-center justify-center p-4 z-10" onClick={() => setSelectedImage(cert.cfimage)}>

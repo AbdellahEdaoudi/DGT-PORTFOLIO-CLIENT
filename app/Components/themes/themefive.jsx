@@ -115,7 +115,7 @@ export default function ThemeFive({ userDetails, userLinks }) {
               </div>
             </div>
             {/* Full Screen Overlay Navigation */}
-            <div className={`fixed inset-0 z-50 bg-zinc-950/95 backdrop-blur-3xl transition-all duration-500 overflow-y-auto ${isNavOpen ? 'opacity-100 visible' : 'opacity-0 invisible pointer-events-none'}`}>
+            <div dir={`${userDetails?.displayLanguage === 'ar' ? 'rtl' : 'ltr'}`} className={`fixed inset-0 z-50 bg-zinc-950/95 backdrop-blur-3xl transition-all duration-500 overflow-y-auto ${isNavOpen ? 'opacity-100 visible' : 'opacity-0 invisible pointer-events-none'}`}>
               <div className="min-h-screen flex flex-col justify-center items-center p-4 md:p-8 relative">
                 <button
                   onClick={() => setIsNavOpen(false)}
@@ -123,9 +123,6 @@ export default function ThemeFive({ userDetails, userLinks }) {
                 >
                   <X size={28} />
                 </button>
-
-                <h2 className="text-3xl md:text-5xl font-bold text-white mb-12 opacity-90 tracking-tight">{t('menu') || "Navigation"}</h2>
-
                 <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6 w-full max-w-5xl mx-auto">
                   {[
                     { id: "experience", label: t('workExperience'), icon: "⭐", condition: userDetails?.experience?.length > 0 },
@@ -511,7 +508,7 @@ export default function ThemeFive({ userDetails, userLinks }) {
       )}
 
       {/* Full Screen Overlay Navigation */}
-      <div className={`fixed inset-0 z-50 bg-zinc-950/95 backdrop-blur-3xl transition-all duration-500 overflow-y-auto ${isNavOpen ? 'opacity-100 visible' : 'opacity-0 invisible pointer-events-none'}`}>
+      <div dir={`${userDetails?.displayLanguage === 'ar' ? 'rtl' : 'ltr'}`} className={`fixed inset-0 z-50 bg-zinc-950/95 backdrop-blur-3xl transition-all duration-500 overflow-y-auto ${isNavOpen ? 'opacity-100 visible' : 'opacity-0 invisible pointer-events-none'}`}>
         <div className="min-h-screen flex flex-col justify-center items-center p-4 md:p-8 relative">
           <button
             onClick={() => setIsNavOpen(false)}
@@ -519,9 +516,6 @@ export default function ThemeFive({ userDetails, userLinks }) {
           >
             <X size={28} />
           </button>
-
-          <h2 className="text-3xl md:text-5xl font-bold text-white mb-12 opacity-90 tracking-tight">{t('menu') || "Navigation"}</h2>
-
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6 w-full max-w-5xl mx-auto">
             {[
               { id: "services", label: t('services'), icon: "💼", condition: userDetails?.services?.length > 0 },

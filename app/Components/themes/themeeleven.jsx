@@ -87,12 +87,13 @@ export default function ThemeEleven({ userDetails, userLinks }) {
             <div className="relative z-10 max-w-6xl mx-auto px-4 py-5">
 
                 {/* HUD Header */}
-                <header className="flex justify-between items-center mb-8 border-b border-cyan-900/50 pb-4 backdrop-blur-sm gap-4">
+                <header className="flex md:flex-row flex-col justify-between items-center mb-8 border-b border-cyan-900/50 pb-4 backdrop-blur-sm gap-4">
                     <div className="flex items-center gap-2">
                         <Rocket className="text-cyan-400" />
                         <Link href="https://dgtportfolio.com" className="text-lg md:text-xl font-bold tracking-widest uppercase text-cyan-400 hover:text-cyan-300 shadow-cyan-500/50 drop-shadow-[0_0_5px_rgba(34,211,238,0.8)]">
                             <span className="text-white">{t('portfolio')}</span>
                         </Link>
+                        <Rocket className="text-cyan-400 md:hidden block" />
                     </div>
 
                     <div className="flex gap-4">
@@ -151,9 +152,6 @@ export default function ThemeEleven({ userDetails, userLinks }) {
                         >
                             <X size={28} />
                         </button>
-
-                        <h2 className="text-3xl md:text-5xl font-bold text-white mb-12 opacity-90 tracking-tight">{t('menu') || "Navigation"}</h2>
-
                         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6 w-full max-w-5xl mx-auto">
                             {[
                                 { id: "services", label: t('services'), icon: "💼", condition: userDetails?.services?.length > 0 },
@@ -468,9 +466,6 @@ export default function ThemeEleven({ userDetails, userLinks }) {
                 className={`fixed bottom-8 right-8 z-40 p-3 bg-cyan-500/10 backdrop-blur-md border border-cyan-500/20 text-cyan-400 rounded-full shadow-[0_0_15px_rgba(6,182,212,0.3)] hover:bg-cyan-500/20 hover:scale-110 transition-all duration-300 group ${showScrollTop ? 'translate-y-0 opacity-100' : 'translate-y-20 opacity-0 pointer-events-none'}`}
             >
                 <ArrowUp size={24} />
-                <span className="absolute right-full mr-4 top-1/2 -translate-y-1/2 px-3 py-1 bg-[#050510]/90 backdrop-blur-md rounded border border-cyan-500/20 text-cyan-400 text-sm font-medium opacity-0 group-hover:opacity-100 transition-all duration-300 whitespace-nowrap pointer-events-none">
-                    {t('backToTop') || "Top"}
-                </span>
             </button>
         </div>
     )

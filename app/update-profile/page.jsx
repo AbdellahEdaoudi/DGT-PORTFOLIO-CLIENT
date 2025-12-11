@@ -27,6 +27,20 @@ export default function UpdateProfilePage() {
 
   const tabs = [
     {
+      id: "displayLanguage",
+      label: {
+        en: "🌍 Display Lang",
+        fr: "🌍 Langue d'affichage",
+        es: "🌍 Idioma de visualización",
+        ar: "🌍 لغة العرض",
+        de: "🌍 Anzeigesprache",
+        ru: "🌍 Язык отображения",
+        ja: "🌍 表示言語",
+        zh: "🌍 显示语言",
+      },
+      component: DisplayLanguage,
+    },
+    {
       id: "about",
       label: {
         en: "📝 About",
@@ -179,20 +193,6 @@ export default function UpdateProfilePage() {
         zh: "🧩 主题",
       },
       component: Theme,
-    },
-    {
-      id: "displayLanguage",
-      label: {
-        en: "🌍 Display Lang",
-        fr: "🌍 Langue d'affichage",
-        es: "🌍 Idioma de visualización",
-        ar: "🌍 لغة العرض",
-        de: "🌍 Anzeigesprache",
-        ru: "🌍 Язык отображения",
-        ja: "🌍 表示言語",
-        zh: "🌍 显示语言",
-      },
-      component: DisplayLanguage,
     },
   ].map((tab) => ({
     ...tab,
