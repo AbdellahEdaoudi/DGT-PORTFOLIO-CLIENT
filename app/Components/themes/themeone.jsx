@@ -282,213 +282,210 @@ export default function Themeone({ userDetails, userLinks, bgcolor }) {
 
             {userDetails && (
               <div className="max-w-4xl mx-auto">
-                {/* Services */}
-                {userDetails.services && userDetails.services.length > 0 && (
-                  <div id="services" className="mb-12 scroll-mt-24">
-                    <h3 className="text-2xl font-bold text-white mb-6">💼 {t('services')}</h3>
-                    <div className="grid md:grid-cols-3 gap-4">
-                      {userDetails.services.map((service, idx) => (
-                        <div
-                          key={idx}
-                          className="text-sm md:text-base bg-white/10 backdrop-blur-md border border-white/20 rounded-xl p-4 md:p-6 hover:bg-white/15 transition-all duration-300 hover:scale-105"
-                        >
-                          <p className=" text-white/90 leading-relaxed">{service}</p>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                )}
+                {/* Dynamic Sections with Order */}
+                {(() => {
+                  const sectionOrder = userDetails.sectionOrder && userDetails.sectionOrder.length > 0
+                    ? userDetails.sectionOrder
+                    : ["services", "experience", "skills", "projects", "education", "certificates", "languages"];
 
-                {/* Experience */}
-                {userDetails.experience && userDetails.experience.length > 0 && (
-                  <div id="experience" className="mb-12 scroll-mt-24">
-                    <h3 className="text-2xl font-bold text-white mb-6 flex items-center gap-2">
-                      ⭐ {t('workExperience')}
-                    </h3>
-                    <div className="space-y-6">
-                      {userDetails.experience?.map((exp, i) => (
-                        <div
-                          key={i}
-                          className="p-4 md:p-8 bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl hover:border-gray-400/50 transition"
-                        >
-                          <div className="flex gap-4 mb-4">
-                            <Briefcase className="text-gray-400 flex-shrink-0" size={24} />
-                            <div className="flex-1">
-                              <h3 className="text-xl font-bold text-gray-300">{exp.role}</h3>
-                              <p className="text-gray-300 font-semibold">{exp.company}</p>
-                              <p className="text-gray-400 text-sm">
-                                {exp.startDate} - {exp.endDate}
-                              </p>
+                  const sectionContent = {
+                    services: userDetails.services && userDetails.services.length > 0 && (
+                      <div id="services" key="services" className="mb-12 scroll-mt-24">
+                        <h3 className="text-2xl font-bold text-white mb-6">💼 {t('services')}</h3>
+                        <div className="grid md:grid-cols-3 gap-4">
+                          {userDetails.services.map((service, idx) => (
+                            <div
+                              key={idx}
+                              className="text-sm md:text-base bg-white/10 backdrop-blur-md border border-white/20 rounded-xl p-4 md:p-6 hover:bg-white/15 transition-all duration-300 hover:scale-105"
+                            >
+                              <p className=" text-white/90 leading-relaxed">{service}</p>
                             </div>
-                          </div>
-                          <p className="text-sm md:text-base text-gray-300 whitespace-pre-wrap">{exp.description}</p>
+                          ))}
                         </div>
-                      ))}
-                    </div>
-                  </div>
-                )}
-
-                {/* Skills */}
-                {userDetails.skills && userDetails.skills.length > 0 && (
-                  <div id="skills" className="mb-12 scroll-mt-24">
-                    <h3 className="text-2xl font-bold text-white mb-6 flex items-center gap-2">
-                      💡 {t('skills')}
-                    </h3>
-                    <div className="grid md:grid-cols-2 gap-4">
-                      {userDetails.skills.map((skill, idx) => (
-                        <div
-                          key={idx}
-                          className="bg-white/10 backdrop-blur-md border border-white/20 rounded-lg p-4 hover:bg-white/15 transition-all duration-300"
-                        >
-                          <p className="text-white/90">{skill}</p>
+                      </div>
+                    ),
+                    experience: userDetails.experience && userDetails.experience.length > 0 && (
+                      <div id="experience" key="experience" className="mb-12 scroll-mt-24">
+                        <h3 className="text-2xl font-bold text-white mb-6 flex items-center gap-2">
+                          ⭐ {t('workExperience')}
+                        </h3>
+                        <div className="space-y-6">
+                          {userDetails.experience?.map((exp, i) => (
+                            <div
+                              key={i}
+                              className="p-4 md:p-8 bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl hover:border-gray-400/50 transition"
+                            >
+                              <div className="flex gap-4 mb-4">
+                                <Briefcase className="text-gray-400 flex-shrink-0" size={24} />
+                                <div className="flex-1">
+                                  <h3 className="text-xl font-bold text-gray-300">{exp.role}</h3>
+                                  <p className="text-gray-300 font-semibold">{exp.company}</p>
+                                  <p className="text-gray-400 text-sm">
+                                    {exp.startDate} - {exp.endDate}
+                                  </p>
+                                </div>
+                              </div>
+                              <p className="text-sm md:text-base text-gray-300 whitespace-pre-wrap">{exp.description}</p>
+                            </div>
+                          ))}
                         </div>
-                      ))}
-                    </div>
-                  </div>
-                )}
-
-                {/* Projects */}
-                {userDetails.projects && userDetails.projects.length > 0 && (
-                  <div id="projects" className="mb-12 scroll-mt-24">
-                    <h3 className="text-2xl font-bold text-white mb-6 flex items-center gap-2">
-                      📁 {t('projects')}
-                    </h3>
-                    <div className="space-y-6">
-                      {userDetails.projects.map((project, idx) => (
-                        <div
-                          key={idx}
-                          className="bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl overflow-hidden hover:bg-white/15 transition-all duration-300 group"
-                        >
-                          <div className="md:flex">
-                            {project.image && (
-                              <Image width={500} height={500}
-                                src={project.image}
-                                alt={project.title || "Project Image"}
-                                onClick={() => setSelectedImage(project.image)}
-                                className="w-full md:w-1/3 h-64 md:h-auto object-cover group-hover:scale-110 transition-transform duration-300 cursor-pointer"
-                              />
-                            )}
-                            <div className="p-6 flex-1">
-                              <h4 className="text-lg md:text-xl font-bold text-white mb-2">{project.title}</h4>
-                              <p onClick={() => setExpanded(!expanded)}
-                                className={` text-sm md:text-base
+                      </div>
+                    ),
+                    skills: userDetails.skills && userDetails.skills.length > 0 && (
+                      <div id="skills" key="skills" className="mb-12 scroll-mt-24">
+                        <h3 className="text-2xl font-bold text-white mb-6 flex items-center gap-2">
+                          💡 {t('skills')}
+                        </h3>
+                        <div className="grid md:grid-cols-2 gap-4">
+                          {userDetails.skills.map((skill, idx) => (
+                            <div
+                              key={idx}
+                              className="bg-white/10 backdrop-blur-md border border-white/20 rounded-lg p-4 hover:bg-white/15 transition-all duration-300"
+                            >
+                              <p className="text-white/90">{skill}</p>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    ),
+                    projects: userDetails.projects && userDetails.projects.length > 0 && (
+                      <div id="projects" key="projects" className="mb-12 scroll-mt-24">
+                        <h3 className="text-2xl font-bold text-white mb-6 flex items-center gap-2">
+                          📁 {t('projects')}
+                        </h3>
+                        <div className="space-y-6">
+                          {userDetails.projects.map((project, idx) => (
+                            <div
+                              key={idx}
+                              className="bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl overflow-hidden hover:bg-white/15 transition-all duration-300 group"
+                            >
+                              <div className="md:flex">
+                                {project.image && (
+                                  <Image width={500} height={500}
+                                    src={project.image}
+                                    alt={project.title || "Project Image"}
+                                    onClick={() => setSelectedImage(project.image)}
+                                    className="w-full md:w-1/3 h-64 md:h-auto object-cover group-hover:scale-110 transition-transform duration-300 cursor-pointer"
+                                  />
+                                )}
+                                <div className="p-6 flex-1">
+                                  <h4 className="text-lg md:text-xl font-bold text-white mb-2">{project.title}</h4>
+                                  <p onClick={() => setExpanded(!expanded)}
+                                    className={` text-sm md:text-base
                               text-white/80 mb-4 whitespace-pre-line cursor-pointer transition-all duration-300
                               ${expanded ? "line-clamp-none" : "line-clamp-3"}
                             `}
-                              >
-                                {project.description}
-                              </p>
-                              <div className="flex flex-wrap gap-2 mb-4">
-                                {project.technologies?.map((tech, i) => (
-                                  <span
-                                    key={i}
-                                    className=" px-3 py-1 bg-white/10 border border-white/20 rounded-full text-xs text-white/80"
                                   >
-                                    {tech}
-                                  </span>
-                                ))}
+                                    {project.description}
+                                  </p>
+                                  <div className="flex flex-wrap gap-2 mb-4">
+                                    {project.technologies?.map((tech, i) => (
+                                      <span
+                                        key={i}
+                                        className=" px-3 py-1 bg-white/10 border border-white/20 rounded-full text-xs text-white/80"
+                                      >
+                                        {tech}
+                                      </span>
+                                    ))}
+                                  </div>
+                                  <a
+                                    href={project.link}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="inline-flex items-center gap-2 px-4 py-2 bg-white/20 hover:bg-white/30 rounded-lg text-white transition-all duration-300"
+                                  >
+                                    <Globe size={16} />
+                                    {t('viewProject')}
+                                  </a>
+                                </div>
                               </div>
-                              <a
-                                href={project.link}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="inline-flex items-center gap-2 px-4 py-2 bg-white/20 hover:bg-white/30 rounded-lg text-white transition-all duration-300"
-                              >
-                                <Globe size={16} />
-                                {t('viewProject')}
-                              </a>
                             </div>
-                          </div>
+                          ))}
                         </div>
-                      ))}
-                    </div>
-                  </div>
-                )}
-
-                {/* Education */}
-                {userDetails.education && userDetails.education.length > 0 && (
-                  <div id="education" className="mb-12 text-sm md:text-base scroll-mt-24">
-                    <h3 className="text-2xl font-bold text-white mb-6 flex items-center gap-2">
-                      🎓 {t('education')}
-                    </h3>
-                    <div className="space-y-4">
-                      {userDetails.education.map((edu, idx) => (
-                        <div
-                          key={idx}
-                          className="bg-white/10 backdrop-blur-md border border-white/20 rounded-xl p-4 md:p-6 hover:bg-white/15 transition-all duration-300"
-                        >
-                          <div className="mb-2">
-                            <div className="flex items-center justify-between">
-                              <h4 className="text-xl font-bold text-white">{edu.degree}</h4>
-                              <span className="text-sm text-white/60">
-                                {edu.startYear} - {edu.endYear}
-                              </span>
+                      </div>
+                    ),
+                    education: userDetails.education && userDetails.education.length > 0 && (
+                      <div id="education" key="education" className="mb-12 text-sm md:text-base scroll-mt-24">
+                        <h3 className="text-2xl font-bold text-white mb-6 flex items-center gap-2">
+                          🎓 {t('education')}
+                        </h3>
+                        <div className="space-y-4">
+                          {userDetails.education.map((edu, idx) => (
+                            <div
+                              key={idx}
+                              className="bg-white/10 backdrop-blur-md border border-white/20 rounded-xl p-4 md:p-6 hover:bg-white/15 transition-all duration-300"
+                            >
+                              <div className="mb-2">
+                                <div className="flex items-center justify-between">
+                                  <h4 className="text-xl font-bold text-white">{edu.degree}</h4>
+                                  <span className="text-sm text-white/60">
+                                    {edu.startYear} - {edu.endYear}
+                                  </span>
+                                </div>
+                                <p className="text-white/80 font-semibold">{edu.school}</p>
+                              </div>
+                              {edu.field && (
+                                <div className="mt-3 p-4 bg-black/30 rounded-lg border-l-4 border-white/30">
+                                  <p className="text-xs text-gray-400 uppercase tracking-wider mb-2">{t('field')}</p>
+                                  <p className="text-sm md:text-base text-white/80 leading-relaxed">
+                                    {edu.field}
+                                  </p>
+                                </div>
+                              )}
                             </div>
-                            <p className="text-white/80 font-semibold">{edu.school}</p>
-                          </div>
-                          {edu.field && (
-                            <div className="mt-3 p-4 bg-black/30 rounded-lg border-l-4 border-white/30">
-                              <p className="text-xs text-gray-400 uppercase tracking-wider mb-2">{t('field')}</p>
-                              <p className="text-sm md:text-base text-white/80 leading-relaxed">
-                                {edu.field}
-                              </p>
+                          ))}
+                        </div>
+                      </div>
+                    ),
+                    certificates: userDetails.certificates && userDetails.certificates.length > 0 && (
+                      <div id="certificates" key="certificates" className="mb-12 text-sm md:text-base scroll-mt-24">
+                        <h3 className="text-2xl font-bold text-white mb-6 flex items-center gap-2">
+                          📜 {t('certificates') || "Certificates"}
+                        </h3>
+                        <div className="grid md:grid-cols-2 gap-6">
+                          {userDetails.certificates.map((cert, idx) => (
+                            <div
+                              key={idx}
+                              className="bg-white/10 backdrop-blur-md border border-white/20 rounded-xl overflow-hidden hover:bg-white/15 transition-all duration-300 group flex flex-col"
+                            >
+                              {cert.cfimage && (
+                                <div className="relative h-56 w-full bg-gray-900/50 overflow-hidden cursor-pointer border-b border-white/10 flex items-center justify-center p-4" onClick={() => setSelectedImage(cert.cfimage)}>
+                                  <Image
+                                    src={cert.cfimage}
+                                    alt={cert.name || "Certificate Image"}
+                                    fill
+                                    className="object-contain p-2 group-hover:scale-105 transition-transform duration-500 drop-shadow-2xl"
+                                  />
+                                </div>
+                              )}
+                              <div className="p-4 flex-1 flex flex-col">
+                                {cert.description && (
+                                  <p className="text-white/90 font-medium text-base leading-relaxed whitespace-pre-wrap break-all">{cert.description}</p>
+                                )}
+                              </div>
                             </div>
-                          )}
+                          ))}
                         </div>
-                      ))}
-                    </div>
-                  </div>
-                )}
-
-                {/* Certificates */}
-                {userDetails.certificates && userDetails.certificates.length > 0 && (
-                  <div id="certificates" className="mb-12 text-sm md:text-base scroll-mt-24">
-                    <h3 className="text-2xl font-bold text-white mb-6 flex items-center gap-2">
-                      📜 {t('certificates') || "Certificates"}
-                    </h3>
-                    <div className="grid md:grid-cols-2 gap-6">
-                      {userDetails.certificates.map((cert, idx) => (
-                        <div
-                          key={idx}
-                          className="bg-white/10 backdrop-blur-md border border-white/20 rounded-xl overflow-hidden hover:bg-white/15 transition-all duration-300 group flex flex-col"
-                        >
-                          {cert.cfimage && (
-                            <div className="relative h-56 w-full bg-gray-900/50 overflow-hidden cursor-pointer border-b border-white/10 flex items-center justify-center p-4" onClick={() => setSelectedImage(cert.cfimage)}>
-                              <Image
-                                src={cert.cfimage}
-                                alt={cert.name || "Certificate Image"}
-                                fill
-                                className="object-contain p-2 group-hover:scale-105 transition-transform duration-500 drop-shadow-2xl"
-                              />
+                      </div>
+                    ),
+                    languages: userDetails.languages && userDetails.languages.length > 0 && (
+                      <div id="languages" key="languages" className="mb-12 scroll-mt-24">
+                        <h3 className="text-2xl font-bold text-white mb-6">🌍 {t('languages')}</h3>
+                        <div className="grid md:grid-cols-3 gap-4">
+                          {userDetails.languages.map((lang, idx) => (
+                            <div
+                              key={idx}
+                              className="bg-white/10 backdrop-blur-md border border-white/20 rounded-lg p-4 hover:bg-white/15 transition-all duration-300"
+                            >
+                              <p className="text-white/90">{lang}</p>
                             </div>
-                          )}
-                          <div className="p-4 flex-1 flex flex-col">
-                            {cert.description && (
-                              <p className="text-white/90 font-medium text-base leading-relaxed whitespace-pre-wrap break-all">{cert.description}</p>
-                            )}
-                          </div>
+                          ))}
                         </div>
-                      ))}
-                    </div>
-                  </div>
-                )}
-
-                {/* Languages */}
-                {userDetails.languages && userDetails.languages.length > 0 && (
-                  <div id="languages" className="mb-12 scroll-mt-24">
-                    <h3 className="text-2xl font-bold text-white mb-6">🌍 {t('languages')}</h3>
-                    <div className="grid md:grid-cols-3 gap-4">
-                      {userDetails.languages.map((lang, idx) => (
-                        <div
-                          key={idx}
-                          className="bg-white/10 backdrop-blur-md border border-white/20 rounded-lg p-4 hover:bg-white/15 transition-all duration-300"
-                        >
-                          <p className="text-white/90">{lang}</p>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                )}
+                      </div>
+                    )
+                  }
+                  return sectionOrder.map(item => sectionContent[item])
+                })()}
 
                 {/* Social Media */}
                 {userDetails.socials && Object.values(userDetails.socials).some(url => url) && (

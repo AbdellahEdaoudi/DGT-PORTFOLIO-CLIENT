@@ -119,37 +119,46 @@ export default function ThemeFour({ userDetails, userLinks }) {
                       <X size={28} />
                     </button>
                     <div dir={`${userDetails?.displayLanguage === 'ar' ? 'rtl' : 'ltr'}`} className={`grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6 w-full max-w-5xl mx-auto ${isNavOpen ? 'opacity-100 visible' : 'opacity-0 invisible pointer-events-none'}`}>
-                      {[
-                        { id: "services", label: t('services'), icon: "💼", condition: userDetails?.services?.length > 0 },
-                        { id: "experience", label: t('workExperience'), icon: "⭐", condition: userDetails?.experience?.length > 0 },
-                        { id: "skills", label: t('skills'), icon: "💡", condition: userDetails?.skills?.length > 0 },
-                        { id: "projects", label: t('projects'), icon: "📁", condition: userDetails?.projects?.length > 0 },
-                        { id: "education", label: t('education'), icon: "🎓", condition: userDetails?.education?.length > 0 },
-                        { id: "certificates", label: t('certificates'), icon: "📜", condition: userDetails?.certificates?.length > 0 },
-                        { id: "languages", label: t('languages'), icon: "🌍", condition: userDetails?.languages?.length > 0 },
-                      ]
-                        .filter(tab => tab.condition)
-                        .map((tab, index) => (
-                          <button
-                            key={tab.id}
-                            onClick={() => {
-                              setIsNavOpen(false);
-                              const element = document.getElementById(tab.id);
-                              if (element) {
-                                setTimeout(() => {
-                                  element.scrollIntoView({ behavior: "smooth", block: "start" });
-                                }, 100);
-                              }
-                            }}
-                            className={`group relative flex flex-col items-center justify-center p-6 md:p-8 gap-4 bg-white/5 hover:bg-emerald-500/10 border border-white/10 rounded-3xl transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:border-emerald-500/30
+                      {(() => {
+                        const sectionOrder = userDetails.sectionOrder && userDetails.sectionOrder.length > 0
+                          ? userDetails.sectionOrder
+                          : ["services", "experience", "skills", "projects", "education", "certificates", "languages"];
+
+                        const navItems = {
+                          services: { id: "services", label: t('services'), icon: "💼", condition: userDetails?.services?.length > 0 },
+                          experience: { id: "experience", label: t('workExperience'), icon: "⭐", condition: userDetails?.experience?.length > 0 },
+                          skills: { id: "skills", label: t('skills'), icon: "💡", condition: userDetails?.skills?.length > 0 },
+                          projects: { id: "projects", label: t('projects'), icon: "📁", condition: userDetails?.projects?.length > 0 },
+                          education: { id: "education", label: t('education'), icon: "🎓", condition: userDetails?.education?.length > 0 },
+                          certificates: { id: "certificates", label: t('certificates'), icon: "📜", condition: userDetails?.certificates?.length > 0 },
+                          languages: { id: "languages", label: t('languages'), icon: "🌍", condition: userDetails?.languages?.length > 0 },
+                        };
+
+                        return sectionOrder
+                          .map(key => navItems[key])
+                          .filter(tab => tab && tab.condition)
+                          .map((tab, index) => (
+                            <button
+                              key={tab.id}
+                              onClick={() => {
+                                setIsNavOpen(false);
+                                const element = document.getElementById(tab.id);
+                                if (element) {
+                                  setTimeout(() => {
+                                    element.scrollIntoView({ behavior: "smooth", block: "start" });
+                                  }, 100);
+                                }
+                              }}
+                              className={`group relative flex flex-col items-center justify-center p-6 md:p-8 gap-4 bg-white/5 hover:bg-emerald-500/10 border border-white/10 rounded-3xl transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:border-emerald-500/30
                             ${isNavOpen ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}
                           `}
-                            style={{ transitionDelay: `${index * 50}ms` }}
-                          >
-                            <span className="text-4xl md:text-5xl group-hover:scale-110 transition-transform duration-300 drop-shadow-lg">{tab.icon}</span>
-                            <span className="text-base md:text-lg font-medium text-white/80 group-hover:text-white transition-colors">{tab.label}</span>
-                          </button>
-                        ))}
+                              style={{ transitionDelay: `${index * 50}ms` }}
+                            >
+                              <span className="text-4xl md:text-5xl group-hover:scale-110 transition-transform duration-300 drop-shadow-lg">{tab.icon}</span>
+                              <span className="text-base md:text-lg font-medium text-white/80 group-hover:text-white transition-colors">{tab.label}</span>
+                            </button>
+                          ));
+                      })()}
                     </div>
                   </div>
                 </div>
@@ -203,260 +212,257 @@ export default function ThemeFour({ userDetails, userLinks }) {
             </header>
 
             <main>
-              {/* Services */}
-              {userDetails.services && userDetails.services.length > 0 && (
-                <section id="services" className="mb-20 scroll-mt-24">
-                  <div className="max-w-5xl mx-auto">
-                    <div className="flex items-center gap-4 mb-8">
-                      <Briefcase size={32} className="text-emerald-400" />
-                      <h2 className="text-3xl font-bold">{t('services')}</h2>
-                    </div>
-                    <div className="grid md:grid-cols-2 gap-6">
-                      {userDetails.services.map((service, i) => (
-                        <div key={i} className="group p-6 bg-gradient-to-br from-emerald-500/10 to-blue-500/10 border border-emerald-500/30 rounded-xl hover:border-emerald-500/60 hover:shadow-lg hover:shadow-emerald-500/20 transition-all duration-300">
-                          <div className="absolute inset-0 bg-gradient-to-r from-emerald-500/0 via-emerald-500/5 to-emerald-500/0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-xl"></div>
-                          <p className="text-sm md:text-base text-gray-200 relative z-10">{service}</p>
+              {/* Dynamic Sections */}
+              {(() => {
+                const sectionOrder = userDetails.sectionOrder && userDetails.sectionOrder.length > 0
+                  ? userDetails.sectionOrder
+                  : ["services", "experience", "skills", "projects", "education", "certificates", "languages"];
+
+                const sectionContent = {
+                  services: userDetails.services && userDetails.services.length > 0 && (
+                    <section key="services" id="services" className="mb-20 scroll-mt-24">
+                      <div className="max-w-5xl mx-auto">
+                        <div className="flex items-center gap-4 mb-8">
+                          <Briefcase size={32} className="text-emerald-400" />
+                          <h2 className="text-3xl font-bold">{t('services')}</h2>
                         </div>
-                      ))}
-                    </div>
-                  </div>
-                </section>
-              )}
-
-              {/* Experience */}
-              {userDetails.experience && userDetails.experience.length > 0 && (
-                <section id="experience" className="mb-20 scroll-mt-24">
-                  <div className="max-w-5xl mx-auto">
-                    <div className="flex items-center gap-4 mb-8">
-                      <Briefcase size={32} className="text-emerald-400" />
-                      <h2 className="text-3xl font-bold">{t('workExperience')}</h2>
-                    </div>
-                    <div className="space-y-6">
-                      {userDetails.experience.map((exp, i) => (
-                        <div key={i} className="group relative p-6 bg-gradient-to-br from-emerald-500/10 to-blue-500/10 border border-emerald-500/30 rounded-xl hover:border-emerald-500/60 hover:shadow-xl hover:shadow-emerald-500/20 transition-all duration-300 overflow-hidden">
-                          {/* Decorative element */}
-                          {userDetails.displayLanguage === "ar" ? (
-                            <div className="absolute top-0 left-0 w-32 h-32 bg-gradient-to-bl from-emerald-400/20 to-transparent rounded-br-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                          ) : (
-                            <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-bl from-emerald-400/20 to-transparent rounded-bl-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                          )}
-
-                          <div className="relative z-10">
-                            <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-2 mb-3">
-                              <h3 className="text-xl md:text-2xl font-bold text-emerald-300 group-hover:text-emerald-200 transition">{exp.role}</h3>
-                              <span className={`text-gray-400 text-sm ${userDetails.displayLanguage === "ar" ? "flex gap-1" : "flex flex-row-reverse gap-1"}`}>
-                                <p>{exp.startDate}</p>
-                                <p> - </p>
-                                <p>{exp.endDate}</p>
-                              </span>
+                        <div className="grid md:grid-cols-2 gap-6">
+                          {userDetails.services.map((service, i) => (
+                            <div key={i} className="group p-6 bg-gradient-to-br from-emerald-500/10 to-blue-500/10 border border-emerald-500/30 rounded-xl hover:border-emerald-500/60 hover:shadow-lg hover:shadow-emerald-500/20 transition-all duration-300">
+                              <div className="absolute inset-0 bg-gradient-to-r from-emerald-500/0 via-emerald-500/5 to-emerald-500/0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-xl"></div>
+                              <p className="text-sm md:text-base text-gray-200 relative z-10">{service}</p>
                             </div>
-                            <p className="text-emerald-400 font-semibold mb-3 text-lg">{exp.company}</p>
-                            <div className={`mt-3 p-4 bg-slate-900/50 rounded-lg  border-emerald-500/50 ${userDetails.displayLanguage === "ar" ? "border-r-4" : "border-l-4"}`}>
-                              <p className="text-xs text-gray-500 uppercase tracking-wider mb-2">{t('description')}</p>
-                              <p className={`text-gray-300 text-sm whitespace-pre-wrap leading-relaxed`}>
-                                {exp.description}
-                              </p>
-                            </div>
-                          </div>
+                          ))}
                         </div>
-                      ))}
-                    </div>
-                  </div>
-                </section>
-              )}
-              {/* Skills */}
-              {userDetails.skills && userDetails.skills.length > 0 && (
-                <section id="skills" className="mb-20 scroll-mt-24">
-                  <div className="max-w-5xl mx-auto">
-                    <div className="flex items-center gap-4 mb-8">
-                      <Code size={32} className="text-emerald-400" />
-                      <h2 className="text-3xl font-bold">{t('skills')}</h2>
-                    </div>
-                    <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4">
-                      {userDetails.skills.map((skill, i) => (
-                        <div key={i} className="group relative p-5 rounded-xl bg-gradient-to-br from-emerald-500/10 to-blue-500/10 border border-emerald-500/30 hover:border-emerald-500/60 hover:shadow-lg hover:shadow-emerald-500/20 transition-all duration-300 cursor-pointer overflow-hidden">
-                          <div className="absolute inset-0 bg-gradient-to-r from-emerald-500/0 via-emerald-500/10 to-emerald-500/0 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                          <p className="text-gray-200 group-hover:text-emerald-200 transition font-medium relative z-10">{skill}</p>
+                      </div>
+                    </section>
+                  ),
+                  experience: userDetails.experience && userDetails.experience.length > 0 && (
+                    <section key="experience" id="experience" className="mb-20 scroll-mt-24">
+                      <div className="max-w-5xl mx-auto">
+                        <div className="flex items-center gap-4 mb-8">
+                          <Briefcase size={32} className="text-emerald-400" />
+                          <h2 className="text-3xl font-bold">{t('workExperience')}</h2>
                         </div>
-                      ))}
-                    </div>
-                  </div>
-                </section >
-              )}
-
-              {/* Projects */}
-              {userDetails.projects && userDetails.projects.length > 0 && (
-                <section id="projects" className="mb-20 scroll-mt-24">
-                  <div className="max-w-5xl mx-auto">
-                    <div className="flex items-center gap-4 mb-8">
-                      <Briefcase size={32} className="text-emerald-400" /> {/* Assuming Briefcase for projects, or a different icon if preferred */}
-                      <h2 className="text-3xl font-bold">{t('projects')}</h2>
-                    </div>
-                    <div className="space-y-6">
-                      {userDetails.projects.map((project, idx) => (
-                        <div
-                          key={idx}
-                          className="bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl overflow-hidden hover:bg-white/10 transition-all duration-300 group"
-                        >
-                          <div className="md:flex">
-                            {project.image && (
-                              <div className="md:w-1/3 relative">
-                                <Image width={500} height={500}
-                                  src={project.image}
-                                  alt={project.title || "Project Image"}
-                                  onClick={() => setSelectedImage(project.image)}
-                                  className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500 cursor-pointer"
-                                />
-                                <div className="absolute inset-0 bg-gradient-to-r from-slate-950/50 via-transparent to-transparent group-hover:scale-110 transition-transform duration-500 pointer-events-none"></div>
-                              </div>
-                            )}
-                            <div className={`py-6 flex-1 px-6 group-hover:px-8 transition-all duration-300`}>
-                              <h3 className="text-2xl font-bold text-emerald-300 mb-3 group-hover:text-emerald-200 transition">{project.title}</h3>
-                              <p onClick={() => setExpanded(expanded === idx ? null : idx)}
-                                className={`text-sm md:text-base text-gray-300 mb-4 whitespace-pre-line cursor-pointer transition-all duration-300 leading-relaxed
-                                ${expanded === idx ? "line-clamp-none" : "line-clamp-3"}
-                              `}
-                              >
-                                {project.description}
-                              </p>
-                              <div className="flex flex-wrap gap-2 mb-6">
-                                {project.technologies?.map((tech, i) => (
-                                  <span
-                                    key={i}
-                                    className="px-3 py-1 bg-emerald-500/20 border border-emerald-500/40 rounded-full text-xs text-emerald-300"
-                                  >
-                                    {tech}
-                                  </span>
-                                ))}
-                              </div>
-                              {project.link && (
-                                <a
-                                  href={project.link}
-                                  target="_blank"
-                                  rel="noopener noreferrer"
-                                  className="inline-flex items-center gap-2 px-6 py-2 bg-emerald-600/20 hover:bg-emerald-600/40 border border-emerald-500/50 rounded-lg text-emerald-300 transition-all duration-300 font-medium"
-                                >
-                                  <Globe size={18} />
-                                  {t('viewProject')}
-                                </a>
+                        <div className="space-y-6">
+                          {userDetails.experience.map((exp, i) => (
+                            <div key={i} className="group relative p-6 bg-gradient-to-br from-emerald-500/10 to-blue-500/10 border border-emerald-500/30 rounded-xl hover:border-emerald-500/60 hover:shadow-xl hover:shadow-emerald-500/20 transition-all duration-300 overflow-hidden">
+                              {/* Decorative element */}
+                              {userDetails.displayLanguage === "ar" ? (
+                                <div className="absolute top-0 left-0 w-32 h-32 bg-gradient-to-bl from-emerald-400/20 to-transparent rounded-br-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                              ) : (
+                                <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-bl from-emerald-400/20 to-transparent rounded-bl-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                               )}
-                            </div>
-                          </div>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                </section>
-              )}
 
-              {/* Education */}
-              {userDetails.education && userDetails.education.length > 0 && (
-                <section id="education" className="mb-20 scroll-mt-24">
-                  <div className="max-w-5xl mx-auto">
-                    <div className="flex items-center gap-4 mb-8">
-                      <GraduationCap size={32} className="text-emerald-400" />
-                      <h2 className="text-3xl font-bold">{t('education')}</h2>
-                    </div>
-                    <div className="space-y-6">
-                      {userDetails.education.map((edu, i) => (
-                        <div
-                          key={i}
-                          className="group relative p-6 bg-gradient-to-br from-emerald-500/10 to-blue-500/10 border border-emerald-500/30 rounded-xl hover:border-emerald-500/60 hover:shadow-xl hover:shadow-emerald-500/20 transition-all duration-300 overflow-hidden"
-                        >
-                          {/* Decorative corner accent */}
-                          {userDetails.displayLanguage === "ar" ? (
-                            <div className="absolute top-0 left-0 w-32 h-32 bg-gradient-to-bl from-emerald-400/20 to-transparent rounded-br-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                          ) : (
-                            <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-bl from-emerald-400/20 to-transparent rounded-bl-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                          )}
-                          <div className="relative z-10">
-                            <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-2 mb-3">
-                              <h3 className="text-xl md:text-2xl font-bold text-emerald-300 group-hover:text-emerald-200 transition">{edu.degree}</h3>
-                              <p className="text-gray-400 text-sm md:text-base whitespace-nowrap">
-                                {edu.startYear} - {edu.endYear}
-                              </p>
-                            </div>
-
-                            <p className="text-emerald-400 font-semibold text-lg mb-3">{edu.school}</p>
-
-                            {edu.field && (
-                              <div className={`p-4 bg-slate-900/50 rounded-lg ${userDetails.displayLanguage === "ar" ? "border-r-4" : "border-l-4"} border-emerald-500/50`}>
-                                <p className="text-xs text-gray-500 uppercase tracking-wider mb-2">{t('field')}</p>
-                                <p className="text-sm md:text-base text-gray-300 leading-relaxed">
-                                  {edu.field}
-                                </p>
+                              <div className="relative z-10">
+                                <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-2 mb-3">
+                                  <h3 className="text-xl md:text-2xl font-bold text-emerald-300 group-hover:text-emerald-200 transition">{exp.role}</h3>
+                                  <span className={`text-gray-400 text-sm ${userDetails.displayLanguage === "ar" ? "flex gap-1" : "flex flex-row-reverse gap-1"}`}>
+                                    <p>{exp.startDate}</p>
+                                    <p> - </p>
+                                    <p>{exp.endDate}</p>
+                                  </span>
+                                </div>
+                                <p className="text-emerald-400 font-semibold mb-3 text-lg">{exp.company}</p>
+                                <div className={`mt-3 p-4 bg-slate-900/50 rounded-lg  border-emerald-500/50 ${userDetails.displayLanguage === "ar" ? "border-r-4" : "border-l-4"}`}>
+                                  <p className="text-xs text-gray-500 uppercase tracking-wider mb-2">{t('description')}</p>
+                                  <p className={`text-gray-300 text-sm whitespace-pre-wrap leading-relaxed`}>
+                                    {exp.description}
+                                  </p>
+                                </div>
                               </div>
-                            )}
-                          </div>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                </section>
-              )
-              }
-
-              {/* Certificates */}
-              {userDetails.certificates && userDetails.certificates.length > 0 && (
-                <section id="certificates" className="mb-20 scroll-mt-24">
-                  <div className="max-w-5xl mx-auto">
-                    <div className="flex items-center gap-4 mb-8">
-                      <Award size={32} className="text-emerald-400" />
-                      <h2 className="text-3xl font-bold">{t('certificates')}</h2>
-                    </div>
-                    <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-                      {userDetails.certificates.map((cert, i) => (
-                        <div
-                          key={i}
-                          className="group relative bg-gradient-to-br from-emerald-500/10 to-blue-500/10 border border-emerald-500/30 rounded-xl hover:border-emerald-500/60 hover:shadow-xl hover:shadow-emerald-500/20 transition-all duration-300 overflow-hidden flex flex-col"
-                        >
-
-                          {cert.cfimage && (
-                            <div className="relative h-56 w-full bg-slate-900/50 overflow-hidden cursor-pointer border-b border-emerald-500/20 flex items-center justify-center p-4 z-10" onClick={() => setSelectedImage(cert.cfimage)}>
-                              <Image
-                                src={cert.cfimage}
-                                alt={cert.name || "Certificate Image"}
-                                fill
-                                className="object-contain p-2 group-hover:scale-105 transition-transform duration-500"
-                              />
                             </div>
-                          )}
-
-                          <div className="p-4 relative z-10 flex-1">
-                            {cert.description && (
-                              <p className="text-gray-300 font-medium break-all">{cert.description}</p>
-                            )}
-                          </div>
+                          ))}
                         </div>
-                      ))}
-                    </div>
-                  </div>
-                </section>
-              )
-              }
-
-              {/* Languages */}
-              {userDetails.languages && userDetails.languages.length > 0 && (
-                <section id="languages" className="mb-20 scroll-mt-24">
-                  <div className="max-w-5xl mx-auto">
-                    <div className="flex items-center gap-4 mb-8">
-                      <Globe size={32} className="text-emerald-400" />
-                      <h2 className="text-3xl font-bold">{t('languages')}</h2>
-                    </div>
-                    <div className="flex flex-wrap gap-4">
-                      {userDetails.languages.map((lang, i) => (
-                        <div
-                          key={i}
-                          className="group relative px-6 py-3 bg-gradient-to-br from-emerald-500/10 to-blue-500/10 border border-emerald-500/30 rounded-full text-gray-200 hover:border-emerald-500/60 hover:text-emerald-200 transition-all duration-300 cursor-pointer overflow-hidden"
-                        >
-                          <div className="absolute inset-0 bg-gradient-to-r from-emerald-500/0 via-emerald-500/10 to-emerald-500/0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-full"></div>
-                          <span className="relative z-10 font-semibold">{lang}</span>
+                      </div>
+                    </section>
+                  ),
+                  skills: userDetails.skills && userDetails.skills.length > 0 && (
+                    <section key="skills" id="skills" className="mb-20 scroll-mt-24">
+                      <div className="max-w-5xl mx-auto">
+                        <div className="flex items-center gap-4 mb-8">
+                          <Code size={32} className="text-emerald-400" />
+                          <h2 className="text-3xl font-bold">{t('skills')}</h2>
                         </div>
-                      ))}
-                    </div>
-                  </div>
-                </section>
-              )}
+                        <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4">
+                          {userDetails.skills.map((skill, i) => (
+                            <div key={i} className="group relative p-5 rounded-xl bg-gradient-to-br from-emerald-500/10 to-blue-500/10 border border-emerald-500/30 hover:border-emerald-500/60 hover:shadow-lg hover:shadow-emerald-500/20 transition-all duration-300 cursor-pointer overflow-hidden">
+                              <div className="absolute inset-0 bg-gradient-to-r from-emerald-500/0 via-emerald-500/10 to-emerald-500/0 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                              <p className="text-gray-200 group-hover:text-emerald-200 transition font-medium relative z-10">{skill}</p>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    </section >
+                  ),
+                  projects: userDetails.projects && userDetails.projects.length > 0 && (
+                    <section key="projects" id="projects" className="mb-20 scroll-mt-24">
+                      <div className="max-w-5xl mx-auto">
+                        <div className="flex items-center gap-4 mb-8">
+                          <Briefcase size={32} className="text-emerald-400" /> {/* Assuming Briefcase for projects, or a different icon if preferred */}
+                          <h2 className="text-3xl font-bold">{t('projects')}</h2>
+                        </div>
+                        <div className="space-y-6">
+                          {userDetails.projects.map((project, idx) => (
+                            <div
+                              key={idx}
+                              className="bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl overflow-hidden hover:bg-white/10 transition-all duration-300 group"
+                            >
+                              <div className="md:flex">
+                                {project.image && (
+                                  <div className="md:w-1/3 relative">
+                                    <Image width={500} height={500}
+                                      src={project.image}
+                                      alt={project.title || "Project Image"}
+                                      onClick={() => setSelectedImage(project.image)}
+                                      className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500 cursor-pointer"
+                                    />
+                                    <div className="absolute inset-0 bg-gradient-to-r from-slate-950/50 via-transparent to-transparent group-hover:scale-110 transition-transform duration-500 pointer-events-none"></div>
+                                  </div>
+                                )}
+                                <div className={`py-6 flex-1 px-6 group-hover:px-8 transition-all duration-300`}>
+                                  <h3 className="text-2xl font-bold text-emerald-300 mb-3 group-hover:text-emerald-200 transition">{project.title}</h3>
+                                  <p onClick={() => setExpanded(expanded === idx ? null : idx)}
+                                    className={`text-sm md:text-base text-gray-300 mb-4 whitespace-pre-line cursor-pointer transition-all duration-300 leading-relaxed
+                                    ${expanded === idx ? "line-clamp-none" : "line-clamp-3"}
+                                  `}
+                                  >
+                                    {project.description}
+                                  </p>
+                                  <div className="flex flex-wrap gap-2 mb-6">
+                                    {project.technologies?.map((tech, i) => (
+                                      <span
+                                        key={i}
+                                        className="px-3 py-1 bg-emerald-500/20 border border-emerald-500/40 rounded-full text-xs text-emerald-300"
+                                      >
+                                        {tech}
+                                      </span>
+                                    ))}
+                                  </div>
+                                  {project.link && (
+                                    <a
+                                      href={project.link}
+                                      target="_blank"
+                                      rel="noopener noreferrer"
+                                      className="inline-flex items-center gap-2 px-6 py-2 bg-emerald-600/20 hover:bg-emerald-600/40 border border-emerald-500/50 rounded-lg text-emerald-300 transition-all duration-300 font-medium"
+                                    >
+                                      <Globe size={18} />
+                                      {t('viewProject')}
+                                    </a>
+                                  )}
+                                </div>
+                              </div>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    </section>
+                  ),
+                  education: userDetails.education && userDetails.education.length > 0 && (
+                    <section key="education" id="education" className="mb-20 scroll-mt-24">
+                      <div className="max-w-5xl mx-auto">
+                        <div className="flex items-center gap-4 mb-8">
+                          <GraduationCap size={32} className="text-emerald-400" />
+                          <h2 className="text-3xl font-bold">{t('education')}</h2>
+                        </div>
+                        <div className="space-y-6">
+                          {userDetails.education.map((edu, i) => (
+                            <div
+                              key={i}
+                              className="group relative p-6 bg-gradient-to-br from-emerald-500/10 to-blue-500/10 border border-emerald-500/30 rounded-xl hover:border-emerald-500/60 hover:shadow-xl hover:shadow-emerald-500/20 transition-all duration-300 overflow-hidden"
+                            >
+                              {/* Decorative corner accent */}
+                              {userDetails.displayLanguage === "ar" ? (
+                                <div className="absolute top-0 left-0 w-32 h-32 bg-gradient-to-bl from-emerald-400/20 to-transparent rounded-br-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                              ) : (
+                                <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-bl from-emerald-400/20 to-transparent rounded-bl-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                              )}
+                              <div className="relative z-10">
+                                <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-2 mb-3">
+                                  <h3 className="text-xl md:text-2xl font-bold text-emerald-300 group-hover:text-emerald-200 transition">{edu.degree}</h3>
+                                  <p className="text-gray-400 text-sm md:text-base whitespace-nowrap">
+                                    {edu.startYear} - {edu.endYear}
+                                  </p>
+                                </div>
+
+                                <p className="text-emerald-400 font-semibold text-lg mb-3">{edu.school}</p>
+
+                                {edu.field && (
+                                  <div className={`p-4 bg-slate-900/50 rounded-lg ${userDetails.displayLanguage === "ar" ? "border-r-4" : "border-l-4"} border-emerald-500/50`}>
+                                    <p className="text-xs text-gray-500 uppercase tracking-wider mb-2">{t('field')}</p>
+                                    <p className="text-sm md:text-base text-gray-300 leading-relaxed">
+                                      {edu.field}
+                                    </p>
+                                  </div>
+                                )}
+                              </div>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    </section>
+                  ),
+                  certificates: userDetails.certificates && userDetails.certificates.length > 0 && (
+                    <section key="certificates" id="certificates" className="mb-20 scroll-mt-24">
+                      <div className="max-w-5xl mx-auto">
+                        <div className="flex items-center gap-4 mb-8">
+                          <Award size={32} className="text-emerald-400" />
+                          <h2 className="text-3xl font-bold">{t('certificates')}</h2>
+                        </div>
+                        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                          {userDetails.certificates.map((cert, i) => (
+                            <div
+                              key={i}
+                              className="group relative bg-gradient-to-br from-emerald-500/10 to-blue-500/10 border border-emerald-500/30 rounded-xl hover:border-emerald-500/60 hover:shadow-xl hover:shadow-emerald-500/20 transition-all duration-300 overflow-hidden flex flex-col"
+                            >
+
+                              {cert.cfimage && (
+                                <div className="relative h-56 w-full bg-slate-900/50 overflow-hidden cursor-pointer border-b border-emerald-500/20 flex items-center justify-center p-4 z-10" onClick={() => setSelectedImage(cert.cfimage)}>
+                                  <Image
+                                    src={cert.cfimage}
+                                    alt={cert.name || "Certificate Image"}
+                                    fill
+                                    className="object-contain p-2 group-hover:scale-105 transition-transform duration-500"
+                                  />
+                                </div>
+                              )}
+
+                              <div className="p-4 relative z-10 flex-1">
+                                {cert.description && (
+                                  <p className="text-gray-300 font-medium break-all">{cert.description}</p>
+                                )}
+                              </div>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    </section>
+                  ),
+                  languages: userDetails.languages && userDetails.languages.length > 0 && (
+                    <section key="languages" id="languages" className="mb-20 scroll-mt-24">
+                      <div className="max-w-5xl mx-auto">
+                        <div className="flex items-center gap-4 mb-8">
+                          <Globe size={32} className="text-emerald-400" />
+                          <h2 className="text-3xl font-bold">{t('languages')}</h2>
+                        </div>
+                        <div className="flex flex-wrap gap-4">
+                          {userDetails.languages.map((lang, i) => (
+                            <div
+                              key={i}
+                              className="group relative px-6 py-3 bg-gradient-to-br from-emerald-500/10 to-blue-500/10 border border-emerald-500/30 rounded-full text-gray-200 hover:border-emerald-500/60 hover:text-emerald-200 transition-all duration-300 cursor-pointer overflow-hidden"
+                            >
+                              <div className="absolute inset-0 bg-gradient-to-r from-emerald-500/0 via-emerald-500/10 to-emerald-500/0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-full"></div>
+                              <span className="relative z-10 font-semibold">{lang}</span>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    </section>
+                  )
+                };
+
+                return sectionOrder.map(item => sectionContent[item]);
+              })()}
 
               {/* Social Media */}
               {userDetails.socials && Object.values(userDetails.socials).some(url => url) && (

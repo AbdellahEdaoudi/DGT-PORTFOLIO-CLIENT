@@ -127,18 +127,28 @@ export default function ThemeThree({ userDetails, userLinks }) {
           {/* Navigation Tabs */}
           <div className="flex justify-center md:justify-start pb-2">
             <div className="flex flex-wrap justify-center md:justify-start gap-2 p-1 bg-white/5 backdrop-blur-xl rounded-2xl border border-white/10 w-full md:w-auto">
-              {[
-                { key: "about", label: t('about'), icon: User },
-                { key: "services", label: t('services'), icon: Layers, condition: userDetails?.services?.length > 0 },
-                { key: "experience", label: t('experience'), icon: Briefcase, condition: userDetails?.experience?.length > 0 },
-                { key: "projects", label: t('projects'), icon: Code2, condition: userDetails?.projects?.length > 0 },
-                { key: "skills", label: t('skills'), icon: Zap, condition: userDetails?.skills?.length > 0 },
-                { key: "education", label: t('education'), icon: GraduationCap, condition: userDetails?.education?.length > 0 },
-                { key: "certificates", label: t('certificates'), icon: Award, condition: userDetails?.certificates?.length > 0 },
-              ]
-                .filter((tab) => tab.condition !== false)
-                .map((tab) => {
-                  const Icon = tab.icon;
+              {(() => {
+                const sectionOrder = userDetails.sectionOrder && userDetails.sectionOrder.length > 0
+                  ? userDetails.sectionOrder
+                  : ["services", "experience", "skills", "projects", "education", "certificates"];
+
+                const tabData = {
+                  about: { key: "about", label: t('about'), icon: User },
+                  services: { key: "services", label: t('services'), icon: Layers, condition: userDetails?.services?.length > 0 },
+                  experience: { key: "experience", label: t('experience'), icon: Briefcase, condition: userDetails?.experience?.length > 0 },
+                  projects: { key: "projects", label: t('projects'), icon: Code2, condition: userDetails?.projects?.length > 0 },
+                  skills: { key: "skills", label: t('skills'), icon: Zap, condition: userDetails?.skills?.length > 0 },
+                  education: { key: "education", label: t('education'), icon: GraduationCap, condition: userDetails?.education?.length > 0 },
+                  certificates: { key: "certificates", label: t('certificates') || "Certificates", icon: Award, condition: userDetails?.certificates?.length > 0 },
+                };
+
+                // Ensure 'about' is first, then the user ordered sections
+                const tabsToRender = ["about", ...sectionOrder]
+                  .map(key => tabData[key])
+                  .filter(tab => tab && tab.condition !== false);
+
+                return tabsToRender.map((tab) => {
+                  const Icon = tab.icon || User;
                   return (
                     <button
                       key={tab.key}
@@ -152,7 +162,8 @@ export default function ThemeThree({ userDetails, userLinks }) {
                       {tab.label}
                     </button>
                   );
-                })}
+                });
+              })()}
             </div>
           </div>
         </header>

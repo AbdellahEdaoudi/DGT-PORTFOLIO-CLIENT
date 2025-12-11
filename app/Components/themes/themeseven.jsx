@@ -129,17 +129,31 @@ export default function ThemeSeven({ userDetails, userLinks }) {
                     {/* Navigation Tabs */}
                     <div className="flex justify-center md:justify-start pb-2">
                         <div className="flex flex-wrap justify-center md:justify-start gap-2 p-1 bg-white/5 backdrop-blur-xl rounded-2xl border border-white/10 w-full md:w-auto">
-                            {[
-                                { key: "about", label: t('about'), icon: User },
-                                { key: "services", label: t('services'), icon: Layers, condition: userDetails?.services?.length > 0 },
-                                { key: "experience", label: t('experience'), icon: Briefcase, condition: userDetails?.experience?.length > 0 },
-                                { key: "projects", label: t('projects'), icon: Code2, condition: userDetails?.projects?.length > 0 },
-                                { key: "skills", label: t('skills'), icon: Zap, condition: userDetails?.skills?.length > 0 },
-                                { key: "education", label: t('education'), icon: GraduationCap, condition: userDetails?.education?.length > 0 },
-                                { key: "certificates", label: t('certificates'), icon: Award, condition: userDetails?.certificates?.length > 0 },
-                            ]
-                                .filter((tab) => tab.condition !== false)
-                                .map((tab) => {
+                            {(() => {
+                                const sectionOrder = userDetails.sectionOrder && userDetails.sectionOrder.length > 0
+                                    ? userDetails.sectionOrder
+                                    : ["services", "experience", "projects", "skills", "education", "certificates"];
+
+                                const tabsMap = {
+                                    services: { key: "services", label: t('services'), icon: Layers, condition: userDetails?.services?.length > 0 },
+                                    experience: { key: "experience", label: t('experience'), icon: Briefcase, condition: userDetails?.experience?.length > 0 },
+                                    projects: { key: "projects", label: t('projects'), icon: Code2, condition: userDetails?.projects?.length > 0 },
+                                    skills: { key: "skills", label: t('skills'), icon: Zap, condition: userDetails?.skills?.length > 0 },
+                                    education: { key: "education", label: t('education'), icon: GraduationCap, condition: userDetails?.education?.length > 0 },
+                                    certificates: { key: "certificates", label: t('certificates'), icon: Award, condition: userDetails?.certificates?.length > 0 },
+                                };
+
+                                const aboutTab = { key: "about", label: t('about'), icon: User };
+
+                                const orderedTabs = [
+                                    aboutTab,
+                                    ...sectionOrder
+                                        .filter(key => tabsMap[key])
+                                        .map(key => tabsMap[key])
+                                        .filter(tab => tab.condition !== false)
+                                ];
+
+                                return orderedTabs.map((tab) => {
                                     const Icon = tab.icon;
                                     return (
                                         <button
@@ -154,7 +168,8 @@ export default function ThemeSeven({ userDetails, userLinks }) {
                                             {tab.label}
                                         </button>
                                     );
-                                })}
+                                });
+                            })()}
                         </div>
                     </div>
                 </header>

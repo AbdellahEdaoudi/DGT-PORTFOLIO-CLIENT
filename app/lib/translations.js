@@ -228,6 +228,7 @@ export const translations = {
         redirecting: "Redirecting...",
 
         // Additional
+        sectionOrdering: "Section Ordering",
         helloIm: "Hello, I'm",
         letsTalk: "Let's Talk",
         whoIam: "Who I am",
@@ -465,6 +466,7 @@ export const translations = {
         redirecting: "Redirection...",
 
         // Additional
+        sectionOrdering: "Ordre des sections",
         helloIm: "Bonjour, je suis",
         letsTalk: "Discutons",
         whoIam: "Qui je suis",
@@ -702,6 +704,7 @@ export const translations = {
         redirecting: "جاري إعادة التوجيه...",
 
         // Additional
+        sectionOrdering: "ترتيب الأقسام",
         helloIm: "مرحباً، أنا",
         letsTalk: "لنتحدث",
         whoIam: "نبذة عني",
@@ -937,6 +940,7 @@ export const translations = {
         redirecting: "Weiterleitung...",
 
         // Additional
+        sectionOrdering: "Abschnittsreihenfolge",
         helloIm: "Hallo, ich bin",
         letsTalk: "Lass uns reden",
         whoIam: "Wer ich bin",
@@ -1172,6 +1176,7 @@ export const translations = {
         redirecting: "Перенаправление...",
 
         // Additional
+        sectionOrdering: "Порядок разделов",
         helloIm: "Привет, я",
         letsTalk: "Давайте поговорим",
         whoIam: "Кто я",
@@ -1407,6 +1412,7 @@ export const translations = {
         redirecting: "リダイレクト中...",
 
         // Additional
+        sectionOrdering: "セクションの順序",
         helloIm: "こんにちは、私は",
         letsTalk: "話しましょう",
         whoIam: "私は誰か",
@@ -1642,6 +1648,7 @@ export const translations = {
         redirecting: "正在重定向...",
 
         // Additional
+        sectionOrdering: "部分排序",
         helloIm: "你好，我是",
         letsTalk: "让我们谈谈",
         whoIam: "我是谁",
@@ -1876,6 +1883,7 @@ export const translations = {
         redirecting: "Redirigiendo...",
 
         // Additional
+        sectionOrdering: "Orden de las secciones",
         helloIm: "Hola, soy",
         letsTalk: "Hablemos",
         whoIam: "Quién soy",

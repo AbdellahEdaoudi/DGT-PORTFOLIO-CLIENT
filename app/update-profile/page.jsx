@@ -16,6 +16,7 @@ import Socials from "./components/Socials"
 import Theme from "./components/Theme"
 import DisplayLanguage from "./components/DisplayLanguage"
 import Certificates from "./components/Certificates"
+import SectionOrdering from "./components/SectionOrdering"
 
 export default function UpdateProfilePage() {
   const { EmailUser, userLinks, userDetails, setUserDetails, loadingAll } = useContext(MyContext)
@@ -193,6 +194,20 @@ export default function UpdateProfilePage() {
         zh: "🧩 主题",
       },
       component: Theme,
+    },
+    {
+      id: "sectionOrdering",
+      label: {
+        en: "🏗 Arrangement",
+        fr: "🏗 Disposition",
+        es: "🏗 Disposición",
+        ar: "🏗 الترتيب",
+        de: "🏗 Anordnung",
+        ru: "🏗 Расположение",
+        ja: "🏗 配置",
+        zh: "🏗 排列",
+      },
+      component: SectionOrdering,
     },
   ].map((tab) => ({
     ...tab,

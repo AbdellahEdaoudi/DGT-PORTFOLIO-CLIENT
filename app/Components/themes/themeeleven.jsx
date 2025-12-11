@@ -153,37 +153,46 @@ export default function ThemeEleven({ userDetails, userLinks }) {
                             <X size={28} />
                         </button>
                         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6 w-full max-w-5xl mx-auto">
-                            {[
-                                { id: "services", label: t('services'), icon: "💼", condition: userDetails?.services?.length > 0 },
-                                { id: "experience", label: t('workExperience'), icon: "⭐", condition: userDetails?.experience?.length > 0 },
-                                { id: "skills", label: t('skills'), icon: "💡", condition: userDetails?.skills?.length > 0 },
-                                { id: "projects", label: t('projects'), icon: "📁", condition: userDetails?.projects?.length > 0 },
-                                { id: "education", label: t('education'), icon: "🎓", condition: userDetails?.education?.length > 0 },
-                                { id: "certificates", label: t('certificates'), icon: "📜", condition: userDetails?.certificates?.length > 0 },
-                                { id: "languages", label: t('languages'), icon: "🌍", condition: userDetails?.languages?.length > 0 },
-                            ]
-                                .filter(tab => tab.condition)
-                                .map((tab, index) => (
-                                    <button
-                                        key={tab.id}
-                                        onClick={() => {
-                                            setIsNavOpen(false);
-                                            const element = document.getElementById(tab.id);
-                                            if (element) {
-                                                setTimeout(() => {
-                                                    element.scrollIntoView({ behavior: "smooth", block: "start" });
-                                                }, 100);
-                                            }
-                                        }}
-                                        className={`group relative flex flex-col items-center justify-center p-6 md:p-8 gap-4 bg-cyan-900/10 hover:bg-cyan-500/10 border border-cyan-500/20 rounded-3xl transition-all duration-300 hover:scale-105 hover:shadow-[0_0_20px_rgba(6,182,212,0.2)] hover:border-cyan-500/40
+                            {(() => {
+                                const sectionOrder = userDetails.sectionOrder && userDetails.sectionOrder.length > 0
+                                    ? userDetails.sectionOrder
+                                    : ["services", "experience", "skills", "projects", "education", "certificates", "languages"];
+
+                                const navItems = {
+                                    services: { id: "services", label: t('services'), icon: "💼", condition: userDetails?.services?.length > 0 },
+                                    experience: { id: "experience", label: t('workExperience'), icon: "⭐", condition: userDetails?.experience?.length > 0 },
+                                    skills: { id: "skills", label: t('skills'), icon: "💡", condition: userDetails?.skills?.length > 0 },
+                                    projects: { id: "projects", label: t('projects'), icon: "📁", condition: userDetails?.projects?.length > 0 },
+                                    education: { id: "education", label: t('education'), icon: "🎓", condition: userDetails?.education?.length > 0 },
+                                    certificates: { id: "certificates", label: t('certificates'), icon: "📜", condition: userDetails?.certificates?.length > 0 },
+                                    languages: { id: "languages", label: t('languages'), icon: "🌍", condition: userDetails?.languages?.length > 0 },
+                                };
+
+                                return sectionOrder
+                                    .map(key => navItems[key])
+                                    .filter(tab => tab && tab.condition)
+                                    .map((tab, index) => (
+                                        <button
+                                            key={tab.id}
+                                            onClick={() => {
+                                                setIsNavOpen(false);
+                                                const element = document.getElementById(tab.id);
+                                                if (element) {
+                                                    setTimeout(() => {
+                                                        element.scrollIntoView({ behavior: "smooth", block: "start" });
+                                                    }, 100);
+                                                }
+                                            }}
+                                            className={`group relative flex flex-col items-center justify-center p-6 md:p-8 gap-4 bg-cyan-900/10 hover:bg-cyan-500/10 border border-cyan-500/20 rounded-3xl transition-all duration-300 hover:scale-105 hover:shadow-[0_0_20px_rgba(6,182,212,0.2)] hover:border-cyan-500/40
                             ${isNavOpen ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}
                           `}
-                                        style={{ transitionDelay: `${index * 50}ms` }}
-                                    >
-                                        <span className="text-4xl md:text-5xl group-hover:scale-110 transition-transform duration-300 drop-shadow-[0_0_10px_rgba(6,182,212,0.5)]">{tab.icon}</span>
-                                        <span className="text-base md:text-lg font-medium text-cyan-100/80 group-hover:text-cyan-50 transition-colors">{tab.label}</span>
-                                    </button>
-                                ))}
+                                            style={{ transitionDelay: `${index * 50}ms` }}
+                                        >
+                                            <span className="text-4xl md:text-5xl group-hover:scale-110 transition-transform duration-300 drop-shadow-[0_0_10px_rgba(6,182,212,0.5)]">{tab.icon}</span>
+                                            <span className="text-base md:text-lg font-medium text-cyan-100/80 group-hover:text-cyan-50 transition-colors">{tab.label}</span>
+                                        </button>
+                                    ));
+                            })()}
                         </div>
                     </div>
                 </div>
@@ -245,156 +254,198 @@ export default function ThemeEleven({ userDetails, userLinks }) {
                     {/* Right Column: Data Modules */}
                     <div className="lg:col-span-8 space-y-8">
 
-                        {/* Services */}
-                        {userDetails.services && userDetails.services.length > 0 && (
-                            <section id="services" className="mb-20 scroll-mt-24">
-                                <h3 className="text-cyan-400 text-sm uppercase tracking-widest mb-4 flex items-center gap-2">
-                                    <span className="w-8 h-[1px] bg-cyan-500"></span>
-                                    {t('services')}
-                                </h3>
-                                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-                                    {userDetails.services.map((service, i) => (
-                                        <div key={i} className="bg-cyan-950/30 border border-cyan-500/20 p-4 hover:bg-cyan-500/10 transition-colors group cursor-crosshair">
-                                            <Layers className="text-cyan-600 mb-2 group-hover:text-cyan-400 transition-colors" size={20} />
-                                            <p className="text-cyan-100 font-bold text-sm">{service}</p>
-                                        </div>
-                                    ))}
-                                </div>
-                            </section>
-                        )}
+                        {/* Dynamic Section Rendering */}
+                        {(() => {
+                            const sectionOrder = userDetails.sectionOrder && userDetails.sectionOrder.length > 0
+                                ? userDetails.sectionOrder
+                                : ["services", "experience", "skills", "projects", "education", "certificates", "languages"];
 
-                        {/* Experience */}
-                        {userDetails.experience && userDetails.experience.length > 0 && (
-                            <section id="experience" className="mb-20 scroll-mt-24">
-                                <h2 className="text-cyan-400 text-sm uppercase tracking-widest mb-4 flex items-center gap-2">
-                                    <span className="w-8 h-[1px] bg-cyan-500"></span> {t('workExperience')}
-                                </h2>
-                                <div className="space-y-4">
-                                    {userDetails.experience.map((exp, i) => (
-                                        <div key={i} className={`${userDetails.displayLanguage === "ar" ? "border-r pr-6" : "border-l pl-6"} relative   border-cyan-500/30 pb-4 last:pb-0`}>
-                                            {userDetails.displayLanguage === "ar" ? (
-                                                <div className="absolute -right-[5px] top-1 w-2.5 h-2.5 bg-black border border-cyan-500 rounded-full"></div>
-                                            ) : (
-                                                <div className="absolute -left-[5px] top-1 w-2.5 h-2.5 bg-black border border-cyan-500 rounded-full"></div>
-                                            )}
-                                            <div className="flex flex-col sm:flex-row justify-between items-start mb-1 gap-1">
-                                                <h4 className="text-lg font-bold text-white">{exp.role}</h4>
-                                                <span className={`${userDetails.displayLanguage === "ar" ? "flex gap-1" : "flex flex-row-reverse gap-1"} text-xs text-cyan-400 font-mono border border-cyan-500/30 px-2 py-0.5 rounded bg-cyan-950/30 whitespace-nowrap`}>
-                                                    <p>{exp.startDate}</p>
-                                                    <p> - </p>
-                                                    <p>{exp.endDate}</p>
-                                                </span>
-                                            </div>
-                                            <p className="text-purple-300 text-sm mb-2">{exp.company}</p>
-                                            <p className="text-cyan-100/60 text-sm">{exp.description}</p>
-                                        </div>
-                                    ))}
-                                </div>
-                            </section>
-                        )}
-
-                        {/* Projects */}
-                        {userDetails.projects && userDetails.projects.length > 0 && (
-                            <section id="projects" className="mb-20 scroll-mt-24">
-                                <h2 className="text-cyan-400 text-sm uppercase tracking-widest mb-4 flex items-center gap-2">
-                                    <span className="w-8 h-[1px] bg-cyan-500"></span> {t('projects')}
-                                </h2>
-                                <div className="grid gap-4">
-                                    {userDetails.projects.map((project, i) => (
-                                        <div key={i} className="flex flex-col sm:flex-row gap-4 bg-black/40 border border-cyan-500/20 p-4 hover:border-cyan-500/50 transition-all group">
-                                            {project.image && (
-                                                <div className="w-full sm:w-24 h-48 sm:h-24 bg-cyan-900/20 flex-shrink-0 overflow-hidden border border-cyan-500/20">
-                                                    <Image width={500} height={500}
-                                                        src={project.image}
-                                                        alt={project.title || "Project Image"}
-                                                        onClick={() => setSelectedImage(project.image)}
-                                                        className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500 cursor-pointer"
-                                                    />
+                            const sectionContent = {
+                                services: userDetails.services && userDetails.services.length > 0 && (
+                                    <section id="services" className="mb-20 scroll-mt-24">
+                                        <h3 className="text-cyan-400 text-sm uppercase tracking-widest mb-4 flex items-center gap-2">
+                                            <span className="w-8 h-[1px] bg-cyan-500"></span>
+                                            {t('services')}
+                                        </h3>
+                                        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+                                            {userDetails.services.map((service, i) => (
+                                                <div key={i} className="bg-cyan-950/30 border border-cyan-500/20 p-4 hover:bg-cyan-500/10 transition-colors group cursor-crosshair">
+                                                    <Layers className="text-cyan-600 mb-2 group-hover:text-cyan-400 transition-colors" size={20} />
+                                                    <p className="text-cyan-100 font-bold text-sm">{service}</p>
                                                 </div>
-                                            )}
-                                            <div className="flex-1">
-                                                <div className="flex justify-between items-start">
-                                                    <h4 className="font-bold text-cyan-50 text-lg group-hover:text-cyan-400 transition-colors">{project.title}</h4>
-                                                    {project.link && (
-                                                        <a
-                                                            href={project.link}
-                                                            target="_blank"
-                                                            rel="noopener noreferrer"
-                                                            className="flex items-center gap-1 text-cyan-400 hover:text-white hover:underline transition-colors text-sm whitespace-nowrap"
-                                                        >
-                                                            {t('viewProject')}
-                                                            <ArrowUpRight size={16} />
-                                                        </a>
+                                            ))}
+                                        </div>
+                                    </section>
+                                ),
+                                experience: userDetails.experience && userDetails.experience.length > 0 && (
+                                    <section id="experience" className="mb-20 scroll-mt-24">
+                                        <h2 className="text-cyan-400 text-sm uppercase tracking-widest mb-4 flex items-center gap-2">
+                                            <span className="w-8 h-[1px] bg-cyan-500"></span> {t('workExperience')}
+                                        </h2>
+                                        <div className="space-y-4">
+                                            {userDetails.experience.map((exp, i) => (
+                                                <div key={i} className={`${userDetails.displayLanguage === "ar" ? "border-r pr-6" : "border-l pl-6"} relative   border-cyan-500/30 pb-4 last:pb-0`}>
+                                                    {userDetails.displayLanguage === "ar" ? (
+                                                        <div className="absolute -right-[5px] top-1 w-2.5 h-2.5 bg-black border border-cyan-500 rounded-full"></div>
+                                                    ) : (
+                                                        <div className="absolute -left-[5px] top-1 w-2.5 h-2.5 bg-black border border-cyan-500 rounded-full"></div>
+                                                    )}
+                                                    <div className="flex flex-col sm:flex-row justify-between items-start mb-1 gap-1">
+                                                        <h4 className="text-lg font-bold text-white">{exp.role}</h4>
+                                                        <span className={`${userDetails.displayLanguage === "ar" ? "flex gap-1" : "flex flex-row-reverse gap-1"} text-xs text-cyan-400 font-mono border border-cyan-500/30 px-2 py-0.5 rounded bg-cyan-950/30 whitespace-nowrap`}>
+                                                            <p>{exp.startDate}</p>
+                                                            <p> - </p>
+                                                            <p>{exp.endDate}</p>
+                                                        </span>
+                                                    </div>
+                                                    <p className="text-purple-300 text-sm mb-2">{exp.company}</p>
+                                                    <p className="text-cyan-100/60 text-sm">{exp.description}</p>
+                                                </div>
+                                            ))}
+                                        </div>
+                                    </section>
+                                ),
+                                skills: userDetails.skills && userDetails.skills.length > 0 && (
+                                    <section id="skills" className="mb-20 scroll-mt-24">
+                                        <h2 className="text-cyan-400 text-sm uppercase tracking-widest mb-4 flex items-center gap-2">
+                                            <span className="w-8 h-[1px] bg-cyan-500"></span> {t('skills')}
+                                        </h2>
+                                        <div className="flex flex-wrap gap-2">
+                                            {userDetails.skills.map((skill, i) => (
+                                                <div key={i} className="px-3 py-1 bg-cyan-950/40 border border-cyan-500/30 text-cyan-100 text-sm hover:bg-cyan-500 hover:text-black transition-all cursor-default clip-path-slant">
+                                                    {skill}
+                                                </div>
+                                            ))}
+                                        </div>
+                                    </section>
+                                ),
+                                projects: userDetails.projects && userDetails.projects.length > 0 && (
+                                    <section id="projects" className="mb-20 scroll-mt-24">
+                                        <h2 className="text-cyan-400 text-sm uppercase tracking-widest mb-4 flex items-center gap-2">
+                                            <span className="w-8 h-[1px] bg-cyan-500"></span> {t('projects')}
+                                        </h2>
+                                        <div className="grid gap-4">
+                                            {userDetails.projects.map((project, i) => (
+                                                <div key={i} className="flex flex-col sm:flex-row gap-4 bg-black/40 border border-cyan-500/20 p-4 hover:border-cyan-500/50 transition-all group">
+                                                    {project.image && (
+                                                        <div className="w-full sm:w-24 h-48 sm:h-24 bg-cyan-900/20 flex-shrink-0 overflow-hidden border border-cyan-500/20">
+                                                            <Image width={500} height={500}
+                                                                src={project.image}
+                                                                alt={project.title || "Project Image"}
+                                                                onClick={() => setSelectedImage(project.image)}
+                                                                className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500 cursor-pointer"
+                                                            />
+                                                        </div>
+                                                    )}
+                                                    <div className="flex-1">
+                                                        <div className="flex justify-between items-start">
+                                                            <h4 className="font-bold text-cyan-50 text-lg group-hover:text-cyan-400 transition-colors">{project.title}</h4>
+                                                            {project.link && (
+                                                                <a
+                                                                    href={project.link}
+                                                                    target="_blank"
+                                                                    rel="noopener noreferrer"
+                                                                    className="flex items-center gap-1 text-cyan-400 hover:text-white hover:underline transition-colors text-sm whitespace-nowrap"
+                                                                >
+                                                                    {t('viewProject')}
+                                                                    <ArrowUpRight size={16} />
+                                                                </a>
+                                                            )}
+                                                        </div>
+                                                        <p className="text-sm text-cyan-100/60 mt-1 line-clamp-2">{project.description}</p>
+                                                        <div className="flex gap-2 mt-3 flex-wrap">
+                                                            {project.technologies?.map((tech, j) => (
+                                                                <span key={j} className="text-[10px] uppercase text-cyan-300 bg-cyan-900/30 px-2 py-1 border border-cyan-500/20">
+                                                                    {tech}
+                                                                </span>
+                                                            ))}
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            ))}
+                                        </div>
+                                    </section>
+                                ),
+                                education: userDetails.education && userDetails.education.length > 0 && (
+                                    <section id="education" className="mb-20 scroll-mt-24">
+                                        <h2 className="text-cyan-400 text-sm uppercase tracking-widest mb-4 flex items-center gap-2">
+                                            <span className="w-8 h-[1px] bg-cyan-500"></span> {t('education')}
+                                        </h2>
+                                        <div className="space-y-4">
+                                            {userDetails.education.map((edu, i) => (
+                                                <div key={i} className={`${userDetails.displayLanguage === "ar" ? "border-r pr-6" : "border-l pl-6"} relative   border-cyan-500/30 pb-4 last:pb-0`}>
+                                                    {userDetails.displayLanguage === "ar" ? (
+                                                        <div className="absolute -right-[5px] top-1 w-2.5 h-2.5 bg-black border border-cyan-500 rounded-full"></div>
+                                                    ) : (
+                                                        <div className="absolute -left-[5px] top-1 w-2.5 h-2.5 bg-black border border-cyan-500 rounded-full"></div>
+                                                    )}
+                                                    <div className="flex flex-col sm:flex-row justify-between items-start mb-1 gap-1">
+                                                        <h4 className="text-lg font-bold text-white">{edu.school}</h4>
+                                                        <span className="text-xs text-cyan-400 font-mono border border-cyan-500/30 px-2 py-0.5 rounded bg-cyan-950/30 whitespace-nowrap">
+                                                            {edu.startYear} - {edu.endYear}
+                                                        </span>
+                                                    </div>
+                                                    <p className="text-purple-300 text-sm mb-2">{edu.degree}: {edu.field}</p>
+                                                    <p className="text-cyan-100/60 text-sm">{edu.description}</p>
+                                                </div>
+                                            ))}
+                                        </div>
+                                    </section>
+                                ),
+                                certificates: userDetails.certificates && userDetails.certificates.length > 0 && (
+                                    <section id="certificates" className="mb-20 scroll-mt-24">
+                                        <h2 className="text-cyan-400 text-sm uppercase tracking-widest mb-4 flex items-center gap-2">
+                                            <span className="w-8 h-[1px] bg-cyan-500"></span> {t('certificates') || "Certificates"}
+                                        </h2>
+                                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                            {userDetails.certificates.map((cert, i) => (
+                                                <div key={i} className="group relative p-4 bg-cyan-950/30 border border-cyan-500/30 hover:bg-cyan-500/10 transition-all">
+                                                    {/* Corner Accents */}
+                                                    <div className="absolute top-0 left-0 w-2 h-2 border-t border-l border-cyan-500"></div>
+                                                    <div className="absolute top-0 right-0 w-2 h-2 border-t border-r border-cyan-500"></div>
+                                                    <div className="absolute bottom-0 left-0 w-2 h-2 border-b border-l border-cyan-500"></div>
+                                                    <div className="absolute bottom-0 right-0 w-2 h-2 border-b border-r border-cyan-500"></div>
+
+                                                    {cert.cfimage && (
+                                                        <div className="relative h-48 w-full bg-black/50 overflow-hidden cursor-pointer border border-cyan-500/20 mb-4" onClick={() => setSelectedImage(cert.cfimage)}>
+                                                            <Image
+                                                                src={cert.cfimage}
+                                                                alt={cert.description || "Certificate"}
+                                                                fill
+                                                                className="object-contain p-2 hover:scale-105 transition-transform duration-500 hover:opacity-100 opacity-80"
+                                                            />
+                                                        </div>
+                                                    )}
+
+                                                    {cert.description && (
+                                                        <div className="text-cyan-100/80 text-sm break-all font-mono leading-relaxed">
+                                                            <span className="text-cyan-500 mr-2">{">"}</span>
+                                                            {cert.description}
+                                                        </div>
                                                     )}
                                                 </div>
-                                                <p className="text-sm text-cyan-100/60 mt-1 line-clamp-2">{project.description}</p>
-                                                <div className="flex gap-2 mt-3 flex-wrap">
-                                                    {project.technologies?.map((tech, j) => (
-                                                        <span key={j} className="text-[10px] uppercase text-cyan-300 bg-cyan-900/30 px-2 py-1 border border-cyan-500/20">
-                                                            {tech}
-                                                        </span>
-                                                    ))}
-                                                </div>
-                                            </div>
+                                            ))}
                                         </div>
-                                    ))}
-                                </div>
-                            </section>
-                        )}
-
-                        {/* Skills */}
-                        {userDetails.skills && userDetails.skills.length > 0 && (
-                            <section id="skills" className="mb-20 scroll-mt-24">
-                                <h2 className="text-cyan-400 text-sm uppercase tracking-widest mb-4 flex items-center gap-2">
-                                    <span className="w-8 h-[1px] bg-cyan-500"></span> {t('skills')}
-                                </h2>
-                                <div className="flex flex-wrap gap-2">
-                                    {userDetails.skills.map((skill, i) => (
-                                        <div key={i} className="px-3 py-1 bg-cyan-950/40 border border-cyan-500/30 text-cyan-100 text-sm hover:bg-cyan-500 hover:text-black transition-all cursor-default clip-path-slant">
-                                            {skill}
-                                        </div>
-                                    ))}
-                                </div>
-                            </section>
-                        )}
-
-                        {/* Certificates */}
-                        {userDetails.certificates && userDetails.certificates.length > 0 && (
-                            <section id="certificates" className="mb-20 scroll-mt-24">
-                                <h2 className="text-cyan-400 text-sm uppercase tracking-widest mb-4 flex items-center gap-2">
-                                    <span className="w-8 h-[1px] bg-cyan-500"></span> {t('certificates') || "Certificates"}
-                                </h2>
-                                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                    {userDetails.certificates.map((cert, i) => (
-                                        <div key={i} className="group relative p-4 bg-cyan-950/30 border border-cyan-500/30 hover:bg-cyan-500/10 transition-all">
-                                            {/* Corner Accents */}
-                                            <div className="absolute top-0 left-0 w-2 h-2 border-t border-l border-cyan-500"></div>
-                                            <div className="absolute top-0 right-0 w-2 h-2 border-t border-r border-cyan-500"></div>
-                                            <div className="absolute bottom-0 left-0 w-2 h-2 border-b border-l border-cyan-500"></div>
-                                            <div className="absolute bottom-0 right-0 w-2 h-2 border-b border-r border-cyan-500"></div>
-
-                                            {cert.cfimage && (
-                                                <div className="relative h-48 w-full bg-black/50 overflow-hidden cursor-pointer border border-cyan-500/20 mb-4" onClick={() => setSelectedImage(cert.cfimage)}>
-                                                    <Image
-                                                        src={cert.cfimage}
-                                                        alt={cert.description || "Certificate"}
-                                                        fill
-                                                        className="object-contain p-2 hover:scale-105 transition-transform duration-500 hover:opacity-100 opacity-80"
-                                                    />
+                                    </section>
+                                ),
+                                languages: userDetails.languages && userDetails.languages.length > 0 && (
+                                    <section id="languages" className="mb-20 scroll-mt-24">
+                                        <h2 className="text-cyan-400 text-sm uppercase tracking-widest mb-4 flex items-center gap-2">
+                                            <span className="w-8 h-[1px] bg-cyan-500"></span> {t('languages')}
+                                        </h2>
+                                        <div className="flex flex-wrap gap-2">
+                                            {userDetails.languages.map((lang, i) => (
+                                                <div key={i} className="px-3 py-1 bg-cyan-950/40 border border-cyan-500/30 text-cyan-100 text-sm hover:bg-cyan-500 hover:text-black transition-all cursor-default clip-path-slant">
+                                                    {lang}
                                                 </div>
-                                            )}
-
-                                            {cert.description && (
-                                                <div className="text-cyan-100/80 text-sm break-all font-mono leading-relaxed">
-                                                    <span className="text-cyan-500 mr-2">{">"}</span>
-                                                    {cert.description}
-                                                </div>
-                                            )}
+                                            ))}
                                         </div>
-                                    ))}
-                                </div>
-                            </section>
-                        )}
+                                    </section>
+                                )
+                            };
+
+                            return sectionOrder.map(item => sectionContent[item]);
+                        })()}
 
                         {/* Socials Module */}
                         {userDetails.socials && Object.values(userDetails.socials).some(url => url) && (
