@@ -40,13 +40,13 @@ const styles = StyleSheet.create({
     page: {
         flexDirection: 'column',
         backgroundColor: '#FFFFFF',
-        padding: 40,
+        padding: 30,
         fontSize: 10,
         lineHeight: 1.5,
         color: '#374151',
     },
     header: {
-        marginBottom: 30,
+        marginBottom: 15,
         flexDirection: 'row',
         alignItems: 'flex-start',
         justifyContent: 'space-between',
@@ -164,6 +164,8 @@ const translations = {
         projects: "Projects",
         education: "Education",
         languages: "Languages",
+        certificates: "Certificates",
+        services: "Services",
         viewProject: "View Project",
         nameFallback: "Your Name",
         titleFallback: "Professional Title"
@@ -175,6 +177,8 @@ const translations = {
         projects: "Projets",
         education: "Éducation",
         languages: "Langues",
+        certificates: "Certificats",
+        services: "Services",
         viewProject: "Voir le projet",
         nameFallback: "Votre Nom",
         titleFallback: "Titre Professionnel"
@@ -186,6 +190,8 @@ const translations = {
         projects: "المشاريع",
         education: "التعليم",
         languages: "اللغات",
+        certificates: "الشهادات",
+        services: "الخدمات",
         viewProject: "عرض المشروع",
         nameFallback: "الاسم",
         titleFallback: "المسمى الوظيفي"
@@ -197,6 +203,8 @@ const translations = {
         projects: "Projekte",
         education: "Ausbildung",
         languages: "Sprachen",
+        certificates: "Zertifikate",
+        services: "Dienstleistungen",
         viewProject: "Projekt ansehen",
         nameFallback: "Ihr Name",
         titleFallback: "Berufsbezeichnung"
@@ -208,6 +216,8 @@ const translations = {
         projects: "Проекты",
         education: "Образование",
         languages: "Языки",
+        certificates: "Сертификаты",
+        services: "Услуги",
         viewProject: "Посмотреть проект",
         nameFallback: "Ваше Имя",
         titleFallback: "Профессиональный заголовок"
@@ -219,6 +229,8 @@ const translations = {
         projects: "プロジェクト",
         education: "学歴",
         languages: "言語",
+        certificates: "証明書",
+        services: "サービス",
         viewProject: "プロジェクトを見る",
         nameFallback: "氏名",
         titleFallback: "職種"
@@ -230,6 +242,8 @@ const translations = {
         projects: "项目",
         education: "教育",
         languages: "语言",
+        certificates: "证书",
+        services: "服务",
         viewProject: "查看项目",
         nameFallback: "姓名",
         titleFallback: "职位"
@@ -241,6 +255,8 @@ const translations = {
         projects: "Proyectos",
         education: "Educación",
         languages: "Idiomas",
+        certificates: "Certificados",
+        services: "Servicios",
         viewProject: "Ver Proyecto",
         nameFallback: "Su Nombre",
         titleFallback: "Título Profesional"
@@ -275,6 +291,165 @@ const ResumePdf = ({ userData }) => {
     const formatDate = (dateString) => {
         if (!dateString) return '';
         return dateString;
+    };
+
+    // Render Function Validators
+    const hasData = (data) => data && data.length > 0;
+
+    // Render functions for each section
+    const renderExperience = () => (
+        hasData(userData?.experience) && (
+            <View style={styles.section} key="experience">
+                <Text style={s('sectionTitle')}>{t.experience}</Text>
+                {userData.experience.map((exp, index) => (
+                    <View key={index} style={styles.item}>
+                        <View style={s('itemHeader')}>
+                            <Text style={s('itemTitle')}>{exp.role}</Text>
+                            <Text style={[styles.itemDate, disableItalic && { fontStyle: 'normal' }]}>
+                                {formatDate(exp.startDate)} - {formatDate(exp.endDate)}
+                            </Text>
+                        </View>
+                        <Text style={s('itemSubtitle')}>{exp.company}</Text>
+                        <Text style={s('description')}>{exp.description}</Text>
+                    </View>
+                ))}
+            </View>
+        )
+    );
+
+    const renderSkills = () => (
+        hasData(userData?.skills) && (
+            <View style={styles.section} key="skills">
+                <Text style={s('sectionTitle')}>{t.skills}</Text>
+                <View style={s('skillContainer')}>
+                    {userData.skills.map((skill, index) => (
+                        <Text key={index} style={styles.skillBadge}>
+                            {skill.name || skill}
+                        </Text>
+                    ))}
+                </View>
+            </View>
+        )
+    );
+
+    const renderProjects = () => (
+        hasData(userData?.projects) && (
+            <View style={styles.section} key="projects">
+                <Text style={s('sectionTitle')}>{t.projects}</Text>
+                {userData.projects.map((proj, index) => (
+                    <View key={index} style={styles.item}>
+                        <View style={s('itemHeader')}>
+                            <Text style={s('itemTitle')}>{proj.title}</Text>
+                            {proj.link && (
+                                <Link src={proj.link} style={{ ...styles.link, fontSize: 9 }}>
+                                    {t.viewProject}
+                                </Link>
+                            )}
+                        </View>
+                        <Text style={s('description')}>{proj.description}</Text>
+                        {proj.technologies && proj.technologies.length > 0 && (
+                            <View style={[styles.skillContainer, isRTL ? rtlStyles.skillContainer : {}]}>
+                                {proj.technologies.map((tech, i) => (
+                                    <Text key={i} style={{ fontSize: 8, color: '#6B7280' }}>• {tech}</Text>
+                                ))}
+                            </View>
+                        )}
+                    </View>
+                ))}
+            </View>
+        )
+    );
+
+    const renderEducation = () => (
+        hasData(userData?.education) && (
+            <View style={styles.section} key="education">
+                <Text style={s('sectionTitle')}>{t.education}</Text>
+                {userData.education.map((edu, index) => (
+                    <View key={index} style={styles.item}>
+                        <View style={s('itemHeader')}>
+                            <Text style={s('itemTitle')}>{edu.school}</Text>
+                            <Text style={[styles.itemDate, disableItalic && { fontStyle: 'normal' }]}>
+                                {formatDate(edu.startYear)} - {formatDate(edu.endYear)}
+                            </Text>
+                        </View>
+                        <Text style={s('itemSubtitle')}>{edu.degree} {edu.field ? `in ${edu.field}` : ''}</Text>
+                    </View>
+                ))}
+            </View>
+        )
+    );
+
+    const renderLanguages = () => (
+        hasData(userData?.languages) && (
+            <View style={styles.section} key="languages">
+                <Text style={s('sectionTitle')}>{t.languages}</Text>
+                <View style={s('skillContainer')}>
+                    {userData.languages.map((lang, index) => (
+                        <Text key={index} style={styles.skillBadge}>
+                            {lang.language || lang} {lang.level ? `(${lang.level})` : ''}
+                        </Text>
+                    ))}
+                </View>
+            </View>
+        )
+    );
+
+    // New: Certificates rendering
+    const renderCertificates = () => (
+        hasData(userData?.certificates) && (
+            <View style={styles.section} key="certificates">
+                <Text style={s('sectionTitle')}>{t.certificates}</Text>
+                <View style={{ flexDirection: 'column', gap: 6 }}>
+                    {userData.certificates.map((cert, index) => (
+                        cert.description && (
+                            <View key={index} style={{ flexDirection: isRTL ? 'row-reverse' : 'row', alignItems: 'flex-start' }}>
+                                <Text style={{ fontSize: 10, color: '#374151', paddingHorizontal: 4 }}>•</Text>
+                                <Text style={{ fontSize: 10, color: '#4B5563', textAlign: isRTL ? 'right' : 'left', flex: 1 }}>
+                                    {cert.description}
+                                </Text>
+                            </View>
+                        )
+                    ))}
+                </View>
+            </View>
+        )
+    );
+
+    const renderServices = () => (
+        hasData(userData?.services) && (
+            <View style={styles.section} key="services">
+                <Text style={s('sectionTitle')}>{t.services}</Text>
+                <View style={s('skillContainer')}>
+                    {userData.services.map((service, index) => (
+                        <Text key={index} style={styles.skillBadge}>
+                            {typeof service === 'string' ? service : (service.name || service.title)}
+                        </Text>
+                    ))}
+                </View>
+            </View>
+        )
+    );
+
+
+    // Determine Section Order
+    const defaultOrder = ["experience", "skills", "projects", "education", "languages", "certificates", "services"];
+    // If userData.sectionOrder is present, use it. Append missing keys to ensure everything is rendered if data exists.
+    const userOrder = userData?.sectionOrder && userData.sectionOrder.length > 0 ? userData.sectionOrder : defaultOrder;
+
+    // Ensure we don't miss any sections if they have data but aren't in the custom order (fallback)
+    const orderToRender = [...new Set([...userOrder, ...defaultOrder])];
+
+    const renderSection = (key) => {
+        switch (key) {
+            case 'experience': return renderExperience();
+            case 'skills': return renderSkills();
+            case 'projects': return renderProjects();
+            case 'education': return renderEducation();
+            case 'languages': return renderLanguages();
+            case 'certificates': return renderCertificates();
+            case 'services': return renderServices();
+            default: return null;
+        }
     };
 
     return (
@@ -314,7 +489,7 @@ const ResumePdf = ({ userData }) => {
                     )}
                 </View>
 
-                {/* Summary */}
+                {/* Summary - usually fixed at top, but could be part of order if desired. Keeping fixed for now as it's an intro. */}
                 {userData?.about && (
                     <View style={styles.section}>
                         <Text style={s('sectionTitle')}>{t.summary}</Text>
@@ -322,97 +497,8 @@ const ResumePdf = ({ userData }) => {
                     </View>
                 )}
 
-                {/* Experience */}
-                {userData?.experience && userData.experience.length > 0 && (
-                    <View style={styles.section}>
-                        <Text style={s('sectionTitle')}>{t.experience}</Text>
-                        {userData.experience.map((exp, index) => (
-                            <View key={index} style={styles.item}>
-                                <View style={s('itemHeader')}>
-                                    <Text style={s('itemTitle')}>{exp.role}</Text>
-                                    <Text style={[styles.itemDate, disableItalic && { fontStyle: 'normal' }]}>
-                                        {formatDate(exp.startDate)} - {formatDate(exp.endDate)}
-                                    </Text>
-                                </View>
-                                <Text style={s('itemSubtitle')}>{exp.company}</Text>
-                                <Text style={s('description')}>{exp.description}</Text>
-                            </View>
-                        ))}
-                    </View>
-                )}
-
-                {/* Skills */}
-                {userData?.skills && userData.skills.length > 0 && (
-                    <View style={styles.section}>
-                        <Text style={s('sectionTitle')}>{t.skills}</Text>
-                        <View style={s('skillContainer')}>
-                            {userData.skills.map((skill, index) => (
-                                <Text key={index} style={styles.skillBadge}>
-                                    {skill.name || skill}
-                                </Text>
-                            ))}
-                        </View>
-                    </View>
-                )}
-
-                {/* Projects */}
-                {userData?.projects && userData.projects.length > 0 && (
-                    <View style={styles.section}>
-                        <Text style={s('sectionTitle')}>{t.projects}</Text>
-                        {userData.projects.map((proj, index) => (
-                            <View key={index} style={styles.item}>
-                                <View style={s('itemHeader')}>
-                                    <Text style={s('itemTitle')}>{proj.title}</Text>
-                                    {proj.link && (
-                                        <Link src={proj.link} style={{ ...styles.link, fontSize: 9 }}>
-                                            {t.viewProject}
-                                        </Link>
-                                    )}
-                                </View>
-                                <Text style={s('description')}>{proj.description}</Text>
-                                {proj.technologies && proj.technologies.length > 0 && (
-                                    <View style={[styles.skillContainer, isRTL ? rtlStyles.skillContainer : {}]}>
-                                        {proj.technologies.map((tech, i) => (
-                                            <Text key={i} style={{ fontSize: 8, color: '#6B7280' }}>• {tech}</Text>
-                                        ))}
-                                    </View>
-                                )}
-                            </View>
-                        ))}
-                    </View>
-                )}
-
-                {/* Education */}
-                {userData?.education && userData.education.length > 0 && (
-                    <View style={styles.section}>
-                        <Text style={s('sectionTitle')}>{t.education}</Text>
-                        {userData.education.map((edu, index) => (
-                            <View key={index} style={styles.item}>
-                                <View style={s('itemHeader')}>
-                                    <Text style={s('itemTitle')}>{edu.school}</Text>
-                                    <Text style={[styles.itemDate, disableItalic && { fontStyle: 'normal' }]}>
-                                        {formatDate(edu.startYear)} - {formatDate(edu.endYear)}
-                                    </Text>
-                                </View>
-                                <Text style={s('itemSubtitle')}>{edu.degree} {edu.field ? `in ${edu.field}` : ''}</Text>
-                            </View>
-                        ))}
-                    </View>
-                )}
-
-                {/* Languages */}
-                {userData?.languages && userData.languages.length > 0 && (
-                    <View style={styles.section}>
-                        <Text style={s('sectionTitle')}>{t.languages}</Text>
-                        <View style={s('skillContainer')}>
-                            {userData.languages.map((lang, index) => (
-                                <Text key={index} style={styles.skillBadge}>
-                                    {lang.language || lang} {lang.level ? `(${lang.level})` : ''}
-                                </Text>
-                            ))}
-                        </View>
-                    </View>
-                )}
+                {/* Dynamic Content Sections */}
+                {orderToRender.map(key => renderSection(key))}
 
             </Page>
         </Document>
