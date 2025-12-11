@@ -1,6 +1,6 @@
 "use client"
-import { useState } from "react"
-import { Zap, Mail, Briefcase, GraduationCap, Loader, FileDown, Globe, Award } from "lucide-react"
+import { useState, useEffect } from "react"
+import { Zap, Mail, Briefcase, GraduationCap, Loader, FileDown, Globe, Award, Menu, X, ArrowUp, Wrench, Lightbulb, FolderOpen, Sparkles } from "lucide-react"
 import UserLinks from "../../[username]/components/UserLinks"
 import QrcodeProfile from "../../[username]/components/QrcodeProfile"
 import Image from "next/image"
@@ -15,6 +15,28 @@ export default function ThemeFive({ userDetails, userLinks }) {
   const [showQR, setShowQR] = useState(false)
   const [expanded, setExpanded] = useState(false);
   const [selectedImage, setSelectedImage] = useState(null);
+  const [isNavOpen, setIsNavOpen] = useState(false);
+  const [showScrollTop, setShowScrollTop] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 300) {
+        setShowScrollTop(true);
+      } else {
+        setShowScrollTop(false);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth"
+    });
+  };
 
   return (
     <div className="min-h-screen bg-zinc-950 text-white overflow-x-hidden relative">
@@ -34,9 +56,9 @@ export default function ThemeFive({ userDetails, userLinks }) {
             imageSrc={selectedImage}
           />
           {/* Hero Section */}
-          <section className="pt-8 pb-12">
+          <section className="md:pt-8 md:pb-12 pt-4 pb-4">
             {/* Toolbar */}
-            <div className="flex justify-between items-center mb-12 gap-4">
+            <div className="flex md:flex-row flex-col justify-between items-center mb-12 gap-4 relative z-20">
               <h1 className="text-white text-2xl font-bold cursor-pointer hover:text-yellow-400 transition">
                 <Link href={"https://dgtportfolio.com"}>{t('portfolio')}</Link>
               </h1>
@@ -83,99 +105,131 @@ export default function ThemeFive({ userDetails, userLinks }) {
                 <div className="flex items-center gap-2 px-2 bg-white/10 hover:bg-yellow-500/20 rounded-lg text-white transition-all duration-300 backdrop-blur-md border border-white/10 hover:border-yellow-500/50">
                   <UserLinks lang={userDetails?.displayLanguage} userLinks={userLinks} />
                 </div>
+                {/* Menu Button in Header */}
+                <button
+                  onClick={() => setIsNavOpen(true)}
+                  className="flex items-center gap-2 px-4 py-2 bg-white/10 hover:bg-yellow-500/20 rounded-lg text-white transition-all duration-300 backdrop-blur-md border border-white/10 hover:border-yellow-500/50 font-medium"
+                >
+                  <Menu size={20} />
+                </button>
+              </div>
+            </div>
+            {/* Full Screen Overlay Navigation */}
+            <div className={`fixed inset-0 z-50 bg-zinc-950/95 backdrop-blur-3xl transition-all duration-500 overflow-y-auto ${isNavOpen ? 'opacity-100 visible' : 'opacity-0 invisible pointer-events-none'}`}>
+              <div className="min-h-screen flex flex-col justify-center items-center p-4 md:p-8 relative">
+                <button
+                  onClick={() => setIsNavOpen(false)}
+                  className="absolute top-6 right-6 md:top-10 md:right-10 p-3 bg-white/5 hover:bg-white/10 rounded-full text-white/70 hover:text-white transition-all duration-300 border border-white/10"
+                >
+                  <X size={28} />
+                </button>
+
+                <h2 className="text-3xl md:text-5xl font-bold text-white mb-12 opacity-90 tracking-tight">{t('menu') || "Navigation"}</h2>
+
+                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6 w-full max-w-5xl mx-auto">
+                  {[
+                    { id: "experience", label: t('workExperience'), icon: "⭐", condition: userDetails?.experience?.length > 0 },
+                    { id: "skills", label: t('skills'), icon: "💡", condition: userDetails?.skills?.length > 0 },
+                    { id: "projects", label: t('projects'), icon: "📁", condition: userDetails?.projects?.length > 0 },
+                    { id: "education", label: t('education'), icon: "🎓", condition: userDetails?.education?.length > 0 },
+                    { id: "certificates", label: t('certificates'), icon: "📜", condition: userDetails?.certificates?.length > 0 },
+                    { id: "languages", label: t('languages'), icon: "🌍", condition: userDetails?.languages?.length > 0 },
+                  ]
+                    .filter(tab => tab.condition)
+                    .map((tab, index) => (
+                      <button
+                        key={tab.id}
+                        onClick={() => {
+                          setIsNavOpen(false);
+                          const element = document.getElementById(tab.id);
+                          if (element) {
+                            setTimeout(() => {
+                              element.scrollIntoView({ behavior: "smooth", block: "start" });
+                            }, 100);
+                          }
+                        }}
+                        className={`group relative flex flex-col items-center justify-center p-6 md:p-8 gap-4 bg-white/5 hover:bg-yellow-500/10 border border-white/10 rounded-3xl transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:border-yellow-500/30
+                        ${isNavOpen ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}
+                      `}
+                        style={{ transitionDelay: `${index * 50}ms` }}
+                      >
+                        <span className="text-4xl md:text-5xl group-hover:scale-110 transition-transform duration-300 drop-shadow-lg">{tab.icon}</span>
+                        <span className="text-base md:text-lg font-medium text-white/80 group-hover:text-white transition-colors">{tab.label}</span>
+                      </button>
+                    ))}
+                </div>
               </div>
             </div>
 
-            <div className="flex flex-col md:flex-row items-center md:items-start gap-12">
-              <div className="flex-1 mb-4">
-                <p className="text-yellow-400 font-semibold uppercase tracking-widest mb-3 text-sm animate-pulse">{t('helloIm')}</p>
-                <h1 className="text-5xl sm:text-6xl md:text-7xl font-black mb-6 leading-tight">
-                  {userDetails.fullname.split(" ")[0]}{" "}
-                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 via-orange-500 to-yellow-600 animate-gradient">
-                    {userDetails.fullname.split(" ")[1]}
-                  </span>
-                </h1>
-                <p className="text-2xl text-yellow-400 font-bold mb-6 flex items-center gap-2">
-                  <Briefcase size={28} className="text-yellow-500" />
+            <div className="flex flex-col-reverse md:flex-row gap-12 md:items-start items-center justify-between">
+              <div className="">
+                <p className="text-yellow-400 font-semibold uppercase tracking-widest mb-3 text-sm">{t('helloIm')}</p>
+                <h1 className="text-5xl md:text-6xl font-black mb-5">{userDetails?.fullname}</h1>
+                <p className="text-2xl text-yellow-300 font-semibold mb-5 flex items-center gap-2">
+                  <Sparkles size={24} className="text-yellow-400" />
                   {userDetails.category}
+                  <Sparkles size={24} className="text-yellow-400" />
                 </p>
-                <p className="text-md md:block hidden text-gray-300 mb-8 leading-relaxed max-w-lg">
-                  {userDetails.about}
-                </p>
-                <a
-                  href={`mailto:${userDetails.email}`}
-                  className="inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-yellow-500 to-orange-600 rounded-xl font-bold text-black hover:shadow-2xl hover:shadow-yellow-500/50 transition-all duration-300 transform hover:scale-105 hover:-translate-y-1"
-                >
-                  <Mail size={20} />
-                  {t('letsTalk')}
-                </a>
+                <div className="text-gray-300 mt-4 max-w-lg">
+                  <p className="mb-6">{userDetails?.about}</p>
+                  <div className="p-4 md:p-6 bg-white/5 backdrop-blur-sm rounded-xl border border-white/10">
+                    {userDetails.email && (
+                      <div className="flex gap-2 items-start">
+                        <span className="font-bold text-yellow-400 whitespace-nowrap">Email:</span>
+                        <a href={`mailto:${userDetails.email}`} className="text-gray-300 hover:text-yellow-300 transition break-all">{userDetails.email}</a>
+                      </div>
+                    )}
+                    {userDetails.country && (
+                      <div className="flex gap-2 items-start">
+                        <span className="font-bold text-yellow-400 whitespace-nowrap">{t('country')}:</span>
+                        <span className="text-gray-300">{userDetails.country}</span>
+                      </div>
+                    )}
+                    {userDetails.phoneNumber && (
+                      <div className="flex gap-2 items-start">
+                        <span className="font-bold text-yellow-400 whitespace-nowrap">{t('phone')}:</span>
+                        <span className="text-gray-300">{userDetails.phoneNumber}</span>
+                      </div>
+                    )}
+                  </div>
+                </div>
               </div>
               <div className="relative flex-shrink-0 group">
                 <div className="absolute inset-0 bg-gradient-to-br from-yellow-500/30 to-orange-600/30 rounded-3xl blur-3xl group-hover:blur-2xl transition-all duration-500"></div>
                 <div className="absolute -inset-1 bg-gradient-to-r from-yellow-500 to-orange-600 rounded-3xl opacity-20 group-hover:opacity-40 transition-opacity duration-500"></div>
-                <Image width={320} height={320}
+                <Image width={320} height={320} priority
                   src={userDetails.urlimage}
                   alt={userDetails.fullname}
-                  className="relative rounded-3xl border-2 border-yellow-500/40 group-hover:border-yellow-500/60 transition-all duration-500 shadow-2xl"
+                  className="relative rounded-3xl border-2 border-yellow-500/40 group-hover:border-yellow-500/60 transition-all duration-500 shadow-2xl w-56 h-56 md:w-80 md:h-80 object-cover"
                 />
               </div>
             </div>
           </section>
 
-          {/* About, Services, Info */}
-          {userDetails.about?.length > 0 && (
-            <section className="py-12 border-t border-zinc-800/50">
-              <div className={`grid ${userDetails.services.length > 0 ? "md:grid-cols-3" : "md:grid-cols-2"}  gap-8`}>
-                <div className="group p-6 bg-gradient-to-br from-zinc-800/30 to-zinc-900/30 rounded-2xl border border-zinc-700/50 hover:border-yellow-500/50 transition-all duration-300 hover:shadow-lg hover:shadow-yellow-500/10">
-                  <p className="text-yellow-400 font-bold uppercase tracking-widest mb-3 text-xs">{t('about')}</p>
-                  <h2 className="text-3xl sm:text-4xl font-black mb-4 group-hover:text-yellow-400 transition">{t('whoIam')}</h2>
-                  <p className="text-gray-300 leading-relaxed">{userDetails.about}</p>
-                </div>
-                {userDetails.services.length > 0 && (
-                  <div className="group p-6 bg-gradient-to-br from-zinc-800/30 to-zinc-900/30 rounded-2xl border border-zinc-700/50 hover:border-yellow-500/50 transition-all duration-300 hover:shadow-lg hover:shadow-yellow-500/10">
-                    <p className="text-yellow-400 font-bold uppercase tracking-widest mb-3 text-xs">{t('services')}</p>
-                    <div className="space-y-3">
-                      {userDetails.services?.map((service, i) => (
-                        <div key={i} className="p-3 bg-zinc-800/50 rounded-lg border border-zinc-700/50 hover:border-yellow-500/50 hover:bg-zinc-800 transition-all duration-200">
-                          <p className="text-gray-200 text-sm">{service}</p>
-                        </div>
-                      ))}
-                    </div>
+          {/* Services */}
+          {userDetails.services && userDetails.services.length > 0 && (
+            <section id="services" className="scroll-mt-24 py-12 border-t border-zinc-800/50">
+              <div className="flex items-center gap-4 mb-8">
+                <Briefcase size={32} className="text-yellow-400" />
+                <h2 className="text-3xl font-bold">{t('services')}</h2>
+              </div>
+              <div className="grid md:grid-cols-2 gap-6">
+                {userDetails.services.map((service, i) => (
+                  <div key={i} className="group p-6 bg-gradient-to-br from-yellow-500/10 to-orange-500/10 border border-yellow-500/30 rounded-xl hover:border-yellow-500/60 hover:shadow-lg hover:shadow-yellow-500/20 transition-all duration-300">
+                    <div className="absolute inset-0 bg-gradient-to-r from-yellow-500/0 via-yellow-500/5 to-yellow-500/0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-xl"></div>
+                    <p className="text-sm md:text-base text-gray-200 relative z-10">{service}</p>
                   </div>
-                )}
-                <div className="group p-6 bg-gradient-to-br from-zinc-800/30 to-zinc-900/30 rounded-2xl border border-zinc-700/50 hover:border-yellow-500/50 transition-all duration-300 hover:shadow-lg hover:shadow-yellow-500/10">
-                  <p className="text-yellow-400 font-bold uppercase tracking-widest mb-3 text-xs">{t('info')}</p>
-                  <div className="space-y-4 text-sm">
-                    {userDetails.country && (
-                      <div>
-                        <p className="text-gray-500 uppercase mb-1 text-xs tracking-wider">{t('country')}</p>
-                        <p className="text-white font-semibold">{userDetails.country}</p>
-                      </div>
-                    )}
-                    <div>
-                      <p className="text-gray-500 uppercase mb-1 text-xs tracking-wider">Email</p>
-                      <a href={`mailto:${userDetails.email}`} className="text-yellow-400 hover:text-yellow-300 transition font-semibold break-all">
-                        {userDetails.email}
-                      </a>
-                    </div>
-                    {userDetails.phoneNumber && (
-                      <div>
-                        <p className="text-gray-500 uppercase mb-1 text-xs tracking-wider">{t('phone')}</p>
-                        <p className="text-white font-semibold">{userDetails.phoneNumber}</p>
-                      </div>
-                    )}
-                  </div>
-                </div>
+                ))}
               </div>
             </section>
           )}
 
           {/* Experience */}
-          {userDetails.experience?.length > 0 && (
-            <section className="py-12 border-t border-zinc-800/50">
-              <div className="flex items-center gap-3 mb-8">
-                <Briefcase className="text-yellow-400" size={32} />
-                <h2 className="text-3xl sm:text-4xl font-black">{t('experience')}</h2>
+          {userDetails.experience && userDetails.experience.length > 0 && (
+            <section id="experience" className="py-12 border-t border-zinc-800/50 scroll-mt-24">
+              <div className="flex items-center gap-4 mb-8">
+                <Briefcase size={32} className="text-yellow-500" />
+                <h2 className="text-3xl font-bold">{t('workExperience')}</h2>
               </div>
               <div className="space-y-6">
                 {userDetails.experience.map((exp, i) => (
@@ -184,7 +238,7 @@ export default function ThemeFive({ userDetails, userLinks }) {
                     {userDetails.displayLanguage === "ar" ? (
                       <div className="absolute top-0 left-0 w-32 h-32 bg-gradient-to-bl from-yellow-500/10 to-transparent rounded-br-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                     ) : (
-                      <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-yellow-500/10 to-transparent rounded-tr-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                      <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-yellow-500/10 to-transparent rounded-bl-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                     )}
 
                     <div className="relative z-10">
@@ -205,11 +259,13 @@ export default function ThemeFive({ userDetails, userLinks }) {
               </div>
             </section>
           )}
-
           {/* Skills */}
-          {userDetails.skills?.length > 0 && (
-            <section className="py-12 border-t border-zinc-800/50">
-              <h2 className="text-3xl sm:text-4xl font-black mb-8">💡{t('skills')}</h2>
+          {userDetails.skills && userDetails.skills.length > 0 && (
+            <section id="skills" className="py-12 border-t border-zinc-800/50 scroll-mt-24">
+              <div className="flex items-center gap-4 mb-8">
+                <Lightbulb size={32} className="text-yellow-500" />
+                <h2 className="text-3xl font-bold">{t('skills')}</h2>
+              </div>
               <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
                 {userDetails.skills?.map((skill, i) => (
                   <div
@@ -227,9 +283,12 @@ export default function ThemeFive({ userDetails, userLinks }) {
 
           {/* Projects */}
           {userDetails.projects && userDetails.projects.length > 0 && (
-            <section className="py-8 border-t border-zinc-800/50">
+            <section id="projects" className="py-12 border-t border-zinc-800/50 scroll-mt-24">
               <div className="max-w-5xl mx-auto">
-                <h2 className="text-4xl font-black mb-8 text-center md:text-start">⭐ {t('projects')}</h2>
+                <div className="flex items-center gap-4 mb-8">
+                  <FolderOpen size={32} className="text-yellow-500" />
+                  <h2 className="text-3xl font-bold">{t('projects')}</h2>
+                </div>
                 <div className="space-y-6">
                   {userDetails.projects.map((project, idx) => (
                     <div
@@ -241,9 +300,9 @@ export default function ThemeFive({ userDetails, userLinks }) {
                           <div className="md:w-1/3 relative">
                             <Image width={500} height={500}
                               src={project.image}
-                              alt={project.title}
+                              alt={project.title || "Project Image"}
                               onClick={() => setSelectedImage(project.image)}
-                              className="w-full h-64 md:h-full object-cover group-hover:scale-110 transition-transform duration-500 cursor-pointer"
+                              className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500 cursor-pointer"
                             />
                             <div className="absolute inset-0 bg-gradient-to-r from-slate-950/50 via-transparent to-transparent group-hover:scale-110 transition-transform duration-500 pointer-events-none"></div>
                           </div>
@@ -288,18 +347,18 @@ export default function ThemeFive({ userDetails, userLinks }) {
           )}
 
           {/* Education */}
-          {userDetails.education?.length > 0 && (
-            <section className="py-12 border-t border-zinc-800/50">
-              <div className="flex items-center gap-3 mb-8">
-                <GraduationCap className="text-yellow-400" size={32} />
-                <h2 className="text-3xl sm:text-4xl font-black text-white">{t('education')}</h2>
+          {userDetails.education && userDetails.education.length > 0 && (
+            <section id="education" className="py-12 border-t border-zinc-800/50 scroll-mt-24">
+              <div className="flex items-center gap-4 mb-8">
+                <GraduationCap size={32} className="text-yellow-500" />
+                <h2 className="text-3xl font-bold">{t('education')}</h2>
               </div>
 
               <div className="space-y-6">
                 {userDetails.education.map((edu, i) => (
                   <div
                     key={i}
-                    className="group relative p-6 bg-gradient-to-br from-zinc-800/40 to-zinc-900/40 border border-zinc-700/50 rounded-2xl 
+                    className="group relative p-6 bg-gradient-to-br from-zinc-800/40 to-zinc-900/40 border border-zinc-700/50 rounded-2xl
                                hover:border-yellow-500/60 hover:shadow-xl hover:shadow-yellow-500/10 transition-all duration-300 overflow-hidden"
                   >
                     {/* Decorative gradient overlay */}
@@ -351,32 +410,26 @@ export default function ThemeFive({ userDetails, userLinks }) {
           )}
 
           {/* Certificates */}
-          {userDetails.certificates?.length > 0 && (
-            <section className="py-12 border-t border-zinc-800/50">
-              <div className="flex items-center gap-3 mb-8">
-                <Award className="text-yellow-400" size={32} />
-                <h2 className="text-3xl sm:text-4xl font-black text-white">{t('certificates')}</h2>
+          {userDetails.certificates && userDetails.certificates.length > 0 && (
+            <section id="certificates" className="py-12 border-t border-zinc-800/50 scroll-mt-24">
+              <div className="flex items-center gap-4 mb-8">
+                <span className="text-2xl">📜</span>
+                <h2 className="text-3xl font-bold">{t('certificates') || "Certificates"}</h2>
               </div>
 
               <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {userDetails.certificates.map((cert, i) => (
                   <div
                     key={i}
-                    className="group relative bg-gradient-to-br from-zinc-800/40 to-zinc-900/40 border border-zinc-700/50 rounded-2xl 
+                    className="group relative bg-gradient-to-br from-zinc-800/40 to-zinc-900/40 border border-zinc-700/50 rounded-2xl
                                hover:border-yellow-500/60 hover:shadow-xl hover:shadow-yellow-500/10 transition-all duration-300 overflow-hidden flex flex-col"
                   >
-                    {/* Decorative gradient overlay */}
-                    {userDetails.displayLanguage === "ar" ? (
-                      <div className="absolute top-0 left-0 w-32 h-32 bg-gradient-to-bl from-yellow-500/10 to-transparent rounded-br-full opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none z-0"></div>
-                    ) : (
-                      <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-yellow-500/10 to-transparent rounded-bl-full opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none z-0"></div>
-                    )}
 
                     {cert.cfimage && (
                       <div className="relative h-56 w-full bg-zinc-900/50 overflow-hidden cursor-pointer border-b border-zinc-700/50 flex items-center justify-center p-4 z-10" onClick={() => setSelectedImage(cert.cfimage)}>
                         <Image
                           src={cert.cfimage}
-                          alt={cert.description || "Certificate"}
+                          alt={cert.name || "Certificate Image"}
                           fill
                           className="object-contain p-2 hover:scale-105 transition-transform duration-500"
                         />
@@ -396,7 +449,7 @@ export default function ThemeFive({ userDetails, userLinks }) {
 
           {/* Languages */}
           {userDetails.languages?.length > 0 && (
-            <section className="py-12 border-t border-zinc-800/50">
+            <section id="languages" className="py-12 border-t border-zinc-800/50 scroll-mt-24">
               <h2 className="flex gap-2 text-3xl sm:text-4xl font-black mb-8">
                 <Globe className="text-yellow-400" size={32} />
                 {t('languages')}</h2>
@@ -457,6 +510,61 @@ export default function ThemeFive({ userDetails, userLinks }) {
         </footer>
       )}
 
+      {/* Full Screen Overlay Navigation */}
+      <div className={`fixed inset-0 z-50 bg-zinc-950/95 backdrop-blur-3xl transition-all duration-500 overflow-y-auto ${isNavOpen ? 'opacity-100 visible' : 'opacity-0 invisible pointer-events-none'}`}>
+        <div className="min-h-screen flex flex-col justify-center items-center p-4 md:p-8 relative">
+          <button
+            onClick={() => setIsNavOpen(false)}
+            className="absolute top-6 right-6 md:top-10 md:right-10 p-3 bg-white/5 hover:bg-white/10 rounded-full text-white/70 hover:text-white transition-all duration-300 border border-white/10"
+          >
+            <X size={28} />
+          </button>
+
+          <h2 className="text-3xl md:text-5xl font-bold text-white mb-12 opacity-90 tracking-tight">{t('menu') || "Navigation"}</h2>
+
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6 w-full max-w-5xl mx-auto">
+            {[
+              { id: "services", label: t('services'), icon: "💼", condition: userDetails?.services?.length > 0 },
+              { id: "experience", label: t('workExperience'), icon: "⭐", condition: userDetails?.experience?.length > 0 },
+              { id: "skills", label: t('skills'), icon: "💡", condition: userDetails?.skills?.length > 0 },
+              { id: "projects", label: t('projects'), icon: "📁", condition: userDetails?.projects?.length > 0 },
+              { id: "education", label: t('education'), icon: "🎓", condition: userDetails?.education?.length > 0 },
+              { id: "certificates", label: t('certificates'), icon: "📜", condition: userDetails?.certificates?.length > 0 },
+              { id: "languages", label: t('languages'), icon: "🌍", condition: userDetails?.languages?.length > 0 },
+            ]
+              .filter(tab => tab.condition)
+              .map((tab, index) => (
+                <button
+                  key={tab.id}
+                  onClick={() => {
+                    setIsNavOpen(false);
+                    const element = document.getElementById(tab.id);
+                    if (element) {
+                      setTimeout(() => {
+                        element.scrollIntoView({ behavior: "smooth", block: "start" });
+                      }, 100);
+                    }
+                  }}
+                  className={`group relative flex flex-col items-center justify-center p-6 md:p-8 gap-4 bg-white/5 hover:bg-yellow-500/10 border border-white/10 rounded-3xl transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:border-yellow-500/30
+                  ${isNavOpen ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}
+                `}
+                  style={{ transitionDelay: `${index * 50}ms` }}
+                >
+                  <span className="text-4xl md:text-5xl group-hover:scale-110 transition-transform duration-300 drop-shadow-lg">{tab.icon}</span>
+                  <span className="text-base md:text-lg font-medium text-white/80 group-hover:text-white transition-colors">{tab.label}</span>
+                </button>
+              ))}
+          </div>
+        </div>
+      </div>
+
+      {/* Scroll To Top Button */}
+      <button
+        onClick={scrollToTop}
+        className={`fixed bottom-8 right-8 z-40 p-3 bg-yellow-500/20 backdrop-blur-md border border-yellow-500/30 text-white rounded-full shadow-2xl hover:bg-yellow-500/40 hover:scale-110 transition-all duration-300 group ${showScrollTop ? 'translate-y-0 opacity-100' : 'translate-y-20 opacity-0 pointer-events-none'}`}
+      >
+        <ArrowUp size={24} />
+      </button>
     </div>
   )
 }
