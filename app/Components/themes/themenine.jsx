@@ -1,6 +1,6 @@
 "use client"
 import { useState } from "react"
-import { Mail, Code2, Briefcase, GraduationCap, Globe, Sparkles, User, Layers, Zap, FileDown, Loader } from "lucide-react"
+import { Mail, Code2, Briefcase, GraduationCap, Globe, Sparkles, User, Layers, Zap, FileDown, Loader, Award } from "lucide-react"
 import QrcodeProfile from "../../[username]/components/QrcodeProfile"
 import UserLinks from "../../[username]/components/UserLinks"
 import Image from "next/image"
@@ -136,6 +136,7 @@ export default function ThemeNine({ userDetails, userLinks }) {
                                 { key: "projects", label: t('projects'), icon: Code2, condition: userDetails?.projects?.length > 0 },
                                 { key: "skills", label: t('skills'), icon: Zap, condition: userDetails?.skills?.length > 0 },
                                 { key: "education", label: t('education'), icon: GraduationCap, condition: userDetails?.education?.length > 0 },
+                                { key: "certificates", label: t('certificates'), icon: Award, condition: userDetails?.certificates?.length > 0 },
                             ]
                                 .filter((tab) => tab.condition !== false)
                                 .map((tab) => {
@@ -382,6 +383,35 @@ export default function ThemeNine({ userDetails, userLinks }) {
                                                             {edu.field}
                                                         </p>
                                                     </div>
+                                                )}
+                                            </div>
+                                        </div>
+                                    ))}
+                                </div>
+                            )}
+
+                            {/* Certificates Tab */}
+                            {activeTab === "certificates" && (
+                                <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                                    {userDetails.certificates?.map((cert, i) => (
+                                        <div
+                                            key={i}
+                                            className="relative bg-white/5 backdrop-blur-md border border-white/10 rounded-3xl overflow-hidden hover:border-orange-500/30 transition-all duration-300 group flex flex-col"
+                                        >
+                                            {cert.cfimage && (
+                                                <div className="relative h-56 w-full bg-gray-900/50 overflow-hidden cursor-pointer flex items-center justify-center p-4" onClick={() => setSelectedImage(cert.cfimage)}>
+                                                    <Image
+                                                        src={cert.cfimage}
+                                                        alt={cert.description || "Certificate"}
+                                                        fill
+                                                        className="object-contain p-2 group-hover:scale-105 transition-transform duration-500 drop-shadow-2xl"
+                                                    />
+                                                </div>
+                                            )}
+
+                                            <div className="p-4 relative z-10 flex-1">
+                                                {cert.description && (
+                                                    <div className="text-white/90 font-medium break-all">{cert.description}</div>
                                                 )}
                                             </div>
                                         </div>

@@ -8,6 +8,7 @@ import {
   Briefcase,
   FileDown,
   Loader,
+  Award,
 } from "lucide-react"
 import QrcodeProfile from "../../[username]/components/QrcodeProfile"
 import UserLinks from "../../[username]/components/UserLinks"
@@ -312,6 +313,39 @@ export default function Themeone({ userDetails, userLinks, bgcolor }) {
                                 </p>
                               </div>
                             )}
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+
+                  {/* Certificates */}
+                  {userDetails.certificates && userDetails.certificates.length > 0 && (
+                    <div className="mb-12 text-sm md:text-base">
+                      <h3 className="text-2xl font-bold text-white mb-6 flex items-center gap-2">
+                        <Award size={28} /> {t('certificates') || "Certificates"}
+                      </h3>
+                      <div className="grid md:grid-cols-2 gap-6">
+                        {userDetails.certificates.map((cert, idx) => (
+                          <div
+                            key={idx}
+                            className="bg-white/10 backdrop-blur-md border border-white/20 rounded-xl overflow-hidden hover:bg-white/15 transition-all duration-300 group flex flex-col"
+                          >
+                            {cert.cfimage && (
+                              <div className="relative h-56 w-full bg-gray-900/50 overflow-hidden cursor-pointer border-b border-white/10 flex items-center justify-center p-4" onClick={() => setSelectedImage(cert.cfimage)}>
+                                <Image
+                                  src={cert.cfimage}
+                                  alt={cert.name}
+                                  fill
+                                  className="object-contain p-2 group-hover:scale-105 transition-transform duration-500 drop-shadow-2xl"
+                                />
+                              </div>
+                            )}
+                            <div className="p-4 flex-1 flex flex-col">
+                              {cert.description && (
+                                <p className="text-white/90 font-medium text-base leading-relaxed whitespace-pre-wrap break-all">{cert.description}</p>
+                              )}
+                            </div>
                           </div>
                         ))}
                       </div>

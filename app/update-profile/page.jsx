@@ -15,6 +15,7 @@ import Bgcolor from "./components/Bgcolor"
 import Socials from "./components/Socials"
 import Theme from "./components/Theme"
 import DisplayLanguage from "./components/DisplayLanguage"
+import Certificates from "./components/Certificates"
 
 export default function UpdateProfilePage() {
   const { EmailUser, userLinks, userDetails, setUserDetails, loadingAll } = useContext(MyContext)
@@ -108,6 +109,20 @@ export default function UpdateProfilePage() {
         zh: "🚀 项目",
       },
       component: Projects,
+    },
+    {
+      id: "certificates",
+      label: {
+        en: "🏅 Certificates",
+        fr: "🏅 Certificats",
+        es: "🏅 Certificados",
+        ar: "🏅 الشهادات",
+        de: "🏅 Zertifikate",
+        ru: "🏅 Сертификаты",
+        ja: "🏅 証明書",
+        zh: "🏅 证书",
+      },
+      component: Certificates,
     },
     {
       id: "languages",

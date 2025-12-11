@@ -1,6 +1,6 @@
 "use client"
 import { useState } from "react"
-import { Sparkles, GraduationCap, Code, Globe, Share2, Loader, FileDown, Briefcase } from "lucide-react"
+import { Sparkles, GraduationCap, Code, Globe, Share2, Loader, FileDown, Briefcase, Award } from "lucide-react"
 import QrcodeProfile from "../../[username]/components/QrcodeProfile";
 import UserLinks from "../../[username]/components/UserLinks";
 import Image from "next/image";
@@ -308,6 +308,52 @@ export default function ThemeFour({ userDetails, userLinks }) {
                                   {edu.field}
                                 </p>
                               </div>
+                            )}
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </section>
+              )
+            }
+
+            {/* Certificates */}
+            {
+              userDetails.certificates?.length > 0 && (
+                <section className="py-8 border-t border-emerald-500/20">
+                  <div className="max-w-5xl mx-auto">
+                    <div className="flex items-center gap-3 mb-8">
+                      <Award className="text-emerald-400" size={32} />
+                      <h2 className="text-4xl font-black">{t('certificates')}</h2>
+                    </div>
+                    <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                      {userDetails.certificates.map((cert, i) => (
+                        <div
+                          key={i}
+                          className="group relative bg-gradient-to-br from-emerald-500/10 to-blue-500/10 border border-emerald-500/30 rounded-xl hover:border-emerald-500/60 hover:shadow-xl hover:shadow-emerald-500/20 transition-all duration-300 overflow-hidden flex flex-col"
+                        >
+                          {/* Decorative corner accent */}
+                          {userDetails.displayLanguage === "ar" ? (
+                            <div className="absolute top-0 left-0 w-32 h-32 bg-gradient-to-bl from-emerald-400/20 to-transparent rounded-br-full opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none z-0"></div>
+                          ) : (
+                            <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-bl from-emerald-400/20 to-transparent rounded-bl-full opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none z-0"></div>
+                          )}
+
+                          {cert.cfimage && (
+                            <div className="relative h-56 w-full bg-slate-900/50 overflow-hidden cursor-pointer border-b border-emerald-500/20 flex items-center justify-center p-4 z-10" onClick={() => setSelectedImage(cert.cfimage)}>
+                              <Image
+                                src={cert.cfimage}
+                                alt={cert.description || "Certificate"}
+                                fill
+                                className="object-contain p-2 hover:scale-105 transition-transform duration-500"
+                              />
+                            </div>
+                          )}
+
+                          <div className="p-4 relative z-10 flex-1">
+                            {cert.description && (
+                              <p className="text-gray-300 font-medium break-all">{cert.description}</p>
                             )}
                           </div>
                         </div>

@@ -1,6 +1,6 @@
 "use client"
 import { useState, useEffect } from "react"
-import {Layers, Rocket, Star,ArrowUpRight,Loader,FileDown} from "lucide-react"
+import { Layers, Rocket, Star, ArrowUpRight, Loader, FileDown, Award } from "lucide-react"
 import QrcodeProfile from "../../[username]/components/QrcodeProfile"
 import UserLinks from "../../[username]/components/UserLinks"
 import Image from "next/image"
@@ -276,6 +276,45 @@ export default function ThemeEleven({ userDetails, userLinks }) {
                                     {userDetails.skills.map((skill, i) => (
                                         <div key={i} className="px-3 py-1 bg-cyan-950/40 border border-cyan-500/30 text-cyan-100 text-sm hover:bg-cyan-500 hover:text-black transition-all cursor-default clip-path-slant">
                                             {skill}
+                                        </div>
+                                    ))}
+                                </div>
+                            </section>
+                        )}
+
+                        {/* Certificates Module */}
+                        {userDetails?.certificates?.length > 0 && (
+                            <section>
+                                <h3 className="text-cyan-400 text-sm uppercase tracking-widest mb-4 flex items-center gap-2">
+                                    <span className="w-8 h-[1px] bg-cyan-500"></span>
+                                    {t('certificates')}
+                                </h3>
+                                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                    {userDetails.certificates.map((cert, i) => (
+                                        <div key={i} className="group relative p-4 bg-cyan-950/30 border border-cyan-500/30 hover:bg-cyan-500/10 transition-all">
+                                            {/* Corner Accents */}
+                                            <div className="absolute top-0 left-0 w-2 h-2 border-t border-l border-cyan-500"></div>
+                                            <div className="absolute top-0 right-0 w-2 h-2 border-t border-r border-cyan-500"></div>
+                                            <div className="absolute bottom-0 left-0 w-2 h-2 border-b border-l border-cyan-500"></div>
+                                            <div className="absolute bottom-0 right-0 w-2 h-2 border-b border-r border-cyan-500"></div>
+
+                                            {cert.cfimage && (
+                                                <div className="relative h-48 w-full bg-black/50 overflow-hidden cursor-pointer border border-cyan-500/20 mb-4" onClick={() => setSelectedImage(cert.cfimage)}>
+                                                    <Image
+                                                        src={cert.cfimage}
+                                                        alt={cert.description || "Certificate"}
+                                                        fill
+                                                        className="object-contain p-2 hover:scale-105 transition-transform duration-500 hover:opacity-100 opacity-80"
+                                                    />
+                                                </div>
+                                            )}
+
+                                            {cert.description && (
+                                                <div className="text-cyan-100/80 text-sm break-all font-mono leading-relaxed">
+                                                    <span className="text-cyan-500 mr-2">{">"}</span>
+                                                    {cert.description}
+                                                </div>
+                                            )}
                                         </div>
                                     ))}
                                 </div>
