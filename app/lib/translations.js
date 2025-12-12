@@ -9,6 +9,7 @@ export const translations = {
         edit: "Edit",
         add: "Add",
         update: "Update",
+        close: "Close",
 
         // Update Profile Tabs
         about: "About",
@@ -247,6 +248,7 @@ export const translations = {
         edit: "Modifier",
         add: "Ajouter",
         update: "Mettre à jour",
+        close: "Fermer",
 
         // Update Profile Tabs
         about: "À propos",
@@ -485,6 +487,7 @@ export const translations = {
         edit: "تعديل",
         add: "إضافة",
         update: "تحديث",
+        close: "إغلاق",
 
         // Update Profile Tabs
         about: "نبذة",
@@ -723,6 +726,7 @@ export const translations = {
         edit: "Bearbeiten",
         add: "Hinzufügen",
         update: "Aktualisieren",
+        close: "Schließen",
 
         // Update Profile Tabs
         about: "Über mich",
@@ -959,6 +963,7 @@ export const translations = {
         edit: "Редактировать",
         add: "Добавить",
         update: "Обновить",
+        close: "Закрыть",
 
         // Update Profile Tabs
         about: "О себе",
@@ -1195,6 +1200,7 @@ export const translations = {
         edit: "編集",
         add: "追加",
         update: "更新",
+        close: "閉じる",
 
         // Update Profile Tabs
         about: "自己紹介",
@@ -1431,6 +1437,7 @@ export const translations = {
         edit: "编辑",
         add: "添加",
         update: "更新",
+        close: "关闭",
 
         // Update Profile Tabs
         about: "关于",
@@ -1666,6 +1673,7 @@ export const translations = {
         edit: "Editar",
         add: "Añadir",
         update: "Actualizar",
+        close: "Cerrar",
 
         // Update Profile Tabs
         about: "Sobre mí",

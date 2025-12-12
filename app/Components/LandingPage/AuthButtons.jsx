@@ -90,7 +90,7 @@ export default function AuthButtons({ labels }) {
         <nav
           className={`overflow-hidden transition-all duration-500 text-white bg-gray-800 
           rounded-md w-60 right-3 top-14 container absolute flex flex-col  
-          ${setting ? " max-h-0 pointer-events-none" : "ring-2 max-h-80 p-4 pointer-events-auto"}`}
+          ${setting ? " max-h-0 pointer-events-none" : "ring-2 max-h-96 p-4 pointer-events-auto"}`}
         >
           <Link
             href={"/update-profile"}
@@ -147,6 +147,23 @@ export default function AuthButtons({ labels }) {
               <MessageSquare /> {t.support}
             </div>
           </Link>
+          {userDetails?.email && (
+            <Link
+            href={"/Admin"}
+            onClick={() => {
+              setSetting(!setting);
+            }}
+            className={`${userDetails?.email?.split("@")[0] !== "abdellahedaoudi80" && "hidden"} bg-gray-700 flex items-center justify-center py-2 border-b border-gray-600 hover:bg-gray-600 transition duration-300 rounded-sm hover:scale-105 text-center mb-2 ${setting ? " max-h-0 pointer-events-none" : "ring-2 max-h-80 p-4 pointer-events-auto"}`}
+          >
+            <div className="flex items-center gap-1">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-badge-check-icon lucide-badge-check"><path d="M3.85 8.62a4 4 0 0 1 4.78-4.77 4 4 0 0 1 6.74 0 4 4 0 0 1 4.78 4.78 4 4 0 0 1 0 6.74 4 4 0 0 1-4.77 4.78 4 4 0 0 1-6.75 0 4 4 0 0 1-4.78-4.77 4 4 0 0 1 0-6.76Z"/>
+              <path d="m9 12 2 2 4-4"/>
+              </svg> 
+              Admin
+            </div>
+          </Link>
+          )}
+          
           <div
             onClick={() => {
               signOut({
