@@ -73,6 +73,23 @@ export async function generateMetadata() {
         canonical: isSubdomain ? `https://${username}.dgtportfolio.com` : `https://${host}`,
       },
     };
+  } else if (!isSubdomain && !isExternalCustomDomain) {
+    // Metadata for the Main Home Page (Default Language: English)
+    return {
+      alternates: {
+        canonical: "https://dgtportfolio.com",
+        languages: {
+          'en': 'https://dgtportfolio.com',
+          'es': 'https://dgtportfolio.com/es',
+          'fr': 'https://dgtportfolio.com/fr',
+          'ar': 'https://dgtportfolio.com/ar',
+          'de': 'https://dgtportfolio.com/de',
+          'ru': 'https://dgtportfolio.com/ru',
+          'ja': 'https://dgtportfolio.com/ja',
+          'zh': 'https://dgtportfolio.com/zh',
+        },
+      },
+    };
   }
 }
 
