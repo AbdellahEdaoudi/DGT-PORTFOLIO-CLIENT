@@ -44,40 +44,50 @@ export default function BulkEmail({ data }) {
 
         setSending(true)
         setProgress({ sent: 0, total: total })
+
+        const CHUNK_SIZE = 50
         let successfulCount = 0
 
         try {
-            // Loop through each email individually
-            for (const email of emailList) {
+            // Split emails into chunks
+            for (let i = 0; i < emailList.length; i += CHUNK_SIZE) {
+                const chunk = emailList.slice(i, i + CHUNK_SIZE)
 
                 try {
-                    // Check browser network status explicitly
+                    // Check connection
                     if (!navigator.onLine) {
                         throw new Error("No internet connection detected.")
                     }
 
-                    // Send individually (single string)
-                    await axios.post("/api/proxy/admin/send-bulk-emails", {
-                        email: email,
+                    // Send chunk (batch of 50)
+                    const response = await axios.post("/api/proxy/admin/send-bulk-emails", {
+                        emails: chunk,
                         subject,
                         content
                     })
 
-                    // Only increment if successful
-                    successfulCount++
+                    // Update count based on backend response or chunk size
+                    const batchSent = response.data.sentCount || chunk.length
+                    successfulCount += batchSent
                     setProgress({ sent: successfulCount, total: total })
 
-                } catch (innerError) {
-                    console.error(`Failed to send to ${email}:`, innerError)
-                    // Stop immediately on first error (like network loss)
-                    throw new Error(`Failed at email #${successfulCount + 1} (${email}). Reason: ${innerError.message}`)
-                }
+                    // Delay between batches (e.g., 2 seconds) to respect server limits
+                    if (i + CHUNK_SIZE < emailList.length) {
+                        await new Promise(resolve => setTimeout(resolve, 2000))
+                    }
 
-                // Small delay optional, but helpful for stability
-                // await new Promise(resolve => setTimeout(resolve, 100)) 
+                } catch (innerError) {
+                    console.error(`Failed to send batch starting at ${i}:`, innerError)
+                    // We continue to next batch or stop? 
+                    // Usually safer to stop if it's a major error, but let's notify user
+                    toast.error(`Batch failed: ${innerError.message}`)
+                    // Ideally we might want to break, but let's try next batch?
+                    // Let's throw to stop everything if it's critical
+                    throw innerError
+                }
             }
 
-            toast.info(`Successfully sent all ${successfulCount} emails!`)
+            toast.success(`Broadcasting complete! Sent approximately ${successfulCount} emails.`)
             setRecipients("")
             setSubject("")
             setContent("")
@@ -85,7 +95,7 @@ export default function BulkEmail({ data }) {
 
         } catch (error) {
             console.error(error)
-            toast.error(`STOPPED! Sent ${successfulCount} out of ${total}. Error: ${error.message}`)
+            toast.error(`Process stopped. Sent ${successfulCount} out of ${total}. Error: ${error.message}`)
         } finally {
             setSending(false)
         }
