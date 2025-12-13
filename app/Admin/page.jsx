@@ -9,6 +9,7 @@ import LinksManagement from "./Components/links-management"
 import SubscriptionManagement from "./Components/SubscriptionManagement"
 import PromoCodeManagement from "./Components/promo-management"
 import ExpiredTrialsManagement from "./Components/expired-trials-management"
+import BulkEmail from "./Components/bulk-email"
 import { signOut } from "next-auth/react"
 import axios from "axios"
 import MagicalLoader from "../Components/MagicalLoader"
@@ -186,6 +187,7 @@ export default function AdminDashboard() {
               {activeTab === "subscriptions" && <SubscriptionManagement data={data} setData={setData} />}
               {activeTab === "promo" && (<PromoCodeManagement data={data} setData={setData} />)}
               {activeTab === "expired" && <ExpiredTrialsManagement />}
+              {activeTab === "bulk-email" && <BulkEmail data={data} />}
 
             </div>
           </main>

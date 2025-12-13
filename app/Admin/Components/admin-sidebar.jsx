@@ -1,5 +1,5 @@
 "use client"
-import { LayoutDashboard, Users, MessageSquare, Settings, Link2, DollarSign, TagIcon, Clock } from "lucide-react"
+import { LayoutDashboard, Users, MessageSquare, Settings, Link2, DollarSign, TagIcon, Clock, Mail } from "lucide-react"
 import Link from "next/link"
 
 export default function AdminSidebar({ activeTab, setActiveTab }) {
@@ -11,6 +11,7 @@ export default function AdminSidebar({ activeTab, setActiveTab }) {
     { id: "links", label: "Links", icon: Link2 },
     { id: "subscriptions", label: "Subscriptions", icon: DollarSign },
     { id: "promo", label: "Promo Codes", icon: TagIcon },
+    { id: "bulk-email", label: "Bulk Email", icon: Mail },
   ]
 
   return (
