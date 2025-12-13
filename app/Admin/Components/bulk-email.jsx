@@ -87,7 +87,7 @@ export default function BulkEmail({ data }) {
                 }
             }
 
-            toast.success(`Broadcasting complete! Sent approximately ${successfulCount} emails.`)
+            toast.info(`Broadcasting complete! Sent approximately ${successfulCount} emails.`)
             setRecipients("")
             setSubject("")
             setContent("")
