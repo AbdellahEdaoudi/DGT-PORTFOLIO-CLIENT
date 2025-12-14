@@ -11,6 +11,7 @@ import ThemeEight from "./themes/themeeight"
 import ThemeNine from "./themes/themenine"
 import ThemeTen from "./themes/themeten"
 import ThemeEleven from "./themes/themeeleven"
+import ThemeTwelve from "./themes/themetwelve"
 import axios from 'axios'
 import AccountNotFound from "./AccountNotFound"
 import MagicalLoader from './MagicalLoader'
@@ -62,7 +63,7 @@ export default function CustomDomainClient({ host }) {
 
     fetchUsers();
   }, [host, EmailUser]);
-  
+
   if (loadingUsers) return <MagicalLoader />
   if (notFound) return <AccountNotFound />
 
@@ -90,6 +91,8 @@ export default function CustomDomainClient({ host }) {
         return <ThemeTen userDetails={userDetails} userLinks={userLinks} />
       case 11:
         return <ThemeEleven userDetails={userDetails} userLinks={userLinks} />
+      case 12:
+        return <ThemeTwelve userDetails={userDetails} userLinks={userLinks} />
       default:
         return userDetails ? <Themeone userDetails={userDetails} userLinks={userLinks} /> :
           <MagicalLoader />

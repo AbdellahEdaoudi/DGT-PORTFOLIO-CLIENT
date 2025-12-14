@@ -55,7 +55,7 @@ export default function Theme({ userData, setUserDetails }) {
         </div>
       </div>
       <div className="grid grid-cols-3  md:grid-cols-5 gap-4">
-        {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11].map((num) => (
+        {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12].map((num) => (
           <div
             key={num}
             onClick={() => setPendingTheme(num)}

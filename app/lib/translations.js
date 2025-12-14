@@ -136,7 +136,7 @@ export const translations = {
         copied: "Copied",
         followMe: "Follow Me",
         viewProject: "View Project",
-        workExperience: "Work Experience",
+        workExperience: "Experience",
         allRightsReserved: "All rights reserved",
 
         // Update Profile Components
@@ -375,7 +375,7 @@ export const translations = {
         copied: "Copié",
         followMe: "Suivez-moi",
         viewProject: "Voir le projet",
-        workExperience: "Expérience professionnelle",
+        workExperience: "Expérience",
         allRightsReserved: "Tous droits réservés",
 
         // Update Profile Components
@@ -1800,7 +1800,7 @@ export const translations = {
         copied: "Copiado",
         followMe: "Sígueme",
         viewProject: "Ver proyecto",
-        workExperience: "Experiencia laboral",
+        workExperience: "Experiencia",
         allRightsReserved: "Todos los derechos reservados",
 
         // Update Profile Components
@@ -2275,7 +2275,7 @@ export const translations = {
         copied: "Copiado",
         followMe: "Siga-me",
         viewProject: "Ver Projeto",
-        workExperience: "Experiência Profissional",
+        workExperience: "Experiência",
         allRightsReserved: "Todos os direitos reservados",
 
         // Update Profile Components
@@ -2513,7 +2513,7 @@ export const translations = {
         copied: "Copiato",
         followMe: "Seguimi",
         viewProject: "Vedi Progetto",
-        workExperience: "Esperienza Lavorativa",
+        workExperience: "Esperienza",
         allRightsReserved: "Tutti i diritti riservati",
 
         // Update Profile Components
