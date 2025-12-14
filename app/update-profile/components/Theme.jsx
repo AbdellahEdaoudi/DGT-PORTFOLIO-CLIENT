@@ -4,11 +4,9 @@ import axios from "axios";
 import { toast } from "react-toastify";
 import { Loader, CheckCheck } from "lucide-react";
 import Image from "next/image";
-
-
 import { useTranslation } from "../../lib/translations";
 
-export default function Theme({ userData, userLinks, setUserDetails }) {
+export default function Theme({ userData, setUserDetails }) {
   const { t } = useTranslation(userData?.displayLanguage || 'en');
   const [selectedTheme, setSelectedTheme] = useState(userData.theme || 1);
   const [loading, setLoading] = useState(false);

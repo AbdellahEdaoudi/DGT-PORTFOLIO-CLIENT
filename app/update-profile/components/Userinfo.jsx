@@ -130,7 +130,13 @@ function Userinfo({ userData, setUserDetails }) {
       setErrormsg("")
     } catch (error) {
       if (error.response?.data?.error) {
-        setErrormsg(error.response.data.error)
+        const errorData = error.response.data.error;
+        // Check if errorData is an object with an 'error' property
+        if (typeof errorData === 'object' && errorData.error) {
+          setErrormsg(String(errorData.error));
+        } else {
+          setErrormsg(typeof errorData === 'object' ? JSON.stringify(errorData) : String(errorData));
+        }
       } else if (error.response?.status === 400) {
         setErrormsg(t('usernameExists'))
       }

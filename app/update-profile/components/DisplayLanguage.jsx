@@ -3,7 +3,7 @@ import axios from 'axios'
 import { CheckCheck, Loader } from 'lucide-react'
 import React, { useState } from 'react'
 import { toast } from 'react-toastify'
-import { useTranslation } from 'react-i18next'
+import { useTranslation } from '../../lib/translations'
 
 function DisplayLanguage({ userData, setUserDetails }) {
     const { t } = useTranslation(userData?.displayLanguage || 'en');
