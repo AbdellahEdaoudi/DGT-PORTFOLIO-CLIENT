@@ -118,6 +118,19 @@ const translations = {
     errorSharing: "分享错误",
     shareUnsupported: "此浏览器不支持分享",
   },
+  nl: {
+    qrCodeProfile: "QR-code profiel",
+    downloadQrCode: "QR-code downloaden",
+    shareQrCode: "Deel QR-code",
+    shareLink: "Deel link",
+    copyLink: "Kopieer link",
+    checkOutQrCode: "Bekijk deze QR-code!",
+    sharingFailed: "Delen mislukt",
+    webShareApiUnsupported: "Uw browser ondersteunt de Web Share API niet.",
+    successfulShare: "Succesvol gedeeld",
+    errorSharing: "Fout bij delen",
+    shareUnsupported: "Delen niet ondersteund in deze browser",
+  },
 };
 
 function QrcodeProfile({ userDetails }) {
@@ -201,16 +214,16 @@ function QrcodeProfile({ userDetails }) {
         </AlertDialogTrigger>
         <AlertDialogContent className="rounded-lg">
           <AlertDialogHeader>
-            <AlertDialogTitle 
-            dir={userDetails?.displayLanguage === 'ar' ? 'rtl' : 'ltr'}
-            className="flex items-center justify-between">
+            <AlertDialogTitle
+              dir={userDetails?.displayLanguage === 'ar' ? 'rtl' : 'ltr'}
+              className="flex items-center justify-between">
               <div>{t("qrCodeProfile")}</div>
               <AlertDialogCancel><X /></AlertDialogCancel>
             </AlertDialogTitle>
             <AlertDialogDescription asChild>
-              <div 
-              dir={userDetails?.displayLanguage === 'ar' ? 'rtl' : 'ltr'}
-              className="flex flex-col justify-center items-center  ">
+              <div
+                dir={userDetails?.displayLanguage === 'ar' ? 'rtl' : 'ltr'}
+                className="flex flex-col justify-center items-center  ">
                 <div className={`mb-6 hidden`} ref={qrCodeRef}>
                   <QRCode
                     value={PORTFOLIO}
@@ -223,13 +236,13 @@ function QrcodeProfile({ userDetails }) {
                     imageSettings={
                       "/LogoinQrcode.png"
                         ? {
-                            src: "/LogoinQrcode.png",
-                            x: undefined,
-                            y: undefined,
-                            height: 80,
-                            width: 80,
-                            excavate: true,
-                          }
+                          src: "/LogoinQrcode.png",
+                          x: undefined,
+                          y: undefined,
+                          height: 80,
+                          width: 80,
+                          excavate: true,
+                        }
                         : {}
                     }
                   />
@@ -247,13 +260,13 @@ function QrcodeProfile({ userDetails }) {
                     imageSettings={
                       "/LogoinQrcode.png"
                         ? {
-                            src: "/LogoinQrcode.png",
-                            x: undefined,
-                            y: undefined,
-                            height: 50,
-                            width: 50,
-                            excavate: true,
-                          }
+                          src: "/LogoinQrcode.png",
+                          x: undefined,
+                          y: undefined,
+                          height: 50,
+                          width: 50,
+                          excavate: true,
+                        }
                         : {}
                     }
                   />

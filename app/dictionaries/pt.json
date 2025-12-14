@@ -1,0 +1,91 @@
+{
+    "navbar": {
+        "features": "Recursos",
+        "showcase": "Vitrine",
+        "pricing": "Preços",
+        "auth": {
+            "signIn": "Entrar",
+            "getStarted": "Começar",
+            "updateProfile": "Atualizar Perfil",
+            "businessLinks": "Links Comerciais",
+            "support": "Suporte",
+            "signOut": "Sair",
+            "customDomain": "Domínio Personalizado",
+            "subscriptions": "Assinaturas"
+        }
+    },
+    "hero": {
+        "title_part1": "Seu Portfólio,",
+        "title_part2": "Elevado",
+        "description": "Sem código, sem complicações. Crie um portfólio moderno e limpo em minutos. Mostre sua carreira, habilidades, projetos e links de trabalho como nunca antes, deixe uma impressão duradoura e desbloqueie novas oportunidades.",
+        "free_trial": "Grátis por 7 dias",
+        "start_building": "Começar a Construir",
+        "watch_demo": "Assistir Demo"
+    },
+    "features": {
+        "title": "Por que escolher o DGT Portfolio",
+        "subtitle": "Tudo o que você precisa para mostrar seu melhor trabalho e conquistar as oportunidades dos seus sonhos",
+        "items": [
+            {
+                "title": "Design Sem Código",
+                "description": "Crie portfólios impressionantes sem escrever uma única linha de código"
+            },
+            {
+                "title": "Subdomínio Personalizado",
+                "description": "Obtenha um subdomínio personalizado como <strong>seunome.dgtportfolio.com</strong> para seu portfólio"
+            },
+            {
+                "title": "Perfil com QR Code",
+                "description": "Gere um código QR para seu portfólio que você pode baixar ou compartilhar instantaneamente"
+            },
+            {
+                "title": "Múltiplos Temas",
+                "description": "Escolha entre diferentes temas para personalizar a aparência do seu portfólio"
+            },
+            {
+                "title": "Compartilhamento Fácil",
+                "description": "Compartilhe seu link de portfólio em qualquer lugar com apenas um clique"
+            },
+            {
+                "title": "Rápido como um Raio",
+                "description": "Tempos de carregamento incrivelmente rápidos que mantêm os visitantes engajados"
+            }
+        ]
+    },
+    "pricing": {
+        "title": "Preços Simples e Transparentes",
+        "subtitle": "Escolha o plano perfeito para seu portfólio criativo",
+        "plans": [
+            {
+                "name": "Plano Mensal",
+                "description": "$10 para o mês seguinte",
+                "price": "$1",
+                "period": "/primeiro mês",
+                "cta": "Assinar Mensalmente"
+            },
+            {
+                "name": "Plano de 4 Meses",
+                "description": "Ótima oferta a médio prazo",
+                "price": "$30",
+                "period": "/4 meses",
+                "cta": "Assinar 4 Meses"
+            },
+            {
+                "name": "Plano Anual",
+                "description": "Melhor valor",
+                "price": "$60",
+                "period": "/ano",
+                "cta": "Assinar Anualmente",
+                "badge": "Recomendado"
+            }
+        ]
+    },
+    "cta": {
+        "title": "Pronto para Mostrar seu Talento?",
+        "subtitle": "Junte-se a milhares de criadores construindo seus portfólios dos sonhos hoje",
+        "button": "Crie Seu Portfólio"
+    },
+    "footer": {
+        "rights": "Todos os direitos reservados."
+    }
+}

@@ -1,0 +1,91 @@
+{
+    "navbar": {
+        "features": "Özellikler",
+        "showcase": "Vitrin",
+        "pricing": "Fiyatlandırma",
+        "auth": {
+            "signIn": "Giriş Yap",
+            "getStarted": "Başla",
+            "updateProfile": "Profili Güncelle",
+            "businessLinks": "İş Bağlantıları",
+            "support": "Destek",
+            "signOut": "Çıkış Yap",
+            "customDomain": "Özel Alan Adı",
+            "subscriptions": "Abonelikler"
+        }
+    },
+    "hero": {
+        "title_part1": "Portföyünüz,",
+        "title_part2": "Yükseltildi",
+        "description": "Kod yok, uğraş yok. Dakikalar içinde temiz, modern bir portföy oluşturun. Kariyerinizi, becerilerinizi, projelerinizi ve iş bağlantılarınızı daha önce hiç olmadığı gibi sergileyin, kalıcı bir izlenim bırakın ve yeni fırsatların kilidini açın.",
+        "free_trial": "7 gün ücretsiz",
+        "start_building": "Oluşturmaya Başla",
+        "watch_demo": "Demoyu İzle"
+    },
+    "features": {
+        "title": "Neden DGT Portföyünü Seçmelisiniz",
+        "subtitle": "En iyi işlerinizi sergilemek ve hayalinizdeki fırsatları yakalamak için ihtiyacınız olan her şey",
+        "items": [
+            {
+                "title": "Kodsuz Tasarım",
+                "description": "Tek bir satır kod yazmadan çarpıcı portföyler oluşturun"
+            },
+            {
+                "title": "Özel Alt Alan Adı",
+                "description": "Portföyünüz için <strong>adiniz.dgtportfolio.com</strong> gibi kişiselleştirilmiş bir alt alan adı alın"
+            },
+            {
+                "title": "QR Kod Profili",
+                "description": "Portföyünüz için anında indirebileceğiniz veya paylaşabileceğiniz bir QR kodu oluşturun"
+            },
+            {
+                "title": "Çoklu Temalar",
+                "description": "Portföyünüzün görünümünü ve hissini kişiselleştirmek için farklı temalar arasından seçim yapın"
+            },
+            {
+                "title": "Kolay Bağlantı Paylaşımı",
+                "description": "Portföy bağlantınızı tek bir tıklamayla her yerde paylaşın"
+            },
+            {
+                "title": "Şimşek Hızında",
+                "description": "Ziyaretçilerin ilgisini çeken inanılmaz hızlı yükleme süreleri"
+            }
+        ]
+    },
+    "pricing": {
+        "title": "Basit, Şeffaf Fiyatlandırma",
+        "subtitle": "Yaratıcı portföyünüz için mükemmel planı seçin",
+        "plans": [
+            {
+                "name": "Aylık Plan",
+                "description": "Sonraki ay için $10",
+                "price": "$1",
+                "period": "/ilk ay",
+                "cta": "Aylık Abone Ol"
+            },
+            {
+                "name": "4 Aylık Plan",
+                "description": "Harika orta vadeli teklif",
+                "price": "$30",
+                "period": "/4 ay",
+                "cta": "4 Aylık Abone Ol"
+            },
+            {
+                "name": "Yıllık Plan",
+                "description": "En iyi değer",
+                "price": "$60",
+                "period": "/yıl",
+                "cta": "Yıllık Abone Ol",
+                "badge": "Önerilen"
+            }
+        ]
+    },
+    "cta": {
+        "title": "Yeteneğinizi Sergilemeye Hazır mısınız?",
+        "subtitle": "Bugün hayallerindeki portföyleri oluşturan binlerce yaratıcıya katılın",
+        "button": "Portföyünüzü Oluşturun"
+    },
+    "footer": {
+        "rights": "Tüm hakları saklıdır."
+    }
+}

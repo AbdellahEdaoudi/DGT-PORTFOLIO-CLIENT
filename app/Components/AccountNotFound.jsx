@@ -75,6 +75,14 @@ const translations = {
     returnHome: "Volver a la página de inicio",
     contactSupport: "Contactar soporte",
     rights: "Todos los derechos reservados."
+  },
+  nl: {
+    title: "Account niet gevonden",
+    description: "We konden het account dat u zoekt niet vinden. Het is mogelijk hernoemd of de gebruiker heeft geen abonnement",
+    subscribe: "Nu abonneren",
+    returnHome: "Terug naar startpagina",
+    contactSupport: "Contact support",
+    rights: "Alle rechten voorbehouden."
   }
 }
 
@@ -164,6 +172,7 @@ export default function AccountNotFound() {
             <SelectItem value="ja">日本語</SelectItem>
             <SelectItem value="zh">中文</SelectItem>
             <SelectItem value="es">Español</SelectItem>
+            <SelectItem value="nl">Nederlands</SelectItem>
           </SelectContent>
         </Select>
       </div>

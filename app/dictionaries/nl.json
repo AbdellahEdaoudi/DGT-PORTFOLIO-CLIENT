@@ -1,0 +1,91 @@
+{
+    "navbar": {
+        "features": "Kenmerken",
+        "showcase": "Showcase",
+        "pricing": "Prijzen",
+        "auth": {
+            "signIn": "Inloggen",
+            "getStarted": "Starten",
+            "updateProfile": "Profiel bijwerken",
+            "businessLinks": "Zakelijke links",
+            "support": "Ondersteuning",
+            "signOut": "Uitloggen",
+            "customDomain": "Aangepast domein",
+            "subscriptions": "Abonnementen"
+        }
+    },
+    "hero": {
+        "title_part1": "Jouw Portfolio,",
+        "title_part2": "Verbeterd",
+        "description": "Geen code, geen gedoe. Bouw in enkele minuten een schoon, modern portfolio. Toon uw carrière, vaardigheden, projecten en werklinks als nooit tevoren en laat een blijvende indruk achter en ontgrendel nieuwe kansen.",
+        "free_trial": "7 dagen gratis",
+        "start_building": "Begin met bouwen",
+        "watch_demo": "Bekijk demo"
+    },
+    "features": {
+        "title": "Waarom kiezen voor DGT Portfolio",
+        "subtitle": "Alles wat u nodig heeft om uw beste werk te laten zien en uw droomkansen te benutten",
+        "items": [
+            {
+                "title": "Codevrij ontwerp",
+                "description": "Creëer verbluffende portfolio's zonder ook maar één regel code te schrijven"
+            },
+            {
+                "title": "Aangepast subdomein",
+                "description": "Krijg een persoonlijk subdomein zoals <strong>uw-naam.dgtportfolio.com</strong> voor uw portfolio"
+            },
+            {
+                "title": "QR-code profiel",
+                "description": "Genereer een QR-code voor uw portfolio die u direct kunt downloaden of delen"
+            },
+            {
+                "title": "Meerdere thema's",
+                "description": "Kies uit verschillende thema's om de look en feel van uw portfolio te personaliseren"
+            },
+            {
+                "title": "Eenvoudig links delen",
+                "description": "Deel uw portfoliolink overal met slechts één klik"
+            },
+            {
+                "title": "Razendsnel",
+                "description": "Razendsnelle laadtijden die bezoekers betrokken houden"
+            }
+        ]
+    },
+    "pricing": {
+        "title": "Eenvoudige, transparante prijzen",
+        "subtitle": "Kies het perfecte plan voor uw creatieve portfolio",
+        "plans": [
+            {
+                "name": "Maandplan",
+                "description": "$10 voor de maand erna",
+                "price": "$1",
+                "period": "/eerste maand",
+                "cta": "Maandelijks abonneren"
+            },
+            {
+                "name": "4-Maanden Plan",
+                "description": "Geweldig aanbod voor de middellange termijn",
+                "price": "$30",
+                "period": "/4 maanden",
+                "cta": "Abonneer voor 4 maanden"
+            },
+            {
+                "name": "Jaarplan",
+                "description": "Beste waarde",
+                "price": "$60",
+                "period": "/jaar",
+                "cta": "Jaarlijks abonneren",
+                "badge": "Aanbevolen"
+            }
+        ]
+    },
+    "cta": {
+        "title": "Klaar om je talent te laten zien?",
+        "subtitle": "Sluit u aan bij duizenden makers die vandaag hun droomportfolio bouwen",
+        "button": "Maak uw portfolio"
+    },
+    "footer": {
+        "rights": "Alle rechten voorbehouden."
+    }
+}

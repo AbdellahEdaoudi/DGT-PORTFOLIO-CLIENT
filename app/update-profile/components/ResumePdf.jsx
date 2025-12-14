@@ -36,6 +36,22 @@ Font.register({
     ]
 });
 
+Font.register({
+    family: 'Noto Sans KR',
+    fonts: [
+        { src: 'https://cdn.jsdelivr.net/npm/@fontsource/noto-sans-kr/files/noto-sans-kr-korean-400-normal.woff' }, // Regular
+        { src: 'https://cdn.jsdelivr.net/npm/@fontsource/noto-sans-kr/files/noto-sans-kr-korean-700-normal.woff', fontWeight: 'bold' } // Bold
+    ]
+});
+
+Font.register({
+    family: 'Noto Sans Devanagari',
+    fonts: [
+        { src: 'https://cdn.jsdelivr.net/npm/@fontsource/noto-sans-devanagari/files/noto-sans-devanagari-devanagari-400-normal.woff' }, // Regular
+        { src: 'https://cdn.jsdelivr.net/npm/@fontsource/noto-sans-devanagari/files/noto-sans-devanagari-devanagari-700-normal.woff', fontWeight: 'bold' } // Bold
+    ]
+});
+
 const styles = StyleSheet.create({
     page: {
         flexDirection: 'column',
@@ -260,6 +276,84 @@ const translations = {
         viewProject: "Ver Proyecto",
         nameFallback: "Su Nombre",
         titleFallback: "Título Profesional"
+    },
+    nl: {
+        summary: "Professionele Samenvatting",
+        experience: "Ervaring",
+        skills: "Vaardigheden",
+        projects: "Projecten",
+        education: "Opleiding",
+        languages: "Talen",
+        certificates: "Certificaten",
+        services: "Diensten",
+        viewProject: "Bekijk project",
+        nameFallback: "Uw Naam",
+        titleFallback: "Professionele Titel"
+    },
+    pt: {
+        summary: "Resumo Profissional",
+        experience: "Experiência",
+        skills: "Habilidades",
+        projects: "Projetos",
+        education: "Educação",
+        languages: "Idiomas",
+        certificates: "Certificados",
+        services: "Serviços",
+        viewProject: "Ver Projeto",
+        nameFallback: "Seu Nome",
+        titleFallback: "Título Profissional"
+    },
+    it: {
+        summary: "Riepilogo Professionale",
+        experience: "Esperienza",
+        skills: "Competenze",
+        projects: "Progetti",
+        education: "Istruzione",
+        languages: "Lingue",
+        certificates: "Certificati",
+        services: "Servizi",
+        viewProject: "Vedi Progetto",
+        nameFallback: "Il Tuo Nome",
+        titleFallback: "Titolo Professionale"
+    },
+    hi: {
+        summary: "पेशेवर सारांश",
+        experience: "अनुभव",
+        skills: "कौशल",
+        projects: "परियोजनाएं",
+        education: "शिक्षा",
+        languages: "भाषाएं",
+        certificates: "प्रमाणपत्र",
+        services: "सेवाएं",
+        viewProject: "परियोजना देखें",
+        nameFallback: "आपका नाम",
+        titleFallback: "पेशेवर शीर्षक"
+    },
+    tr: {
+        summary: "Profesyonel Özet",
+        experience: "Deneyim",
+        skills: "Beceriler",
+        projects: "Projeler",
+        education: "Eğitim",
+        languages: "Diller",
+        certificates: "Sertifikalar",
+        services: "Hizmetler",
+        viewProject: "Projeyi Görüntüle",
+        nameFallback: "Adınız",
+        titleFallback: "Profesyonel Unvan"
+    },
+    ko: {
+        summary: "전문 요약",
+        experience: "경력",
+        skills: "기술",
+        projects: "프로젝트",
+        education: "교육",
+        languages: "언어",
+        certificates: "자격증",
+        services: "서비스",
+        viewProject: "프로젝트 보기",
+        nameFallback: "당신의 이름",
+        titleFallback: "전문 직함"
     }
 };
 
@@ -273,13 +367,15 @@ const ResumePdf = ({ userData }) => {
             case 'ar': return 'Amiri';
             case 'ja': return 'Noto Sans JP';
             case 'zh': return 'Noto Sans SC';
+            case 'ko': return 'Noto Sans KR';
+            case 'hi': return 'Noto Sans Devanagari';
             case 'ru': return 'Roboto';
             default: return 'Roboto';
         }
     };
 
     const fontFamily = getFontFamily(lang);
-    const disableItalic = ['ja', 'zh'].includes(lang);
+    const disableItalic = ['ja', 'zh', 'ko', 'hi'].includes(lang);
 
     // Dynamic Styles Helper
     const s = (styleName, extra = {}) => {

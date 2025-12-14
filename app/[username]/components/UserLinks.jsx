@@ -45,6 +45,10 @@ const translations = {
     businessLinks: "商业链接",
     noBusinessLinks: "无可用商业链接。",
   },
+  nl: {
+    businessLinks: "Zakelijke links",
+    noBusinessLinks: "Geen zakelijke links beschikbaar.",
+  },
 };
 
 function UserLinks({ userLinks = [], lang }) {
@@ -63,17 +67,17 @@ function UserLinks({ userLinks = [], lang }) {
         <AlertDialogHeader>
           <AlertDialogTitle className="sr-only">{t.businessLinks}</AlertDialogTitle>
           <AlertDialogDescription asChild>
-            <div 
-            dir={currentLanguage === 'ar' ? 'rtl' : 'ltr'}
-            className="rounded-lg text-black">
+            <div
+              dir={currentLanguage === 'ar' ? 'rtl' : 'ltr'}
+              className="rounded-lg text-black">
               <div className="flex items-center justify-between mx-3 text-3xl font-semibold text-center text-gray-800 mb-4">
                 <span>{t.businessLinks}</span>
                 <AlertDialogCancel><X /></AlertDialogCancel>
               </div>
 
-              <div 
-              dir={currentLanguage === 'ar' ? 'rtl' : 'ltr'}
-              className="p-2 space-y-3 overflow-y-auto scrollbar-non max-h-96">
+              <div
+                dir={currentLanguage === 'ar' ? 'rtl' : 'ltr'}
+                className="p-2 space-y-3 overflow-y-auto scrollbar-non max-h-96">
                 <div className="p-2 space-y-3">
                   {userLinks.length > 0 ? (
                     userLinks.map((lnk, i) => (

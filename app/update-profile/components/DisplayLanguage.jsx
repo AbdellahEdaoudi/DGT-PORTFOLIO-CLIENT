@@ -40,6 +40,12 @@ function DisplayLanguage({ userData, setUserDetails }) {
             ru: "🌍 Язык отображения",
             ja: "🌍 表示言語",
             zh: "🌍 显示语言",
+            nl: "🌍 Weergavetaal",
+            pt: "🌍 Idioma de Exibição",
+            it: "🌍 Lingua di Visualizzazione",
+            hi: "🌍 प्रदर्शन भाषा",
+            tr: "🌍 Görüntüleme Dili",
+            ko: "🌍 표시 언어",
         },
         description: {
             en: "Choose the language in which your portfolio will be displayed to visitors.",
@@ -50,6 +56,12 @@ function DisplayLanguage({ userData, setUserDetails }) {
             ru: "Выберите язык, на котором ваше портфолио будет отображаться посетителям.",
             ja: "訪問者にポートフォリオが表示される言語を選択してください。",
             zh: "选择您的作品集向访问者显示的语言。",
+            nl: "Kies de taal waarin uw portfolio aan bezoekers wordt getoond.",
+            pt: "Escolha o idioma em que seu portfólio será exibido aos visitantes.",
+            it: "Scegli la lingua in cui il tuo portfolio verrà mostrato ai visitatori.",
+            hi: "वह भाषा चुनें जिसमें आपका पोर्टफोलियो आगंतुकों को दिखाया जाएगा।",
+            tr: "Portföyünüzün ziyaretçilere gösterileceği dili seçin.",
+            ko: "방문자에게 포트폴리오가 표시될 언어를 선택하세요.",
         },
     }
     const currentLanguage = displayLanguage;
@@ -68,11 +80,17 @@ function DisplayLanguage({ userData, setUserDetails }) {
                         { value: "en", label: "English", description: "Display portfolio in English" },
                         { value: "fr", label: "Français", description: "Afficher le portfolio en français" },
                         { value: "es", label: "Español", description: "Mostrar portafolio en español" },
+                        { value: "pt", label: "Português", description: "Exibir portfólio em Português" },
+                        { value: "it", label: "Italiano", description: "Visualizza portfolio in Italiano" },
                         { value: "de", label: "Deutsch", description: "Portfolio auf Deutsch anzeigen" },
                         { value: "ar", label: "Arabic", description: "عرض المحفظة باللغة العربية" },
+                        { value: "nl", label: "Nederlands", description: "Portfolio in het Nederlands weergeven" },
+                        { value: "tr", label: "Türkçe", description: "Portföyü Türkçe göster" },
                         { value: "ru", label: "Русский", description: "Показать портфолио на русском" },
                         { value: "ja", label: "日本語", description: "ポートフォリオを日本語で表示" },
                         { value: "zh", label: "中文", description: "以中文显示作品集" },
+                        { value: "hi", label: "हिंदी", description: "पोर्टफोलियो हिंदी में दिखाएं" },
+                        { value: "ko", label: "한국어", description: "포트폴리오를 한국어로 표시" },
                     ].map((lang) => (
                         <label
                             key={lang.value}

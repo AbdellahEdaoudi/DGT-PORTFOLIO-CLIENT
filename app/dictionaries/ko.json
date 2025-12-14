@@ -1,0 +1,91 @@
+{
+    "navbar": {
+        "features": "기능",
+        "showcase": "쇼케이스",
+        "pricing": "가격",
+        "auth": {
+            "signIn": "로그인",
+            "getStarted": "시작하기",
+            "updateProfile": "프로필 업데이트",
+            "businessLinks": "비즈니스 링크",
+            "support": "지원",
+            "signOut": "로그아웃",
+            "customDomain": "맞춤 도메인",
+            "subscriptions": "구독"
+        }
+    },
+    "hero": {
+        "title_part1": "당신의 포트폴리오,",
+        "title_part2": "한 단계 더 높여보세요",
+        "description": "코딩 없이, 번거로움 없이. 몇 분 만에 깔끔하고 현대적인 포트폴리오를 만드세요. 경력, 기술, 프로젝트 및 작업 링크를 이전과는 전혀 다른 방식으로 보여주고 지속적인 인상을 남기고 새로운 기회를 열어보세요.",
+        "free_trial": "7일 무료",
+        "start_building": "제작 시작",
+        "watch_demo": "데모 보기"
+    },
+    "features": {
+        "title": "DGT 포트폴리오를 선택해야 하는 이유",
+        "subtitle": "최고의 작품을 선보이고 꿈의 기회를 잡는 데 필요한 모든 것",
+        "items": [
+            {
+                "title": "코드 없는 디자인",
+                "description": "코드 한 줄 쓰지 않고 멋진 포트폴리오 만들기"
+            },
+            {
+                "title": "맞춤 서브도메인",
+                "description": "포트폴리오를 위한 <strong>yourname.dgtportfolio.com</strong>과 같은 개인화된 서브도메인을 받으세요"
+            },
+            {
+                "title": "QR 코드 프로필",
+                "description": "즉시 다운로드하거나 공유할 수 있는 포트폴리오용 QR 코드 생성"
+            },
+            {
+                "title": "다양한 테마",
+                "description": "다양한 테마 중에서 선택하여 포트폴리오의 모양과 느낌을 개인화하세요"
+            },
+            {
+                "title": "쉬운 링크 공유",
+                "description": "한 번의 클릭으로 어디서나 포트폴리오 링크 공유"
+            },
+            {
+                "title": "초고속",
+                "description": "방문자의 참여를 유지하는 놀라울 정도로 빠른 로딩 시간"
+            }
+        ]
+    },
+    "pricing": {
+        "title": "간단하고 투명한 가격",
+        "subtitle": "창의적인 포트폴리오를 위한 완벽한 요금제 선택",
+        "plans": [
+            {
+                "name": "월간 요금제",
+                "description": "다음 달 $10",
+                "price": "$1",
+                "period": "/첫 달",
+                "cta": "월간 구독"
+            },
+            {
+                "name": "4개월 요금제",
+                "description": "훌륭한 중기 제안",
+                "price": "$30",
+                "period": "/4개월",
+                "cta": "4개월 구독"
+            },
+            {
+                "name": "연간 요금제",
+                "description": "최고의 가치",
+                "price": "$60",
+                "period": "/년",
+                "cta": "연간 구독",
+                "badge": "추천"
+            }
+        ]
+    },
+    "cta": {
+        "title": "재능을 선보일 준비가 되셨나요?",
+        "subtitle": "오늘 꿈의 포트폴리오를 구축하는 수천 명의 크리에이터와 함께하세요",
+        "button": "포트폴리오 만들기"
+    },
+    "footer": {
+        "rights": "판권 소유."
+    }
+}

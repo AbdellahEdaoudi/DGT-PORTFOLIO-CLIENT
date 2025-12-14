@@ -104,6 +104,18 @@ const plansTranslations = {
     placeholder: "Código promocional",
     applyBtn: "Aplicar",
     verifyingBtn: "Verificando..."
+  },
+  nl: {
+    promoMonthly: { name: "Promo Maandelijks", description: "Speciale promo-aanbieding", period: "/maand" },
+    promo6Month: { name: "Promo 6 Maanden", description: "Geweldige waarde voor 6 maanden", period: "/6 maanden" },
+    promoAnnual: { name: "Promo Jaarlijks", description: "Beste deal van het jaar", period: "/jaar" },
+    subMonthly: { name: "Maandelijks Abonneren", description: "$10 voor de maand erna", period: "/eerste maand" },
+    sub4Months: { name: "Abonneren 4 Maanden", description: "Geweldige aanbieding voor middellange termijn", period: "/4 maanden" },
+    subYearly: { name: "Jaarlijks Abonneren", description: "Beste waarde", period: "/jaar" },
+    recommended: "Aanbevolen",
+    placeholder: "Promotiecode",
+    applyBtn: "Toepassen",
+    verifyingBtn: "Verifiëren..."
   }
 };
 

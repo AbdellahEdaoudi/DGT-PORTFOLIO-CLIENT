@@ -70,6 +70,12 @@ export default function ThemeFour({ userDetails, userLinks }) {
                           ru: 'Скачать резюме',
                           ja: '履歴書をダウンロード',
                           zh: '下载简历',
+                          nl: 'CV downloaden',
+                          pt: 'Baixar CV',
+                          it: 'Scarica CV',
+                          hi: 'सीवी डाउनलोड करें',
+                          tr: 'CV İndir',
+                          ko: 'CV 다운로드',
                         };
                         return translations[userDetails?.displayLanguage] || translations['en']
                       })()}

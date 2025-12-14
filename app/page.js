@@ -87,6 +87,7 @@ export async function generateMetadata() {
           'ru': 'https://dgtportfolio.com/ru',
           'ja': 'https://dgtportfolio.com/ja',
           'zh': 'https://dgtportfolio.com/zh',
+          'nl': 'https://dgtportfolio.com/nl',
         },
       },
     };
