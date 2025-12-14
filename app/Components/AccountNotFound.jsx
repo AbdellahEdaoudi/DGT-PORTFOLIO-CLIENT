@@ -83,6 +83,46 @@ const translations = {
     returnHome: "Terug naar startpagina",
     contactSupport: "Contact support",
     rights: "Alle rechten voorbehouden."
+  },
+  pt: {
+    title: "Conta Não Encontrada",
+    description: "Não conseguimos localizar a conta que você está procurando. Ela pode ter sido renomeada ou o usuário não está inscrito",
+    subscribe: "Inscrever-se Agora",
+    returnHome: "Voltar para Início",
+    contactSupport: "Contatar Suporte",
+    rights: "Todos os direitos reservados."
+  },
+  it: {
+    title: "Account Non Trovato",
+    description: "Non siamo riusciti a trovare l'account che stai cercando. Potrebbe essere stato rinominato o l'utente non è abbonato",
+    subscribe: "Iscriviti Ora",
+    returnHome: "Torna alla Home",
+    contactSupport: "Contatta Supporto",
+    rights: "Tutti i diritti riservati."
+  },
+  hi: {
+    title: "खाता नहीं मिला",
+    description: "हम वह खाता नहीं ढूंढ सके जिसे आप खोज रहे हैं। इसका नाम बदला जा सकता है या उपयोगकर्ता ने सदस्यता नहीं ली है",
+    subscribe: "अभी सदस्यता लें",
+    returnHome: "होम पेज पर लौटें",
+    contactSupport: "समर्थन से संपर्क करें",
+    rights: "सर्वाधिकार सुरक्षित।"
+  },
+  tr: {
+    title: "Hesap Bulunamadı",
+    description: "Aradığınız hesabı bulamadık. Yeniden adlandırılmış olabilir veya kullanıcı abone olmamış olabilir",
+    subscribe: "Şimdi Abone Ol",
+    returnHome: "Ana Sayfaya Dön",
+    contactSupport: "Destek ile İletişime Geç",
+    rights: "Tüm hakları saklıdır."
+  },
+  ko: {
+    title: "계정을 찾을 수 없음",
+    description: "찾으시는 계정을 찾을 수 없습니다. 이름이 변경되었거나 사용자가 구독하지 않았을 수 있습니다",
+    subscribe: "지금 구독하기",
+    returnHome: "홈페이지로 돌아가기",
+    contactSupport: "고객 지원 문의",
+    rights: "모든 권리 보유."
   }
 }
 
@@ -169,10 +209,15 @@ export default function AccountNotFound() {
             <SelectItem value="ar">العربية</SelectItem>
             <SelectItem value="de">Deutsch</SelectItem>
             <SelectItem value="ru">Русский</SelectItem>
-            <SelectItem value="ja">日本語</SelectItem>
-            <SelectItem value="zh">中文</SelectItem>
             <SelectItem value="es">Español</SelectItem>
+            <SelectItem value="pt">Português</SelectItem>
             <SelectItem value="nl">Nederlands</SelectItem>
+            <SelectItem value="it">Italiano</SelectItem>
+            <SelectItem value="tr">Türkçe</SelectItem>
+            <SelectItem value="ko">한국어</SelectItem>
+            <SelectItem value="zh">中文</SelectItem>
+            <SelectItem value="ja">日本語</SelectItem>
+            <SelectItem value="hi">हिंदी</SelectItem>
           </SelectContent>
         </Select>
       </div>

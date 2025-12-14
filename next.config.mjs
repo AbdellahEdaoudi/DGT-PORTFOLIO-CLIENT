@@ -13,6 +13,12 @@ const nextConfig = {
     ],
   },
 
+  webpack: (config) => {
+    config.ignoreWarnings = [
+      { module: /node_modules\/react-toastify/ }
+    ];
+    return config;
+  },
 };
 
 export default nextConfig;
