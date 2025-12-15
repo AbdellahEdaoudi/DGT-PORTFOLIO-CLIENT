@@ -2,7 +2,7 @@
 import axios from "axios";
 import React, { useState } from "react";
 import { toast } from "react-toastify";
-import { ArrowUp, ArrowDown, CheckCheck, Loader, Plus, Trash2, ChevronDown, ChevronUp, Pencil } from "lucide-react";
+import { ArrowUp, ArrowDown, CheckCheck, Loader, Plus, Trash2, X, ChevronUp, Pencil } from "lucide-react";
 
 import { useTranslation } from "../../lib/translations";
 
@@ -111,7 +111,7 @@ export default function Experience({ userData, setUserDetails }) {
                     className={`p-2 rounded-lg transition-colors flex items-center gap-2 text-sm font-medium ${exp.collapsed ? 'bg-amber-50 text-amber-700 hover:bg-amber-100' : 'bg-gray-100 text-gray-700 hover:bg-gray-200'}`}
                     title={exp.collapsed ? t('edit') : t('close') || "Close"}
                   >
-                    <Pencil size={16} />
+                    {exp.collapsed ? <Pencil size={16} /> : <X size={16} />}
                     <span className="hidden md:inline">{exp.collapsed ? t('edit') : (t('close') || "Close")}</span>
                   </button>
 

@@ -2,7 +2,7 @@
 import axios from "axios";
 import React, { useState } from "react";
 import { toast } from "react-toastify";
-import { ArrowUp, ArrowDown, CheckCheck, Loader, Plus, Trash2, ChevronDown, ChevronUp, Pencil } from "lucide-react";
+import { ArrowUp, ArrowDown, CheckCheck, Loader, Plus, Trash2, X, Pencil } from "lucide-react";
 
 import { useTranslation } from "../../lib/translations";
 
@@ -110,7 +110,7 @@ export default function Projects({ userData, setUserDetails }) {
                     className={`p-2 rounded-lg transition-colors flex items-center gap-2 text-sm font-medium ${proj.collapsed ? 'bg-green-50 text-green-700 hover:bg-green-100' : 'bg-gray-100 text-gray-700 hover:bg-gray-200'}`}
                     title={proj.collapsed ? t('edit') : t('collapse') || "Collapse"}
                   >
-                    <Pencil size={16} />
+                    {proj.collapsed ? <Pencil size={16} /> : <X size={16} />}
                     <span className="hidden md:inline">{proj.collapsed ? t('edit') : (t('close') || "Close")}</span>
                   </button>
 
