@@ -3,6 +3,7 @@ import { useState } from "react"
 import { Mail, Send, CheckCircle, AlertCircle, Copy, Users } from "lucide-react"
 import axios from "axios"
 import { toast } from "react-toastify"
+import Editor from "@monaco-editor/react"
 
 export default function BulkEmail({ data }) {
     const [recipients, setRecipients] = useState("")
@@ -215,16 +216,28 @@ export default function BulkEmail({ data }) {
                             </div>
 
                             {previewMode ? (
-                                <div className="w-full min-h-[300px] bg-white text-black p-6 rounded-lg overflow-auto border border-gray-700">
+                                <div className="w-full min-h-[400px] bg-white text-black p-6 rounded-lg overflow-auto border border-gray-700">
                                     <div dangerouslySetInnerHTML={{ __html: content || "<p style='color: gray; text-align: center'>No content to preview</p>" }} />
                                 </div>
                             ) : (
-                                <textarea
-                                    value={content}
-                                    onChange={(e) => setContent(e.target.value)}
-                                    placeholder="<p>Hello,</p><br/><p>Write your message here. Basic HTML tags like <b>bold</b>, <i>italic</i>, and <a href='#'>links</a> are supported.</p>"
-                                    className="w-full h-[300px] bg-slate-950/50 border border-purple-500/20 rounded-lg p-4 text-white placeholder-gray-500 focus:outline-none focus:border-purple-500/50 resize-y font-mono text-sm"
-                                />
+                                <div className="border border-purple-500/20 rounded-lg overflow-hidden">
+                                    <Editor
+                                        height="400px"
+                                        defaultLanguage="html"
+                                        value={content}
+                                        theme="vs-dark"
+                                        onChange={(value) => setContent(value || "")}
+                                        options={{
+                                            minimap: { enabled: false },
+                                            fontSize: 12,
+                                            lineNumbers: "on",
+                                            scrollBeyondLastLine: false,
+                                            automaticLayout: true,
+                                            padding: { top: 16, bottom: 16 },
+                                            fontFamily: "monospace"
+                                        }}
+                                    />
+                                </div>
                             )}
                         </div>
                     </div>
