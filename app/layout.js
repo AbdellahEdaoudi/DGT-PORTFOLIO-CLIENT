@@ -32,6 +32,7 @@ export const metadata = {
       },
     ],
     locale: "en_US",
+    alternateLocales: ["fr_FR", "es_ES", "ar_AR", "de_DE", "ru_RU", "ja_JP", "zh_CN", "nl_NL", "pt_PT", "it_IT", "tr_TR", "hi_IN", "ko_KR"],
     type: "website",
   },
   twitter: {
@@ -39,6 +40,25 @@ export const metadata = {
     title: "Build Your Personal Portfolio Online - DGT Portfolio",
     description: "No code, no hassle. Build a clean, modern portfolio in minutes. Showcase your career, skills, projects, and work links like never before—leave a lasting impression and unlock new opportunities.",
     images: ["/logo.png"],
+  },
+  alternates: {
+    canonical: './',
+    languages: {
+      'en': '/en',
+      'fr': '/fr',
+      'es': '/es',
+      'ar': '/ar',
+      'de': '/de',
+      'ru': '/ru',
+      'ja': '/ja',
+      'zh': '/zh',
+      'nl': '/nl',
+      'pt': '/pt',
+      'it': '/it',
+      'tr': '/tr',
+      'hi': '/hi',
+      'ko': '/ko',
+    },
   },
 };
 
