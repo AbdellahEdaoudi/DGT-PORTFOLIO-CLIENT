@@ -4,7 +4,7 @@ import React, { useContext, useState } from 'react';
 import axios from 'axios';
 import { MyContext } from '../Context/MyContext';
 import { toast } from 'react-toastify';
-import { CheckCheck, Mail, Phone, Loader2, FolderOpen, MessageCircle, MapPin, ImagePlus, X } from '../Components/Icons';
+import { CheckCheck, Mail, Phone, Loader2, FolderOpen, MessageCircle, MapPin, ImagePlus, X, Loader } from '../Components/Icons';
 
 import WarningModal from "./Pages/WarningModal"
 import MagicalLoader from '../Components/MagicalLoader';
@@ -169,6 +169,7 @@ export default function ContactForm() {
                       type="text"
                       id="subject"
                       value={subject}
+                      maxLength={100}
                       required
                       onChange={(e) => setSubject(e.target.value)}
                       className="pl-10 border-teal-300 focus:border-teal-500 focus:ring-teal-500 w-full rounded-md border h-10 bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
@@ -224,11 +225,11 @@ export default function ContactForm() {
                 <button
                   type="submit"
                   disabled={loading}
-                  className="w-full bg-gradient-to-r from-teal-700 to-teal-800 text-white py-2 px-4 rounded-md hover:from-teal-800 hover:to-teal-900 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:ring-offset-2 transition-all duration-300"
+                  className="flex items-center justify-center gap-2 w-full bg-gradient-to-r from-teal-700 to-teal-800 text-white py-2 px-4 rounded-md hover:from-teal-800 hover:to-teal-900 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:ring-offset-2 transition-all duration-300"
                 >
                   {loading ? (
                     <>
-                      <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                      <Loader className="mr-2 h-4 w-4 animate-spin" />
                       {t('sending')}
                     </>
                   ) : (

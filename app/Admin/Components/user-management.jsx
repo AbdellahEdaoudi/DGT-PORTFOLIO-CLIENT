@@ -1,12 +1,10 @@
 "use client"
-
 import { useState } from "react"
 import { Search, AlertCircle, Loader, X, ExternalLink } from "../../Components/Icons"
 import { toast } from "react-toastify"
 import axios from "axios"
 import { useRouter } from "next/navigation"
 import Image from "next/image"
-
 import ThemeOne from "../../Components/themes/themeone"
 import ThemeTwo from "../../Components/themes/themetwo"
 import ThemeThree from "../../Components/themes/themethree"
@@ -162,8 +160,8 @@ export default function UserManagement({ data, setData }) {
                       <tr key={user._id} className="border-b border-purple-500/10 hover:bg-purple-500/10 transition">
                         <td className="px-4 py-2 text-white font-medium">
                           <div className="flex items-center gap-2">
-                            <div onClick={() => setSelectedPreviewUser(user)} className="cursor-pointer hover:opacity-80 transition">
-                              <Image src={user?.urlimage} width={32} height={32} className="rounded-lg" alt="Profile User" />
+                            <div onClick={() => setSelectedPreviewUser(user)} className="cursor-pointer hover:opacity-80 transition shrink-0">
+                              <Image src={user?.urlimage} width={32} height={32} className="rounded-lg object-cover" alt="Profile User" />
                             </div>
                             <span
                               onClick={() => window.open(PORTFOLIO, "_blank")}

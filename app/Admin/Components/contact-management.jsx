@@ -162,7 +162,7 @@ export default function ContactManagement({ data, setData }) {
             <div className="p-4 sm:p-8 overflow-y-auto custom-scrollbar">
               <div className="mb-6 sm:mb-8">
                 <span className="text-xs font-bold text-purple-400 tracking-wider uppercase mb-2 block">Subject</span>
-                <h2 className="text-lg sm:text-2xl font-bold text-white leading-tight break-words">
+                <h2 className="text-xs sm:text-sm font-bold text-white leading-tight break-words">
                   {selectedMessage.subject || "No Subject"}
                 </h2>
               </div>
@@ -171,7 +171,7 @@ export default function ContactManagement({ data, setData }) {
                 <span className="text-xs font-bold text-slate-500 tracking-wider uppercase mb-3 flex items-center gap-2">
                   <Mail className="w-3 h-3" /> Message Content
                 </span>
-                <div className="bg-slate-950/50 p-4 sm:p-6 rounded-xl border border-slate-800/50 text-slate-300 leading-relaxed text-sm sm:text-base whitespace-pre-wrap break-words break-all">
+                <div className="bg-slate-950/50 p-4 sm:p-6 rounded-xl border border-slate-800/50 text-slate-300 leading-relaxed text-xs sm:text-sm whitespace-pre-wrap break-words break-all">
                   {selectedMessage.message}
                 </div>
               </div>
@@ -255,10 +255,12 @@ export default function ContactManagement({ data, setData }) {
             className="relative max-w-5xl max-h-[90vh] w-full h-full flex items-center justify-center"
             onClick={(e) => e.stopPropagation()}
           >
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
+            <Image
               src={selectedImage}
               alt="Full Preview"
+              width={1200}
+              height={1200}
+              unoptimized
               className="max-w-full max-h-full object-contain rounded-lg shadow-2xl animate-in zoom-in-95 duration-300"
             />
           </div>

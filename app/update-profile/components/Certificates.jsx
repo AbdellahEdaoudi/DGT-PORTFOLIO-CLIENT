@@ -1,5 +1,6 @@
 "use client";
 import axios from "axios";
+import Image from "next/image";
 import React, { useState } from "react";
 import { toast } from "react-toastify";
 import { ArrowUp, ArrowDown, CheckCheck, Loader, Plus, Trash2, Award, Upload, X } from "../../Components/Icons";
@@ -225,7 +226,7 @@ export default function Certificates({ userData, setUserDetails }) {
                                         <div className="relative h-full min-h-[100px] flex flex-col items-center justify-center gap-2 px-3 py-2 border border-blue-200 rounded-lg bg-blue-50 overflow-hidden group">
                                             {/* Preview Image Background */}
                                             <div className="absolute inset-0 z-0 opacity-20">
-                                                <img src={cert.previewUrl || cert.cfimage} alt="preview" className="w-full h-full object-cover" />
+                                                <Image src={cert.previewUrl || cert.cfimage} alt="preview" width={500} height={300} className="w-full h-full object-cover" unoptimized />
                                             </div>
 
                                             <div className="z-10 flex flex-col items-center gap-2">

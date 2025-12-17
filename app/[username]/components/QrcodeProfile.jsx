@@ -198,6 +198,12 @@ function QrcodeProfile({ userDetails, className, isOpen, onClose }) {
 
   const t = (key) => translations[lang][key] || translations.en[key]; // Translation function
 
+  // Preload the QR code logo to ensure it appears instantly
+  useEffect(() => {
+    const img = new Image();
+    img.src = "/LogoinQrcode.png";
+  }, []);
+
   // Lock body scroll when modal is open
   useEffect(() => {
     if (showModal) {
