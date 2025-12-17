@@ -1,8 +1,7 @@
 "use client"
 import axios from 'axios'
 import { CheckCheck, Loader, FileDown } from '../../Components/Icons'
-import { PDFDownloadLink } from '@react-pdf/renderer'
-import ResumePdf from './ResumePdf'
+import DownloadResume from '../../Components/downloadcv/DownloadResume'
 import Image from 'next/image'
 import { useRouter } from 'next/navigation'
 import React, { useContext } from 'react'
@@ -252,49 +251,7 @@ function Userinfo({ userData, setUserDetails }) {
       </div>
       {/* Submit Button */}
       <div className="flex justify-end py-4 border-b-2 border-gray-200 gap-4">
-        <PDFDownloadLink
-          document={<ResumePdf userData={userData} />}
-          fileName={`cv.${userData?.username || 'resume'}.pdf`}
-          className="bg-gradient-to-r from-blue-500 to-indigo-600 hover:from-blue-600 hover:to-indigo-700 text-white font-bold px-8 py-3 rounded-lg transition-all duration-300 flex items-center gap-2 transform hover:scale-105 shadow-lg"
-        >
-          {({ blob, url, loading, error }) => {
-            if (error) {
-              return (
-                <>
-                  <span className="text-red-500">{t('errorGeneratingPdf') || 'Error generating PDF'}</span>
-                </>
-              );
-            }
-            return loading ? (
-              <>
-                <Loader size={20} className="animate-spin" /> {t('loading') || 'Loading...'}
-              </>
-            ) : (
-              <>
-                <FileDown size={20} />
-                {(() => {
-                  const translations = {
-                    en: 'Download CV',
-                    fr: 'Télécharger CV',
-                    es: 'Descargar CV',
-                    ar: 'تحميل السيرة الذاتية',
-                    de: 'Lebenslauf herunterladen',
-                    ru: 'Скачать резюме',
-                    ja: '履歴書をダウンロード',
-                    zh: '下载简历',
-                    nl: 'CV downloaden',
-                    pt: 'Baixar CV',
-                    it: 'Scarica CV',
-                    hi: 'सीवी डाउनलोड करें',
-                    tr: 'CV İndir',
-                    ko: 'CV 다운로드',
-                  };
-                  return translations[userData?.displayLanguage] || translations['en'];
-                })()}
-              </>
-            );
-          }}
-        </PDFDownloadLink>
+        <DownloadResume userDetails={userData} className="bg-gradient-to-r from-blue-500 to-indigo-600 hover:from-blue-600 hover:to-indigo-700 text-white font-bold px-8 py-3 rounded-lg transition-all duration-300 flex items-center gap-2 transform hover:scale-105 shadow-lg" />
         <button onClick={UpUserInfo}
           type="submit"
           disabled={loading}

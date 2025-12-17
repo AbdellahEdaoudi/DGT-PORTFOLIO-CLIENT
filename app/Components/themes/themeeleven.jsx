@@ -6,9 +6,8 @@ import UserLinks from "../../[username]/components/UserLinks"
 import Image from "next/image"
 import Link from "next/link"
 import { useTranslation } from "../../lib/translations"
-import { PDFDownloadLink } from "@react-pdf/renderer"
-import ResumePdf from "../../update-profile/components/ResumePdf"
 import ImageModal from "../ImageModal"
+import DownloadResume from "../downloadcv/DownloadResume"
 
 export default function ThemeEleven({ userDetails, userLinks }) {
     const { t } = useTranslation(userDetails?.displayLanguage || 'en')
@@ -53,7 +52,7 @@ export default function ThemeEleven({ userDetails, userLinks }) {
         setStars(newStars);
     }, []);
 
-    const MyResume = useMemo(() => <ResumePdf userData={userDetails} />, [userDetails]);
+
 
     return (
         <div
@@ -100,42 +99,7 @@ export default function ThemeEleven({ userDetails, userLinks }) {
                     </div>
 
                     <div className="flex gap-4">
-                        <PDFDownloadLink
-                            document={MyResume}
-                            fileName={`cv.${userDetails?.username || 'resume'}.pdf`}
-                            title={(() => {
-                                const translations = {
-                                    en: 'Download CV',
-                                    fr: 'Télécharger CV',
-                                    es: 'Descargar CV',
-                                    ar: 'تحميل السيرة الذاتية',
-                                    de: 'Lebenslauf herunterladen',
-                                    ru: 'Скачать резюме',
-                                    ja: '履歴書をダウンロード',
-                                    zh: '下载简历',
-                                    nl: 'CV downloaden',
-                                    pt: 'Baixar CV',
-                                    it: 'Scarica CV',
-                                    hi: 'सीवी डाउनलोड करें',
-                                    tr: 'CV İndir',
-                                    ko: 'CV 다운로드',
-                                };
-                                return translations[userDetails?.displayLanguage] || translations['en']
-                            })()}
-                            className="cursor-pointer px-5 py-2 border border-cyan-500/30 bg-cyan-950/30 rounded hover:bg-cyan-500/20 transition-all text-cyan-400 font-bold text-xs flex items-center"
-                        >
-                            {({ blob, url, loading, error }) =>
-                                loading ? (
-                                    <div>
-                                        <Loader size={20} className="animate-spin" /> {t('loading') || 'Loading...'}
-                                    </div>
-                                ) : (
-                                    <div>
-                                        <FileDown size={20} />
-                                    </div>
-                                )
-                            }
-                        </PDFDownloadLink>
+                        <DownloadResume userDetails={userDetails} className="cursor-pointer px-5 py-2 border border-cyan-500/30 bg-cyan-950/30 rounded hover:bg-cyan-500/20 transition-all text-cyan-400 font-bold text-xs flex items-center" />
                         <div onClick={() => setShowQR(true)} className="cursor-pointer border border-cyan-500/30 bg-cyan-950/30 rounded hover:bg-cyan-500/20 transition-all text-cyan-400 font-bold text-xs flex items-center justify-center">
                             <QrcodeProfile userDetails={userDetails} className="text-cyan-400 border-none bg-transparent hover:bg-transparent shadow-none" isOpen={showQR} onClose={() => setShowQR(false)} />
                         </div>

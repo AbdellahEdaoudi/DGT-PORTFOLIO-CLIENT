@@ -6,9 +6,8 @@ import UserLinks from "../../[username]/components/UserLinks"
 import Image from "next/image"
 import Link from "next/link"
 import { useTranslation } from "../../lib/translations"
-import { PDFDownloadLink } from "@react-pdf/renderer"
-import ResumePdf from "../../update-profile/components/ResumePdf"
 import ImageModal from "../ImageModal"
+import DownloadResume from "../downloadcv/DownloadResume"
 
 export default function ThemeThirteen({ userDetails, userLinks }) {
     const { t } = useTranslation(userDetails?.displayLanguage || 'en')
@@ -18,7 +17,7 @@ export default function ThemeThirteen({ userDetails, userLinks }) {
     const [expanded, setExpanded] = useState(false);
     const [selectedImage, setSelectedImage] = useState(null);
 
-    const MyResume = useMemo(() => <ResumePdf userData={userDetails} />, [userDetails]);
+
 
     return (
         <div
@@ -48,42 +47,7 @@ export default function ThemeThirteen({ userDetails, userLinks }) {
                         </h1>
                         <div className="flex gap-3">
                             {/* Copy Link */}
-                            <PDFDownloadLink
-                                document={MyResume}
-                                fileName={`cv.${userDetails?.username || 'resume'}.pdf`}
-                                title={(() => {
-                                    const translations = {
-                                        en: 'Download CV',
-                                        fr: 'Télécharger CV',
-                                        es: 'Descargar CV',
-                                        ar: 'تحميل السيرة الذاتية',
-                                        de: 'Lebenslauf herunterladen',
-                                        ru: 'Скачать резюме',
-                                        ja: '履歴書をダウンロード',
-                                        zh: '下载简历',
-                                        nl: 'CV downloaden',
-                                        pt: 'Baixar CV',
-                                        it: 'Scarica CV',
-                                        hi: 'सीवी डाउनलोड करें',
-                                        tr: 'CV İndir',
-                                        ko: 'CV 다운로드',
-                                    };
-                                    return translations[userDetails?.displayLanguage] || translations['en']
-                                })()}
-                                className="text-slate-700 bg-white border border-slate-200 hover:border-blue-500/50 hover:bg-slate-50 font-bold px-5 py-3 rounded-xl transition-all duration-300 flex items-center gap-2 transform hover:scale-105 shadow-sm hover:shadow-md"
-                            >
-                                {({ blob, url, loading, error }) =>
-                                    loading ? (
-                                        <>
-                                            <Loader size={20} className="animate-spin text-blue-500" /> {t('loading') || 'Loading...'}
-                                        </>
-                                    ) : (
-                                        <>
-                                            <FileDown size={20} className="text-blue-600" />
-                                        </>
-                                    )
-                                }
-                            </PDFDownloadLink>
+                            <DownloadResume userDetails={userDetails} className="text-slate-700 bg-white border border-slate-200 hover:border-blue-500/50 hover:bg-slate-50 font-bold px-5 py-3 rounded-xl transition-all duration-300 flex items-center gap-2 transform hover:scale-105 shadow-sm hover:shadow-md" />
                             {/* QR Code */}
                             <div
                                 onClick={() => setShowQR(true)}

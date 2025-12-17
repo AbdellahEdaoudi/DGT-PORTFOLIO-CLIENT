@@ -6,9 +6,8 @@ import UserLinks from "../../[username]/components/UserLinks"
 import Image from "next/image"
 import Link from "next/link"
 import { useTranslation } from "../../lib/translations"
-import { PDFDownloadLink } from "@react-pdf/renderer"
-import ResumePdf from "../../update-profile/components/ResumePdf"
 import ImageModal from "../ImageModal"
+import DownloadResume from "../downloadcv/DownloadResume"
 
 export default function ThemeNine({ userDetails, userLinks }) {
     const { t } = useTranslation(userDetails?.displayLanguage || 'en')
@@ -18,7 +17,7 @@ export default function ThemeNine({ userDetails, userLinks }) {
     const [expanded, setExpanded] = useState(false);
     const [selectedImage, setSelectedImage] = useState(null);
 
-    const MyResume = useMemo(() => <ResumePdf userData={userDetails} />, [userDetails]);
+
 
     return (
         <div
@@ -55,42 +54,7 @@ export default function ThemeNine({ userDetails, userLinks }) {
                         </h1>
                         <div className="flex gap-3">
                             {/* Copy Link */}
-                            <PDFDownloadLink
-                                title={(() => {
-                                    const translations = {
-                                        en: 'Download CV',
-                                        fr: 'Télécharger CV',
-                                        es: 'Descargar CV',
-                                        ar: 'تحميل السيرة الذاتية',
-                                        de: 'Lebenslauf herunterladen',
-                                        ru: 'Скачать резюме',
-                                        ja: '履歴書をダウンロード',
-                                        zh: '下载简历',
-                                        nl: 'CV downloaden',
-                                        pt: 'Baixar CV',
-                                        it: 'Scarica CV',
-                                        hi: 'सीवी डाउनलोड करें',
-                                        tr: 'CV İndir',
-                                        ko: 'CV 다운로드',
-                                    };
-                                    return translations[userDetails?.displayLanguage] || translations['en']
-                                })()}
-                                document={MyResume}
-                                fileName={`cv.${userDetails?.username || 'resume'}.pdf`}
-                                className=" text-white bg-white/10 hover:bg-white/20 font-bold px-5 py-3 rounded-lg transition-all duration-300 flex items-center gap-2 transform hover:scale-105 shadow-lg"
-                            >
-                                {({ blob, url, loading, error }) =>
-                                    loading ? (
-                                        <>
-                                            <Loader size={20} className="animate-spin" /> {t('loading') || 'Loading...'}
-                                        </>
-                                    ) : (
-                                        <>
-                                            <FileDown size={20} />
-                                        </>
-                                    )
-                                }
-                            </PDFDownloadLink>
+                            <DownloadResume userDetails={userDetails} className="text-white bg-white/10 hover:bg-white/20 font-bold px-5 py-3 rounded-lg transition-all duration-300 flex items-center gap-2 transform hover:scale-105 shadow-lg" />
                             {/* QR Code */}
                             <div
                                 onClick={() => setShowQR(true)}

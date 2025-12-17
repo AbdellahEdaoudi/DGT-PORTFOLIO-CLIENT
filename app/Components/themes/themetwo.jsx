@@ -1,14 +1,12 @@
-"use client"
-import { useState, useMemo } from "react"
-import { Mail, Code2, Briefcase, GraduationCap, Globe, Sparkles, User, Layers, Zap, Loader, FileDown, Award } from "../Icons"
+import { useState } from "react"
+import { Mail, Code2, Briefcase, GraduationCap, Globe, Sparkles, User, Layers, Zap, Award } from "../Icons"
 import QrcodeProfile from "../../[username]/components/QrcodeProfile"
 import UserLinks from "../../[username]/components/UserLinks"
 import Image from "next/image"
 import Link from "next/link"
 import { useTranslation } from "../../lib/translations"
-import { PDFDownloadLink } from "@react-pdf/renderer"
-import ResumePdf from "../../update-profile/components/ResumePdf"
 import ImageModal from "../ImageModal"
+import DownloadResume from "../downloadcv/DownloadResume"
 
 export default function ThemeTwo({ userDetails, userLinks }) {
   const { t } = useTranslation(userDetails?.displayLanguage || 'en')
@@ -17,8 +15,6 @@ export default function ThemeTwo({ userDetails, userLinks }) {
   const [showUserLinks, setShowUserLinks] = useState(false);
   const [expanded, setExpanded] = useState(false);
   const [selectedImage, setSelectedImage] = useState(null);
-
-  const MyResume = useMemo(() => <ResumePdf userData={userDetails} />, [userDetails]);
 
   return (
     <div
@@ -54,43 +50,8 @@ export default function ThemeTwo({ userDetails, userLinks }) {
               <Link href={"https://dgtportfolio.com"}>{t('portfolio')}</Link>
             </h1>
             <div className="flex gap-3">
-              {/* Copy Link */}
-              <PDFDownloadLink
-                document={MyResume}
-                fileName={`cv.${userDetails?.username || 'resume'}.pdf`}
-                title={(() => {
-                  const translations = {
-                    en: 'Download CV',
-                    fr: 'Télécharger CV',
-                    es: 'Descargar CV',
-                    ar: 'تحميل السيرة الذاتية',
-                    de: 'Lebenslauf herunterladen',
-                    ru: 'Скачать резюме',
-                    ja: '履歴書をダウンロード',
-                    zh: '下载简历',
-                    nl: 'CV downloaden',
-                    pt: 'Baixar CV',
-                    it: 'Scarica CV',
-                    hi: 'सीवी डाउनलोड करें',
-                    tr: 'CV İndir',
-                    ko: 'CV 다운로드',
-                  };
-                  return translations[userDetails?.displayLanguage] || translations['en']
-                })()}
-                className=" text-white bg-white/10 hover:bg-white/20 font-bold px-5 py-3 rounded-lg transition-all duration-300 flex items-center gap-2 transform hover:scale-105 shadow-lg"
-              >
-                {({ blob, url, loading, error }) =>
-                  loading ? (
-                    <>
-                      <Loader size={20} className="animate-spin" /> {t('loading') || 'Loading...'}
-                    </>
-                  ) : (
-                    <>
-                      <FileDown size={20} />
-                    </>
-                  )
-                }
-              </PDFDownloadLink>
+              {/* Download Resume */}
+              <DownloadResume userDetails={userDetails} className="text-white bg-white/10 hover:bg-white/20 font-bold px-5 py-3 rounded-lg transition-all duration-300 flex items-center gap-2 transform hover:scale-105 shadow-lg disabled:opacity-50 disabled:cursor-not-allowed" />
               {/* QR Code */}
               <div
                 onClick={() => setShowQR(true)}
