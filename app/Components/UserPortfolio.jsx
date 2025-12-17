@@ -75,7 +75,7 @@ export default function UserPortfolio({ params }) {
             case 1:
                 return <Themeone userDetails={userDetails} userLinks={userLinks} />
             case 2:
-                return <ThemeThirteen userDetails={userDetails} userLinks={userLinks} />
+                return <ThemeTwo userDetails={userDetails} userLinks={userLinks} />
             case 3:
                 return <ThemeThree userDetails={userDetails} userLinks={userLinks} />
             case 4:

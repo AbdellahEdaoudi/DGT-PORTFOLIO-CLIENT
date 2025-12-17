@@ -16,6 +16,7 @@ import axios from 'axios'
 import AccountNotFound from "./AccountNotFound"
 import MagicalLoader from './MagicalLoader'
 import { MyContext } from '../Context/MyContext'
+import ThemeThirteen from './themes/themethirteen'
 
 export default function SubdomainClient({ username }) {
   const [userDetails, setUserDetails] = useState(null)
@@ -95,6 +96,8 @@ export default function SubdomainClient({ username }) {
         return <ThemeEleven userDetails={userDetails} userLinks={userLinks} />
       case 12:
         return <ThemeTwelve userDetails={userDetails} userLinks={userLinks} />
+      case 13:
+        return <ThemeThirteen userDetails={userDetails} userLinks={userLinks} />
       default:
         return userDetails ? <Themeone userDetails={userDetails} userLinks={userLinks} /> :
           <MagicalLoader />

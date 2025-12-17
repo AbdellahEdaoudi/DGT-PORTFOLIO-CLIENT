@@ -287,7 +287,7 @@ function QrcodeProfile({ userDetails, className, isOpen, onClose }) {
     <>
       <div
         onClick={() => !isControlled && setInternalIsOpen(true)}
-        className={`size-10 flex items-center justify-center rounded-full hover:bg-white/10 transition-colors cursor-pointer ${className || "text-cyan-400 border border-cyan-500/30"}`}
+        className={`size-10 flex items-center justify-center transition-colors cursor-pointer ${className || "text-cyan-400 border border-cyan-500/30"}`}
         title={t("qrCodeProfile")}
       >
         <QrCode size={22} />
