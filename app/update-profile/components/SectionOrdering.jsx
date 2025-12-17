@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import { toast } from 'react-toastify'
-import { ArrowUp, ArrowDown, CheckCheck, Loader, LayoutList, GripVertical } from 'lucide-react'
+import { ArrowUp, ArrowDown, CheckCheck, Loader, LayoutList, GripVertical } from '../../Components/Icons'
 import { useTranslation } from '../../lib/translations'
 import {
     DndContext,

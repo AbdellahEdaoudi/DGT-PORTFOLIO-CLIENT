@@ -1,15 +1,7 @@
 "use client"
 import { useState, useEffect } from 'react'
-import { Button } from "../../components/ui/button"
-import { ArrowLeft, LifeBuoy, User, CreditCard, Globe } from "lucide-react"
+import { ArrowLeft, LifeBuoy, User, CreditCard, Globe, ChevronDown } from "./Icons"
 import Link from "next/link"
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "../../components/ui/select"
 
 const translations = {
   en: {
@@ -129,6 +121,7 @@ const translations = {
 
 export default function AccountNotFound() {
   const [lang, setLang] = useState('en')
+  const [isLangOpen, setIsLangOpen] = useState(false)
   const t = translations[lang]
 
   const [particles, setParticles] = useState([])
@@ -180,6 +173,22 @@ export default function AccountNotFound() {
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-[#1e2124] overflow-hidden relative" dir={lang === 'ar' ? 'rtl' : 'ltr'}>
+      <style dangerouslySetInnerHTML={{
+        __html: `
+        .custom-scrollbar::-webkit-scrollbar {
+          width: 6px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+          background: transparent;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+          background-color: rgba(0, 168, 150, 0.5);
+          border-radius: 99px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+          background-color: #00a896;
+        }
+      `}} />
       <div className="absolute inset-0">
         {particles.map((particle, index) => (
           <div
@@ -197,29 +206,70 @@ export default function AccountNotFound() {
           />
         ))}
       </div>
-      <div className="absolute top-4 right-4 z-20">
-        <Select value={lang} onValueChange={setLang}>
-          <SelectTrigger className="w-[140px] bg-[#2a2e32] text-white border-[#00a896]">
-            <Globe className="mr-2 h-4 w-4" />
-            <SelectValue placeholder="Language" />
-          </SelectTrigger>
-          <SelectContent className="bg-[#2a2e32] text-white border-[#00a896]">
-            <SelectItem value="en">English</SelectItem>
-            <SelectItem value="fr">Français</SelectItem>
-            <SelectItem value="ar">العربية</SelectItem>
-            <SelectItem value="de">Deutsch</SelectItem>
-            <SelectItem value="ru">Русский</SelectItem>
-            <SelectItem value="es">Español</SelectItem>
-            <SelectItem value="pt">Português</SelectItem>
-            <SelectItem value="nl">Nederlands</SelectItem>
-            <SelectItem value="it">Italiano</SelectItem>
-            <SelectItem value="tr">Türkçe</SelectItem>
-            <SelectItem value="ko">한국어</SelectItem>
-            <SelectItem value="zh">中文</SelectItem>
-            <SelectItem value="ja">日本語</SelectItem>
-            <SelectItem value="hi">हिंदी</SelectItem>
-          </SelectContent>
-        </Select>
+      <div className="absolute top-4 right-4 z-50">
+        <div className="relative inline-block w-40">
+          <button
+            onClick={() => setIsLangOpen(!isLangOpen)}
+            className="w-full flex items-center justify-between bg-[#1e2124]/80 text-white border border-[#00a896]/30 hover:border-[#00a896] rounded-xl py-2.5 pl-3 pr-3 focus:outline-none focus:ring-2 focus:ring-[#00a896]/50 transition-all duration-300 backdrop-blur-md shadow-lg text-sm font-medium cursor-pointer"
+          >
+            <div className="flex items-center gap-2">
+              <Globe className="h-4 w-4 text-gray-400" />
+              <span>
+                {/* Display label based on current lang */}
+                {{
+                  en: "English",
+                  fr: "Français",
+                  ar: "العربية",
+                  de: "Deutsch",
+                  ru: "Русский",
+                  es: "Español",
+                  pt: "Português",
+                  nl: "Nederlands",
+                  it: "Italiano",
+                  tr: "Türkçe",
+                  ko: "한국어",
+                  zh: "中文",
+                  ja: "日本語",
+                  hi: "हिंदी",
+                }[lang]}
+              </span>
+            </div>
+            <ChevronDown className={`h-4 w-4 text-gray-400 transition-transform duration-200 ${isLangOpen ? 'rotate-180' : ''}`} />
+          </button>
+
+          {isLangOpen && (
+            <div className="custom-scrollbar absolute top-full right-0 mt-2 w-full bg-[#2a2e32] border border-[#00a896]/30 rounded-xl overflow-hidden shadow-2xl z-50 animate-in fade-in zoom-in-95 duration-100 max-h-72 overflow-y-auto">
+              {[
+                { code: "en", label: "English" },
+                { code: "fr", label: "Français" },
+                { code: "ar", label: "العربية" },
+                { code: "de", label: "Deutsch" },
+                { code: "ru", label: "Русский" },
+                { code: "es", label: "Español" },
+                { code: "pt", label: "Português" },
+                { code: "nl", label: "Nederlands" },
+                { code: "it", label: "Italiano" },
+                { code: "tr", label: "Türkçe" },
+                { code: "ko", label: "한국어" },
+                { code: "zh", label: "中文" },
+                { code: "ja", label: "日本語" },
+                { code: "hi", label: "हिंदी" },
+              ].map((language) => (
+                <div
+                  key={language.code}
+                  onClick={() => {
+                    setLang(language.code);
+                    setIsLangOpen(false);
+                  }}
+                  className={`px-4 py-2 text-sm text-gray-200 hover:bg-[#00a896]/20 hover:text-white cursor-pointer transition-colors flex items-center justify-between ${lang === language.code ? 'bg-[#00a896]/10 text-[#00a896]' : ''}`}
+                >
+                  {language.label}
+                  {lang === language.code && <div className="h-1.5 w-1.5 rounded-full bg-[#00a896]" />}
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
       </div>
       <main className="flex-grow flex items-start  justify-center px-4 z-10">
         <div className="max-w-md w-full text-center bg-[#2a2e32] p-8 rounded-lg shadow-2xl backdrop-blur-sm bg-opacity-80">
@@ -233,21 +283,17 @@ export default function AccountNotFound() {
             {t.description}
           </p>
           <div className="space-y-4">
-            <Button asChild className="w-full bg-gradient-to-r from-purple-600 to-cyan-600 hover:from-purple-500 hover:to-cyan-500 text-white py-2 px-4 rounded-md transition-all duration-300 transform hover:scale-105">
-              <Link href={"https://dgtportfolio.com/subscription"} className="flex items-center justify-center gap-1">
-                <CreditCard className="mr-2 h-4 w-4" /> {t.subscribe}
-              </Link>
-            </Button>
-            <Button asChild className="w-full bg-[#00a896] hover:bg-[#008080] text-white py-2 px-4 rounded-md transition-all duration-300 transform hover:scale-105">
-              <Link href={"https://dgtportfolio.com/" + lang} className="flex items-center justify-center gap-1">
-                <ArrowLeft className="mr-2 h-4 w-4" /> {t.returnHome}
-              </Link>
-            </Button>
-            <Button asChild variant="outline" className="w-full border-[#00a896] text-[#00a896] hover:bg-[#00a896] hover:text-white py-2 px-4 rounded-md transition-all duration-300">
-              <Link href={"https://dgtportfolio.com/support"} className="flex items-center justify-center gap-1">
-                <LifeBuoy className="mr-2 h-4 w-4" /> {t.contactSupport}
-              </Link>
-            </Button>
+            <Link href={"https://dgtportfolio.com/subscription"} className="w-full flex items-center justify-center gap-1 bg-gradient-to-r from-purple-600 to-cyan-600 hover:from-purple-500 hover:to-cyan-500 text-white py-2 px-4 rounded-md transition-all duration-300 transform hover:scale-105">
+              <CreditCard className="mr-2 h-4 w-4" /> {t.subscribe}
+            </Link>
+
+            <Link href={"https://dgtportfolio.com/" + lang} className="w-full flex items-center justify-center gap-1 bg-[#00a896] hover:bg-[#008080] text-white py-2 px-4 rounded-md transition-all duration-300 transform hover:scale-105">
+              <ArrowLeft className="mr-2 h-4 w-4" /> {t.returnHome}
+            </Link>
+
+            <Link href={"https://dgtportfolio.com/support"} className="w-full flex items-center justify-center gap-1 bg-white border border-[#00a896] text-[#00a896] hover:bg-[#00a896] hover:text-white py-2 px-4 rounded-md transition-all duration-300">
+              <LifeBuoy className="mr-2 h-4 w-4" /> {t.contactSupport}
+            </Link>
           </div>
         </div>
       </main>

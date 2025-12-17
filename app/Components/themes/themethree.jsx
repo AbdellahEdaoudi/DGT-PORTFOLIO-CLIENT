@@ -1,6 +1,6 @@
 "use client"
-import { useState } from "react"
-import { Mail, Code2, Briefcase, GraduationCap, Globe, Sparkles, User, Layers, Zap, Loader, FileDown, Award } from "lucide-react"
+import { useState, useMemo } from "react"
+import { Mail, Code2, Briefcase, GraduationCap, Globe, Sparkles, User, Layers, Zap, Loader, FileDown, Award } from "../Icons"
 import QrcodeProfile from "../../[username]/components/QrcodeProfile"
 import UserLinks from "../../[username]/components/UserLinks"
 import Image from "next/image"
@@ -14,8 +14,11 @@ export default function ThemeThree({ userDetails, userLinks }) {
   const { t } = useTranslation(userDetails?.displayLanguage || 'en')
   const [activeTab, setActiveTab] = useState("about")
   const [showQR, setShowQR] = useState(false);
+  const [showUserLinks, setShowUserLinks] = useState(false);
   const [expanded, setExpanded] = useState(false);
   const [selectedImage, setSelectedImage] = useState(null);
+
+  const MyResume = useMemo(() => <ResumePdf userData={userDetails} />, [userDetails]);
 
   return (
     <div
@@ -51,7 +54,7 @@ export default function ThemeThree({ userDetails, userLinks }) {
             <div className="flex gap-3">
               {/* Copy Link */}
               <PDFDownloadLink
-                document={<ResumePdf userData={userDetails} />}
+                document={MyResume}
                 title={(() => {
                   const translations = {
                     en: 'Download CV',
@@ -88,14 +91,16 @@ export default function ThemeThree({ userDetails, userLinks }) {
               </PDFDownloadLink>
               {/* QR Code */}
               <div
-                onClick={() => setShowQR(!showQR)}
+                onClick={() => setShowQR(true)}
                 className="flex items-center gap-2 px-2 bg-white/10 hover:bg-pink-500/20 rounded-lg text-white transition-all duration-300 backdrop-blur-md border border-white/10 hover:border-pink-500/50 cursor-pointer"
               >
-                <QrcodeProfile userDetails={userDetails} />
+                <QrcodeProfile userDetails={userDetails} className="text-white border-none hover:bg-transparent" isOpen={showQR} onClose={() => setShowQR(false)} />
               </div>
               {/* User Links */}
-              <div className="flex items-center gap-2 px-2 bg-white/10 hover:bg-pink-500/20 rounded-lg text-white transition-all duration-300 backdrop-blur-md border border-white/10 hover:border-pink-500/50">
-                <UserLinks lang={userDetails?.displayLanguage} userLinks={userLinks} />
+              <div
+                onClick={() => setShowUserLinks(true)}
+                className="flex items-center gap-2 px-2 bg-white/10 hover:bg-pink-500/20 rounded-lg text-white transition-all duration-300 backdrop-blur-md border border-white/10 hover:border-pink-500/50 cursor-pointer">
+                <UserLinks lang={userDetails?.displayLanguage} userLinks={userLinks} className="text-white border-none hover:bg-transparent" isOpen={showUserLinks} onClose={() => setShowUserLinks(false)} />
               </div>
             </div>
           </div>

@@ -1,4 +1,4 @@
-import { ArrowRight, Code2, Zap, Share2, Globe2, SquareMousePointer, QrCode, Layout } from "lucide-react"
+import { ArrowRight, Code2, Zap, Share2, Globe2, SquareMousePointer, QrCode, Layout } from "../Icons"
 import Image from "next/image"
 import ThemeSlideshow from "./ThemeSlideshow"
 import Navbar from "./Navbar"

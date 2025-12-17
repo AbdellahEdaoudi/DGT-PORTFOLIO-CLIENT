@@ -7,13 +7,15 @@ import { authOptions } from "../../../../../../lib/nextAuth";
 // DELETE subscription by ID
 export async function DELETE(
   req: Request,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   const session = await getServerSession(authOptions);
 
   if (!session?.user?.email || session?.user?.email !== process.env.EMAIL) {
     return NextResponse.json({ message: "Unauthorized" }, { status: 401 });
   }
+
+  const { id } = await params;
 
   const token = jwt.sign(
     { email: session.user.email },
@@ -23,7 +25,7 @@ export async function DELETE(
 
   try {
     const backendUrl = process.env.BACKEND_URL;
-    const response = await axios.delete(`${backendUrl}/api/subscriptions/${params.id}`, {
+    const response = await axios.delete(`${backendUrl}/api/subscriptions/${id}`, {
       headers: { Authorization: `Bearer ${token}` },
     });
 

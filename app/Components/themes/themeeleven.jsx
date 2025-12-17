@@ -1,6 +1,6 @@
 "use client"
-import { useState, useEffect } from "react"
-import { Layers, Rocket, Star, ArrowUpRight, Loader, FileDown, Award, Menu, X, ArrowUp } from "lucide-react"
+import { useState, useEffect, useMemo } from "react"
+import { Layers, Rocket, Star, ArrowUpRight, Loader, FileDown, Award, Menu, X, ArrowUp } from "../Icons"
 import QrcodeProfile from "../../[username]/components/QrcodeProfile"
 import UserLinks from "../../[username]/components/UserLinks"
 import Image from "next/image"
@@ -13,6 +13,7 @@ import ImageModal from "../ImageModal"
 export default function ThemeEleven({ userDetails, userLinks }) {
     const { t } = useTranslation(userDetails?.displayLanguage || 'en')
     const [showQR, setShowQR] = useState(false);
+    const [showUserLinks, setShowUserLinks] = useState(false);
     const [selectedImage, setSelectedImage] = useState(null);
     const [isNavOpen, setIsNavOpen] = useState(false);
     const [showScrollTop, setShowScrollTop] = useState(false);
@@ -51,6 +52,8 @@ export default function ThemeEleven({ userDetails, userLinks }) {
         }));
         setStars(newStars);
     }, []);
+
+    const MyResume = useMemo(() => <ResumePdf userData={userDetails} />, [userDetails]);
 
     return (
         <div
@@ -98,7 +101,7 @@ export default function ThemeEleven({ userDetails, userLinks }) {
 
                     <div className="flex gap-4">
                         <PDFDownloadLink
-                            document={<ResumePdf userData={userDetails} />}
+                            document={MyResume}
                             fileName={`cv.${userDetails?.username || 'resume'}.pdf`}
                             title={(() => {
                                 const translations = {
@@ -133,11 +136,11 @@ export default function ThemeEleven({ userDetails, userLinks }) {
                                 )
                             }
                         </PDFDownloadLink>
-                        <div onClick={() => setShowQR(!showQR)} className="cursor-pointer px-2 py-2 border border-cyan-500/30 bg-cyan-950/30 rounded hover:bg-cyan-500/20 transition-all text-cyan-400 font-bold text-xs flex items-center">
-                            <QrcodeProfile userDetails={userDetails} />
+                        <div onClick={() => setShowQR(true)} className="cursor-pointer border border-cyan-500/30 bg-cyan-950/30 rounded hover:bg-cyan-500/20 transition-all text-cyan-400 font-bold text-xs flex items-center justify-center">
+                            <QrcodeProfile userDetails={userDetails} className="text-cyan-400 border-none bg-transparent hover:bg-transparent shadow-none" isOpen={showQR} onClose={() => setShowQR(false)} />
                         </div>
-                        <div onClick={() => setShowQR(!showQR)} className="cursor-pointer px-2 py-2 border border-cyan-500/30 bg-cyan-950/30 rounded hover:bg-cyan-500/20 transition-all text-cyan-400 font-bold text-xs flex items-center">
-                            <UserLinks lang={userDetails?.displayLanguage} userLinks={userLinks} />
+                        <div onClick={() => setShowUserLinks(true)} className="cursor-pointer border border-cyan-500/30 bg-cyan-950/30 rounded hover:bg-cyan-500/20 transition-all text-cyan-400 font-bold text-xs flex items-center justify-center">
+                            <UserLinks lang={userDetails?.displayLanguage} userLinks={userLinks} className="text-cyan-400 border-none bg-transparent hover:bg-transparent shadow-none" isOpen={showUserLinks} onClose={() => setShowUserLinks(false)} />
                         </div>
                         {/* Menu Button in Header */}
                         <button
@@ -233,6 +236,13 @@ export default function ThemeEleven({ userDetails, userLinks }) {
                                         ru: 'Проверено',
                                         ja: '認証済み',
                                         zh: '已验证',
+                                        es: 'Verificado',
+                                        pt: 'Verificado',
+                                        nl: 'Geverifieerd',
+                                        it: 'Verificato',
+                                        tr: 'Doğrulanmış',
+                                        ko: '인증됨',
+                                        hi: 'सत्यापित',
                                     }[userDetails?.displayLanguage] || 'Verified'
                                 }
                             </div>
@@ -268,7 +278,7 @@ export default function ThemeEleven({ userDetails, userLinks }) {
 
                             const sectionContent = {
                                 services: userDetails.services && userDetails.services.length > 0 && (
-                                    <section id="services" className="mb-20 scroll-mt-24">
+                                    <section key="services" id="services" className="mb-20 scroll-mt-24">
                                         <h3 className="text-cyan-400 text-sm uppercase tracking-widest mb-4 flex items-center gap-2">
                                             <span className="w-8 h-[1px] bg-cyan-500"></span>
                                             {t('services')}
@@ -284,7 +294,7 @@ export default function ThemeEleven({ userDetails, userLinks }) {
                                     </section>
                                 ),
                                 experience: userDetails.experience && userDetails.experience.length > 0 && (
-                                    <section id="experience" className="mb-20 scroll-mt-24">
+                                    <section key="experience" id="experience" className="mb-20 scroll-mt-24">
                                         <h2 className="text-cyan-400 text-sm uppercase tracking-widest mb-4 flex items-center gap-2">
                                             <span className="w-8 h-[1px] bg-cyan-500"></span> {t('workExperience')}
                                         </h2>
@@ -312,7 +322,7 @@ export default function ThemeEleven({ userDetails, userLinks }) {
                                     </section>
                                 ),
                                 skills: userDetails.skills && userDetails.skills.length > 0 && (
-                                    <section id="skills" className="mb-20 scroll-mt-24">
+                                    <section key="skills" id="skills" className="mb-20 scroll-mt-24">
                                         <h2 className="text-cyan-400 text-sm uppercase tracking-widest mb-4 flex items-center gap-2">
                                             <span className="w-8 h-[1px] bg-cyan-500"></span> {t('skills')}
                                         </h2>
@@ -326,7 +336,7 @@ export default function ThemeEleven({ userDetails, userLinks }) {
                                     </section>
                                 ),
                                 projects: userDetails.projects && userDetails.projects.length > 0 && (
-                                    <section id="projects" className="mb-20 scroll-mt-24">
+                                    <section key="projects" id="projects" className="mb-20 scroll-mt-24">
                                         <h2 className="text-cyan-400 text-sm uppercase tracking-widest mb-4 flex items-center gap-2">
                                             <span className="w-8 h-[1px] bg-cyan-500"></span> {t('projects')}
                                         </h2>
@@ -373,7 +383,7 @@ export default function ThemeEleven({ userDetails, userLinks }) {
                                     </section>
                                 ),
                                 education: userDetails.education && userDetails.education.length > 0 && (
-                                    <section id="education" className="mb-20 scroll-mt-24">
+                                    <section key="education" id="education" className="mb-20 scroll-mt-24">
                                         <h2 className="text-cyan-400 text-sm uppercase tracking-widest mb-4 flex items-center gap-2">
                                             <span className="w-8 h-[1px] bg-cyan-500"></span> {t('education')}
                                         </h2>
@@ -399,7 +409,7 @@ export default function ThemeEleven({ userDetails, userLinks }) {
                                     </section>
                                 ),
                                 certificates: userDetails.certificates && userDetails.certificates.length > 0 && (
-                                    <section id="certificates" className="mb-20 scroll-mt-24">
+                                    <section key="certificates" id="certificates" className="mb-20 scroll-mt-24">
                                         <h2 className="text-cyan-400 text-sm uppercase tracking-widest mb-4 flex items-center gap-2">
                                             <span className="w-8 h-[1px] bg-cyan-500"></span> {t('certificates') || "Certificates"}
                                         </h2>
@@ -435,7 +445,7 @@ export default function ThemeEleven({ userDetails, userLinks }) {
                                     </section>
                                 ),
                                 languages: userDetails.languages && userDetails.languages.length > 0 && (
-                                    <section id="languages" className="mb-20 scroll-mt-24">
+                                    <section key="languages" id="languages" className="mb-20 scroll-mt-24">
                                         <h2 className="text-cyan-400 text-sm uppercase tracking-widest mb-4 flex items-center gap-2">
                                             <span className="w-8 h-[1px] bg-cyan-500"></span> {t('languages')}
                                         </h2>

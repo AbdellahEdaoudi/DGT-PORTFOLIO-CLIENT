@@ -1,6 +1,6 @@
 "use client"
-import { useState, useEffect } from "react"
-import { Sparkles, GraduationCap, Code, Globe, Share2, Loader, FileDown, Briefcase, Award, Menu, X, ArrowUp } from "lucide-react"
+import { useState, useEffect, useMemo } from "react"
+import { Sparkles, GraduationCap, Code, Globe, Share2, Loader, FileDown, Briefcase, Award, Menu, X, ArrowUp } from "../Icons"
 import QrcodeProfile from "../../[username]/components/QrcodeProfile";
 import UserLinks from "../../[username]/components/UserLinks";
 import Image from "next/image";
@@ -14,6 +14,7 @@ export default function ThemeTwelve({ userDetails, userLinks }) {
     const { t } = useTranslation(userDetails?.displayLanguage || 'en')
     const [expanded, setExpanded] = useState(false);
     const [showQR, setShowQR] = useState(false);
+    const [showUserLinks, setShowUserLinks] = useState(false);
     const [selectedImage, setSelectedImage] = useState(null);
     const [isNavOpen, setIsNavOpen] = useState(false);
     const [showScrollTop, setShowScrollTop] = useState(false);
@@ -38,6 +39,8 @@ export default function ThemeTwelve({ userDetails, userLinks }) {
         });
     };
 
+    const MyResume = useMemo(() => <ResumePdf userData={userDetails} />, [userDetails]);
+
     return (
         <div>
             {userDetails && (
@@ -59,7 +62,7 @@ export default function ThemeTwelve({ userDetails, userLinks }) {
                                     <div className="flex gap-3">
                                         {/* Copy Link */}
                                         <PDFDownloadLink
-                                            document={<ResumePdf userData={userDetails} />}
+                                            document={MyResume}
                                             title={(() => {
                                                 const translations = {
                                                     en: 'Download CV',
@@ -96,14 +99,16 @@ export default function ThemeTwelve({ userDetails, userLinks }) {
                                         </PDFDownloadLink>
                                         {/* QR Code */}
                                         <div
-                                            onClick={() => setShowQR(!showQR)}
+                                            onClick={() => setShowQR(true)}
                                             className="flex items-center gap-2 px-2 bg-white/10 hover:bg-blue-500/20 rounded-lg text-white transition-all duration-300 backdrop-blur-md border border-white/10 hover:border-blue-500/50 cursor-pointer"
                                         >
-                                            <QrcodeProfile userDetails={userDetails} />
+                                            <QrcodeProfile userDetails={userDetails} className="text-white border-none hover:bg-transparent" isOpen={showQR} onClose={() => setShowQR(false)} />
                                         </div>
                                         {/* User Links */}
-                                        <div className="flex items-center gap-2 px-2 bg-white/10 hover:bg-blue-500/20 rounded-lg text-white transition-all duration-300 backdrop-blur-md border border-white/10 hover:border-blue-500/50">
-                                            <UserLinks lang={userDetails?.displayLanguage} userLinks={userLinks} />
+                                        <div
+                                            onClick={() => setShowUserLinks(true)}
+                                            className="flex items-center gap-2 px-2 bg-white/10 hover:bg-blue-500/20 rounded-lg text-white transition-all duration-300 backdrop-blur-md border border-white/10 hover:border-blue-500/50 cursor-pointer">
+                                            <UserLinks lang={userDetails?.displayLanguage} userLinks={userLinks} className="text-white border-none hover:bg-transparent" isOpen={showUserLinks} onClose={() => setShowUserLinks(false)} />
                                         </div>
                                         {/* Menu Button in Header */}
                                         <button

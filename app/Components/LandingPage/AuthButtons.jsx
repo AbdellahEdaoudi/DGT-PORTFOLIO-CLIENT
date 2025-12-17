@@ -2,7 +2,7 @@
 import { signIn, signOut, useSession } from "next-auth/react"
 import { useContext, useState, useEffect, useRef } from "react";
 import { MyContext } from "../../Context/MyContext";
-import { BookUser, LogOut, MessageSquare, NotebookText, Globe, Menu, CreditCard } from "lucide-react";
+import { BookUser, LogOut, MessageSquare, NotebookText, Globe, Menu, CreditCard } from "../Icons";
 import Link from "next/link";
 import Image from "next/image";
 import { useRouter } from "next/navigation";

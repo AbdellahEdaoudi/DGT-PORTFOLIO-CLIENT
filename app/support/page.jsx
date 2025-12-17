@@ -4,10 +4,8 @@ import React, { useContext, useState } from 'react';
 import axios from 'axios';
 import { MyContext } from '../Context/MyContext';
 import { toast } from 'react-toastify';
-import { CheckCheck, Mail, Phone, Loader2, FolderOpen, MessageCircle, MapPin, ImagePlus, X } from 'lucide-react';
-import { Button } from "../../components/ui/button"
-import { Input } from "../../components/ui/input"
-import { Textarea } from "../../components/ui/textarea"
+import { CheckCheck, Mail, Phone, Loader2, FolderOpen, MessageCircle, MapPin, ImagePlus, X } from '../Components/Icons';
+
 import WarningModal from "./Pages/WarningModal"
 import MagicalLoader from '../Components/MagicalLoader';
 import Image from 'next/image';
@@ -152,12 +150,12 @@ export default function ContactForm() {
                 <div className='hidden'>
                   <label htmlFor="email" className="block text-sm font-medium text-teal-600 mb-1">{t('email')} :</label>
                   <div className="relative">
-                    <Input
+                    <input
                       type="email"
                       id="email"
                       value={EmailUser}
                       readOnly
-                      className="pl-10 border-teal-300 focus:border-teal-500 focus:ring-teal-500 w-full"
+                      className="pl-10 border-teal-300 focus:border-teal-500 focus:ring-teal-500 w-full rounded-md border h-10 bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
                       placeholder={t('enterEmail')}
                       required
                     />
@@ -167,13 +165,13 @@ export default function ContactForm() {
                 <div>
                   <label htmlFor="number" className="block text-sm font-medium text-teal-600 mb-1">{t('subject')} :</label>
                   <div className="relative">
-                    <Input
+                    <input
                       type="text"
                       id="subject"
                       value={subject}
                       required
                       onChange={(e) => setSubject(e.target.value)}
-                      className="pl-10 border-teal-300 focus:border-teal-500 focus:ring-teal-500 w-full"
+                      className="pl-10 border-teal-300 focus:border-teal-500 focus:ring-teal-500 w-full rounded-md border h-10 bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
                       placeholder={t('enterSubject')}
                     />
                     <FolderOpen className="absolute left-3 top-1/2 transform -translate-y-1/2 text-teal-800 h-5 w-5" />
@@ -182,11 +180,11 @@ export default function ContactForm() {
                 <div>
                   <label htmlFor="message" className="block text-sm font-medium text-teal-600 mb-1">{t('message')} :</label>
                   <div className="relative">
-                    <Textarea
+                    <textarea
                       id="message"
                       value={message}
                       onChange={(e) => setMessage(e.target.value)}
-                      className="pl-10 pt-2 border-teal-300 focus:border-teal-500 focus:ring-teal-500 w-full"
+                      className="pl-10 pt-2 border-teal-300 focus:border-teal-500 focus:ring-teal-500 w-full rounded-md border min-h-[80px] bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
                       rows={4}
                       maxLength={500}
                       placeholder={t('enterMessage')}
@@ -223,7 +221,7 @@ export default function ContactForm() {
                     )}
                   </div>
                 </div>
-                <Button
+                <button
                   type="submit"
                   disabled={loading}
                   className="w-full bg-gradient-to-r from-teal-700 to-teal-800 text-white py-2 px-4 rounded-md hover:from-teal-800 hover:to-teal-900 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:ring-offset-2 transition-all duration-300"
@@ -236,7 +234,7 @@ export default function ContactForm() {
                   ) : (
                     t('sendMessage')
                   )}
-                </Button>
+                </button>
               </form>
               <WarningModal />
             </div>

@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { toast } from "react-toastify";
-import { Loader, CheckCheck } from "lucide-react";
+import { Loader, CheckCheck } from "../../Components/Icons";
 import Image from "next/image";
 import { useTranslation } from "../../lib/translations";
 
@@ -55,7 +55,7 @@ export default function Theme({ userData, setUserDetails }) {
         </div>
       </div>
       <div className="grid grid-cols-3  md:grid-cols-5 gap-4">
-        {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12].map((num) => (
+        {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13].map((num) => (
           <div
             key={num}
             onClick={() => setPendingTheme(num)}

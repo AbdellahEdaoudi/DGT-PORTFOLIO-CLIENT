@@ -3,11 +3,12 @@ import axios from "axios";
 
 export async function GET(
   req: Request,
-  { params }: { params: { domain: string } }
+  { params }: { params: Promise<{ domain: string }> }
 ) {
+  const { domain } = await params;
   try {
     const backendUrl = process.env.BACKEND_URL;
-    const response = await axios.get(`${backendUrl}/users/customdomain/${params.domain}`);
+    const response = await axios.get(`${backendUrl}/users/customdomain/${domain}`);
     
     return NextResponse.json(response.data, { status: response.status });
   } catch (err: any) {

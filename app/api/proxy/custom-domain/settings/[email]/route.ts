@@ -5,9 +5,11 @@ import axios from "axios";
 import jwt from "jsonwebtoken";
 import { authOptions } from "../../../../../../lib/nextAuth";
 
-export async function GET(req: Request, { params }: { params: { email: string } }) {
+export async function GET(req: Request, { params }: { params: Promise<{ email: string }> }) {
   const session = await getServerSession(authOptions);
   if (!session?.user?.email) return NextResponse.json({ message: "Unauthorized" }, { status: 401 });
+
+  const { email } = await params;
 
   const token = jwt.sign(
     { email: session.user.email },
@@ -17,7 +19,7 @@ export async function GET(req: Request, { params }: { params: { email: string } 
 
   try {
     const backendUrl = process.env.BACKEND_URL;
-    const response = await axios.get(`${backendUrl}/api/custom-domain/settings/${params.email}`, {
+    const response = await axios.get(`${backendUrl}/api/custom-domain/settings/${email}`, {
       headers: { Authorization: `Bearer ${token}` }
     });
     return NextResponse.json(response.data, { status: response.status });

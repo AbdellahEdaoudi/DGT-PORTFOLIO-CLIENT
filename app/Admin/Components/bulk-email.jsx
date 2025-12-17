@@ -1,6 +1,6 @@
 "use client"
 import { useState } from "react"
-import { Mail, Send, CheckCircle, AlertCircle, Copy, Users } from "lucide-react"
+import { Mail, Send, CheckCircle, AlertCircle, Copy, Users } from "../../Components/Icons"
 import axios from "axios"
 import { toast } from "react-toastify"
 import Editor from "@monaco-editor/react"

@@ -1,6 +1,6 @@
 "use client"
 import axios from 'axios'
-import { CheckCheck, Loader } from 'lucide-react'
+import { CheckCheck, Loader } from '../../Components/Icons'
 import React, { useState } from 'react'
 import { toast } from 'react-toastify'
 import { useTranslation } from '../../lib/translations'
@@ -17,7 +17,7 @@ function DisplayLanguage({ userData, setUserDetails }) {
         try {
             await axios.put(`/api/proxy/users/update/display-language`, { displayLanguage })
             toast(<p className='flex gap-3 items-center'><CheckCheck className="text-teal-500" />
-                {t('savedSuccessfully')}    
+                {t('savedSuccessfully')}
             </p>, {
                 autoClose: 2000,
             })

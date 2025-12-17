@@ -1,6 +1,6 @@
 "use client"
 import axios from 'axios'
-import { CheckCheck, Loader, FileDown } from 'lucide-react'
+import { CheckCheck, Loader, FileDown } from '../../Components/Icons'
 import { PDFDownloadLink } from '@react-pdf/renderer'
 import ResumePdf from './ResumePdf'
 import Image from 'next/image'

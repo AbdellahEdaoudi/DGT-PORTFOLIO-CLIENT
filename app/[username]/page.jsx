@@ -1,16 +1,16 @@
-import dynamic from 'next/dynamic';
 import { generateUserMetadata } from "../lib/metadata";
 import { fetchUserData } from "../lib/userUtils";
+import { DynamicUserPortfolio } from '../Components/ClientWrappers';
 
-const UserPortfolio = dynamic(() => import('../Components/UserPortfolio'), { ssr: false });
-
-export async function generateMetadata({ params }) {
+export async function generateMetadata(props) {
+  const params = await props.params;
 
   const user = await fetchUserData(params.username);
   const portfolioUrl = `https://dgtportfolio.com/${params.username}`;
   return generateUserMetadata(user, portfolioUrl);
 }
 
-export default function Page({ params }) {
-  return <UserPortfolio params={params} />;
+export default async function Page(props) {
+  const params = await props.params;
+  return <DynamicUserPortfolio params={params} />;
 }

@@ -1,7 +1,7 @@
 "use client"
 
 import { useState } from "react"
-import { Search, AlertCircle, Loader, Eye, X, Maximize2, Mail, Type, Calendar, User, Paperclip, Clock } from "lucide-react"
+import { Search, AlertCircle, Loader, Eye, X, Maximize2, Mail, Type, Calendar, User, Paperclip, Clock } from "../../Components/Icons"
 import { toast } from "react-toastify"
 import axios from "axios"
 import Image from "next/image"

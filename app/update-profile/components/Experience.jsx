@@ -2,7 +2,7 @@
 import axios from "axios";
 import React, { useState } from "react";
 import { toast } from "react-toastify";
-import { ArrowUp, ArrowDown, CheckCheck, Loader, Plus, Trash2, X, Pencil } from "lucide-react";
+import { ArrowUp, ArrowDown, CheckCheck, Loader, Plus, Trash2, X, Pencil } from "../../Components/Icons";
 
 import { useTranslation } from "../../lib/translations";
 

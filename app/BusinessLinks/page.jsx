@@ -1,6 +1,6 @@
 'use client';
 import React, { useContext, useState } from 'react';
-import { Link, X, Edit3, Trash2, CheckCircle, Loader } from 'lucide-react';
+import { Link, X, Edit3, Trash2, CheckCircle, Loader } from '../Components/Icons';
 import { MyContext } from '../Context/MyContext';
 import axios from 'axios';
 import { toast } from "react-toastify";

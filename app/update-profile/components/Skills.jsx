@@ -2,7 +2,7 @@
 import axios from "axios"
 import React, { useState } from "react"
 import { toast } from "react-toastify"
-import { CheckCheck, Loader, Plus, Trash2 } from "lucide-react"
+import { CheckCheck, Loader, Plus, Trash2 } from "../../Components/Icons"
 
 import { useTranslation } from "../../lib/translations"
 

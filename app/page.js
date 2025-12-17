@@ -1,10 +1,7 @@
 import LandingPage from "./Components/LandingPage/LandingPage";
 import { headers } from "next/headers";
 import { getDictionary } from "./dictionaries/get-dictionary";
-import dynamic from 'next/dynamic';
-
-const SubdomainClient = dynamic(() => import('./Components/SubdomainClient'), { ssr: false });
-const CustomDomainClient = dynamic(() => import('./Components/CustomDomainClient'), { ssr: false });
+import { DynamicSubdomainClient, DynamicCustomDomainClient } from './Components/ClientWrappers';
 
 async function fetchUserData(url) {
   try {
@@ -35,7 +32,8 @@ function getDomainFlags(host) {
 export async function generateMetadata() {
   // const host = "abdellah-edaoudi.dgtportfolio.com"
   // const host = "abdellah-edaoudi.site"
-  const host = headers().get("host");
+  const headersList = await headers();
+  const host = headersList.get("host");
   const { isSubdomain, isExternalCustomDomain } = getDomainFlags(host);
   console.log("isSubdomain : " + isSubdomain);
   console.log("isExternalCustomDomain : " + isExternalCustomDomain);
@@ -95,7 +93,8 @@ export async function generateMetadata() {
 }
 
 export default async function Home() {
-  const host = headers().get("host");
+  const headersList = await headers();
+  const host = headersList.get("host");
   const { isSubdomain, isExternalCustomDomain } = getDomainFlags(host);
   let userSchema = null;
 
@@ -150,7 +149,7 @@ export default async function Home() {
   return (
     <div>
       {userSchema && <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(userSchema) }} />}
-      {isSubdomain ? <SubdomainClient username={host.split(".")[0]} /> : isExternalCustomDomain ? <CustomDomainClient host={host} /> : <LandingPage dict={dict} />}
+      {isSubdomain ? <DynamicSubdomainClient username={host.split(".")[0]} /> : isExternalCustomDomain ? <DynamicCustomDomainClient host={host} /> : <LandingPage dict={dict} />}
     </div>
   );
 }

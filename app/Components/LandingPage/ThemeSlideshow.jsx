@@ -24,6 +24,8 @@ export default function ThemeSlideshow() {
     { image: "/themes/theme9.png", id: 9 },
     { image: "/themes/theme10.png", id: 10 },
     { image: "/themes/theme11.png", id: 11 },
+    { image: "/themes/theme12.png", id: 12 },
+    { image: "/themes/theme13.png", id: 13 },
   ]
 
   const nextSlide = useCallback(() => {

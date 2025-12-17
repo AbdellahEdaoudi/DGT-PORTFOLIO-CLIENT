@@ -2,7 +2,7 @@
 import { useState, useEffect, useContext } from 'react';
 import { MyContext } from '../Context/MyContext';
 import { toast } from 'react-toastify';
-import { Globe, CheckCircle, AlertCircle, ExternalLink, Loader2, Trash2, X } from 'lucide-react';
+import { Globe, CheckCircle, AlertCircle, ExternalLink, Loader2, Trash2, X } from '../Components/Icons';
 import axios from 'axios';
 import Header from '../Components/header';
 import MagicalLoader from '../Components/MagicalLoader';
@@ -19,6 +19,7 @@ export default function CustomDomainPage() {
     const [showRemoveModal, setShowRemoveModal] = useState(false);
 
     useEffect(() => {
+        if (!EmailUser) return;
         const fetchSettings = async () => {
             setIsFetching(true);
             try {

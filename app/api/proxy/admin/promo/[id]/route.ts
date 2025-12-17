@@ -4,11 +4,14 @@ import axios from "axios";
 import jwt from "jsonwebtoken";
 import { authOptions } from "../../../../../../lib/nextAuth";
 
-export async function DELETE(req: Request, { params }: { params: { id: string } }) {
+export async function DELETE(req: Request, { params }: { params: Promise<{ id: string }> }) {
   const session = await getServerSession(authOptions);
   if (!session?.user?.email || session?.user?.email !== process.env.EMAIL) {
     return NextResponse.json({ message: "Unauthorized" }, { status: 401 });
   }
+
+  const { id } = await params;
+
   const token = jwt.sign(
     { email: session.user.email },
     process.env.NEXTAUTH_SECRET as string,
@@ -21,7 +24,7 @@ export async function DELETE(req: Request, { params }: { params: { id: string } 
       return NextResponse.json({ message: "BACKEND_URL not set" }, { status: 500 });
     }
 
-    const response = await axios.delete(`${backendUrl}/admin/promo/${params.id}`, {
+    const response = await axios.delete(`${backendUrl}/admin/promo/${id}`, {
       headers: { Authorization: `Bearer ${token}` },
     });
 

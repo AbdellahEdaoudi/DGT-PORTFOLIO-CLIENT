@@ -1,6 +1,6 @@
 "use client"
 import axios from 'axios'
-import { CheckCheck, Loader } from 'lucide-react'
+import { CheckCheck, Loader } from '../../Components/Icons'
 import React from 'react'
 import { useState } from 'react'
 import { toast } from 'react-toastify'

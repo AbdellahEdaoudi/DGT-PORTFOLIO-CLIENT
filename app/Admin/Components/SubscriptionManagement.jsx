@@ -1,7 +1,7 @@
 "use client"
 
 import { useState } from "react"
-import { Search, AlertCircle, Loader } from "lucide-react"
+import { Search, AlertCircle, Loader } from "../../Components/Icons"
 import { toast } from "react-toastify"
 import axios from "axios"
 
@@ -118,10 +118,10 @@ export default function SubscriptionManagement({ data, setData }) {
 
                   <td
                     className={`px-4 py-2 font-semibold text-xs ${sub.status === "ACTIVE"
-                        ? "text-green-400"
-                        : sub.status === "CANCELLED"
-                          ? "text-red-400"
-                          : "text-yellow-400"
+                      ? "text-green-400"
+                      : sub.status === "CANCELLED"
+                        ? "text-red-400"
+                        : "text-yellow-400"
                       }`}
                   >
                     {highlightText(sub.status, searchQuery)}

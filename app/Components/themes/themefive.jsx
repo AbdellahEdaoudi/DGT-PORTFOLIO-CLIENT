@@ -1,6 +1,6 @@
 "use client"
-import { useState, useEffect } from "react"
-import { Zap, Mail, Briefcase, GraduationCap, Loader, FileDown, Globe, Award, Menu, X, ArrowUp, Wrench, Lightbulb, FolderOpen, Sparkles } from "lucide-react"
+import { useState, useEffect, useMemo } from "react"
+import { Zap, Mail, Briefcase, GraduationCap, Loader, FileDown, Globe, Award, Menu, X, ArrowUp, Wrench, Lightbulb, FolderOpen, Sparkles } from "../Icons"
 import UserLinks from "../../[username]/components/UserLinks"
 import QrcodeProfile from "../../[username]/components/QrcodeProfile"
 import Image from "next/image"
@@ -38,6 +38,8 @@ export default function ThemeFive({ userDetails, userLinks }) {
     });
   };
 
+  const MyResume = useMemo(() => <ResumePdf userData={userDetails} />, [userDetails]);
+
   return (
     <div className="min-h-screen bg-zinc-950 text-white overflow-x-hidden relative">
       {/* Animated Background */}
@@ -65,7 +67,7 @@ export default function ThemeFive({ userDetails, userLinks }) {
               <div className="flex flex-wrap gap-3">
                 {/* Copy Link */}
                 <PDFDownloadLink
-                  document={<ResumePdf userData={userDetails} />}
+                  document={MyResume}
                   title={(() => {
                     const translations = {
                       en: 'Download CV',
@@ -102,14 +104,16 @@ export default function ThemeFive({ userDetails, userLinks }) {
                 </PDFDownloadLink>
                 {/* QR Code */}
                 <div
-                  onClick={() => setShowQR(!showQR)}
+                  onClick={() => setShowQR(true)}
                   className="flex items-center gap-2 px-2 bg-white/10 hover:bg-yellow-500/20 rounded-lg text-white transition-all duration-300 backdrop-blur-md border border-white/10 hover:border-yellow-500/50 cursor-pointer"
                 >
-                  <QrcodeProfile userDetails={userDetails} />
+                  <QrcodeProfile userDetails={userDetails} className="text-white border-none hover:bg-transparent" isOpen={showQR} onClose={() => setShowQR(false)} />
                 </div>
                 {/* User Links */}
-                <div className="flex items-center gap-2 px-2 bg-white/10 hover:bg-yellow-500/20 rounded-lg text-white transition-all duration-300 backdrop-blur-md border border-white/10 hover:border-yellow-500/50">
-                  <UserLinks lang={userDetails?.displayLanguage} userLinks={userLinks} />
+                <div
+                  onClick={() => setShowUserLinks(true)}
+                  className="flex items-center gap-2 px-2 bg-white/10 hover:bg-yellow-500/20 rounded-lg text-white transition-all duration-300 backdrop-blur-md border border-white/10 hover:border-yellow-500/50 cursor-pointer">
+                  <UserLinks lang={userDetails?.displayLanguage} userLinks={userLinks} className="text-white border-none hover:bg-transparent" isOpen={showUserLinks} onClose={() => setShowUserLinks(false)} />
                 </div>
                 {/* Menu Button in Header */}
                 <button
@@ -227,7 +231,7 @@ export default function ThemeFive({ userDetails, userLinks }) {
 
             const sectionContent = {
               services: userDetails.services && userDetails.services.length > 0 && (
-                <section id="services" className="scroll-mt-24 py-12 border-t border-zinc-800/50">
+                <section key="services" id="services" className="scroll-mt-24 py-12 border-t border-zinc-800/50">
                   <div className="flex items-center gap-4 mb-8">
                     <Briefcase size={32} className="text-yellow-400" />
                     <h2 className="text-3xl font-bold">{t('services')}</h2>
@@ -243,7 +247,7 @@ export default function ThemeFive({ userDetails, userLinks }) {
                 </section>
               ),
               experience: userDetails.experience && userDetails.experience.length > 0 && (
-                <section id="experience" className="py-12 border-t border-zinc-800/50 scroll-mt-24">
+                <section key="experience" id="experience" className="py-12 border-t border-zinc-800/50 scroll-mt-24">
                   <div className="flex items-center gap-4 mb-8">
                     <Briefcase size={32} className="text-yellow-500" />
                     <h2 className="text-3xl font-bold">{t('workExperience')}</h2>
@@ -277,7 +281,7 @@ export default function ThemeFive({ userDetails, userLinks }) {
                 </section>
               ),
               skills: userDetails.skills && userDetails.skills.length > 0 && (
-                <section id="skills" className="py-12 border-t border-zinc-800/50 scroll-mt-24">
+                <section key="skills" id="skills" className="py-12 border-t border-zinc-800/50 scroll-mt-24">
                   <div className="flex items-center gap-4 mb-8">
                     <Lightbulb size={32} className="text-yellow-500" />
                     <h2 className="text-3xl font-bold">{t('skills')}</h2>
@@ -297,7 +301,7 @@ export default function ThemeFive({ userDetails, userLinks }) {
                 </section>
               ),
               projects: userDetails.projects && userDetails.projects.length > 0 && (
-                <section id="projects" className="py-12 border-t border-zinc-800/50 scroll-mt-24">
+                <section key="projects" id="projects" className="py-12 border-t border-zinc-800/50 scroll-mt-24">
                   <div className="max-w-5xl mx-auto">
                     <div className="flex items-center gap-4 mb-8">
                       <FolderOpen size={32} className="text-yellow-500" />
@@ -360,7 +364,7 @@ export default function ThemeFive({ userDetails, userLinks }) {
                 </section>
               ),
               education: userDetails.education && userDetails.education.length > 0 && (
-                <section id="education" className="py-12 border-t border-zinc-800/50 scroll-mt-24">
+                <section key="education" id="education" className="py-12 border-t border-zinc-800/50 scroll-mt-24">
                   <div className="flex items-center gap-4 mb-8">
                     <GraduationCap size={32} className="text-yellow-500" />
                     <h2 className="text-3xl font-bold">{t('education')}</h2>
@@ -421,7 +425,7 @@ export default function ThemeFive({ userDetails, userLinks }) {
                 </section>
               ),
               certificates: userDetails.certificates && userDetails.certificates.length > 0 && (
-                <section id="certificates" className="py-12 border-t border-zinc-800/50 scroll-mt-24">
+                <section key="certificates" id="certificates" className="py-12 border-t border-zinc-800/50 scroll-mt-24">
                   <div className="flex items-center gap-4 mb-8">
                     <span className="text-2xl">📜</span>
                     <h2 className="text-3xl font-bold">{t('certificates') || "Certificates"}</h2>
@@ -457,7 +461,7 @@ export default function ThemeFive({ userDetails, userLinks }) {
                 </section>
               ),
               languages: userDetails.languages?.length > 0 && (
-                <section id="languages" className="py-12 border-t border-zinc-800/50 scroll-mt-24">
+                <section key="languages" id="languages" className="py-12 border-t border-zinc-800/50 scroll-mt-24">
                   <h2 className="flex gap-2 text-3xl sm:text-4xl font-black mb-8">
                     <Globe className="text-yellow-400" size={32} />
                     {t('languages')}</h2>

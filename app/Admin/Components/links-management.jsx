@@ -1,7 +1,7 @@
 "use client"
 
 import { useState } from "react"
-import { Search, ExternalLink, X, AlertCircle, Loader } from "lucide-react"
+import { Search, ExternalLink, X, AlertCircle, Loader } from "../../Components/Icons"
 import { toast } from "react-toastify"
 import axios from "axios"
 

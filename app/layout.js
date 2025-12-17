@@ -1,6 +1,5 @@
 import "./globals.css";
 import { Inter, Prompt } from "next/font/google";
-import { Toaster } from "../components/ui/sonner"
 import { MyProvider } from "./Context/MyContext";
 import { ToastContainer } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
@@ -88,7 +87,6 @@ export default function RootLayout({ children }) {
             {children}
           </MyProvider>
         </NextAuthProvider>
-        <Toaster />
         <ToastContainer />
         <Analytics />
       </body>

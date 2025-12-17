@@ -1,5 +1,5 @@
 "use client"
-import { useState, useEffect } from "react"
+import { useState, useEffect, useMemo } from "react"
 import {
   Mail,
   Phone,
@@ -12,7 +12,7 @@ import {
   Menu,
   X,
   ArrowUp,
-} from "lucide-react"
+} from "../Icons"
 import QrcodeProfile from "../../[username]/components/QrcodeProfile"
 import UserLinks from "../../[username]/components/UserLinks"
 import Image from "next/image"
@@ -25,6 +25,7 @@ import ImageModal from "../ImageModal"
 export default function Themeone({ userDetails, userLinks, bgcolor }) {
   const { t } = useTranslation(userDetails?.displayLanguage || 'en')
   const [showQR, setShowQR] = useState(false);
+  const [showUserLinks, setShowUserLinks] = useState(false);
   const [expanded, setExpanded] = useState(false);
   const [selectedImage, setSelectedImage] = useState(null);
   const [isNavOpen, setIsNavOpen] = useState(false);
@@ -49,6 +50,8 @@ export default function Themeone({ userDetails, userLinks, bgcolor }) {
       behavior: "smooth"
     });
   };
+
+  const MyResume = useMemo(() => <ResumePdf userData={userDetails} />, [userDetails]);
 
   return (
     <div
@@ -80,9 +83,6 @@ export default function Themeone({ userDetails, userLinks, bgcolor }) {
             >
               <X size={28} />
             </button>
-
-            <h2 className="text-3xl md:text-5xl font-bold text-white mb-12 opacity-90 tracking-tight">{t('menu') || "Navigation"}</h2>
-
             <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6 w-full max-w-5xl mx-auto">
               {[
                 { id: "services", label: t('services'), icon: "💼", condition: userDetails?.services?.length > 0 },
@@ -167,7 +167,7 @@ export default function Themeone({ userDetails, userLinks, bgcolor }) {
                 <div className="flex gap-3">
                   {/* // Download CV */}
                   <PDFDownloadLink
-                    document={<ResumePdf userData={userDetails} />}
+                    document={MyResume}
                     title={(() => {
                       const translations = {
                         en: 'Download CV',
@@ -204,16 +204,17 @@ export default function Themeone({ userDetails, userLinks, bgcolor }) {
                   </PDFDownloadLink>
                   {/* // Qrcode */}
                   <div
-                    onClick={() => setShowQR(!showQR)}
+                    onClick={() => setShowQR(true)}
                     className="flex items-center gap-2 px-2 cursor-pointer bg-white/10 hover:bg-white/20 rounded-lg text-white transition-all duration-300 backdrop-blur-md border border-white/10"
                   >
-                    <QrcodeProfile userDetails={userDetails} />
+                    <QrcodeProfile userDetails={userDetails} className="text-white border-none hover:bg-transparent" isOpen={showQR} onClose={() => setShowQR(false)} />
                   </div>
                   {/* // User Links */}
                   <div
-                    className="flex items-center gap-2 px-2 bg-white/10 hover:bg-white/20 rounded-lg text-white transition-all duration-300 backdrop-blur-md border border-white/10"
+                    onClick={() => setShowUserLinks(true)}
+                    className="flex items-center gap-2 px-2 bg-white/10 hover:bg-white/20 rounded-lg text-white transition-all duration-300 backdrop-blur-md border border-white/10 cursor-pointer"
                   >
-                    <UserLinks lang={userDetails?.displayLanguage} userLinks={userLinks} />
+                    <UserLinks lang={userDetails?.displayLanguage} userLinks={userLinks} className="text-white border-none hover:bg-transparent" isOpen={showUserLinks} onClose={() => setShowUserLinks(false)} />
                   </div>
 
                   {/* Menu Button in Header */}

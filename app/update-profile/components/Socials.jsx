@@ -1,7 +1,7 @@
 "use client";
 import React, { useState } from "react";
 import { toast } from "react-toastify";
-import { CheckCheck, Loader } from "lucide-react";
+import { CheckCheck, Loader } from "../../Components/Icons";
 import axios from "axios";
 import Image from "next/image";
 

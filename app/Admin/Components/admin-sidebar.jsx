@@ -1,5 +1,5 @@
 "use client"
-import { LayoutDashboard, Users, MessageSquare, Settings, Link2, DollarSign, TagIcon, Clock, Mail } from "lucide-react"
+import { LayoutDashboard, Users, MessageSquare, Settings, Link2, DollarSign, TagIcon, Clock, Mail } from "../../Components/Icons"
 import Link from "next/link"
 
 export default function AdminSidebar({ activeTab, setActiveTab }) {

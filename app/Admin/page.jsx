@@ -1,7 +1,7 @@
 "use client"
 
 import { useEffect, useState } from "react"
-import { Users, MessageSquare, Settings, LogOut, DollarSign } from "lucide-react"
+import { Users, MessageSquare, Settings, LogOut, DollarSign } from "../Components/Icons"
 import AdminSidebar from "./Components/admin-sidebar"
 import UserManagement from "./Components/user-management"
 import ContactManagement from "./Components/contact-management"

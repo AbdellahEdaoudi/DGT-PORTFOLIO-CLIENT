@@ -1,6 +1,6 @@
 'use client';
 
-import { CheckCircle } from 'lucide-react';
+import { CheckCircle } from '../Components/Icons';
 import Link from 'next/link';
 import { useContext } from 'react';
 import { MyContext } from '../Context/MyContext';

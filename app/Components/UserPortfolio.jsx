@@ -16,6 +16,7 @@ import ThemeEleven from "./themes/themeeleven"
 import ThemeTwelve from "./themes/themetwelve"
 import AccountNotFound from "./AccountNotFound"
 import MagicalLoader from './MagicalLoader'
+import ThemeThirteen from './themes/themethirteen'
 
 export default function UserPortfolio({ params }) {
     const [userDetails, setUserDetails] = useState(null)
@@ -74,7 +75,7 @@ export default function UserPortfolio({ params }) {
             case 1:
                 return <Themeone userDetails={userDetails} userLinks={userLinks} />
             case 2:
-                return <ThemeTwo userDetails={userDetails} userLinks={userLinks} />
+                return <ThemeThirteen userDetails={userDetails} userLinks={userLinks} />
             case 3:
                 return <ThemeThree userDetails={userDetails} userLinks={userLinks} />
             case 4:
@@ -95,6 +96,8 @@ export default function UserPortfolio({ params }) {
                 return <ThemeEleven userDetails={userDetails} userLinks={userLinks} />
             case 12:
                 return <ThemeTwelve userDetails={userDetails} userLinks={userLinks} />
+            case 13:
+                return <ThemeThirteen userDetails={userDetails} userLinks={userLinks} />
             default:
                 return userDetails ? <Themeone userDetails={userDetails} userLinks={userLinks} /> :
                     <MagicalLoader />

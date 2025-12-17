@@ -6,7 +6,7 @@ import axios from "axios";
 import MagicalLoader from "../Components/MagicalLoader";
 import Header from "../Components/header";
 import { toast } from "react-toastify"
-import { Loader } from "lucide-react";
+import { Loader } from "../Components/Icons";
 
 const plansTranslations = {
   en: {
@@ -105,6 +105,54 @@ const plansTranslations = {
     applyBtn: "Aplicar",
     verifyingBtn: "Verificando..."
   },
+  pt: {
+    promoMonthly: { name: "Promo Mensal", description: "Oferta promocional especial", period: "/mês" },
+    promo6Month: { name: "Promo 6 Meses", description: "Ótimo valor por 6 meses", period: "/6 meses" },
+    promoAnnual: { name: "Promo Anual", description: "Melhor oferta do ano", period: "/ano" },
+    subMonthly: { name: "Assinatura Mensal", description: "$10 para o mês seguinte", period: "/primeiro mês" },
+    sub4Months: { name: "Assinatura 4 Meses", description: "Ótima oferta a médio prazo", period: "/4 meses" },
+    subYearly: { name: "Assinatura Anual", description: "Melhor valor", period: "/ano" },
+    recommended: "Recomendado",
+    placeholder: "Código promocional",
+    applyBtn: "Aplicar",
+    verifyingBtn: "Verificando..."
+  },
+  it: {
+    promoMonthly: { name: "Promo Mensile", description: "Offerta promozionale speciale", period: "/mese" },
+    promo6Month: { name: "Promo 6 Mesi", description: "Grande valore per 6 mesi", period: "/6 mesi" },
+    promoAnnual: { name: "Promo Annuale", description: "Miglior affare dell'anno", period: "/anno" },
+    subMonthly: { name: "Abbonamento Mensile", description: "$10 per il mese successivo", period: "/primo mese" },
+    sub4Months: { name: "Abbonamento 4 Mesi", description: "Grande offerta a medio termine", period: "/4 mesi" },
+    subYearly: { name: "Abbonamento Annuale", description: "Miglior valore", period: "/anno" },
+    recommended: "Consigliato",
+    placeholder: "Codice promozionale",
+    applyBtn: "Applica",
+    verifyingBtn: "Verifica..."
+  },
+  tr: {
+    promoMonthly: { name: "Aylık Promosyon", description: "Özel promosyon teklifi", period: "/ay" },
+    promo6Month: { name: "6 Aylık Promosyon", description: "6 ay için harika değer", period: "/6 ay" },
+    promoAnnual: { name: "Yıllık Promosyon", description: "Yılın en iyi teklifi", period: "/yıl" },
+    subMonthly: { name: "Aylık Abonelik", description: "Sonraki ay için $10", period: "/ilk ay" },
+    sub4Months: { name: "4 Aylık Abonelik", description: "Harika orta vadeli teklif", period: "/4 ay" },
+    subYearly: { name: "Yıllık Abonelik", description: "En iyi değer", period: "/yıl" },
+    recommended: "Önerilen",
+    placeholder: "Promosyon Kodu",
+    applyBtn: "Uygula",
+    verifyingBtn: "Doğrulanıyor..."
+  },
+  hi: {
+    promoMonthly: { name: "मासिक प्रोमो", description: "विशेष प्रोमो ऑफ़र", period: "/महीना" },
+    promo6Month: { name: "6 महीने का प्रोमो", description: "6 महीने के लिए शानदार मूल्य", period: "/6 महीने" },
+    promoAnnual: { name: "वार्षिक प्रोमो", description: "वर्ष का सर्वोत्तम सौदा", period: "/वर्ष" },
+    subMonthly: { name: "मासिक सदस्यता", description: "अगले महीने के लिए $10", period: "/पहला महीना" },
+    sub4Months: { name: "4 महीने की सदस्यता", description: "शानदार मध्यावधि ऑफ़र", period: "/4 महीने" },
+    subYearly: { name: "वार्षिक सदस्यता", description: "सर्वोत्तम मूल्य", period: "/वर्ष" },
+    recommended: "अनुशंसित",
+    placeholder: "प्रोमो कोड",
+    applyBtn: "लागू करें",
+    verifyingBtn: "सत्यापित कर रहा है..."
+  },
   nl: {
     promoMonthly: { name: "Promo Maandelijks", description: "Speciale promo-aanbieding", period: "/maand" },
     promo6Month: { name: "Promo 6 Maanden", description: "Geweldige waarde voor 6 maanden", period: "/6 maanden" },
@@ -116,6 +164,18 @@ const plansTranslations = {
     placeholder: "Promotiecode",
     applyBtn: "Toepassen",
     verifyingBtn: "Verifiëren..."
+  },
+  ko: {
+    promoMonthly: { name: "월간 프로모션", description: "특별 프로모션 제안", period: "/월" },
+    promo6Month: { name: "6개월 프로모션", description: "6개월간 최고의 가치", period: "/6개월" },
+    promoAnnual: { name: "연간 프로모션", description: "연간 최고의 딜", period: "/년" },
+    subMonthly: { name: "월간 구독", description: "다음 달 $10", period: "/첫 달" },
+    sub4Months: { name: "4개월 구독", description: "훌륭한 중기 제안", period: "/4개월" },
+    subYearly: { name: "연간 구독", description: "최고의 가치", period: "/년" },
+    recommended: "추천",
+    placeholder: "프로모션 코드",
+    applyBtn: "적용",
+    verifyingBtn: "확인 중..."
   }
 };
 

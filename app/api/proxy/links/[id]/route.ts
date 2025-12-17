@@ -5,9 +5,12 @@ import jwt from "jsonwebtoken";
 import { authOptions } from "../../../../../lib/nextAuth";
 
 export const runtime = 'nodejs';
-export async function PUT(req: Request, { params }: { params: { id: string } }) {
+export async function PUT(req: Request, { params }: { params: Promise<{ id: string }> }) {
   const session = await getServerSession(authOptions);
   if (!session?.user?.email) return NextResponse.json({ message: "Unauthorized" }, { status: 401 });
+  
+  const { id } = await params;
+  
   const token = jwt.sign(
   { email: session.user.email },
   process.env.NEXTAUTH_SECRET as string,
@@ -16,7 +19,7 @@ export async function PUT(req: Request, { params }: { params: { id: string } }) 
   try {
     const data = await req.json();
     const backendUrl = process.env.BACKEND_URL;
-    const response = await axios.put(`${backendUrl}/links/${params.id}`, data, { headers: { Authorization: `Bearer ${token}` } });
+    const response = await axios.put(`${backendUrl}/links/${id}`, data, { headers: { Authorization: `Bearer ${token}` } });
     return NextResponse.json(response.data, { status: response.status });
   } catch (error: any) {
     console.error("Error updating link:", error.response?.data || error.message);
@@ -24,9 +27,11 @@ export async function PUT(req: Request, { params }: { params: { id: string } }) 
   }
 }
 
-export async function DELETE(req: Request, { params }: { params: { id: string } }) {
+export async function DELETE(req: Request, { params }: { params: Promise<{ id: string }> }) {
   const session = await getServerSession(authOptions);
   if (!session?.user?.email) return NextResponse.json({ message: "Unauthorized" }, { status: 401 });
+  
+  const { id } = await params;
   const token = jwt.sign(
   { email: session.user.email },
   process.env.NEXTAUTH_SECRET as string,
@@ -34,7 +39,7 @@ export async function DELETE(req: Request, { params }: { params: { id: string } 
 );
   try {
     const backendUrl = process.env.BACKEND_URL;
-    const response = await axios.delete(`${backendUrl}/links/${params.id}`, { headers: { Authorization: `Bearer ${token}` } });
+    const response = await axios.delete(`${backendUrl}/links/${id}`, { headers: { Authorization: `Bearer ${token}` } });
     return NextResponse.json(response.data, { status: response.status });
   } catch (error: any) {
     console.error("Error deleting link:", error.response?.data || error.message);

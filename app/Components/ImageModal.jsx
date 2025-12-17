@@ -1,19 +1,21 @@
 "use client"
 import React, { useState, useEffect } from 'react';
-import { X } from 'lucide-react';
+import { X, Loader } from './Icons';
 import Image from 'next/image';
 
 const ImageModal = ({ isOpen, onClose, imageSrc, altText }) => {
     const [isVisible, setIsVisible] = useState(false);
+    const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
         if (isOpen) {
+            setIsLoading(true);
             // Small delay to trigger animation after mount
             setTimeout(() => setIsVisible(true), 10);
         } else {
             setIsVisible(false);
         }
-    }, [isOpen]);
+    }, [isOpen, imageSrc]);
 
     if (!isOpen || !imageSrc) return null;
 
@@ -34,14 +36,20 @@ const ImageModal = ({ isOpen, onClose, imageSrc, altText }) => {
                 >
                     <X size={32} />
                 </button>
-                <div className="relative w-full h-full">
+                <div className="relative w-full h-full flex items-center justify-center">
+                    {isLoading && (
+                        <div className="absolute inset-0 flex items-center justify-center z-0">
+                            <Loader size={48} className="text-white animate-spin" />
+                        </div>
+                    )}
                     <Image
                         src={imageSrc}
                         alt={altText || 'Project Image'}
                         fill
-                        className="object-contain"
+                        className={`object-contain transition-opacity duration-500 ${isLoading ? 'opacity-0' : 'opacity-100'}`}
                         sizes="100vw"
                         priority
+                        onLoadingComplete={() => setIsLoading(false)}
                     />
                 </div>
             </div>

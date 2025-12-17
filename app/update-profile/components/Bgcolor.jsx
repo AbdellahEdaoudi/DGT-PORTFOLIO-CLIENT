@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { toast } from "react-toastify";
-import { CheckCheck, Loader } from "lucide-react";
+import { CheckCheck, Loader } from "../../Components/Icons";
 import Themeone from "../../Components/themes/themeone";
 import ThemeTwo from "../../Components/themes/themetwo";
 
