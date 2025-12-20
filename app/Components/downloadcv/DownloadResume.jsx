@@ -72,65 +72,95 @@ export default function DownloadResume({ userDetails, className }) {
         }
     };
 
-    const getTitle = () => {
-        const translations = {
-            en: 'Download CV',
-            fr: 'Télécharger CV',
-            es: 'Descargar CV',
-            ar: 'تحميل السيرة الذاتية',
-            de: 'Lebenslauf herunterladen',
-            ru: 'Скачать резюме',
-            ja: '履歴書をダウンロード',
-            zh: '下载简历',
-            nl: 'CV downloaden',
-            pt: 'Baixar CV',
-            it: 'Scarica CV',
-            hi: 'सीवी डाउनलोड करें',
-            tr: 'CV İndir',
-            ko: 'CV 다운로드',
-        };
-        return translations[userDetails?.displayLanguage] || translations['en'];
+    const TRANSLATIONS = {
+        en: {
+            waitTitle: 'Please wait...',
+            title: 'Download CV',
+            loading: (name) => `Downloading CV for ${name}...`,
+            cancel: 'Cancel',
+        },
+        fr: {
+            waitTitle: 'Veuillez patienter...',
+            title: 'Télécharger CV',
+            loading: (name) => `Téléchargement du CV de ${name}...`,
+            cancel: 'Annuler',
+        },
+        es: {
+            waitTitle: 'Por favor, espere...',
+            title: 'Descargar CV',
+            loading: (name) => `Descargando CV de ${name}...`,
+            cancel: 'Cancelar',
+        },
+        ar: {
+            waitTitle: 'المرجو الانتظار...',
+            title: 'تحميل السيرة الذاتية',
+            loading: (name) => `جاري تحميل السيرة الذاتية لـ ${name}...`,
+            cancel: 'إلغاء',
+        },
+        de: {
+            waitTitle: 'Bitte warten...',
+            title: 'Lebenslauf herunterladen',
+            loading: (name) => `Lebenslauf von ${name} wird heruntergeladen...`,
+            cancel: 'Abbrechen',
+        },
+        ru: {
+            waitTitle: 'Пожалуйста, подождите...',
+            title: 'Скачать резюме',
+            loading: (name) => `Загрузка резюме ${name}...`,
+            cancel: 'Отмена',
+        },
+        ja: {
+            waitTitle: '少々お待ちください...',
+            title: '履歴書をダウンロード',
+            loading: (name) => `${name}の履歴書をダウンロード中...`,
+            cancel: 'キャンセル',
+        },
+        zh: {
+            waitTitle: '请稍候...',
+            title: '下载简历',
+            loading: (name) => `正在下载 ${name} 的简历...`,
+            cancel: '取消',
+        },
+        nl: {
+            waitTitle: 'Even geduld a.u.b....',
+            title: 'CV downloaden',
+            loading: (name) => `CV van ${name} downloaden...`,
+            cancel: 'Annuleren',
+        },
+        pt: {
+            waitTitle: 'Por favor, aguarde...',
+            title: 'Baixar CV',
+            loading: (name) => `Baixando CV de ${name}...`,
+            cancel: 'Cancelar',
+        },
+        it: {
+            waitTitle: 'Attendere prego...',
+            title: 'Scarica CV',
+            loading: (name) => `Scaricando il CV di ${name}...`,
+            cancel: 'Annulla',
+        },
+        hi: {
+            waitTitle: 'कृपया प्रतीक्षा करें...',
+            title: 'सीवी डाउनलोड करें',
+            loading: (name) => `${name} का सीवी डाउनलोड हो रहा है...`,
+            cancel: 'रद्द करें',
+        },
+        tr: {
+            waitTitle: 'Lütfen bekleyin...',
+            title: 'CV İndir',
+            loading: (name) => `${name} kişisinin CV'si indiriliyor...`,
+            cancel: 'İptal',
+        },
+        ko: {
+            waitTitle: '잠시만 기다려 주세요...',
+            title: 'CV 다운로드',
+            loading: (name) => `${name}의 CV 다운로드 중...`,
+            cancel: '취소',
+        },
     };
 
-    const getLoadingText = () => {
-        const loadingTranslations = {
-            en: 'Downloading CV...',
-            fr: 'Téléchargement du CV...',
-            es: 'Descargando CV...',
-            ar: 'جاري تحميل السيرة الذاتية...',
-            de: 'CV wird heruntergeladen...',
-            ru: 'Загрузка резюме...',
-            ja: '履歴書をダウンロード中...',
-            zh: '正在下载简历...',
-            nl: 'CV downloaden...',
-            pt: 'Baixando CV...',
-            it: 'Scaricando CV...',
-            hi: 'CV डाउनलोड हो रहा है...',
-            tr: 'CV İndiriliyor...',
-            ko: 'CV 다운로드 중...',
-        };
-        return loadingTranslations[userDetails?.displayLanguage] || loadingTranslations['en'];
-    };
-
-    const getCancelText = () => {
-        const cancelTranslations = {
-            en: 'Cancel',
-            fr: 'Annuler',
-            es: 'Cancelar',
-            ar: 'إلغاء',
-            de: 'Abbrechen',
-            ru: 'Отмена',
-            ja: 'キャンセル',
-            zh: '取消',
-            nl: 'Annuleren',
-            pt: 'Cancelar',
-            it: 'Annulla',
-            hi: 'रद्द करें',
-            tr: 'İptal',
-            ko: '취소',
-        };
-        return cancelTranslations[userDetails?.displayLanguage] || cancelTranslations['en'];
-    };
+    const t = TRANSLATIONS[userDetails?.displayLanguage] || TRANSLATIONS['en'];
+    const fullName = userDetails?.fullname || userDetails?.username || 'User';
 
     return (
         <>
@@ -144,7 +174,7 @@ export default function DownloadResume({ userDetails, className }) {
                 </button>
                 {/* Custom Tooltip */}
                 <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-3 px-3 py-1.5 bg-gray-900/90 text-white text-xs font-medium rounded-lg opacity-0 group-hover:opacity-100 transition-all duration-300 pointer-events-none whitespace-nowrap shadow-xl backdrop-blur-sm z-50 translate-y-2 group-hover:translate-y-0">
-                    {getTitle()}
+                    {t.title}
                     <div className="absolute top-full left-1/2 transform -translate-x-1/2 border-4 border-transparent border-t-gray-900/90"></div>
                 </div>
             </div>
@@ -160,15 +190,15 @@ export default function DownloadResume({ userDetails, className }) {
                             </div>
                         </div>
 
-                        <h3 className="text-xl font-bold text-white mb-2">{getTitle()}</h3>
-                        <p className="text-gray-400 mb-8">{getLoadingText()}</p>
+                        <h3 className="text-xl font-bold text-white mb-2">{t.waitTitle}</h3>
+                        <p className="text-gray-400 mb-8">{t.loading(fullName)}</p>
 
                         <button
                             onClick={handleCancel}
                             className="px-6 py-2 rounded-lg bg-white/5 hover:bg-white/10 text-white border border-white/10 transition-colors w-full flex items-center justify-center gap-2"
                         >
                             <X size={18} />
-                            {getCancelText()}
+                            {t.cancel}
                         </button>
 
                     </div>
