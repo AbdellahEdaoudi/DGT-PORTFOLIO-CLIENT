@@ -190,24 +190,18 @@ export default function Themeone({ userDetails, userLinks, bgcolor }) {
                   </button>
                 </div>
               </div>
-
-
-
               {/* Main profile card */}
               <div className="bg-white/10 backdrop-blur-md border border-white/20 rounded-3xl p-5 md:p-8 mb-8 hover:bg-white/15 transition-all duration-300">
                 <div className="flex flex-col md:flex-row gap-3 md:gap-8 items-start">
                   {/* Profile picture */}
                   <div className="flex-shrink-0 flex items-center gap-2 ">
-                    <div className="relative w-24 h-24 md:w-40 md:h-40">
+                    <div className="relative w-24 h-24 md:w-40 md:h-40 shrink-0">
                       <div className="absolute inset-0 bg-gradient-to-br from-white/20 to-white/5 rounded-full blur-xl"></div>
                       <Image width={500} height={500}
                         src={userDetails?.urlimage}
                         alt={userDetails?.fullname || "Profile Picture"}
-                        className="relative w-full h-full rounded-full object-cover border-4 border-white/30 shadow-2xl"
+                        className="relative z-10 w-full h-full rounded-full object-cover border-4 border-white/30 shadow-2xl"
                       />
-                      {userDetails?.isOnline && (
-                        <div className="absolute bottom-1 right-1 md:bottom-3 md:right-3 w-6 h-6 bg-green-500 rounded-full border-2 border-white animate-pulse"></div>
-                      )}
                     </div>
                     <div className="md:hidden block mt-4">
                       <h2 className=" text-2xl  font-bold text-white mb-2">{userDetails?.fullname}</h2>

@@ -54,7 +54,7 @@ export default function Theme({ userData, setUserDetails }) {
           </button>
         </div>
       </div>
-      <div className="grid grid-cols-3  md:grid-cols-5 gap-4">
+      <div className="grid grid-cols-2 sm:grid-cols-3  md:grid-cols-5 gap-4">
         {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13].map((num) => (
           <div
             key={num}
@@ -70,8 +70,8 @@ export default function Theme({ userData, setUserDetails }) {
               <Image
                 src={`/themes/theme${num}.png`}
                 alt={`Theme ${num}`}
-                width={1920}
-                height={1080}
+                width={150}
+                height={100}
                 className="w-full h-full object-cover object-top"
               />
             </div>

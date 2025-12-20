@@ -12,6 +12,7 @@ import DownloadResume from "../downloadcv/DownloadResume"
 export default function ThemeFive({ userDetails, userLinks }) {
   const { t } = useTranslation(userDetails?.displayLanguage || 'en')
   const [showQR, setShowQR] = useState(false)
+  const [showUserLinks, setShowUserLinks] = useState(false)
   const [expanded, setExpanded] = useState(false);
   const [selectedImage, setSelectedImage] = useState(null);
   const [isNavOpen, setIsNavOpen] = useState(false);

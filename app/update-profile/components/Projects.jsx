@@ -209,28 +209,7 @@ export default function Projects({ userData, setUserDetails }) {
                     </div>
                   )}
 
-                  <div className="grid grid-cols-2 gap-2">
-                    <input
-                      type="text"
-                      placeholder={t('startDate')}
-                      value={proj.startDate || ""}
-                      maxLength={20}
-                      onChange={(e) =>
-                        updateObjectInArray(projects, setProjects, index, "startDate", e.target.value)
-                      }
-                      className="px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 bg-white transition"
-                    />
-                    <input
-                      type="text"
-                      placeholder={t('endDate')}
-                      value={proj.endDate || ""}
-                      maxLength={20}
-                      onChange={(e) =>
-                        updateObjectInArray(projects, setProjects, index, "endDate", e.target.value)
-                      }
-                      className="px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 bg-white transition"
-                    />
-                  </div>
+
                 </div>
               )}
             </div>
@@ -247,8 +226,6 @@ export default function Projects({ userData, setUserDetails }) {
               link: "",
               image: "",
               technologies: [],
-              startDate: "",
-              endDate: "",
               collapsed: false // Expand the new item
             })
           }
