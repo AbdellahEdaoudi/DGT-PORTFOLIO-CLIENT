@@ -3,8 +3,8 @@ export default function ConfirmModal({ isOpen, onConfirm, onCancel, message }) {
 
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
-      <div className="bg-white rounded-lg p-6 w-80 shadow-lg text-center">
-        <p className="mb-4 text-gray-800">{message}</p>
+      <div className="bg-white rounded-lg p-6 w-full max-w-md mx-4 shadow-lg text-center">
+        <div className="mb-4 text-gray-800">{message}</div>
         <div className="flex justify-around">
           <button
             onClick={onConfirm}

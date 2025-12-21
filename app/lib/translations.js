@@ -147,7 +147,7 @@ export const translations = {
         addLink: "Add Link",
         linkName: "Link Name",
         linkUrl: "Link URL",
-        exampleWebsite: "e.g., My Website",
+        exampleWebsite: "e.g., My Platform or My Blog",
         exampleUrl: "https://example.com",
         updateLink: "Update Link",
         deleteLinkConfirm: "Are you sure you want to delete this link?",
@@ -237,6 +237,8 @@ export const translations = {
         email: "Email",
         location: "Location",
         skillsAndExpertise: "Skills & Expertise",
+        Title: "Title",
+        Link: "Link",
     },
 
     fr: {
@@ -386,7 +388,7 @@ export const translations = {
         addLink: "Ajouter un lien",
         linkName: "Nom du lien",
         linkUrl: "URL du lien",
-        exampleWebsite: "par ex., Mon site web",
+        exampleWebsite: "par ex., Ma Plateforme ou Mon Blog",
         exampleUrl: "https://exemple.com",
         updateLink: "Mettre à jour le lien",
         deleteLinkConfirm: "Êtes-vous sûr de vouloir supprimer ce lien?",
@@ -476,6 +478,8 @@ export const translations = {
         email: "Email",
         location: "Emplacement",
         skillsAndExpertise: "Compétences et expertise",
+        Title: "Titre",
+        Link: "Lien",
     },
 
     ar: {
@@ -621,11 +625,11 @@ export const translations = {
         summary: "نبذة عنك",
         tellUsAboutYourself: "أخبرنا عن نفسك...",
         savedSuccessfully: "تم الحفظ بنجاح!",
-        businessLinks: "روابط العمل",
+        businessLinks: "روابط الأعمال",
         addLink: "إضافة رابط",
         linkName: "اسم الرابط",
         linkUrl: "عنوان URL للرابط",
-        exampleWebsite: "مثال: موقعي الإلكتروني",
+        exampleWebsite: "مثال: منصتي أو مدونتي",
         exampleUrl: "https://example.com",
         updateLink: "تحديث الرابط",
         deleteLinkConfirm: "هل أنت متأكد أنك تريد حذف هذا الرابط؟",
@@ -715,6 +719,8 @@ export const translations = {
         email: "البريد الإلكتروني",
         location: "الموقع",
         skillsAndExpertise: "المهارات والخبرات",
+        Title: "العنوان",
+        Link: "الرابط",
     },
 
     de: {
@@ -864,7 +870,7 @@ export const translations = {
         addLink: "Link hinzufügen",
         linkName: "Link-Name",
         linkUrl: "Link-URL",
-        exampleWebsite: "z.B. Meine Website",
+        exampleWebsite: "z.B. Meine Plattform oder Mein Blog",
         exampleUrl: "https://example.com",
         updateLink: "Link aktualisieren",
         deleteLinkConfirm: "Sind Sie sicher, dass Sie diesen Link löschen möchten?",
@@ -952,6 +958,8 @@ export const translations = {
         email: "E-Mail",
         location: "Standort",
         skillsAndExpertise: "Fähigkeiten & Expertise",
+        Title: "Titel",
+        Link: "Link",
     },
 
     ru: {
@@ -1101,7 +1109,7 @@ export const translations = {
         addLink: "Добавить ссылку",
         linkName: "Название ссылки",
         linkUrl: "URL ссылки",
-        exampleWebsite: "например, Мой веб-сайт",
+        exampleWebsite: "например, Моя платформа или Мой блог",
         exampleUrl: "https://example.com",
         updateLink: "Обновить ссылку",
         deleteLinkConfirm: "Вы уверены, что хотите удалить эту ссылку?",
@@ -1189,6 +1197,8 @@ export const translations = {
         email: "Email",
         location: "Местоположение",
         skillsAndExpertise: "Навыки и опыт",
+        Title: "Заголовок",
+        Link: "Ссылка",
     },
 
     ja: {
@@ -1338,7 +1348,7 @@ export const translations = {
         addLink: "リンクを追加",
         linkName: "リンク名",
         linkUrl: "リンクURL",
-        exampleWebsite: "例：私のウェブサイト",
+        exampleWebsite: "例：私のプラットフォームまたは私のブログ",
         exampleUrl: "https://example.com",
         updateLink: "リンクを更新",
         deleteLinkConfirm: "このリンクを削除してもよろしいですか？",
@@ -1426,6 +1436,8 @@ export const translations = {
         email: "メール",
         location: "場所",
         skillsAndExpertise: "スキルと専門知識",
+        Title: "タイトル",
+        Link: "リンク",
     },
 
     zh: {
@@ -1575,7 +1587,7 @@ export const translations = {
         addLink: "添加链接",
         linkName: "链接名称",
         linkUrl: "链接URL",
-        exampleWebsite: "例如：我的网站",
+        exampleWebsite: "例如：我的平台或我的博客",
         exampleUrl: "https://example.com",
         updateLink: "更新链接",
         deleteLinkConfirm: "您确定要删除此链接吗？",
@@ -1663,6 +1675,8 @@ export const translations = {
         email: "电子邮件",
         location: "位置",
         skillsAndExpertise: "技能与专长",
+        Title: "标题",
+        Link: "链接",
     },
     es: {
         // Common
@@ -1811,7 +1825,7 @@ export const translations = {
         addLink: "Añadir enlace",
         linkName: "Nombre del enlace",
         linkUrl: "URL del enlace",
-        exampleWebsite: "ej. Mi sitio web",
+        exampleWebsite: "ej. Mi Plataforma o Mi Blog",
         exampleUrl: "https://ejemplo.com",
         updateLink: "Actualizar enlace",
         deleteLinkConfirm: "¿Estás seguro de que quieres eliminar este enlace?",
@@ -1899,6 +1913,8 @@ export const translations = {
         email: "Correo electrónico",
         location: "Ubicación",
         skillsAndExpertise: "Habilidades y experiencia",
+        Title: "Título",
+        Link: "Enlace",
     },
 
     nl: {
@@ -2048,7 +2064,7 @@ export const translations = {
         addLink: "Link toevoegen",
         linkName: "Linknaam",
         linkUrl: "Link URL",
-        exampleWebsite: "bijv., Mijn website",
+        exampleWebsite: "bijv., Mijn Platform of Mijn Blog",
         exampleUrl: "https://voorbeeld.nl",
         updateLink: "Link bijwerken",
         deleteLinkConfirm: "Weet u zeker dat u deze link wilt verwijderen?",
@@ -2138,6 +2154,8 @@ export const translations = {
         email: "E-mail",
         location: "Locatie",
         skillsAndExpertise: "Vaardigheden & Expertise",
+        Title: "Titel",
+        Link: "Link",
     },
     pt: {
         // Common
@@ -2286,7 +2304,7 @@ export const translations = {
         addLink: "Adicionar Link",
         linkName: "Nome do Link",
         linkUrl: "URL do Link",
-        exampleWebsite: "ex: Meu Site",
+        exampleWebsite: "ex: Minha Plataforma ou Meu Blog",
         exampleUrl: "https://exemplo.com",
         updateLink: "Atualizar Link",
         deleteLinkConfirm: "Tem certeza que deseja excluir este link?",
@@ -2376,6 +2394,8 @@ export const translations = {
         email: "Email",
         location: "Localização",
         skillsAndExpertise: "Habilidades e Expertise",
+        Title: "Título",
+        Link: "Link",
     },
     it: {
         // Common
@@ -2524,7 +2544,7 @@ export const translations = {
         addLink: "Aggiungi Link",
         linkName: "Nome Link",
         linkUrl: "URL Link",
-        exampleWebsite: "es: Il Mio Sito",
+        exampleWebsite: "es: La mia piattaforma o Il mio blog",
         exampleUrl: "https://esempio.com",
         updateLink: "Aggiorna Link",
         deleteLinkConfirm: "Sei sicuro di voler eliminare questo link?",
@@ -2614,6 +2634,8 @@ export const translations = {
         email: "Email",
         location: "Posizione",
         skillsAndExpertise: "Competenze ed Esperienza",
+        Title: "Titolo",
+        Link: "Link",
     },
     hi: {
         // Common
@@ -2762,7 +2784,7 @@ export const translations = {
         addLink: "लिंक जोड़ें",
         linkName: "लिंक का नाम",
         linkUrl: "लिंक URL",
-        exampleWebsite: "उदा: मेरी वेबसाइट",
+        exampleWebsite: "उदा: मेरा मंच या मेरा ब्लॉग",
         exampleUrl: "https://example.com",
         updateLink: "लिंक अपडेट करें",
         deleteLinkConfirm: "क्या आप वाकई इस लिंक को हटाना चाहते हैं?",
@@ -2852,6 +2874,8 @@ export const translations = {
         email: "ईमेल",
         location: "स्थान",
         skillsAndExpertise: "कौशल और विशेषज्ञता",
+        Title: "शीर्षक",
+        Link: "लिंक",
     },
     tr: {
         // Common
@@ -3000,7 +3024,7 @@ export const translations = {
         addLink: "Bağlantı Ekle",
         linkName: "Bağlantı Adı",
         linkUrl: "Bağlantı URL'si",
-        exampleWebsite: "ör: Web Sitem",
+        exampleWebsite: "ör: Platformum veya Blogum",
         exampleUrl: "https://ornek.com",
         updateLink: "Bağlantıyı Güncelle",
         deleteLinkConfirm: "Bu bağlantıyı silmek istediğinizden emin misiniz?",
@@ -3090,6 +3114,8 @@ export const translations = {
         email: "E-posta",
         location: "Konum",
         skillsAndExpertise: "Beceriler ve Uzmanlık",
+        Title: "Başlık",
+        Link: "Bağlantı",
     },
     ko: {
         // Common
@@ -3238,7 +3264,7 @@ export const translations = {
         addLink: "링크 추가",
         linkName: "링크 이름",
         linkUrl: "링크 URL",
-        exampleWebsite: "예: 내 웹사이트",
+        exampleWebsite: "예: 내 플랫폼 또는 내 블로그",
         exampleUrl: "https://example.com",
         updateLink: "링크 업데이트",
         deleteLinkConfirm: "이 링크를 삭제하시겠습니까?",
@@ -3328,6 +3354,8 @@ export const translations = {
         email: "이메일",
         location: "위치",
         skillsAndExpertise: "기술 및 전문성",
+        Title: "제목",
+        Link: "링크",
     },
 };
 

@@ -1,6 +1,7 @@
 "use client"
 
 import { useState } from "react"
+import { createPortal } from "react-dom"
 import { Search, AlertCircle, Loader, Eye, X, Maximize2, Mail, Type, Calendar, User, Paperclip, Clock } from "../../Components/Icons"
 import { toast } from "react-toastify"
 import axios from "axios"
@@ -110,8 +111,8 @@ export default function ContactManagement({ data, setData }) {
       </div>
 
       {/* Modal عرض الرسالة */}
-      {selectedMessage && (
-        <div className="fixed inset-0 bg-black/80 backdrop-blur-md flex items-center justify-center z-50 p-4 transition-all duration-300">
+      {selectedMessage && createPortal(
+        <div className="fixed inset-0 bg-black/80 backdrop-blur-md flex items-center justify-center z-[9999] p-4 transition-all duration-300">
           <div className="bg-slate-900 border border-slate-800 rounded-2xl max-w-3xl w-full shadow-2xl max-h-[85vh] flex flex-col overflow-hidden animate-in fade-in zoom-in-95 duration-200">
 
             {/* Header */}
@@ -235,13 +236,14 @@ export default function ContactManagement({ data, setData }) {
             </div>
 
           </div>
-        </div>
+        </div>,
+        document.body
       )}
 
       {/* Image Viewer Modal */}
-      {selectedImage && (
+      {selectedImage && createPortal(
         <div
-          className="fixed inset-0 bg-black/90 backdrop-blur-md flex items-center justify-center z-[60] p-4 transition-all duration-300 animate-in fade-in"
+          className="fixed inset-0 bg-black/90 backdrop-blur-md flex items-center justify-center z-[9999] p-4 transition-all duration-300 animate-in fade-in"
           onClick={() => setSelectedImage(null)}
         >
           <button
@@ -264,12 +266,13 @@ export default function ContactManagement({ data, setData }) {
               className="max-w-full max-h-full object-contain rounded-lg shadow-2xl animate-in zoom-in-95 duration-300"
             />
           </div>
-        </div>
+        </div>,
+        document.body
       )}
 
       {/* Modal تأكيد الحذف */}
-      {deleteConfirm && (
-        <div className="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-50 p-4">
+      {deleteConfirm && createPortal(
+        <div className="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-[9999] p-4">
           <div className="bg-gradient-to-br from-slate-800 to-slate-900 border border-red-500/30 rounded-2xl max-w-md w-full p-8 shadow-2xl">
             <div className="flex items-center justify-center w-12 h-12 rounded-full bg-red-500/20 border border-red-500/50 mx-auto mb-6">
               <AlertCircle className="w-6 h-6 text-red-400" />
@@ -299,7 +302,8 @@ export default function ContactManagement({ data, setData }) {
               </button>
             </div>
           </div>
-        </div>
+        </div>,
+        document.body
       )}
     </div>
   )

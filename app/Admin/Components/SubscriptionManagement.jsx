@@ -1,6 +1,7 @@
 "use client"
 
 import { useState } from "react"
+import { createPortal } from "react-dom"
 import { Search, AlertCircle, Loader } from "../../Components/Icons"
 import { toast } from "react-toastify"
 import axios from "axios"
@@ -164,8 +165,8 @@ export default function SubscriptionManagement({ data, setData }) {
         </div>
       </div>
 
-      {deleteConfirm && (
-        <div className="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-50 p-4">
+      {deleteConfirm && createPortal(
+        <div className="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-[9999] p-4">
           <div className="bg-gradient-to-br from-slate-800 to-slate-900 border border-red-500/30 rounded-2xl max-w-md w-full p-8 shadow-2xl">
             <div className="flex items-center justify-center w-12 h-12 rounded-full bg-red-500/20 border border-red-500/50 mx-auto mb-6">
               <AlertCircle className="w-6 h-6 text-red-400" />
@@ -202,7 +203,8 @@ export default function SubscriptionManagement({ data, setData }) {
               </button>
             </div>
           </div>
-        </div>
+        </div>,
+        document.body
       )}
     </div>
   )

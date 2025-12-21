@@ -5,7 +5,6 @@ import { Users, MessageSquare, Settings, LogOut, DollarSign } from "../Component
 import AdminSidebar from "./Components/admin-sidebar"
 import UserManagement from "./Components/user-management"
 import ContactManagement from "./Components/contact-management"
-import LinksManagement from "./Components/links-management"
 import SubscriptionManagement from "./Components/SubscriptionManagement"
 import PromoCodeManagement from "./Components/promo-management"
 import ExpiredTrialsManagement from "./Components/expired-trials-management"
@@ -183,7 +182,6 @@ export default function AdminDashboard() {
 
               {activeTab === "users" && <UserManagement data={data} setData={setData} />}
               {activeTab === "contacts" && <ContactManagement data={data} setData={setData} />}
-              {activeTab === "links" && <LinksManagement links={data.links} />}
               {activeTab === "subscriptions" && <SubscriptionManagement data={data} setData={setData} />}
               {activeTab === "promo" && (<PromoCodeManagement data={data} setData={setData} />)}
               {activeTab === "expired" && <ExpiredTrialsManagement />}

@@ -1,6 +1,7 @@
 "use client"
 
 import { useState, useEffect } from "react"
+import { createPortal } from "react-dom"
 import { Search, Mail, CheckCircle, RefreshCcw, XCircle } from "../../Components/Icons"
 import axios from "axios"
 import { toast } from "react-toastify"
@@ -180,8 +181,8 @@ export default function ExpiredTrialsManagement() {
             </div>
 
             {/* Confirmation Modal */}
-            {showConfirmModal && (
-                <div className="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50 p-4 ">
+            {showConfirmModal && createPortal(
+                <div className="fixed inset-0 bg-black/75 flex items-center justify-center z-[9999] p-4 ">
                     <div className="bg-slate-900 border border-gray-700 rounded-lg shadow-xl p-6 max-w-sm w-full animate-in zoom-in-95 fade-in-0 duration-300">
                         <div className="flex justify-between items-center mb-4">
                             <h3 className="text-lg font-semibold text-white">Confirm Email Send</h3>
@@ -212,7 +213,8 @@ export default function ExpiredTrialsManagement() {
                             </button>
                         </div>
                     </div>
-                </div>
+                </div>,
+                document.body
             )}
         </div>
     )

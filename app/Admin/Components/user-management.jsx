@@ -1,9 +1,9 @@
 "use client"
 import { useState } from "react"
+import { createPortal } from "react-dom"
 import { Search, AlertCircle, Loader, X, ExternalLink } from "../../Components/Icons"
 import { toast } from "react-toastify"
 import axios from "axios"
-import { useRouter } from "next/navigation"
 import Image from "next/image"
 import ThemeOne from "../../Components/themes/themeone"
 import ThemeTwo from "../../Components/themes/themetwo"
@@ -25,7 +25,6 @@ export default function UserManagement({ data, setData }) {
   const [searchQuery, setSearchQuery] = useState("")
   const [loadingDeleteId, setLoadingDeleteId] = useState(null)
   const [loadingDeleteId2, setLoadingDeleteId2] = useState(null)
-  const router = useRouter()
 
   // Helper: render theme preview
   const renderThemePreview = (user) => {
@@ -204,15 +203,17 @@ export default function UserManagement({ data, setData }) {
           </div>
 
 
-          {selectedUserLinks && (
-            <div className="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-50 p-4">
-              <div className="bg-gradient-to-br from-slate-800 to-slate-900 border border-purple-500/30 rounded-2xl max-w-2xl w-full p-8 shadow-2xl max-h-[80vh] overflow-y-auto">
+          {selectedUserLinks && createPortal(
+            <div className="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-[9999] p-4">
+              <div className="bg-gradient-to-br from-slate-800 to-slate-900 border border-purple-500/30 rounded-2xl max-w-2xl w-full p-4 md:p-8 shadow-2xl max-h-[80vh] overflow-y-auto">
                 <div className="flex justify-between items-start mb-6">
-                  <div>
-                    <p className=" mt-1">{data.users.filter((user) => user.email === selectedUserLinks[0]?.useremail)[0]?.fullname}</p>
-                    <p className=" mt-1">{selectedUserLinks[0]?.useremail}</p>
+                  <div className="w-full pr-8">
+                    <p className="text-lg font-bold text-white mb-1 truncate">
+                      {data.users.find((user) => user.email === selectedUserLinks[0]?.useremail)?.fullname || "User Links"}
+                    </p>
+                    <p className="text-sm text-gray-400 break-all">{selectedUserLinks[0]?.useremail}</p>
                   </div>
-                  <button onClick={() => setSelectedUserLinks(null)} className="p-2 hover:bg-purple-500/20 rounded transition">
+                  <button onClick={() => setSelectedUserLinks(null)} className="p-2 hover:bg-purple-500/20 rounded transition -mr-2 -mt-2">
                     <X className="w-6 h-6 text-gray-400" />
                   </button>
                 </div>
@@ -222,34 +223,34 @@ export default function UserManagement({ data, setData }) {
                     selectedUserLinks.map((link) => (
                       <div
                         key={link._id}
-                        className="p-4 bg-slate-700/50 border border-purple-500/20 rounded-lg flex justify-between items-center hover:bg-slate-700/70 transition"
+                        className="p-3 sm:p-4 bg-slate-700/50 border border-purple-500/20 rounded-lg flex items-center justify-between gap-3 hover:bg-slate-700/70 transition"
                       >
-                        <div className="flex-1">
-                          <h3 className="text-white font-semibold">{link.namelink}</h3>
+                        <div className="flex-1 min-w-0">
+                          <h3 className="text-white font-semibold text-sm sm:text-base truncate">{link.namelink}</h3>
                           <a
                             href={link.link}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="text-cyan-400 hover:text-cyan-300 text-sm truncate break-all"
+                            className="text-cyan-400 hover:text-cyan-300 text-xs sm:text-sm truncate block"
                           >
                             {link.link}
                           </a>
-                          <p className="text-gray-500 text-xs mt-1">
+                          <p className="text-gray-500 text-[10px] sm:text-xs mt-1">
                             {new Date(link.createdAt).toLocaleString()}
                           </p>
                         </div>
-                        <div className="flex gap-2 ml-4">
+                        <div className="flex gap-2 shrink-0">
                           <button
                             onClick={() => window.open(link.link, "_blank")}
-                            className="p-2 hover:bg-purple-500/20 rounded transition"
+                            className="p-1.5 sm:p-2 hover:bg-purple-500/20 rounded transition bg-slate-800/50"
                           >
-                            <ExternalLink className="w-4 h-4 text-cyan-400" />
+                            <ExternalLink className="w-3 h-3 sm:w-4 sm:h-4 text-cyan-400" />
                           </button>
                           <button
                             onClick={() => setDeleteConfirm2(link._id)}
-                            className="px-3 py-2 bg-red-500/20 border border-red-500/50 rounded text-red-400 hover:bg-red-500/30 transition text-sm font-semibold"
+                            className="px-2 py-1 sm:px-3 sm:py-2 bg-red-500/20 border border-red-500/50 rounded text-red-400 hover:bg-red-500/30 transition text-xs sm:text-sm font-semibold flex items-center justify-center min-w-[60px] sm:min-w-[80px]"
                           >
-                            {loadingDeleteId2 === link._id ? <Loader size={18} className="animate-spin" /> : "Delete"}
+                            {loadingDeleteId2 === link._id ? <Loader size={14} className="animate-spin" /> : "Delete"}
                           </button>
                         </div>
                       </div>
@@ -261,11 +262,12 @@ export default function UserManagement({ data, setData }) {
                   )}
                 </div>
               </div>
-            </div>
+            </div>,
+            document.body
           )}
 
-          {deleteConfirm && (
-            <div className="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-50 p-4">
+          {deleteConfirm && createPortal(
+            <div className="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-[9999] p-4">
               <div className="bg-gradient-to-br from-slate-800 to-slate-900 border border-red-500/30 rounded-2xl max-w-md w-full p-8 shadow-2xl">
                 <div className="flex items-center justify-center w-12 h-12 rounded-full bg-red-500/20 border border-red-500/50 mx-auto mb-6">
                   <AlertCircle className="w-6 h-6 text-red-400" />
@@ -293,11 +295,12 @@ export default function UserManagement({ data, setData }) {
                   </button>
                 </div>
               </div>
-            </div>
+            </div>,
+            document.body
           )}
 
-          {deleteConfirm2 && (
-            <div className="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-50 p-4">
+          {deleteConfirm2 && createPortal(
+            <div className="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-[9999] p-4">
               <div className="bg-gradient-to-br from-slate-800 to-slate-900 border border-red-500/30 rounded-2xl max-w-md w-full p-8 shadow-2xl">
                 <div className="flex items-center justify-center w-12 h-12 rounded-full bg-red-500/20 border border-red-500/50 mx-auto mb-6">
                   <AlertCircle className="w-6 h-6 text-red-400" />
@@ -325,13 +328,14 @@ export default function UserManagement({ data, setData }) {
                   </button>
                 </div>
               </div>
-            </div>
+            </div>,
+            document.body
           )}
         </div>
       )}
       {/* Theme Preview Modal */}
-      {selectedPreviewUser && (
-        <div className="fixed inset-0 bg-black/80 backdrop-blur-md flex items-center justify-center z-[100] p-4 animate-in fade-in duration-200">
+      {selectedPreviewUser && createPortal(
+        <div className="fixed inset-0 bg-black/80 backdrop-blur-md flex items-center justify-center z-[9999] p-4 animate-in fade-in duration-200">
           {/* Close Button Fixed outside or absolute top-right */}
           <button
             onClick={() => setSelectedPreviewUser(null)}
@@ -359,7 +363,8 @@ export default function UserManagement({ data, setData }) {
               {renderThemePreview(selectedPreviewUser)}
             </div>
           </div>
-        </div>
+        </div>,
+        document.body
       )}
 
     </div>
