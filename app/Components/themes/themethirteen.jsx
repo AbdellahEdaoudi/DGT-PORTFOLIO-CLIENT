@@ -56,11 +56,13 @@ export default function ThemeThirteen({ userDetails, userLinks }) {
                                 <QrcodeProfile userDetails={userDetails} className="text-slate-700 border-none bg-transparent hover:bg-transparent shadow-none" isOpen={showQR} onClose={() => setShowQR(false)} />
                             </div>
                             {/* User Links */}
-                            <div
-                                onClick={() => setShowUserLinks(true)}
-                                className="flex items-center gap-2 px-3 bg-white border border-slate-200 hover:border-blue-500/50 hover:bg-slate-50 rounded-xl text-slate-700 transition-all duration-300 cursor-pointer shadow-sm hover:shadow-md">
-                                <UserLinks lang={userDetails?.displayLanguage} userLinks={userLinks} className="text-slate-700 border-none bg-transparent hover:bg-transparent shadow-none" isOpen={showUserLinks} onClose={() => setShowUserLinks(false)} />
-                            </div>
+                            {userLinks?.length > 0 && (
+                                <div
+                                    onClick={() => setShowUserLinks(true)}
+                                    className="flex items-center gap-2 px-3 bg-white border border-slate-200 hover:border-blue-500/50 hover:bg-slate-50 rounded-xl text-slate-700 transition-all duration-300 cursor-pointer shadow-sm hover:shadow-md">
+                                    <UserLinks lang={userDetails?.displayLanguage} userLinks={userLinks} className="text-slate-700 border-none bg-transparent hover:bg-transparent shadow-none" isOpen={showUserLinks} onClose={() => setShowUserLinks(false)} />
+                                </div>
+                            )}
                         </div>
                     </div>
 
@@ -436,7 +438,7 @@ export default function ThemeThirteen({ userDetails, userLinks }) {
                                 ))}
                         </div>
                         <p dir={userDetails?.displayLanguage === 'ar' ? 'rtl' : 'ltr'} className="text-slate-400 font-medium text-sm">
-                            © {new Date().getFullYear()} {userDetails?.fullname}. {t('allRightsReserved')}.
+                            © {new Date().getFullYear()} {userDetails?.fullname}. {t('allRightsReserved')} ©
                         </p>
                     </div>
                 </footer>

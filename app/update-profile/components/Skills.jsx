@@ -65,7 +65,6 @@ export default function Skills({ userData, setUserDetails }) {
                 value={skill}
                 maxLength={130}
                 onChange={(e) => updateArrayItem(skills, setSkills, index, e.target.value)}
-                placeholder={t('skillName')}
                 className="flex-1 px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 bg-white transition"
               />
               <button

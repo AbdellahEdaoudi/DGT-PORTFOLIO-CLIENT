@@ -62,11 +62,13 @@ export default function ThemeTen({ userDetails, userLinks }) {
                                 <QrcodeProfile userDetails={userDetails} className="text-slate-300 border-none hover:bg-transparent" isOpen={showQR} onClose={() => setShowQR(false)} />
                             </div>
                             {/* User Links */}
-                            <div
-                                onClick={() => setShowUserLinks(true)}
-                                className="flex items-center gap-2 px-2 bg-slate-800/50 hover:bg-slate-700 rounded-lg text-slate-300 transition-all duration-300 border border-slate-700 hover:border-indigo-500/50 cursor-pointer">
-                                <UserLinks lang={userDetails?.displayLanguage} userLinks={userLinks} className="text-slate-300 border-none hover:bg-transparent" isOpen={showUserLinks} onClose={() => setShowUserLinks(false)} />
-                            </div>
+                            {userLinks?.length > 0 && (
+                                <div
+                                    onClick={() => setShowUserLinks(true)}
+                                    className="flex items-center gap-2 px-2 bg-slate-800/50 hover:bg-slate-700 rounded-lg text-slate-300 transition-all duration-300 border border-slate-700 hover:border-indigo-500/50 cursor-pointer">
+                                    <UserLinks lang={userDetails?.displayLanguage} userLinks={userLinks} className="text-slate-300 border-none hover:bg-transparent" isOpen={showUserLinks} onClose={() => setShowUserLinks(false)} />
+                                </div>
+                            )}
                         </div>
                     </div>
 
@@ -443,7 +445,7 @@ export default function ThemeTen({ userDetails, userLinks }) {
                                 ))}
                         </div>
                         <p className="text-slate-500 text-sm">
-                            © {new Date().getFullYear()} {userDetails.fullname}. {t('allRightsReserved')}.
+                            © {new Date().getFullYear()} {userDetails.fullname}. {t('allRightsReserved')} ©
                         </p>
                     </div>
                 </footer>

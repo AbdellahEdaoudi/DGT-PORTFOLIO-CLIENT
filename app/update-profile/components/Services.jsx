@@ -66,7 +66,6 @@ export default function Services({ userData, setUserDetails }) {
                   value={service}
                   maxLength={150}
                   onChange={(e) => updateArrayItem(services, setServices, index, e.target.value)}
-                  placeholder={t('serviceName')}
                   className="flex-1 px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 bg-white transition"
                 />
                 <button

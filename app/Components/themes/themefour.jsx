@@ -39,6 +39,17 @@ export default function ThemeFour({ userDetails, userLinks }) {
   };
 
 
+
+  const activeSectionsCount = [
+    userDetails?.services,
+    userDetails?.experience,
+    userDetails?.skills,
+    userDetails?.projects,
+    userDetails?.education,
+    userDetails?.certificates,
+    userDetails?.languages
+  ].filter(section => section && section.length > 0).length;
+
   return (
     <div>
       {userDetails && (
@@ -68,18 +79,22 @@ export default function ThemeFour({ userDetails, userLinks }) {
                       <QrcodeProfile userDetails={userDetails} className="text-white border-none hover:bg-transparent" isOpen={showQR} onClose={() => setShowQR(false)} />
                     </div>
                     {/* User Links */}
-                    <div
-                      onClick={() => setShowUserLinks(true)}
-                      className="flex items-center gap-2 px-2 bg-white/10 hover:bg-emerald-500/20 rounded-lg text-white transition-all duration-300 backdrop-blur-md border border-white/10 hover:border-emerald-500/50 cursor-pointer">
-                      <UserLinks lang={userDetails?.displayLanguage} userLinks={userLinks} className="text-white border-none hover:bg-transparent" isOpen={showUserLinks} onClose={() => setShowUserLinks(false)} />
-                    </div>
+                    {userLinks?.length > 0 && (
+                      <div
+                        onClick={() => setShowUserLinks(true)}
+                        className="flex items-center gap-2 px-2 bg-white/10 hover:bg-emerald-500/20 rounded-lg text-white transition-all duration-300 backdrop-blur-md border border-white/10 hover:border-emerald-500/50 cursor-pointer">
+                        <UserLinks lang={userDetails?.displayLanguage} userLinks={userLinks} className="text-white border-none hover:bg-transparent" isOpen={showUserLinks} onClose={() => setShowUserLinks(false)} />
+                      </div>
+                    )}
                     {/* Menu Button in Header */}
-                    <button
-                      onClick={() => setIsNavOpen(true)}
-                      className="flex items-center gap-2 px-4 py-2 bg-white/10 hover:bg-emerald-500/20 rounded-lg text-white transition-all duration-300 backdrop-blur-md border border-white/10 hover:border-emerald-500/50 font-medium"
-                    >
-                      <Menu size={20} />
-                    </button>
+                    {activeSectionsCount >= 3 && (
+                      <button
+                        onClick={() => setIsNavOpen(true)}
+                        className="flex items-center gap-2 px-4 py-2 bg-white/10 hover:bg-emerald-500/20 rounded-lg text-white transition-all duration-300 backdrop-blur-md border border-white/10 hover:border-emerald-500/50 font-medium"
+                      >
+                        <Menu size={20} />
+                      </button>
+                    )}
                   </div>
                 </div>
 
@@ -486,7 +501,7 @@ export default function ThemeFour({ userDetails, userLinks }) {
             <footer className="border-t border-emerald-500/20 bg-slate-950/50 backdrop-blur-md mt-12">
               <div className="max-w-5xl mx-auto px-4 py-8 text-center">
                 <p className="text-gray-400">
-                  © {new Date().getFullYear()} {userDetails?.fullname}. {t('allRightsReserved')}.
+                  © {new Date().getFullYear()} {userDetails?.fullname}. {t('allRightsReserved')} ©
                 </p>
               </div>
             </footer>

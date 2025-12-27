@@ -63,11 +63,13 @@ export default function ThemeSix({ userDetails, userLinks }) {
                                 <QrcodeProfile userDetails={userDetails} className="text-white border-none hover:bg-transparent" isOpen={showQR} onClose={() => setShowQR(false)} />
                             </div>
                             {/* User Links */}
-                            <div
-                                onClick={() => setShowUserLinks(true)}
-                                className="flex items-center gap-2 px-2 bg-white/10 hover:bg-green-500/20 rounded-lg text-white transition-all duration-300 backdrop-blur-md border border-white/10 hover:border-green-500/50 cursor-pointer">
-                                <UserLinks lang={userDetails?.displayLanguage} userLinks={userLinks} className="text-white border-none hover:bg-transparent" isOpen={showUserLinks} onClose={() => setShowUserLinks(false)} />
-                            </div>
+                            {userLinks?.length > 0 && (
+                                <div
+                                    onClick={() => setShowUserLinks(true)}
+                                    className="flex items-center gap-2 px-2 bg-white/10 hover:bg-green-500/20 rounded-lg text-white transition-all duration-300 backdrop-blur-md border border-white/10 hover:border-green-500/50 cursor-pointer">
+                                    <UserLinks lang={userDetails?.displayLanguage} userLinks={userLinks} className="text-white border-none hover:bg-transparent" isOpen={showUserLinks} onClose={() => setShowUserLinks(false)} />
+                                </div>
+                            )}
                         </div>
                     </div>
 
@@ -444,7 +446,7 @@ export default function ThemeSix({ userDetails, userLinks }) {
                                 ))}
                         </div>
                         <p className="text-gray-500 text-sm">
-                            © {new Date().getFullYear()} {userDetails.fullname}. {t('allRightsReserved')}.
+                            © {new Date().getFullYear()} {userDetails.fullname}. {t('allRightsReserved')} ©
                         </p>
                     </div>
                 </footer>

@@ -50,6 +50,16 @@ export default function Themeone({ userDetails, userLinks, bgcolor }) {
     });
   };
 
+  const activeSectionsCount = [
+    userDetails?.services,
+    userDetails?.experience,
+    userDetails?.skills,
+    userDetails?.projects,
+    userDetails?.education,
+    userDetails?.certificates,
+    userDetails?.languages
+  ].filter(section => section && section.length > 0).length;
+
 
 
   return (
@@ -173,21 +183,24 @@ export default function Themeone({ userDetails, userLinks, bgcolor }) {
                   >
                     <QrcodeProfile userDetails={userDetails} className="text-white border-none hover:bg-transparent" isOpen={showQR} onClose={() => setShowQR(false)} />
                   </div>
-                  {/* // User Links */}
-                  <div
-                    onClick={() => setShowUserLinks(true)}
-                    className="flex items-center gap-2 px-2 bg-white/10 hover:bg-white/20 rounded-lg text-white transition-all duration-300 backdrop-blur-md border border-white/10 cursor-pointer"
-                  >
-                    <UserLinks lang={userDetails?.displayLanguage} userLinks={userLinks} className="text-white border-none hover:bg-transparent" isOpen={showUserLinks} onClose={() => setShowUserLinks(false)} />
-                  </div>
-
+                  {/* User Links */}
+                  {userLinks?.length > 0 && (
+                    <div
+                      onClick={() => setShowUserLinks(true)}
+                      className="flex items-center gap-2 px-2 bg-white/10 hover:bg-white/20 rounded-lg text-white transition-all duration-300 backdrop-blur-md border border-white/10 cursor-pointer"
+                    >
+                      <UserLinks lang={userDetails?.displayLanguage} userLinks={userLinks} className="text-white border-none hover:bg-transparent" isOpen={showUserLinks} onClose={() => setShowUserLinks(false)} />
+                    </div>
+                  )}
                   {/* Menu Button in Header */}
-                  <button
-                    onClick={() => setIsNavOpen(true)}
-                    className="flex items-center gap-2 px-4 py-2 bg-white/10 hover:bg-white/20 rounded-lg text-white transition-all duration-300 backdrop-blur-md border border-white/10 font-medium"
-                  >
-                    <Menu size={20} />
-                  </button>
+                  {activeSectionsCount >= 3 && (
+                    <button
+                      onClick={() => setIsNavOpen(true)}
+                      className="flex items-center gap-2 px-4 py-2 bg-white/10 hover:bg-white/20 rounded-lg text-white transition-all duration-300 backdrop-blur-md border border-white/10 font-medium"
+                    >
+                      <Menu size={20} />
+                    </button>
+                  )}
                 </div>
               </div>
               {/* Main profile card */}
@@ -494,7 +507,7 @@ export default function Themeone({ userDetails, userLinks, bgcolor }) {
           <footer className="border-t border-white/10 bg-black/20 backdrop-blur-md">
             <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8 text-center">
               <p className="text-white/60">
-                © {new Date().getFullYear()} {userDetails?.fullname}. {t('allRightsReserved')}.
+                © {new Date().getFullYear()} {userDetails?.fullname}. {t('allRightsReserved')} © 
               </p>
             </div>
           </footer>

@@ -54,6 +54,16 @@ export default function ThemeEleven({ userDetails, userLinks }) {
 
 
 
+    const activeSectionsCount = [
+        userDetails?.services,
+        userDetails?.experience,
+        userDetails?.skills,
+        userDetails?.projects,
+        userDetails?.education,
+        userDetails?.certificates,
+        userDetails?.languages
+    ].filter(section => section && section.length > 0).length;
+
     return (
         <div
             dir={userDetails?.displayLanguage === 'ar' ? 'rtl' : 'ltr'}
@@ -103,16 +113,20 @@ export default function ThemeEleven({ userDetails, userLinks }) {
                         <div onClick={() => setShowQR(true)} className="cursor-pointer border border-cyan-500/30 bg-cyan-950/30 rounded hover:bg-cyan-500/20 transition-all text-cyan-400 font-bold text-xs flex items-center justify-center">
                             <QrcodeProfile userDetails={userDetails} className="text-cyan-400 border-none bg-transparent hover:bg-transparent shadow-none" isOpen={showQR} onClose={() => setShowQR(false)} />
                         </div>
-                        <div onClick={() => setShowUserLinks(true)} className="cursor-pointer border border-cyan-500/30 bg-cyan-950/30 rounded hover:bg-cyan-500/20 transition-all text-cyan-400 font-bold text-xs flex items-center justify-center">
-                            <UserLinks lang={userDetails?.displayLanguage} userLinks={userLinks} className="text-cyan-400 border-none bg-transparent hover:bg-transparent shadow-none" isOpen={showUserLinks} onClose={() => setShowUserLinks(false)} />
-                        </div>
+                        {userLinks?.length > 0 && (
+                            <div onClick={() => setShowUserLinks(true)} className="cursor-pointer border border-cyan-500/30 bg-cyan-950/30 rounded hover:bg-cyan-500/20 transition-all text-cyan-400 font-bold text-xs flex items-center justify-center">
+                                <UserLinks lang={userDetails?.displayLanguage} userLinks={userLinks} className="text-cyan-400 border-none bg-transparent hover:bg-transparent shadow-none" isOpen={showUserLinks} onClose={() => setShowUserLinks(false)} />
+                            </div>
+                        )}
                         {/* Menu Button in Header */}
-                        <button
-                            onClick={() => setIsNavOpen(true)}
-                            className="flex items-center gap-2 px-4 py-2 border border-cyan-500/30 bg-cyan-950/30 rounded hover:bg-cyan-500/20 text-cyan-400 transition-all duration-300 backdrop-blur-md font-medium"
-                        >
-                            <Menu size={20} />
-                        </button>
+                        {activeSectionsCount >= 3 && (
+                            <button
+                                onClick={() => setIsNavOpen(true)}
+                                className="flex items-center gap-2 px-4 py-2 border border-cyan-500/30 bg-cyan-950/30 rounded hover:bg-cyan-500/20 text-cyan-400 transition-all duration-300 backdrop-blur-md font-medium"
+                            >
+                                <Menu size={20} />
+                            </button>
+                        )}
                     </div>
                 </header>
 
@@ -469,7 +483,7 @@ export default function ThemeEleven({ userDetails, userLinks }) {
                 </main>
 
                 <footer className="mt-20 border-t border-cyan-900/30 pt-8 text-center text-cyan-800 text-xs uppercase tracking-widest">
-                    <p>End of Transmission /// © {new Date().getFullYear()} {userDetails?.fullname}</p>
+                    <p>End of Transmission /// © {new Date().getFullYear()} {userDetails?.fullname} ©</p>
                 </footer>
 
             </div>

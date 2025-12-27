@@ -40,11 +40,10 @@ export const translations = {
 
         // Skills
         addSkill: "Add Skill",
-        skillName: "Skill Name",
 
         // Services
         addService: "Add Service",
-        serviceName: "Service Name",
+
 
         // Education
         addEducation: "Add Education",
@@ -281,11 +280,10 @@ export const translations = {
 
         // Skills
         addSkill: "Ajouter une compétence",
-        skillName: "Nom de la compétence",
 
         // Services
         addService: "Ajouter un service",
-        serviceName: "Nom du service",
+
 
         // Education
         addEducation: "Ajouter une formation",
@@ -522,11 +520,10 @@ export const translations = {
 
         // Skills
         addSkill: "إضافة مهارة",
-        skillName: "اسم المهارة",
 
         // Services
         addService: "إضافة خدمة",
-        serviceName: "اسم الخدمة",
+
 
         // Education
         addEducation: "إضافة تعليم",
@@ -763,11 +760,10 @@ export const translations = {
 
         // Skills
         addSkill: "Fähigkeit hinzufügen",
-        skillName: "Fähigkeitsname",
 
         // Services
         addService: "Dienstleistung hinzufügen",
-        serviceName: "Dienstleistungsname",
+
 
         // Education
         addEducation: "Ausbildung hinzufügen",
@@ -1002,11 +998,9 @@ export const translations = {
 
         // Skills
         addSkill: "Добавить навык",
-        skillName: "Название навыка",
 
         // Services
         addService: "Добавить услугу",
-        serviceName: "Название услуги",
 
         // Education
         addEducation: "Добавить образование",
@@ -1241,11 +1235,9 @@ export const translations = {
 
         // Skills
         addSkill: "スキルを追加",
-        skillName: "スキル名",
 
         // Services
         addService: "サービスを追加",
-        serviceName: "サービス名",
 
         // Education
         addEducation: "学歴を追加",
@@ -1480,11 +1472,9 @@ export const translations = {
 
         // Skills
         addSkill: "添加技能",
-        skillName: "技能名称",
 
         // Services
         addService: "添加服务",
-        serviceName: "服务名称",
 
         // Education
         addEducation: "添加教育",
@@ -1718,11 +1708,9 @@ export const translations = {
 
         // Skills
         addSkill: "Añadir habilidad",
-        skillName: "Nombre de la habilidad",
 
         // Services
         addService: "Añadir servicio",
-        serviceName: "Nombre del servicio",
 
         // Education
         addEducation: "Añadir educación",
@@ -1957,11 +1945,9 @@ export const translations = {
 
         // Skills
         addSkill: "Vaardigheid toevoegen",
-        skillName: "Vaardigheidsnaam",
 
         // Services
         addService: "Dienst toevoegen",
-        serviceName: "Dienstnaam",
 
         // Education
         addEducation: "Opleiding toevoegen",
@@ -2197,11 +2183,9 @@ export const translations = {
 
         // Skills
         addSkill: "Adicionar Habilidade",
-        skillName: "Nome da Habilidade",
 
         // Services
         addService: "Adicionar Serviço",
-        serviceName: "Nome do Serviço",
 
         // Education
         addEducation: "Adicionar Educação",
@@ -2437,11 +2421,9 @@ export const translations = {
 
         // Skills
         addSkill: "Aggiungi Competenza",
-        skillName: "Nome Competenza",
 
         // Services
         addService: "Aggiungi Servizio",
-        serviceName: "Nome Servizio",
 
         // Education
         addEducation: "Aggiungi Istruzione",
@@ -2677,11 +2659,9 @@ export const translations = {
 
         // Skills
         addSkill: "कौशल जोड़ें",
-        skillName: "कौशल का नाम",
 
         // Services
         addService: "सेवा जोड़ें",
-        serviceName: "सेवा का नाम",
 
         // Education
         addEducation: "शिक्षा जोड़ें",
@@ -2917,11 +2897,9 @@ export const translations = {
 
         // Skills
         addSkill: "Yetenek Ekle",
-        skillName: "Yetenek Adı",
 
         // Services
         addService: "Hizmet Ekle",
-        serviceName: "Hizmet Adı",
 
         // Education
         addEducation: "Eğitim Ekle",
@@ -3157,11 +3135,9 @@ export const translations = {
 
         // Skills
         addSkill: "기술 추가",
-        skillName: "기술 이름",
 
         // Services
         addService: "서비스 추가",
-        serviceName: "서비스 이름",
 
         // Education
         addEducation: "교육 추가",
