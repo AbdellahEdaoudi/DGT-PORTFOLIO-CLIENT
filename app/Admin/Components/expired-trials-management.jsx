@@ -7,29 +7,49 @@ import axios from "axios"
 import { toast } from "react-toastify"
 import Image from "next/image"
 
-export default function ExpiredTrialsManagement() {
+export default function ExpiredTrialsManagement({ data }) {
     const [users, setUsers] = useState([])
-    const [loading, setLoading] = useState(true)
     const [sending, setSending] = useState(false)
     const [filter, setFilter] = useState("")
     const [showConfirmModal, setShowConfirmModal] = useState(false)
 
     useEffect(() => {
-        fetchExpiredUsers()
-    }, [])
+        if (data?.users && data?.subscription) {
+            try {
+            const sevenDaysAgo = new Date();
+            sevenDaysAgo.setDate(sevenDaysAgo.getDate() - 7);
 
-    const fetchExpiredUsers = async () => {
-        setLoading(true)
-        try {
-            const res = await axios.get("/api/proxy/admin/expired-trials")
-            setUsers(res.data)
+            const whitelist = [
+                "adam.carter.dev@gmail.com",
+                "soondiss8@gmail.com",
+                "dgt.portfolio.ma@gmail.com",
+                "edaoudicontact@gmail.com"
+            ];
+
+            const expiredUsers = data.users.filter(user => {
+                // 1. Whitelist check
+                if (whitelist.includes(user.email)) return false;
+
+                // 2. Created > 7 days ago check
+                const createdAt = new Date(user.createdAt);
+                if (createdAt >= sevenDaysAgo) return false;
+
+                // 3. Active Subscription Check
+                // Check if user has an ACTIVE subscription in data.subscription
+                const hasActiveSub = data.subscription.some(sub =>
+                    sub.userEmail === user.email && sub.status === 'ACTIVE'
+                );
+
+                return !hasActiveSub;
+            });
+
+            setUsers(expiredUsers)
         } catch (error) {
-            console.error("Error fetching expired users:", error)
-            toast.error("Failed to fetch expired users.")
-        } finally {
-            setLoading(false)
+            console.error("Error processing expired users:", error)
+            toast.error("Failed to process expired users.")
         }
-    }
+        }
+    }, [data])
 
     const handleSendBulkEmail = () => {
         if (!users.length) {
@@ -62,12 +82,6 @@ export default function ExpiredTrialsManagement() {
         u.username?.toLowerCase().includes(filter.toLowerCase())
     )
 
-    if (loading) return (
-        <div className="flex items-center justify-center h-64 text-white">
-            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-purple-500"></div>
-        </div>
-    )
-
     return (
         <div className="space-y-6 animate-in fade-in duration-500">
             <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
@@ -78,13 +92,6 @@ export default function ExpiredTrialsManagement() {
                     <p className="text-gray-400 text-xs mt-0.5">Users registered &gt; 7 days ago without active subscriptions.</p>
                 </div>
                 <div className="flex gap-2">
-                    <button
-                        onClick={fetchExpiredUsers}
-                        className="p-1.5 bg-slate-800 rounded-lg hover:bg-slate-700 text-gray-400 transition"
-                        title="Refresh"
-                    >
-                        <RefreshCcw className="w-4 h-4" />
-                    </button>
                     <button
                         onClick={handleSendBulkEmail}
                         disabled={sending || users.length === 0}

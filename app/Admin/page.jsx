@@ -157,21 +157,23 @@ export default function AdminDashboard() {
                           <p className="text-gray-400 text-xs mb-1">Subscriptions</p>
                           <p className="text-2xl font-bold">{data.subscription?.length || 0}</p>
 
-                          {/* مثال لعدد الاشتراكات ACTIVE */}
+                          {/* Active Subscriptions */}
                           <p className="text-xs text-green-400 mt-1">
                             Active: {data.subscription?.filter(sub => sub.status === "ACTIVE").length || 0}
                           </p>
 
-                          {/* مثال لعدد كل خطة */}
-                          <p className="text-xs text-cyan-400 mt-0.5">
-                            Monthly: {data.subscription?.filter(sub => sub.nameplan === "Monthly Plan").length || 0}
-                          </p>
-                          <p className="text-xs text-cyan-400 mt-0.5">
-                            4 Months: {data.subscription?.filter(sub => sub.nameplan === "4-Month Plan").length || 0}
-                          </p>
-                          <p className="text-xs text-cyan-400 mt-0.5">
-                            Yearly: {data.subscription?.filter(sub => sub.nameplan === "Annual Plan").length || 0}
-                          </p>
+                          {/* Plan Breakdown */}
+                          <div className="mt-1 space-y-0.5">
+                            <p className="text-xs text-cyan-400">
+                              Monthly: {data.subscription?.filter(sub => sub.nameplan?.toLowerCase().includes("month") && !sub.nameplan?.includes("6")).length || 0}
+                            </p>
+                            <p className="text-xs text-cyan-400">
+                              6 Months: {data.subscription?.filter(sub => sub.nameplan?.includes("6")).length || 0}
+                            </p>
+                            <p className="text-xs text-cyan-400">
+                              Yearly: {data.subscription?.filter(sub => sub.nameplan?.toLowerCase().includes("year") || sub.nameplan?.toLowerCase().includes("annual")).length || 0}
+                            </p>
+                          </div>
                         </div>
                         <DollarSign className="w-6 h-6 text-green-400" />
                       </div>
@@ -184,7 +186,7 @@ export default function AdminDashboard() {
               {activeTab === "contacts" && <ContactManagement data={data} setData={setData} />}
               {activeTab === "subscriptions" && <SubscriptionManagement data={data} setData={setData} />}
               {activeTab === "promo" && (<PromoCodeManagement data={data} setData={setData} />)}
-              {activeTab === "expired" && <ExpiredTrialsManagement />}
+              {activeTab === "expired" && <ExpiredTrialsManagement data={data} />}
               {activeTab === "bulk-email" && <BulkEmail data={data} />}
 
             </div>
