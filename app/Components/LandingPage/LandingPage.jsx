@@ -78,11 +78,11 @@ export default function LandingPage({ dict }) {
                 </span>
               </p>
             </div>
-            <div className="flex gap-4">
-              <Link href={"/update-profile"} className="px-8 py-4 bg-gradient-to-r from-cyan-400 to-purple-500 rounded-full font-semibold hover:shadow-lg hover:shadow-purple-500/50 transition flex items-center gap-2">
-                {dict.hero.start_building} <ArrowRight className="w-5 h-5" />
+            <div className="flex flex-col sm:flex-row gap-4">
+              <Link href={"/update-profile"} className="px-6 py-3 md:px-8 md:py-4 bg-gradient-to-r from-cyan-400 to-purple-500 rounded-full font-semibold hover:shadow-lg hover:shadow-purple-500/50 transition flex items-center justify-center gap-2 text-sm md:text-base">
+                {dict.hero.start_building} <ArrowRight className="w-4 h-4 md:w-5 md:h-5" />
               </Link>
-              <Link href={PORTFOLIO} target="_blank" className="px-8 py-4 border border-purple-500/50 rounded-full hover:bg-purple-500/10 transition">
+              <Link href={PORTFOLIO} target="_blank" className="px-6 py-3 md:px-8 md:py-4 border border-purple-500/50 rounded-full hover:bg-purple-500/10 transition text-center text-sm md:text-base">
                 {dict.hero.watch_demo}
               </Link>
             </div>
@@ -184,7 +184,7 @@ export default function LandingPage({ dict }) {
       {/* CTA Section */}
       <section className="px-6 py-20 border-t border-purple-500/20">
         <div className="max-w-4xl mx-auto text-center">
-          <div className="bg-gradient-to-br from-purple-600/20 to-pink-600/20 border border-purple-500/50 rounded-3xl p-12">
+          <div className="bg-gradient-to-br from-purple-600/20 to-pink-600/20 border border-purple-500/50 rounded-3xl md:p-12 p-6">
             <h2 className="text-2xl md:text-5xl font-bold mb-6">{dict.cta.title}</h2>
             <p className=" md:text-xl text-gray-300 mb-8">
               {dict.cta.subtitle}
