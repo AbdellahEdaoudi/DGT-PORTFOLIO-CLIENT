@@ -4,6 +4,7 @@ import ThemeSlideshow from "./ThemeSlideshow"
 import Navbar from "./Navbar"
 import AuthButtons from "./AuthButtons"
 import Link from "next/link"
+import LanguageSwitcher from "./LanguageSwitcher"
 
 export default function LandingPage({ dict }) {
   const PORTFOLIO = `https://adam-carter.dgtportfolio.com`
@@ -31,14 +32,16 @@ export default function LandingPage({ dict }) {
 
       {/* Navigation */}
       <Navbar>
-        <div className=" mx-auto md:mx-3 px-6 py-6 flex justify-between items-center">
+        <div className=" mx-auto md:mx-3 px-6 py-6 flex justify-between items-center relative">
           <Link href={"/"}>
             <div className="flex items-center gap-0.5 text-2xl font-bold bg-gradient-to-r from-cyan-400 to-purple-500 bg-clip-text text-transparent cursor-pointer">
               <Image src={"/LogoinQrcode.png"} width={500} height={500} className="w-12 h-10" alt="DGT Portfolio - Personal Portfolio Builder" />
-              DGTPortfolio
+              <h1 className="md:block hidden">DGTPortfolio</h1>
             </div>
           </Link>
-          <div className="hidden md:flex gap-8">
+
+          {/* Desktop Menu */}
+          <div className="hidden md:flex gap-8 items-center">
             <Link href={"#Features"} className="hover:text-cyan-400 transition">
               {dict.navbar.features}
             </Link>
@@ -49,7 +52,11 @@ export default function LandingPage({ dict }) {
               {dict.navbar.pricing}
             </Link>
           </div>
-          <AuthButtons labels={dict.navbar.auth} />
+
+          <div className="flex items-center gap-4">
+            <LanguageSwitcher />
+            <AuthButtons labels={dict.navbar.auth} />
+          </div>
         </div>
       </Navbar>
       {/* Hero Section */}
