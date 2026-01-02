@@ -58,22 +58,22 @@
         "plans": [
             {
                 "name": "Monthly Plan",
-                "description": "$10 for the month after",
+                "description": "$1 for the month",
                 "price": "$1",
-                "period": "/first month",
+                "period": "/month",
                 "cta": "Subscribe Monthly"
             },
             {
-                "name": "4-Month Plan",
+                "name": "6-Month Plan",
                 "description": "Great mid‑term offer",
-                "price": "$30",
-                "period": "/4 months",
-                "cta": "Subscribe 4 Months"
+                "price": "$5",
+                "period": "/6 months",
+                "cta": "Subscribe 6 Months"
             },
             {
                 "name": "Annual Plan",
                 "description": "Best value",
-                "price": "$60",
+                "price": "$9",
                 "period": "/year",
                 "cta": "Subscribe Yearly",
                 "badge": "Recommended"

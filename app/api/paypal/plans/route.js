@@ -23,22 +23,19 @@ export async function GET(req) {
   try {
     const token = await getAccessToken();
 
-    // جلب المنتجات
-    const productsRes = await axios.get(`${BASE}/v1/catalogs/products`, {
-      headers: { Authorization: `Bearer ${token}` },
-    });
-
-    const products = productsRes.data;
-    if (!products.products || products.products.length === 0) {
-      return new Response(JSON.stringify({ plans: [] }), { status: 200 });
-    }
-
-    const productId = products.products[0].id;
+    // Use the active PRODUCT ID
+    // Old logic was taking the first product, which might be a DELETED one.
+    // We now hardcode the new active product ID or filter for it.
+    const productId = "PROD-35N04952TH6572948";
 
     // جلب الخطط الخاصة بالمنتج
     const plansRes = await axios.get(`${BASE}/v1/billing/plans`, {
       headers: { Authorization: `Bearer ${token}` },
-      params: { product_id: productId },
+      params: {
+        product_id: productId,
+        page_size: 20, // ensure we get all plans
+        status: "ACTIVE" // Only get active plans
+      },
     });
 
     const plans = plansRes.data.plans || [];

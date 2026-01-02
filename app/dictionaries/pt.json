@@ -58,22 +58,22 @@
         "plans": [
             {
                 "name": "Plano Mensal",
-                "description": "$10 para o mês seguinte",
+                "description": "$1 para o mês",
                 "price": "$1",
-                "period": "/primeiro mês",
+                "period": "/mês",
                 "cta": "Assinar Mensalmente"
             },
             {
-                "name": "Plano de 4 Meses",
+                "name": "Plano de 6 Meses",
                 "description": "Ótima oferta a médio prazo",
-                "price": "$30",
-                "period": "/4 meses",
-                "cta": "Assinar 4 Meses"
+                "price": "$5",
+                "period": "/6 meses",
+                "cta": "Assinar 6 Meses"
             },
             {
                 "name": "Plano Anual",
                 "description": "Melhor valor",
-                "price": "$60",
+                "price": "$9",
                 "period": "/ano",
                 "cta": "Assinar Anualmente",
                 "badge": "Recomendado"

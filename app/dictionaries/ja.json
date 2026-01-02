@@ -58,22 +58,22 @@
         "plans": [
             {
                 "name": "月額プラン",
-                "description": "翌月10ドル",
+                "description": "月額1ドル",
                 "price": "1ドル",
-                "period": "/初月",
+                "period": "/月",
                 "cta": "月額で購読"
             },
             {
-                "name": "4ヶ月プラン",
+                "name": "6ヶ月プラン",
                 "description": "素晴らしい中期オファー",
-                "price": "30ドル",
-                "period": "/4ヶ月",
-                "cta": "4ヶ月購読"
+                "price": "5ドル",
+                "period": "/6ヶ月",
+                "cta": "6ヶ月購読"
             },
             {
                 "name": "年間プラン",
                 "description": "最高の価値",
-                "price": "60ドル",
+                "price": "9ドル",
                 "period": "/年",
                 "cta": "年間購読",
                 "badge": "おすすめ"

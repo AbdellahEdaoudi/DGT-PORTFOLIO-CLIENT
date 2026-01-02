@@ -58,22 +58,22 @@
         "plans": [
             {
                 "name": "Plan mensuel",
-                "description": "10 $ pour le mois suivant",
+                "description": "1 $ pour le mois",
                 "price": "1 $",
-                "period": "/premier mois",
+                "period": "/mois",
                 "cta": "S'abonner mensuellement"
             },
             {
-                "name": "Plan 4 mois",
+                "name": "Plan 6 mois",
                 "description": "Excellente offre à moyen terme",
-                "price": "30 $",
-                "period": "/4 mois",
-                "cta": "S'abonner 4 mois"
+                "price": "5 $",
+                "period": "/6 mois",
+                "cta": "S'abonner 6 mois"
             },
             {
                 "name": "Plan annuel",
                 "description": "Meilleur rapport qualité-prix",
-                "price": "60 $",
+                "price": "9 $",
                 "period": "/an",
                 "cta": "S'abonner annuellement",
                 "badge": "Recommandé"

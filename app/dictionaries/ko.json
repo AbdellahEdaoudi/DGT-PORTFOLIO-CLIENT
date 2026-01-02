@@ -58,22 +58,22 @@
         "plans": [
             {
                 "name": "월간 요금제",
-                "description": "다음 달 $10",
+                "description": "월 $1",
                 "price": "$1",
-                "period": "/첫 달",
+                "period": "/월",
                 "cta": "월간 구독"
             },
             {
-                "name": "4개월 요금제",
+                "name": "6개월 요금제",
                 "description": "훌륭한 중기 제안",
-                "price": "$30",
-                "period": "/4개월",
-                "cta": "4개월 구독"
+                "price": "$5",
+                "period": "/6개월",
+                "cta": "6개월 구독"
             },
             {
                 "name": "연간 요금제",
                 "description": "최고의 가치",
-                "price": "$60",
+                "price": "$9",
                 "period": "/년",
                 "cta": "연간 구독",
                 "badge": "추천"

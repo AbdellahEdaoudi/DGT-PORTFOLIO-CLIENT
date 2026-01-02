@@ -58,22 +58,22 @@
         "plans": [
             {
                 "name": "Monatsplan",
-                "description": "10 $ für den Folgemonat",
+                "description": "1 $ für den Monat",
                 "price": "1 $",
-                "period": "/erster Monat",
+                "period": "/Monat",
                 "cta": "Monatlich abonnieren"
             },
             {
-                "name": "4-Monats-Plan",
+                "name": "6-Monats-Plan",
                 "description": "Großartiges mittelfristiges Angebot",
-                "price": "30 $",
-                "period": "/4 Monate",
-                "cta": "4 Monate abonnieren"
+                "price": "5 $",
+                "period": "/6 Monate",
+                "cta": "6 Monate abonnieren"
             },
             {
                 "name": "Jahresplan",
                 "description": "Bester Wert",
-                "price": "60 $",
+                "price": "9 $",
                 "period": "/Jahr",
                 "cta": "Jährlich abonnieren",
                 "badge": "Empfohlen"

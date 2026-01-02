@@ -58,22 +58,22 @@
         "plans": [
             {
                 "name": "月度计划",
-                "description": "下个月10美元",
+                "description": "每月1美元",
                 "price": "1美元",
-                "period": "/首月",
+                "period": "/月",
                 "cta": "按月订阅"
             },
             {
-                "name": "4个月计划",
+                "name": "6个月计划",
                 "description": "超值中期优惠",
-                "price": "30美元",
-                "period": "/4个月",
-                "cta": "订阅4个月"
+                "price": "5美元",
+                "period": "/6个月",
+                "cta": "订阅6个月"
             },
             {
                 "name": "年度计划",
                 "description": "最佳价值",
-                "price": "60美元",
+                "price": "9美元",
                 "period": "/年",
                 "cta": "按年订阅",
                 "badge": "推荐"

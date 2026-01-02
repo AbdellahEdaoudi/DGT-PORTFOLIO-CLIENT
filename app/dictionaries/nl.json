@@ -58,22 +58,22 @@
         "plans": [
             {
                 "name": "Maandplan",
-                "description": "$10 voor de maand erna",
+                "description": "$1 per maand",
                 "price": "$1",
-                "period": "/eerste maand",
+                "period": "/maand",
                 "cta": "Maandelijks abonneren"
             },
             {
-                "name": "4-Maanden Plan",
+                "name": "6-Maanden Plan",
                 "description": "Geweldig aanbod voor de middellange termijn",
-                "price": "$30",
-                "period": "/4 maanden",
-                "cta": "Abonneer voor 4 maanden"
+                "price": "$5",
+                "period": "/6 maanden",
+                "cta": "Abonneer voor 6 maanden"
             },
             {
                 "name": "Jaarplan",
                 "description": "Beste waarde",
-                "price": "$60",
+                "price": "$9",
                 "period": "/jaar",
                 "cta": "Jaarlijks abonneren",
                 "badge": "Aanbevolen"

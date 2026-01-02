@@ -58,22 +58,22 @@
         "plans": [
             {
                 "name": "Plan Mensual",
-                "description": "$10 por el mes siguiente",
+                "description": "$1 por mes",
                 "price": "$1",
-                "period": "/primer mes",
+                "period": "/mes",
                 "cta": "Suscribirse Mensualmente"
             },
             {
-                "name": "Plan de 4 Meses",
+                "name": "Plan de 6 Meses",
                 "description": "Gran oferta a medio plazo",
-                "price": "$30",
-                "period": "/4 meses",
-                "cta": "Suscribirse 4 Meses"
+                "price": "$5",
+                "period": "/6 meses",
+                "cta": "Suscribirse 6 Meses"
             },
             {
                 "name": "Plan Anual",
                 "description": "Mejor valor",
-                "price": "$60",
+                "price": "$9",
                 "period": "/año",
                 "cta": "Suscribirse Anualmente",
                 "badge": "Recomendado"

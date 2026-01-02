@@ -58,22 +58,22 @@
         "plans": [
             {
                 "name": "Piano Mensile",
-                "description": "$10 per il mese successivo",
+                "description": "$1 al mese",
                 "price": "$1",
-                "period": "/primo mese",
+                "period": "/mese",
                 "cta": "Abbonati Mensilmente"
             },
             {
-                "name": "Piano 4 Mesi",
+                "name": "Piano 6 Mesi",
                 "description": "Ottima offerta a medio termine",
-                "price": "$30",
-                "period": "/4 mesi",
-                "cta": "Abbonati 4 Mesi"
+                "price": "$5",
+                "period": "/6 mesi",
+                "cta": "Abbonati 6 Mesi"
             },
             {
                 "name": "Piano Annuale",
                 "description": "Miglior valore",
-                "price": "$60",
+                "price": "$9",
                 "period": "/anno",
                 "cta": "Abbonati Annualmente",
                 "badge": "Consigliato"

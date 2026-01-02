@@ -58,22 +58,22 @@
         "plans": [
             {
                 "name": "Aylık Plan",
-                "description": "Sonraki ay için $10",
+                "description": "Ayda 1 $",
                 "price": "$1",
-                "period": "/ilk ay",
+                "period": "/ay",
                 "cta": "Aylık Abone Ol"
             },
             {
-                "name": "4 Aylık Plan",
+                "name": "6 Aylık Plan",
                 "description": "Harika orta vadeli teklif",
-                "price": "$30",
-                "period": "/4 ay",
-                "cta": "4 Aylık Abone Ol"
+                "price": "$5",
+                "period": "/6 ay",
+                "cta": "6 Aylık Abone Ol"
             },
             {
                 "name": "Yıllık Plan",
                 "description": "En iyi değer",
-                "price": "$60",
+                "price": "$9",
                 "period": "/yıl",
                 "cta": "Yıllık Abone Ol",
                 "badge": "Önerilen"
