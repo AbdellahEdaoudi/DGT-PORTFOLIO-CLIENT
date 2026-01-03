@@ -1,0 +1,91 @@
+{
+    "navbar": {
+        "features": "Fitur",
+        "showcase": "Pameran",
+        "pricing": "Harga",
+        "auth": {
+            "signIn": "Masuk",
+            "getStarted": "Mulai",
+            "updateProfile": "Perbarui Profil",
+            "businessLinks": "Tautan Bisnis",
+            "support": "Dukungan",
+            "signOut": "Keluar",
+            "customDomain": "Domain Kustom",
+            "subscriptions": "Langganan"
+        }
+    },
+    "hero": {
+        "title_part1": "Portofolio Anda,",
+        "title_part2": "Meningkat",
+        "description": "Tanpa kode, tanpa repot. Buat portofolio modern dan bersih dalam hitungan menit. Tampilkan karier, keahlian, proyek, dan tautan kerja Anda dengan cara yang belum pernah ada sebelumnya, tinggalkan kesan mendalam dan buka peluang baru.",
+        "free_trial": "Gratis selama 7 hari",
+        "start_building": "Mulai Membangun",
+        "watch_demo": "Tonton Demo"
+    },
+    "features": {
+        "title": "Mengapa memilih DGT Portfolio",
+        "subtitle": "Semua yang Anda butuhkan untuk menampilkan karya terbaik Anda dan mendapatkan peluang impian Anda",
+        "items": [
+            {
+                "title": "Desain Tanpa Kode",
+                "description": "Buat portofolio menakjubkan tanpa menulis satu baris kode pun"
+            },
+            {
+                "title": "Subdomain Kustom",
+                "description": "Dapatkan subdomain kustom seperti <strong>namakamu.dgtportfolio.com</strong> untuk portofolio Anda"
+            },
+            {
+                "title": "Profil Kode QR",
+                "description": "Hasilkan kode QR untuk portofolio Anda yang dapat Anda unduh atau bagikan secara instan"
+            },
+            {
+                "title": "Banyak Tema",
+                "description": "Pilih dari berbagai tema untuk menyesuaikan tampilan dan nuansa portofolio Anda"
+            },
+            {
+                "title": "Berbagi Mudah",
+                "description": "Bagikan tautan portofolio Anda di mana saja hanya dengan satu klik"
+            },
+            {
+                "title": "Sangat Cepat",
+                "description": "Waktu muat yang sangat cepat yang membuat pengunjung tetap terlibat"
+            }
+        ]
+    },
+    "pricing": {
+        "title": "Harga Sederhana dan Transparan",
+        "subtitle": "Pilih paket yang sempurna untuk portofolio kreatif Anda",
+        "plans": [
+            {
+                "name": "Paket Bulanan",
+                "description": "$1 untuk sebulan",
+                "price": "$1",
+                "period": "/bulan",
+                "cta": "Berlangganan Bulanan"
+            },
+            {
+                "name": "Paket 6 Bulan",
+                "description": "Penawaran jangka menengah yang hebat",
+                "price": "$5",
+                "period": "/6 bulan",
+                "cta": "Berlangganan 6 Bulan"
+            },
+            {
+                "name": "Paket Tahunan",
+                "description": "Nilai terbaik",
+                "price": "$9",
+                "period": "/tahun",
+                "cta": "Berlangganan Tahunan",
+                "badge": "Direkomendasikan"
+            }
+        ]
+    },
+    "cta": {
+        "title": "Siap Menampilkan Bakat Anda?",
+        "subtitle": "Bergabunglah dengan ribuan kreator yang membangun portofolio impian mereka hari ini",
+        "button": "Buat Portofolio Anda"
+    },
+    "footer": {
+        "rights": "Hak cipta dilindungi undang-undang."
+    }
+}

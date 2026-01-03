@@ -116,6 +116,22 @@ const translations = {
     returnHome: "홈페이지로 돌아가기",
     contactSupport: "고객 지원 문의",
     rights: "모든 권리 보유."
+  },
+  id: {
+    title: "Akun Tidak Ditemukan",
+    description: "Kami tidak dapat menemukan akun yang Anda cari. Mungkin telah diganti namanya atau pengguna belum berlangganan",
+    subscribe: "Berlangganan Sekarang",
+    returnHome: "Kembali ke Beranda",
+    contactSupport: "Hubungi Dukungan",
+    rights: "Hak cipta dilindungi undang-undang."
+  },
+  pl: {
+    title: "Konto nie znalezione",
+    description: "Nie mogliśmy znaleźć konta, którego szukasz. Mogło zostać zmienione lub użytkownik nie subskrybuje",
+    subscribe: "Zasubskrybuj teraz",
+    returnHome: "Powrót do strony głównej",
+    contactSupport: "Kontakt z pomocą techniczną",
+    rights: "Wszelkie prawa zastrzeżone."
   }
 }
 
@@ -131,6 +147,8 @@ const LANGUAGES = [
   { code: "nl", label: "Nederlands", country: "nl" },
   { code: "it", label: "Italiano", country: "it" },
   { code: "tr", label: "Türkçe", country: "tr" },
+  { code: "pl", label: "Polski", country: "pl" },
+  { code: "id", label: "Bahasa Indonesia", country: "id" },
   { code: "ko", label: "한국어", country: "kr" },
   { code: "zh", label: "中文", country: "cn" },
   { code: "ja", label: "日本語", country: "jp" },

@@ -21,6 +21,8 @@ export default function LanguageSwitcher() {
         { code: "nl", label: "Nederlands", flag: "nl" },
         { code: "ru", label: "Русский", flag: "ru" },
         { code: "tr", label: "Türkçe", flag: "tr" },
+        { code: "id", label: "Bahasa Indonesia", flag: "id" },
+        { code: "pl", label: "Polski", flag: "pl" },
         { code: "zh", label: "中文", flag: "cn" },
         { code: "ja", label: "日本語", flag: "jp" },
         { code: "ko", label: "한국어", flag: "kr" },

@@ -59,6 +59,14 @@ const translations = {
     businessLinks: "비즈니스 링크",
     noBusinessLinks: "이용 가능한 비즈니스 링크가 없습니다.",
   },
+  id: {
+    businessLinks: "Tautan Bisnis",
+    noBusinessLinks: "Tidak ada tautan bisnis tersedia.",
+  },
+  pl: {
+    businessLinks: "Linki biznesowe",
+    noBusinessLinks: "Brak dostępnych linków biznesowych.",
+  },
 };
 
 function UserLinks({ userLinks = [], lang, className, isOpen, onClose }) {

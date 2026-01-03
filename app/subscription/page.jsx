@@ -176,6 +176,30 @@ const plansTranslations = {
     placeholder: "프로모션 코드",
     applyBtn: "적용",
     verifyingBtn: "확인 중..."
+  },
+  id: {
+    promoMonthly: { name: "Promo Bulanan", description: "Penawaran promo spesial", period: "/bulan" },
+    promo6Month: { name: "Promo 6 Bulan", description: "Nilai hebat untuk 6 bulan", period: "/6 bulan" },
+    promoAnnual: { name: "Promo Tahunan", description: "Penawaran terbaik tahun ini", period: "/tahun" },
+    subMonthly: { name: "Langganan Bulanan", description: "$1 untuk sebulan", period: "/bulan" },
+    sub6Months: { name: "Langganan 6 Bulan", description: "Penawaran jangka menengah yang hebat", period: "/6 bulan" },
+    subYearly: { name: "Langganan Tahunan", description: "Nilai terbaik", period: "/tahun" },
+    recommended: "Direkomendasikan",
+    placeholder: "Kode Promo",
+    applyBtn: "Terapkan",
+    verifyingBtn: "Memverifikasi..."
+  },
+  pl: {
+    promoMonthly: { name: "Promo miesięczne", description: "Specjalna oferta promocyjna", period: "/miesiąc" },
+    promo6Month: { name: "Promo 6-miesięczne", description: "Świetna wartość na 6 miesięcy", period: "/6 miesięcy" },
+    promoAnnual: { name: "Promo Roczne", description: "Najlepsza oferta roku", period: "/rok" },
+    subMonthly: { name: "Subskrypcja miesięczna", description: "1$ za miesiąc", period: "/miesiąc" },
+    sub6Months: { name: "Subskrypcja 6-miesięczna", description: "Świetna oferta średnioterminowa", period: "/6 miesięcy" },
+    subYearly: { name: "Subskrypcja roczna", description: "Najlepsza wartość", period: "/rok" },
+    recommended: "Zalecane",
+    placeholder: "Kod promocyjny",
+    applyBtn: "Zastosuj",
+    verifyingBtn: "Weryfikacja..."
   }
 };
 

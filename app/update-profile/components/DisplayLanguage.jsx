@@ -50,6 +50,8 @@ function DisplayLanguage({ userData, setUserDetails }) {
             hi: "🌍 प्रदर्शन भाषा",
             tr: "🌍 Görüntüleme Dili",
             ko: "🌍 표시 언어",
+            id: "🌍 Bahasa Tampilan",
+            pl: "🌍 Język wyświetlania",
         },
         description: {
             en: "Choose the language in which your portfolio will be displayed to visitors.",
@@ -66,6 +68,8 @@ function DisplayLanguage({ userData, setUserDetails }) {
             hi: "वह भाषा चुनें जिसमें आपका पोर्टफोलियो आगंतुकों को दिखाया जाएगा।",
             tr: "Portföyünüzün ziyaretçilere gösterileceği dili seçin.",
             ko: "방문자에게 포트폴리오가 표시될 언어를 선택하세요.",
+            id: "Pilih bahasa di mana portofolio Anda akan ditampilkan kepada pengunjung.",
+            pl: "Wybierz język, w którym Twoje portfolio będzie wyświetlane odwiedzającym.",
         },
     }
     const currentLanguage = displayLanguage;
@@ -87,6 +91,8 @@ function DisplayLanguage({ userData, setUserDetails }) {
         { value: "zh", label: "中文", description: "以中文显示作品集", flag: "cn" },
         { value: "hi", label: "हिंदी", description: "पोर्टफोलियो हिंदी में दिखाएं", flag: "in" },
         { value: "ko", label: "한국어", description: "포트폴리오를 한국어로 표시", flag: "kr" },
+        { value: "id", label: "Bahasa Indonesia", description: "Tampilkan portofolio dalam bahasa Indonesia", flag: "id" },
+        { value: "pl", label: "Polski", description: "Wyświetl portfolio w języku polskim", flag: "pl" },
     ]
 
     return (

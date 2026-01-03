@@ -181,6 +181,32 @@ const translations = {
     copyLink: "링크 복사",
     checkOutQrCode: "이 QR 코드를 확인하세요!",
   },
+  id: {
+    qrCodeProfile: "Kode QR",
+    downloadQrCode: "Unduh",
+    shareQrCode: "Bagikan QR",
+    shareLink: "Bagikan Tautan",
+    copyLink: "Salin Tautan",
+    checkOutQrCode: "Cek Kode QR ini!",
+    sharingFailed: "Gagal membagikan",
+    webShareApiUnsupported: "Browser Anda tidak mendukung Web Share API.",
+    successfulShare: "Berhasil dibagikan",
+    errorSharing: "Kesalahan saat membagikan",
+    shareUnsupported: "Berbagi tidak didukung di browser ini",
+  },
+  pl: {
+    qrCodeProfile: "Kod QR",
+    downloadQrCode: "Pobierz",
+    shareQrCode: "Udostępnij QR",
+    shareLink: "Udostępnij link",
+    copyLink: "Kopiuj link",
+    checkOutQrCode: "Sprawdź ten kod QR!",
+    sharingFailed: "Udostępnianie nie powiodło się",
+    webShareApiUnsupported: "Twoja przeglądarka nie obsługuje interfejsu Web Share API.",
+    successfulShare: "Udostępniono pomyślnie",
+    errorSharing: "Błąd udostępniania",
+    shareUnsupported: "Udostępnianie nie jest obsługiwane w tej przeglądarce",
+  },
 };
 
 function QrcodeProfile({ userDetails, className, isOpen, onClose }) {

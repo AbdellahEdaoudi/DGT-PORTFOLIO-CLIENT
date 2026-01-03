@@ -220,6 +220,8 @@ export default function ThemeEleven({ userDetails, userLinks }) {
                                         it: 'Verificato',
                                         tr: 'Doğrulanmış',
                                         ko: '인증됨',
+                                        id: 'Terverifikasi',
+                                        pl: 'Zweryfikowano',
                                         hi: 'सत्यापित',
                                     }[userDetails?.displayLanguage] || 'Verified'
                                 }

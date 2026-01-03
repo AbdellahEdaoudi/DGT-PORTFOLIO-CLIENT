@@ -354,6 +354,32 @@ const translations = {
         viewProject: "프로젝트 보기",
         nameFallback: "당신의 이름",
         titleFallback: "전문 직함"
+    },
+    id: {
+        summary: "Ringkasan Profesional",
+        experience: "Pengalaman",
+        skills: "Keahlian",
+        projects: "Proyek",
+        education: "Pendidikan",
+        languages: "Bahasa",
+        certificates: "Sertifikat",
+        services: "Layanan",
+        viewProject: "Lihat Proyek",
+        nameFallback: "Nama Anda",
+        titleFallback: "Gelar Profesional"
+    },
+    pl: {
+        summary: "Podsumowanie Zawodowe",
+        experience: "Doświadczenie",
+        skills: "Umiejętności",
+        projects: "Projekty",
+        education: "Edukacja",
+        languages: "Języki",
+        certificates: "Certyfikaty",
+        services: "Usługi",
+        viewProject: "Zobacz projekt",
+        nameFallback: "Twoje Imię",
+        titleFallback: "Tytuł Zawodowy"
     }
 };
 

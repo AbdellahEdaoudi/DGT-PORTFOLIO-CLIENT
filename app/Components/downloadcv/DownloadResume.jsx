@@ -157,6 +157,18 @@ export default function DownloadResume({ userDetails, className }) {
             loading: (name) => `${name}의 CV 다운로드 중...`,
             cancel: '취소',
         },
+        id: {
+            waitTitle: 'Mohon tunggu...',
+            title: 'Unduh CV',
+            loading: (name) => `Mengunduh CV untuk ${name}...`,
+            cancel: 'Batal',
+        },
+        pl: {
+            waitTitle: 'Proszę czekać...',
+            title: 'Pobierz CV',
+            loading: (name) => `Pobieranie CV dla ${name}...`,
+            cancel: 'Anuluj',
+        },
     };
 
     const t = TRANSLATIONS[userDetails?.displayLanguage] || TRANSLATIONS['en'];
