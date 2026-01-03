@@ -1,4 +1,5 @@
 "use client"
+import "flag-icons/css/flag-icons.min.css"
 import { useState, useEffect } from 'react'
 import { ArrowLeft, LifeBuoy, User, CreditCard, Globe, ChevronDown } from "./Icons"
 import Link from "next/link"
@@ -119,6 +120,23 @@ const translations = {
 }
 
 
+const LANGUAGES = [
+  { code: "en", label: "English", country: "us" },
+  { code: "fr", label: "Français", country: "fr" },
+  { code: "ar", label: "العربية", country: "sa" },
+  { code: "de", label: "Deutsch", country: "de" },
+  { code: "ru", label: "Русский", country: "ru" },
+  { code: "es", label: "Español", country: "es" },
+  { code: "pt", label: "Português", country: "pt" },
+  { code: "nl", label: "Nederlands", country: "nl" },
+  { code: "it", label: "Italiano", country: "it" },
+  { code: "tr", label: "Türkçe", country: "tr" },
+  { code: "ko", label: "한국어", country: "kr" },
+  { code: "zh", label: "中文", country: "cn" },
+  { code: "ja", label: "日本語", country: "jp" },
+  { code: "hi", label: "हिंदी", country: "in" },
+];
+
 export default function AccountNotFound() {
   const [lang, setLang] = useState('en')
   const [isLangOpen, setIsLangOpen] = useState(false)
@@ -213,25 +231,9 @@ export default function AccountNotFound() {
             className="w-full flex items-center justify-between bg-[#1e2124]/80 text-white border border-[#00a896]/30 hover:border-[#00a896] rounded-xl py-2.5 pl-3 pr-3 focus:outline-none focus:ring-2 focus:ring-[#00a896]/50 transition-all duration-300 backdrop-blur-md shadow-lg text-sm font-medium cursor-pointer"
           >
             <div className="flex items-center gap-2">
-              <Globe className="h-4 w-4 text-gray-400" />
+              <span className={`fi fi-${LANGUAGES.find(l => l.code === lang)?.country} text-lg rounded-[2px] shadow-sm`}></span>
               <span>
-                {/* Display label based on current lang */}
-                {{
-                  en: "English",
-                  fr: "Français",
-                  ar: "العربية",
-                  de: "Deutsch",
-                  ru: "Русский",
-                  es: "Español",
-                  pt: "Português",
-                  nl: "Nederlands",
-                  it: "Italiano",
-                  tr: "Türkçe",
-                  ko: "한국어",
-                  zh: "中文",
-                  ja: "日本語",
-                  hi: "हिंदी",
-                }[lang]}
+                {LANGUAGES.find(l => l.code === lang)?.label}
               </span>
             </div>
             <ChevronDown className={`h-4 w-4 text-gray-400 transition-transform duration-200 ${isLangOpen ? 'rotate-180' : ''}`} />
@@ -239,22 +241,7 @@ export default function AccountNotFound() {
 
           {isLangOpen && (
             <div className="custom-scrollbar absolute top-full right-0 mt-2 w-full bg-[#2a2e32] border border-[#00a896]/30 rounded-xl overflow-hidden shadow-2xl z-50 animate-in fade-in zoom-in-95 duration-100 max-h-72 overflow-y-auto">
-              {[
-                { code: "en", label: "English" },
-                { code: "fr", label: "Français" },
-                { code: "ar", label: "العربية" },
-                { code: "de", label: "Deutsch" },
-                { code: "ru", label: "Русский" },
-                { code: "es", label: "Español" },
-                { code: "pt", label: "Português" },
-                { code: "nl", label: "Nederlands" },
-                { code: "it", label: "Italiano" },
-                { code: "tr", label: "Türkçe" },
-                { code: "ko", label: "한국어" },
-                { code: "zh", label: "中文" },
-                { code: "ja", label: "日本語" },
-                { code: "hi", label: "हिंदी" },
-              ].map((language) => (
+              {LANGUAGES.map((language) => (
                 <div
                   key={language.code}
                   onClick={() => {
@@ -263,7 +250,10 @@ export default function AccountNotFound() {
                   }}
                   className={`px-4 py-2 text-sm text-gray-200 hover:bg-[#00a896]/20 hover:text-white cursor-pointer transition-colors flex items-center justify-between ${lang === language.code ? 'bg-[#00a896]/10 text-[#00a896]' : ''}`}
                 >
-                  {language.label}
+                  <span className="flex items-center gap-3">
+                    <span className={`fi fi-${language.country} text-lg rounded-[2px] shadow-sm`}></span>
+                    {language.label}
+                  </span>
                   {lang === language.code && <div className="h-1.5 w-1.5 rounded-full bg-[#00a896]" />}
                 </div>
               ))}

@@ -5,6 +5,8 @@ import React, { useState } from 'react'
 import { toast } from 'react-toastify'
 import { useTranslation } from '../../lib/translations'
 
+import 'flag-icons/css/flag-icons.min.css'
+
 function DisplayLanguage({ userData, setUserDetails }) {
     const { t } = useTranslation(userData?.displayLanguage || 'en');
     const [displayLanguage, setDisplayLanguage] = useState(userData?.displayLanguage || "en")
@@ -70,63 +72,131 @@ function DisplayLanguage({ userData, setUserDetails }) {
     const translatedTitle = translations.title[currentLanguage] || translations.title.en;
     const translatedDescription = translations.description[currentLanguage] || translations.description.en;
 
-    return (
-        <form onSubmit={handleSave}>
-            <div className="bg-gradient-to-br from-gray-50 to-gray-100 shadow-xl border-2 border-gray-200 rounded-2xl p-6 space-y-4">
-                <h2 className="text-2xl font-bold text-gray-800 mb-4">{translatedTitle}</h2>
-                <p className="text-gray-600 mb-4">
-                    {translatedDescription}
-                </p>
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                    {[
-                        { value: "en", label: "English", description: "Display portfolio in English" },
-                        { value: "fr", label: "Français", description: "Afficher le portfolio en français" },
-                        { value: "es", label: "Español", description: "Mostrar portafolio en español" },
-                        { value: "pt", label: "Português", description: "Exibir portfólio em Português" },
-                        { value: "it", label: "Italiano", description: "Visualizza portfolio in Italiano" },
-                        { value: "de", label: "Deutsch", description: "Portfolio auf Deutsch anzeigen" },
-                        { value: "ar", label: "Arabic", description: "عرض المحفظة باللغة العربية" },
-                        { value: "nl", label: "Nederlands", description: "Portfolio in het Nederlands weergeven" },
-                        { value: "tr", label: "Türkçe", description: "Portföyü Türkçe göster" },
-                        { value: "ru", label: "Русский", description: "Показать портфолио на русском" },
-                        { value: "ja", label: "日本語", description: "ポートフォリオを日本語で表示" },
-                        { value: "zh", label: "中文", description: "以中文显示作品集" },
-                        { value: "hi", label: "हिंदी", description: "पोर्टफोलियो हिंदी में दिखाएं" },
-                        { value: "ko", label: "한국어", description: "포트폴리오를 한국어로 표시" },
-                    ].map((lang) => (
-                        <label
-                            key={lang.value}
-                            className="flex items-center gap-3 p-4 border-2 rounded-lg cursor-pointer hover:bg-white transition-all"
-                        >
-                            <input
-                                type="radio"
-                                name="displayLanguage"
-                                value={lang.value}
-                                checked={displayLanguage === lang.value}
-                                onChange={(e) => setDisplayLanguage(e.target.value)}
-                                className="w-5 h-5 text-teal-600"
-                            />
-                            <div className="flex-1">
-                                <span className="font-semibold text-gray-800">{lang.label}</span>
-                                <p className="text-sm text-gray-500">{lang.description}</p>
-                            </div>
-                        </label>
-                    ))}
-                </div>
-            </div>
+    const languages = [
+        { value: "en", label: "English", description: "Display portfolio in English", flag: "gb" },
+        { value: "fr", label: "Français", description: "Afficher le portfolio en français", flag: "fr" },
+        { value: "es", label: "Español", description: "Mostrar portafolio en español", flag: "es" },
+        { value: "pt", label: "Português", description: "Exibir portfólio em Português", flag: "pt" },
+        { value: "it", label: "Italiano", description: "Visualizza portfolio in Italiano", flag: "it" },
+        { value: "de", label: "Deutsch", description: "Portfolio auf Deutsch anzeigen", flag: "de" },
+        { value: "ar", label: "Arabic", description: "عرض المحفظة باللغة العربية", flag: "sa" },
+        { value: "nl", label: "Nederlands", description: "Portfolio in het Nederlands weergeven", flag: "nl" },
+        { value: "tr", label: "Türkçe", description: "Portföyü Türkçe göster", flag: "tr" },
+        { value: "ru", label: "Русский", description: "Показать портфолио на русском", flag: "ru" },
+        { value: "ja", label: "日本語", description: "ポートフォリオを日本語で表示", flag: "jp" },
+        { value: "zh", label: "中文", description: "以中文显示作品集", flag: "cn" },
+        { value: "hi", label: "हिंदी", description: "पोर्टफोलियो हिंदी में दिखाएं", flag: "in" },
+        { value: "ko", label: "한국어", description: "포트폴리오를 한국어로 표시", flag: "kr" },
+    ]
 
-            <div className="flex justify-end py-4 border-b-2 border-gray-200">
+    return (
+        <form onSubmit={handleSave} className="relative w-full">
+            <div className="bg-white/80 space-y-6 p-2">
+
+                {/* Header Section */}
+                <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
+                    <div className="space-y-1">
+                        <h2 className="text-lg font-bold text-gray-800">
+                            {translatedTitle}
+                        </h2>
+                        <p className="text-gray-500 text-xs md:text-sm max-w-2xl">
+                            {translatedDescription}
+                        </p>
+                    </div>
+
+                    <button
+                        type="submit"
+                        disabled={loading}
+                        className="
+                            hidden md:flex
+                            bg-gray-900 text-white font-bold px-6 py-2.5 rounded-lg 
+                            shadow-lg hover:shadow-xl hover:bg-gray-800 disabled:opacity-50 
+                            transition-all duration-200 items-center gap-2
+                        "
+                    >
+                        {loading ? (
+                            <>
+                                <Loader size={18} className="animate-spin" />
+                                {t('saving')}
+                            </>
+                        ) : (
+                            <>
+                                💾 {t('save')}
+                            </>
+                        )}
+                    </button>
+                </div>
+
+                {/* Languages Grid */}
+                <div className="grid grid-cols-4 gap-2 md:gap-3">
+                    {languages.map((lang) => {
+                        const isSelected = displayLanguage === lang.value;
+                        return (
+                            <label
+                                key={lang.value}
+                                className={`
+                                    relative flex flex-col p-1.5 md:p-3 rounded-lg md:rounded-xl cursor-pointer transition-all duration-200 group
+                                    ${isSelected
+                                        ? 'bg-teal-50 border md:border-2 border-teal-500 shadow-sm md:shadow-md'
+                                        : 'bg-white border md:border-2 border-transparent hover:border-gray-200 hover:shadow-sm'
+                                    }
+                                `}
+                            >
+                                <input
+                                    type="radio"
+                                    name="displayLanguage"
+                                    value={lang.value}
+                                    checked={isSelected}
+                                    onChange={(e) => setDisplayLanguage(e.target.value)}
+                                    className="hidden"
+                                />
+
+                                <div className="flex items-center justify-between mb-1 md:mb-2">
+                                    <span className={`
+                                        text-lg md:text-2xl rounded shadow-sm
+                                        fi fi-${lang.flag}
+                                    `}></span>
+
+                                    <div className={`
+                                        w-3 h-3 md:w-5 md:h-5 rounded-full border md:border-2 flex items-center justify-center
+                                        ${isSelected ? 'border-teal-500 bg-teal-500' : 'border-gray-300'}
+                                    `}>
+                                        {isSelected && <CheckCheck className="w-2 h-2 md:w-3 md:h-3 text-white" />}
+                                    </div>
+                                </div>
+
+                                <div>
+                                    <span className={`block font-bold text-[10px] md:text-base truncate ${isSelected ? 'text-teal-900' : 'text-gray-800'}`}>
+                                        {lang.label}
+                                    </span>
+                                    <p className={`hidden md:block text-xs text-gray-500 line-clamp-1 ${isSelected ? 'text-teal-700/80' : ''}`}>
+                                        {lang.description}
+                                    </p>
+                                </div>
+                            </label>
+                        );
+                    })}
+                </div>
+
                 <button
                     type="submit"
                     disabled={loading}
-                    className="bg-gradient-to-r from-teal-600 to-green-600 hover:from-teal-700 hover:to-green-700 disabled:opacity-50 text-white font-bold px-8 py-3 rounded-lg transition-all duration-300 flex items-center gap-2 transform hover:scale-105 shadow-lg"
+                    className="
+                        md:hidden w-full justify-center
+                        bg-gray-900 text-white font-bold px-6 py-2.5 rounded-lg 
+                        shadow-lg hover:shadow-xl hover:bg-gray-800 disabled:opacity-50 
+                        transition-all duration-200 flex items-center gap-2
+                    "
                 >
                     {loading ? (
                         <>
-                            <Loader size={20} className="animate-spin" /> Saving...
+                            <Loader size={18} className="animate-spin" />
+                            {t('saving')}
                         </>
                     ) : (
-                        "💾 Save"
+                        <>
+                            💾 {t('save')}
+                        </>
                     )}
                 </button>
             </div>

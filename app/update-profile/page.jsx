@@ -311,7 +311,7 @@ export default function UpdateProfilePage() {
                 <button
                   key={tab.id}
                   onClick={() => setActiveTab(tab.id)}
-                  className={`md:px-4 py-2 rounded-lg font-semibold transition-all text-sm md:text-base ${activeTab === tab.id
+                  className={`md:px-4 py-2 rounded-lg font-semibold transition-all text-xs md:text-base ${activeTab === tab.id
                     ? "bg-teal-600 text-white"
                     : "bg-gray-200 text-gray-700 hover:bg-gray-300"
                     } ${userDetails.theme !== 1 && tab.id === "bgcolor" ? "hidden" : ""}`}

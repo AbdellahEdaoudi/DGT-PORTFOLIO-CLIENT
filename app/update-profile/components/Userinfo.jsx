@@ -154,7 +154,7 @@ function Userinfo({ userData, setUserDetails }) {
             onClick={() => {
               const PORTFOLIO = `https://${userData.username}.dgtportfolio.com`
               if (userData.username) {
-                router.push(PORTFOLIO)
+                window.open(PORTFOLIO, '_blank')
               } else if (!userData.username) {
                 setErrormsg(t('usernameRequired'))
               }
@@ -173,14 +173,7 @@ function Userinfo({ userData, setUserDetails }) {
         </div>
         {/* User Information */}
         <div className="text-xs md:text-base bg-gradient-to-br from-gray-50 to-gray-100 shadow-xl border-2 border-gray-200 rounded-2xl p-6 w-full md:w-2/3 space-y-4">
-          <h2 onClick={() => {
-            const PORTFOLIO = `https://${userData.username}.dgtportfolio.com`
-            if (userData.username) {
-              router.push(PORTFOLIO)
-            } else if (!userData.username) {
-              setErrormsg(t('usernameRequired'))
-            }
-          }} className="text-3xl md:block hidden font-bold text-gray-800 text-center mb-6">
+          <h2 className="text-3xl md:block hidden font-bold text-gray-800 text-center mb-6">
             {fullname || t('fullName')}
           </h2>
           <div className="grid grid-cols-2 gap-4">
