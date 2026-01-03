@@ -1,5 +1,6 @@
 "use client"
 import React, { useState, useEffect } from 'react';
+import { createPortal } from 'react-dom';
 import { X, Loader } from './Icons';
 import Image from 'next/image';
 
@@ -19,9 +20,9 @@ const ImageModal = ({ isOpen, onClose, imageSrc, altText }) => {
 
     if (!isOpen || !imageSrc) return null;
 
-    return (
+    return createPortal(
         <div
-            className={`fixed inset-0 z-[100] flex items-center justify-center bg-black/90 backdrop-blur-sm p-4 transition-opacity duration-300 ${isVisible ? 'opacity-100' : 'opacity-0'
+            className={`fixed inset-0 z-[9999] flex items-center justify-center bg-black/90 backdrop-blur-sm p-4 transition-opacity duration-300 ${isVisible ? 'opacity-100' : 'opacity-0'
                 }`}
             onClick={onClose}
         >
@@ -53,7 +54,8 @@ const ImageModal = ({ isOpen, onClose, imageSrc, altText }) => {
                     />
                 </div>
             </div>
-        </div>
+        </div>,
+        document.body
     );
 };
 

@@ -1,9 +1,10 @@
 "use client";
 import axios from "axios";
-import Image from "next/image";
+import NextImage from "next/image";
 import React, { useState } from "react";
 import { toast } from "react-toastify";
 import { ArrowUp, ArrowDown, CheckCheck, Loader, Plus, Trash2, Award, Upload, X } from "../../Components/Icons";
+import ImageModal from "../../Components/ImageModal";
 
 import { useTranslation } from "../../lib/translations";
 
@@ -12,6 +13,7 @@ export default function Certificates({ userData, setUserDetails }) {
     // Initialize certificates. If cfimage exists, use it.
     const [certificates, setCertificates] = useState(userData.certificates || []);
     const [loading, setLoading] = useState(false);
+    const [selectedImage, setSelectedImage] = useState(null);
 
     // Helper to compress image (similar to Userinfo)
     const compressImage = async (file) => {
@@ -226,7 +228,7 @@ export default function Certificates({ userData, setUserDetails }) {
                                         <div className="relative h-full min-h-[100px] flex flex-col items-center justify-center gap-2 px-3 py-2 border border-blue-200 rounded-lg bg-blue-50 overflow-hidden group">
                                             {/* Preview Image Background */}
                                             <div className="absolute inset-0 z-0 opacity-20">
-                                                <Image src={cert.previewUrl || cert.cfimage} alt="preview" width={500} height={300} className="w-full h-full object-cover" unoptimized />
+                                                <NextImage src={cert.previewUrl || cert.cfimage} alt="preview" width={500} height={300} className="w-full h-full object-cover" unoptimized />
                                             </div>
 
                                             <div className="z-10 flex flex-col items-center gap-2">
@@ -235,9 +237,13 @@ export default function Certificates({ userData, setUserDetails }) {
                                                 </span>
 
                                                 <div className="flex gap-2">
-                                                    <a href={cert.previewUrl || cert.cfimage} target="_blank" rel="noopener noreferrer" className="px-3 py-1 bg-white/80 hover:bg-white rounded-full text-xs text-blue-600 font-bold shadow-sm transition">
+                                                    <button
+                                                        type="button"
+                                                        onClick={() => setSelectedImage(cert.previewUrl || cert.cfimage)}
+                                                        className="px-3 py-1 bg-white/80 hover:bg-white rounded-full text-xs text-blue-600 font-bold shadow-sm transition"
+                                                    >
                                                         {t('view') || "View"}
-                                                    </a>
+                                                    </button>
                                                     <button type="button" onClick={() => clearFile(index)} className="px-3 py-1 bg-white/80 hover:bg-white rounded-full text-xs text-red-600 font-bold shadow-sm transition">
                                                         {t('remove') || "Remove"}
                                                     </button>
@@ -322,6 +328,13 @@ export default function Certificates({ userData, setUserDetails }) {
                     )}
                 </button>
             </div>
+
+            <ImageModal
+                isOpen={!!selectedImage}
+                onClose={() => setSelectedImage(null)}
+                imageSrc={selectedImage}
+                altText={t('certificatePreview') || "Certificate Preview"}
+            />
         </div>
     );
 }
