@@ -1,5 +1,5 @@
 "use client"
-import { LayoutDashboard, Users, MessageSquare, Settings, DollarSign, TagIcon, Clock, Mail } from "../../Components/Icons"
+import { LayoutDashboard, Users, MessageSquare, Settings, DollarSign, TagIcon, Clock, Mail, ImagePlus } from "../../Components/Icons"
 import Link from "next/link"
 
 export default function AdminSidebar({ activeTab, setActiveTab }) {
@@ -11,6 +11,7 @@ export default function AdminSidebar({ activeTab, setActiveTab }) {
     { id: "subscriptions", label: "Subscriptions", icon: DollarSign },
     { id: "promo", label: "Promo Codes", icon: TagIcon },
     { id: "bulk-email", label: "Bulk Email", icon: Mail },
+    { id: "cloudinary", label: "Cloudinary", icon: ImagePlus },
   ]
 
   return (
