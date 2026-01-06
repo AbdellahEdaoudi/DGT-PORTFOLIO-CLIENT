@@ -16,7 +16,7 @@ import {
     FolderOpen,
     Layers,
     CheckCircle
-} from '../../Components/Icons'
+} from '../../components/Icons'
 import {
     DndContext,
     closestCenter,

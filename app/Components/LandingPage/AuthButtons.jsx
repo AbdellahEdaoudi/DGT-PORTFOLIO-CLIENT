@@ -150,7 +150,7 @@ export default function AuthButtons({ lang }) {
           </Link>
           {userDetails?.email && (
             <Link
-              href={"/Admin"}
+              href={"/admin"}
               onClick={() => {
                 setSetting(!setting);
               }}

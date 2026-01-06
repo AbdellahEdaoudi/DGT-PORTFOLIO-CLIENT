@@ -1,7 +1,7 @@
-import LandingPage from "./Components/LandingPage/LandingPage";
+import LandingPage from "./components/LandingPage/LandingPage";
 import { headers } from "next/headers";
 import { getDictionary } from "./translations/landing-page";
-import { DynamicSubdomainClient, DynamicCustomDomainClient } from './Components/portfolio/ClientWrappers';
+import { DynamicSubdomainClient, DynamicCustomDomainClient } from './components/portfolio/ClientWrappers';
 
 async function fetchUserData(url) {
   try {

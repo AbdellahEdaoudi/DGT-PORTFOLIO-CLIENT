@@ -1,6 +1,6 @@
 'use client';
 
-import { CheckCircle } from '../Components/Icons';
+import { CheckCircle } from '../components/Icons';
 import Link from 'next/link';
 import { useContext } from 'react';
 import { MyContext } from '../context/context';

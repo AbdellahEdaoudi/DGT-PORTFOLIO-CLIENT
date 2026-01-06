@@ -1,5 +1,5 @@
 "use client"
-import { LayoutDashboard, Users, MessageSquare, Settings, DollarSign, TagIcon, Clock, Mail, ImagePlus } from "../../Components/Icons"
+import { LayoutDashboard, Users, MessageSquare, Settings, DollarSign, TagIcon, Clock, Mail, ImagePlus } from "../../components/Icons"
 import Link from "next/link"
 
 export default function AdminSidebar({ activeTab, setActiveTab }) {

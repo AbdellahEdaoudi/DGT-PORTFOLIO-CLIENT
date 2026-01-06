@@ -1,7 +1,7 @@
 "use client"
 import 'flag-icons/css/flag-icons.min.css'
 import axios from 'axios'
-import { CheckCheck, Loader, Globe } from '../../Components/Icons'
+import { CheckCheck, Loader, Globe } from '../../components/Icons'
 import React, { useState } from 'react'
 import { toast } from 'react-toastify'
 import { getTranslation } from '../../translations/update-profile'

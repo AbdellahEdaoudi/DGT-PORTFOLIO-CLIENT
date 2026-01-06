@@ -2,10 +2,10 @@
 import { useState, useEffect, useContext } from 'react';
 import { MyContext } from '../context/context';
 import { toast } from 'react-toastify';
-import { Globe, CheckCircle, AlertCircle, ExternalLink, Loader2, Trash2, X } from '../Components/Icons';
+import { Globe, CheckCircle, AlertCircle, ExternalLink, Loader2, Trash2, X } from '../components/Icons';
 import axios from 'axios';
-import Header from '../Components/LandingPage/header';
-import MagicalLoader from '../Components/MagicalLoader';
+import Header from '../components/LandingPage/header';
+import MagicalLoader from '../components/MagicalLoader';
 import { getTranslation } from '../translations/others';
 
 export default function CustomDomainPage() {

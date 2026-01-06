@@ -2,7 +2,7 @@
 
 import { useState } from "react"
 import { createPortal } from "react-dom"
-import { Search, AlertCircle, Loader } from "../../Components/Icons"
+import { Search, AlertCircle, Loader } from "../../components/Icons"
 import { toast } from "react-toastify"
 import axios from "axios"
 

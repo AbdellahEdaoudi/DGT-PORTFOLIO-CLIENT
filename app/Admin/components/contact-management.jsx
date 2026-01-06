@@ -2,7 +2,7 @@
 
 import { useState } from "react"
 import { createPortal } from "react-dom"
-import { Search, AlertCircle, Loader, Eye, X, Maximize2, Mail, Type, Calendar, User, Paperclip, Clock } from "../../Components/Icons"
+import { Search, AlertCircle, Loader, Eye, X, Maximize2, Mail, Type, Calendar, User, Paperclip, Clock } from "../../components/Icons"
 import { toast } from "react-toastify"
 import axios from "axios"
 import Image from "next/image"

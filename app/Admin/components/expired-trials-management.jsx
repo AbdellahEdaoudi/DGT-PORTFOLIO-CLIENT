@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react"
 import { createPortal } from "react-dom"
-import { Search, Mail, CheckCircle, RefreshCcw, XCircle } from "../../Components/Icons"
+import { Search, Mail, CheckCircle, RefreshCcw, XCircle } from "../../components/Icons"
 import axios from "axios"
 import { toast } from "react-toastify"
 import Image from "next/image"
@@ -16,38 +16,38 @@ export default function ExpiredTrialsManagement({ data }) {
     useEffect(() => {
         if (data?.users && data?.subscription) {
             try {
-            const sevenDaysAgo = new Date();
-            sevenDaysAgo.setDate(sevenDaysAgo.getDate() - 7);
+                const sevenDaysAgo = new Date();
+                sevenDaysAgo.setDate(sevenDaysAgo.getDate() - 7);
 
-            const whitelist = [
-                "adam.carter.dev@gmail.com",
-                "soondiss8@gmail.com",
-                "dgt.portfolio.ma@gmail.com",
-                "edaoudicontact@gmail.com"
-            ];
+                const whitelist = [
+                    "adam.carter.dev@gmail.com",
+                    "soondiss8@gmail.com",
+                    "dgt.portfolio.ma@gmail.com",
+                    "edaoudicontact@gmail.com"
+                ];
 
-            const expiredUsers = data.users.filter(user => {
-                // 1. Whitelist check
-                if (whitelist.includes(user.email)) return false;
+                const expiredUsers = data.users.filter(user => {
+                    // 1. Whitelist check
+                    if (whitelist.includes(user.email)) return false;
 
-                // 2. Created > 7 days ago check
-                const createdAt = new Date(user.createdAt);
-                if (createdAt >= sevenDaysAgo) return false;
+                    // 2. Created > 7 days ago check
+                    const createdAt = new Date(user.createdAt);
+                    if (createdAt >= sevenDaysAgo) return false;
 
-                // 3. Active Subscription Check
-                // Check if user has an ACTIVE subscription in data.subscription
-                const hasActiveSub = data.subscription.some(sub =>
-                    sub.userEmail === user.email && sub.status === 'ACTIVE'
-                );
+                    // 3. Active Subscription Check
+                    // Check if user has an ACTIVE subscription in data.subscription
+                    const hasActiveSub = data.subscription.some(sub =>
+                        sub.userEmail === user.email && sub.status === 'ACTIVE'
+                    );
 
-                return !hasActiveSub;
-            });
+                    return !hasActiveSub;
+                });
 
-            setUsers(expiredUsers)
-        } catch (error) {
-            console.error("Error processing expired users:", error)
-            toast.error("Failed to process expired users.")
-        }
+                setUsers(expiredUsers)
+            } catch (error) {
+                console.error("Error processing expired users:", error)
+                toast.error("Failed to process expired users.")
+            }
         }
     }, [data])
 

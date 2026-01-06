@@ -1,6 +1,6 @@
 "use client"
 import axios from 'axios'
-import { CheckCheck, Loader, User, Sparkles, Lightbulb, Trash2, X, AlertCircle } from '../../Components/Icons'
+import { CheckCheck, Loader, User, Sparkles, Lightbulb, Trash2, X, AlertCircle } from '../../components/Icons'
 import React, { useState, useEffect } from 'react'
 import { createPortal } from "react-dom"
 import { toast } from 'react-toastify'

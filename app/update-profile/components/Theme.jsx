@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { toast } from "react-toastify";
-import { Loader, CheckCheck } from "../../Components/Icons";
+import { Loader, CheckCheck } from "../../components/Icons";
 import Image from "next/image";
 import { getTranslation } from '../../translations/update-profile'
 

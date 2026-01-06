@@ -1,7 +1,7 @@
 "use client"
 
 import { useEffect, useState } from "react"
-import { Users, MessageSquare, Settings, LogOut, DollarSign } from "../Components/Icons"
+import { Users, MessageSquare, Settings, LogOut, DollarSign } from "../components/Icons"
 import AdminSidebar from "./components/admin-sidebar"
 import UserManagement from "./components/user-management"
 import ContactManagement from "./components/contact-management"
@@ -12,7 +12,7 @@ import BulkEmail from "./components/bulk-email"
 import CloudinaryGallery from "./components/cloudinary-gallery"
 import { signOut } from "next-auth/react"
 import axios from "axios"
-import MagicalLoader from "../Components/MagicalLoader"
+import MagicalLoader from "../components/MagicalLoader"
 import Image from "next/image"
 import Link from "next/link"
 

@@ -39,8 +39,8 @@
     "app/Edit/ExperienceEditor.jsx",
     "app/Edit/ProjectsEditor.jsx",
     "app/(me)/UserProfileDisplay.jsx",
-    "app/Components/themes/theme-two.jsx",
-    "app/Components/themes/theme-five.jsx",
+    "app/components/themes/theme-two.jsx",
+    "app/components/themes/theme-five.jsx",
     "app/update-profilee/components/theme-provider.jsx",
     ".next/dev/types/**/*.ts"
   ],

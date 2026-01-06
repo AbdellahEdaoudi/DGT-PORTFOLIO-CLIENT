@@ -3,7 +3,7 @@ import axios from 'axios';
 import { useSession } from 'next-auth/react';
 import { createContext, useEffect, useState } from 'react';
 
-import GlobalLoader from '../Components/GlobalLoader';
+import GlobalLoader from '../components/GlobalLoader';
 
 export const MyContext = createContext();
 

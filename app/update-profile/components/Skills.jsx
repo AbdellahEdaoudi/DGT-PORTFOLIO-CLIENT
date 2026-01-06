@@ -3,7 +3,7 @@ import axios from "axios"
 import React, { useState, useEffect } from "react"
 import { createPortal } from "react-dom"
 import { toast } from "react-toastify"
-import { CheckCheck, Loader, Plus, Trash2, ArrowUp, ArrowDown, X, AlertCircle } from "../../Components/Icons"
+import { CheckCheck, Loader, Plus, Trash2, ArrowUp, ArrowDown, X, AlertCircle } from "../../components/Icons"
 import { getTranslation } from '../../translations/update-profile'
 
 export default function Skills({ userData, setUserDetails }) {

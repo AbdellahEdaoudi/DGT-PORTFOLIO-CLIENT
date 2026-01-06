@@ -1,15 +1,15 @@
 'use client';
 import { useContext, useState } from 'react';
 import { createPortal } from "react-dom";
-import { Link, X, Edit3, Trash2, CheckCircle, Loader } from '../Components/Icons';
+import { Link, X, Edit3, Trash2, CheckCircle, Loader } from '../components/Icons';
 import { MyContext } from '../context/context';
 import axios from 'axios';
 import { toast } from "react-toastify";
 import DOMPurify from 'dompurify';
 import WarningModal from "./Pages/WarningModal"
 import ConfirmModal from "./Pages/ConfirmModal"
-import MagicalLoader from '../Components/MagicalLoader';
-import Header from '../Components/LandingPage/header';
+import MagicalLoader from '../components/MagicalLoader';
+import Header from '../components/LandingPage/header';
 import { getTranslation } from '../translations/others';
 
 function EditUserLinks() {

@@ -18,7 +18,7 @@ export async function GET(req: Request) {
       { expiresIn: "15m" }
     );
 
-    const backendUrl = process.env.BACKEND_URL; 
+    const backendUrl = process.env.BACKEND_URL;
 
     const response = await axios.get(`${backendUrl}/admin/appdata`, {
       headers: { Authorization: `Bearer ${token}` },

@@ -172,7 +172,7 @@ export default function ThemeSlideshow() {
                 height={1080}
                 src={theme.image}
                 alt={`Theme ${theme.id}`}
-                className={`w-full h-full object-cover object-top transition-transform duration-[4000ms] ease-out ${index === currentIndex ? "scale-[1.02]" : "scale-100"}`}
+                className={`w-full h-full object-cover object-top transition-transform [transition-duration:4000ms] ease-out ${index === currentIndex ? "scale-[1.02]" : "scale-100"}`}
               />
 
               {/* Image Content Overlay Gradient */}

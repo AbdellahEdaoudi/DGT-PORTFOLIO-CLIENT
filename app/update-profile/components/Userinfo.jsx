@@ -1,7 +1,7 @@
 "use client"
 import axios from 'axios'
-import { CheckCheck, Loader, FileDown } from '../../Components/Icons'
-import DownloadResume from '../../Components/downloadcv/DownloadResume'
+import { CheckCheck, Loader, FileDown } from '../../components/Icons'
+import DownloadResume from '../../components/downloadcv/DownloadResume'
 import Image from 'next/image'
 import { useState } from 'react'
 import { toast } from 'react-toastify'

@@ -3,8 +3,8 @@ import NextImage from "next/image";
 import React, { useState } from "react";
 import { toast } from "react-toastify";
 import { createPortal } from "react-dom";
-import { ArrowUp, ArrowDown, CheckCheck, Loader, Plus, Trash2, X, Pencil, AlertCircle, Upload, Award } from "../../Components/Icons";
-import ImageModal from "../../Components/portfolio/ImageModal";
+import { ArrowUp, ArrowDown, CheckCheck, Loader, Plus, Trash2, X, Pencil, AlertCircle, Upload, Award } from "../../components/Icons";
+import ImageModal from "../../components/portfolio/ImageModal";
 import { getTranslation } from '../../translations/update-profile'
 
 export default function Certificates({ userData, setUserDetails }) {

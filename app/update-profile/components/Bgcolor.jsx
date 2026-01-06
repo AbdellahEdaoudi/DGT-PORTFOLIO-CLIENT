@@ -2,8 +2,8 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { toast } from "react-toastify";
-import { CheckCheck, Loader } from "../../Components/Icons";
-import Themeone from "../../Components/themes/themeone";
+import { CheckCheck, Loader } from "../../components/Icons";
+import Themeone from "../../components/themes/themeone";
 import { getTranslation } from '../../translations/update-profile'
 
 export default function Bgcolor({ userData }) {

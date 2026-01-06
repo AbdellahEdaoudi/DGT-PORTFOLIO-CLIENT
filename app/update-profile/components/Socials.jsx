@@ -1,7 +1,7 @@
 "use client";
 import React, { useState } from "react";
 import { toast } from "react-toastify";
-import { CheckCheck, Loader } from "../../Components/Icons";
+import { CheckCheck, Loader } from "../../components/Icons";
 import axios from "axios";
 import Image from "next/image";
 import { getTranslation } from '../../translations/update-profile'

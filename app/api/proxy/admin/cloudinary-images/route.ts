@@ -22,7 +22,7 @@ export async function GET(req: Request) {
     const { searchParams } = new URL(req.url);
     const next_cursor = searchParams.get('next_cursor');
     const folder = searchParams.get('folder');
-    
+
     // Construct URL with query parameters
     let url = `${backendUrl}/admin/cloudinary-images`;
     const params = new URLSearchParams();
@@ -30,7 +30,7 @@ export async function GET(req: Request) {
     if (folder) params.append('folder', folder);
 
     if (params.toString()) {
-        url += `?${params.toString()}`;
+      url += `?${params.toString()}`;
     }
 
     const response = await axios.get(url, {

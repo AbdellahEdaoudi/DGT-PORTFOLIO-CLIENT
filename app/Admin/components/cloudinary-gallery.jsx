@@ -1,8 +1,8 @@
 "use client"
 import { useState, useEffect } from "react"
 import axios from "axios"
-import MagicalLoader from "../../Components/MagicalLoader"
-import { Copy, ExternalLink, Trash2 as Trash, ImagePlus as ImageIcon, FolderOpen, ArrowLeft, Check, RefreshCcw } from "../../Components/Icons"
+import MagicalLoader from "../../components/MagicalLoader"
+import { Copy, ExternalLink, Trash2 as Trash, ImagePlus as ImageIcon, FolderOpen, ArrowLeft, Check, RefreshCcw } from "../../components/Icons"
 import Image from "next/image"
 import { createPortal } from "react-dom"
 

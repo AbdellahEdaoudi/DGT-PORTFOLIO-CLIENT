@@ -4,13 +4,13 @@ import React, { useContext, useState } from 'react';
 import axios from 'axios';
 import { MyContext } from '../context/context';
 import { toast } from 'react-toastify';
-import { CheckCheck, Mail, Phone, Loader2, FolderOpen, MessageCircle, MapPin, ImagePlus, X, Loader } from '../Components/Icons';
+import { CheckCheck, Mail, Phone, Loader2, FolderOpen, MessageCircle, MapPin, ImagePlus, X, Loader } from '../components/Icons';
 
 import WarningModal from "./Pages/WarningModal"
-import MagicalLoader from '../Components/MagicalLoader';
+import MagicalLoader from '../components/MagicalLoader';
 import Image from 'next/image';
 import Link from 'next/link';
-import Header from '../Components/LandingPage/header';
+import Header from '../components/LandingPage/header';
 import { getTranslation } from '../translations/others';
 
 export default function ContactForm() {

@@ -1,6 +1,6 @@
 import { generateUserMetadata } from "../../../lib/metadata";
 import { fetchUserData } from "../../../lib/userUtils";
-import { DynamicUserPortfolio } from "../../Components/portfolio/ClientWrappers";
+import { DynamicUserPortfolio } from "../../components/portfolio/ClientWrappers";
 
 export async function generateMetadata(props) {
   const params = await props.params;

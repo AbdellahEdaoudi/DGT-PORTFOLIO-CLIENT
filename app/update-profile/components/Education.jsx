@@ -2,7 +2,7 @@ import axios from "axios";
 import React, { useState } from "react";
 import { toast } from "react-toastify";
 import { createPortal } from "react-dom";
-import { ArrowUp, ArrowDown, CheckCheck, Loader, Plus, Trash2, X, Pencil, AlertCircle } from "../../Components/Icons";
+import { ArrowUp, ArrowDown, CheckCheck, Loader, Plus, Trash2, X, Pencil, AlertCircle } from "../../components/Icons";
 import { getTranslation } from '../../translations/update-profile'
 
 export default function Education({ userData, setUserDetails }) {

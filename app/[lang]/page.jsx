@@ -1,4 +1,4 @@
-import LandingPage from "../Components/LandingPage/LandingPage"
+import LandingPage from "../components/LandingPage/LandingPage"
 import { getMetadata } from "../translations/metadata"
 
 export async function generateMetadata(props) {

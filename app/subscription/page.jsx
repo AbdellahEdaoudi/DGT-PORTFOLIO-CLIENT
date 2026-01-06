@@ -3,10 +3,10 @@ import { useEffect, useState, useContext } from "react";
 import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
 import { MyContext } from "../context/context";
 import axios from "axios";
-import MagicalLoader from "../Components/MagicalLoader";
-import Header from "../Components/LandingPage/header";
+import MagicalLoader from "../components/MagicalLoader";
+import Header from "../components/LandingPage/header";
 import { toast } from "react-toastify"
-import { Loader } from "../Components/Icons";
+import { Loader } from "../components/Icons";
 import { getTranslation } from '../translations/others';
 
 export default function SubscriptionPage() {
