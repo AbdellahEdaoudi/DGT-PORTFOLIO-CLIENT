@@ -118,9 +118,9 @@ export default function ContactForm() {
   }
 
   return (
-    <div className="bg-cyan-950 min-h-screen flex flex-col" dir={userDetails?.displayLanguage === 'ar' ? 'rtl' : 'ltr'}>
+    <div className="bg-cyan-950 min-h-screen flex flex-col">
       <div className="w-full"><Header lang={userDetails?.displayLanguage} /></div>
-      <div className="relative  w-full max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 my-4">
+      <div dir={userDetails?.displayLanguage === 'ar' ? 'rtl' : 'ltr'} className="relative  w-full max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 my-4">
         <div className="bg-white rounded-xl shadow-2xl overflow-hidden">
           <div className="lg:flex ">
             <div className="lg:w-1/2 bg-teal-800 p-4 lg:p-12">

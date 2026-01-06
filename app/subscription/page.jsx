@@ -100,20 +100,22 @@ export default function SubscriptionPage() {
         <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-black flex flex-col pb-10 md:pb-0">
           <Header lang={userDetails?.displayLanguage} />
           {/* Promo Code Section */}
-          <div className="flex flex-col items-center justify-center my-8 gap-2">
+          <div dir={userDetails?.displayLanguage === 'ar' ? 'rtl' : 'ltr'} className="flex flex-col items-center justify-center my-8 gap-2">
             <div className="flex items-center shadow-lg shadow-purple-500/10 rounded-full ">
               <input
                 type="text"
                 placeholder={t('subscription.placeholder')}
                 maxLength={30}
-                className="w-56 md:w-64 bg-slate-800/80 text-white border border-r-0 border-purple-500/30 rounded-l-full px-6 py-3 focus:outline-none focus:border-purple-500  placeholder-gray-400 transition-all"
+                className={`w-56 md:w-64 bg-slate-800/80 text-white border border-r-0 border-purple-500/30 
+                  ${userDetails?.displayLanguage === 'ar' ? 'rounded-r-full' : 'rounded-l-full'} px-6 py-3 focus:outline-none focus:border-purple-500  placeholder-gray-400 transition-all`}
                 value={promoCode}
                 onChange={(e) => setPromoCode(e.target.value)}
               />
               <button
                 onClick={handleApplyPromo}
                 disabled={promoLoading}
-                className={`bg-gradient-to-r from-purple-600 to-cyan-600 hover:from-purple-500 hover:to-cyan-500 text-white px-8 py-3 rounded-r-full font-bold transition-all duration-300 hover:shadow-lg hover:shadow-purple-500/25 ${promoLoading ? "opacity-50 cursor-not-allowed" : ""}`}
+                className={`bg-gradient-to-r from-purple-600 to-cyan-600 hover:from-purple-500 hover:to-cyan-500 text-white px-8 py-3 
+                  ${userDetails?.displayLanguage === 'ar' ? 'rounded-l-full' : 'rounded-r-full'} font-bold transition-all duration-300 hover:shadow-lg hover:shadow-purple-500/25 ${promoLoading ? "opacity-50 cursor-not-allowed" : ""}`}
               >
                 {promoLoading ? (
                   <div className="flex items-center gap-2">
@@ -131,7 +133,7 @@ export default function SubscriptionPage() {
             )}
           </div>
 
-          <div className="mx-auto grid grid-cols-1  md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div dir={userDetails?.displayLanguage === 'ar' ? 'rtl' : 'ltr'} className="mx-auto grid grid-cols-1  md:grid-cols-2 lg:grid-cols-3 gap-8">
             {uiPlans.map((uiPlan, index) => {
               const plan = plans[index];
               if (!plan) return null;

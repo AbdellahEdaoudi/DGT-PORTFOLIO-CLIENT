@@ -94,7 +94,7 @@ export default function CustomDomainPage() {
                     <p className="text-slate-400 text-base sm:text-lg">{t('customDomain.subtitle')}</p>
                 </div>
 
-                <div className="bg-slate-800/50 backdrop-blur-xl rounded-2xl p-5 sm:p-8 border border-slate-700/50 shadow-xl">
+                <div dir={userDetails?.displayLanguage === 'ar' ? 'rtl' : 'ltr'} className="bg-slate-800/50 backdrop-blur-xl rounded-2xl p-5 sm:p-8 border border-slate-700/50 shadow-xl">
                     <div className="mb-8">
                         <label className="block text-sm font-semibold text-slate-300 mb-2 ml-1">{t('customDomain.yourDomainName')}</label>
                         <div className="flex flex-col sm:flex-row gap-3">

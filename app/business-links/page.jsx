@@ -140,10 +140,10 @@ function EditUserLinks() {
 
 
   return (
-    <div className={`bg-cyan-950 min-h-screen pb-12 justify-center`} dir={userDetails?.displayLanguage === 'ar' ? 'rtl' : 'ltr'}>
+    <div className={`bg-cyan-950 min-h-screen pb-12 justify-center`}>
       <Header lang={userDetails?.displayLanguage} />
       {/* UserLinks */}
-      <div className="flex items-center justify-center p-4">
+      <div dir={userDetails?.displayLanguage === 'ar' ? 'rtl' : 'ltr'} className="flex items-center justify-center p-4">
         <section className='p-2 md:p-4 rounded-lg bg-gray-100 w-full max-w-[98%] md:w-[110vh] user-select-none mx-auto md:mx-0 text-gray-800 shadow-xl'>
           <h1 className='p-2 text-center text-lg md:text-3xl font-semibold text-gray-900'>{t('businessLinks.title')}</h1>
           {/* Add Link Form */}
