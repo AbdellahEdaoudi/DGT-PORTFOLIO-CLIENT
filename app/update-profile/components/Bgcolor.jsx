@@ -4,12 +4,10 @@ import axios from "axios";
 import { toast } from "react-toastify";
 import { CheckCheck, Loader } from "../../Components/Icons";
 import Themeone from "../../Components/themes/themeone";
-import ThemeTwo from "../../Components/themes/themetwo";
-
-import { useTranslation } from "../../lib/translations";
+import { getTranslation } from '../../translations/update-profile'
 
 export default function Bgcolor({ userData }) {
-  const { t } = useTranslation(userData?.displayLanguage || 'en');
+  const t = getTranslation(userData?.displayLanguage || 'en');
   const [bgcolorp, setBgcolorp] = useState(userData.bgcolorp || "#OA3C4D");
   const [loading, setLoading] = useState(false);
 
@@ -19,13 +17,13 @@ export default function Bgcolor({ userData }) {
       await axios.put(`/api/proxy/users/update/bgcolor`, { bgcolorp });
       toast(
         <p className="flex gap-3 items-center">
-          <CheckCheck /> {t('savedSuccessfully')}
+          <CheckCheck /> {t('bgColor.savedSuccessfully')}
         </p>,
         { autoClose: 2000 }
       );
     } catch (error) {
       console.error("Error updating background color:", error);
-      toast.error(t('errorMessage'));
+      toast.error(t('bgColor.errorMessage'));
     } finally {
       setLoading(false);
     }
@@ -34,7 +32,7 @@ export default function Bgcolor({ userData }) {
   return (
     <div className="" dir={userData?.displayLanguage === 'ar' ? 'rtl' : 'ltr'}>
       <div>
-        <label className="block text-lg font-bold text-gray-800 mb-3">🎨 {t('backgroundColor')}</label>
+        <label className="block text-lg font-bold text-gray-800 mb-3">🎨 {t('bgColor.title')}</label>
         <input
           type="color"
           value={bgcolorp}
@@ -50,10 +48,10 @@ export default function Bgcolor({ userData }) {
         >
           {loading ? (
             <>
-              <Loader size={20} className="animate-spin" /> {t('saving')}
+              <Loader size={20} className="animate-spin" /> {t('bgColor.saving')}
             </>
           ) : (
-            `💾 ${t('save')}`
+            `💾 ${t('bgColor.save')}`
           )}
         </button>
       </div>

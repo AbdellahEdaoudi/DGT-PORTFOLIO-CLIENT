@@ -1,0 +1,40 @@
+{
+    "portfolio": "Портфолио",
+    "about": "О себе",
+    "aboutMe": "Обо мне",
+    "services": "Услуги",
+    "workExperience": "Опыт работы",
+    "experience": "Опыт",
+    "skills": "Навыки",
+    "projects": "Проекты",
+    "education": "Образование",
+    "certificates": "Сертификаты",
+    "languages": "Языки",
+    "viewProject": "Посмотреть проект",
+    "field": "Область обучения",
+    "followMe": "Подписаться",
+    "allRightsReserved": "Все права защищены",
+    "country": "Страна",
+    "phone": "Телефон",
+    "description": "Описание",
+    "helloIm": "Привет, я",
+    "qrcode": {
+        "qrCodeProfile": "QR-код",
+        "downloadQrCode": "Скачать",
+        "shareQrCode": "Поделиться QR",
+        "shareLink": "Поделиться",
+        "copyLink": "Скопировать",
+        "checkOutQrCode": "Посмотрите этот QR-код!",
+        "sharingFailed": "Ошибка при обмене",
+        "webShareApiUnsupported": "Ваш браузер не поддерживает Web Share API.",
+        "successfulShare": "Успешный обмен",
+        "errorSharing": "Ошибка при обмене",
+        "shareUnsupported": "Обмен не поддерживается в этом браузере"
+    },
+    "userlinks": {
+        "businessLinks": "Бизнес-ссылки",
+        "noBusinessLinks": "Нет доступных бизнес-ссылок.",
+        "close": "Закрыть"
+    },
+    "welcometomyworld": "Добро пожаловать в мой мир"
+}

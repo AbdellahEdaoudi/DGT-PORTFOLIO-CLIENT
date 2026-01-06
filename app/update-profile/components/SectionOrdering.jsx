@@ -17,7 +17,6 @@ import {
     Layers,
     CheckCircle
 } from '../../Components/Icons'
-import { useTranslation } from '../../lib/translations'
 import {
     DndContext,
     closestCenter,
@@ -34,9 +33,7 @@ import {
     useSortable,
 } from '@dnd-kit/sortable'
 import { CSS } from '@dnd-kit/utilities'
-
 const DEFAULT_ORDER = ["services", "experience", "skills", "projects", "education", "certificates", "languages"]
-
 const ITEM_ICONS = {
     services: Layers,
     experience: Briefcase,
@@ -77,8 +74,8 @@ function SortableSectionItem({ id, index, label, moveUp, moveDown, isFirst, isLa
                 rounded-xl shadow-sm hover:shadow-md transition-all duration-200
                 group
                 ${isDragging
-                    ? 'border-teal-500 ring-1 ring-teal-500 bg-teal-50 shadow-lg scale-[1.02]'
-                    : 'border-gray-200 hover:border-teal-200'
+                    ? 'border-cyan-500 ring-1 ring-cyan-500 bg-cyan-50 shadow-lg scale-[1.02]'
+                    : 'border-gray-200 hover:border-cyan-200'
                 }
             `}
         >
@@ -89,8 +86,8 @@ function SortableSectionItem({ id, index, label, moveUp, moveDown, isFirst, isLa
                     {...attributes}
                     {...listeners}
                     className="
-                        text-gray-400 hover:text-teal-600 cursor-grab active:cursor-grabbing
-                        p-1.5 hover:bg-teal-50 rounded-lg transition-colors touch-none
+                        text-gray-400 hover:text-cyan-600 cursor-grab active:cursor-grabbing
+                        p-1.5 hover:bg-cyan-50 rounded-lg transition-colors touch-none
                     "
                     title="Drag to reorder"
                 >
@@ -102,13 +99,13 @@ function SortableSectionItem({ id, index, label, moveUp, moveDown, isFirst, isLa
                     <span className="hidden md:flex w-6 h-6 items-center justify-center text-xs font-mono font-medium text-gray-400 bg-gray-50 rounded-md">
                         {index + 1}
                     </span>
-                    <div className={`p-2 rounded-lg ${isDragging ? 'bg-teal-100 text-teal-700' : 'bg-gray-50 text-gray-500 group-hover:bg-teal-50 group-hover:text-teal-600'} transition-colors`}>
+                    <div className={`p-2 rounded-lg ${isDragging ? 'bg-cyan-100 text-cyan-700' : 'bg-gray-50 text-gray-500 group-hover:bg-cyan-50 group-hover:text-cyan-600'} transition-colors`}>
                         <Icon size={20} />
                     </div>
                 </div>
 
                 {/* Label */}
-                <span className={`font-bold text-sm md:text-base capitalize truncate ${isDragging ? 'text-teal-900' : 'text-gray-700'}`}>
+                <span className={`font-bold text-sm md:text-base capitalize truncate ${isDragging ? 'text-cyan-900' : 'text-gray-700'}`}>
                     {label}
                 </span>
             </div>
@@ -147,10 +144,12 @@ function SortableSectionItem({ id, index, label, moveUp, moveDown, isFirst, isLa
         </div>
     )
 }
+import { getTranslation } from '../../translations/update-profile'
 
 export default function SectionOrdering({ userData, setUserDetails }) {
-    const { t } = useTranslation(userData?.displayLanguage || 'en')
+    const t = getTranslation(userData?.displayLanguage || 'en')
     const [order, setOrder] = useState(userData?.sectionOrder && userData.sectionOrder.length > 0 ? userData.sectionOrder : DEFAULT_ORDER)
+    const [originalOrder, setOriginalOrder] = useState(userData?.sectionOrder && userData.sectionOrder.length > 0 ? userData.sectionOrder : DEFAULT_ORDER)
     const [loading, setLoading] = useState(false)
 
     const sensors = useSensors(
@@ -163,11 +162,9 @@ export default function SectionOrdering({ userData, setUserDetails }) {
     useEffect(() => {
         const currentOrder = userData?.sectionOrder && userData.sectionOrder.length > 0 ? userData.sectionOrder : DEFAULT_ORDER
         const missing = DEFAULT_ORDER.filter(item => !currentOrder.includes(item))
-        if (missing.length > 0) {
-            setOrder([...currentOrder, ...missing])
-        } else {
-            setOrder(currentOrder)
-        }
+        const finalOrder = missing.length > 0 ? [...currentOrder, ...missing] : currentOrder
+        setOrder(finalOrder)
+        setOriginalOrder(finalOrder)
     }, [userData])
 
     const handleDragEnd = (event) => {
@@ -208,115 +205,100 @@ export default function SectionOrdering({ userData, setUserDetails }) {
             if (setUserDetails) {
                 setUserDetails(prev => ({ ...prev, sectionOrder: order }))
             }
-            toast(<p className='flex gap-3 items-center'><CheckCheck className="text-teal-500" />{t('savedSuccessfully')}</p>, { autoClose: 2000 })
+            setOriginalOrder(order) // Update original order after successful save
+            toast.success(t('sectionOrdering.savedSuccessfully'));
         } catch (error) {
             console.error(error)
-            toast.error(t('errorMessage') || "Error saving")
+            toast.error(t('sectionOrdering.errorMessage'))
         } finally {
             setLoading(false)
         }
     }
 
+    // Check if order has changed
+    const hasOrderChanged = () => {
+        if (order.length !== originalOrder.length) return true
+        return order.some((item, index) => item !== originalOrder[index])
+    }
+
     const getLabel = (key) => {
         const labels = {
-            services: t('services'),
-            experience: t('workExperience'),
-            skills: t('skills'),
-            projects: t('projects'),
-            education: t('education'),
-            certificates: t('certificates'),
-            languages: t('languages')
+            services: t('tabs.services'),
+            experience: t('tabs.experience'),
+            skills: t('tabs.skills'),
+            projects: t('tabs.projects'),
+            education: t('tabs.education'),
+            certificates: t('tabs.certificates'),
+            languages: t('tabs.languages')
         }
         return labels[key] || key
     }
 
     return (
         <div className="space-y-6" dir={userData?.displayLanguage === 'ar' ? 'rtl' : 'ltr'}>
-            <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-gray-100 pb-6">
+            <div className="flex items-center justify-between border-b border-gray-100 pb-4 mb-6">
                 <div className="space-y-1">
                     <h3 className="text-xl font-bold text-gray-800 flex items-center gap-2">
-                        <LayoutList className="text-teal-600" />
-                        {t('sectionOrdering') || (userData?.displayLanguage === 'ar' ? "ترتيب الأقسام" : "Section Ordering")}
+                        <LayoutList className="text-cyan-600" />
+                        {t('sectionOrdering.title')}
                     </h3>
                     <p className="text-sm text-gray-500">
-                        {userData?.displayLanguage === 'ar'
-                            ? "قم بسحب وإفلات الأقسام لترتيبها حسب رغبتك في العرض"
-                            : "Drag and drop sections to reorder how they appear on your portfolio"
-                        }
+                        {t('sectionOrdering.description')}
                     </p>
                 </div>
-
-                <button
-                    onClick={saveOrder}
-                    disabled={loading}
-                    className="
-                        hidden md:flex
-                        bg-gray-900 hover:bg-gray-800
-                        text-white font-bold px-8 py-3 rounded-xl
-                        shadow-lg hover:shadow-xl disabled:opacity-50 disabled:shadow-none
-                        transition-all duration-300 items-center gap-2.5 transform hover:-translate-y-0.5
-                    "
-                >
-                    {loading ? (
-                        <>
-                            <Loader size={20} className="animate-spin" /> {t('saving')}
-                        </>
-                    ) : (
-                        <>
-                            <CheckCheck size={20} /> {t('save')}
-                        </>
-                    )}
-                </button>
             </div>
 
-            <div className="space-y-3 max-w-3xl mx-auto">
-                <DndContext
-                    sensors={sensors}
-                    collisionDetection={closestCenter}
-                    onDragEnd={handleDragEnd}
-                >
-                    <SortableContext
-                        items={order}
-                        strategy={verticalListSortingStrategy}
+            <div className="bg-white p-6 rounded-2xl border border-gray-200 shadow-sm space-y-8">
+                <div className="space-y-3 max-w-3xl mx-auto">
+                    <DndContext
+                        sensors={sensors}
+                        collisionDetection={closestCenter}
+                        onDragEnd={handleDragEnd}
                     >
-                        {order.map((item, index) => (
-                            <SortableSectionItem
-                                key={item}
-                                id={item}
-                                index={index}
-                                label={getLabel(item)}
-                                moveUp={moveUp}
-                                moveDown={moveDown}
-                                isFirst={index === 0}
-                                isLast={index === order.length - 1}
-                            />
-                        ))}
-                    </SortableContext>
-                </DndContext>
-            </div>
+                        <SortableContext
+                            items={order}
+                            strategy={verticalListSortingStrategy}
+                        >
+                            {order.map((item, index) => (
+                                <SortableSectionItem
+                                    key={item}
+                                    id={item}
+                                    index={index}
+                                    label={getLabel(item)}
+                                    moveUp={moveUp}
+                                    moveDown={moveDown}
+                                    isFirst={index === 0}
+                                    isLast={index === order.length - 1}
+                                />
+                            ))}
+                        </SortableContext>
+                    </DndContext>
+                </div>
 
-            <div className="md:hidden pt-4 border-t border-gray-100">
-                <button
-                    onClick={saveOrder}
-                    disabled={loading}
-                    className="
-                        w-full justify-center
-                        bg-gray-900 hover:bg-gray-800
-                        text-white font-bold px-6 py-3.5 rounded-xl
-                        shadow-lg hover:shadow-xl disabled:opacity-50 
-                        transition-all duration-300 flex items-center gap-2
-                    "
-                >
-                    {loading ? (
-                        <>
-                            <Loader size={20} className="animate-spin" /> {t('saving')}
-                        </>
-                    ) : (
-                        <>
-                            <CheckCheck size={20} /> {t('save')}
-                        </>
-                    )}
-                </button>
+                <div className="flex justify-end pt-4 border-t border-gray-100">
+                    <button
+                        onClick={saveOrder}
+                        disabled={loading || !hasOrderChanged()}
+                        className="
+                            w-full md:w-auto
+                            bg-gray-900 hover:bg-gray-800
+                            text-white font-bold px-8 py-3.5 rounded-xl
+                            shadow-lg hover:shadow-xl disabled:opacity-50 disabled:shadow-none disabled:cursor-not-allowed
+                            transition-all duration-300 flex items-center justify-center gap-2 transform hover:-translate-y-0.5
+                            disabled:transform-none
+                        "
+                    >
+                        {loading ? (
+                            <>
+                                <Loader size={20} className="animate-spin" /> {t('sectionOrdering.saving')}
+                            </>
+                        ) : (
+                            <>
+                                <CheckCheck size={20} /> {t('sectionOrdering.save')}
+                            </>
+                        )}
+                    </button>
+                </div>
             </div>
         </div>
     )

@@ -1,0 +1,113 @@
+{
+    "customDomain": {
+        "enterDomain": "Bitte geben Sie eine Domain ein",
+        "verificationFailed": "Verifizierung fehlgeschlagen",
+        "domainRemovedSuccess": "Domain erfolgreich entfernt",
+        "errorRemovingDomain": "Fehler beim Entfernen der Domain",
+        "title": "Benutzerdefinierte Domain",
+        "subtitle": "Verbinden Sie Ihre eigene Domain mit Ihrem Portfolio",
+        "yourDomainName": "Ihr Domainname",
+        "placeholder": "beispiel.com",
+        "save": "Speichern",
+        "domainActiveVerified": "Domain Aktiv & Verifiziert",
+        "verificationPending": "Verifizierung Ausstehend",
+        "domainConfigured": "Ihre Domain ist konfiguriert und funktioniert perfekt!",
+        "verifyOwnership": "Bitte verifizieren Sie die Domain-Inhaberschaft durch Konfiguration der DNS-Einträge",
+        "visitSite": "Seite Besuchen",
+        "removeDomain": "Domain Entfernen",
+        "dnsConfiguration": "DNS-Konfiguration",
+        "connectDomainSteps": "Um Ihre Domain zu verbinden, folgen Sie diesen Schritten:",
+        "step1Login": "Melden Sie sich bei Ihrem Domain-Registrar an (GoDaddy, Namecheap, usw.)",
+        "step2Navigate": "Navigieren Sie zu den DNS-Einstellungen / DNS-Verwaltung",
+        "step3AddRecord": "Fügen Sie den folgenden A-Eintrag hinzu:",
+        "type": "Typ",
+        "name": "Name",
+        "value": "Wert",
+        "note": "Hinweis",
+        "dnsPropagationNote": "Die DNS-Verbreitung kann bis zu 48 Stunden dauern",
+        "verifyingDns": "DNS wird verifiziert...",
+        "verifyDnsConfiguration": "DNS-Konfiguration Überprüfen",
+        "removeTitle": "Benutzerdefinierte Domain Entfernen?",
+        "removeDesc1": "Sind Sie sicher, dass Sie ",
+        "removeDesc2": " von Ihrem Portfolio entfernen möchten?",
+        "cancel": "Abbrechen"
+    },
+    "businessLinks": {
+        "title": "Geschäftslinks",
+        "linkTitle": "Titel",
+        "exampleWebsite": "Meine Webseite",
+        "link": "Link",
+        "exampleUrl": "https://beispiel.com",
+        "addLink": "Link Hinzufügen",
+        "linkAddedSuccessfully": "Link erfolgreich hinzugefügt",
+        "failedToAddLink": "Fehler beim Hinzufügen des Links",
+        "linkUpdatedSuccessfully": "Link erfolgreich aktualisiert",
+        "failedToUpdateLink": "Fehler beim Aktualisieren des Links",
+        "linkDeletedSuccessfully": "Link erfolgreich gelöscht",
+        "failedToDeleteLink": "Fehler beim Löschen des Links",
+        "edit": "Bearbeiten",
+        "delete": "Löschen",
+        "noLinksFound": "Noch keine Links hinzugefügt.",
+        "deleteLinkConfirm": "Sind Sie sicher, dass Sie diesen Link löschen möchten?",
+        "updateLink": "Link Aktualisieren"
+    },
+    "support": {
+        "successMessage": "Nachricht erfolgreich gesendet!",
+        "tooManyRequests": "Zu viele Anfragen. Bitte versuchen Sie es später erneut.",
+        "errorMessage": "Ein Fehler ist aufgetreten. Bitte versuchen Sie es erneut.",
+        "getInTouch": "Kontaktieren Sie uns",
+        "weLoveToHear": "Wir würden gerne von Ihnen hören! Senden Sie uns eine Nachricht und wir antworten so schnell wie möglich.",
+        "contactSupport": "Support Kontaktieren",
+        "email": "E-Mail",
+        "enterEmail": "Geben Sie Ihre E-Mail ein",
+        "subject": "Betreff",
+        "enterSubject": "Betreff eingeben",
+        "message": "Nachricht",
+        "enterMessage": "Geben Sie Ihre Nachricht ein",
+        "attachment": "Anhang",
+        "uploadImage": "Bild Hochladen (Optional)",
+        "sending": "Senden...",
+        "sendMessage": "Nachricht Senden"
+    },
+    "success": {
+        "paymentSuccessful": "Zahlung Erfolgreich!",
+        "subscriptionActive": "Ihr Abonnement ist jetzt aktiv. Danke für Ihren Kauf!",
+        "goToHome": "Zur Startseite"
+    },
+    "subscription": {
+        "promoMonthly": {
+            "name": "Promo Monatlich",
+            "description": "Spezielles Promo-Angebot",
+            "period": "/Monat"
+        },
+        "promo6Month": {
+            "name": "Promo 6 Monate",
+            "description": "Toller Wert für 6 Monate",
+            "period": "/6 Monate"
+        },
+        "promoAnnual": {
+            "name": "Promo Jährlich",
+            "description": "Bestes Angebot des Jahres",
+            "period": "/Jahr"
+        },
+        "subMonthly": {
+            "name": "Monatlich Abonnieren",
+            "description": "1 $ für den Monat",
+            "period": "/Monat"
+        },
+        "sub6Months": {
+            "name": "6 Monate Abonnieren",
+            "description": "Tolles mittelfristiges Angebot",
+            "period": "/6 Monate"
+        },
+        "subYearly": {
+            "name": "Jährlich Abonnieren",
+            "description": "Bester Wert",
+            "period": "/Jahr"
+        },
+        "recommended": "Empfohlen",
+        "placeholder": "Promo-Code",
+        "applyBtn": "Anwenden",
+        "verifyingBtn": "Überprüfen..."
+    }
+}

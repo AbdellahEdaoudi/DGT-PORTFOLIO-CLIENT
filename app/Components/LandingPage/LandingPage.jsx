@@ -5,11 +5,11 @@ import Navbar from "./Navbar"
 import AuthButtons from "./AuthButtons"
 import Link from "next/link"
 import LanguageSwitcher from "./LanguageSwitcher"
+import { getTranslation } from "../../translations/landing-page"
 
-export default function LandingPage({ dict }) {
+export default function LandingPage({ lang }) {
   const PORTFOLIO = `https://adam-carter.dgtportfolio.com`
-
-  if (!dict) return null;
+  const t = getTranslation(lang || 'en');
 
   const featuresList = [
     { icon: Code2 },
@@ -19,6 +19,9 @@ export default function LandingPage({ dict }) {
     { icon: Share2 },
     { icon: Zap },
   ]
+
+  const featuresItems = t('features.items') || [];
+  const pricingPlans = t('pricing.plans') || [];
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-black text-white overflow-hidden">
@@ -43,19 +46,19 @@ export default function LandingPage({ dict }) {
           {/* Desktop Menu */}
           <div className="hidden md:flex gap-8 items-center">
             <Link href={"#Features"} className="hover:text-cyan-400 transition">
-              {dict.navbar.features}
+              {t('navbar.features')}
             </Link>
             <Link href={PORTFOLIO} target="_blank" className="hover:text-cyan-400 transition">
-              {dict.navbar.showcase}
+              {t('navbar.showcase')}
             </Link>
             <Link href={"#pricing"} className="hover:text-cyan-400 transition">
-              {dict.navbar.pricing}
+              {t('navbar.pricing')}
             </Link>
           </div>
 
           <div className="flex items-center gap-4">
             <LanguageSwitcher />
-            <AuthButtons labels={dict.navbar.auth} />
+            <AuthButtons lang={lang || 'en'} />
           </div>
         </div>
       </Navbar>
@@ -66,24 +69,24 @@ export default function LandingPage({ dict }) {
             <div className="space-y-4">
               <h1 className="text-6xl md:text-7xl font-bold leading-tight">
                 <span className="bg-gradient-to-r from-cyan-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">
-                  {dict.hero.title_part1}
+                  {t('hero.title_part1')}
                 </span>
                 <br />
-                <span className="text-white">{dict.hero.title_part2}</span>
+                <span className="text-white">{t('hero.title_part2')}</span>
               </h1>
               <p className="text-lg  text-gray-300 leading-relaxed">
-                {dict.hero.description}
+                {t('hero.description')}
                 <span className=" m-4 text-sm bg-gradient-to-r from-cyan-400 to-purple-500 text-black rounded-full px-3  py-1 font-semibold shadow-lg shadow-cyan-500/30">
-                  {dict.hero.free_trial}
+                  {t('hero.free_trial')}
                 </span>
               </p>
             </div>
             <div className="flex flex-col sm:flex-row gap-4">
               <Link href={"/update-profile"} className="px-6 py-3 md:px-8 md:py-4 bg-gradient-to-r from-cyan-400 to-purple-500 rounded-full font-semibold hover:shadow-lg hover:shadow-purple-500/50 transition flex items-center justify-center gap-2 text-sm md:text-base">
-                {dict.hero.start_building} <ArrowRight className="w-4 h-4 md:w-5 md:h-5" />
+                {t('hero.start_building')} <ArrowRight className="w-4 h-4 md:w-5 md:h-5" />
               </Link>
               <Link href={PORTFOLIO} target="_blank" className="px-6 py-3 md:px-8 md:py-4 border border-purple-500/50 rounded-full hover:bg-purple-500/10 transition text-center text-sm md:text-base">
-                {dict.hero.watch_demo}
+                {t('hero.watch_demo')}
               </Link>
             </div>
           </div>
@@ -95,13 +98,13 @@ export default function LandingPage({ dict }) {
       <section id="Features" className="px-6 pt-8 pb-8 md:py-12 border-t border-purple-500/20">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
-            <h2 className="text-5xl font-bold mb-4">{dict.features.title}</h2>
+            <h2 className="text-5xl font-bold mb-4">{t('features.title')}</h2>
             <p className="text-gray-400 max-w-2xl mx-auto">
-              {dict.features.subtitle}
+              {t('features.subtitle')}
             </p>
           </div>
           <div className="grid md:grid-cols-3 gap-8">
-            {dict.features.items.map((feature, i) => {
+            {Array.isArray(featuresItems) && featuresItems.map((feature, i) => {
               const Icon = featuresList[i]?.icon || Code2;
               return (
                 <div
@@ -124,15 +127,15 @@ export default function LandingPage({ dict }) {
         <div className="max-w-6xl mx-auto">
           {/* Header */}
           <div className="text-center mb-16">
-            <h2 className="text-5xl font-bold mb-4">{dict.pricing.title}</h2>
+            <h2 className="text-5xl font-bold mb-4">{t('pricing.title')}</h2>
             <p className="text-gray-400 max-w-2xl mx-auto">
-              {dict.pricing.subtitle}
+              {t('pricing.subtitle')}
             </p>
           </div>
 
           {/* Pricing Cards */}
           <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
-            {dict.pricing.plans.map((plan, index) => (
+            {Array.isArray(pricingPlans) && pricingPlans.map((plan, index) => (
               <div
                 key={index}
                 className={`relative p-8 rounded-2xl border transition-all duration-300 ${plan.badge
@@ -185,14 +188,14 @@ export default function LandingPage({ dict }) {
       <section className="px-6 py-20 border-t border-purple-500/20">
         <div className="max-w-4xl mx-auto text-center">
           <div className="bg-gradient-to-br from-purple-600/20 to-pink-600/20 border border-purple-500/50 rounded-3xl md:p-12 p-6">
-            <h2 className="text-2xl md:text-5xl font-bold mb-6">{dict.cta.title}</h2>
+            <h2 className="text-2xl md:text-5xl font-bold mb-6">{t('cta.title')}</h2>
             <p className=" md:text-xl text-gray-300 mb-8">
-              {dict.cta.subtitle}
+              {t('cta.subtitle')}
             </p>
             <Link className="text-sm md:text-base" href={"/update-profile"}>
               <button
                 className=" px-10 py-4 bg-gradient-to-r from-cyan-400 to-purple-500 rounded-full font-semibold hover:shadow-lg hover:shadow-purple-500/50 transition flex items-center gap-2 mx-auto">
-                {dict.cta.button} <ArrowRight className="w-5 h-5" />
+                {t('cta.button')} <ArrowRight className="w-5 h-5" />
               </button>
             </Link>
           </div>
@@ -201,7 +204,7 @@ export default function LandingPage({ dict }) {
 
       {/* Footer */}
       <footer className="border-t border-purple-500/20 px-6 py-12 text-gray-400 text-center">
-        <p> © {new Date().getFullYear()} <span className="font-semibold">DGT Portfolio</span>. {dict.footer.rights}</p>
+        <p> © {new Date().getFullYear()} <span className="font-semibold">DGT Portfolio</span>. {t('footer.rights')}</p>
       </footer>
     </div>
   )

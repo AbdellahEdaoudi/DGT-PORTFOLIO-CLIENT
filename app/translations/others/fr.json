@@ -1,0 +1,113 @@
+{
+    "customDomain": {
+        "enterDomain": "Veuillez entrer un domaine",
+        "verificationFailed": "Échec de la vérification",
+        "domainRemovedSuccess": "Domaine supprimé avec succès",
+        "errorRemovingDomain": "Erreur lors de la suppression du domaine",
+        "title": "Domaine personnalisé",
+        "subtitle": "Connectez votre propre domaine à votre portfolio",
+        "yourDomainName": "Votre nom de domaine",
+        "placeholder": "exemple.com",
+        "save": "Enregistrer",
+        "domainActiveVerified": "Domaine actif et vérifié",
+        "verificationPending": "Vérification en attente",
+        "domainConfigured": "Votre domaine est configuré et fonctionne parfaitement!",
+        "verifyOwnership": "Veuillez vérifier la propriété du domaine en configurant les enregistrements DNS",
+        "visitSite": "Visiter le site",
+        "removeDomain": "Supprimer le domaine",
+        "dnsConfiguration": "Configuration DNS",
+        "connectDomainSteps": "Pour connecter votre domaine, suivez ces étapes:",
+        "step1Login": "Connectez-vous à votre bureau d'enregistrement de domaine (GoDaddy, Namecheap, etc.)",
+        "step2Navigate": "Accédez aux paramètres DNS / gestion DNS",
+        "step3AddRecord": "Ajoutez l'enregistrement A suivant:",
+        "type": "Type",
+        "name": "Nom",
+        "value": "Valeur",
+        "note": "Remarque",
+        "dnsPropagationNote": "La propagation DNS peut prendre jusqu'à 48 heures",
+        "verifyingDns": "Vérification DNS...",
+        "verifyDnsConfiguration": "Vérifier la configuration DNS",
+        "removeTitle": "Supprimer le domaine personnalisé?",
+        "removeDesc1": "Êtes-vous sûr de vouloir supprimer ",
+        "removeDesc2": " de votre portfolio?",
+        "cancel": "Annuler"
+    },
+    "businessLinks": {
+        "title": "Liens professionnels",
+        "linkTitle": "Titre",
+        "exampleWebsite": "Mon site web",
+        "link": "Lien",
+        "exampleUrl": "https://exemple.com",
+        "addLink": "Ajouter un lien",
+        "linkAddedSuccessfully": "Lien ajouté avec succès",
+        "failedToAddLink": "Échec de l'ajout du lien",
+        "linkUpdatedSuccessfully": "Lien mis à jour avec succès",
+        "failedToUpdateLink": "Échec de la mise à jour du lien",
+        "linkDeletedSuccessfully": "Lien supprimé avec succès",
+        "failedToDeleteLink": "Échec de la suppression du lien",
+        "edit": "Modifier",
+        "delete": "Supprimer",
+        "noLinksFound": "Aucun lien ajouté pour le moment.",
+        "deleteLinkConfirm": "Êtes-vous sûr de vouloir supprimer ce lien?",
+        "updateLink": "Mettre à jour le lien"
+    },
+    "support": {
+        "successMessage": "Message envoyé avec succès!",
+        "tooManyRequests": "Trop de requêtes. Veuillez réessayer plus tard.",
+        "errorMessage": "Une erreur s'est produite. Veuillez réessayer.",
+        "getInTouch": "Contactez-nous",
+        "weLoveToHear": "Nous aimerions avoir de vos nouvelles! Envoyez-nous un message et nous vous répondrons dès que possible.",
+        "contactSupport": "Contacter le support",
+        "email": "Email",
+        "enterEmail": "Entrez votre email",
+        "subject": "Sujet",
+        "enterSubject": "Entrez le sujet",
+        "message": "Message",
+        "enterMessage": "Entrez votre message",
+        "attachment": "Pièce jointe",
+        "uploadImage": "Télécharger une image (Optionnel)",
+        "sending": "Envoi...",
+        "sendMessage": "Envoyer le message"
+    },
+    "success": {
+        "paymentSuccessful": "Paiement réussi!",
+        "subscriptionActive": "Votre abonnement est maintenant actif. Merci pour votre achat!",
+        "goToHome": "Aller à l'accueil"
+    },
+    "subscription": {
+        "promoMonthly": {
+            "name": "Promo Mensuel",
+            "description": "Offre promotionnelle spéciale",
+            "period": "/mois"
+        },
+        "promo6Month": {
+            "name": "Promo 6 Mois",
+            "description": "Excellente valeur pour 6 mois",
+            "period": "/6 mois"
+        },
+        "promoAnnual": {
+            "name": "Promo Annuelle",
+            "description": "Meilleure offre de l'année",
+            "period": "/an"
+        },
+        "subMonthly": {
+            "name": "Abonnement Mensuel",
+            "description": "1 $ pour le mois",
+            "period": "/mois"
+        },
+        "sub6Months": {
+            "name": "Abonnement 6 Mois",
+            "description": "Superbe offre à moyen terme",
+            "period": "/6 mois"
+        },
+        "subYearly": {
+            "name": "Abonnement Annuel",
+            "description": "Meilleure valeur",
+            "period": "/an"
+        },
+        "recommended": "Recommandé",
+        "placeholder": "Code promo",
+        "applyBtn": "Appliquer",
+        "verifyingBtn": "Vérification..."
+    }
+}

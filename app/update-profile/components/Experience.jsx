@@ -4,13 +4,16 @@ import React, { useState } from "react";
 import { toast } from "react-toastify";
 import { createPortal } from "react-dom";
 import { ArrowUp, ArrowDown, CheckCheck, Loader, Plus, Trash2, X, Pencil, AlertCircle } from "../../Components/Icons";
-
-import { useTranslation } from "../../lib/translations";
+import { getTranslation } from '../../translations/update-profile'
 
 export default function Experience({ userData, setUserDetails }) {
-  const { t } = useTranslation(userData?.displayLanguage || 'en');
+  const t = getTranslation(userData?.displayLanguage || 'en');
   const [experience, setExperience] = useState(
     (userData.experience || []).map(e => ({ ...e, collapsed: true }))
+  );
+  // Track original order for comparison
+  const [originalOrder, setOriginalOrder] = useState(
+    (userData.experience || []).filter(e => e._id).map(e => e._id)
   );
   const [loading, setLoading] = useState(false);
   const [savingIds, setSavingIds] = useState(new Set());
@@ -26,7 +29,11 @@ export default function Experience({ userData, setUserDetails }) {
 
   const addArrayItem = (array, setArray, newItem) => {
     if (array.length >= 10) return; // Limit to 10
+    const newIndex = array.length;
     setArray([...array, { ...newItem, collapsed: false }]);
+    // Subtle highlight for the newly added item
+    setHighlightedId(`new-${newIndex}`);
+    setTimeout(() => setHighlightedId(null), 2000);
   };
 
   const updateObjectInArray = (array, setArray, index, key, value) => {
@@ -51,16 +58,28 @@ export default function Experience({ userData, setUserDetails }) {
 
   const moveItemUp = (index) => {
     if (index === 0) return;
-    const newExperience = [...experience];
-    [newExperience[index - 1], newExperience[index]] = [newExperience[index], newExperience[index - 1]];
-    setExperience(newExperience);
+    const newItems = [...experience];
+    const itemToMove = newItems[index];
+    [newItems[index - 1], newItems[index]] = [newItems[index], newItems[index - 1]];
+    setExperience(newItems);
+
+    // Subtle highlight for the moved item
+    const targetId = itemToMove._id || `new-${index - 1}`;
+    setHighlightedId(targetId);
+    setTimeout(() => setHighlightedId(null), 1500);
   };
 
   const moveItemDown = (index) => {
     if (index === experience.length - 1) return;
-    const newExperience = [...experience];
-    [newExperience[index], newExperience[index + 1]] = [newExperience[index + 1], newExperience[index]];
-    setExperience(newExperience);
+    const newItems = [...experience];
+    const itemToMove = newItems[index];
+    [newItems[index], newItems[index + 1]] = [newItems[index + 1], newItems[index]];
+    setExperience(newItems);
+
+    // Subtle highlight for the moved item
+    const targetId = itemToMove._id || `new-${index + 1}`;
+    setHighlightedId(targetId);
+    setTimeout(() => setHighlightedId(null), 1500);
   };
 
   // 🟢 Save Single Experience Item
@@ -94,7 +113,7 @@ export default function Experience({ userData, setUserDetails }) {
         setUserDetails(prev => ({ ...prev, experience: newExperienceList }));
       }
 
-      toast.success(t('savedSuccessfully'));
+      toast.success(t('experience.savedSuccessfully'));
       setValidationErrors(prev => {
         const next = { ...prev };
         delete next[index];
@@ -110,7 +129,7 @@ export default function Experience({ userData, setUserDetails }) {
 
     } catch (error) {
       console.error("Error saving experience:", error);
-      toast.error(t('errorMessage'));
+      toast.error(t('experience.errorMessage'));
     } finally {
       setSavingIds(prev => {
         const next = new Set(prev);
@@ -143,10 +162,10 @@ export default function Experience({ userData, setUserDetails }) {
       if (setUserDetails) {
         setUserDetails(prev => ({ ...prev, experience: newExperienceList }));
       }
-      toast.success(t('deletedSuccessfully') || "Deleted successfully");
+      toast.success(t('experience.deletedSuccessfully') || "Deleted successfully");
     } catch (error) {
       console.error("Error deleting experience:", error);
-      toast.error(t('errorMessage'));
+      toast.error(t('experience.errorMessage'));
     } finally {
       setDeletingIds(prev => {
         const next = new Set(prev);
@@ -163,7 +182,7 @@ export default function Experience({ userData, setUserDetails }) {
       const experienceWithIds = experience.filter(e => e._id).map(e => ({ _id: e._id }));
 
       if (experienceWithIds.length !== experience.length) {
-        toast.warning(t('saveNewItemsFirst') || "Please save new items first");
+        toast.warning(t('experience.saveNewItemsFirst') || "Please save new items first");
         setLoading(false);
         return;
       }
@@ -178,15 +197,19 @@ export default function Experience({ userData, setUserDetails }) {
         }));
       }
 
+      // Update original order after successful save
+      const newOrder = experience.filter(e => e._id).map(e => e._id);
+      setOriginalOrder(newOrder);
+
       toast(
         <p className="flex gap-3 items-center">
-          <CheckCheck className="text-amber-500" /> {t('orderSaved') || "Order saved"}
+          <CheckCheck className="text-amber-500" /> {t('experience.orderSaved') || "Order saved"}
         </p>,
         { autoClose: 2000 }
       );
     } catch (error) {
       console.error("Error updating order:", error);
-      toast.error(t('errorMessage'));
+      toast.error(t('experience.errorMessage'));
     } finally {
       setLoading(false);
     }
@@ -194,17 +217,17 @@ export default function Experience({ userData, setUserDetails }) {
 
   return (
     <div className="space-y-4" dir={userData?.displayLanguage === 'ar' ? 'rtl' : 'ltr'}>
-      <h3 className="text-lg font-bold text-gray-800">⭐ {t('experience')}</h3>
+      <h3 className="text-lg font-bold text-gray-800">⭐ {t('experience.title')}</h3>
 
       <div className="bg-gradient-to-br from-amber-50 to-orange-50 p-2 md:p-4 rounded-xl border border-amber-200 space-y-3">
         <div className="space-y-2">
           {experience.map((exp, index) => (
             <div
               key={exp._id || index}
-              className={`bg-white pb-1 border rounded-xl shadow-sm hover:shadow-md transition-all duration-300 overflow-hidden ${deletingIds.has(exp._id) ? 'opacity-60 grayscale pointer-events-none ring-2 ring-red-100 border-red-200 scale-[0.99]' :
-                  validationErrors[index] ? 'border-red-300 ring-1 ring-red-200' :
-                    highlightedId === exp._id ? 'border-amber-500 ring-2 ring-amber-200 shadow-amber-100' :
-                      'border-gray-200'
+              className={`bg-white pb-1 border rounded-xl shadow-sm hover:shadow-md transition-all duration-500 overflow-hidden ${deletingIds.has(exp._id) ? 'opacity-60 grayscale pointer-events-none ring-2 ring-red-100 border-red-200 scale-[0.99]' :
+                validationErrors[index] ? 'border-red-300 ring-1 ring-red-200' :
+                  (highlightedId === exp._id || highlightedId === `new-${index}`) ? 'border-blue-400 bg-blue-50/50 shadow-md scale-[1.01]' :
+                    'border-gray-200'
                 }`}
             >
               {/* Collapsible Header with Editable Company */}
@@ -214,7 +237,7 @@ export default function Experience({ userData, setUserDetails }) {
                 <div className="flex-grow">
                   <input
                     type="text"
-                    placeholder={t('company')}
+                    placeholder={t('experience.company')}
                     value={exp.company}
                     maxLength={100}
                     onChange={(e) =>
@@ -225,7 +248,7 @@ export default function Experience({ userData, setUserDetails }) {
                   {validationErrors[index]?.company && (
                     <p className="text-red-500 text-xs mt-1.5 flex items-center gap-1.5 font-medium animate-in slide-in-from-top-1">
                       <AlertCircle size={14} />
-                      {t('companyRequired') || "Company is required"}
+                      {t('experience.companyRequired') || "Company is required"}
                     </p>
                   )}
                 </div>
@@ -235,10 +258,10 @@ export default function Experience({ userData, setUserDetails }) {
                     type="button"
                     onClick={() => toggleCollapse(index)}
                     className={`p-2 rounded-lg transition-colors flex items-center gap-2 text-sm font-medium ${exp.collapsed ? 'bg-amber-50 text-amber-700 hover:bg-amber-100' : 'bg-gray-100 text-gray-700 hover:bg-gray-200'}`}
-                    title={exp.collapsed ? t('edit') : t('collapse') || "Collapse"}
+                    title={exp.collapsed ? t('experience.edit') : t('experience.collapse') || "Collapse"}
                   >
                     {exp.collapsed ? <Pencil size={16} /> : <X size={16} />}
-                    <span className="hidden md:inline">{exp.collapsed ? t('edit') : (t('close') || "Close")}</span>
+                    <span className="hidden md:inline">{exp.collapsed ? t('experience.edit') : (t('experience.close') || "Close")}</span>
                   </button>
 
                   <div className="w-px h-6 bg-gray-200 mx-1"></div>
@@ -248,7 +271,7 @@ export default function Experience({ userData, setUserDetails }) {
                     onClick={() => moveItemUp(index)}
                     disabled={index === 0}
                     className="p-1.5 hover:bg-gray-200 rounded-lg transition-colors disabled:opacity-30 disabled:cursor-not-allowed"
-                    title={t('moveUp') || "Move Up"}
+                    title={t('experience.moveUp') || "Move Up"}
                   >
                     <ArrowUp size={16} className="text-gray-600" />
                   </button>
@@ -257,7 +280,7 @@ export default function Experience({ userData, setUserDetails }) {
                     onClick={() => moveItemDown(index)}
                     disabled={index === experience.length - 1}
                     className="p-1.5 hover:bg-gray-200 rounded-lg transition-colors disabled:opacity-30 disabled:cursor-not-allowed"
-                    title={t('moveDown') || "Move Down"}
+                    title={t('experience.moveDown') || "Move Down"}
                   >
                     <ArrowDown size={16} className="text-gray-600" />
                   </button>
@@ -265,7 +288,7 @@ export default function Experience({ userData, setUserDetails }) {
                     type="button"
                     onClick={() => setItemToDelete(index)}
                     className="p-1.5 hover:bg-red-100 rounded-lg transition-colors text-red-500 ml-1"
-                    title={t('delete')}
+                    title={t('experience.delete')}
                     disabled={deletingIds.has(exp._id)}
                   >
                     {deletingIds.has(exp._id) ? <Loader size={16} className="animate-spin" /> : <Trash2 size={16} />}
@@ -279,7 +302,7 @@ export default function Experience({ userData, setUserDetails }) {
                   <div>
                     <input
                       type="text"
-                      placeholder={t('role')}
+                      placeholder={t('experience.role')}
                       value={exp.role || ""}
                       maxLength={100}
                       onChange={(e) =>
@@ -290,14 +313,14 @@ export default function Experience({ userData, setUserDetails }) {
                     {validationErrors[index]?.role && (
                       <p className="text-red-500 text-xs mt-1.5 flex items-center gap-1.5 font-medium animate-in slide-in-from-top-1">
                         <AlertCircle size={14} />
-                        {t('roleRequired') || "Role is required"}
+                        {t('experience.roleRequired') || "Role is required"}
                       </p>
                     )}
                   </div>
 
                   <div>
                     <textarea
-                      placeholder={t('description')}
+                      placeholder={t('experience.description')}
                       value={exp.description || ""}
                       maxLength={2000}
                       onChange={(e) =>
@@ -308,7 +331,7 @@ export default function Experience({ userData, setUserDetails }) {
                     {validationErrors[index]?.description && (
                       <p className="text-red-500 text-xs mt-1.5 flex items-center gap-1.5 font-medium animate-in slide-in-from-top-1">
                         <AlertCircle size={14} />
-                        {t('descriptionRequired') || "Description is required"}
+                        {t('experience.descriptionRequired') || "Description is required"}
                       </p>
                     )}
                   </div>
@@ -316,7 +339,7 @@ export default function Experience({ userData, setUserDetails }) {
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
                     <input
                       type="text"
-                      placeholder={t('startDate')}
+                      placeholder={t('experience.startDate')}
                       value={exp.startDate || ""}
                       maxLength={20}
                       onChange={(e) =>
@@ -326,7 +349,7 @@ export default function Experience({ userData, setUserDetails }) {
                     />
                     <input
                       type="text"
-                      placeholder={t('endDate')}
+                      placeholder={t('experience.endDate')}
                       value={exp.endDate || ""}
                       maxLength={20}
                       onChange={(e) =>
@@ -344,7 +367,7 @@ export default function Experience({ userData, setUserDetails }) {
                       className="bg-amber-600 hover:bg-amber-700 text-white px-4 py-2 rounded-lg text-sm font-medium flex items-center gap-2 transition-colors disabled:opacity-50"
                     >
                       {savingIds.has(index) ? <Loader size={12} className="animate-spin" /> : <CheckCheck size={16} />}
-                      {t('save') || "Save"}
+                      {t('experience.save') || "Save"}
                     </button>
                   </div>
                 </div>
@@ -371,25 +394,31 @@ export default function Experience({ userData, setUserDetails }) {
           }}
           className={`w-full text-white py-2 rounded-lg flex items-center justify-center gap-2 transition-all duration-300 mt-2 ${experience.length >= 10 ? 'bg-gray-400 cursor-not-allowed' : 'bg-gradient-to-r from-amber-500 to-orange-600 hover:from-amber-600 hover:to-orange-700'}`}
         >
-          <Plus size={18} /> {experience.length >= 10 ? "10 Max" : t('addExperience')}
+          <Plus size={18} /> {experience.length >= 10 ? "10 Max" : t('experience.addExperience')}
         </button>
       </div>
 
-      <div className="flex justify-end py-4 border-b-2 border-gray-200">
-        <button
-          onClick={saveOrder}
-          disabled={loading}
-          className="bg-gray-800 hover:bg-gray-900 disabled:opacity-50 text-white font-bold px-8 py-3 rounded-lg transition-all duration-300 flex items-center gap-2 transform hover:scale-105 shadow-lg"
-        >
-          {loading ? (
-            <>
-              <Loader size={20} className="animate-spin" /> {t('saving')}
-            </>
-          ) : (
-            `💾 ${t('saveOrder') || "Save Order"}`
-          )}
-        </button>
-      </div>
+      {/* Only show Save Order button if there are 2+ items */}
+      {experience.filter(e => e._id).length >= 2 && (
+        <div className="flex justify-end py-4 border-b-2 border-gray-200">
+          <button
+            onClick={saveOrder}
+            disabled={loading || (() => {
+              const currentOrder = experience.filter(e => e._id).map(e => e._id);
+              return JSON.stringify(currentOrder) === JSON.stringify(originalOrder);
+            })()}
+            className="bg-gray-800 hover:bg-gray-900 disabled:opacity-50 disabled:cursor-not-allowed text-white font-bold px-8 py-3 rounded-lg transition-all duration-300 flex items-center gap-2 transform hover:scale-105 shadow-lg"
+          >
+            {loading ? (
+              <>
+                <Loader size={20} className="animate-spin" /> {t('experience.saving')}
+              </>
+            ) : (
+              `💾 ${t('experience.saveOrder') || "Save Order"}`
+            )}
+          </button>
+        </div>
+      )}
 
       {/* Professional Delete Modal with Portal - Inlined */}
       {mounted && itemToDelete !== null && createPortal(
@@ -414,7 +443,7 @@ export default function Experience({ userData, setUserDetails }) {
               <div className="text-gray-600 mb-6 text-base leading-relaxed">
                 <div className="flex flex-col gap-2">
                   <span className="font-semibold text-gray-800">Are you sure you want to delete this experience?</span>
-                  <span className="font-bold text-black border-t pt-2 mt-1 break-all">"{experience[itemToDelete]?.company || t('thisExperience') || "this experience"}"</span>
+                  <span className="font-bold text-black border-t pt-2 mt-1 break-all">"{experience[itemToDelete]?.company || t('experience.thisExperience') || "this experience"}"</span>
                 </div>
               </div>
             </div>
@@ -424,14 +453,14 @@ export default function Experience({ userData, setUserDetails }) {
                 onClick={() => setItemToDelete(null)}
                 className="flex-1 px-4 py-2.5 bg-gray-200 hover:bg-gray-300 text-gray-800 font-bold rounded-lg transition-all duration-200"
               >
-                {t('cancel') || "Cancel"}
+                {t('experience.cancel') || "Cancel"}
               </button>
               <button
                 onClick={confirmDelete}
                 className="flex-1 px-4 py-2.5 bg-red-600 hover:bg-red-700 text-white font-medium rounded-lg shadow-md transition duration-200 flex items-center justify-center gap-2"
               >
                 <Trash2 size={18} />
-                <span>{t('delete') || "Delete"}</span>
+                <span>{t('experience.delete') || "Delete"}</span>
               </button>
             </div>
           </div>

@@ -5,7 +5,7 @@ import { NextRequest, NextResponse } from 'next/server';
 export default withAuth(async function middleware(request: NextRequest) {
   const pathname = request.nextUrl.pathname;
   const isAuth = await getToken({ req: request });
-  const protectedRoutes = ['/BusinessLinks','/update-profile','/support','/subscription','/Admin','/api/proxy/users/:path*','/api/proxy/alldata/:path*','/api/proxy/links/:path*','/custom-domain'];
+  const protectedRoutes = ['/business-links', '/update-profile', '/support', '/subscription', '/Admin', '/api/proxy/users/:path*', '/api/proxy/alldata/:path*', '/api/proxy/links/:path*', '/custom-domain'];
   const isAuthRoute = pathname.startsWith('/auth');
   const isProtectedRoute = protectedRoutes.some(route => pathname.startsWith(route));
   // If not authenticated and accessing protected route
@@ -24,7 +24,7 @@ export default withAuth(async function middleware(request: NextRequest) {
     },
   },
 });
-  
+
 export const config = {
-  matcher: ['/BusinessLinks','/update-profile','/support','/subscription','/Admin','/auth/:path*','/api/proxy/users/:path*','/api/proxy/alldata/:path*','/api/proxy/links/:path*','/custom-domain',],
+  matcher: ['/business-links', '/update-profile', '/support', '/subscription', '/Admin', '/auth/:path*', '/api/proxy/users/:path*', '/api/proxy/alldata/:path*', '/api/proxy/links/:path*', '/custom-domain',],
 };

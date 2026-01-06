@@ -3,12 +3,12 @@
 import { CheckCircle } from '../Components/Icons';
 import Link from 'next/link';
 import { useContext } from 'react';
-import { MyContext } from '../Context/MyContext';
-import { useTranslation } from '../lib/translations';
+import { MyContext } from '../context/context';
+import { getTranslation } from '../translations/others';
 
 export default function Success() {
   const { userDetails } = useContext(MyContext);
-  const { t } = useTranslation(userDetails?.displayLanguage || 'en');
+  const t = getTranslation(userDetails?.displayLanguage || 'en');
 
   return (
     <main className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-black flex items-center justify-center px-6" dir={userDetails?.displayLanguage === 'ar' ? 'rtl' : 'ltr'}>
@@ -24,18 +24,18 @@ export default function Success() {
 
           {/* عنوان النجاح */}
           <h1 className="text-3xl font-bold text-white mb-3 drop-shadow">
-            {t('paymentSuccessful')}
+            {t('success.paymentSuccessful')}
           </h1>
 
           {/* نص بسيط */}
           <p className="text-gray-300 mb-8">
-            {t('subscriptionActive')}
+            {t('success.subscriptionActive')}
           </p>
 
           {/* زر العودة */}
           <Link href="/">
             <button className="w-full bg-gradient-to-r from-green-400 to-green-500 text-black font-semibold py-3 rounded-full shadow-md hover:shadow-green-500/40 transition-all duration-300">
-              {t('goToHome')}
+              {t('success.goToHome')}
             </button>
           </Link>
         </div>

@@ -1,0 +1,40 @@
+{
+    "portfolio": "ポートフォリオ",
+    "about": "について",
+    "aboutMe": "私について",
+    "services": "サービス",
+    "workExperience": "職務経験",
+    "experience": "経験",
+    "skills": "スキル",
+    "projects": "プロジェクト",
+    "education": "学歴",
+    "certificates": "資格",
+    "languages": "言語",
+    "viewProject": "プロジェクトを見る",
+    "field": "専攻分野",
+    "followMe": "フォローする",
+    "allRightsReserved": "無断転載禁止",
+    "country": "国",
+    "phone": "電話",
+    "description": "説明",
+    "helloIm": "こんにちは、私は",
+    "qrcode": {
+        "qrCodeProfile": "QRコード",
+        "downloadQrCode": "ダウンロード",
+        "shareQrCode": "QRを共有",
+        "shareLink": "リンクを共有",
+        "copyLink": "リンクをコピー",
+        "checkOutQrCode": "このQRコードをチェックしてください！",
+        "sharingFailed": "共有に失敗しました",
+        "webShareApiUnsupported": "お使いのブラウザはWeb Share APIをサポートしていません。",
+        "successfulShare": "共有に成功しました",
+        "errorSharing": "共有エラー",
+        "shareUnsupported": "このブラウザでは共有がサポートされていません"
+    },
+    "userlinks": {
+        "businessLinks": "ビジネスリンク",
+        "noBusinessLinks": "利用可能なビジネスリンクはありません。",
+        "close": "閉じる"
+    },
+    "welcometomyworld": "私の世界へようこそ"
+}

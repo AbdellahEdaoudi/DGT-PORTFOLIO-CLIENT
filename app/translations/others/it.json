@@ -1,0 +1,113 @@
+{
+    "customDomain": {
+        "enterDomain": "Inserisci un dominio",
+        "verificationFailed": "Verifica fallita",
+        "domainRemovedSuccess": "Dominio rimosso con successo",
+        "errorRemovingDomain": "Errore durante la rimozione del dominio",
+        "title": "Dominio Personalizzato",
+        "subtitle": "Collega il tuo dominio al tuo portfolio",
+        "yourDomainName": "Il Tuo Nome di Dominio",
+        "placeholder": "esempio.com",
+        "save": "Salva",
+        "domainActiveVerified": "Dominio Attivo e Verificato",
+        "verificationPending": "Verifica in Sospeso",
+        "domainConfigured": "Il tuo dominio è configurato e funziona perfettamente!",
+        "verifyOwnership": "Verifica la proprietà del dominio configurando i record DNS",
+        "visitSite": "Visita Sito",
+        "removeDomain": "Rimuovi Dominio",
+        "dnsConfiguration": "Configurazione DNS",
+        "connectDomainSteps": "Per collegare il tuo dominio, segui questi passaggi:",
+        "step1Login": "Accedi al tuo registrar di domini (GoDaddy, Namecheap, ecc.)",
+        "step2Navigate": "Vai alle impostazioni DNS / gestione DNS",
+        "step3AddRecord": "Aggiungi il seguente record A:",
+        "type": "Tipo",
+        "name": "Nome",
+        "value": "Valore",
+        "note": "Nota",
+        "dnsPropagationNote": "La propagazione DNS può richiedere fino a 48 ore",
+        "verifyingDns": "Verifica DNS in corso...",
+        "verifyDnsConfiguration": "Verifica Configurazione DNS",
+        "removeTitle": "Rimuovere Dominio Personalizzato?",
+        "removeDesc1": "Sei sicuro di voler rimuovere ",
+        "removeDesc2": " dal tuo portfolio?",
+        "cancel": "Annulla"
+    },
+    "businessLinks": {
+        "title": "Link Aziendali",
+        "linkTitle": "Titolo",
+        "exampleWebsite": "Il Mio Sito Web",
+        "link": "Link",
+        "exampleUrl": "https://esempio.com",
+        "addLink": "Aggiungi Link",
+        "linkAddedSuccessfully": "Link aggiunto con successo",
+        "failedToAddLink": "Impossibile aggiungere il link",
+        "linkUpdatedSuccessfully": "Link aggiornato con successo",
+        "failedToUpdateLink": "Impossibile aggiornare il link",
+        "linkDeletedSuccessfully": "Link eliminato con successo",
+        "failedToDeleteLink": "Impossibile eliminare il link",
+        "edit": "Modifica",
+        "delete": "Elimina",
+        "noLinksFound": "Nessun link aggiunto ancora.",
+        "deleteLinkConfirm": "Sei sicuro di voler eliminare questo link?",
+        "updateLink": "Aggiorna Link"
+    },
+    "support": {
+        "successMessage": "Messaggio inviato con successo!",
+        "tooManyRequests": "Troppe richieste. Riprova più tardi.",
+        "errorMessage": "Si è verificato un errore. Riprova.",
+        "getInTouch": "Mettiti in Contatto",
+        "weLoveToHear": "Ci piacerebbe sentirti! Inviaci un messaggio e risponderemo il prima possibile.",
+        "contactSupport": "Contatta il Supporto",
+        "email": "Email",
+        "enterEmail": "Inserisci la tua email",
+        "subject": "Oggetto",
+        "enterSubject": "Inserisci l'oggetto",
+        "message": "Messaggio",
+        "enterMessage": "Inserisci il tuo messaggio",
+        "attachment": "Allegato",
+        "uploadImage": "Carica Immagine (Opzionale)",
+        "sending": "Invio...",
+        "sendMessage": "Invia Messaggio"
+    },
+    "success": {
+        "paymentSuccessful": "Pagamento Riuscito!",
+        "subscriptionActive": "Il tuo abbonamento è ora attivo. Grazie per l'acquisto!",
+        "goToHome": "Vai alla Home"
+    },
+    "subscription": {
+        "promoMonthly": {
+            "name": "Promo Mensile",
+            "description": "Offerta promozionale speciale",
+            "period": "/mese"
+        },
+        "promo6Month": {
+            "name": "Promo 6 Mesi",
+            "description": "Ottimo valore per 6 mesi",
+            "period": "/6 mesi"
+        },
+        "promoAnnual": {
+            "name": "Promo Annuale",
+            "description": "Miglior offerta dell'anno",
+            "period": "/anno"
+        },
+        "subMonthly": {
+            "name": "Abbonati Mensilmente",
+            "description": "1$ per il mese",
+            "period": "/mese"
+        },
+        "sub6Months": {
+            "name": "Abbonati 6 Mesi",
+            "description": "Ottima offerta a medio termine",
+            "period": "/6 mesi"
+        },
+        "subYearly": {
+            "name": "Abbonati Annualmente",
+            "description": "Miglior valore",
+            "period": "/anno"
+        },
+        "recommended": "Consigliato",
+        "placeholder": "Codice Promo",
+        "applyBtn": "Applica",
+        "verifyingBtn": "Verifica in corso..."
+    }
+}

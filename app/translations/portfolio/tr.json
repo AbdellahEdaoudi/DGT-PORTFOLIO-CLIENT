@@ -1,0 +1,40 @@
+{
+    "portfolio": "Portföy",
+    "about": "Hakkında",
+    "aboutMe": "Hakkımda",
+    "services": "Hizmetler",
+    "workExperience": "İş Deneyimi",
+    "experience": "Deneyim",
+    "skills": "Yetenekler",
+    "projects": "Projeler",
+    "education": "Eğitim",
+    "certificates": "Sertifikalar",
+    "languages": "Diller",
+    "viewProject": "Projeyi Görüntüle",
+    "field": "Çalışma Alanı",
+    "followMe": "Takip Et",
+    "allRightsReserved": "Tüm hakları saklıdır",
+    "country": "Ülke",
+    "phone": "Telefon",
+    "description": "Açıklama",
+    "helloIm": "Merhaba, ben",
+    "qrcode": {
+        "qrCodeProfile": "QR Kod",
+        "downloadQrCode": "İndir",
+        "shareQrCode": "QR Paylaş",
+        "shareLink": "Bağlantı Paylaş",
+        "copyLink": "Kopyala",
+        "checkOutQrCode": "Bu QR Koduna göz atın!",
+        "sharingFailed": "Paylaşım başarısız",
+        "webShareApiUnsupported": "Tarayıcınız Web Share API'sini desteklemiyor.",
+        "successfulShare": "Başarılı paylaşım",
+        "errorSharing": "Paylaşım hatası",
+        "shareUnsupported": "Bu tarayıcıda paylaşım desteklenmiyor"
+    },
+    "userlinks": {
+        "businessLinks": "İş Bağlantıları",
+        "noBusinessLinks": "Mevcut iş bağlantısı yok.",
+        "close": "Kapat"
+    },
+    "welcometomyworld": "Dünyama hoş geldiniz"
+}

@@ -1,0 +1,113 @@
+{
+    "customDomain": {
+        "enterDomain": "Silakan masukkan domain",
+        "verificationFailed": "Verifikasi gagal",
+        "domainRemovedSuccess": "Domain berhasil dihapus",
+        "errorRemovingDomain": "Gagal menghapus domain",
+        "title": "Domain Kustom",
+        "subtitle": "Hubungkan domain Anda sendiri ke portofolio Anda",
+        "yourDomainName": "Nama Domain Anda",
+        "placeholder": "contoh.com",
+        "save": "Simpan",
+        "domainActiveVerified": "Domain Aktif & Terverifikasi",
+        "verificationPending": "Verifikasi Tertunda",
+        "domainConfigured": "Domain Anda dikonfigurasi dan berfungsi dengan sempurna!",
+        "verifyOwnership": "Harap verifikasi kepemilikan domain dengan mengonfigurasi catatan DNS",
+        "visitSite": "Kunjungi Situs",
+        "removeDomain": "Hapus Domain",
+        "dnsConfiguration": "Konfigurasi DNS",
+        "connectDomainSteps": "Untuk menghubungkan domain Anda, ikuti langkah-langkah ini:",
+        "step1Login": "Masuk ke pendaftar domain Anda (GoDaddy, Namecheap, dll.)",
+        "step2Navigate": "Arahkan ke pengaturan DNS / manajemen DNS",
+        "step3AddRecord": "Tambahkan catatan A berikut:",
+        "type": "Tipe",
+        "name": "Nama",
+        "value": "Nilai",
+        "note": "Catatan",
+        "dnsPropagationNote": "Propagasi DNS dapat memakan waktu hingga 48 jam",
+        "verifyingDns": "Memverifikasi DNS...",
+        "verifyDnsConfiguration": "Verifikasi Konfigurasi DNS",
+        "removeTitle": "Hapus Domain Kustom?",
+        "removeDesc1": "Apakah Anda yakin ingin menghapus ",
+        "removeDesc2": " dari portofolio Anda?",
+        "cancel": "Batal"
+    },
+    "businessLinks": {
+        "title": "Tautan Bisnis",
+        "linkTitle": "Judul",
+        "exampleWebsite": "Situs Web Saya",
+        "link": "Tautan",
+        "exampleUrl": "https://contoh.com",
+        "addLink": "Tambah Tautan",
+        "linkAddedSuccessfully": "Tautan berhasil ditambahkan",
+        "failedToAddLink": "Gagal menambahkan tautan",
+        "linkUpdatedSuccessfully": "Tautan berhasil diperbarui",
+        "failedToUpdateLink": "Gagal memperbarui tautan",
+        "linkDeletedSuccessfully": "Tautan berhasil dihapus",
+        "failedToDeleteLink": "Gagal menghapus tautan",
+        "edit": "Edit",
+        "delete": "Hapus",
+        "noLinksFound": "Belum ada tautan yang ditambahkan.",
+        "deleteLinkConfirm": "Apakah Anda yakin ingin menghapus tautan ini?",
+        "updateLink": "Perbarui Tautan"
+    },
+    "support": {
+        "successMessage": "Pesan berhasil dikirim!",
+        "tooManyRequests": "Terlalu banyak permintaan. Silakan coba lagi nanti.",
+        "errorMessage": "Terjadi kesalahan. Silakan coba lagi.",
+        "getInTouch": "Hubungi Kami",
+        "weLoveToHear": "Kami ingin mendengar dari Anda! Kirimkan pesan kepada kami dan kami akan membalas secepatnya.",
+        "contactSupport": "Hubungi Dukungan",
+        "email": "Email",
+        "enterEmail": "Masukkan email Anda",
+        "subject": "Subjek",
+        "enterSubject": "Masukkan subjek",
+        "message": "Pesan",
+        "enterMessage": "Masukkan pesan Anda",
+        "attachment": "Lampiran",
+        "uploadImage": "Unggah Gambar (Opsional)",
+        "sending": "Mengirim...",
+        "sendMessage": "Kirim Pesan"
+    },
+    "success": {
+        "paymentSuccessful": "Pembayaran Berhasil!",
+        "subscriptionActive": "Langganan Anda sekarang aktif. Terima kasih atas pembelian Anda!",
+        "goToHome": "Ke Beranda"
+    },
+    "subscription": {
+        "promoMonthly": {
+            "name": "Promo Bulanan",
+            "description": "Penawaran promo khusus",
+            "period": "/bulan"
+        },
+        "promo6Month": {
+            "name": "Promo 6 Bulan",
+            "description": "Nilai luar biasa untuk 6 bulan",
+            "period": "/6 bulan"
+        },
+        "promoAnnual": {
+            "name": "Promo Tahunan",
+            "description": "Penawaran terbaik tahun ini",
+            "period": "/tahun"
+        },
+        "subMonthly": {
+            "name": "Berlangganan Bulanan",
+            "description": "$1 untuk sebulan",
+            "period": "/bulan"
+        },
+        "sub6Months": {
+            "name": "Berlangganan 6 Bulan",
+            "description": "Penawaran jangka menengah yang hebat",
+            "period": "/6 bulan"
+        },
+        "subYearly": {
+            "name": "Berlangganan Tahunan",
+            "description": "Nilai terbaik",
+            "period": "/tahun"
+        },
+        "recommended": "Direkomendasikan",
+        "placeholder": "Kode Promo",
+        "applyBtn": "Terapkan",
+        "verifyingBtn": "Memverifikasi..."
+    }
+}

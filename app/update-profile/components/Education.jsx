@@ -3,14 +3,17 @@ import React, { useState } from "react";
 import { toast } from "react-toastify";
 import { createPortal } from "react-dom";
 import { ArrowUp, ArrowDown, CheckCheck, Loader, Plus, Trash2, X, Pencil, AlertCircle } from "../../Components/Icons";
-
-import { useTranslation } from "../../lib/translations";
+import { getTranslation } from '../../translations/update-profile'
 
 export default function Education({ userData, setUserDetails }) {
-  const { t } = useTranslation(userData?.displayLanguage || 'en');
+  const t = getTranslation(userData?.displayLanguage || 'en');
   // Initialize education with collapsed: true for existing items
   const [education, setEducation] = useState(
     (userData.education || []).map(e => ({ ...e, collapsed: true }))
+  );
+  // Track original order for comparison
+  const [originalOrder, setOriginalOrder] = useState(
+    (userData.education || []).filter(e => e._id).map(e => e._id)
   );
   const [loading, setLoading] = useState(false);
   const [savingIds, setSavingIds] = useState(new Set());
@@ -26,7 +29,11 @@ export default function Education({ userData, setUserDetails }) {
 
   const addArrayItem = (array, setArray, newItem) => {
     if (array.length >= 10) return;
+    const newIndex = array.length;
     setArray([...array, { ...newItem, collapsed: false }]);
+    // Highlight the newly added item
+    setHighlightedId(`new-${newIndex}`);
+    setTimeout(() => setHighlightedId(null), 2000);
   };
 
   const updateObjectInArray = (array, setArray, index, key, value) => {
@@ -51,16 +58,28 @@ export default function Education({ userData, setUserDetails }) {
 
   const moveItemUp = (index) => {
     if (index === 0) return;
-    const newEducation = [...education];
-    [newEducation[index - 1], newEducation[index]] = [newEducation[index], newEducation[index - 1]];
-    setEducation(newEducation);
+    const newItems = [...education];
+    const itemToMove = newItems[index];
+    [newItems[index - 1], newItems[index]] = [newItems[index], newItems[index - 1]];
+    setEducation(newItems);
+
+    // Highlight the moved item
+    const targetId = itemToMove._id || `new-${index - 1}`;
+    setHighlightedId(targetId);
+    setTimeout(() => setHighlightedId(null), 1500);
   };
 
   const moveItemDown = (index) => {
     if (index === education.length - 1) return;
-    const newEducation = [...education];
-    [newEducation[index], newEducation[index + 1]] = [newEducation[index + 1], newEducation[index]];
-    setEducation(newEducation);
+    const newItems = [...education];
+    const itemToMove = newItems[index];
+    [newItems[index], newItems[index + 1]] = [newItems[index + 1], newItems[index]];
+    setEducation(newItems);
+
+    // Highlight the moved item
+    const targetId = itemToMove._id || `new-${index + 1}`;
+    setHighlightedId(targetId);
+    setTimeout(() => setHighlightedId(null), 1500);
   };
 
   // 🟢 Save Single Education Item
@@ -93,7 +112,7 @@ export default function Education({ userData, setUserDetails }) {
         setUserDetails(prev => ({ ...prev, education: newEducationList }));
       }
 
-      toast.success(t('savedSuccessfully'));
+      toast.success(t('education.savedSuccessfully'));
       setValidationErrors(prev => {
         const next = { ...prev };
         delete next[index];
@@ -109,7 +128,7 @@ export default function Education({ userData, setUserDetails }) {
 
     } catch (error) {
       console.error("Error saving education:", error);
-      toast.error(t('errorMessage'));
+      toast.error(t('education.errorMessage'));
     } finally {
       setSavingIds(prev => {
         const next = new Set(prev);
@@ -142,10 +161,10 @@ export default function Education({ userData, setUserDetails }) {
       if (setUserDetails) {
         setUserDetails(prev => ({ ...prev, education: newEducationList }));
       }
-      toast.success(t('deletedSuccessfully') || "Deleted successfully");
+      toast.success(t('education.deletedSuccessfully') || "Deleted successfully");
     } catch (error) {
       console.error("Error deleting education:", error);
-      toast.error(t('errorMessage'));
+      toast.error(t('education.errorMessage'));
     } finally {
       setDeletingIds(prev => {
         const next = new Set(prev);
@@ -162,7 +181,7 @@ export default function Education({ userData, setUserDetails }) {
       const educationWithIds = education.filter(e => e._id).map(e => ({ _id: e._id }));
 
       if (educationWithIds.length !== education.length) {
-        toast.warning(t('saveNewItemsFirst') || "Please save new items first");
+        toast.warning(t('education.saveNewItemsFirst') || "Please save new items first");
         setLoading(false);
         return;
       }
@@ -177,15 +196,19 @@ export default function Education({ userData, setUserDetails }) {
         }));
       }
 
+      // Update original order after successful save
+      const newOrder = education.filter(e => e._id).map(e => e._id);
+      setOriginalOrder(newOrder);
+
       toast(
         <p className="flex gap-3 items-center">
-          <CheckCheck className="text-blue-500" /> {t('orderSaved') || "Order saved"}
+          <CheckCheck className="text-blue-500" /> {t('education.orderSaved') || "Order saved"}
         </p>,
         { autoClose: 2000 }
       );
     } catch (error) {
       console.error("Error updating order:", error);
-      toast.error(t('errorMessage'));
+      toast.error(t('education.errorMessage'));
     } finally {
       setLoading(false);
     }
@@ -193,17 +216,17 @@ export default function Education({ userData, setUserDetails }) {
 
   return (
     <div className="space-y-4" dir={userData?.displayLanguage === 'ar' ? 'rtl' : 'ltr'}>
-      <h3 className="text-lg font-bold text-gray-800">🎓 {t('education')}</h3>
+      <h3 className="text-lg font-bold text-gray-800">🎓 {t('education.title')}</h3>
 
       <div className="bg-gradient-to-br from-blue-50 to-purple-50 p-2 md:p-4 rounded-xl border border-blue-200 space-y-3">
         <div className="space-y-2">
           {education.map((edu, index) => (
             <div
               key={edu._id || index}
-              className={`bg-white pb-1 border rounded-xl shadow-sm hover:shadow-md transition-all duration-300 overflow-hidden ${deletingIds.has(edu._id) ? 'opacity-60 grayscale pointer-events-none ring-2 ring-red-100 border-red-200 scale-[0.99]' :
-                  validationErrors[index] ? 'border-red-300 ring-1 ring-red-200' :
-                    highlightedId === edu._id ? 'border-blue-500 ring-2 ring-blue-200 shadow-blue-100' :
-                      'border-gray-200'
+              className={`bg-white pb-1 border rounded-xl shadow-sm hover:shadow-md transition-all duration-500 overflow-hidden ${deletingIds.has(edu._id) ? 'opacity-60 grayscale pointer-events-none ring-2 ring-red-100 border-red-200 scale-[0.99]' :
+                validationErrors[index] ? 'border-red-300 ring-1 ring-red-200' :
+                  (highlightedId === edu._id || highlightedId === `new-${index}`) ? 'border-blue-400 bg-blue-50/50 shadow-md scale-[1.01]' :
+                    'border-gray-200'
                 }`}
             >
               {/* Collapsible Header with Editable School */}
@@ -211,7 +234,7 @@ export default function Education({ userData, setUserDetails }) {
                 <div className="flex-grow">
                   <input
                     type="text"
-                    placeholder={t('school')}
+                    placeholder={t('education.school')}
                     value={edu.school}
                     maxLength={100}
                     onChange={(e) =>
@@ -222,7 +245,7 @@ export default function Education({ userData, setUserDetails }) {
                   {validationErrors[index]?.school && (
                     <p className="text-red-500 text-xs mt-1.5 flex items-center gap-1.5 font-medium animate-in slide-in-from-top-1">
                       <AlertCircle size={14} />
-                      {t('schoolRequired') || "School is required"}
+                      {t('education.schoolRequired') || "School is required"}
                     </p>
                   )}
                 </div>
@@ -232,10 +255,10 @@ export default function Education({ userData, setUserDetails }) {
                     type="button"
                     onClick={() => toggleCollapse(index)}
                     className={`p-2 rounded-lg transition-colors flex items-center gap-2 text-sm font-medium ${edu.collapsed ? 'bg-blue-50 text-blue-700 hover:bg-blue-100' : 'bg-gray-100 text-gray-700 hover:bg-gray-200'}`}
-                    title={edu.collapsed ? t('edit') : t('collapse') || "Collapse"}
+                    title={edu.collapsed ? t('education.edit') : t('education.collapse') || "Collapse"}
                   >
                     {edu.collapsed ? <Pencil size={16} /> : <X size={16} />}
-                    <span className="hidden md:inline">{edu.collapsed ? t('edit') : (t('close') || "Close")}</span>
+                    <span className="hidden md:inline">{edu.collapsed ? t('education.edit') : (t('education.close') || "Close")}</span>
                   </button>
 
                   <div className="w-px h-6 bg-gray-200 mx-1"></div>
@@ -245,7 +268,7 @@ export default function Education({ userData, setUserDetails }) {
                     onClick={() => moveItemUp(index)}
                     disabled={index === 0}
                     className="p-1.5 hover:bg-gray-200 rounded-lg transition-colors disabled:opacity-30 disabled:cursor-not-allowed"
-                    title={t('moveUp') || "Move Up"}
+                    title={t('education.moveUp') || "Move Up"}
                   >
                     <ArrowUp size={16} className="text-gray-600" />
                   </button>
@@ -254,7 +277,7 @@ export default function Education({ userData, setUserDetails }) {
                     onClick={() => moveItemDown(index)}
                     disabled={index === education.length - 1}
                     className="p-1.5 hover:bg-gray-200 rounded-lg transition-colors disabled:opacity-30 disabled:cursor-not-allowed"
-                    title={t('moveDown') || "Move Down"}
+                    title={t('education.moveDown') || "Move Down"}
                   >
                     <ArrowDown size={16} className="text-gray-600" />
                   </button>
@@ -262,7 +285,7 @@ export default function Education({ userData, setUserDetails }) {
                     type="button"
                     onClick={() => setItemToDelete(index)}
                     className="p-1.5 hover:bg-red-100 rounded-lg transition-colors text-red-500 ml-1"
-                    title={t('delete')}
+                    title={t('education.delete')}
                     disabled={deletingIds.has(edu._id)}
                   >
                     {deletingIds.has(edu._id) ? <Loader size={16} className="animate-spin" /> : <Trash2 size={16} />}
@@ -275,7 +298,7 @@ export default function Education({ userData, setUserDetails }) {
                   <div>
                     <input
                       type="text"
-                      placeholder={t('degree')}
+                      placeholder={t('education.degree')}
                       value={edu.degree || ""}
                       maxLength={100}
                       onChange={(e) =>
@@ -286,14 +309,14 @@ export default function Education({ userData, setUserDetails }) {
                     {validationErrors[index]?.degree && (
                       <p className="text-red-500 text-xs mt-1.5 flex items-center gap-1.5 font-medium animate-in slide-in-from-top-1">
                         <AlertCircle size={14} />
-                        {t('degreeRequired') || "Degree is required"}
+                        {t('education.degreeRequired') || "Degree is required"}
                       </p>
                     )}
                   </div>
 
                   <input
                     type="text"
-                    placeholder={t('field')}
+                    placeholder={t('education.field')}
                     value={edu.field || ""}
                     maxLength={100}
                     onChange={(e) =>
@@ -305,7 +328,7 @@ export default function Education({ userData, setUserDetails }) {
                   <div className="grid grid-cols-2 gap-2">
                     <input
                       type="text"
-                      placeholder={t('startYear')}
+                      placeholder={t('education.startYear')}
                       value={edu.startYear || ""}
                       maxLength={20}
                       onChange={(e) =>
@@ -315,7 +338,7 @@ export default function Education({ userData, setUserDetails }) {
                     />
                     <input
                       type="text"
-                      placeholder={t('endYear')}
+                      placeholder={t('education.endYear')}
                       maxLength={20}
                       value={edu.endYear || ""}
                       onChange={(e) =>
@@ -333,7 +356,7 @@ export default function Education({ userData, setUserDetails }) {
                       className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg text-sm font-medium flex items-center gap-2 transition-colors disabled:opacity-50"
                     >
                       {savingIds.has(index) ? <Loader size={12} className="animate-spin" /> : <CheckCheck size={16} />}
-                      {t('save') || "Save"}
+                      {t('education.save') || "Save"}
                     </button>
                   </div>
                 </div>
@@ -359,25 +382,31 @@ export default function Education({ userData, setUserDetails }) {
           }}
           className={`w-full text-white py-2 rounded-lg flex items-center justify-center gap-2 transition-all duration-300 mt-2 ${education.length >= 10 ? 'bg-gray-400 cursor-not-allowed' : 'bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700'}`}
         >
-          <Plus size={18} /> {education.length >= 10 ? "10 Max" : t('addEducation')}
+          <Plus size={18} /> {education.length >= 10 ? "10 Max" : t('education.addEducation')}
         </button>
       </div>
 
-      <div className="flex justify-end py-4 border-b-2 border-gray-200">
-        <button
-          onClick={saveOrder}
-          disabled={loading}
-          className="bg-gray-800 hover:bg-gray-900 disabled:opacity-50 text-white font-bold px-8 py-3 rounded-lg transition-all duration-300 flex items-center gap-2 transform hover:scale-105 shadow-lg"
-        >
-          {loading ? (
-            <>
-              <Loader size={20} className="animate-spin" /> {t('saving')}
-            </>
-          ) : (
-            `💾 ${t('saveOrder') || "Save Order"}`
-          )}
-        </button>
-      </div>
+      {/* Only show Save Order button if there are 2+ items */}
+      {education.filter(e => e._id).length >= 2 && (
+        <div className="flex justify-end py-4 border-b-2 border-gray-200">
+          <button
+            onClick={saveOrder}
+            disabled={loading || (() => {
+              const currentOrder = education.filter(e => e._id).map(e => e._id);
+              return JSON.stringify(currentOrder) === JSON.stringify(originalOrder);
+            })()}
+            className="bg-gray-800 hover:bg-gray-900 disabled:opacity-50 disabled:cursor-not-allowed text-white font-bold px-8 py-3 rounded-lg transition-all duration-300 flex items-center gap-2 transform hover:scale-105 shadow-lg"
+          >
+            {loading ? (
+              <>
+                <Loader size={20} className="animate-spin" /> {t('education.saving')}
+              </>
+            ) : (
+              `💾 ${t('education.saveOrder') || "Save Order"}`
+            )}
+          </button>
+        </div>
+      )}
 
       {/* Professional Delete Modal with Portal - Inlined */}
       {mounted && itemToDelete !== null && createPortal(
@@ -402,7 +431,7 @@ export default function Education({ userData, setUserDetails }) {
               <div className="text-gray-600 mb-6 text-base leading-relaxed">
                 <div className="flex flex-col gap-2">
                   <span className="font-semibold text-gray-800">Are you sure you want to delete this education?</span>
-                  <span className="font-bold text-black border-t pt-2 mt-1 break-all">"{education[itemToDelete]?.school || t('thisEducation') || "this education"}"</span>
+                  <span className="font-bold text-black border-t pt-2 mt-1 break-all">"{education[itemToDelete]?.school || t('education.thisEducation') || "this education"}"</span>
                 </div>
               </div>
             </div>
@@ -412,14 +441,14 @@ export default function Education({ userData, setUserDetails }) {
                 onClick={() => setItemToDelete(null)}
                 className="flex-1 px-4 py-2.5 bg-gray-200 hover:bg-gray-300 text-gray-800 font-bold rounded-lg transition-all duration-200"
               >
-                {t('cancel') || "Cancel"}
+                {t('education.cancel') || "Cancel"}
               </button>
               <button
                 onClick={confirmDelete}
                 className="flex-1 px-4 py-2.5 bg-red-600 hover:bg-red-700 text-white font-medium rounded-lg shadow-md transition duration-200 flex items-center justify-center gap-2"
               >
                 <Trash2 size={18} />
-                <span>{t('delete') || "Delete"}</span>
+                <span>{t('education.delete') || "Delete"}</span>
               </button>
             </div>
           </div>

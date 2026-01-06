@@ -1,0 +1,113 @@
+{
+    "customDomain": {
+        "enterDomain": "도메인을 입력하십시오",
+        "verificationFailed": "확인 실패",
+        "domainRemovedSuccess": "도메인이 성공적으로 제거되었습니다",
+        "errorRemovingDomain": "도메인 제거 중 오류 발생",
+        "title": "사용자 지정 도메인",
+        "subtitle": "자신의 도메인을 포트폴리오에 연결하십시오",
+        "yourDomainName": "도메인 이름",
+        "placeholder": "example.com",
+        "save": "저장",
+        "domainActiveVerified": "도메인 활성 및 확인됨",
+        "verificationPending": "확인 대기 중",
+        "domainConfigured": "도메인이 구성되어 완벽하게 작동합니다!",
+        "verifyOwnership": "DNS 레코드를 구성하여 도메인 소유권을 확인하십시오",
+        "visitSite": "사이트 방문",
+        "removeDomain": "도메인 제거",
+        "dnsConfiguration": "DNS 구성",
+        "connectDomainSteps": "도메인을 연결하려면 다음 단계를 따르십시오:",
+        "step1Login": "도메인 등록 대행업체(GoDaddy, Namecheap 등)에 로그인하십시오",
+        "step2Navigate": "DNS 설정 / DNS 관리로 이동하십시오",
+        "step3AddRecord": "다음 A 레코드를 추가하십시오:",
+        "type": "유형",
+        "name": "이름",
+        "value": "값",
+        "note": "참고",
+        "dnsPropagationNote": "DNS 전파에는 최대 48시간이 걸릴 수 있습니다",
+        "verifyingDns": "DNS 확인 중...",
+        "verifyDnsConfiguration": "DNS 구성 확인",
+        "removeTitle": "사용자 지정 도메인을 제거하시겠습니까?",
+        "removeDesc1": "포트폴리오에서 ",
+        "removeDesc2": "을(를) 제거하시겠습니까?",
+        "cancel": "취소"
+    },
+    "businessLinks": {
+        "title": "비즈니스 링크",
+        "linkTitle": "제목",
+        "exampleWebsite": "내 웹사이트",
+        "link": "링크",
+        "exampleUrl": "https://example.com",
+        "addLink": "링크 추가",
+        "linkAddedSuccessfully": "링크가 성공적으로 추가되었습니다",
+        "failedToAddLink": "링크 추가 실패",
+        "linkUpdatedSuccessfully": "링크가 성공적으로 업데이트되었습니다",
+        "failedToUpdateLink": "링크 업데이트 실패",
+        "linkDeletedSuccessfully": "링크가 성공적으로 삭제되었습니다",
+        "failedToDeleteLink": "링크 삭제 실패",
+        "edit": "편집",
+        "delete": "삭제",
+        "noLinksFound": "아직 링크가 추가되지 않았습니다.",
+        "deleteLinkConfirm": "이 링크를 삭제하시겠습니까?",
+        "updateLink": "링크 업데이트"
+    },
+    "support": {
+        "successMessage": "메시지가 성공적으로 전송되었습니다!",
+        "tooManyRequests": "요청이 너무 많습니다. 나중에 다시 시도해 주십시오.",
+        "errorMessage": "오류가 발생했습니다. 다시 시도해 주십시오.",
+        "getInTouch": "연락하기",
+        "weLoveToHear": "여러분의 의견을 듣고 싶습니다! 메시지를 보내주시면 가능한 한 빨리 답변해 드리겠습니다.",
+        "contactSupport": "지원팀에 문의",
+        "email": "이메일",
+        "enterEmail": "이메일 입력",
+        "subject": "제목",
+        "enterSubject": "제목 입력",
+        "message": "메시지",
+        "enterMessage": "메시지 입력",
+        "attachment": "첨부 파일",
+        "uploadImage": "이미지 업로드 (선택 사항)",
+        "sending": "전송 중...",
+        "sendMessage": "메시지 보내기"
+    },
+    "success": {
+        "paymentSuccessful": "결제 성공!",
+        "subscriptionActive": "구독이 지금 활성화되었습니다. 구매해 주셔서 감사합니다!",
+        "goToHome": "홈으로 이동"
+    },
+    "subscription": {
+        "promoMonthly": {
+            "name": "프로모 월간",
+            "description": "특별 프로모션 혜택",
+            "period": "/월"
+        },
+        "promo6Month": {
+            "name": "프로모 6개월",
+            "description": "6개월 동안 훌륭한 가치",
+            "period": "/6개월"
+        },
+        "promoAnnual": {
+            "name": "프로모 연간",
+            "description": "올해 최고의 딜",
+            "period": "/년"
+        },
+        "subMonthly": {
+            "name": "월간 구독",
+            "description": "월 $1",
+            "period": "/월"
+        },
+        "sub6Months": {
+            "name": "6개월 구독",
+            "description": "훌륭한 중기 제안",
+            "period": "/6개월"
+        },
+        "subYearly": {
+            "name": "연간 구독",
+            "description": "최고의 가치",
+            "period": "/년"
+        },
+        "recommended": "추천",
+        "placeholder": "프로모션 코드",
+        "applyBtn": "적용",
+        "verifyingBtn": "확인 중..."
+    }
+}

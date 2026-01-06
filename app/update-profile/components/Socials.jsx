@@ -4,11 +4,10 @@ import { toast } from "react-toastify";
 import { CheckCheck, Loader } from "../../Components/Icons";
 import axios from "axios";
 import Image from "next/image";
-
-import { useTranslation } from "../../lib/translations";
+import { getTranslation } from '../../translations/update-profile'
 
 export default function Socials({ userData, setUserDetails }) {
-  const { t } = useTranslation(userData?.displayLanguage || 'en');
+  const t = getTranslation(userData?.displayLanguage || 'en');
   const user = userData || {};
   const [socials, setSocials] = useState(user.socials || {});
   const socialIcons = {
@@ -43,13 +42,13 @@ export default function Socials({ userData, setUserDetails }) {
 
       toast(
         <p className="flex gap-3 items-center">
-          <CheckCheck className="text-teal-500" /> {t('savedSuccessfully')}
+          <CheckCheck className="text-teal-500" /> {t('socials.savedSuccessfully')}
         </p>,
         { autoClose: 2000 }
       );
     } catch (error) {
       console.error("Error updating socials:", error);
-      toast.error(t('errorMessage'));
+      toast.error(t('socials.errorMessage'));
     } finally {
       setLoading(false);
     }
@@ -63,7 +62,7 @@ export default function Socials({ userData, setUserDetails }) {
         {/* Header Section */}
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
           <h3 className="text-lg font-bold text-gray-800 flex items-center gap-2">
-            🔗 {t('socialMediaLinks')}
+            🔗 {t('socials.title')}
           </h3>
         </div>
 
@@ -80,7 +79,7 @@ export default function Socials({ userData, setUserDetails }) {
                 value={socials[key] || ""}
                 maxLength={500}
                 onChange={(e) => setSocials({ ...socials, [key]: e.target.value })}
-                placeholder={`${t('enterUrl')} (${key})`}
+                placeholder={`${t('socials.enterUrl')} (${key})`}
                 className="w-full bg-gray-50 text-gray-800 font-medium text-[10px] md:text-sm rounded md:rounded-lg px-2 py-1 md:px-3 md:py-2 outline-none border border-gray-300 focus:bg-white focus:border-teal-500 transition-all placeholder-gray-400"
               />
             </div>
@@ -100,11 +99,11 @@ export default function Socials({ userData, setUserDetails }) {
           >
             {loading ? (
               <>
-                <Loader size={14} className="animate-spin md:w-[18px] md:h-[18px]" /> {t('saving')}...
+                <Loader size={14} className="animate-spin md:w-[18px] md:h-[18px]" /> {t('socials.saving')}...
               </>
             ) : (
               <>
-                💾 {t('save')}
+                💾 {t('socials.save')}
               </>
             )}
           </button>

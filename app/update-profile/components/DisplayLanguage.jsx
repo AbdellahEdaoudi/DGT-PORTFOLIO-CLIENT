@@ -1,15 +1,15 @@
 "use client"
+import 'flag-icons/css/flag-icons.min.css'
 import axios from 'axios'
 import { CheckCheck, Loader, Globe } from '../../Components/Icons'
 import React, { useState } from 'react'
 import { toast } from 'react-toastify'
-import { useTranslation } from '../../lib/translations'
+import { getTranslation } from '../../translations/update-profile'
 
-import 'flag-icons/css/flag-icons.min.css'
 
 function DisplayLanguage({ userData, setUserDetails }) {
-    const { t } = useTranslation(userData?.displayLanguage || 'en');
     const [displayLanguage, setDisplayLanguage] = useState(userData?.displayLanguage || "en")
+    const t = getTranslation(displayLanguage || 'en');
     const [loading, setLoading] = useState(false)
 
     const handleSave = async (e) => {
@@ -19,7 +19,7 @@ function DisplayLanguage({ userData, setUserDetails }) {
         try {
             await axios.put(`/api/proxy/users/update/display-language`, { displayLanguage })
             toast(<p className='flex gap-3 items-center'><CheckCheck className="text-teal-500" />
-                {t('savedSuccessfully')}
+                {t('userInfo.savedSuccessfully')}
             </p>, {
                 autoClose: 2000,
             })
@@ -34,47 +34,7 @@ function DisplayLanguage({ userData, setUserDetails }) {
             setLoading(false)
         }
     }
-    const translations = {
-        title: {
-            en: "Display Language",
-            fr: "Langue d'affichage",
-            es: "Idioma de visualización",
-            ar: "لغة العرض",
-            de: "Anzeigesprache",
-            ru: "Язык отображения",
-            ja: "表示言語",
-            zh: "显示语言",
-            nl: "Weergavetaal",
-            pt: "Idioma de Exibição",
-            it: "Lingua di Visualizzazione",
-            hi: "प्रदर्शन भाषा",
-            tr: "Görüntüleme Dili",
-            ko: "표시 언어",
-            id: "Bahasa Tampilan",
-            pl: "Język wyświetlania",
-        },
-        description: {
-            en: "Choose the language in which your portfolio will be displayed to visitors.",
-            fr: "Choisissez la langue dans laquelle votre portfolio sera affiché aux visiteurs.",
-            es: "Elige el idioma en el que se mostrará tu portafolio a los visitantes.",
-            ar: "اختر اللغة التي سيتم بها عرض محفظتك للزوار.",
-            de: "Wählen Sie die Sprache, in der Ihr Portfolio Besuchern angezeigt werden soll.",
-            ru: "Выберите язык, на котором ваше портфолио будет отображаться посетителям.",
-            ja: "訪問者にポートフォリオが表示される言語を選択してください。",
-            zh: "选择您的作品集向访问者显示的语言。",
-            nl: "Kies de taal waarin uw portfolio aan bezoekers wordt getoond.",
-            pt: "Escolha o idioma em que seu portfólio será exibido aos visitantes.",
-            it: "Scegli la lingua in cui il tuo portfolio verrà mostrato ai visitatori.",
-            hi: "वह भाषा चुनें जिसमें आपका पोर्टफोलियो आगंतुकों को दिखाया जाएगा।",
-            tr: "Portföyünüzün ziyaretçilere gösterileceği dili seçin.",
-            ko: "방문자에게 포트폴리오가 표시될 언어를 선택하세요.",
-            id: "Pilih bahasa di mana portofolio Anda akan ditampilkan kepada pengunjung.",
-            pl: "Wybierz język, w którym Twoje portfolio będzie wyświetlane odwiedzającym.",
-        },
-    }
-    const currentLanguage = displayLanguage;
-    const translatedTitle = translations.title[currentLanguage] || translations.title.en;
-    const translatedDescription = translations.description[currentLanguage] || translations.description.en;
+
 
     const languages = [
         { value: "en", label: "English", description: "Display portfolio in English", flag: "gb" },
@@ -109,10 +69,10 @@ function DisplayLanguage({ userData, setUserDetails }) {
                         </div>
                         <div className="space-y-1">
                             <h2 className="text-lg font-bold text-gray-800">
-                                {translatedTitle}
+                                {t('displayLanguage.title')}
                             </h2>
                             <p className="text-gray-500 text-xs md:text-sm max-w-2xl">
-                                {translatedDescription}
+                                {t('displayLanguage.description')}
                             </p>
                         </div>
                     </div>
@@ -131,12 +91,12 @@ function DisplayLanguage({ userData, setUserDetails }) {
                         {loading ? (
                             <>
                                 <Loader size={20} className="animate-spin" />
-                                <span>{t('saving')}</span>
+                                <span>{t('displayLanguage.saving')}</span>
                             </>
                         ) : (
                             <>
                                 <CheckCheck size={20} />
-                                <span>{t('save')}</span>
+                                <span>{t('displayLanguage.save')}</span>
                             </>
                         )}
                     </button>
@@ -214,12 +174,12 @@ function DisplayLanguage({ userData, setUserDetails }) {
                         {loading ? (
                             <>
                                 <Loader size={20} className="animate-spin" />
-                                <span>{t('saving')}</span>
+                                <span>{t('displayLanguage.saving')}</span>
                             </>
                         ) : (
                             <>
                                 <CheckCheck size={20} />
-                                <span>{t('save')}</span>
+                                <span>{t('displayLanguage.save')}</span>
                             </>
                         )}
                     </button>

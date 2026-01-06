@@ -1,16 +1,16 @@
 "use client"
 import { useState, useEffect, useMemo } from "react"
 import { Zap, Mail, Briefcase, GraduationCap, Loader, FileDown, Globe, Award, Menu, X, ArrowUp, Wrench, Lightbulb, FolderOpen, Sparkles } from "../Icons"
-import UserLinks from "../../[username]/components/UserLinks"
-import QrcodeProfile from "../../[username]/components/QrcodeProfile"
+import UserLinks from "../portfolio/UserLinks"
+import QrcodeProfile from "../portfolio/QrcodeProfile"
 import Image from "next/image"
 import Link from "next/link"
-import { useTranslation } from "../../lib/translations"
-import ImageModal from "../ImageModal"
+import { getTranslation } from "../../translations/portfolio"
+import ImageModal from "../portfolio/ImageModal"
 import DownloadResume from "../downloadcv/DownloadResume"
 
 export default function ThemeFive({ userDetails, userLinks }) {
-  const { t } = useTranslation(userDetails?.displayLanguage || 'en')
+  const t = getTranslation(userDetails?.displayLanguage || 'en')
   const [showQR, setShowQR] = useState(false)
   const [showUserLinks, setShowUserLinks] = useState(false)
   const [expanded, setExpanded] = useState(false);

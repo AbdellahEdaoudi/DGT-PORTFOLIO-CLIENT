@@ -1,0 +1,40 @@
+{
+    "portfolio": "Portfolio",
+    "about": "Informazioni",
+    "aboutMe": "Su di me",
+    "services": "Servizi",
+    "workExperience": "Esperienza lavorativa",
+    "experience": "Esperienza",
+    "skills": "Competenze",
+    "projects": "Progetti",
+    "education": "Istruzione",
+    "certificates": "Certificati",
+    "languages": "Lingue",
+    "viewProject": "Visualizza progetto",
+    "field": "Campo di studio",
+    "followMe": "Seguimi",
+    "allRightsReserved": "Tutti i diritti riservati",
+    "country": "Paese",
+    "phone": "Telefono",
+    "description": "Descrizione",
+    "helloIm": "Ciao, sono",
+    "qrcode": {
+        "qrCodeProfile": "Codice QR",
+        "downloadQrCode": "Scarica",
+        "shareQrCode": "Condividi QR",
+        "shareLink": "Condividi Link",
+        "copyLink": "Copia Link",
+        "checkOutQrCode": "Dai un'occhiata a questo Codice QR!",
+        "sharingFailed": "Condivizione fallita",
+        "webShareApiUnsupported": "Il tuo browser non supporta la Web Share API.",
+        "successfulShare": "Condivisione riuscita",
+        "errorSharing": "Errore durante la condivisione",
+        "shareUnsupported": "Condivisione non supportata su questo browser"
+    },
+    "userlinks": {
+        "businessLinks": "Link Aziendali",
+        "noBusinessLinks": "Nessun link aziendale disponibile.",
+        "close": "Chiudi"
+    },
+    "welcometomyworld": "Benvenuto nel mio mondo"
+}

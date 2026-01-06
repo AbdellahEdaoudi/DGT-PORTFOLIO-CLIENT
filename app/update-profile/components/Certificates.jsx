@@ -4,15 +4,18 @@ import React, { useState } from "react";
 import { toast } from "react-toastify";
 import { createPortal } from "react-dom";
 import { ArrowUp, ArrowDown, CheckCheck, Loader, Plus, Trash2, X, Pencil, AlertCircle, Upload, Award } from "../../Components/Icons";
-import ImageModal from "../../Components/ImageModal";
-
-import { useTranslation } from "../../lib/translations";
+import ImageModal from "../../Components/portfolio/ImageModal";
+import { getTranslation } from '../../translations/update-profile'
 
 export default function Certificates({ userData, setUserDetails }) {
-    const { t } = useTranslation(userData?.displayLanguage || 'en');
+    const t = getTranslation(userData?.displayLanguage || 'en');
     // Initialize with collapsed: true
     const [certificates, setCertificates] = useState(
         (userData.certificates || []).map(e => ({ ...e, collapsed: true }))
+    );
+    // Track original order for comparison
+    const [originalOrder, setOriginalOrder] = useState(
+        (userData.certificates || []).filter(c => c._id).map(c => c._id)
     );
     const [savingIds, setSavingIds] = useState(new Set());
     const [deletingIds, setDeletingIds] = useState(new Set());
@@ -64,8 +67,12 @@ export default function Certificates({ userData, setUserDetails }) {
     };
 
     const addArrayItem = (array, setArray, newItem) => {
-        if (array.length >= 5) return;
+        if (array.length >= 10) return;
+        const newIndex = array.length;
         setArray([...array, { ...newItem, collapsed: false }]);
+        // Subtle highlight for the newly added item
+        setHighlightedId(`new-${newIndex}`);
+        setTimeout(() => setHighlightedId(null), 2000);
     };
 
     const updateObjectInArray = (array, setArray, index, key, value) => {
@@ -84,7 +91,7 @@ export default function Certificates({ userData, setUserDetails }) {
     const updateFileInArray = async (index, file) => {
         if (!file) return;
         if (file.size > 5 * 1024 * 1024) {
-            toast.error(t('fileSizeError') || "File is too large");
+            toast.error(t('certificates.fileSizeError') || "File is too large");
             return;
         }
         try {
@@ -130,16 +137,28 @@ export default function Certificates({ userData, setUserDetails }) {
 
     const moveItemUp = (index) => {
         if (index === 0) return;
-        const newCert = [...certificates];
-        [newCert[index - 1], newCert[index]] = [newCert[index], newCert[index - 1]];
-        setCertificates(newCert);
+        const newItems = [...certificates];
+        const itemToMove = newItems[index];
+        [newItems[index - 1], newItems[index]] = [newItems[index], newItems[index - 1]];
+        setCertificates(newItems);
+
+        // Subtle highlight for the moved item
+        const targetId = itemToMove._id || `new-${index - 1}`;
+        setHighlightedId(targetId);
+        setTimeout(() => setHighlightedId(null), 1500);
     };
 
     const moveItemDown = (index) => {
         if (index === certificates.length - 1) return;
-        const newCert = [...certificates];
-        [newCert[index], newCert[index + 1]] = [newCert[index + 1], newCert[index]];
-        setCertificates(newCert);
+        const newItems = [...certificates];
+        const itemToMove = newItems[index];
+        [newItems[index], newItems[index + 1]] = [newItems[index + 1], newItems[index]];
+        setCertificates(newItems);
+
+        // Subtle highlight for the moved item
+        const targetId = itemToMove._id || `new-${index + 1}`;
+        setHighlightedId(targetId);
+        setTimeout(() => setHighlightedId(null), 1500);
     };
 
     // 🟢 Save Single Certificate
@@ -192,7 +211,7 @@ export default function Certificates({ userData, setUserDetails }) {
                 setUserDetails(prev => ({ ...prev, certificates: newCertList }));
             }
 
-            toast.success(t('savedSuccessfully'));
+            toast.success(t('certificates.savedSuccessfully'));
             setValidationErrors(prev => {
                 const next = { ...prev };
                 delete next[index];
@@ -207,7 +226,7 @@ export default function Certificates({ userData, setUserDetails }) {
 
         } catch (error) {
             console.error("Error saving certificate:", error);
-            toast.error(t('errorMessage'));
+            toast.error(t('certificates.errorMessage'));
         } finally {
             setSavingIds(prev => {
                 const next = new Set(prev);
@@ -238,10 +257,10 @@ export default function Certificates({ userData, setUserDetails }) {
             if (setUserDetails) {
                 setUserDetails(prev => ({ ...prev, certificates: newCertList }));
             }
-            toast.success(t('deletedSuccessfully') || "Deleted successfully");
+            toast.success(t('certificates.deletedSuccessfully') || "Deleted successfully");
         } catch (error) {
             console.error("Error deleting certificate:", error);
-            toast.error(t('errorMessage'));
+            toast.error(t('certificates.errorMessage'));
         } finally {
             setDeletingIds(prev => {
                 const next = new Set(prev);
@@ -257,7 +276,7 @@ export default function Certificates({ userData, setUserDetails }) {
         try {
             const certificatesWithIds = certificates.filter(e => e._id).map(e => ({ _id: e._id }));
             if (certificatesWithIds.length !== certificates.length) {
-                toast.warning(t('saveNewItemsFirst') || "Please save new items first");
+                toast.warning(t('certificates.saveNewItemsFirst') || "Please save new items first");
                 setLoading(false);
                 return;
             }
@@ -271,15 +290,19 @@ export default function Certificates({ userData, setUserDetails }) {
                 }));
             }
 
+            // Update original order after successful save
+            const newOrder = certificates.filter(c => c._id).map(c => c._id);
+            setOriginalOrder(newOrder);
+
             toast(
                 <p className="flex gap-3 items-center">
-                    <CheckCheck className="text-blue-500" /> {t('orderSaved') || "Order saved"}
+                    <CheckCheck className="text-blue-500" /> {t('certificates.orderSaved') || "Order saved"}
                 </p>,
                 { autoClose: 2000 }
             );
         } catch (error) {
             console.error("Error updating order:", error);
-            toast.error(t('errorMessage'));
+            toast.error(t('certificates.errorMessage'));
         } finally {
             setLoading(false);
         }
@@ -288,7 +311,7 @@ export default function Certificates({ userData, setUserDetails }) {
     return (
         <div className="space-y-4" dir={userData?.displayLanguage === 'ar' ? 'rtl' : 'ltr'}>
             <h3 className="text-lg font-bold text-gray-800 flex items-center gap-2">
-                <Award className="text-blue-500" /> {t('certificates') || "Certificates"}
+                <Award className="text-blue-500" /> {t('certificates.title') || "Certificates"}
             </h3>
 
             <div className="bg-gradient-to-br from-blue-50 to-indigo-50 p-2 md:p-4 rounded-xl border border-blue-200 space-y-3">
@@ -296,10 +319,10 @@ export default function Certificates({ userData, setUserDetails }) {
                     {certificates.map((cert, index) => (
                         <div
                             key={cert._id || index}
-                            className={`bg-white pb-1 border rounded-xl shadow-sm hover:shadow-md transition-all duration-300 overflow-hidden ${deletingIds.has(cert._id) ? 'opacity-60 grayscale pointer-events-none ring-2 ring-red-100 border-red-200 scale-[0.99]' :
-                                    validationErrors[index] ? 'border-red-300 ring-1 ring-red-200' :
-                                        highlightedId === cert._id ? 'border-blue-500 ring-2 ring-blue-200 shadow-blue-100' :
-                                            'border-gray-200'
+                            className={`bg-white pb-1 border rounded-xl shadow-sm hover:shadow-md transition-all duration-500 overflow-hidden ${deletingIds.has(cert._id) ? 'opacity-60 grayscale pointer-events-none ring-2 ring-red-100 border-red-200 scale-[0.99]' :
+                                validationErrors[index] ? 'border-red-300 ring-1 ring-red-200' :
+                                    (highlightedId === cert._id || highlightedId === `new-${index}`) ? 'border-blue-400 bg-blue-50/50 shadow-md scale-[1.01]' :
+                                        'border-gray-200'
                                 }`}
                         >
                             {/* Header */}
@@ -322,7 +345,7 @@ export default function Certificates({ userData, setUserDetails }) {
                                     <div className="w-full">
                                         <input
                                             type="text"
-                                            placeholder={t('certificateTitle') || "Certificate Title"}
+                                            placeholder={t('certificates.certificateTitle') || "Certificate Title"}
                                             value={cert.title || ""}
                                             maxLength={100}
                                             onChange={(e) =>
@@ -334,7 +357,7 @@ export default function Certificates({ userData, setUserDetails }) {
                                         {validationErrors[index]?.title && (
                                             <p className="text-red-500 text-xs mt-1.5 flex items-center gap-1.5 font-medium animate-in slide-in-from-top-1">
                                                 <AlertCircle size={14} />
-                                                {t('titleRequired') || "Title is required"}
+                                                {t('certificates.titleRequired') || "Title is required"}
                                             </p>
                                         )}
                                     </div>
@@ -345,10 +368,10 @@ export default function Certificates({ userData, setUserDetails }) {
                                         type="button"
                                         onClick={() => toggleCollapse(index)}
                                         className={`p-2 rounded-lg transition-colors flex items-center gap-2 text-sm font-medium ${cert.collapsed ? 'bg-blue-50 text-blue-700 hover:bg-blue-100' : 'bg-gray-100 text-gray-700 hover:bg-gray-200'}`}
-                                        title={cert.collapsed ? t('edit') : t('collapse') || "Collapse"}
+                                        title={cert.collapsed ? t('certificates.edit') : t('certificates.collapse') || "Collapse"}
                                     >
                                         {cert.collapsed ? <Pencil size={16} /> : <X size={16} />}
-                                        <span className="hidden md:inline">{cert.collapsed ? t('edit') : (t('close') || "Close")}</span>
+                                        <span className="hidden md:inline">{cert.collapsed ? t('certificates.edit') : (t('certificates.close') || "Close")}</span>
                                     </button>
 
                                     <div className="w-px h-6 bg-gray-200 mx-1"></div>
@@ -385,7 +408,7 @@ export default function Certificates({ userData, setUserDetails }) {
                                     {/* Image Selector */}
                                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                                         <div className="flex flex-col gap-2">
-                                            <label className="text-sm font-medium text-gray-700 ml-1">{t('certificateImage') || "Certificate Image"}</label>
+                                            <label className="text-sm font-medium text-gray-700 ml-1">{t('certificates.certificateImage') || "Certificate Image"}</label>
                                             {!(cert.cfimage || cert.previewUrl) ? (
                                                 <div className="relative">
                                                     <input
@@ -401,13 +424,13 @@ export default function Certificates({ userData, setUserDetails }) {
                                                     >
                                                         <Upload size={24} className={validationErrors[index]?.image ? 'text-red-500' : 'text-blue-600'} />
                                                         <span className={`${validationErrors[index]?.image ? 'text-red-500' : 'text-blue-600'} text-sm font-medium`}>
-                                                            {t('selectCertificateImage') || "Select Image (Required)"} *
+                                                            {t('certificates.selectCertificateImage') || "Select Image (Required)"} *
                                                         </span>
                                                     </label>
                                                     {validationErrors[index]?.image && (
                                                         <p className="text-red-500 text-xs mt-1.5 flex items-center gap-1.5 font-medium animate-in slide-in-from-top-1">
                                                             <AlertCircle size={14} />
-                                                            {t('imageRequired') || "Image is required"}
+                                                            {t('certificates.imageRequired') || "Image is required"}
                                                         </p>
                                                     )}
                                                 </div>
@@ -426,7 +449,7 @@ export default function Certificates({ userData, setUserDetails }) {
                                                             onClick={() => setSelectedImage(cert.previewUrl || cert.cfimage)}
                                                             className="px-3 py-1 bg-white rounded-full text-xs font-bold text-gray-800 hover:bg-gray-100"
                                                         >
-                                                            {t('view')}
+                                                            {t('certificates.view')}
                                                         </button>
                                                         <button
                                                             type="button"
@@ -438,7 +461,7 @@ export default function Certificates({ userData, setUserDetails }) {
                                                             }}
                                                             className="px-3 py-1 bg-white rounded-full text-xs font-bold text-red-600 hover:bg-red-50"
                                                         >
-                                                            {t('remove')}
+                                                            {t('certificates.remove')}
                                                         </button>
                                                     </div>
                                                 </div>
@@ -447,9 +470,9 @@ export default function Certificates({ userData, setUserDetails }) {
 
                                         {/* Description */}
                                         <div className="flex flex-col gap-2">
-                                            <label className="text-sm font-medium text-gray-700 ml-1">{t('description')}</label>
+                                            <label className="text-sm font-medium text-gray-700 ml-1">{t('certificates.description')}</label>
                                             <textarea
-                                                placeholder={t('certificateDescription') || "Description (Optional)"}
+                                                placeholder={t('certificates.certificateDescription') || "Description (Optional)"}
                                                 value={cert.description || ""}
                                                 maxLength={200}
                                                 rows={5}
@@ -469,7 +492,7 @@ export default function Certificates({ userData, setUserDetails }) {
                                             className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg text-sm font-medium flex items-center gap-2 transition-colors disabled:opacity-50"
                                         >
                                             {savingIds.has(index) ? <Loader size={12} className="animate-spin" /> : <CheckCheck size={16} />}
-                                            {t('save') || "Save"}
+                                            {t('certificates.save') || "Save"}
                                         </button>
                                     </div>
                                 </div>
@@ -480,9 +503,9 @@ export default function Certificates({ userData, setUserDetails }) {
 
                 <button
                     type="button"
-                    disabled={certificates.length >= 5}
+                    disabled={certificates.length >= 10}
                     onClick={() => {
-                        if (certificates.length < 5) {
+                        if (certificates.length < 10) {
                             addArrayItem(certificates, setCertificates, {
                                 title: "",
                                 description: "",
@@ -491,27 +514,33 @@ export default function Certificates({ userData, setUserDetails }) {
                             })
                         }
                     }}
-                    className={`w-full text-white py-2 rounded-lg flex items-center justify-center gap-2 transition-all duration-300 mt-2 ${certificates.length >= 5 ? 'bg-gray-400 cursor-not-allowed' : 'bg-gradient-to-r from-blue-500 to-indigo-600 hover:from-blue-600 hover:to-indigo-700'}`}
+                    className={`w-full text-white py-2 rounded-lg flex items-center justify-center gap-2 transition-all duration-300 mt-2 ${certificates.length >= 10 ? 'bg-gray-400 cursor-not-allowed' : 'bg-gradient-to-r from-blue-500 to-indigo-600 hover:from-blue-600 hover:to-indigo-700'}`}
                 >
-                    <Plus size={18} /> {certificates.length >= 5 ? "5 Max" : t('addCertificate')}
+                    <Plus size={18} /> {certificates.length >= 10 ? "10 Max" : t('certificates.addCertificate')}
                 </button>
             </div>
 
-            <div className="flex justify-end py-4 border-b-2 border-gray-200">
-                <button
-                    onClick={saveOrder}
-                    disabled={loading}
-                    className="bg-gray-800 hover:bg-gray-900 disabled:opacity-50 text-white font-bold px-8 py-3 rounded-lg transition-all duration-300 flex items-center gap-2 transform hover:scale-105 shadow-lg"
-                >
-                    {loading ? (
-                        <>
-                            <Loader size={20} className="animate-spin" /> {t('saving')}
-                        </>
-                    ) : (
-                        `💾 ${t('saveOrder') || "Save Order"}`
-                    )}
-                </button>
-            </div>
+            {/* Only show Save Order button if there are 2+ items */}
+            {certificates.filter(c => c._id).length >= 2 && (
+                <div className="flex justify-end py-4 border-b-2 border-gray-200">
+                    <button
+                        onClick={saveOrder}
+                        disabled={loading || (() => {
+                            const currentOrder = certificates.filter(c => c._id).map(c => c._id);
+                            return JSON.stringify(currentOrder) === JSON.stringify(originalOrder);
+                        })()}
+                        className="bg-gray-800 hover:bg-gray-900 disabled:opacity-50 disabled:cursor-not-allowed text-white font-bold px-8 py-3 rounded-lg transition-all duration-300 flex items-center gap-2 transform hover:scale-105 shadow-lg"
+                    >
+                        {loading ? (
+                            <>
+                                <Loader size={20} className="animate-spin" /> {t('certificates.saving')}
+                            </>
+                        ) : (
+                            `💾 ${t('certificates.saveOrder') || "Save Order"}`
+                        )}
+                    </button>
+                </div>
+            )}
 
             {/* Delete Modal */}
             {mounted && itemToDelete !== null && createPortal(
@@ -536,7 +565,7 @@ export default function Certificates({ userData, setUserDetails }) {
                             <div className="text-gray-600 mb-6 text-base leading-relaxed">
                                 <div className="flex flex-col gap-2">
                                     <span className="font-semibold text-gray-800">Are you sure you want to delete this certificate?</span>
-                                    <span className="font-bold text-black border-t pt-2 mt-1 break-all">"{certificates[itemToDelete]?.title || t('thisCertificate') || "this certificate"}"</span>
+                                    <span className="font-bold text-black border-t pt-2 mt-1 break-all">"{certificates[itemToDelete]?.title || t('certificates.thisCertificate') || "this certificate"}"</span>
                                 </div>
                             </div>
                         </div>
@@ -546,14 +575,14 @@ export default function Certificates({ userData, setUserDetails }) {
                                 onClick={() => setItemToDelete(null)}
                                 className="flex-1 px-4 py-2.5 bg-gray-200 hover:bg-gray-300 text-gray-800 font-bold rounded-lg transition-all duration-200"
                             >
-                                {t('cancel') || "Cancel"}
+                                {t('certificates.cancel') || "Cancel"}
                             </button>
                             <button
                                 onClick={confirmDelete}
                                 className="flex-1 px-4 py-2.5 bg-red-600 hover:bg-red-700 text-white font-medium rounded-lg shadow-md transition duration-200 flex items-center justify-center gap-2"
                             >
                                 <Trash2 size={18} />
-                                <span>{t('delete') || "Delete"}</span>
+                                <span>{t('certificates.delete') || "Delete"}</span>
                             </button>
                         </div>
                     </div>
@@ -565,7 +594,7 @@ export default function Certificates({ userData, setUserDetails }) {
                 isOpen={!!selectedImage}
                 onClose={() => setSelectedImage(null)}
                 imageSrc={selectedImage}
-                altText={t('certificatePreview') || "Certificate Preview"}
+                altText={t('certificates.certificatePreview') || "Certificate Preview"}
             />
         </div>
     );

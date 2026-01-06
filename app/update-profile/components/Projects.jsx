@@ -4,13 +4,16 @@ import React, { useState } from "react";
 import { toast } from "react-toastify";
 import { createPortal } from "react-dom";
 import { ArrowUp, ArrowDown, CheckCheck, Loader, Plus, Trash2, X, Pencil, AlertCircle } from "../../Components/Icons";
-import { useTranslation } from "../../lib/translations";
-
+import { getTranslation } from '../../translations/update-profile'
 
 export default function Projects({ userData, setUserDetails }) {
-  const { t } = useTranslation(userData?.displayLanguage || 'en');
+  const t = getTranslation(userData?.displayLanguage || 'en');
   const [projects, setProjects] = useState(
     (userData.projects || []).map(p => ({ ...p, collapsed: true }))
+  );
+  // Track original order for comparison
+  const [originalOrder, setOriginalOrder] = useState(
+    (userData.projects || []).filter(p => p._id).map(p => p._id)
   );
   const [loading, setLoading] = useState(false);
   const [savingIds, setSavingIds] = useState(new Set());
@@ -23,7 +26,14 @@ export default function Projects({ userData, setUserDetails }) {
   React.useEffect(() => {
     setMounted(true);
   }, []);
-  const addArrayItem = (array, setArray, newItem) => setArray([...array, newItem]);
+  const addArrayItem = (array, setArray, newItem) => {
+    if (array.length >= 10) return;
+    const newIndex = array.length;
+    setArray([...array, { ...newItem, collapsed: false }]);
+    // Subtle highlight for the newly added item
+    setHighlightedId(`new-${newIndex}`);
+    setTimeout(() => setHighlightedId(null), 2000);
+  };
 
   const updateObjectInArray = (array, setArray, index, key, value) => {
     const updated = [...array];
@@ -47,16 +57,28 @@ export default function Projects({ userData, setUserDetails }) {
 
   const moveItemUp = (index) => {
     if (index === 0) return;
-    const newProjects = [...projects];
-    [newProjects[index - 1], newProjects[index]] = [newProjects[index], newProjects[index - 1]];
-    setProjects(newProjects);
+    const newItems = [...projects];
+    const itemToMove = newItems[index];
+    [newItems[index - 1], newItems[index]] = [newItems[index], newItems[index - 1]];
+    setProjects(newItems);
+
+    // Subtle highlight for the moved item
+    const targetId = itemToMove._id || `new-${index - 1}`;
+    setHighlightedId(targetId);
+    setTimeout(() => setHighlightedId(null), 1500);
   };
 
   const moveItemDown = (index) => {
     if (index === projects.length - 1) return;
-    const newProjects = [...projects];
-    [newProjects[index], newProjects[index + 1]] = [newProjects[index + 1], newProjects[index]];
-    setProjects(newProjects);
+    const newItems = [...projects];
+    const itemToMove = newItems[index];
+    [newItems[index], newItems[index + 1]] = [newItems[index + 1], newItems[index]];
+    setProjects(newItems);
+
+    // Subtle highlight for the moved item
+    const targetId = itemToMove._id || `new-${index + 1}`;
+    setHighlightedId(targetId);
+    setTimeout(() => setHighlightedId(null), 1500);
   };
 
   // 🟢 Save Single Project
@@ -89,7 +111,7 @@ export default function Projects({ userData, setUserDetails }) {
         setUserDetails(prev => ({ ...prev, projects: newProjectsList }));
       }
 
-      toast.success(t('savedSuccessfully'));
+      toast.success(t('projects.savedSuccessfully'));
       setValidationErrors(prev => {
         const next = { ...prev };
         delete next[index];
@@ -105,7 +127,7 @@ export default function Projects({ userData, setUserDetails }) {
 
     } catch (error) {
       console.error("Error saving project:", error);
-      toast.error(t('errorMessage'));
+      toast.error(t('projects.errorMessage'));
     } finally {
       setSavingIds(prev => {
         const next = new Set(prev);
@@ -138,10 +160,10 @@ export default function Projects({ userData, setUserDetails }) {
       if (setUserDetails) {
         setUserDetails(prev => ({ ...prev, projects: newProjectsList }));
       }
-      toast.success(t('deletedSuccessfully') || "Deleted successfully");
+      toast.success(t('projects.deletedSuccessfully') || "Deleted successfully");
     } catch (error) {
       console.error("Error deleting project:", error);
-      toast.error(t('errorMessage'));
+      toast.error(t('projects.errorMessage'));
     } finally {
       setDeletingIds(prev => {
         const next = new Set(prev);
@@ -158,7 +180,7 @@ export default function Projects({ userData, setUserDetails }) {
       const projectsWithIds = projects.filter(p => p._id).map(p => ({ _id: p._id }));
 
       if (projectsWithIds.length !== projects.length) {
-        toast.warning(t('saveNewItemsFirst') || "Please save new items first");
+        toast.warning(t('projects.saveNewItemsFirst') || "Please save new items first");
         setLoading(false);
         return;
       }
@@ -173,15 +195,19 @@ export default function Projects({ userData, setUserDetails }) {
         }));
       }
 
+      // Update original order after successful save
+      const newOrder = projects.filter(p => p._id).map(p => p._id);
+      setOriginalOrder(newOrder);
+
       toast(
         <p className="flex gap-3 items-center">
-          <CheckCheck className="text-green-500" /> {t('orderSaved') || "Order saved"}
+          <CheckCheck className="text-green-500" /> {t('projects.orderSaved') || "Order saved"}
         </p>,
         { autoClose: 2000 }
       );
     } catch (error) {
       console.error("Error updating order:", error);
-      toast.error(t('errorMessage'));
+      toast.error(t('projects.errorMessage'));
     } finally {
       setLoading(false);
     }
@@ -189,17 +215,17 @@ export default function Projects({ userData, setUserDetails }) {
 
   return (
     <div className="space-y-4" dir={userData?.displayLanguage === 'ar' ? 'rtl' : 'ltr'}>
-      <h3 className="text-lg font-bold text-gray-800">🚀 {t('projects')}</h3>
+      <h3 className="text-lg font-bold text-gray-800">🚀 {t('projects.title')}</h3>
 
       <div className="bg-gradient-to-br from-green-50 to-emerald-50 p-2 md:p-4 rounded-xl border border-green-200 space-y-3">
         <div className="space-y-2">
           {projects.map((proj, index) => (
             <div
-              key={proj._id || index}
-              className={`bg-white pb-1 border rounded-xl shadow-sm hover:shadow-md transition-all duration-300 overflow-hidden ${deletingIds.has(proj._id) ? 'opacity-60 grayscale pointer-events-none ring-2 ring-red-100 border-red-200 scale-[0.99]' :
-                  validationErrors[index] ? 'border-red-300 ring-1 ring-red-200' :
-                    highlightedId === proj._id ? 'border-green-500 ring-2 ring-green-200 shadow-green-100' :
-                      'border-gray-200'
+              key={proj._id || `new-${index}`}
+              className={`bg-white pb-1 border rounded-xl shadow-sm hover:shadow-md transition-all duration-500 overflow-hidden ${deletingIds.has(proj._id) ? 'opacity-60 grayscale pointer-events-none ring-2 ring-red-100 border-red-200 scale-[0.99]' :
+                validationErrors[index] ? 'border-red-300 ring-1 ring-red-200' :
+                  (highlightedId === proj._id || highlightedId === `new-${index}`) ? 'border-blue-400 bg-blue-50/50 shadow-md scale-[1.01]' :
+                    'border-gray-200'
                 }`}
             >
               {/* Collapsible Header with Editable Title */}
@@ -209,7 +235,7 @@ export default function Projects({ userData, setUserDetails }) {
                 <div className="flex-grow">
                   <input
                     type="text"
-                    placeholder={t('projectTitle')}
+                    placeholder={t('projects.projectTitle')}
                     value={proj.title}
                     maxLength={100}
                     onChange={(e) =>
@@ -220,7 +246,7 @@ export default function Projects({ userData, setUserDetails }) {
                   {validationErrors[index]?.title && (
                     <p className="text-red-500 text-xs mt-1.5 flex items-center gap-1.5 font-medium animate-in slide-in-from-top-1">
                       <AlertCircle size={14} />
-                      {t('titleRequired') || "Title is required"}
+                      {t('projects.titleRequired') || "Title is required"}
                     </p>
                   )}
                 </div>
@@ -230,10 +256,10 @@ export default function Projects({ userData, setUserDetails }) {
                     type="button"
                     onClick={() => toggleCollapse(index)}
                     className={`p-2 rounded-lg transition-colors flex items-center gap-2 text-sm font-medium ${proj.collapsed ? 'bg-green-50 text-green-700 hover:bg-green-100' : 'bg-gray-100 text-gray-700 hover:bg-gray-200'}`}
-                    title={proj.collapsed ? t('edit') : t('collapse') || "Collapse"}
+                    title={proj.collapsed ? t('projects.edit') : t('projects.collapse') || "Collapse"}
                   >
                     {proj.collapsed ? <Pencil size={16} /> : <X size={16} />}
-                    <span className="hidden md:inline">{proj.collapsed ? t('edit') : (t('close') || "Close")}</span>
+                    <span className="hidden md:inline">{proj.collapsed ? t('projects.edit') : (t('projects.close') || "Close")}</span>
                   </button>
 
                   <div className="w-px h-6 bg-gray-200 mx-1"></div>
@@ -243,7 +269,7 @@ export default function Projects({ userData, setUserDetails }) {
                     onClick={() => moveItemUp(index)}
                     disabled={index === 0}
                     className="p-1.5 hover:bg-gray-200 rounded-lg transition-colors disabled:opacity-30 disabled:cursor-not-allowed"
-                    title={t('moveUp') || "Move Up"}
+                    title={t('projects.moveUp') || "Move Up"}
                   >
                     <ArrowUp size={16} className="text-gray-600" />
                   </button>
@@ -252,7 +278,7 @@ export default function Projects({ userData, setUserDetails }) {
                     onClick={() => moveItemDown(index)}
                     disabled={index === projects.length - 1}
                     className="p-1.5 hover:bg-gray-200 rounded-lg transition-colors disabled:opacity-30 disabled:cursor-not-allowed"
-                    title={t('moveDown') || "Move Down"}
+                    title={t('projects.moveDown') || "Move Down"}
                   >
                     <ArrowDown size={16} className="text-gray-600" />
                   </button>
@@ -260,7 +286,7 @@ export default function Projects({ userData, setUserDetails }) {
                     type="button"
                     onClick={() => setProjectToDelete(index)}
                     className="p-1.5 hover:bg-red-100 rounded-lg transition-colors text-red-500 ml-1"
-                    title={t('delete')}
+                    title={t('projects.delete')}
                     disabled={deletingIds.has(proj._id)}
                   >
                     {deletingIds.has(proj._id) ? <Loader size={16} className="animate-spin" /> : <Trash2 size={16} />}
@@ -272,7 +298,7 @@ export default function Projects({ userData, setUserDetails }) {
                 <div className="p-3 md:p-4 border-t border-gray-100 space-y-3 bg-gray-50/50 animate-in fade-in slide-in-from-top-1 duration-200">
                   <div>
                     <textarea
-                      placeholder={t('projectDescription')}
+                      placeholder={t('projects.projectDescription')}
                       value={proj.description || ""}
                       maxLength={2000}
                       onChange={(e) =>
@@ -283,7 +309,7 @@ export default function Projects({ userData, setUserDetails }) {
                     {validationErrors[index]?.description && (
                       <p className="text-red-500 text-xs mt-1.5 flex items-center gap-1.5 font-medium animate-in slide-in-from-top-1">
                         <AlertCircle size={14} />
-                        {t('descriptionRequired') || "Description is required"}
+                        {t('projects.descriptionRequired') || "Description is required"}
                       </p>
                     )}
                   </div>
@@ -291,7 +317,7 @@ export default function Projects({ userData, setUserDetails }) {
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
                     <input
                       type="url"
-                      placeholder={t('projectLink')}
+                      placeholder={t('projects.projectLink')}
                       value={proj.link || ""}
                       maxLength={1000}
                       onChange={(e) =>
@@ -301,7 +327,7 @@ export default function Projects({ userData, setUserDetails }) {
                     />
                     <input
                       type="url"
-                      placeholder={t('projectImage')}
+                      placeholder={t('projects.projectImage')}
                       value={proj.image || ""}
                       maxLength={1000}
                       onChange={(e) =>
@@ -313,7 +339,7 @@ export default function Projects({ userData, setUserDetails }) {
 
                   <input
                     type="text"
-                    placeholder={t('technologies') + " (e.g. t1,t2,t3)"}
+                    placeholder={t('projects.technologies') + " (e.g. t1,t2,t3)"}
                     value={(proj.technologies || []).join(", ")}
                     onChange={(e) =>
                       updateObjectInArray(
@@ -348,7 +374,7 @@ export default function Projects({ userData, setUserDetails }) {
                       className="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg text-sm font-medium flex items-center gap-2 transition-colors disabled:opacity-50"
                     >
                       {savingIds.has(index) ? <Loader size={12} className="animate-spin" /> : <CheckCheck size={16} />}
-                      {t('save') || "Save"}
+                      {t('projects.save') || "Save"}
                     </button>
                   </div>
 
@@ -373,25 +399,31 @@ export default function Projects({ userData, setUserDetails }) {
           }
           className="w-full bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-600 hover:to-emerald-700 text-white py-2 rounded-lg flex items-center justify-center gap-2 transition-all duration-300 mt-2"
         >
-          <Plus size={18} /> {t('addProject')}
+          <Plus size={18} /> {t('projects.addProject')}
         </button>
       </div>
 
-      <div className="flex justify-end py-4 border-b-2 border-gray-200">
-        <button
-          onClick={saveOrder}
-          disabled={loading}
-          className="bg-gray-800 hover:bg-gray-900 disabled:opacity-50 text-white font-bold px-8 py-3 rounded-lg transition-all duration-300 flex items-center gap-2 transform hover:scale-105 shadow-lg"
-        >
-          {loading ? (
-            <>
-              <Loader size={20} className="animate-spin" /> {t('saving')}
-            </>
-          ) : (
-            `💾 ${t('saveOrder') || "Save Order"}`
-          )}
-        </button>
-      </div>
+      {/* Only show Save Order button if there are 2+ items */}
+      {projects.filter(p => p._id).length >= 2 && (
+        <div className="flex justify-end py-4 border-b-2 border-gray-200">
+          <button
+            onClick={saveOrder}
+            disabled={loading || (() => {
+              const currentOrder = projects.filter(p => p._id).map(p => p._id);
+              return JSON.stringify(currentOrder) === JSON.stringify(originalOrder);
+            })()}
+            className="bg-gray-800 hover:bg-gray-900 disabled:opacity-50 disabled:cursor-not-allowed text-white font-bold px-8 py-3 rounded-lg transition-all duration-300 flex items-center gap-2 transform hover:scale-105 shadow-lg"
+          >
+            {loading ? (
+              <>
+                <Loader size={20} className="animate-spin" /> {t('projects.saving')}
+              </>
+            ) : (
+              `💾 ${t('projects.saveOrder') || "Save Order"}`
+            )}
+          </button>
+        </div>
+      )}
 
       {/* Professional Delete Modal with Portal - Inlined */}
       {mounted && projectToDelete !== null && createPortal(
@@ -416,7 +448,7 @@ export default function Projects({ userData, setUserDetails }) {
               <div className="text-gray-600 mb-6 text-base leading-relaxed">
                 <div className="flex flex-col gap-2">
                   <span className="font-semibold text-gray-800">Are you sure you want to delete this project?</span>
-                  <span className="font-bold text-black border-t pt-2 mt-1 break-all">"{projects[projectToDelete]?.title || t('thisProject') || "this project"}"</span>
+                  <span className="font-bold text-black border-t pt-2 mt-1 break-all">"{projects[projectToDelete]?.title || t('projects.thisProject') || "this project"}"</span>
                 </div>
               </div>
             </div>
@@ -426,14 +458,14 @@ export default function Projects({ userData, setUserDetails }) {
                 onClick={() => setProjectToDelete(null)}
                 className="flex-1 px-4 py-2.5 bg-gray-200 hover:bg-gray-300 text-gray-800 font-bold rounded-lg transition-all duration-200"
               >
-                {t('cancel') || "Cancel"}
+                {t('projects.cancel') || "Cancel"}
               </button>
               <button
                 onClick={confirmDelete}
                 className="flex-1 px-4 py-2.5 bg-red-600 hover:bg-red-700 text-white font-medium rounded-lg shadow-md transition duration-200 flex items-center justify-center gap-2"
               >
                 <Trash2 size={18} />
-                <span>{t('delete') || "Delete"}</span>
+                <span>{t('projects.delete') || "Delete"}</span>
               </button>
             </div>
           </div>

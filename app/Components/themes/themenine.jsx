@@ -1,16 +1,16 @@
 "use client"
 import { useState, useMemo } from "react"
 import { Mail, Code2, Briefcase, GraduationCap, Globe, Sparkles, User, Layers, Zap, FileDown, Loader, Award } from "../Icons"
-import QrcodeProfile from "../../[username]/components/QrcodeProfile"
-import UserLinks from "../../[username]/components/UserLinks"
+import QrcodeProfile from "../portfolio/QrcodeProfile"
+import UserLinks from "../portfolio/UserLinks"
 import Image from "next/image"
 import Link from "next/link"
-import { useTranslation } from "../../lib/translations"
-import ImageModal from "../ImageModal"
+import { getTranslation } from "../../translations/portfolio"
+import ImageModal from "../portfolio/ImageModal"
 import DownloadResume from "../downloadcv/DownloadResume"
 
 export default function ThemeNine({ userDetails, userLinks }) {
-    const { t } = useTranslation(userDetails?.displayLanguage || 'en')
+    const t = getTranslation(userDetails?.displayLanguage || 'en')
     const [activeTab, setActiveTab] = useState("about")
     const [showQR, setShowQR] = useState(false);
     const [showUserLinks, setShowUserLinks] = useState(false);
@@ -77,7 +77,7 @@ export default function ThemeNine({ userDetails, userLinks }) {
                     <div className="flex flex-col-reverse md:flex-row gap-10 items-center justify-between mb-8">
                         <div className={`flex-1 text-center  ${userDetails?.displayLanguage === 'ar' ? 'md:text-right' : 'md:text-left'}`}>
                             <div className="inline-block px-3 py-1 mb-4 text-xs tracking-wider text-orange-300 uppercase bg-orange-500/10 rounded-full border border-orange-500/20">
-                                Welcome to my world
+                                {t('welcometomyworld')}
                             </div>
                             <h1 className="text-5xl md:text-7xl font-bold mb-6 tracking-tight leading-tight text-white">
                                 {userDetails?.fullname}

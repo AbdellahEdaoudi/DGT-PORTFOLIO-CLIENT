@@ -1,0 +1,113 @@
+{
+    "customDomain": {
+        "enterDomain": "ドメインを入力してください",
+        "verificationFailed": "確認に失敗しました",
+        "domainRemovedSuccess": "ドメインが正常に削除されました",
+        "errorRemovingDomain": "ドメインの削除中にエラーが発生しました",
+        "title": "カスタムドメイン",
+        "subtitle": "独自のドメインをポートフォリオに接続します",
+        "yourDomainName": "あなたのドメイン名",
+        "placeholder": "example.com",
+        "save": "保存",
+        "domainActiveVerified": "ドメインはアクティブで確認済みです",
+        "verificationPending": "確認待ち",
+        "domainConfigured": "ドメインが設定され、正常に動作しています！",
+        "verifyOwnership": "DNSレコードを設定してドメインの所有権を確認してください",
+        "visitSite": "サイトにアクセス",
+        "removeDomain": "ドメインを削除",
+        "dnsConfiguration": "DNS設定",
+        "connectDomainSteps": "ドメインを接続するには、以下の手順に従ってください：",
+        "step1Login": "ドメインレジストラ（GoDaddy、Namecheapなど）にログインします",
+        "step2Navigate": "DNS設定/DNS管理に移動します",
+        "step3AddRecord": "以下のAレコードを追加します：",
+        "type": "タイプ",
+        "name": "名前",
+        "value": "値",
+        "note": "注意",
+        "dnsPropagationNote": "DNSの伝播には最大48時間かかる場合があります",
+        "verifyingDns": "DNSを確認中...",
+        "verifyDnsConfiguration": "DNS設定を確認",
+        "removeTitle": "カスタムドメインを削除しますか？",
+        "removeDesc1": "ポートフォリオから ",
+        "removeDesc2": " を削除してもよろしいですか？",
+        "cancel": "キャンセル"
+    },
+    "businessLinks": {
+        "title": "ビジネスリンク",
+        "linkTitle": "タイトル",
+        "exampleWebsite": "私のウェブサイト",
+        "link": "リンク",
+        "exampleUrl": "https://example.com",
+        "addLink": "リンクを追加",
+        "linkAddedSuccessfully": "リンクが正常に追加されました",
+        "failedToAddLink": "リンクの追加に失敗しました",
+        "linkUpdatedSuccessfully": "リンクが正常に更新されました",
+        "failedToUpdateLink": "リンクの更新に失敗しました",
+        "linkDeletedSuccessfully": "リンクが正常に削除されました",
+        "failedToDeleteLink": "リンクの削除に失敗しました",
+        "edit": "編集",
+        "delete": "削除",
+        "noLinksFound": "リンクはまだ追加されていません。",
+        "deleteLinkConfirm": "このリンクを削除してもよろしいですか？",
+        "updateLink": "リンクを更新"
+    },
+    "support": {
+        "successMessage": "メッセージが正常に送信されました！",
+        "tooManyRequests": "リクエストが多すぎます。後でもう一度お試しください。",
+        "errorMessage": "エラーが発生しました。もう一度お試しください。",
+        "getInTouch": "お問い合わせ",
+        "weLoveToHear": "ご連絡をお待ちしております！メッセージをお送りください。できるだけ早く返信いたします。",
+        "contactSupport": "サポートに連絡",
+        "email": "メール",
+        "enterEmail": "メールアドレスを入力してください",
+        "subject": "件名",
+        "enterSubject": "件名を入力してください",
+        "message": "メッセージ",
+        "enterMessage": "メッセージを入力してください",
+        "attachment": "添付ファイル",
+        "uploadImage": "画像をアップロード（任意）",
+        "sending": "送信中...",
+        "sendMessage": "メッセージを送信"
+    },
+    "success": {
+        "paymentSuccessful": "支払い成功！",
+        "subscriptionActive": "サブスクリプションがアクティブになりました。ご購入ありがとうございます！",
+        "goToHome": "ホームへ移動"
+    },
+    "subscription": {
+        "promoMonthly": {
+            "name": "プロモ月額",
+            "description": "特別プロモオファー",
+            "period": "/月"
+        },
+        "promo6Month": {
+            "name": "プロモ6ヶ月",
+            "description": "6ヶ月間のお得なプラン",
+            "period": "/6ヶ月"
+        },
+        "promoAnnual": {
+            "name": "プロモ年額",
+            "description": "年間ベストオファー",
+            "period": "/年"
+        },
+        "subMonthly": {
+            "name": "月額登録",
+            "description": "月額$1",
+            "period": "/月"
+        },
+        "sub6Months": {
+            "name": "6ヶ月登録",
+            "description": "お得な中期プラン",
+            "period": "/6ヶ月"
+        },
+        "subYearly": {
+            "name": "年額登録",
+            "description": "ベストバリュー",
+            "period": "/年"
+        },
+        "recommended": "推奨",
+        "placeholder": "プロモーションコード",
+        "applyBtn": "適用",
+        "verifyingBtn": "確認中..."
+    }
+}

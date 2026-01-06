@@ -1,0 +1,113 @@
+{
+    "customDomain": {
+        "enterDomain": "Lütfen bir alan adı girin",
+        "verificationFailed": "Doğrulama başarısız",
+        "domainRemovedSuccess": "Alan adı başarıyla kaldırıldı",
+        "errorRemovingDomain": "Alan adı kaldırılırken hata",
+        "title": "Özel Alan Adı",
+        "subtitle": "Kendi alan adınızı portföyünüze bağlayın",
+        "yourDomainName": "Alan Adınız",
+        "placeholder": "ornek.com",
+        "save": "Kaydet",
+        "domainActiveVerified": "Alan Adı Aktif ve Doğrulandı",
+        "verificationPending": "Doğrulama Bekleniyor",
+        "domainConfigured": "Alan adınız yapılandırıldı ve mükemmel çalışıyor!",
+        "verifyOwnership": "Lütfen DNS kayıtlarını yapılandırarak alan adı sahipliğini doğrulayın",
+        "visitSite": "Siteyi Ziyaret Et",
+        "removeDomain": "Alan Adını Kaldır",
+        "dnsConfiguration": "DNS Yapılandırması",
+        "connectDomainSteps": "Alan adınızı bağlamak için şu adımları izleyin:",
+        "step1Login": "Alan adı kayıt şirketinize giriş yapın (GoDaddy, Namecheap vb.)",
+        "step2Navigate": "DNS ayarlarına / DNS yönetimine gidin",
+        "step3AddRecord": "Aşağıdaki A kaydını ekleyin:",
+        "type": "Tür",
+        "name": "İsim",
+        "value": "Değer",
+        "note": "Not",
+        "dnsPropagationNote": "DNS yayılımı 48 saate kadar sürebilir",
+        "verifyingDns": "DNS doğrulanıyor...",
+        "verifyDnsConfiguration": "DNS Yapılandırmasını Doğrula",
+        "removeTitle": "Özel Alan Adını Kaldır?",
+        "removeDesc1": "Portföyünüzden ",
+        "removeDesc2": " alan adını kaldırmak istediğinizden emin misiniz?",
+        "cancel": "İptal"
+    },
+    "businessLinks": {
+        "title": "İş Bağlantıları",
+        "linkTitle": "Başlık",
+        "exampleWebsite": "Web Sitem",
+        "link": "Bağlantı",
+        "exampleUrl": "https://ornek.com",
+        "addLink": "Bağlantı Ekle",
+        "linkAddedSuccessfully": "Bağlantı başarıyla eklendi",
+        "failedToAddLink": "Bağlantı eklenemedi",
+        "linkUpdatedSuccessfully": "Bağlantı başarıyla güncellendi",
+        "failedToUpdateLink": "Bağlantı güncellenemedi",
+        "linkDeletedSuccessfully": "Bağlantı başarıyla silindi",
+        "failedToDeleteLink": "Bağlantı silinemedi",
+        "edit": "Düzenle",
+        "delete": "Sil",
+        "noLinksFound": "Henüz bağlantı eklenmedi.",
+        "deleteLinkConfirm": "Bu bağlantıyı silmek istediğinizden emin misiniz?",
+        "updateLink": "Bağlantıyı Güncelle"
+    },
+    "support": {
+        "successMessage": "Mesaj başarıyla gönderildi!",
+        "tooManyRequests": "Çok fazla istek. Lütfen daha sonra tekrar deneyin.",
+        "errorMessage": "Bir hata oluştu. Lütfen tekrar deneyin.",
+        "getInTouch": "İletişime Geçin",
+        "weLoveToHear": "Sizden haber almayı çok isteriz! Bize bir mesaj gönderin ve en kısa sürede yanıtlayalım.",
+        "contactSupport": "Destekle İletişime Geçin",
+        "email": "E-posta",
+        "enterEmail": "E-postanızı girin",
+        "subject": "Konu",
+        "enterSubject": "Konuyu girin",
+        "message": "Mesaj",
+        "enterMessage": "Mesajınızı girin",
+        "attachment": "Ek",
+        "uploadImage": "Resim Yükle (İsteğe Bağlı)",
+        "sending": "Gönderiliyor...",
+        "sendMessage": "Mesaj Gönder"
+    },
+    "success": {
+        "paymentSuccessful": "Ödeme Başarılı!",
+        "subscriptionActive": "Aboneliğiniz şimdi aktif. Satın aldığınız için teşekkürler!",
+        "goToHome": "Ana Sayfaya Git"
+    },
+    "subscription": {
+        "promoMonthly": {
+            "name": "Aylık Promosyon",
+            "description": "Özel promosyon teklifi",
+            "period": "/ay"
+        },
+        "promo6Month": {
+            "name": "6 Aylık Promosyon",
+            "description": "6 ay için harika değer",
+            "period": "/6 ay"
+        },
+        "promoAnnual": {
+            "name": "Yıllık Promosyon",
+            "description": "Yılın en iyi teklifi",
+            "period": "/yıl"
+        },
+        "subMonthly": {
+            "name": "Aylık Abone Ol",
+            "description": "Ay için 1$",
+            "period": "/ay"
+        },
+        "sub6Months": {
+            "name": "6 Aylık Abone Ol",
+            "description": "Harika orta vadeli teklif",
+            "period": "/6 ay"
+        },
+        "subYearly": {
+            "name": "Yıllık Abone Ol",
+            "description": "En iyi değer",
+            "period": "/yıl"
+        },
+        "recommended": "Önerilen",
+        "placeholder": "Promosyon Kodu",
+        "applyBtn": "Uygula",
+        "verifyingBtn": "Doğrulanıyor..."
+    }
+}

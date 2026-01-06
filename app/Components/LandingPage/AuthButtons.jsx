@@ -1,23 +1,24 @@
 "use client"
 import { signIn, signOut, useSession } from "next-auth/react"
 import { useContext, useState, useEffect, useRef } from "react";
-import { MyContext } from "../../Context/MyContext";
+import { MyContext } from "../../context/context";
 import { BookUser, LogOut, MessageSquare, NotebookText, Globe, Menu, CreditCard } from "../Icons";
 import Link from "next/link";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
+import { getTranslation } from "../../translations/landing-page";
 
-export default function AuthButtons({ labels }) {
-  const t = {
-    signIn: "Sign In",
-    getStarted: "Get Started",
-    updateProfile: "Update Profile",
-    businessLinks: "Business Links",
-    support: "Support",
-    signOut: "Sign Out",
-    customDomain: "Custom Domain",
-    subscriptions: "Subscriptions",
-    ...labels
+export default function AuthButtons({ lang }) {
+  const t = getTranslation(lang || 'en');
+  const labels = {
+    signIn: t('navbar.auth.signIn') || "Sign In",
+    getStarted: t('navbar.auth.getStarted') || "Get Started",
+    updateProfile: t('navbar.auth.updateProfile') || "Update Profile",
+    businessLinks: t('navbar.auth.businessLinks') || "Business Links",
+    customDomain: t('navbar.auth.customDomain') || "Custom Domain",
+    subscriptions: t('navbar.auth.subscriptions') || "Subscriptions",
+    support: t('navbar.auth.support') || "Support",
+    signOut: t('navbar.auth.signOut') || "Sign Out",
   }
   const [setting, setSetting] = useState(true);
   const { data, status } = useSession();
@@ -62,7 +63,7 @@ export default function AuthButtons({ labels }) {
             setSetting(true)
             if (userDetails?.username) {
               window.open(PORTFOLIO, "_blank");
-              // router.push(`/${userDetails?.username}`)
+              // router.push(`/dp/${userDetails?.username}`)
             } else (
               router.push(`/update-profile`)
             )
@@ -87,7 +88,7 @@ export default function AuthButtons({ labels }) {
           <Menu />
         </span>
         {/* SETTING [] */}
-        <nav
+        <nav dir={userDetails?.displayLanguage === "ar" ? "rtl" : "ltr"}
           className={`overflow-hidden transition-all duration-500 text-white bg-gray-800 
           rounded-md w-60 right-3 top-14 container absolute flex flex-col  
           ${setting ? " max-h-0 pointer-events-none" : "ring-2 max-h-96 p-4 pointer-events-auto"}`}
@@ -100,18 +101,18 @@ export default function AuthButtons({ labels }) {
             className="bg-gray-700 py-2 border-b flex items-center justify-center border-gray-600 hover:bg-gray-600 transition duration-300 rounded-sm hover:scale-105 text-center mb-2"
           >
             <div className="flex items-center gap-1">
-              <BookUser /> {t.updateProfile}
+              <BookUser /> {labels.updateProfile}
             </div>
           </Link>
           <Link
-            href={"/BusinessLinks"}
+            href={"/business-links"}
             onClick={() => {
               setSetting(!setting);
             }}
             className="bg-gray-700 py-2 border-b flex items-center justify-center border-gray-600 hover:bg-gray-600 transition duration-300 rounded-sm hover:scale-105 text-center mb-2"
           >
             <div className="flex items-center gap-1">
-              <NotebookText /> {t.businessLinks}
+              <NotebookText className={` ${userDetails?.displayLanguage === "ar" ? "rotate-180" : ""}`} /> {labels.businessLinks}
             </div>
           </Link>
           <Link
@@ -122,7 +123,7 @@ export default function AuthButtons({ labels }) {
             className="bg-gray-700 py-2 border-b flex items-center justify-center border-gray-600 hover:bg-gray-600 transition duration-300 rounded-sm hover:scale-105 text-center mb-2"
           >
             <div className="flex items-center gap-1">
-              <Globe /> {t.customDomain}
+              <Globe /> {labels.customDomain}
             </div>
           </Link>
           <Link
@@ -133,7 +134,7 @@ export default function AuthButtons({ labels }) {
             className="bg-gray-700 py-2 border-b flex items-center justify-center border-gray-600 hover:bg-gray-600 transition duration-300 rounded-sm hover:scale-105 text-center mb-2"
           >
             <div className="flex items-center gap-1">
-              <CreditCard /> {t.subscriptions}
+              <CreditCard /> {labels.subscriptions}
             </div>
           </Link>
           <Link
@@ -144,7 +145,7 @@ export default function AuthButtons({ labels }) {
             className="bg-gray-700 flex items-center justify-center py-2 border-b border-gray-600 hover:bg-gray-600 transition duration-300 rounded-sm hover:scale-105 text-center mb-2"
           >
             <div className="flex items-center gap-1">
-              <MessageSquare /> {t.support}
+              <MessageSquare className={`${userDetails?.displayLanguage === "ar" ? "scale-x-[-1]" : ""}`} /> {labels.support}
             </div>
           </Link>
           {userDetails?.email && (
@@ -174,7 +175,7 @@ export default function AuthButtons({ labels }) {
             className="bg-red-500 py-2 border-b cursor-pointer border-gray-600 hover:bg-red-600 transition duration-300 rounded-sm hover:scale-105 justify-center flex gap-2"
           >
             <LogOut />
-            {t.signOut}
+            {labels.signOut}
           </div>
         </nav>
       </div>
@@ -188,13 +189,13 @@ export default function AuthButtons({ labels }) {
         onClick={() => signIn("google", { redirect: true, callbackUrl: "/" })}
         className="md:block hidden px-6 py-2 rounded-full border border-purple-500/50 hover:border-purple-400 transition"
       >
-        {t.signIn}
+        {labels.signIn}
       </button>
       <button
         onClick={() => signIn("google", { redirect: true, callbackUrl: "/" })}
         className="px-6 py-2 rounded-full bg-gradient-to-r from-cyan-400 to-purple-500 hover:shadow-lg hover:shadow-purple-500/50 transition"
       >
-        {t.getStarted}
+        {labels.getStarted}
       </button>
     </div>
   );

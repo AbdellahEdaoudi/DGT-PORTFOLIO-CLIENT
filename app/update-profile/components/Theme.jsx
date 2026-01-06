@@ -4,10 +4,10 @@ import axios from "axios";
 import { toast } from "react-toastify";
 import { Loader, CheckCheck } from "../../Components/Icons";
 import Image from "next/image";
-import { useTranslation } from "../../lib/translations";
+import { getTranslation } from '../../translations/update-profile'
 
 export default function Theme({ userData, setUserDetails }) {
-  const { t } = useTranslation(userData?.displayLanguage || 'en');
+  const t = getTranslation(userData?.displayLanguage || 'en');
   const [selectedTheme, setSelectedTheme] = useState(userData.theme || 1);
   const [loading, setLoading] = useState(false);
   const [pendingTheme, setPendingTheme] = useState(null);
@@ -22,26 +22,35 @@ export default function Theme({ userData, setUserDetails }) {
       setUserDetails({ ...userData, theme: pendingTheme });
       toast(
         <p className="flex gap-2 items-center">
-          <CheckCheck className="text-green-500" /> {t('savedSuccessfully')}
+          <CheckCheck className="text-green-500" /> {t('theme.savedSuccessfully')}
         </p>,
         { autoClose: 1000 }
       );
     } catch (error) {
       console.error("Error updating theme:", error);
-      toast.error(t('errorMessage'));
+      toast.error(t('theme.errorMessage'));
     } finally {
       setLoading(false);
+    }
+  };
+
+  const handleThemeClick = (num) => {
+    if (selectedTheme === num) {
+      setPendingTheme(null);
+    } else {
+      setPendingTheme(num);
     }
   };
 
   return (
     <div className="space-y-4" dir={userData?.displayLanguage === 'ar' ? 'rtl' : 'ltr'}>
       <div className="flex  items-center justify-between">
-        <h3 className="text-lg font-bold text-gray-800">🧩 {t('selectTheme')}</h3>
+        <h3 className="text-lg font-bold text-gray-800">🧩 {t('theme.selectTheme')}</h3>
         <div className="flex justify-center">
           <button
             onClick={handleSave}
-            className={`px-6 py-2 font-semibold rounded-lg text-white transition-all shadow-lg ${loading
+            disabled={loading || !pendingTheme}
+            className={`px-6 py-2 font-semibold duration-300 rounded-lg text-white transition-all shadow-lg ${loading || !pendingTheme
               ? "bg-gray-400 cursor-not-allowed"
               : "bg-gradient-to-r from-green-400 to-blue-500 hover:from-green-500 hover:to-blue-600"
               }`}
@@ -49,7 +58,7 @@ export default function Theme({ userData, setUserDetails }) {
             {loading ? (
               <Loader size={20} className="animate-spin inline-block" />
             ) : (
-              t('save')
+              t('theme.save')
             )}
           </button>
         </div>
@@ -58,7 +67,7 @@ export default function Theme({ userData, setUserDetails }) {
         {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13].map((num) => (
           <div
             key={num}
-            onClick={() => setPendingTheme(num)}
+            onClick={() => handleThemeClick(num)}
             className={`border-4 rounded-xl overflow-hidden transition-all duration-300 cursor-pointer ${pendingTheme === num
               ? "border-yellow-400 scale-105"
               : selectedTheme === num

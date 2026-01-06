@@ -1,0 +1,113 @@
+{
+    "customDomain": {
+        "enterDomain": "Wprowadź domenę",
+        "verificationFailed": "Weryfikacja nie powiodła się",
+        "domainRemovedSuccess": "Domena usunięta pomyślnie",
+        "errorRemovingDomain": "Błąd podczas usuwania domeny",
+        "title": "Niestandardowa Domena",
+        "subtitle": "Podłącz własną domenę do swojego portfolio",
+        "yourDomainName": "Twoja Nazwa Domeny",
+        "placeholder": "przykład.pl",
+        "save": "Zapisz",
+        "domainActiveVerified": "Domena Aktywna i Zweryfikowana",
+        "verificationPending": "Oczekiwanie na Weryfikację",
+        "domainConfigured": "Twoja domena jest skonfigurowana i działa poprawnie!",
+        "verifyOwnership": "Zweryfikuj własność domeny, konfigurując rekordy DNS",
+        "visitSite": "Odwiedź Stronę",
+        "removeDomain": "Usuń Domenę",
+        "dnsConfiguration": "Konfiguracja DNS",
+        "connectDomainSteps": "Aby podłączyć domenę, wykonaj następujące kroki:",
+        "step1Login": "Zaloguj się do rejestratora domeny (GoDaddy, Namecheap itp.)",
+        "step2Navigate": "Przejdź do ustawień DNS / zarządzania DNS",
+        "step3AddRecord": "Dodaj następujący rekord A:",
+        "type": "Typ",
+        "name": "Nazwa",
+        "value": "Wartość",
+        "note": "Uwaga",
+        "dnsPropagationNote": "Propagacja DNS może zająć do 48 godzin",
+        "verifyingDns": "Weryfikacja DNS...",
+        "verifyDnsConfiguration": "Zweryfikuj Konfigurację DNS",
+        "removeTitle": "Usunąć Niestandardową Domenę?",
+        "removeDesc1": "Czy na pewno chcesz usunąć ",
+        "removeDesc2": " ze swojego portfolio?",
+        "cancel": "Anuluj"
+    },
+    "businessLinks": {
+        "title": "Linki Biznesowe",
+        "linkTitle": "Tytuł",
+        "exampleWebsite": "Moja Strona",
+        "link": "Link",
+        "exampleUrl": "https://przykład.pl",
+        "addLink": "Dodaj Link",
+        "linkAddedSuccessfully": "Link dodany pomyślnie",
+        "failedToAddLink": "Nie udało się dodać linku",
+        "linkUpdatedSuccessfully": "Link zaktualizowany pomyślnie",
+        "failedToUpdateLink": "Nie udało się zaktualizować linku",
+        "linkDeletedSuccessfully": "Link usunięty pomyślnie",
+        "failedToDeleteLink": "Nie udało się usunąć linku",
+        "edit": "Edytuj",
+        "delete": "Usuń",
+        "noLinksFound": "Nie dodano jeszcze żadnych linków.",
+        "deleteLinkConfirm": "Czy na pewno chcesz usunąć ten link?",
+        "updateLink": "Zaktualizuj Link"
+    },
+    "support": {
+        "successMessage": "Wiadomość wysłana pomyślnie!",
+        "tooManyRequests": "Zbyt wiele żądań. Spróbuj ponownie później.",
+        "errorMessage": "Wystąpił błąd. Spróbuj ponownie.",
+        "getInTouch": "Skontaktuj się",
+        "weLoveToHear": "Chcielibyśmy usłyszeć od Ciebie! Wyślij nam wiadomość, a odpowiemy tak szybko, jak to możliwe.",
+        "contactSupport": "Skontaktuj się z Pomocą",
+        "email": "E-mail",
+        "enterEmail": "Wprowadź swój e-mail",
+        "subject": "Temat",
+        "enterSubject": "Wprowadź temat",
+        "message": "Wiadomość",
+        "enterMessage": "Wprowadź swoją wiadomość",
+        "attachment": "Załącznik",
+        "uploadImage": "Prześlij Obraz (Opcjonalnie)",
+        "sending": "Wysyłanie...",
+        "sendMessage": "Wyślij Wiadomość"
+    },
+    "success": {
+        "paymentSuccessful": "Płatność Udana!",
+        "subscriptionActive": "Twoja subskrypcja jest teraz aktywna. Dziękujemy za zakup!",
+        "goToHome": "Idź do Strony Głównej"
+    },
+    "subscription": {
+        "promoMonthly": {
+            "name": "Promo Miesięczne",
+            "description": "Specjalna oferta promocyjna",
+            "period": "/miesiąc"
+        },
+        "promo6Month": {
+            "name": "Promo 6-Miesięczne",
+            "description": "Świetna wartość na 6 miesięcy",
+            "period": "/6 miesięcy"
+        },
+        "promoAnnual": {
+            "name": "Promo Roczne",
+            "description": "Najlepsza oferta roku",
+            "period": "/rok"
+        },
+        "subMonthly": {
+            "name": "Subskrybuj Miesięcznie",
+            "description": "1 USD za miesiąc",
+            "period": "/miesiąc"
+        },
+        "sub6Months": {
+            "name": "Subskrybuj na 6 Miesięcy",
+            "description": "Świetna oferta średnioterminowa",
+            "period": "/6 miesięcy"
+        },
+        "subYearly": {
+            "name": "Subskrybuj Rocznie",
+            "description": "Najlepsza wartość",
+            "period": "/rok"
+        },
+        "recommended": "Polecane",
+        "placeholder": "Kod Promocyjny",
+        "applyBtn": "Zastosuj",
+        "verifyingBtn": "Weryfikacja..."
+    }
+}

@@ -3,14 +3,13 @@ import axios from 'axios'
 import { CheckCheck, Loader, FileDown } from '../../Components/Icons'
 import DownloadResume from '../../Components/downloadcv/DownloadResume'
 import Image from 'next/image'
-import { useRouter } from 'next/navigation'
-import React, { useContext } from 'react'
 import { useState } from 'react'
 import { toast } from 'react-toastify'
-import { useTranslation } from '../../lib/translations'
+import { getTranslation } from '../../translations/update-profile'
 
 function Userinfo({ userData, setUserDetails }) {
-  const { t } = useTranslation(userData?.displayLanguage || 'en')
+  // Local translation helper
+  const t = getTranslation(userData?.displayLanguage || 'en');
   const user = userData || {}
   const [imagePreview, setImagePreview] = useState(user.urlimage || "")
   const [imageFile, setImageFile] = useState(null)
@@ -22,7 +21,6 @@ function Userinfo({ userData, setUserDetails }) {
   const [country, setCountry] = useState(user.country || "")
   const [category, setCategory] = useState(user.category || "")
   const [errormsg, setErrormsg] = useState("")
-  const router = useRouter()
 
   // Handle image upload with automatic compression
   const handleImageUpload = (e) => {
@@ -94,7 +92,7 @@ function Userinfo({ userData, setUserDetails }) {
   // Submit form
   const UpUserInfo = async (e) => {
     if (!username) {
-      return setErrormsg(t('usernameExists'))
+      return setErrormsg(t('userInfo.usernameExists'))
     }
     e.preventDefault();
     setLoading(true);
@@ -112,7 +110,7 @@ function Userinfo({ userData, setUserDetails }) {
 
       await axios.put(`/api/proxy/users/update/user-info`, formData);
       toast(<p className='flex gap-3 items-center'><CheckCheck className="text-teal-500" />
-        {t('savedSuccessfully')}
+        {t('userInfo.savedSuccessfully')}
       </p>, {
         autoClose: 2000,
       })
@@ -137,7 +135,7 @@ function Userinfo({ userData, setUserDetails }) {
           setErrormsg(typeof errorData === 'object' ? JSON.stringify(errorData) : String(errorData));
         }
       } else if (error.response?.status === 400) {
-        setErrormsg(t('usernameExists'))
+        setErrormsg(t('userInfo.usernameExists'))
       }
       // console.error("Error updating profile:", error);
     } finally {
@@ -156,7 +154,7 @@ function Userinfo({ userData, setUserDetails }) {
               if (userData.username) {
                 window.open(PORTFOLIO, '_blank')
               } else if (!userData.username) {
-                setErrormsg(t('usernameRequired'))
+                setErrormsg(t('userInfo.usernameRequired'))
               }
             }}
             src={imagePreview}
@@ -167,18 +165,18 @@ function Userinfo({ userData, setUserDetails }) {
             priority
           />
           <label className="mt-4 bg-gradient-to-r from-teal-400 to-green-500 hover:from-teal-500 hover:to-green-600 text-white font-semibold rounded-full px-6 py-2 cursor-pointer transition duration-300 transform hover:scale-105">
-            {t('uploadImage')}
+            {t('userInfo.uploadImage')}
             <input type="file" accept="image/*" onChange={handleImageUpload} className="hidden" />
           </label>
         </div>
         {/* User Information */}
         <div className="text-xs md:text-base bg-gradient-to-br from-gray-50 to-gray-100 shadow-xl border-2 border-gray-200 rounded-2xl p-6 w-full md:w-2/3 space-y-4">
           <h2 className="text-3xl md:block hidden font-bold text-gray-800 text-center mb-6">
-            {fullname || t('fullName')}
+            {fullname || t('userInfo.fullName')}
           </h2>
           <div className="grid grid-cols-2 gap-4">
             <div>
-              <label className="block text-sm font-bold text-gray-700 mb-2">{t('fullName')}</label>
+              <label className="block text-sm font-bold text-gray-700 mb-2">{t('userInfo.fullName')}</label>
               <input
                 type="text"
                 value={fullname}
@@ -189,7 +187,7 @@ function Userinfo({ userData, setUserDetails }) {
               />
             </div>
             <div>
-              <label className="block text-sm font-bold text-gray-700 mb-2">{t('username')}</label>
+              <label className="block text-sm font-bold text-gray-700 mb-2">{t('userInfo.username')}</label>
               <input
                 type="text"
                 value={username}
@@ -205,11 +203,11 @@ function Userinfo({ userData, setUserDetails }) {
               {username ? (
                 <p className="mt-1 ml-2 text-blue-500 text-xs font-medium">{`${username}.dgtportfolio.com`}</p>
               ) : (
-                <p className="mt-1 ml-2 text-blue-500 text-xs font-medium">{`${t('username')}.dgtportfolio.com`}</p>
+                <p className="mt-1 ml-2 text-blue-500 text-xs font-medium">{`${t('userInfo.username')}.dgtportfolio.com`}</p>
               )}
             </div>
             <div>
-              <label className="block text-sm font-bold text-gray-700 mb-2">{t('country')}</label>
+              <label className="block text-sm font-bold text-gray-700 mb-2">{t('userInfo.country')}</label>
               <input
                 type="text"
                 value={country}
@@ -219,7 +217,7 @@ function Userinfo({ userData, setUserDetails }) {
               />
             </div>
             <div>
-              <label className="block text-sm font-bold text-gray-700 mb-2">{t('phone')}</label>
+              <label className="block text-sm font-bold text-gray-700 mb-2">{t('userInfo.phone')}</label>
               <input
                 type="tel"
                 maxLength={100}
@@ -230,13 +228,13 @@ function Userinfo({ userData, setUserDetails }) {
             </div>
           </div>
           <div className="md:col-span-2">
-            <label className="block text-sm font-bold text-gray-700 mb-2">{t('specialization')}</label>
+            <label className="block text-sm font-bold text-gray-700 mb-2">{t('userInfo.specialization')}</label>
             <input
               type="text"
               maxLength={100}
               value={category}
               onChange={(e) => setCategory(e.target.value)}
-              placeholder={t('exampleSpecialization')}
+              placeholder={t('userInfo.exampleSpecialization')}
               className="w-full px-4 py-2 bg-white border-2 border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 transition"
             />
           </div>
@@ -252,10 +250,10 @@ function Userinfo({ userData, setUserDetails }) {
         >
           {loading ? (
             <>
-              <Loader size={20} className="animate-spin" /> {t('saving')}
+              <Loader size={20} className="animate-spin" /> {t('userInfo.saving')}
             </>
           ) : (
-            `💾 ${t('save')}`
+            `💾 ${t('userInfo.save')}`
           )}
         </button>
       </div>

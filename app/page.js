@@ -1,7 +1,7 @@
 import LandingPage from "./Components/LandingPage/LandingPage";
 import { headers } from "next/headers";
-import { getDictionary } from "./dictionaries/get-dictionary";
-import { DynamicSubdomainClient, DynamicCustomDomainClient } from './Components/ClientWrappers';
+import { getDictionary } from "./translations/landing-page";
+import { DynamicSubdomainClient, DynamicCustomDomainClient } from './Components/portfolio/ClientWrappers';
 
 async function fetchUserData(url) {
   try {
@@ -77,7 +77,7 @@ export async function generateMetadata() {
       alternates: {
         canonical: "https://dgtportfolio.com",
         languages: {
-          'en': 'https://dgtportfolio.com',
+          'en': 'https://dgtportfolio.com/en',
           'es': 'https://dgtportfolio.com/es',
           'fr': 'https://dgtportfolio.com/fr',
           'ar': 'https://dgtportfolio.com/ar',
@@ -86,6 +86,13 @@ export async function generateMetadata() {
           'ja': 'https://dgtportfolio.com/ja',
           'zh': 'https://dgtportfolio.com/zh',
           'nl': 'https://dgtportfolio.com/nl',
+          'pt': 'https://dgtportfolio.com/pt',
+          'it': 'https://dgtportfolio.com/it',
+          'tr': 'https://dgtportfolio.com/tr',
+          'ko': 'https://dgtportfolio.com/ko',
+          'hi': 'https://dgtportfolio.com/hi',
+          'id': 'https://dgtportfolio.com/id',
+          'pl': 'https://dgtportfolio.com/pl',
         },
       },
     };
@@ -145,11 +152,10 @@ export default async function Home() {
     };
   }
 
-  const dict = await getDictionary("en");
   return (
     <div>
       {userSchema && <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(userSchema) }} />}
-      {isSubdomain ? <DynamicSubdomainClient username={host.split(".")[0]} /> : isExternalCustomDomain ? <DynamicCustomDomainClient host={host} /> : <LandingPage dict={dict} />}
+      {isSubdomain ? <DynamicSubdomainClient username={host.split(".")[0]} /> : isExternalCustomDomain ? <DynamicCustomDomainClient host={host} /> : <LandingPage lang={"en"} />}
     </div>
   );
 }

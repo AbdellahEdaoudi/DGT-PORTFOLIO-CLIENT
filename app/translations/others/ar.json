@@ -1,0 +1,113 @@
+{
+    "customDomain": {
+        "enterDomain": "الرجاء إدخال نطاق",
+        "verificationFailed": "فشل التحقق",
+        "domainRemovedSuccess": "تم إزالة النطاق بنجاح",
+        "errorRemovingDomain": "خطأ في إزالة النطاق",
+        "title": "نطاق مخصص",
+        "subtitle": "اربط نطاقك الخاص بمعرض أعمالك",
+        "yourDomainName": "اسم نطاقك",
+        "placeholder": "example.com",
+        "save": "حفظ",
+        "domainActiveVerified": "النطاق نشط ومُتحقق منه",
+        "verificationPending": "التحقق قيد الانتظار",
+        "domainConfigured": "نطاقك مُكوّن ويعمل بشكل مثالي!",
+        "verifyOwnership": "يرجى التحقق من ملكية النطاق عن طريق تكوين سجلات DNS",
+        "visitSite": "زيارة الموقع",
+        "removeDomain": "إزالة النطاق",
+        "dnsConfiguration": "تكوين DNS",
+        "connectDomainSteps": "لربط نطاقك، اتبع الخطوات التالية:",
+        "step1Login": "تسجيل الدخول إلى مسجل النطاق الخاص بك (GoDaddy، Namecheap، إلخ)",
+        "step2Navigate": "انتقل إلى إعدادات DNS / إدارة DNS",
+        "step3AddRecord": "أضف سجل A التالي:",
+        "type": "النوع",
+        "name": "الاسم",
+        "value": "القيمة",
+        "note": "ملاحظة",
+        "dnsPropagationNote": "قد يستغرق انتشار DNS ما يصل إلى 48 ساعة",
+        "verifyingDns": "جاري التحقق من DNS...",
+        "verifyDnsConfiguration": "التحقق من تكوين DNS",
+        "removeTitle": "إزالة النطاق المخصص؟",
+        "removeDesc1": "هل أنت متأكد أنك تريد إزالة ",
+        "removeDesc2": " من معرض أعمالك؟",
+        "cancel": "إلغاء"
+    },
+    "businessLinks": {
+        "title": "روابط الأعمال",
+        "linkTitle": "العنوان",
+        "exampleWebsite": "موقعي الإلكتروني",
+        "link": "الرابط",
+        "exampleUrl": "https://example.com",
+        "addLink": "إضافة رابط",
+        "linkAddedSuccessfully": "تمت إضافة الرابط بنجاح",
+        "failedToAddLink": "فشل في إضافة الرابط",
+        "linkUpdatedSuccessfully": "تم تحديث الرابط بنجاح",
+        "failedToUpdateLink": "فشل في تحديث الرابط",
+        "linkDeletedSuccessfully": "تم حذف الرابط بنجاح",
+        "failedToDeleteLink": "فشل في حذف الرابط",
+        "edit": "تعديل",
+        "delete": "حذف",
+        "noLinksFound": "لم تتم إضافة أي روابط بعد.",
+        "deleteLinkConfirm": "هل أنت متأكد أنك تريد حذف هذا الرابط؟",
+        "updateLink": "تحديث الرابط"
+    },
+    "support": {
+        "successMessage": "تم إرسال الرسالة بنجاح!",
+        "tooManyRequests": "طلبات كثيرة جداً. يرجى المحاولة مرة أخرى لاحقاً.",
+        "errorMessage": "حدث خطأ. يرجى المحاولة مرة أخرى.",
+        "getInTouch": "تواصل معنا",
+        "weLoveToHear": "نحب أن نسمع منك! أرسل لنا رسالة وسنرد في أقرب وقت ممكن.",
+        "contactSupport": "اتصل بالدعم",
+        "email": "البريد الإلكتروني",
+        "enterEmail": "أدخل بريدك الإلكتروني",
+        "subject": "الموضوع",
+        "enterSubject": "أدخل الموضوع",
+        "message": "الرسالة",
+        "enterMessage": "أدخل رسالتك",
+        "attachment": "مرفق",
+        "uploadImage": "تحميل صورة (اختياري)",
+        "sending": "جاري الإرسال...",
+        "sendMessage": "إرسال رسالة"
+    },
+    "success": {
+        "paymentSuccessful": "تم الدفع بنجاح!",
+        "subscriptionActive": "اشتراكك نشط الآن. شكراً لك على الشراء!",
+        "goToHome": "الذهاب إلى الصفحة الرئيسية"
+    },
+    "subscription": {
+        "promoMonthly": {
+            "name": "عرض شهري",
+            "description": "عرض ترويجي خاص",
+            "period": "/شهر"
+        },
+        "promo6Month": {
+            "name": "عرض 6 أشهر",
+            "description": "قيمة رائعة لمدة 6 أشهر",
+            "period": "/6 أشهر"
+        },
+        "promoAnnual": {
+            "name": "عرض سنوي",
+            "description": "أفضل صفقة لهذا العام",
+            "period": "/سنة"
+        },
+        "subMonthly": {
+            "name": "اشتراك شهري",
+            "description": "1 دولار للشهر",
+            "period": "/شهر"
+        },
+        "sub6Months": {
+            "name": "اشتراك 6 أشهر",
+            "description": "عرض متوسط المدى رائع",
+            "period": "/6 أشهر"
+        },
+        "subYearly": {
+            "name": "اشتراك سنوي",
+            "description": "أفضل قيمة",
+            "period": "/سنة"
+        },
+        "recommended": "موصى به",
+        "placeholder": "رمز ترويجي",
+        "applyBtn": "تطبيق",
+        "verifyingBtn": "جار التحقق..."
+    }
+}

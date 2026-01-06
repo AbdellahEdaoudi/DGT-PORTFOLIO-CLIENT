@@ -1,16 +1,16 @@
 "use client"
 import { useState, useEffect, useMemo } from "react"
 import { Layers, Rocket, Star, ArrowUpRight, Loader, FileDown, Award, Menu, X, ArrowUp } from "../Icons"
-import QrcodeProfile from "../../[username]/components/QrcodeProfile"
-import UserLinks from "../../[username]/components/UserLinks"
+import QrcodeProfile from "../portfolio/QrcodeProfile"
+import UserLinks from "../portfolio/UserLinks"
 import Image from "next/image"
 import Link from "next/link"
-import { useTranslation } from "../../lib/translations"
-import ImageModal from "../ImageModal"
+import { getTranslation } from "../../translations/portfolio"
+import ImageModal from "../portfolio/ImageModal"
 import DownloadResume from "../downloadcv/DownloadResume"
 
 export default function ThemeEleven({ userDetails, userLinks }) {
-    const { t } = useTranslation(userDetails?.displayLanguage || 'en')
+    const t = getTranslation(userDetails?.displayLanguage || 'en')
     const [showQR, setShowQR] = useState(false);
     const [showUserLinks, setShowUserLinks] = useState(false);
     const [selectedImage, setSelectedImage] = useState(null);

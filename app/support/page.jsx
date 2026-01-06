@@ -2,7 +2,7 @@
 
 import React, { useContext, useState } from 'react';
 import axios from 'axios';
-import { MyContext } from '../Context/MyContext';
+import { MyContext } from '../context/context';
 import { toast } from 'react-toastify';
 import { CheckCheck, Mail, Phone, Loader2, FolderOpen, MessageCircle, MapPin, ImagePlus, X, Loader } from '../Components/Icons';
 
@@ -10,8 +10,8 @@ import WarningModal from "./Pages/WarningModal"
 import MagicalLoader from '../Components/MagicalLoader';
 import Image from 'next/image';
 import Link from 'next/link';
-import Header from '../Components/header';
-import { useTranslation } from '../lib/translations';
+import Header from '../Components/LandingPage/header';
+import { getTranslation } from '../translations/others';
 
 export default function ContactForm() {
   const [subject, setSubject] = useState('')
@@ -19,7 +19,7 @@ export default function ContactForm() {
   const [attachment, setAttachment] = useState(null)
   const [loading, setLoading] = useState(false)
   const { EmailUser, userDetails } = useContext(MyContext)
-  const { t } = useTranslation(userDetails?.displayLanguage || 'en')
+  const t = getTranslation(userDetails?.displayLanguage || 'en')
 
   const handleFileChange = (e) => {
     if (e.target && e.target.files && e.target.files.length > 0) {
@@ -92,7 +92,7 @@ export default function ContactForm() {
     }
     try {
       await axios.post(`/api/proxy/contacts`, { email: EmailUser, subject, message, attachment });
-      toast(<p className='flex gap-3 items-center'><CheckCheck className="text-teal-500" /> {t('successMessage')}</p>, {
+      toast(<p className='flex gap-3 items-center'><CheckCheck className="text-teal-500" /> {t('support.successMessage')}</p>, {
         autoClose: 2000,
       })
       setSubject('')
@@ -101,11 +101,11 @@ export default function ContactForm() {
     } catch (error) {
       console.error('Error adding contact:', error)
       if (error.response && error.response.status === 429) {
-        toast.error(<p className='flex gap-3 items-center'>{t('tooManyRequests')}</p>, {
+        toast.error(<p className='flex gap-3 items-center'>{t('support.tooManyRequests')}</p>, {
           autoClose: 2000,
         })
       } else {
-        toast.error(<p className='flex gap-3 items-center'>{t('errorMessage')}</p>, {
+        toast.error(<p className='flex gap-3 items-center'>{t('support.errorMessage')}</p>, {
           autoClose: 2000,
         })
       }
@@ -127,8 +127,8 @@ export default function ContactForm() {
               <Link href={"/"}>
                 <Image src={"/LogoinQrcode.png"} alt='LOGO' width={130} height={130} className="bg-white p-2 rounded-lg mb-5" />
               </Link>
-              <h2 className="text-3xl font-bold text-white mb-6">{t('getInTouch')}</h2>
-              <p className="text-teal-100 mb-6">{t('weLoveToHear')}</p>
+              <h2 className="text-3xl font-bold text-white mb-6">{t('support.getInTouch')}</h2>
+              <p className="text-teal-100 mb-6">{t('support.weLoveToHear')}</p>
               <div className="space-y-4">
                 <div className="fle items-center text-teal-100 hidden">
                   <Mail className="h-6 w-6 mr-3" />
@@ -145,10 +145,10 @@ export default function ContactForm() {
               </div>
             </div>
             <div className="lg:w-1/2 p-8 lg:p-8">
-              <h2 className="text-3xl font-bold text-teal-800 mb-6">{t('contactSupport')}</h2>
+              <h2 className="text-3xl font-bold text-teal-800 mb-6">{t('support.contactSupport')}</h2>
               <form onSubmit={sendContact} className="space-y-6">
                 <div className='hidden'>
-                  <label htmlFor="email" className="block text-sm font-medium text-teal-600 mb-1">{t('email')} :</label>
+                  <label htmlFor="email" className="block text-sm font-medium text-teal-600 mb-1">{t('support.email')} :</label>
                   <div className="relative">
                     <input
                       type="email"
@@ -156,14 +156,14 @@ export default function ContactForm() {
                       value={EmailUser}
                       readOnly
                       className="pl-10 border-teal-300 focus:border-teal-500 focus:ring-teal-500 w-full rounded-md border h-10 bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
-                      placeholder={t('enterEmail')}
+                      placeholder={t('support.enterEmail')}
                       required
                     />
                     <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 text-teal-800 h-5 w-5" />
                   </div>
                 </div>
                 <div>
-                  <label htmlFor="number" className="block text-sm font-medium text-teal-600 mb-1">{t('subject')} :</label>
+                  <label htmlFor="number" className="block text-sm font-medium text-teal-600 mb-1">{t('support.subject')} :</label>
                   <div className="relative">
                     <input
                       type="text"
@@ -173,13 +173,13 @@ export default function ContactForm() {
                       required
                       onChange={(e) => setSubject(e.target.value)}
                       className="pl-10 border-teal-300 focus:border-teal-500 focus:ring-teal-500 w-full rounded-md border h-10 bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
-                      placeholder={t('enterSubject')}
+                      placeholder={t('support.enterSubject')}
                     />
                     <FolderOpen className="absolute left-3 top-1/2 transform -translate-y-1/2 text-teal-800 h-5 w-5" />
                   </div>
                 </div>
                 <div>
-                  <label htmlFor="message" className="block text-sm font-medium text-teal-600 mb-1">{t('message')} :</label>
+                  <label htmlFor="message" className="block text-sm font-medium text-teal-600 mb-1">{t('support.message')} :</label>
                   <div className="relative">
                     <textarea
                       id="message"
@@ -188,18 +188,18 @@ export default function ContactForm() {
                       className="pl-10 pt-2 border-teal-300 focus:border-teal-500 focus:ring-teal-500 w-full rounded-md border min-h-[80px] bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
                       rows={4}
                       maxLength={500}
-                      placeholder={t('enterMessage')}
+                      placeholder={t('support.enterMessage')}
                       required
                     />
                     <MessageCircle className="absolute left-3 top-2 text-teal-800 h-5 w-5" />
                   </div>
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-teal-600 mb-1">{t('attachment')} :</label>
+                  <label className="block text-sm font-medium text-teal-600 mb-1">{t('support.attachment')} :</label>
                   <div className="flex items-center gap-4">
                     <label htmlFor="file-upload" className="cursor-pointer flex items-center gap-2 px-4 py-2 border border-teal-300 rounded-md text-teal-700 hover:bg-teal-50 transition-colors">
                       <ImagePlus size={20} />
-                      <span>{t('uploadImage')}</span>
+                      <span>{t('support.uploadImage')}</span>
                       <input
                         id="file-upload"
                         type="file"
@@ -230,10 +230,10 @@ export default function ContactForm() {
                   {loading ? (
                     <>
                       <Loader className="mr-2 h-4 w-4 animate-spin" />
-                      {t('sending')}
+                      {t('support.sending')}
                     </>
                   ) : (
-                    t('sendMessage')
+                    t('support.sendMessage')
                   )}
                 </button>
               </form>

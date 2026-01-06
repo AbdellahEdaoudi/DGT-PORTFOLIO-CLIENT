@@ -1,0 +1,40 @@
+{
+    "portfolio": "Portofolio",
+    "about": "Tentang",
+    "aboutMe": "Tentang Saya",
+    "services": "Layanan",
+    "workExperience": "Pengalaman Kerja",
+    "experience": "Pengalaman",
+    "skills": "Keahlian",
+    "projects": "Proyek",
+    "education": "Pendidikan",
+    "certificates": "Sertifikat",
+    "languages": "Bahasa",
+    "viewProject": "Lihat Proyek",
+    "field": "Bidang Studi",
+    "followMe": "Ikuti Saya",
+    "allRightsReserved": "Hak cipta dilindungi",
+    "country": "Negara",
+    "phone": "Telepon",
+    "description": "Deskripsi",
+    "helloIm": "Halo, saya",
+    "qrcode": {
+        "qrCodeProfile": "Kode QR",
+        "downloadQrCode": "Unduh",
+        "shareQrCode": "Bagikan QR",
+        "shareLink": "Bagikan Tautan",
+        "copyLink": "Salin Tautan",
+        "checkOutQrCode": "Cek Kode QR ini!",
+        "sharingFailed": "Gagal membagikan",
+        "webShareApiUnsupported": "Browser Anda tidak mendukung Web Share API.",
+        "successfulShare": "Berhasil dibagikan",
+        "errorSharing": "Kesalahan saat membagikan",
+        "shareUnsupported": "Berbagi tidak didukung di browser ini"
+    },
+    "userlinks": {
+        "businessLinks": "Tautan Bisnis",
+        "noBusinessLinks": "Tidak ada tautan bisnis tersedia.",
+        "close": "Tutup"
+    },
+    "welcometomyworld": "Selamat datang di duniaku"
+}

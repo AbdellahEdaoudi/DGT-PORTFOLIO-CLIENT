@@ -1,0 +1,113 @@
+{
+    "customDomain": {
+        "enterDomain": "Please enter a domain",
+        "verificationFailed": "Verification failed",
+        "domainRemovedSuccess": "Domain removed successfully",
+        "errorRemovingDomain": "Error removing domain",
+        "title": "Custom Domain",
+        "subtitle": "Connect your own domain to your portfolio",
+        "yourDomainName": "Your Domain Name",
+        "placeholder": "example.com",
+        "save": "Save",
+        "domainActiveVerified": "Domain Active & Verified",
+        "verificationPending": "Verification Pending",
+        "domainConfigured": "Your domain is configured and working perfectly!",
+        "verifyOwnership": "Please verify domain ownership by configuring DNS records",
+        "visitSite": "Visit Site",
+        "removeDomain": "Remove Domain",
+        "dnsConfiguration": "DNS Configuration",
+        "connectDomainSteps": "To connect your domain, follow these steps:",
+        "step1Login": "Login to your domain registrar (GoDaddy, Namecheap, etc.)",
+        "step2Navigate": "Navigate to DNS settings/DNS management",
+        "step3AddRecord": "Add the following A record:",
+        "type": "Type",
+        "name": "Name",
+        "value": "Value",
+        "note": "Note",
+        "dnsPropagationNote": "DNS propagation may take up to 48 hours",
+        "verifyingDns": "Verifying DNS...",
+        "verifyDnsConfiguration": "Verify DNS Configuration",
+        "removeTitle": "Remove Custom Domain?",
+        "removeDesc1": "Are you sure you want to remove ",
+        "removeDesc2": " from your portfolio?",
+        "cancel": "Cancel"
+    },
+    "businessLinks": {
+        "title": "Business Links",
+        "linkTitle": "Title",
+        "exampleWebsite": "My Website",
+        "link": "Link",
+        "exampleUrl": "https://example.com",
+        "addLink": "Add Link",
+        "linkAddedSuccessfully": "Link added successfully",
+        "failedToAddLink": "Failed to add link",
+        "linkUpdatedSuccessfully": "Link updated successfully",
+        "failedToUpdateLink": "Failed to update link",
+        "linkDeletedSuccessfully": "Link deleted successfully",
+        "failedToDeleteLink": "Failed to delete link",
+        "edit": "Edit",
+        "delete": "Delete",
+        "noLinksFound": "No links added yet.",
+        "deleteLinkConfirm": "Are you sure you want to delete this link?",
+        "updateLink": "Update Link"
+    },
+    "support": {
+        "successMessage": "Message sent successfully!",
+        "tooManyRequests": "Too many requests. Please try again later.",
+        "errorMessage": "An error occurred. Please try again.",
+        "getInTouch": "Get in Touch",
+        "weLoveToHear": "We'd love to hear from you! Send us a message and we'll respond as soon as possible.",
+        "contactSupport": "Contact Support",
+        "email": "Email",
+        "enterEmail": "Enter your email",
+        "subject": "Subject",
+        "enterSubject": "Enter subject",
+        "message": "Message",
+        "enterMessage": "Enter your message",
+        "attachment": "Attachment",
+        "uploadImage": "Upload Image (Optional)",
+        "sending": "Sending...",
+        "sendMessage": "Send Message"
+    },
+    "success": {
+        "paymentSuccessful": "Payment Successful!",
+        "subscriptionActive": "Your subscription is now active. Thank you for your purchase!",
+        "goToHome": "Go to Home"
+    },
+    "subscription": {
+        "promoMonthly": {
+            "name": "Promo Monthly",
+            "description": "Special promo offer",
+            "period": "/month"
+        },
+        "promo6Month": {
+            "name": "Promo 6-Month",
+            "description": "Great value for 6 months",
+            "period": "/6 months"
+        },
+        "promoAnnual": {
+            "name": "Promo Annual",
+            "description": "Best deal for the year",
+            "period": "/year"
+        },
+        "subMonthly": {
+            "name": "Subscribe Monthly",
+            "description": "$1 for the month",
+            "period": "/month"
+        },
+        "sub6Months": {
+            "name": "Subscribe 6 Months",
+            "description": "Great mid‑term offer",
+            "period": "/6 months"
+        },
+        "subYearly": {
+            "name": "Subscribe Yearly",
+            "description": "Best value",
+            "period": "/year"
+        },
+        "recommended": "Recommended",
+        "placeholder": "Promo Code",
+        "applyBtn": "Apply",
+        "verifyingBtn": "Verifying..."
+    }
+}

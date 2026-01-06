@@ -4,11 +4,10 @@ import React, { useState, useEffect } from "react"
 import { createPortal } from "react-dom"
 import { toast } from "react-toastify"
 import { CheckCheck, Loader, Plus, Trash2, ArrowUp, ArrowDown, X, AlertCircle } from "../../Components/Icons"
-
-import { useTranslation } from "../../lib/translations"
+import { getTranslation } from '../../translations/update-profile'
 
 export default function Skills({ userData, setUserDetails }) {
-  const { t } = useTranslation(userData?.displayLanguage || 'en')
+  const t = getTranslation(userData?.displayLanguage || 'en')
   const [skills, setSkills] = useState(userData.skills || [])
   const [loading, setLoading] = useState(false)
   const [movedItemIndex, setMovedItemIndex] = useState(null)
@@ -69,13 +68,13 @@ export default function Skills({ userData, setUserDetails }) {
 
       toast(
         <p className="flex gap-3 items-center">
-          <CheckCheck className="text-purple-500" /> {t('savedSuccessfully')}
+          <CheckCheck className="text-purple-500" /> {t('skills.savedSuccessfully')}
         </p>,
         { autoClose: 2000 }
       )
     } catch (error) {
       console.error("Error updating skills:", error)
-      toast.error(t('errorMessage'))
+      toast.error(t('skills.errorMessage'))
     } finally {
       setLoading(false)
     }
@@ -83,7 +82,7 @@ export default function Skills({ userData, setUserDetails }) {
 
   return (
     <div className="space-y-4" dir={userData?.displayLanguage === 'ar' ? 'rtl' : 'ltr'}>
-      <h3 className="text-lg font-bold text-gray-800">💡 {t('skills')}</h3>
+      <h3 className="text-lg font-bold text-gray-800">💡 {t('skills.title')}</h3>
       <div className="bg-gradient-to-br from-purple-50 to-pink-50 p-2 md:p-4 rounded-xl border border-purple-200 space-y-3">
         <div className="space-y-2">
           {skills.map((skill, index) => (
@@ -134,7 +133,7 @@ export default function Skills({ userData, setUserDetails }) {
           }}
           className={`w-full text-white py-2 rounded-lg flex items-center justify-center gap-2 transition-all duration-300 ${skills.length >= 10 ? 'bg-gray-400 cursor-not-allowed' : 'bg-gradient-to-r from-purple-500 to-pink-600 hover:from-purple-600 hover:to-pink-700'}`}
         >
-          <Plus size={18} /> {skills.length >= 10 ? "10 Max" : t('addSkill')}
+          <Plus size={18} /> {skills.length >= 10 ? "10 Max" : t('skills.addSkill')}
         </button>
       </div>
       <div className="flex justify-end py-4 border-b-2 border-gray-200">
@@ -145,10 +144,10 @@ export default function Skills({ userData, setUserDetails }) {
         >
           {loading ? (
             <>
-              <Loader size={20} className="animate-spin" /> {t('saving')}
+              <Loader size={20} className="animate-spin" /> {t('skills.saving')}
             </>
           ) : (
-            `💾 ${t('save')}`
+            `💾 ${t('skills.save')}`
           )}
         </button>
       </div>
@@ -186,14 +185,14 @@ export default function Skills({ userData, setUserDetails }) {
                 onClick={() => setItemToDelete(null)}
                 className="flex-1 px-4 py-2.5 bg-gray-200 hover:bg-gray-300 text-gray-800 font-bold rounded-lg transition-all duration-200"
               >
-                {t('cancel') || "Cancel"}
+                {t('skills.cancel') || "Cancel"}
               </button>
               <button
                 onClick={confirmDelete}
                 className="flex-1 px-4 py-2.5 bg-red-600 hover:bg-red-700 text-white font-medium rounded-lg shadow-md transition duration-200 flex items-center justify-center gap-2"
               >
                 <Trash2 size={18} />
-                <span>{t('delete') || "Delete"}</span>
+                <span>{t('skills.delete') || "Delete"}</span>
               </button>
             </div>
           </div>

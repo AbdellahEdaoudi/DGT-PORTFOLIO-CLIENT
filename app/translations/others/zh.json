@@ -1,0 +1,113 @@
+{
+    "customDomain": {
+        "enterDomain": "请输入域名",
+        "verificationFailed": "验证失败",
+        "domainRemovedSuccess": "域名已成功移除",
+        "errorRemovingDomain": "移除域名时出错",
+        "title": "自定义域名",
+        "subtitle": "将您自己的域名连接到您的作品集",
+        "yourDomainName": "您的域名",
+        "placeholder": "example.com",
+        "save": "保存",
+        "domainActiveVerified": "域名已激活并验证",
+        "verificationPending": "等待验证",
+        "domainConfigured": "您的域名已配置并完美运行！",
+        "verifyOwnership": "请通过配置DNS记录来验证域名所有权",
+        "visitSite": "访问网站",
+        "removeDomain": "移除域名",
+        "dnsConfiguration": "DNS配置",
+        "connectDomainSteps": "要连接您的域名，请按照以下步骤操作：",
+        "step1Login": "登录您的域名注册商（GoDaddy, Namecheap等）",
+        "step2Navigate": "导航到DNS设置/DNS管理",
+        "step3AddRecord": "添加以下A记录：",
+        "type": "类型",
+        "name": "名称",
+        "value": "值",
+        "note": "注意",
+        "dnsPropagationNote": "DNS传播可能需要长达48小时",
+        "verifyingDns": "正在验证DNS...",
+        "verifyDnsConfiguration": "验证DNS配置",
+        "removeTitle": "移除自定义域名？",
+        "removeDesc1": "您确定要从作品集中移除 ",
+        "removeDesc2": " 吗？",
+        "cancel": "取消"
+    },
+    "businessLinks": {
+        "title": "商业链接",
+        "linkTitle": "标题",
+        "exampleWebsite": "我的网站",
+        "link": "链接",
+        "exampleUrl": "https://example.com",
+        "addLink": "添加链接",
+        "linkAddedSuccessfully": "链接添加成功",
+        "failedToAddLink": "添加链接失败",
+        "linkUpdatedSuccessfully": "链接更新成功",
+        "failedToUpdateLink": "更新链接失败",
+        "linkDeletedSuccessfully": "链接删除成功",
+        "failedToDeleteLink": "删除链接失败",
+        "edit": "编辑",
+        "delete": "删除",
+        "noLinksFound": "尚未添加链接。",
+        "deleteLinkConfirm": "您确定要删除此链接吗？",
+        "updateLink": "更新链接"
+    },
+    "support": {
+        "successMessage": "消息发送成功！",
+        "tooManyRequests": "请求过多。请稍后再试。",
+        "errorMessage": "发生错误。请重试。",
+        "getInTouch": "联系我们",
+        "weLoveToHear": "我们要听取您的意见！给我们发送消息，我们将尽快回复。",
+        "contactSupport": "联系支持",
+        "email": "电子邮件",
+        "enterEmail": "输入您的电子邮件",
+        "subject": "主题",
+        "enterSubject": "输入主题",
+        "message": "消息",
+        "enterMessage": "输入您的消息",
+        "attachment": "附件",
+        "uploadImage": "上传图片（可选）",
+        "sending": "发送中...",
+        "sendMessage": "发送消息"
+    },
+    "success": {
+        "paymentSuccessful": "支付成功！",
+        "subscriptionActive": "您的订阅现已激活。感谢您的购买！",
+        "goToHome": "返回首页"
+    },
+    "subscription": {
+        "promoMonthly": {
+            "name": "每月促销",
+            "description": "特别促销优惠",
+            "period": "/月"
+        },
+        "promo6Month": {
+            "name": "6个月促销",
+            "description": "半年超值优惠",
+            "period": "/6个月"
+        },
+        "promoAnnual": {
+            "name": "年度促销",
+            "description": "年度最佳优惠",
+            "period": "/年"
+        },
+        "subMonthly": {
+            "name": "按月订阅",
+            "description": "每月$1",
+            "period": "/月"
+        },
+        "sub6Months": {
+            "name": "订阅6个月",
+            "description": "极佳的中期优惠",
+            "period": "/6个月"
+        },
+        "subYearly": {
+            "name": "按年订阅",
+            "description": "最佳价值",
+            "period": "/年"
+        },
+        "recommended": "推荐",
+        "placeholder": "促销代码",
+        "applyBtn": "应用",
+        "verifyingBtn": "正在验证..."
+    }
+}

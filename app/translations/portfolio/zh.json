@@ -1,0 +1,40 @@
+{
+    "portfolio": "作品集",
+    "about": "关于",
+    "aboutMe": "关于我",
+    "services": "服务",
+    "workExperience": "工作经验",
+    "experience": "经验",
+    "skills": "技能",
+    "projects": "项目",
+    "education": "教育",
+    "certificates": "证书",
+    "languages": "语言",
+    "viewProject": "查看项目",
+    "field": "研究领域",
+    "followMe": "关注我",
+    "allRightsReserved": "版权所有",
+    "country": "国家",
+    "phone": "电话",
+    "description": "描述",
+    "helloIm": "你好，我是",
+    "qrcode": {
+        "qrCodeProfile": "二维码",
+        "downloadQrCode": "下载",
+        "shareQrCode": "分享二维码",
+        "shareLink": "分享链接",
+        "copyLink": "复制链接",
+        "checkOutQrCode": "查看此二维码！",
+        "sharingFailed": "分享失败",
+        "webShareApiUnsupported": "您的浏览器不支持Web Share API。",
+        "successfulShare": "分享成功",
+        "errorSharing": "分享错误",
+        "shareUnsupported": "此浏览器不支持分享"
+    },
+    "userlinks": {
+        "businessLinks": "商业链接",
+        "noBusinessLinks": "无可用商业链接。",
+        "close": "关闭"
+    },
+    "welcometomyworld": "欢迎来到我的世界"
+}

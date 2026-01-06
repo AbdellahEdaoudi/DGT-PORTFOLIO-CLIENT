@@ -1,0 +1,113 @@
+{
+    "customDomain": {
+        "enterDomain": "Пожалуйста, введите домен",
+        "verificationFailed": "Ошибка проверки",
+        "domainRemovedSuccess": "Домен успешно удален",
+        "errorRemovingDomain": "Ошибка при удалении домена",
+        "title": "Пользовательский домен",
+        "subtitle": "Подключите свой собственный домен к портфолио",
+        "yourDomainName": "Ваше доменное имя",
+        "placeholder": "example.com",
+        "save": "Сохранить",
+        "domainActiveVerified": "Домен активен и проверен",
+        "verificationPending": "Ожидание проверки",
+        "domainConfigured": "Ваш домен настроен и работает отлично!",
+        "verifyOwnership": "Пожалуйста, подтвердите владение доменом, настроив записи DNS",
+        "visitSite": "Посетить сайт",
+        "removeDomain": "Удалить домен",
+        "dnsConfiguration": "Конфигурация DNS",
+        "connectDomainSteps": "Чтобы подключить домен, выполните следующие действия:",
+        "step1Login": "Войдите в регистратор домена (GoDaddy, Namecheap и т. д.)",
+        "step2Navigate": "Перейдите в настройки DNS / управление DNS",
+        "step3AddRecord": "Добавьте следующую запись A:",
+        "type": "Тип",
+        "name": "Имя",
+        "value": "Значение",
+        "note": "Примечание",
+        "dnsPropagationNote": "Распространение DNS может занять до 48 часов",
+        "verifyingDns": "Проверка DNS...",
+        "verifyDnsConfiguration": "Проверить конфигурацию DNS",
+        "removeTitle": "Удалить пользовательский домен?",
+        "removeDesc1": "Вы уверены, что хотите удалить ",
+        "removeDesc2": " из вашего портфолио?",
+        "cancel": "Отмена"
+    },
+    "businessLinks": {
+        "title": "Бизнес-ссылки",
+        "linkTitle": "Заголовок",
+        "exampleWebsite": "Мой веб-сайт",
+        "link": "Ссылка",
+        "exampleUrl": "https://example.com",
+        "addLink": "Добавить ссылку",
+        "linkAddedSuccessfully": "Ссылка успешно добавлена",
+        "failedToAddLink": "Не удалось добавить ссылку",
+        "linkUpdatedSuccessfully": "Ссылка успешно обновлена",
+        "failedToUpdateLink": "Не удалось обновить ссылку",
+        "linkDeletedSuccessfully": "Ссылка успешно удалена",
+        "failedToDeleteLink": "Не удалось удалить ссылку",
+        "edit": "Редактировать",
+        "delete": "Удалить",
+        "noLinksFound": "Ссылки пока не добавлены.",
+        "deleteLinkConfirm": "Вы уверены, что хотите удалить эту ссылку?",
+        "updateLink": "Обновить ссылку"
+    },
+    "support": {
+        "successMessage": "Сообщение успешно отправлено!",
+        "tooManyRequests": "Слишком много запросов. Пожалуйста, попробуйте позже.",
+        "errorMessage": "Произошла ошибка. Пожалуйста, попробуйте еще раз.",
+        "getInTouch": "Связаться с нами",
+        "weLoveToHear": "Мы будем рады услышать от вас! Отправьте нам сообщение, и мы ответим как можно скорее.",
+        "contactSupport": "Связаться с поддержкой",
+        "email": "Электронная почта",
+        "enterEmail": "Введите ваш email",
+        "subject": "Тема",
+        "enterSubject": "Введите тему",
+        "message": "Сообщение",
+        "enterMessage": "Введите ваше сообщение",
+        "attachment": "Вложение",
+        "uploadImage": "Загрузить изображение (необязательно)",
+        "sending": "Отправка...",
+        "sendMessage": "Отправить сообщение"
+    },
+    "success": {
+        "paymentSuccessful": "Оплата прошла успешно!",
+        "subscriptionActive": "Ваша подписка теперь активна. Спасибо за покупку!",
+        "goToHome": "На главную"
+    },
+    "subscription": {
+        "promoMonthly": {
+            "name": "Промо Ежемесячно",
+            "description": "Специальное промо-предложение",
+            "period": "/месяц"
+        },
+        "promo6Month": {
+            "name": "Промо 6 месяцев",
+            "description": "Отличная цена за 6 месяцев",
+            "period": "/6 месяцев"
+        },
+        "promoAnnual": {
+            "name": "Промо Ежегодно",
+            "description": "Лучшее предложение года",
+            "period": "/год"
+        },
+        "subMonthly": {
+            "name": "Подписаться на месяц",
+            "description": "$1 за месяц",
+            "period": "/месяц"
+        },
+        "sub6Months": {
+            "name": "Подписаться на 6 месяцев",
+            "description": "Отличное среднесрочное предложение",
+            "period": "/6 месяцев"
+        },
+        "subYearly": {
+            "name": "Подписаться на год",
+            "description": "Лучшая цена",
+            "period": "/год"
+        },
+        "recommended": "Рекомендуется",
+        "placeholder": "Промокод",
+        "applyBtn": "Применить",
+        "verifyingBtn": "Проверка..."
+    }
+}

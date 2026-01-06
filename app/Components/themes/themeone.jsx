@@ -12,17 +12,18 @@ import {
   Menu,
   X,
   ArrowUp,
+  User,
 } from "../Icons"
-import QrcodeProfile from "../../[username]/components/QrcodeProfile"
-import UserLinks from "../../[username]/components/UserLinks"
+import QrcodeProfile from "../portfolio/QrcodeProfile"
+import UserLinks from "../portfolio/UserLinks"
 import Image from "next/image"
 import Link from "next/link"
-import { useTranslation } from "../../lib/translations"
-import ImageModal from "../ImageModal"
+import { getTranslation } from "../../translations/portfolio"
+import ImageModal from "../portfolio/ImageModal"
 import DownloadResume from "../downloadcv/DownloadResume"
 
 export default function Themeone({ userDetails, userLinks, bgcolor }) {
-  const { t } = useTranslation(userDetails?.displayLanguage || 'en')
+  const t = getTranslation(userDetails?.displayLanguage || 'en')
   const [showQR, setShowQR] = useState(false);
   const [showUserLinks, setShowUserLinks] = useState(false);
   const [expanded, setExpanded] = useState(false);
@@ -210,11 +211,17 @@ export default function Themeone({ userDetails, userLinks, bgcolor }) {
                   <div className="flex-shrink-0 flex items-center gap-2 ">
                     <div className="relative w-24 h-24 md:w-40 md:h-40 shrink-0">
                       <div className="absolute inset-0 bg-gradient-to-br from-white/20 to-white/5 rounded-full blur-xl"></div>
-                      <Image width={500} height={500}
-                        src={userDetails?.urlimage}
-                        alt={userDetails?.fullname || "Profile Picture"}
-                        className="relative z-10 w-full h-full rounded-full object-cover border-4 border-white/30 shadow-2xl"
-                      />
+                      {userDetails?.urlimage ? (
+                        <Image width={500} height={500}
+                          src={userDetails?.urlimage}
+                          alt={userDetails?.fullname || "Profile Picture"}
+                          className="relative z-10 w-full h-full rounded-full object-cover border-4 border-white/30 shadow-2xl"
+                        />
+                      ) : (
+                        <div className="relative z-10 w-full h-full rounded-full bg-white/10 border-4 border-white/30 shadow-2xl flex items-center justify-center text-white/50">
+                          <User size={48} className="md:w-20 md:h-20 w-12 h-12" />
+                        </div>
+                      )}
                     </div>
                     <div className="md:hidden block mt-4">
                       <h2 className=" text-2xl  font-bold text-white mb-2">{userDetails?.fullname}</h2>
@@ -507,7 +514,7 @@ export default function Themeone({ userDetails, userLinks, bgcolor }) {
           <footer className="border-t border-white/10 bg-black/20 backdrop-blur-md">
             <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8 text-center">
               <p className="text-white/60">
-                © {new Date().getFullYear()} {userDetails?.fullname}. {t('allRightsReserved')} © 
+                © {new Date().getFullYear()} {userDetails?.fullname}. {t('allRightsReserved')} ©
               </p>
             </div>
           </footer>

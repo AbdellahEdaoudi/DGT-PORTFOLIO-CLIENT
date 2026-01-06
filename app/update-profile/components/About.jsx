@@ -4,10 +4,10 @@ import { CheckCheck, Loader, User, Sparkles, Lightbulb, Trash2, X, AlertCircle }
 import React, { useState, useEffect } from 'react'
 import { createPortal } from "react-dom"
 import { toast } from 'react-toastify'
-import { useTranslation } from '../../lib/translations'
+import { getTranslation } from '../../translations/update-profile'
 
 export default function About({ userData }) {
-  const { t } = useTranslation(userData?.displayLanguage || 'en')
+  const t = getTranslation(userData?.displayLanguage || 'en')
   const [about, setAbout] = useState(userData?.about || "")
   const [loading, setLoading] = useState(false)
   const [showClearModal, setShowClearModal] = useState(false)
@@ -25,12 +25,12 @@ export default function About({ userData }) {
         about,
       })
       toast(<p className='flex gap-3 items-center'><CheckCheck className="text-teal-500" />
-        {t('savedSuccessfully')}</p>, {
+        {t('about.savedSuccessfully')}</p>, {
         autoClose: 2000,
       })
     } catch (error) {
       console.error(error)
-      toast.error(t('errorMessage') || "Error saving")
+      toast.error(t('about.errorMessage') || "Error saving")
     } finally {
       setLoading(false)
     }
@@ -55,13 +55,10 @@ export default function About({ userData }) {
         <div className="space-y-1">
           <h3 className="text-xl font-bold text-gray-800 flex items-center gap-2">
             <User className="text-teal-600" />
-            {t('summary')}
+            {t('about.summary')}
           </h3>
           <p className="text-sm text-gray-500 max-w-2xl">
-            {userData?.displayLanguage === 'ar'
-              ? "اكتب نبذة مختصرة عن نفسك، خبراتك، وأهدافك المهنية."
-              : "Write a brief summary about yourself, your experience, and your professional goals."
-            }
+            {t('about.description')}
           </p>
         </div>
 
@@ -78,11 +75,11 @@ export default function About({ userData }) {
         >
           {loading ? (
             <>
-              <Loader size={20} className="animate-spin" /> {t('saving')}
+              <Loader size={20} className="animate-spin" /> {t('about.saving')}
             </>
           ) : (
             <>
-              <CheckCheck size={20} /> {t('save')}
+              <CheckCheck size={20} /> {t('about.save')}
             </>
           )}
         </button>
@@ -99,7 +96,7 @@ export default function About({ userData }) {
         <div className="bg-gray-50 border-b border-gray-100 px-4 py-3 flex justify-between items-center text-sm text-gray-500">
           <div className="flex items-center gap-2">
             <Sparkles size={16} className="text-teal-500" />
-            <span className="font-medium text-gray-700">{t('bio') || "Bio"}</span>
+            <span className="font-medium text-gray-700">{t('about.bio')}</span>
           </div>
           {about.length > 0 && (
             <button
@@ -107,7 +104,7 @@ export default function About({ userData }) {
               className="text-gray-400 hover:text-red-500 transition-colors flex items-center gap-1.5 text-xs font-medium"
             >
               <Trash2 size={14} />
-              {t('clear') || "Clear"}
+              {t('about.clear')}
             </button>
           )}
         </div>
@@ -118,9 +115,7 @@ export default function About({ userData }) {
             value={about}
             maxLength={maxLength}
             onChange={(e) => setAbout(e.target.value)}
-            placeholder={userData?.displayLanguage === 'ar'
-              ? "أنا مطور برمجيات شغوف..."
-              : "I am a passionate software developer..."}
+            placeholder={t('about.placeholder')}
             className="
                 w-full px-5 py-5 min-h-[220px]
                 border-0 focus:ring-0 outline-none
@@ -157,13 +152,10 @@ export default function About({ userData }) {
         </div>
         <div className="space-y-1">
           <h4 className="text-sm font-bold text-gray-800">
-            {userData?.displayLanguage === 'ar' ? "نصيحة احترافية" : "Pro Tip"}
+            {t('about.proTip')}
           </h4>
           <p className="text-xs md:text-sm text-gray-600 leading-relaxed">
-            {userData?.displayLanguage === 'ar'
-              ? "اجعل نبذتك قصيرة وجذابة. ركز على أقوى مهاراتك وما يمكنك تقديمه للعملاء أو أصحاب العمل."
-              : "Keep your summary concise and engaging. Focus on your strongest skills and the unique value you offer to clients or employers."
-            }
+            {t('about.tip')}
           </p>
         </div>
       </div>
@@ -183,11 +175,11 @@ export default function About({ userData }) {
         >
           {loading ? (
             <>
-              <Loader size={20} className="animate-spin" /> {t('saving')}
+              <Loader size={20} className="animate-spin" /> {t('about.saving')}
             </>
           ) : (
             <>
-              <CheckCheck size={20} /> {t('save')}
+              <CheckCheck size={20} /> {t('about.save')}
             </>
           )}
         </button>
@@ -214,13 +206,10 @@ export default function About({ userData }) {
 
             <div className="w-full mb-6">
               <h3 className="text-lg font-bold text-gray-800 mb-2">
-                {userData?.displayLanguage === 'ar' ? "هل أنت متأكد؟" : "Are you sure?"}
+                {t('about.confirmTitle')}
               </h3>
               <p className="text-gray-600 text-sm leading-relaxed">
-                {userData?.displayLanguage === 'ar'
-                  ? "سيؤدي هذا الإجراء إلى حذف كل النص الموجود في النبذة المختصرة. لا يمكن التراجع عن هذا."
-                  : "This action will delete all text in your summary. This cannot be undone."
-                }
+                {t('about.confirmMessage')}
               </p>
             </div>
 
@@ -229,14 +218,14 @@ export default function About({ userData }) {
                 onClick={() => setShowClearModal(false)}
                 className="flex-1 px-4 py-2.5 bg-gray-100 hover:bg-gray-200 text-gray-700 font-bold rounded-lg transition-colors duration-200"
               >
-                {t('cancel') || "Cancel"}
+                {t('about.cancel') || "Cancel"}
               </button>
               <button
                 onClick={confirmClear}
                 className="flex-1 px-4 py-2.5 bg-red-600 hover:bg-red-700 text-white font-bold rounded-lg shadow-md transition-colors duration-200 flex items-center justify-center gap-2"
               >
                 <Trash2 size={18} />
-                <span>{t('clear') || "Clear All"}</span>
+                <span>{t('about.clear') || "Clear All"}</span>
               </button>
             </div>
           </div>

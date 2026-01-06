@@ -1,0 +1,40 @@
+{
+    "portfolio": "पोर्टफोलियो",
+    "about": "के बारे में",
+    "aboutMe": "मेरे बारे में",
+    "services": "सेवाएं",
+    "workExperience": "कार्य अनुभव",
+    "experience": "अनुभव",
+    "skills": "कौशल",
+    "projects": "परियोजनाएं",
+    "education": "शिक्षा",
+    "certificates": "प्रमाणपत्र",
+    "languages": "भाषाएं",
+    "viewProject": "परियोजना देखें",
+    "field": "अध्ययन का क्षेत्र",
+    "followMe": "मुझे फॉलो करें",
+    "allRightsReserved": "सर्वाधिकार सुरक्षित",
+    "country": "देश",
+    "phone": "फ़ोन",
+    "description": "विवरण",
+    "helloIm": "नमस्ते, मैं हूँ",
+    "qrcode": {
+        "qrCodeProfile": "QR कोड",
+        "downloadQrCode": "डाउनलोड",
+        "shareQrCode": "QR साझा करें",
+        "shareLink": "लिंक साझा करें",
+        "copyLink": "लिंक कॉपी करें",
+        "checkOutQrCode": "इस QR कोड को देखें!",
+        "sharingFailed": "साजा करने में विफल",
+        "webShareApiUnsupported": "आपका ब्राउज़र वेब शेयर API का समर्थन नहीं करता है।",
+        "successfulShare": "सफलतापूर्वक साझा किया गया",
+        "errorSharing": "साझा करने में त्रुटि",
+        "shareUnsupported": "इस ब्राउज़र पर साझा करना समर्थيت नहीं है"
+    },
+    "userlinks": {
+        "businessLinks": "व्यापार लिंक",
+        "noBusinessLinks": "कोई व्यापार लिंक उपलब्ध नहीं है।",
+        "close": "बंद करें"
+    },
+    "welcometomyworld": "मेरी दुनिया में आपका स्वागत है"
+}

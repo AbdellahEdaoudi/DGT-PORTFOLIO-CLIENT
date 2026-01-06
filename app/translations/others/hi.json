@@ -1,0 +1,113 @@
+{
+    "customDomain": {
+        "enterDomain": "कृपया एक डोमेन दर्ज करें",
+        "verificationFailed": "सत्यापन विफल",
+        "domainRemovedSuccess": "डोमेन सफलतापूर्वक हटा दिया गया",
+        "errorRemovingDomain": "डोमेन हटाने में त्रुटि",
+        "title": "कस्टम डोमेन",
+        "subtitle": "अपने पोर्टफोलियो से अपना खुद का डोमेन कनेक्ट करें",
+        "yourDomainName": "आपका डोमेन नाम",
+        "placeholder": "उदाहरण.com",
+        "save": "सहेजें",
+        "domainActiveVerified": "डोमेन सक्रिय और सत्यापित",
+        "verificationPending": "सत्यापन लंबित",
+        "domainConfigured": "आपका डोमेन कॉन्फ़िगर किया गया है और पूरी तरह से काम कर रहा है!",
+        "verifyOwnership": "कृपया DNS रिकॉर्ड कॉन्फ़िगर करके डोमेन स्वामित्व सत्यापित करें",
+        "visitSite": "साइट पर जाएं",
+        "removeDomain": "डोमेन हटाएं",
+        "dnsConfiguration": "DNS कॉन्फ़िगरेशन",
+        "connectDomainSteps": "अपना डोमेन कनेक्ट करने के लिए, इन चरणों का पालन करें:",
+        "step1Login": "अपने डोमेन रजिस्ट्रार (GoDaddy, Namecheap, आदि) में लॉगिन करें",
+        "step2Navigate": "DNS सेटिंग्स / DNS प्रबंधन पर जाएं",
+        "step3AddRecord": "निम्नलिखित A रिकॉर्ड जोड़ें:",
+        "type": "प्रकार",
+        "name": "नाम",
+        "value": "मूल्य",
+        "note": "नोट",
+        "dnsPropagationNote": "DNS प्रसार में 48 घंटे तक लग सकते हैं",
+        "verifyingDns": "DNS सत्यापित कर रहा है...",
+        "verifyDnsConfiguration": "DNS कॉन्फ़िगरेशन सत्यापित करें",
+        "removeTitle": "कस्टम डोमेन हटाएं?",
+        "removeDesc1": "क्या आप वाकई अपने पोर्टफोलियो से ",
+        "removeDesc2": " हटाना चाहते हैं?",
+        "cancel": "रद्द करें"
+    },
+    "businessLinks": {
+        "title": "व्यापार लिंक",
+        "linkTitle": "शीर्षक",
+        "exampleWebsite": "मेरी वेबसाइट",
+        "link": "लिंक",
+        "exampleUrl": "https://example.com",
+        "addLink": "लिंक जोड़ें",
+        "linkAddedSuccessfully": "लिंक सफलतापूर्वक जोड़ा गया",
+        "failedToAddLink": "लिंक जोड़ने में विफल",
+        "linkUpdatedSuccessfully": "लिंक सफलतापूर्वक अपडेट किया गया",
+        "failedToUpdateLink": "लिंक अपडेट करने में विफल",
+        "linkDeletedSuccessfully": "लिंक सफलतापूर्वक हटा दिया गया",
+        "failedToDeleteLink": "लिंक हटाने में विफल",
+        "edit": "संपादित करें",
+        "delete": "हटाएं",
+        "noLinksFound": "अभी तक कोई लिंक नहीं जोड़ा गया।",
+        "deleteLinkConfirm": "क्या आप वाकई इस लिंक को हटाना चाहते हैं?",
+        "updateLink": "लिंक अपडेट करें"
+    },
+    "support": {
+        "successMessage": "संदेश सफलतापूर्वक भेजा गया!",
+        "tooManyRequests": "बहुत सारे अनुरोध। कृपया बाद में पुनः प्रयास करें।",
+        "errorMessage": "एक त्रुटि हुई। कृपया पुनः प्रयास करें।",
+        "getInTouch": "संपर्क में रहें",
+        "weLoveToHear": "हमें आपसे सुनना अच्छा लगेगा! हमें एक संदेश भेजें और हम जल्द से जल्द जवाब देंगे।",
+        "contactSupport": "समर्थन से संपर्क करें",
+        "email": "ईमेल",
+        "enterEmail": "अपना ईमेल दर्ज करें",
+        "subject": "विषय",
+        "enterSubject": "विषय दर्ज करें",
+        "message": "संदेश",
+        "enterMessage": "अपना संदेश दर्ज करें",
+        "attachment": "संलग्नक",
+        "uploadImage": "छवि अपलोड करें (वैकल्पिक)",
+        "sending": "भेज रहा है...",
+        "sendMessage": "संदेश भेजें"
+    },
+    "success": {
+        "paymentSuccessful": "भुगतान सफल!",
+        "subscriptionActive": "आपकी सदस्यता अब सक्रिय है। आपकी खरीद के लिए धन्यवाद!",
+        "goToHome": "होम पर जाएं"
+    },
+    "subscription": {
+        "promoMonthly": {
+            "name": "प्रोमो मासिक",
+            "description": "विशेष प्रोमो प्रस्ताव",
+            "period": "/माह"
+        },
+        "promo6Month": {
+            "name": "प्रोमो 6 महीने",
+            "description": "6 महीने के लिए बढ़िया मूल्य",
+            "period": "/6 महीने"
+        },
+        "promoAnnual": {
+            "name": "प्रोमो वार्षिक",
+            "description": "वर्ष का सबसे अच्छा सौदा",
+            "period": "/वर्ष"
+        },
+        "subMonthly": {
+            "name": "मासिक सदस्यता लें",
+            "description": "महीने के लिए $1",
+            "period": "/माह"
+        },
+        "sub6Months": {
+            "name": "6 महीने की सदस्यता लें",
+            "description": "महान मध्यम अवधि का प्रस्ताव",
+            "period": "/6 महीने"
+        },
+        "subYearly": {
+            "name": "वार्षिक सदस्यता लें",
+            "description": "सबसे अच्छा मूल्य",
+            "period": "/वर्ष"
+        },
+        "recommended": "अनुशंसित",
+        "placeholder": "प्रोमो कोड",
+        "applyBtn": "लागू करें",
+        "verifyingBtn": "सत्यापित कर रहा है..."
+    }
+}

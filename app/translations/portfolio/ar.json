@@ -1,0 +1,40 @@
+{
+    "portfolio": "معرض الأعمال",
+    "about": "نبذة",
+    "aboutMe": "نبذة عني",
+    "services": "الخدمات",
+    "workExperience": "الخبرة العملية",
+    "experience": "الخبرة",
+    "skills": "المهارات",
+    "projects": "المشاريع",
+    "education": "التعليم",
+    "certificates": "الشهادات",
+    "languages": "اللغات",
+    "viewProject": "عرض المشروع",
+    "field": "مجال الدراسة",
+    "followMe": "تابعني",
+    "allRightsReserved": "جميع الحقوق محفوظة",
+    "country": "الدولة",
+    "phone": "الهاتف",
+    "description": "الوصف",
+    "helloIm": "مرحباً، أنا",
+    "qrcode": {
+        "qrCodeProfile": "رمز الاستجابة السريعة",
+        "downloadQrCode": "تحميل",
+        "shareQrCode": "مشاركة الرمز",
+        "shareLink": "مشاركة الرابط",
+        "copyLink": "نسخ الرابط",
+        "checkOutQrCode": "اطلع على رمز الاستجابة السريعة هذا!",
+        "sharingFailed": "فشل المشاركة",
+        "webShareApiUnsupported": "متصفحك لا يدعم واجهة برمجة تطبيقات Web Share.",
+        "successfulShare": "مشاركة ناجحة",
+        "errorSharing": "خطأ في المشاركة",
+        "shareUnsupported": "المشاركة غير مدعومة في هذا المتصفح"
+    },
+    "userlinks": {
+        "businessLinks": "روابط الأعمال",
+        "noBusinessLinks": "لا توجد روابط عمل متاحة.",
+        "close": "إغلاق"
+    },
+    "welcometomyworld": "مرحباً بك في عالمي"
+}

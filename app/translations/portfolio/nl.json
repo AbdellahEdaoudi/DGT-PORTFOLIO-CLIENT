@@ -1,0 +1,40 @@
+{
+    "portfolio": "Portfolio",
+    "about": "Over",
+    "aboutMe": "Over mij",
+    "services": "Diensten",
+    "workExperience": "Werkervaring",
+    "experience": "Ervaring",
+    "skills": "Vaardigheden",
+    "projects": "Projecten",
+    "education": "Opleiding",
+    "certificates": "Certificaten",
+    "languages": "Talen",
+    "viewProject": "Project bekijken",
+    "field": "Studierichting",
+    "followMe": "Volg mij",
+    "allRightsReserved": "Alle rechten voorbehouden",
+    "country": "Land",
+    "phone": "Telefoon",
+    "description": "Beschrijving",
+    "helloIm": "Hallo, ik ben",
+    "qrcode": {
+        "qrCodeProfile": "QR-code",
+        "downloadQrCode": "Downloaden",
+        "shareQrCode": "Deel QR",
+        "shareLink": "Deel link",
+        "copyLink": "Kopieer link",
+        "checkOutQrCode": "Bekijk deze QR-code!",
+        "sharingFailed": "Delen mislukt",
+        "webShareApiUnsupported": "Uw browser ondersteunt de Web Share API niet.",
+        "successfulShare": "Succesvol gedeeld",
+        "errorSharing": "Fout bij delen",
+        "shareUnsupported": "Delen niet ondersteund in deze browser"
+    },
+    "userlinks": {
+        "businessLinks": "Zakelijke links",
+        "noBusinessLinks": "Geen zakelijke links beschikbaar.",
+        "close": "Sluiten"
+    },
+    "welcometomyworld": "Welkom in mijn wereld"
+}

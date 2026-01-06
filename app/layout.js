@@ -1,9 +1,9 @@
 import "./globals.css";
 import { Inter, Prompt } from "next/font/google";
-import { MyProvider } from "./Context/MyContext";
+import { MyProvider } from "./context/context";
 import { ToastContainer } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
-import NextAuthProvider from "./providers/NextAuthProvider";
+import NextAuthProvider from "./api/auth/NextAuthProvider";
 import { Analytics } from "@vercel/analytics/react"
 
 const inter = Inter({ subsets: ['latin'] });

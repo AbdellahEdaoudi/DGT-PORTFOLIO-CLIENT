@@ -1,0 +1,113 @@
+{
+    "customDomain": {
+        "enterDomain": "Voer een domein in",
+        "verificationFailed": "Verificatie mislukt",
+        "domainRemovedSuccess": "Domein succesvol verwijderd",
+        "errorRemovingDomain": "Fout bij verwijderen domein",
+        "title": "Aangepast Domein",
+        "subtitle": "Koppel je eigen domein aan je portfolio",
+        "yourDomainName": "Jouw Domeinnaam",
+        "placeholder": "voorbeeld.nl",
+        "save": "Opslaan",
+        "domainActiveVerified": "Domein Actief & Geverifieerd",
+        "verificationPending": "Verificatie In Behandeling",
+        "domainConfigured": "Je domein is geconfigureerd en werkt perfect!",
+        "verifyOwnership": "Verifieer domeineigendom door DNS-records te configureren",
+        "visitSite": "Bezoek Site",
+        "removeDomain": "Verwijder Domein",
+        "dnsConfiguration": "DNS Configuratie",
+        "connectDomainSteps": "Volg deze stappen om je domein te koppelen:",
+        "step1Login": "Log in bij je domeinregistar (TransIP, Hostnet, etc.)",
+        "step2Navigate": "Ga naar DNS-instellingen / DNS-beheer",
+        "step3AddRecord": "Voeg het volgende A-record toe:",
+        "type": "Type",
+        "name": "Naam",
+        "value": "Waarde",
+        "note": "Opmerking",
+        "dnsPropagationNote": "DNS-propagatie kan tot 48 uur duren",
+        "verifyingDns": "DNS verifiëren...",
+        "verifyDnsConfiguration": "Verifieer DNS Configuratie",
+        "removeTitle": "Aangepast Domein Verwijderen?",
+        "removeDesc1": "Weet je zeker dat je ",
+        "removeDesc2": " van je portfolio wilt verwijderen?",
+        "cancel": "Annuleren"
+    },
+    "businessLinks": {
+        "title": "Zakelijke Links",
+        "linkTitle": "Titel",
+        "exampleWebsite": "Mijn Website",
+        "link": "Link",
+        "exampleUrl": "https://voorbeeld.nl",
+        "addLink": "Link Toevoegen",
+        "linkAddedSuccessfully": "Link succesvol toegevoegd",
+        "failedToAddLink": "Link toevoegen mislukt",
+        "linkUpdatedSuccessfully": "Link succesvol bijgewerkt",
+        "failedToUpdateLink": "Link bijwerken mislukt",
+        "linkDeletedSuccessfully": "Link succesvol verwijderd",
+        "failedToDeleteLink": "Link verwijderen mislukt",
+        "edit": "Bewerken",
+        "delete": "Verwijderen",
+        "noLinksFound": "Nog geen links toegevoegd.",
+        "deleteLinkConfirm": "Weet je zeker dat je deze link wilt verwijderen?",
+        "updateLink": "Link Bijwerken"
+    },
+    "support": {
+        "successMessage": "Bericht succesvol verzonden!",
+        "tooManyRequests": "Te veel verzoeken. Probeer het later opnieuw.",
+        "errorMessage": "Er is een fout opgetreden. Probeer het opnieuw.",
+        "getInTouch": "Neem Contact Op",
+        "weLoveToHear": "We horen graag van je! Stuur ons een bericht en we reageren zo snel mogelijk.",
+        "contactSupport": "Neem Contact op met Support",
+        "email": "E-mail",
+        "enterEmail": "Voer je e-mail in",
+        "subject": "Onderwerp",
+        "enterSubject": "Voer onderwerp in",
+        "message": "Bericht",
+        "enterMessage": "Voer je bericht in",
+        "attachment": "Bijlage",
+        "uploadImage": "Afbeelding Uploaden (Optioneel)",
+        "sending": "Verzenden...",
+        "sendMessage": "Verstuur Bericht"
+    },
+    "success": {
+        "paymentSuccessful": "Betaling Geslaagd!",
+        "subscriptionActive": "Je abonnement is nu actief. Bedankt voor je aankoop!",
+        "goToHome": "Ga naar Home"
+    },
+    "subscription": {
+        "promoMonthly": {
+            "name": "Promo Maandelijks",
+            "description": "Speciale promo aanbieding",
+            "period": "/maand"
+        },
+        "promo6Month": {
+            "name": "Promo 6 Maanden",
+            "description": "Grote waarde voor 6 maanden",
+            "period": "/6 maanden"
+        },
+        "promoAnnual": {
+            "name": "Promo Jaarlijks",
+            "description": "Beste deal van het jaar",
+            "period": "/jaar"
+        },
+        "subMonthly": {
+            "name": "Maandelijks Abonneren",
+            "description": "€1 voor de maand",
+            "period": "/maand"
+        },
+        "sub6Months": {
+            "name": "6 Maanden Abonneren",
+            "description": "Geweldige middellange termijn aanbieding",
+            "period": "/6 maanden"
+        },
+        "subYearly": {
+            "name": "Jaarlijks Abonneren",
+            "description": "Beste waarde",
+            "period": "/jaar"
+        },
+        "recommended": "Aanbevolen",
+        "placeholder": "Promotiecode",
+        "applyBtn": "Toepassen",
+        "verifyingBtn": "Verifiëren..."
+    }
+}
