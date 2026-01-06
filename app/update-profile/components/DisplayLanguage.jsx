@@ -1,6 +1,6 @@
 "use client"
 import axios from 'axios'
-import { CheckCheck, Loader } from '../../Components/Icons'
+import { CheckCheck, Loader, Globe } from '../../Components/Icons'
 import React, { useState } from 'react'
 import { toast } from 'react-toastify'
 import { useTranslation } from '../../lib/translations'
@@ -36,22 +36,22 @@ function DisplayLanguage({ userData, setUserDetails }) {
     }
     const translations = {
         title: {
-            en: "🌍 Display Language",
-            fr: "🌍 Langue d'affichage",
-            es: "🌍 Idioma de visualización",
-            ar: "🌍 لغة العرض",
-            de: "🌍 Anzeigesprache",
-            ru: "🌍 Язык отображения",
-            ja: "🌍 表示言語",
-            zh: "🌍 显示语言",
-            nl: "🌍 Weergavetaal",
-            pt: "🌍 Idioma de Exibição",
-            it: "🌍 Lingua di Visualizzazione",
-            hi: "🌍 प्रदर्शन भाषा",
-            tr: "🌍 Görüntüleme Dili",
-            ko: "🌍 표시 언어",
-            id: "🌍 Bahasa Tampilan",
-            pl: "🌍 Język wyświetlania",
+            en: "Display Language",
+            fr: "Langue d'affichage",
+            es: "Idioma de visualización",
+            ar: "لغة العرض",
+            de: "Anzeigesprache",
+            ru: "Язык отображения",
+            ja: "表示言語",
+            zh: "显示语言",
+            nl: "Weergavetaal",
+            pt: "Idioma de Exibição",
+            it: "Lingua di Visualizzazione",
+            hi: "प्रदर्शन भाषा",
+            tr: "Görüntüleme Dili",
+            ko: "표시 언어",
+            id: "Bahasa Tampilan",
+            pl: "Język wyświetlania",
         },
         description: {
             en: "Choose the language in which your portfolio will be displayed to visitors.",
@@ -83,7 +83,7 @@ function DisplayLanguage({ userData, setUserDetails }) {
         { value: "pt", label: "Português", description: "Exibir portfólio em Português", flag: "pt" },
         { value: "it", label: "Italiano", description: "Visualizza portfolio in Italiano", flag: "it" },
         { value: "de", label: "Deutsch", description: "Portfolio auf Deutsch anzeigen", flag: "de" },
-        { value: "ar", label: "Arabic", description: "عرض المحفظة باللغة العربية", flag: "sa" },
+        { value: "ar", label: "العربية", description: "عرض المحفظة باللغة العربية", flag: "sa" },
         { value: "nl", label: "Nederlands", description: "Portfolio in het Nederlands weergeven", flag: "nl" },
         { value: "tr", label: "Türkçe", description: "Portföyü Türkçe göster", flag: "tr" },
         { value: "ru", label: "Русский", description: "Показать портфолио на русском", flag: "ru" },
@@ -95,19 +95,26 @@ function DisplayLanguage({ userData, setUserDetails }) {
         { value: "pl", label: "Polski", description: "Wyświetl portfolio w języku polskim", flag: "pl" },
     ]
 
+    const currentFlag = languages.find(l => l.value === displayLanguage)?.flag || 'gb';
+
     return (
-        <form onSubmit={handleSave} className="relative w-full">
-            <div className="bg-white/80 space-y-6 p-2">
+        <form onSubmit={handleSave} className="relative w-full" dir={userData?.displayLanguage === 'ar' ? 'rtl' : 'ltr'}>
+            <div className="bg-white/80 md:p-2 space-y-8">
 
                 {/* Header Section */}
-                <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
-                    <div className="space-y-1">
-                        <h2 className="text-lg font-bold text-gray-800">
-                            {translatedTitle}
-                        </h2>
-                        <p className="text-gray-500 text-xs md:text-sm max-w-2xl">
-                            {translatedDescription}
-                        </p>
+                <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 border-b border-gray-100">
+                    <div className="flex items-start gap-4">
+                        <div className="p-1.5 bg-white rounded-xl shadow-sm border border-gray-100">
+                            <span className={`fi fi-${currentFlag} text-2xl rounded shadow-sm`}></span>
+                        </div>
+                        <div className="space-y-1">
+                            <h2 className="text-lg font-bold text-gray-800">
+                                {translatedTitle}
+                            </h2>
+                            <p className="text-gray-500 text-xs md:text-sm max-w-2xl">
+                                {translatedDescription}
+                            </p>
+                        </div>
                     </div>
 
                     <button
@@ -115,36 +122,38 @@ function DisplayLanguage({ userData, setUserDetails }) {
                         disabled={loading}
                         className="
                             hidden md:flex
-                            bg-gray-900 text-white font-bold px-6 py-2.5 rounded-lg 
-                            shadow-lg hover:shadow-xl hover:bg-gray-800 disabled:opacity-50 
-                            transition-all duration-200 items-center gap-2
+                            bg-gradient-to-r from-teal-600 to-emerald-600 hover:from-teal-700 hover:to-emerald-700
+                            text-white font-bold px-8 py-3 rounded-xl
+                            shadow-lg hover:shadow-teal-500/30 disabled:opacity-50 disabled:shadow-none
+                            transition-all duration-300 items-center gap-2.5 transform hover:-translate-y-0.5
                         "
                     >
                         {loading ? (
                             <>
-                                <Loader size={18} className="animate-spin" />
-                                {t('saving')}
+                                <Loader size={20} className="animate-spin" />
+                                <span>{t('saving')}</span>
                             </>
                         ) : (
                             <>
-                                💾 {t('save')}
+                                <CheckCheck size={20} />
+                                <span>{t('save')}</span>
                             </>
                         )}
                     </button>
                 </div>
 
                 {/* Languages Grid */}
-                <div className="grid grid-cols-4 gap-2 md:gap-3">
+                <div className="grid grid-cols-4 gap-2 md:gap-4">
                     {languages.map((lang) => {
                         const isSelected = displayLanguage === lang.value;
                         return (
                             <label
                                 key={lang.value}
                                 className={`
-                                    relative flex flex-col p-1.5 md:p-3 rounded-lg md:rounded-xl cursor-pointer transition-all duration-200 group
+                                    relative group cursor-pointer rounded-lg md:rounded-xl border-2 transition-all duration-200 overflow-hidden
                                     ${isSelected
-                                        ? 'bg-teal-50 border md:border-2 border-teal-500 shadow-sm md:shadow-md'
-                                        : 'bg-white border md:border-2 border-transparent hover:border-gray-200 hover:shadow-sm'
+                                        ? 'border-teal-500 bg-teal-50/30 shadow-md ring-1 ring-teal-500/20'
+                                        : 'border-gray-100 bg-white hover:border-teal-200 hover:shadow-lg hover:shadow-gray-100/50'
                                     }
                                 `}
                             >
@@ -157,54 +166,64 @@ function DisplayLanguage({ userData, setUserDetails }) {
                                     className="hidden"
                                 />
 
-                                <div className="flex items-center justify-between mb-1 md:mb-2">
-                                    <span className={`
-                                        text-lg md:text-2xl rounded shadow-sm
-                                        fi fi-${lang.flag}
-                                    `}></span>
-
+                                <div className="p-1.5 md:p-4 flex flex-col md:flex-row md:items-start gap-1.5 md:gap-4 md:text-left">
                                     <div className={`
-                                        w-3 h-3 md:w-5 md:h-5 rounded-full border md:border-2 flex items-center justify-center
-                                        ${isSelected ? 'border-teal-500 bg-teal-500' : 'border-gray-300'}
+                                        w-8 h-8 md:w-12 md:h-12 rounded-lg md:rounded-xl flex items-center justify-center shadow-sm text-xl md:text-2xl
+                                        ${isSelected ? 'bg-white shadow-teal-100' : 'bg-gray-50'}
                                     `}>
-                                        {isSelected && <CheckCheck className="w-2 h-2 md:w-3 md:h-3 text-white" />}
+                                        <span className={`fi fi-${lang.flag} rounded-md`}></span>
+                                    </div>
+
+                                    <div className="flex-1 min-w-0 w-full">
+                                        <div className="flex flex-col md:flex-row items-center justify-center md:justify-between gap-1">
+                                            <span className={`font-bold text-[10px] md:text-base truncate w-full ${isSelected ? 'text-teal-900' : 'text-gray-800'}`}>
+                                                {lang.label}
+                                            </span>
+                                            {isSelected && (
+                                                <div className="hidden md:flex w-5 h-5 rounded-full bg-teal-500 items-center justify-center animate-in zoom-in duration-200">
+                                                    <CheckCheck className="w-3 h-3 text-white" />
+                                                </div>
+                                            )}
+                                        </div>
+                                        <p className={`hidden md:block text-xs mt-1 transition-colors duration-200 ${isSelected ? 'text-teal-600' : 'text-gray-400 group-hover:text-gray-500'}`}>
+                                            {lang.description || lang.label}
+                                        </p>
                                     </div>
                                 </div>
 
-                                <div>
-                                    <span className={`block font-bold text-[10px] md:text-base truncate ${isSelected ? 'text-teal-900' : 'text-gray-800'}`}>
-                                        {lang.label}
-                                    </span>
-                                    <p className={`hidden md:block text-xs text-gray-500 line-clamp-1 ${isSelected ? 'text-teal-700/80' : ''}`}>
-                                        {lang.description}
-                                    </p>
-                                </div>
+                                {/* Active Indicator Bar */}
+                                <div className={`absolute bottom-0 left-0 w-full h-0.5 md:h-1 transition-all duration-300 ${isSelected ? 'bg-teal-500' : 'bg-transparent group-hover:bg-teal-100'}`} />
                             </label>
                         );
                     })}
                 </div>
 
-                <button
-                    type="submit"
-                    disabled={loading}
-                    className="
-                        md:hidden w-full justify-center
-                        bg-gray-900 text-white font-bold px-6 py-2.5 rounded-lg 
-                        shadow-lg hover:shadow-xl hover:bg-gray-800 disabled:opacity-50 
-                        transition-all duration-200 flex items-center gap-2
-                    "
-                >
-                    {loading ? (
-                        <>
-                            <Loader size={18} className="animate-spin" />
-                            {t('saving')}
-                        </>
-                    ) : (
-                        <>
-                            💾 {t('save')}
-                        </>
-                    )}
-                </button>
+                {/* Mobile Save Button */}
+                <div className="md:hidden pt-4 border-t border-gray-100">
+                    <button
+                        type="submit"
+                        disabled={loading}
+                        className="
+                            w-full justify-center
+                            bg-gradient-to-r from-teal-600 to-emerald-600 hover:from-teal-700 hover:to-emerald-700
+                            text-white font-bold px-6 py-3.5 rounded-xl
+                            shadow-lg shadow-teal-500/20 hover:shadow-teal-500/40 disabled:opacity-50 
+                            transition-all duration-300 flex items-center gap-2
+                        "
+                    >
+                        {loading ? (
+                            <>
+                                <Loader size={20} className="animate-spin" />
+                                <span>{t('saving')}</span>
+                            </>
+                        ) : (
+                            <>
+                                <CheckCheck size={20} />
+                                <span>{t('save')}</span>
+                            </>
+                        )}
+                    </button>
+                </div>
             </div>
         </form>
     )

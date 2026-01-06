@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 import { getServerSession } from "next-auth/next";
 import axios from "axios";
 import jwt from "jsonwebtoken";
-import { authOptions } from "../../../../../../lib/nextAuth";
+import { authOptions } from "../../../../../../../lib/nextAuth";
 
 export async function PUT(req: Request) {
   try {
@@ -19,15 +19,15 @@ export async function PUT(req: Request) {
     const backendUrl = process.env.BACKEND_URL;
     const body = await req.json();
 
-    const response = await axios.put(`${backendUrl}/users/update/projects`, body, {
+    const response = await axios.put(`${backendUrl}/users/update/experience/item`, body, {
       headers: { Authorization: `Bearer ${token}` },
     });
 
     return NextResponse.json(response.data, { status: response.status });
   } catch (error: any) {
-    console.error("Error updating projects:", error.response?.data || error.message);
+    console.error("Error updating experience item:", error.response?.data || error.message);
     return NextResponse.json(
-      { message: "Failed to update projects", error: error.response?.data || error.message },
+      { message: "Failed to update experience item", error: error.response?.data || error.message },
       { status: 500 }
     );
   }

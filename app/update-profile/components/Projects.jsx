@@ -2,28 +2,41 @@
 import axios from "axios";
 import React, { useState } from "react";
 import { toast } from "react-toastify";
-import { ArrowUp, ArrowDown, CheckCheck, Loader, Plus, Trash2, X, Pencil } from "../../Components/Icons";
-
+import { createPortal } from "react-dom";
+import { ArrowUp, ArrowDown, CheckCheck, Loader, Plus, Trash2, X, Pencil, AlertCircle } from "../../Components/Icons";
 import { useTranslation } from "../../lib/translations";
+
 
 export default function Projects({ userData, setUserDetails }) {
   const { t } = useTranslation(userData?.displayLanguage || 'en');
-  // Initialize projects with collapsed: true for existing items to save space
   const [projects, setProjects] = useState(
     (userData.projects || []).map(p => ({ ...p, collapsed: true }))
   );
   const [loading, setLoading] = useState(false);
+  const [savingIds, setSavingIds] = useState(new Set());
+  const [deletingIds, setDeletingIds] = useState(new Set());
+  const [validationErrors, setValidationErrors] = useState({});
+  const [projectToDelete, setProjectToDelete] = useState(null); // ID or Index of project to delete
+  const [highlightedId, setHighlightedId] = useState(null);
+  const [mounted, setMounted] = useState(false);
 
-  // Reverted to append new items to the end of the array as button is now at bottom
+  React.useEffect(() => {
+    setMounted(true);
+  }, []);
   const addArrayItem = (array, setArray, newItem) => setArray([...array, newItem]);
-
-  const removeArrayItem = (array, setArray, index) =>
-    setArray(array.filter((_, i) => i !== index));
 
   const updateObjectInArray = (array, setArray, index, key, value) => {
     const updated = [...array];
     updated[index] = { ...updated[index], [key]: value };
     setArray(updated);
+
+    // Clear validation error when user types
+    if (validationErrors[index]?.[key]) {
+      setValidationErrors(prev => ({
+        ...prev,
+        [index]: { ...prev[index], [key]: false }
+      }));
+    }
   };
 
   const toggleCollapse = (index) => {
@@ -46,29 +59,128 @@ export default function Projects({ userData, setUserDetails }) {
     setProjects(newProjects);
   };
 
-  const saveProjects = async () => {
+  // 🟢 Save Single Project
+  const saveProjectItem = async (index) => {
+    const project = projects[index];
+    const errors = {};
+    if (!project.title?.trim()) errors.title = true;
+    if (!project.description?.trim()) errors.description = true;
+
+    if (Object.keys(errors).length > 0) {
+      setValidationErrors(prev => ({ ...prev, [index]: errors }));
+      // Expand if collapsed to show errors
+      if (project.collapsed) toggleCollapse(index);
+      return;
+    }
+
+    setSavingIds(prev => new Set(prev).add(index));
+    try {
+      const { collapsed, ...projectData } = project;
+      const res = await axios.put('/api/proxy/users/update/projects/item', projectData);
+
+      const newProjectsList = res.data.projects;
+      const mergedProjects = newProjectsList.map((p, i) => {
+        const oldP = projects.find(op => op._id === p._id) || (projects[i] && !projects[i]._id ? projects[i] : null);
+        return { ...p, collapsed: oldP ? oldP.collapsed : true };
+      });
+
+      setProjects(mergedProjects);
+      if (setUserDetails) {
+        setUserDetails(prev => ({ ...prev, projects: newProjectsList }));
+      }
+
+      toast.success(t('savedSuccessfully'));
+      setValidationErrors(prev => {
+        const next = { ...prev };
+        delete next[index];
+        return next;
+      });
+
+      // Trigger success effect
+      const savedProject = mergedProjects[index];
+      if (savedProject && savedProject._id) {
+        setHighlightedId(savedProject._id);
+        setTimeout(() => setHighlightedId(null), 2000);
+      }
+
+    } catch (error) {
+      console.error("Error saving project:", error);
+      toast.error(t('errorMessage'));
+    } finally {
+      setSavingIds(prev => {
+        const next = new Set(prev);
+        next.delete(index);
+        return next;
+      });
+    }
+  };
+
+  // 🟢 Delete Logic (Called from Modal)
+  const confirmDelete = async () => {
+    const index = projectToDelete;
+    if (index === null) return;
+    setProjectToDelete(null);
+
+    const project = projects[index];
+    if (!project._id) {
+      // Just remove from state
+      setProjects(projects.filter((_, i) => i !== index));
+      return;
+    }
+
+    setDeletingIds(prev => new Set(prev).add(project._id));
+    try {
+      const res = await axios.delete(`/api/proxy/users/update/projects/${project._id}`);
+
+      const newProjectsList = res.data.projects;
+      setProjects(newProjectsList.map(p => ({ ...p, collapsed: true })));
+
+      if (setUserDetails) {
+        setUserDetails(prev => ({ ...prev, projects: newProjectsList }));
+      }
+      toast.success(t('deletedSuccessfully') || "Deleted successfully");
+    } catch (error) {
+      console.error("Error deleting project:", error);
+      toast.error(t('errorMessage'));
+    } finally {
+      setDeletingIds(prev => {
+        const next = new Set(prev);
+        next.delete(project._id);
+        return next;
+      });
+    }
+  };
+
+  // 🟢 Save Order Only
+  const saveOrder = async () => {
     setLoading(true);
     try {
-      // Clean projects (remove collapsed property) before saving
-      const cleanProjects = projects.map(({ collapsed, ...rest }) => rest);
-      await axios.put(`/api/proxy/users/update/projects`, { projects: cleanProjects });
+      const projectsWithIds = projects.filter(p => p._id).map(p => ({ _id: p._id }));
 
-      // Update global state to reflect changes immediately without refresh
+      if (projectsWithIds.length !== projects.length) {
+        toast.warning(t('saveNewItemsFirst') || "Please save new items first");
+        setLoading(false);
+        return;
+      }
+
+      await axios.put(`/api/proxy/users/update/projects/order`, { projects: projectsWithIds });
+
+      // Update global state
       if (setUserDetails) {
         setUserDetails(prev => ({
           ...prev,
-          projects: cleanProjects
+          projects: projects.map(({ collapsed, ...rest }) => rest)
         }));
       }
 
       toast(
         <p className="flex gap-3 items-center">
-          <CheckCheck className="text-green-500" /> {t('savedSuccessfully')}
+          <CheckCheck className="text-green-500" /> {t('orderSaved') || "Order saved"}
         </p>,
         { autoClose: 2000 }
       );
     } catch (error) {
-      console.error("Error updating projects:", error);
+      console.error("Error updating order:", error);
       toast.error(t('errorMessage'));
     } finally {
       setLoading(false);
@@ -83,8 +195,12 @@ export default function Projects({ userData, setUserDetails }) {
         <div className="space-y-2">
           {projects.map((proj, index) => (
             <div
-              key={index}
-              className="bg-white pb-1 border border-gray-200 rounded-xl shadow-sm hover:shadow-md transition-all duration-300 overflow-hidden"
+              key={proj._id || index}
+              className={`bg-white pb-1 border rounded-xl shadow-sm hover:shadow-md transition-all duration-300 overflow-hidden ${deletingIds.has(proj._id) ? 'opacity-60 grayscale pointer-events-none ring-2 ring-red-100 border-red-200 scale-[0.99]' :
+                  validationErrors[index] ? 'border-red-300 ring-1 ring-red-200' :
+                    highlightedId === proj._id ? 'border-green-500 ring-2 ring-green-200 shadow-green-100' :
+                      'border-gray-200'
+                }`}
             >
               {/* Collapsible Header with Editable Title */}
               <div
@@ -99,8 +215,14 @@ export default function Projects({ userData, setUserDetails }) {
                     onChange={(e) =>
                       updateObjectInArray(projects, setProjects, index, "title", e.target.value)
                     }
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 bg-white transition"
+                    className={`w-full px-3 py-2 border rounded-lg focus:outline-none transition bg-white ${validationErrors[index]?.title ? 'border-red-500 ring-1 ring-red-100' : 'border-gray-300 focus:ring-2 focus:ring-green-500'}`}
                   />
+                  {validationErrors[index]?.title && (
+                    <p className="text-red-500 text-xs mt-1.5 flex items-center gap-1.5 font-medium animate-in slide-in-from-top-1">
+                      <AlertCircle size={14} />
+                      {t('titleRequired') || "Title is required"}
+                    </p>
+                  )}
                 </div>
 
                 <div className="flex items-center gap-1 md:gap-2 flex-shrink-0">
@@ -136,26 +258,35 @@ export default function Projects({ userData, setUserDetails }) {
                   </button>
                   <button
                     type="button"
-                    onClick={() => removeArrayItem(projects, setProjects, index)}
+                    onClick={() => setProjectToDelete(index)}
                     className="p-1.5 hover:bg-red-100 rounded-lg transition-colors text-red-500 ml-1"
                     title={t('delete')}
+                    disabled={deletingIds.has(proj._id)}
                   >
-                    <Trash2 size={16} />
+                    {deletingIds.has(proj._id) ? <Loader size={16} className="animate-spin" /> : <Trash2 size={16} />}
                   </button>
                 </div>
               </div>
 
               {!proj.collapsed && (
                 <div className="p-3 md:p-4 border-t border-gray-100 space-y-3 bg-gray-50/50 animate-in fade-in slide-in-from-top-1 duration-200">
-                  <textarea
-                    placeholder={t('projectDescription')}
-                    value={proj.description || ""}
-                    maxLength={2000}
-                    onChange={(e) =>
-                      updateObjectInArray(projects, setProjects, index, "description", e.target.value)
-                    }
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 bg-white h-20 transition"
-                  />
+                  <div>
+                    <textarea
+                      placeholder={t('projectDescription')}
+                      value={proj.description || ""}
+                      maxLength={2000}
+                      onChange={(e) =>
+                        updateObjectInArray(projects, setProjects, index, "description", e.target.value)
+                      }
+                      className={`w-full px-3 py-2 border rounded-lg focus:outline-none h-20 transition bg-white ${validationErrors[index]?.description ? 'border-red-500 ring-1 ring-red-100' : 'border-gray-300 focus:ring-2 focus:ring-green-500'}`}
+                    />
+                    {validationErrors[index]?.description && (
+                      <p className="text-red-500 text-xs mt-1.5 flex items-center gap-1.5 font-medium animate-in slide-in-from-top-1">
+                        <AlertCircle size={14} />
+                        {t('descriptionRequired') || "Description is required"}
+                      </p>
+                    )}
+                  </div>
 
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
                     <input
@@ -209,6 +340,17 @@ export default function Projects({ userData, setUserDetails }) {
                     </div>
                   )}
 
+                  <div className="flex justify-end pt-2">
+                    <button
+                      type="button"
+                      onClick={() => saveProjectItem(index)}
+                      disabled={savingIds.has(index)}
+                      className="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg text-sm font-medium flex items-center gap-2 transition-colors disabled:opacity-50"
+                    >
+                      {savingIds.has(index) ? <Loader size={12} className="animate-spin" /> : <CheckCheck size={16} />}
+                      {t('save') || "Save"}
+                    </button>
+                  </div>
 
                 </div>
               )}
@@ -237,19 +379,67 @@ export default function Projects({ userData, setUserDetails }) {
 
       <div className="flex justify-end py-4 border-b-2 border-gray-200">
         <button
-          onClick={saveProjects}
+          onClick={saveOrder}
           disabled={loading}
-          className="bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 disabled:opacity-50 text-white font-bold px-8 py-3 rounded-lg transition-all duration-300 flex items-center gap-2 transform hover:scale-105 shadow-lg"
+          className="bg-gray-800 hover:bg-gray-900 disabled:opacity-50 text-white font-bold px-8 py-3 rounded-lg transition-all duration-300 flex items-center gap-2 transform hover:scale-105 shadow-lg"
         >
           {loading ? (
             <>
               <Loader size={20} className="animate-spin" /> {t('saving')}
             </>
           ) : (
-            `💾 ${t('save')} `
+            `💾 ${t('saveOrder') || "Save Order"}`
           )}
         </button>
       </div>
+
+      {/* Professional Delete Modal with Portal - Inlined */}
+      {mounted && projectToDelete !== null && createPortal(
+        <div className="fixed inset-0 bg-black/60 backdrop-blur-sm flex justify-center items-center z-[9999] p-4 animate-in fade-in duration-200">
+          <div
+            className="bg-white rounded-xl shadow-2xl w-full max-w-md p-6 relative flex flex-col items-center text-center transform transition-all scale-100 border border-gray-100"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <button
+              onClick={() => setProjectToDelete(null)}
+              className="absolute top-4 right-4 text-gray-400 hover:text-gray-600 transition p-1 rounded-full hover:bg-gray-100"
+              title="Close"
+            >
+              <X className="w-5 h-5" />
+            </button>
+
+            <div className="w-14 h-14 bg-red-50 rounded-full flex items-center justify-center mb-4 text-red-500 ring-4 ring-red-50">
+              <AlertCircle size={32} />
+            </div>
+
+            <div className="w-full">
+              <div className="text-gray-600 mb-6 text-base leading-relaxed">
+                <div className="flex flex-col gap-2">
+                  <span className="font-semibold text-gray-800">Are you sure you want to delete this project?</span>
+                  <span className="font-bold text-black border-t pt-2 mt-1 break-all">"{projects[projectToDelete]?.title || t('thisProject') || "this project"}"</span>
+                </div>
+              </div>
+            </div>
+
+            <div className="flex gap-3 w-full">
+              <button
+                onClick={() => setProjectToDelete(null)}
+                className="flex-1 px-4 py-2.5 bg-gray-200 hover:bg-gray-300 text-gray-800 font-bold rounded-lg transition-all duration-200"
+              >
+                {t('cancel') || "Cancel"}
+              </button>
+              <button
+                onClick={confirmDelete}
+                className="flex-1 px-4 py-2.5 bg-red-600 hover:bg-red-700 text-white font-medium rounded-lg shadow-md transition duration-200 flex items-center justify-center gap-2"
+              >
+                <Trash2 size={18} />
+                <span>{t('delete') || "Delete"}</span>
+              </button>
+            </div>
+          </div>
+        </div>,
+        document.body
+      )}
     </div>
   );
 }
