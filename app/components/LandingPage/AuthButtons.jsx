@@ -27,8 +27,8 @@ export default function AuthButtons({ lang }) {
   const navRef = useRef(null);
   const { userDetails } = useContext(MyContext);
   // const PORTFOLIO = `http://${userDetails?.username}.localhost:3000`
-  const PORTFOLIO = `https://${userDetails?.username}.dgtportfolio.com`
   // const PORTFOLIO = `https://${userDetails?.username}.dgtportfolio.vercel.app`
+  const PORTFOLIO = `https://${userDetails?.username}.dgtportfolio.com`
 
 
   // Click Outside to close menus
@@ -58,25 +58,23 @@ export default function AuthButtons({ lang }) {
 
     return (
       <div ref={navRef} className="relative flex items-center gap-5 z-50">
-        <div
-          onClick={() => {
-            setSetting(true)
-            if (userDetails?.username) {
-              window.open(PORTFOLIO, "_blank");
-              // router.push(`/dp/${userDetails?.username}`)
-            } else (
-              router.push(`/update-profile`)
-            )
-          }
-          }
+        <Link href={userDetails?.username ? `${PORTFOLIO}` : `/update-profile`}
           className="flex items-center gap-2 cursor-pointer hover:scale-105 duration-500">
-          <Image width={500} height={500}
-            src={displayImage}
-            alt={displayName}
-            className="w-10 h-10 rounded-full object-cover"
-          />
-          <span className="font-semibold text-white md:block hidden">{displayName}</span>
-        </div>
+          <div className="relative p-[2px] rounded-full bg-gradient-to-b from-yellow-300 via-amber-500 to-yellow-600 shadow-md">
+            <Image width={50} height={50}
+              src={displayImage}
+              alt={displayName}
+              className="w-10 h-10 rounded-full object-cover border-[3px] border-gray-900"
+            />
+          </div>
+          <div className="hidden md:flex items-center gap-1">
+            <span className="font-semibold text-white">{displayName}</span>
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" className="text-blue-500 fill-current">
+              <path d="M3.85 8.62a4 4 0 0 1 4.78-4.77 4 4 0 0 1 6.74 0 4 4 0 0 1 4.78 4.78 4 4 0 0 1 0 6.74 4 4 0 0 1-4.77 4.78 4 4 0 0 1-6.75 0 4 4 0 0 1-4.78-4.77 4 4 0 0 1 0-6.76Z" />
+              <path d="m9 12 2 2 4-4" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" fill="none" />
+            </svg>
+          </div>
+        </Link>
 
         {/* Icon Settings */}
         <span

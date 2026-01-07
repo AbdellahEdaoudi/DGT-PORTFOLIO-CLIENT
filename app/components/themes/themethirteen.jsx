@@ -224,7 +224,7 @@ export default function ThemeThirteen({ userDetails, userLinks }) {
                                                 <Layers size={24} className="text-blue-600" />
                                             </div>
                                             <h4 className="text-lg text-slate-900 font-bold mb-2">{service}</h4>
-                                            <p className="text-slate-500 font-medium text-sm leading-relaxed">Professional service tailored to your needs.</p>
+                                            <p className="text-slate-500 font-medium text-sm leading-relaxed"></p>
                                         </div>
                                     ))}
                                 </div>

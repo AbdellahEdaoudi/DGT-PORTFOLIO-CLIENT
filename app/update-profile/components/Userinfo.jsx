@@ -6,6 +6,7 @@ import Image from 'next/image'
 import { useState } from 'react'
 import { toast } from 'react-toastify'
 import { getTranslation } from '../../translations/update-profile'
+import Link from 'next/link'
 
 function Userinfo({ userData, setUserDetails }) {
   // Local translation helper
@@ -21,6 +22,8 @@ function Userinfo({ userData, setUserDetails }) {
   const [country, setCountry] = useState(user.country || "")
   const [category, setCategory] = useState(user.category || "")
   const [errormsg, setErrormsg] = useState("")
+  // const PORTFOLIO = `https://${userData.username}.dgtportfolio.com`
+  const PORTFOLIO_2 = `/dp/${userData?.username}`;
 
   // Handle image upload with automatic compression
   const handleImageUpload = (e) => {
@@ -92,7 +95,7 @@ function Userinfo({ userData, setUserDetails }) {
   // Submit form
   const UpUserInfo = async (e) => {
     if (!username) {
-      return setErrormsg(t('userInfo.usernameExists'))
+      return setErrormsg(t('userInfo.usernameRequired'))
     }
     e.preventDefault();
     setLoading(true);
@@ -148,22 +151,21 @@ function Userinfo({ userData, setUserDetails }) {
       {/* Profile Image Section */}
       <div className="flex flex-col md:flex-row items-start justify-between gap-2 md:gap-8">
         <div className="flex flex-col items-center bg-gradient-to-br from-gray-50 to-gray-100 shadow-xl border-2 border-gray-200 rounded-2xl p-6 w-full md:w-1/3">
-          <Image
-            onClick={() => {
-              const PORTFOLIO = `https://${userData.username}.dgtportfolio.com`
-              if (userData.username) {
-                window.open(PORTFOLIO, '_blank')
-              } else if (!userData.username) {
-                setErrormsg(t('userInfo.usernameRequired'))
-              }
-            }}
-            src={imagePreview}
-            alt="Profile"
-            className="rounded-full cursor-pointer w-32 h-32 md:w-40 md:h-40 object-cover border-4 border-teal-500 shadow-lg"
-            width={160}
-            height={160}
-            priority
-          />
+          <Link href={userData.username ? `${PORTFOLIO_2}` : `/update-profile`}>
+            <Image
+              onClick={() => {
+                if (!userData.username) {
+                  setErrormsg(t('userInfo.usernameRequired'))
+                }
+              }}
+              src={imagePreview}
+              alt="Profile"
+              className="rounded-full cursor-pointer w-32 h-32 md:w-40 md:h-40 object-cover border-4 border-teal-500 shadow-lg"
+              width={160}
+              height={160}
+              priority
+            />
+          </Link>
           <label className="mt-4 bg-gradient-to-r from-teal-400 to-green-500 hover:from-teal-500 hover:to-green-600 text-white font-semibold rounded-full px-6 py-2 cursor-pointer transition duration-300 transform hover:scale-105">
             {t('userInfo.uploadImage')}
             <input type="file" accept="image/*" onChange={handleImageUpload} className="hidden" />
@@ -200,10 +202,11 @@ function Userinfo({ userData, setUserDetails }) {
               {errormsg && (
                 <p className="mt-1 text-red-500 text-sm font-medium">{errormsg}</p>
               )}
-              {username ? (
-                <p className="mt-1 ml-2 text-blue-500 text-xs font-medium">{`${username}.dgtportfolio.com`}</p>
-              ) : (
-                <p className="mt-1 ml-2 text-blue-500 text-xs font-medium">{`${t('userInfo.username')}.dgtportfolio.com`}</p>
+              {username && (
+                <div className="flex flex-col gap-1 mt-1 ml-2">
+                  <p className="text-blue-500 text-xs font-medium">{`l1: ${username}.dgtportfolio.com`}</p>
+                  <p className="text-blue-500 text-xs font-medium">{`l2: dgtportfolio.com/dp/${username}`}</p>
+                </div>
               )}
             </div>
             <div>

@@ -232,7 +232,7 @@ export default function ThemeTen({ userDetails, userLinks }) {
                                                 <Layers className="text-indigo-400" size={24} />
                                             </div>
                                             <h4 className="text-lg text-white font-bold mb-2">{service}</h4>
-                                            <p className="text-sm text-slate-400">Professional service tailored to your needs.</p>
+                                            <p className="text-sm text-slate-400"></p>
                                         </div>
                                     ))}
                                 </div>

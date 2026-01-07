@@ -233,7 +233,7 @@ export default function ThemeSeven({ userDetails, userLinks }) {
                                                 <Layers className="text-red-400" size={24} />
                                             </div>
                                             <h4 className="text-lg text-white mb-2">{service}</h4>
-                                            <p className="text-sm text-gray-400">Professional service tailored to your needs.</p>
+                                            <p className="text-sm text-gray-400"></p>
                                         </div>
                                     ))}
                                 </div>
