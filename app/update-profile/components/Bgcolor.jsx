@@ -6,7 +6,7 @@ import { CheckCheck, Loader } from "../../components/Icons";
 import Themeone from "../../components/themes/themeone";
 import { getTranslation } from '../../translations/update-profile'
 
-export default function Bgcolor({ userData }) {
+export default function Bgcolor({ userData, setUserDetails }) {
   const t = getTranslation(userData?.displayLanguage || 'en');
   const [bgcolorp, setBgcolorp] = useState(userData.bgcolorp || "#1f2937");
   const [loading, setLoading] = useState(false);
@@ -15,6 +15,9 @@ export default function Bgcolor({ userData }) {
     setLoading(true);
     try {
       await axios.put(`/api/proxy/users/update/bgcolor`, { bgcolorp });
+      if (setUserDetails) {
+        setUserDetails(prev => ({ ...prev, bgcolorp: bgcolorp }))
+      }
       toast(
         <p className="flex gap-3 items-center">
           <CheckCheck /> {t('bgColor.savedSuccessfully')}

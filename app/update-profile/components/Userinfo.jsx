@@ -214,7 +214,7 @@ function Userinfo({ userData, setUserDetails }) {
               <input
                 type="text"
                 value={country}
-                maxLength={100}
+                maxLength={50}
                 onChange={(e) => setCountry(e.target.value)}
                 className="w-full px-2 py-1.5 sm:px-4 sm:py-2 text-[10px] sm:text-base border bg-white border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 transition"
               />
@@ -223,7 +223,7 @@ function Userinfo({ userData, setUserDetails }) {
               <label className="block text-[10px] sm:text-sm font-bold text-gray-700 mb-1 sm:mb-2">{t('userInfo.phone')}</label>
               <input
                 type="tel"
-                maxLength={100}
+                maxLength={50}
                 value={phoneNumber}
                 onChange={(e) => setPhoneNumber(e.target.value)}
                 className="w-full px-2 py-1.5 sm:px-4 sm:py-2 text-[10px] sm:text-base border bg-white border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 transition"

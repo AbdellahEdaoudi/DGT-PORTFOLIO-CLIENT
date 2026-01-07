@@ -45,7 +45,7 @@ const ITEM_ICONS = {
     languages: Globe
 }
 
-function SortableSectionItem({ id, index, label, moveUp, moveDown, isFirst, isLast }) {
+function SortableSectionItem({ id, index, label, moveUp, moveDown, isFirst, isLast, recentlyMoved }) {
     const {
         attributes,
         listeners,
@@ -78,7 +78,9 @@ function SortableSectionItem({ id, index, label, moveUp, moveDown, isFirst, isLa
                 group cursor-grab active:cursor-grabbing
                 ${isDragging
                     ? 'border-cyan-500 ring-1 ring-cyan-500 bg-cyan-50 shadow-lg scale-[1.02]'
-                    : 'border-gray-200 hover:border-cyan-200'
+                    : recentlyMoved
+                        ? 'border-cyan-400 ring-2 ring-cyan-200 bg-cyan-50 shadow-md scale-[1.01] z-10'
+                        : 'border-gray-200 hover:border-cyan-200'
                 }
             `}
         >
@@ -98,13 +100,13 @@ function SortableSectionItem({ id, index, label, moveUp, moveDown, isFirst, isLa
                     <span className="flex w-4 h-4 sm:w-6 sm:h-6 items-center justify-center text-[8px] sm:text-xs font-mono font-medium text-gray-500 bg-gray-100 rounded-md border border-gray-200">
                         {index + 1}
                     </span>
-                    <div className={`p-0.5 sm:p-2 rounded-lg ${isDragging ? 'bg-cyan-100 text-cyan-700' : 'bg-gray-50 text-gray-500 group-hover:bg-cyan-50 group-hover:text-cyan-600'} transition-colors`}>
+                    <div className={`p-0.5 sm:p-2 rounded-lg ${isDragging || recentlyMoved ? 'bg-cyan-100 text-cyan-700' : 'bg-gray-50 text-gray-500 group-hover:bg-cyan-50 group-hover:text-cyan-600'} transition-colors`}>
                         <Icon className="w-2.5 h-2.5 sm:w-[20px] sm:h-[20px]" />
                     </div>
                 </div>
 
                 {/* Label */}
-                <span className={`font-bold text-[10px] sm:text-base capitalize truncate ${isDragging ? 'text-cyan-900' : 'text-gray-700'}`}>
+                <span className={`font-bold text-[10px] sm:text-base capitalize truncate ${isDragging || recentlyMoved ? 'text-cyan-900' : 'text-gray-700'}`}>
                     {label}
                 </span>
             </div>
@@ -156,6 +158,7 @@ export default function SectionOrdering({ userData, setUserDetails }) {
     const [originalOrder, setOriginalOrder] = useState(userData?.sectionOrder && userData.sectionOrder.length > 0 ? userData.sectionOrder : DEFAULT_ORDER)
     const [loading, setLoading] = useState(false)
     const [showTutorial, setShowTutorial] = useState(true)
+    const [activeMovedItem, setActiveMovedItem] = useState(null)
 
     useEffect(() => {
         const timer = setTimeout(() => {
@@ -197,6 +200,9 @@ export default function SectionOrdering({ userData, setUserDetails }) {
                 const newIndex = items.indexOf(over.id)
                 return arrayMove(items, oldIndex, newIndex)
             })
+            // Highlight the moved item
+            setActiveMovedItem(active.id)
+            setTimeout(() => setActiveMovedItem(null), 1000)
         }
     }
 
@@ -208,6 +214,10 @@ export default function SectionOrdering({ userData, setUserDetails }) {
         newOrder[index] = newOrder[index - 1]
         newOrder[index - 1] = temp
         setOrder(newOrder)
+
+        // Highlight the moved item
+        setActiveMovedItem(temp)
+        setTimeout(() => setActiveMovedItem(null), 3000)
     }
 
     const moveDown = (index, e) => {
@@ -218,6 +228,10 @@ export default function SectionOrdering({ userData, setUserDetails }) {
         newOrder[index] = newOrder[index + 1]
         newOrder[index + 1] = temp
         setOrder(newOrder)
+
+        // Highlight the moved item
+        setActiveMovedItem(temp)
+        setTimeout(() => setActiveMovedItem(null), 3000)
     }
 
     const saveOrder = async () => {
@@ -296,6 +310,7 @@ export default function SectionOrdering({ userData, setUserDetails }) {
                                     moveDown={moveDown}
                                     isFirst={index === 0}
                                     isLast={index === order.length - 1}
+                                    recentlyMoved={activeMovedItem === item}
                                 />
                             ))}
                         </SortableContext>

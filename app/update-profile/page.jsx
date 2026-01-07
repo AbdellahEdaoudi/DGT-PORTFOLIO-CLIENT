@@ -1,5 +1,5 @@
 "use client"
-import { useContext, useState } from "react"
+import { useContext, useState, useEffect } from "react"
 import { MyContext } from "../context/context"
 import MagicalLoader from "../components/MagicalLoader"
 import Header from "../components/LandingPage/header"
@@ -21,6 +21,13 @@ import SectionOrdering from "./components/SectionOrdering"
 export default function UpdateProfilePage() {
   const { EmailUser, userLinks, userDetails, setUserDetails, loadingAll } = useContext(MyContext)
   const [activeTab, setActiveTab] = useState("displayLanguage")
+
+  useEffect(() => {
+    const savedTab = localStorage.getItem("activeTab")
+    if (savedTab) {
+      setActiveTab(savedTab)
+    }
+  }, [])
 
   if (loadingAll || !EmailUser || !userDetails) {
     return <MagicalLoader />
@@ -336,7 +343,10 @@ export default function UpdateProfilePage() {
               {tabs.map((tab) => (
                 <button
                   key={tab.id}
-                  onClick={() => setActiveTab(tab.id)}
+                  onClick={() => {
+                    setActiveTab(tab.id)
+                    localStorage.setItem("activeTab", tab.id)
+                  }}
                   className={`md:px-4 py-2 rounded-lg font-semibold transition-all text-xs md:text-base ${activeTab === tab.id
                     ? "bg-teal-600 text-white"
                     : "bg-gray-200 text-gray-700 hover:bg-gray-300"

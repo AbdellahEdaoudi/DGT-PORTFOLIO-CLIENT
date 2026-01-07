@@ -6,7 +6,7 @@ import { createPortal } from "react-dom"
 import { toast } from 'react-toastify'
 import { getTranslation } from '../../translations/update-profile'
 
-export default function About({ userData }) {
+export default function About({ userData, setUserDetails }) {
   const t = getTranslation(userData?.displayLanguage || 'en')
   const [about, setAbout] = useState(userData?.about || "")
   const [loading, setLoading] = useState(false)
@@ -24,6 +24,15 @@ export default function About({ userData }) {
       await axios.put(`/api/proxy/users/update/about`, {
         about,
       })
+
+      // Update global state to reflect changes immediately without refresh
+      if (setUserDetails) {
+        setUserDetails(prev => ({
+          ...prev,
+          about: about
+        }));
+      }
+
       toast(<p className='flex gap-3 items-center'><CheckCheck className="text-teal-500" />
         {t('about.savedSuccessfully')}</p>, {
         autoClose: 2000,
