@@ -8,7 +8,7 @@ import { getTranslation } from '../../translations/update-profile'
 
 export default function Bgcolor({ userData }) {
   const t = getTranslation(userData?.displayLanguage || 'en');
-  const [bgcolorp, setBgcolorp] = useState(userData.bgcolorp || "#OA3C4D");
+  const [bgcolorp, setBgcolorp] = useState(userData.bgcolorp || "#1f2937");
   const [loading, setLoading] = useState(false);
 
   const saveBackgroundColor = async () => {

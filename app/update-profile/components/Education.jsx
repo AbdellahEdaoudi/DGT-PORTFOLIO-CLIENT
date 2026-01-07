@@ -230,65 +230,71 @@ export default function Education({ userData, setUserDetails }) {
                 }`}
             >
               {/* Collapsible Header with Editable School */}
-              <div className="p-3 md:p-4 flex items-center justify-between gap-3 bg-white">
-                <div className="flex-grow">
-                  <input
-                    type="text"
-                    placeholder={t('education.school')}
-                    value={edu.school}
-                    maxLength={100}
-                    onChange={(e) =>
-                      updateObjectInArray(education, setEducation, index, "school", e.target.value)
-                    }
-                    className={`w-full px-3 py-2 border rounded-lg focus:outline-none transition bg-white ${validationErrors[index]?.school ? 'border-red-500 ring-1 ring-red-100' : 'border-gray-300 focus:ring-2 focus:ring-blue-500'}`}
-                  />
-                  {validationErrors[index]?.school && (
-                    <p className="text-red-500 text-xs mt-1.5 flex items-center gap-1.5 font-medium animate-in slide-in-from-top-1">
-                      <AlertCircle size={14} />
-                      {t('education.schoolRequired') || "School is required"}
-                    </p>
-                  )}
+              <div className="p-1 sm:p-4 flex items-center justify-between gap-1 sm:gap-3 bg-white">
+                <div className="flex-grow flex items-center gap-1 sm:gap-3">
+                  <div className="flex-shrink-0 w-4 h-4 sm:w-8 sm:h-8 flex items-center justify-center bg-blue-100 text-blue-700 rounded-full font-bold text-[8px] sm:text-sm border border-blue-200 shadow-sm">
+                    {index + 1}
+                  </div>
+                  <div className="w-full">
+                    <input
+                      type="text"
+                      placeholder={t('education.school')}
+                      value={edu.school}
+                      maxLength={100}
+                      onChange={(e) =>
+                        updateObjectInArray(education, setEducation, index, "school", e.target.value)
+                      }
+                      className={`w-full px-1 py-0.5 sm:px-3 sm:py-2 text-[9px] sm:text-base border rounded-lg focus:outline-none transition bg-white ${validationErrors[index]?.school ? 'border-red-500 ring-1 ring-red-100' : 'border-gray-300 focus:ring-2 focus:ring-blue-500'}`}
+                      onClick={(e) => e.stopPropagation()}
+                    />
+                    {validationErrors[index]?.school && (
+                      <p className="text-red-500 text-[8px] sm:text-xs mt-0.5 sm:mt-1.5 flex items-center gap-1 font-medium animate-in slide-in-from-top-1">
+                        <AlertCircle className="w-2.5 h-2.5 sm:w-[14px] sm:h-[14px]" />
+                        {t('education.schoolRequired') || "School is required"}
+                      </p>
+                    )}
+                  </div>
                 </div>
 
-                <div className="flex items-center gap-1 md:gap-2 flex-shrink-0">
+                <div className="flex items-center gap-0 sm:gap-2 flex-shrink-0">
                   <button
                     type="button"
                     onClick={() => toggleCollapse(index)}
-                    className={`p-2 rounded-lg transition-colors flex items-center gap-2 text-sm font-medium ${edu.collapsed ? 'bg-blue-50 text-blue-700 hover:bg-blue-100' : 'bg-gray-100 text-gray-700 hover:bg-gray-200'}`}
+                    className={`p-0.5 sm:p-2 rounded-lg transition-colors flex items-center gap-1 sm:gap-2 text-[8px] sm:text-sm font-medium ${edu.collapsed ? 'bg-blue-50 text-blue-700 hover:bg-blue-100' : 'bg-gray-100 text-gray-700 hover:bg-gray-200'}`}
                     title={edu.collapsed ? t('education.edit') : t('education.collapse') || "Collapse"}
                   >
-                    {edu.collapsed ? <Pencil size={16} /> : <X size={16} />}
+                    {edu.collapsed ? <Pencil className="w-2.5 h-2.5 sm:w-[16px] sm:h-[16px]" /> : <X className="w-2.5 h-2.5 sm:w-[16px] sm:h-[16px]" />}
                     <span className="hidden md:inline">{edu.collapsed ? t('education.edit') : (t('education.close') || "Close")}</span>
                   </button>
 
-                  <div className="w-px h-6 bg-gray-200 mx-1"></div>
+                  <div className="w-px h-3 sm:h-6 bg-gray-200 mx-0.5 sm:mx-1"></div>
 
                   <button
                     type="button"
                     onClick={() => moveItemUp(index)}
                     disabled={index === 0}
-                    className="p-1.5 hover:bg-gray-200 rounded-lg transition-colors disabled:opacity-30 disabled:cursor-not-allowed"
+                    className="p-0.5 sm:p-1.5 hover:bg-gray-200 rounded-lg transition-colors disabled:opacity-30 disabled:cursor-not-allowed"
                     title={t('education.moveUp') || "Move Up"}
                   >
-                    <ArrowUp size={16} className="text-gray-600" />
+                    <ArrowUp className="w-2.5 h-2.5 sm:w-[16px] sm:h-[16px] text-gray-600" />
                   </button>
                   <button
                     type="button"
                     onClick={() => moveItemDown(index)}
                     disabled={index === education.length - 1}
-                    className="p-1.5 hover:bg-gray-200 rounded-lg transition-colors disabled:opacity-30 disabled:cursor-not-allowed"
+                    className="p-0.5 sm:p-1.5 hover:bg-gray-200 rounded-lg transition-colors disabled:opacity-30 disabled:cursor-not-allowed"
                     title={t('education.moveDown') || "Move Down"}
                   >
-                    <ArrowDown size={16} className="text-gray-600" />
+                    <ArrowDown className="w-2.5 h-2.5 sm:w-[16px] sm:h-[16px] text-gray-600" />
                   </button>
                   <button
                     type="button"
                     onClick={() => setItemToDelete(index)}
-                    className="p-1.5 hover:bg-red-100 rounded-lg transition-colors text-red-500 ml-1"
+                    className="p-0.5 sm:p-1.5 hover:bg-red-100 rounded-lg transition-colors text-red-500 ml-0.5 sm:ml-1"
                     title={t('education.delete')}
                     disabled={deletingIds.has(edu._id)}
                   >
-                    {deletingIds.has(edu._id) ? <Loader size={16} className="animate-spin" /> : <Trash2 size={16} />}
+                    {deletingIds.has(edu._id) ? <Loader size={12} className="w-2.5 h-2.5 sm:w-[16px] sm:h-[16px] animate-spin" /> : <Trash2 className="w-2.5 h-2.5 sm:w-[16px] sm:h-[16px]" />}
                   </button>
                 </div>
               </div>
@@ -304,11 +310,11 @@ export default function Education({ userData, setUserDetails }) {
                       onChange={(e) =>
                         updateObjectInArray(education, setEducation, index, "degree", e.target.value)
                       }
-                      className={`w-full px-3 py-2 border rounded-lg focus:outline-none transition bg-white ${validationErrors[index]?.degree ? 'border-red-500 ring-1 ring-red-100' : 'border-gray-300 focus:ring-2 focus:ring-blue-500'}`}
+                      className={`w-full px-2 py-1.5 sm:px-3 sm:py-2 text-[10px] sm:text-base border rounded-lg focus:outline-none transition bg-white ${validationErrors[index]?.degree ? 'border-red-500 ring-1 ring-red-100' : 'border-gray-300 focus:ring-2 focus:ring-blue-500'}`}
                     />
                     {validationErrors[index]?.degree && (
-                      <p className="text-red-500 text-xs mt-1.5 flex items-center gap-1.5 font-medium animate-in slide-in-from-top-1">
-                        <AlertCircle size={14} />
+                      <p className="text-red-500 text-[9px] sm:text-xs mt-1 sm:mt-1.5 flex items-center gap-1 sm:gap-1.5 font-medium animate-in slide-in-from-top-1">
+                        <AlertCircle className="w-3 h-3 sm:w-[14px] sm:h-[14px]" />
                         {t('education.degreeRequired') || "Degree is required"}
                       </p>
                     )}
@@ -322,10 +328,10 @@ export default function Education({ userData, setUserDetails }) {
                     onChange={(e) =>
                       updateObjectInArray(education, setEducation, index, "field", e.target.value)
                     }
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white transition"
+                    className="w-full px-2 py-1.5 sm:px-3 sm:py-2 text-[10px] sm:text-base border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white transition"
                   />
 
-                  <div className="grid grid-cols-2 gap-2">
+                  <div className="grid grid-cols-2 gap-1.5 sm:gap-2">
                     <input
                       type="text"
                       placeholder={t('education.startYear')}
@@ -334,7 +340,7 @@ export default function Education({ userData, setUserDetails }) {
                       onChange={(e) =>
                         updateObjectInArray(education, setEducation, index, "startYear", e.target.value)
                       }
-                      className="px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white transition"
+                      className="px-2 py-1.5 sm:px-3 sm:py-2 text-[10px] sm:text-base border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white transition"
                     />
                     <input
                       type="text"
@@ -344,7 +350,7 @@ export default function Education({ userData, setUserDetails }) {
                       onChange={(e) =>
                         updateObjectInArray(education, setEducation, index, "endYear", e.target.value)
                       }
-                      className="px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white transition"
+                      className="px-2 py-1.5 sm:px-3 sm:py-2 text-[10px] sm:text-base border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white transition"
                     />
                   </div>
 
@@ -353,9 +359,9 @@ export default function Education({ userData, setUserDetails }) {
                       type="button"
                       onClick={() => saveEducationItem(index)}
                       disabled={savingIds.has(index)}
-                      className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg text-sm font-medium flex items-center gap-2 transition-colors disabled:opacity-50"
+                      className="bg-blue-600 hover:bg-blue-700 text-white px-3 py-1.5 sm:px-4 sm:py-2 rounded-lg text-[10px] sm:text-sm font-medium flex items-center gap-1.5 sm:gap-2 transition-colors disabled:opacity-50"
                     >
-                      {savingIds.has(index) ? <Loader size={12} className="animate-spin" /> : <CheckCheck size={16} />}
+                      {savingIds.has(index) ? <Loader size={12} className="animate-spin" /> : <CheckCheck className="w-3 h-3 sm:w-4 sm:h-4" />}
                       {t('education.save') || "Save"}
                     </button>
                   </div>
@@ -380,9 +386,9 @@ export default function Education({ userData, setUserDetails }) {
               })
             }
           }}
-          className={`w-full text-white py-2 rounded-lg flex items-center justify-center gap-2 transition-all duration-300 mt-2 ${education.length >= 10 ? 'bg-gray-400 cursor-not-allowed' : 'bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700'}`}
+          className={`w-full text-white py-1.5 sm:py-2 rounded-lg flex items-center justify-center gap-2 transition-all duration-300 mt-2 text-xs sm:text-base ${education.length >= 10 ? 'bg-gray-400 cursor-not-allowed' : 'bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700'}`}
         >
-          <Plus size={18} /> {education.length >= 10 ? "10 Max" : t('education.addEducation')}
+          <Plus className="w-4 h-4 sm:w-[18px] sm:h-[18px]" /> {education.length >= 10 ? "10 Max" : t('education.addEducation')}
         </button>
       </div>
 
@@ -395,11 +401,11 @@ export default function Education({ userData, setUserDetails }) {
               const currentOrder = education.filter(e => e._id).map(e => e._id);
               return JSON.stringify(currentOrder) === JSON.stringify(originalOrder);
             })()}
-            className="bg-gray-800 hover:bg-gray-900 disabled:opacity-50 disabled:cursor-not-allowed text-white font-bold px-8 py-3 rounded-lg transition-all duration-300 flex items-center gap-2 transform hover:scale-105 shadow-lg"
+            className="bg-gray-800 hover:bg-gray-900 disabled:opacity-50 disabled:cursor-not-allowed text-white font-bold px-4 py-2 sm:px-8 sm:py-3 rounded-lg transition-all duration-300 flex items-center gap-2 transform hover:scale-105 shadow-lg text-xs sm:text-base"
           >
             {loading ? (
               <>
-                <Loader size={20} className="animate-spin" /> {t('education.saving')}
+                <Loader size={20} className="animate-spin w-4 h-4 sm:w-5 sm:h-5" /> {t('education.saving')}
               </>
             ) : (
               `💾 ${t('education.saveOrder') || "Save Order"}`

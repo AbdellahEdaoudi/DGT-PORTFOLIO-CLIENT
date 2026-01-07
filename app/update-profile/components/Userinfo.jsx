@@ -149,8 +149,8 @@ function Userinfo({ userData, setUserDetails }) {
   return (
     <form dir={userData?.displayLanguage === 'ar' ? 'rtl' : 'ltr'}>
       {/* Profile Image Section */}
-      <div className="flex flex-col md:flex-row items-start justify-between gap-2 md:gap-8">
-        <div className="flex flex-col items-center bg-gradient-to-br from-gray-50 to-gray-100 shadow-xl border-2 border-gray-200 rounded-2xl p-6 w-full md:w-1/3">
+      <div className="flex flex-col md:flex-row items-start justify-between gap-3 md:gap-8">
+        <div className="flex flex-col items-center bg-gradient-to-br from-gray-50 to-gray-100 shadow-xl border-2 border-gray-200 rounded-xl sm:rounded-2xl p-4 sm:p-6 w-full md:w-1/3">
           <Link href={userData.username ? `${PORTFOLIO_2}` : `/update-profile`}>
             <Image
               onClick={() => {
@@ -160,100 +160,100 @@ function Userinfo({ userData, setUserDetails }) {
               }}
               src={imagePreview}
               alt="Profile"
-              className="rounded-full cursor-pointer w-32 h-32 md:w-40 md:h-40 object-cover border-4 border-teal-500 shadow-lg"
+              className="rounded-full cursor-pointer w-24 h-24 sm:w-40 sm:h-40 object-cover border-4 border-teal-500 shadow-lg"
               width={160}
               height={160}
               priority
             />
           </Link>
-          <label className="mt-4 bg-gradient-to-r from-teal-400 to-green-500 hover:from-teal-500 hover:to-green-600 text-white font-semibold rounded-full px-6 py-2 cursor-pointer transition duration-300 transform hover:scale-105">
+          <label className="mt-3 sm:mt-4 bg-gradient-to-r from-teal-400 to-green-500 hover:from-teal-500 hover:to-green-600 text-white font-semibold rounded-full px-4 py-1.5 sm:px-6 sm:py-2 text-xs sm:text-base cursor-pointer transition duration-300 transform hover:scale-105">
             {t('userInfo.uploadImage')}
             <input type="file" accept="image/*" onChange={handleImageUpload} className="hidden" />
           </label>
         </div>
         {/* User Information */}
-        <div className="text-xs md:text-base bg-gradient-to-br from-gray-50 to-gray-100 shadow-xl border-2 border-gray-200 rounded-2xl p-6 w-full md:w-2/3 space-y-4">
+        <div className="text-xs md:text-base bg-gradient-to-br from-gray-50 to-gray-100 shadow-xl border-2 border-gray-200 rounded-xl sm:rounded-2xl p-4 sm:p-6 w-full md:w-2/3 space-y-3 sm:space-y-4">
           <h2 className="text-3xl md:block hidden font-bold text-gray-800 text-center mb-6">
             {fullname || t('userInfo.fullName')}
           </h2>
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-2 gap-2 sm:gap-4">
             <div>
-              <label className="block text-sm font-bold text-gray-700 mb-2">{t('userInfo.fullName')}</label>
+              <label className="block text-[10px] sm:text-sm font-bold text-gray-700 mb-1 sm:mb-2">{t('userInfo.fullName')}</label>
               <input
                 type="text"
                 value={fullname}
                 maxLength={50}
                 onChange={(e) => setFullname(e.target.value)}
                 required
-                className="w-full px-4 py-2 bg-white border-2 border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 transition"
+                className="w-full px-2 py-1.5 sm:px-4 sm:py-2 text-[10px] sm:text-base bg-white border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 transition"
               />
             </div>
             <div>
-              <label className="block text-sm font-bold text-gray-700 mb-2">{t('userInfo.username')}</label>
+              <label className="block text-[10px] sm:text-sm font-bold text-gray-700 mb-1 sm:mb-2">{t('userInfo.username')}</label>
               <input
                 type="text"
                 value={username}
                 maxLength={30}
                 onChange={(e) => setUsername(e.target.value.replace(/[.\s/]/g, "").toLowerCase())}
                 required
-                className={`w-full px-4 py-2 border-2 bg-white border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 transition
+                className={`w-full px-2 py-1.5 sm:px-4 sm:py-2 text-[10px] sm:text-base border bg-white border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 transition
                   ${errormsg ? "border-red-500 focus:ring-red-500" : "border-gray-300 focus:ring-teal-500"}`}
               />
               {errormsg && (
-                <p className="mt-1 text-red-500 text-sm font-medium">{errormsg}</p>
+                <p className="mt-1 text-red-500 text-[9px] sm:text-sm font-medium">{errormsg}</p>
               )}
               {username && (
-                <div className="flex flex-col gap-1 mt-1 ml-2">
-                  <p className="text-blue-500 text-xs font-medium">{`l1: ${username}.dgtportfolio.com`}</p>
-                  <p className="text-blue-500 text-xs font-medium">{`l2: dgtportfolio.com/dp/${username}`}</p>
+                <div className="flex flex-col gap-0.5 mt-1 ml-1">
+                  <p className="text-blue-500 text-[8px] sm:text-xs font-medium break-all leading-tight">{`l1: ${username}.dgtportfolio.com`}</p>
+                  <p className="text-blue-500 text-[8px] sm:text-xs font-medium break-all leading-tight">{`l2: dgtportfolio.com/dp/${username}`}</p>
                 </div>
               )}
             </div>
             <div>
-              <label className="block text-sm font-bold text-gray-700 mb-2">{t('userInfo.country')}</label>
+              <label className="block text-[10px] sm:text-sm font-bold text-gray-700 mb-1 sm:mb-2">{t('userInfo.country')}</label>
               <input
                 type="text"
                 value={country}
                 maxLength={100}
                 onChange={(e) => setCountry(e.target.value)}
-                className="w-full px-4 py-2 border-2 bg-white border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 transition"
+                className="w-full px-2 py-1.5 sm:px-4 sm:py-2 text-[10px] sm:text-base border bg-white border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 transition"
               />
             </div>
             <div>
-              <label className="block text-sm font-bold text-gray-700 mb-2">{t('userInfo.phone')}</label>
+              <label className="block text-[10px] sm:text-sm font-bold text-gray-700 mb-1 sm:mb-2">{t('userInfo.phone')}</label>
               <input
                 type="tel"
                 maxLength={100}
                 value={phoneNumber}
                 onChange={(e) => setPhoneNumber(e.target.value)}
-                className="w-full px-4 py-2 border-2 bg-white border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 transition"
+                className="w-full px-2 py-1.5 sm:px-4 sm:py-2 text-[10px] sm:text-base border bg-white border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 transition"
               />
             </div>
-          </div>
-          <div className="md:col-span-2">
-            <label className="block text-sm font-bold text-gray-700 mb-2">{t('userInfo.specialization')}</label>
-            <input
-              type="text"
-              maxLength={100}
-              value={category}
-              onChange={(e) => setCategory(e.target.value)}
-              placeholder={t('userInfo.exampleSpecialization')}
-              className="w-full px-4 py-2 bg-white border-2 border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 transition"
-            />
+            <div className="col-span-2">
+              <label className="block text-[10px] sm:text-sm font-bold text-gray-700 mb-1 sm:mb-2">{t('userInfo.specialization')}</label>
+              <input
+                type="text"
+                maxLength={100}
+                value={category}
+                onChange={(e) => setCategory(e.target.value)}
+                placeholder={t('userInfo.exampleSpecialization')}
+                className="w-full px-2 py-1.5 sm:px-4 sm:py-2 text-[10px] sm:text-base bg-white border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 transition"
+              />
+            </div>
           </div>
         </div>
       </div>
       {/* Submit Button */}
-      <div className="flex justify-end py-4 border-b-2 border-gray-200 gap-4">
-        <DownloadResume userDetails={userData} className="bg-gradient-to-r from-blue-500 to-indigo-600 hover:from-blue-600 hover:to-indigo-700 text-white font-bold px-8 py-3 rounded-lg transition-all duration-300 flex items-center gap-2 transform hover:scale-105 shadow-lg" />
+      <div className="flex justify-end py-3 sm:py-4 border-b-2 border-gray-200 gap-3 sm:gap-4">
+        <DownloadResume userDetails={userData} className="bg-gradient-to-r from-blue-500 to-indigo-600 hover:from-blue-600 hover:to-indigo-700 text-white font-bold px-4 py-2 sm:px-8 sm:py-3 rounded-lg transition-all duration-300 flex items-center gap-2 transform hover:scale-105 shadow-lg text-xs sm:text-base" />
         <button onClick={UpUserInfo}
           type="submit"
           disabled={loading}
-          className="bg-gradient-to-r from-teal-600 to-green-600 hover:from-teal-700 hover:to-green-700 disabled:opacity-50 text-white font-bold px-8 py-3 rounded-lg transition-all duration-300 flex items-center gap-2 transform hover:scale-105 shadow-lg"
+          className="bg-gradient-to-r from-teal-600 to-green-600 hover:from-teal-700 hover:to-green-700 disabled:opacity-50 text-white font-bold px-4 py-2 sm:px-8 sm:py-3 rounded-lg transition-all duration-300 flex items-center gap-2 transform hover:scale-105 shadow-lg text-xs sm:text-base"
         >
           {loading ? (
             <>
-              <Loader size={20} className="animate-spin" /> {t('userInfo.saving')}
+              <Loader size={16} className="animate-spin w-3 h-3 sm:w-5 sm:h-5" /> {t('userInfo.saving')}
             </>
           ) : (
             `💾 ${t('userInfo.save')}`

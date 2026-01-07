@@ -51,13 +51,13 @@ export default function About({ userData }) {
   return (
     <div className="space-y-8" dir={userData?.displayLanguage === 'ar' ? 'rtl' : 'ltr'}>
       {/* Header Section */}
-      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-gray-100 pb-6">
-        <div className="space-y-1">
-          <h3 className="text-xl font-bold text-gray-800 flex items-center gap-2">
-            <User className="text-teal-600" />
+      <div className="flex flex-col md:flex-row md:items-center justify-between border-b border-gray-100">
+        <div className="space-y-0.5 sm:space-y-1">
+          <h3 className="text-sm sm:text-xl font-bold text-gray-800 flex items-center gap-1.5 sm:gap-2">
+            <User className="text-teal-600 w-3 h-3 sm:w-6 sm:h-6" />
             {t('about.summary')}
           </h3>
-          <p className="text-sm text-gray-500 max-w-2xl">
+          <p className="text-[10px] sm:text-sm text-gray-500 max-w-2xl">
             {t('about.description')}
           </p>
         </div>
@@ -87,23 +87,23 @@ export default function About({ userData }) {
 
       {/* Editor Section */}
       <div className="
-        bg-white rounded-2xl shadow-sm border border-gray-200 
+        bg-white rounded-lg sm:rounded-2xl shadow-sm border border-gray-200 
         overflow-hidden transition-all duration-300
         hover:shadow-md hover:border-gray-300
-        focus-within:border-teal-500 focus-within:ring-4 focus-within:ring-teal-500/10
+        focus-within:border-teal-500 focus-within:ring-2 sm:focus-within:ring-4 focus-within:ring-teal-500/10
       ">
         {/* Toolbar */}
-        <div className="bg-gray-50 border-b border-gray-100 px-4 py-3 flex justify-between items-center text-sm text-gray-500">
-          <div className="flex items-center gap-2">
-            <Sparkles size={16} className="text-teal-500" />
+        <div className="bg-gray-50 border-b border-gray-100 px-2 py-1.5 sm:px-4 sm:py-3 flex justify-between items-center text-[10px] sm:text-sm text-gray-500">
+          <div className="flex items-center gap-1 sm:gap-2">
+            <Sparkles className="text-teal-500 w-3 h-3 sm:w-4 sm:h-4" />
             <span className="font-medium text-gray-700">{t('about.bio')}</span>
           </div>
           {about.length > 0 && (
             <button
               onClick={handleClear}
-              className="text-gray-400 hover:text-red-500 transition-colors flex items-center gap-1.5 text-xs font-medium"
+              className="text-gray-400 hover:text-red-500 transition-colors flex items-center gap-1 sm:gap-1.5 text-[9px] sm:text-xs font-medium"
             >
-              <Trash2 size={14} />
+              <Trash2 className="w-3 h-3 sm:w-[14px] sm:h-[14px]" />
               {t('about.clear')}
             </button>
           )}
@@ -117,11 +117,11 @@ export default function About({ userData }) {
             onChange={(e) => setAbout(e.target.value)}
             placeholder={t('about.placeholder')}
             className="
-                w-full px-5 py-5 min-h-[220px]
+                w-full px-2 py-2 sm:px-5 sm:py-5 min-h-[150px] sm:min-h-[220px]
                 border-0 focus:ring-0 outline-none
                 text-gray-700 placeholder-gray-400 leading-relaxed
                 resize-y bg-transparent
-                text-base
+                text-[11px] sm:text-base
               "
           />
 
@@ -135,9 +135,9 @@ export default function About({ userData }) {
         </div>
 
         {/* Footer */}
-        <div className="bg-white border-t border-gray-50 px-4 py-2 flex justify-end items-center">
+        <div className="bg-white border-t border-gray-50 px-2 py-1 sm:px-4 sm:py-2 flex justify-end items-center">
           <div className={`
-                text-xs font-mono font-medium px-2 py-1 rounded-full
+                text-[9px] sm:text-xs font-mono font-medium px-1.5 py-0.5 sm:px-2 sm:py-1 rounded-full
                 ${about.length >= maxLength ? 'text-red-500 bg-red-50' : 'text-gray-400'}
              `}>
             {about.length} / {maxLength}
@@ -145,44 +145,44 @@ export default function About({ userData }) {
         </div>
       </div>
 
-      {/* Tip Section */}
-      <div className="bg-blue-50/50 border border-blue-100 rounded-xl p-4 flex gap-4 items-start">
-        <div className="p-2 bg-blue-100/50 rounded-lg text-blue-600 shrink-0">
-          <Lightbulb size={20} />
-        </div>
-        <div className="space-y-1">
-          <h4 className="text-sm font-bold text-gray-800">
-            {t('about.proTip')}
-          </h4>
-          <p className="text-xs md:text-sm text-gray-600 leading-relaxed">
-            {t('about.tip')}
-          </p>
-        </div>
-      </div>
-
       {/* Mobile Save Button */}
-      <div className="md:hidden pt-2">
+      <div className="md:hidden">
         <button
           onClick={handleSave}
           disabled={loading}
           className="
             w-full justify-center
             bg-gray-900 hover:bg-gray-800
-            text-white font-bold px-6 py-3.5 rounded-xl
+            text-white font-bold px-4 py-1.5 sm:px-6 sm:py-3.5 rounded-lg sm:rounded-xl
             shadow-lg hover:shadow-xl disabled:opacity-50 
-            transition-all duration-300 flex items-center gap-2
+            transition-all duration-300 flex items-center gap-1.5 sm:gap-2 text-xs sm:text-base
           "
         >
           {loading ? (
             <>
-              <Loader size={20} className="animate-spin" /> {t('about.saving')}
+              <Loader size={16} className="animate-spin w-3 h-3 sm:w-5 sm:h-5" /> {t('about.saving')}
             </>
           ) : (
             <>
-              <CheckCheck size={20} /> {t('about.save')}
+              <CheckCheck className="w-3 h-3 sm:w-5 sm:h-5" /> {t('about.save')}
             </>
           )}
         </button>
+      </div>
+
+      {/* Tip Section */}
+      <div className="bg-blue-50/50 border border-blue-100 rounded-lg sm:rounded-xl p-2 sm:p-4 flex gap-2 sm:gap-4 items-start">
+        <div className="p-1 sm:p-2 bg-blue-100/50 rounded-lg text-blue-600 shrink-0">
+          <Lightbulb className="w-3 h-3 sm:w-5 sm:h-5" />
+        </div>
+        <div className="space-y-0.5 sm:space-y-1">
+          <h4 className="text-[10px] sm:text-sm font-bold text-gray-800">
+            {t('about.proTip')}
+          </h4>
+          <p className="text-[9px] sm:text-sm text-gray-600 leading-relaxed">
+            {t('about.tip')}
+          </p>
+        </div>
       </div>
 
       {/* Clear Confirmation Modal */}

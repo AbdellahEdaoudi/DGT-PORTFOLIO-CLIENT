@@ -21,7 +21,8 @@ import {
     DndContext,
     closestCenter,
     KeyboardSensor,
-    PointerSensor,
+    TouchSensor,
+    MouseSensor,
     useSensor,
     useSensors,
 } from '@dnd-kit/core'
@@ -49,7 +50,6 @@ function SortableSectionItem({ id, index, label, moveUp, moveDown, isFirst, isLa
         attributes,
         listeners,
         setNodeRef,
-        setActivatorNodeRef,
         transform,
         transition,
         isDragging,
@@ -60,6 +60,7 @@ function SortableSectionItem({ id, index, label, moveUp, moveDown, isFirst, isLa
         transition,
         zIndex: isDragging ? 50 : 'auto',
         position: 'relative',
+        touchAction: 'none', // Prevent browser scrolling while dragging
     }
 
     const Icon = ITEM_ICONS[id] || LayoutList
@@ -68,92 +69,113 @@ function SortableSectionItem({ id, index, label, moveUp, moveDown, isFirst, isLa
         <div
             ref={setNodeRef}
             style={style}
+            {...attributes}
+            {...listeners}
             className={`
-                flex items-center justify-between p-3 md:p-4
+                flex items-center justify-between p-1 sm:p-4
                 bg-white border text-gray-700
-                rounded-xl shadow-sm hover:shadow-md transition-all duration-200
-                group
+                rounded-lg sm:rounded-xl shadow-sm hover:shadow-md transition-all duration-200
+                group cursor-grab active:cursor-grabbing
                 ${isDragging
                     ? 'border-cyan-500 ring-1 ring-cyan-500 bg-cyan-50 shadow-lg scale-[1.02]'
                     : 'border-gray-200 hover:border-cyan-200'
                 }
             `}
         >
-            <div className="flex items-center gap-3 md:gap-4 flex-1 overflow-hidden">
-                {/* Drag Handle */}
+            <div className="flex items-center gap-1 sm:gap-4 flex-1 overflow-hidden">
+                {/* Drag Handle (Visual only now) */}
                 <div
-                    ref={setActivatorNodeRef}
-                    {...attributes}
-                    {...listeners}
                     className="
-                        text-gray-400 hover:text-cyan-600 cursor-grab active:cursor-grabbing
-                        p-1.5 hover:bg-cyan-50 rounded-lg transition-colors touch-none
+                        text-gray-400
+                        p-0.5 sm:p-1.5 rounded-lg transition-colors
                     "
-                    title="Drag to reorder"
                 >
-                    <GripVertical size={20} />
+                    <GripVertical className="w-2.5 h-2.5 sm:w-[20px] sm:h-[20px]" />
                 </div>
 
                 {/* Index & Icon */}
-                <div className="flex items-center gap-3">
-                    <span className="hidden md:flex w-6 h-6 items-center justify-center text-xs font-mono font-medium text-gray-400 bg-gray-50 rounded-md">
+                <div className="flex items-center gap-1 sm:gap-3">
+                    <span className="flex w-4 h-4 sm:w-6 sm:h-6 items-center justify-center text-[8px] sm:text-xs font-mono font-medium text-gray-500 bg-gray-100 rounded-md border border-gray-200">
                         {index + 1}
                     </span>
-                    <div className={`p-2 rounded-lg ${isDragging ? 'bg-cyan-100 text-cyan-700' : 'bg-gray-50 text-gray-500 group-hover:bg-cyan-50 group-hover:text-cyan-600'} transition-colors`}>
-                        <Icon size={20} />
+                    <div className={`p-0.5 sm:p-2 rounded-lg ${isDragging ? 'bg-cyan-100 text-cyan-700' : 'bg-gray-50 text-gray-500 group-hover:bg-cyan-50 group-hover:text-cyan-600'} transition-colors`}>
+                        <Icon className="w-2.5 h-2.5 sm:w-[20px] sm:h-[20px]" />
                     </div>
                 </div>
 
                 {/* Label */}
-                <span className={`font-bold text-sm md:text-base capitalize truncate ${isDragging ? 'text-cyan-900' : 'text-gray-700'}`}>
+                <span className={`font-bold text-[10px] sm:text-base capitalize truncate ${isDragging ? 'text-cyan-900' : 'text-gray-700'}`}>
                     {label}
                 </span>
             </div>
 
             {/* Actions */}
-            <div className="flex items-center gap-1 pl-2 border-l border-gray-100 ml-2">
+            <div className="flex items-center gap-0.5 sm:gap-1 pl-1 sm:pl-2 border-l border-gray-100 ml-1 sm:ml-2">
                 <button
                     onClick={(e) => moveUp(index, e)}
                     disabled={isFirst}
                     className={`
-                        p-1.5 md:p-2 rounded-lg transition-all duration-200
+                        p-0.5 sm:p-2 rounded-lg transition-all duration-200
                         ${isFirst
                             ? 'text-gray-200 cursor-not-allowed'
                             : 'text-gray-400 hover:bg-gray-100 hover:text-gray-700 active:scale-95'
                         }
                     `}
                     title="Move Up"
+                    onPointerDown={(e) => e.stopPropagation()} // Prevent drag start on button
+                    onTouchStart={(e) => e.stopPropagation()}
                 >
-                    <ArrowUp size={18} />
+                    <ArrowUp className="w-2.5 h-2.5 sm:w-[18px] sm:h-[18px]" />
                 </button>
                 <button
                     onClick={(e) => moveDown(index, e)}
                     disabled={isLast}
                     className={`
-                        p-1.5 md:p-2 rounded-lg transition-all duration-200
+                        p-0.5 sm:p-2 rounded-lg transition-all duration-200
                         ${isLast
                             ? 'text-gray-200 cursor-not-allowed'
                             : 'text-gray-400 hover:bg-gray-100 hover:text-gray-700 active:scale-95'
                         }
                     `}
                     title="Move Down"
+                    onPointerDown={(e) => e.stopPropagation()} // Prevent drag start on button
+                    onTouchStart={(e) => e.stopPropagation()}
                 >
-                    <ArrowDown size={18} />
+                    <ArrowDown className="w-2.5 h-2.5 sm:w-[18px] sm:h-[18px]" />
                 </button>
             </div>
         </div>
     )
 }
 import { getTranslation } from '../../translations/update-profile'
+import DragTutorial from './DragTutorial'
 
 export default function SectionOrdering({ userData, setUserDetails }) {
     const t = getTranslation(userData?.displayLanguage || 'en')
     const [order, setOrder] = useState(userData?.sectionOrder && userData.sectionOrder.length > 0 ? userData.sectionOrder : DEFAULT_ORDER)
     const [originalOrder, setOriginalOrder] = useState(userData?.sectionOrder && userData.sectionOrder.length > 0 ? userData.sectionOrder : DEFAULT_ORDER)
     const [loading, setLoading] = useState(false)
+    const [showTutorial, setShowTutorial] = useState(true)
+
+    useEffect(() => {
+        const timer = setTimeout(() => {
+            setShowTutorial(false)
+        }, 5000)
+        return () => clearTimeout(timer)
+    }, [])
 
     const sensors = useSensors(
-        useSensor(PointerSensor),
+        useSensor(MouseSensor, {
+            activationConstraint: {
+                distance: 10,
+            },
+        }),
+        useSensor(TouchSensor, {
+            activationConstraint: {
+                delay: 250,
+                tolerance: 5,
+            },
+        }),
         useSensor(KeyboardSensor, {
             coordinateGetter: sortableKeyboardCoordinates,
         })
@@ -236,20 +258,25 @@ export default function SectionOrdering({ userData, setUserDetails }) {
 
     return (
         <div className="space-y-6" dir={userData?.displayLanguage === 'ar' ? 'rtl' : 'ltr'}>
-            <div className="flex items-center justify-between border-b border-gray-100 pb-4 mb-6">
+            <div className="flex items-center justify-between border-b border-gray-100">
                 <div className="space-y-1">
-                    <h3 className="text-xl font-bold text-gray-800 flex items-center gap-2">
+                    <h3 className="text-xs md:text-xl font-bold text-gray-800 flex items-center gap-2">
                         <LayoutList className="text-cyan-600" />
                         {t('sectionOrdering.title')}
                     </h3>
-                    <p className="text-sm text-gray-500">
+                    <p className="text-xs md:text-sm text-gray-500">
                         {t('sectionOrdering.description')}
                     </p>
                 </div>
             </div>
 
-            <div className="bg-white p-6 rounded-2xl border border-gray-200 shadow-sm space-y-8">
-                <div className="space-y-3 max-w-3xl mx-auto">
+            <div className="bg-white p-2 sm:p-6 rounded-2xl border border-gray-200 shadow-sm space-y-4 sm:space-y-8 relative">
+                {showTutorial && (
+                    <div className="absolute top-0 right-0 pt-4 sm:pt-10 pr-4 sm:pr-8 z-50 pointer-events-none">
+                        <DragTutorial />
+                    </div>
+                )}
+                <div className="space-y-1 sm:space-y-3 max-w-3xl mx-auto">
                     <DndContext
                         sensors={sensors}
                         collisionDetection={closestCenter}
@@ -282,24 +309,24 @@ export default function SectionOrdering({ userData, setUserDetails }) {
                         className="
                             w-full md:w-auto
                             bg-gray-900 hover:bg-gray-800
-                            text-white font-bold px-8 py-3.5 rounded-xl
+                            text-white font-bold px-4 py-2 sm:px-8 sm:py-3.5 rounded-lg sm:rounded-xl
                             shadow-lg hover:shadow-xl disabled:opacity-50 disabled:shadow-none disabled:cursor-not-allowed
-                            transition-all duration-300 flex items-center justify-center gap-2 transform hover:-translate-y-0.5
-                            disabled:transform-none
+                            transition-all duration-300 flex items-center justify-center gap-1.5 sm:gap-2 transform hover:-translate-y-0.5
+                            disabled:transform-none text-[10px] sm:text-base
                         "
                     >
                         {loading ? (
                             <>
-                                <Loader size={20} className="animate-spin" /> {t('sectionOrdering.saving')}
+                                <Loader size={16} className="animate-spin w-3 h-3 sm:w-5 sm:h-5" /> {t('sectionOrdering.saving')}
                             </>
                         ) : (
                             <>
-                                <CheckCheck size={20} /> {t('sectionOrdering.save')}
+                                <CheckCheck className="w-3 h-3 sm:w-5 sm:h-5" /> {t('sectionOrdering.save')}
                             </>
                         )}
                     </button>
                 </div>
             </div>
-        </div>
+        </div >
     )
 }

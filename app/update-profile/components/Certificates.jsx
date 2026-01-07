@@ -326,10 +326,13 @@ export default function Certificates({ userData, setUserDetails }) {
                                 }`}
                         >
                             {/* Header */}
-                            <div className="p-3 md:p-4 flex items-center justify-between gap-3 bg-white">
-                                <div className="flex-grow flex items-center gap-3">
+                            <div className="p-1 sm:p-4 flex items-center justify-between gap-1 sm:gap-3 bg-white">
+                                <div className="flex-grow flex items-center gap-1 sm:gap-3">
+                                    <div className="flex-shrink-0 w-4 h-4 sm:w-8 sm:h-8 flex items-center justify-center bg-blue-100 text-blue-700 rounded-full font-bold text-[8px] sm:text-sm border border-blue-200 shadow-sm">
+                                        {index + 1}
+                                    </div>
                                     {/* Mini Preview in Header */}
-                                    <div className="w-10 h-10 rounded-md bg-gray-100 border border-gray-200 overflow-hidden flex-shrink-0 relative">
+                                    <div className="w-6 h-6 sm:w-10 sm:h-10 rounded-md bg-gray-100 border border-gray-200 overflow-hidden flex-shrink-0 relative">
                                         {(cert.previewUrl || cert.cfimage) ? (
                                             <NextImage
                                                 src={cert.previewUrl || cert.cfimage}
@@ -339,7 +342,7 @@ export default function Certificates({ userData, setUserDetails }) {
                                                 unoptimized
                                             />
                                         ) : (
-                                            <Award className="text-gray-300 w-6 h-6 m-auto mt-2" />
+                                            <Award className="text-gray-300 w-3 h-3 sm:w-6 sm:h-6 m-auto mt-1 sm:mt-2" />
                                         )}
                                     </div>
                                     <div className="w-full">
@@ -351,54 +354,54 @@ export default function Certificates({ userData, setUserDetails }) {
                                             onChange={(e) =>
                                                 updateObjectInArray(certificates, setCertificates, index, "title", e.target.value)
                                             }
-                                            className={`w-full px-3 py-2 border rounded-lg focus:outline-none transition bg-white ${validationErrors[index]?.title ? 'border-red-500 ring-1 ring-red-100' : 'border-gray-300 focus:ring-2 focus:ring-blue-500'}`}
+                                            className={`w-full px-1 py-0.5 sm:px-3 sm:py-2 text-[9px] sm:text-base border rounded-lg focus:outline-none transition bg-white ${validationErrors[index]?.title ? 'border-red-500 ring-1 ring-red-100' : 'border-gray-300 focus:ring-2 focus:ring-blue-500'}`}
                                             onClick={(e) => e.stopPropagation()} // Prevent expand
                                         />
                                         {validationErrors[index]?.title && (
-                                            <p className="text-red-500 text-xs mt-1.5 flex items-center gap-1.5 font-medium animate-in slide-in-from-top-1">
-                                                <AlertCircle size={14} />
+                                            <p className="text-red-500 text-[8px] sm:text-xs mt-0.5 sm:mt-1.5 flex items-center gap-1 font-medium animate-in slide-in-from-top-1">
+                                                <AlertCircle className="w-2.5 h-2.5 sm:w-[14px] sm:h-[14px]" />
                                                 {t('certificates.titleRequired') || "Title is required"}
                                             </p>
                                         )}
                                     </div>
                                 </div>
 
-                                <div className="flex items-center gap-1 md:gap-2 flex-shrink-0">
+                                <div className="flex items-center gap-0 sm:gap-2 flex-shrink-0">
                                     <button
                                         type="button"
                                         onClick={() => toggleCollapse(index)}
-                                        className={`p-2 rounded-lg transition-colors flex items-center gap-2 text-sm font-medium ${cert.collapsed ? 'bg-blue-50 text-blue-700 hover:bg-blue-100' : 'bg-gray-100 text-gray-700 hover:bg-gray-200'}`}
+                                        className={`p-0.5 sm:p-2 rounded-lg transition-colors flex items-center gap-1 sm:gap-2 text-[8px] sm:text-sm font-medium ${cert.collapsed ? 'bg-blue-50 text-blue-700 hover:bg-blue-100' : 'bg-gray-100 text-gray-700 hover:bg-gray-200'}`}
                                         title={cert.collapsed ? t('certificates.edit') : t('certificates.collapse') || "Collapse"}
                                     >
-                                        {cert.collapsed ? <Pencil size={16} /> : <X size={16} />}
+                                        {cert.collapsed ? <Pencil className="w-2.5 h-2.5 sm:w-[16px] sm:h-[16px]" /> : <X className="w-2.5 h-2.5 sm:w-[16px] sm:h-[16px]" />}
                                         <span className="hidden md:inline">{cert.collapsed ? t('certificates.edit') : (t('certificates.close') || "Close")}</span>
                                     </button>
 
-                                    <div className="w-px h-6 bg-gray-200 mx-1"></div>
+                                    <div className="w-px h-3 sm:h-6 bg-gray-200 mx-0.5 sm:mx-1"></div>
 
                                     <button
                                         type="button"
                                         onClick={() => moveItemUp(index)}
                                         disabled={index === 0}
-                                        className="p-1.5 hover:bg-gray-200 rounded-lg transition-colors disabled:opacity-30 disabled:cursor-not-allowed"
+                                        className="p-0.5 sm:p-1.5 hover:bg-gray-200 rounded-lg transition-colors disabled:opacity-30 disabled:cursor-not-allowed"
                                     >
-                                        <ArrowUp size={16} className="text-gray-600" />
+                                        <ArrowUp className="w-2.5 h-2.5 sm:w-[16px] sm:h-[16px] text-gray-600" />
                                     </button>
                                     <button
                                         type="button"
                                         onClick={() => moveItemDown(index)}
                                         disabled={index === certificates.length - 1}
-                                        className="p-1.5 hover:bg-gray-200 rounded-lg transition-colors disabled:opacity-30 disabled:cursor-not-allowed"
+                                        className="p-0.5 sm:p-1.5 hover:bg-gray-200 rounded-lg transition-colors disabled:opacity-30 disabled:cursor-not-allowed"
                                     >
-                                        <ArrowDown size={16} className="text-gray-600" />
+                                        <ArrowDown className="w-2.5 h-2.5 sm:w-[16px] sm:h-[16px] text-gray-600" />
                                     </button>
                                     <button
                                         type="button"
                                         onClick={() => setItemToDelete(index)}
-                                        className="p-1.5 hover:bg-red-100 rounded-lg transition-colors text-red-500 ml-1"
+                                        className="p-0.5 sm:p-1.5 hover:bg-red-100 rounded-lg transition-colors text-red-500 ml-0.5 sm:ml-1"
                                         disabled={deletingIds.has(cert._id)}
                                     >
-                                        {deletingIds.has(cert._id) ? <Loader size={16} className="animate-spin" /> : <Trash2 size={16} />}
+                                        {deletingIds.has(cert._id) ? <Loader size={12} className="w-2.5 h-2.5 sm:w-[16px] sm:h-[16px] animate-spin" /> : <Trash2 className="w-2.5 h-2.5 sm:w-[16px] sm:h-[16px]" />}
                                     </button>
                                 </div>
                             </div>
@@ -406,9 +409,9 @@ export default function Certificates({ userData, setUserDetails }) {
                             {!cert.collapsed && (
                                 <div className="p-3 md:p-4 border-t border-gray-100 space-y-3 bg-gray-50/50 animate-in fade-in slide-in-from-top-1 duration-200">
                                     {/* Image Selector */}
-                                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                        <div className="flex flex-col gap-2">
-                                            <label className="text-sm font-medium text-gray-700 ml-1">{t('certificates.certificateImage') || "Certificate Image"}</label>
+                                    <div className="grid grid-cols-1 md:grid-cols-2 gap-2 sm:gap-4">
+                                        <div className="flex flex-col gap-1 sm:gap-2">
+                                            <label className="text-[10px] sm:text-sm font-medium text-gray-700 ml-1">{t('certificates.certificateImage') || "Certificate Image"}</label>
                                             {!(cert.cfimage || cert.previewUrl) ? (
                                                 <div className="relative">
                                                     <input
@@ -420,22 +423,22 @@ export default function Certificates({ userData, setUserDetails }) {
                                                     />
                                                     <label
                                                         htmlFor={`cert-upload-${index}`}
-                                                        className={`flex flex-col items-center justify-center gap-2 w-full h-32 px-3 py-2 border-2 border-dashed ${validationErrors[index]?.image ? 'border-red-300 bg-red-50' : 'border-blue-400 bg-blue-50'} rounded-lg cursor-pointer hover:bg-blue-100 transition`}
+                                                        className={`flex flex-col items-center justify-center gap-1 sm:gap-2 w-full h-24 sm:h-32 px-2 py-1.5 sm:px-3 sm:py-2 border-2 border-dashed ${validationErrors[index]?.image ? 'border-red-300 bg-red-50' : 'border-blue-400 bg-blue-50'} rounded-lg cursor-pointer hover:bg-blue-100 transition`}
                                                     >
-                                                        <Upload size={24} className={validationErrors[index]?.image ? 'text-red-500' : 'text-blue-600'} />
-                                                        <span className={`${validationErrors[index]?.image ? 'text-red-500' : 'text-blue-600'} text-sm font-medium`}>
+                                                        <Upload className="text-blue-600 w-4 h-4 sm:w-6 sm:h-6" />
+                                                        <span className={`${validationErrors[index]?.image ? 'text-red-500' : 'text-blue-600'} text-[9px] sm:text-sm font-medium`}>
                                                             {t('certificates.selectCertificateImage') || "Select Image (Required)"} *
                                                         </span>
                                                     </label>
                                                     {validationErrors[index]?.image && (
-                                                        <p className="text-red-500 text-xs mt-1.5 flex items-center gap-1.5 font-medium animate-in slide-in-from-top-1">
-                                                            <AlertCircle size={14} />
+                                                        <p className="text-red-500 text-[9px] sm:text-xs mt-0.5 sm:mt-1.5 flex items-center gap-1 font-medium animate-in slide-in-from-top-1">
+                                                            <AlertCircle className="w-3 h-3 sm:w-[14px] sm:h-[14px]" />
                                                             {t('certificates.imageRequired') || "Image is required"}
                                                         </p>
                                                     )}
                                                 </div>
                                             ) : (
-                                                <div className="relative w-full h-48 rounded-lg overflow-hidden border border-gray-200 group">
+                                                <div className="relative w-full h-32 sm:h-48 rounded-lg overflow-hidden border border-gray-200 group">
                                                     <NextImage
                                                         src={cert.previewUrl || cert.cfimage}
                                                         alt="preview"
@@ -443,23 +446,22 @@ export default function Certificates({ userData, setUserDetails }) {
                                                         className="object-contain bg-gray-900/5"
                                                         unoptimized
                                                     />
-                                                    <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-2">
+                                                    <div className="absolute inset-0 bg-black/40 opacity-100 sm:opacity-0 sm:group-hover:opacity-100 transition-opacity flex items-center justify-center gap-2">
                                                         <button
                                                             type="button"
                                                             onClick={() => setSelectedImage(cert.previewUrl || cert.cfimage)}
-                                                            className="px-3 py-1 bg-white rounded-full text-xs font-bold text-gray-800 hover:bg-gray-100"
+                                                            className="px-2 py-1 sm:px-3 sm:py-1 bg-white rounded-full text-[9px] sm:text-xs font-bold text-gray-800 hover:bg-gray-100"
                                                         >
                                                             {t('certificates.view')}
                                                         </button>
                                                         <button
                                                             type="button"
                                                             onClick={() => {
-                                                                // Clear both file and cfimage to force re-selection or just clear file?
                                                                 const updated = [...certificates];
                                                                 updated[index] = { ...updated[index], file: null, previewUrl: null, cfimage: "" }; // Full clear
                                                                 setCertificates(updated);
                                                             }}
-                                                            className="px-3 py-1 bg-white rounded-full text-xs font-bold text-red-600 hover:bg-red-50"
+                                                            className="px-2 py-1 sm:px-3 sm:py-1 bg-white rounded-full text-[9px] sm:text-xs font-bold text-red-600 hover:bg-red-50"
                                                         >
                                                             {t('certificates.remove')}
                                                         </button>
@@ -469,8 +471,8 @@ export default function Certificates({ userData, setUserDetails }) {
                                         </div>
 
                                         {/* Description */}
-                                        <div className="flex flex-col gap-2">
-                                            <label className="text-sm font-medium text-gray-700 ml-1">{t('certificates.description')}</label>
+                                        <div className="flex flex-col gap-1 sm:gap-2">
+                                            <label className="text-[10px] sm:text-sm font-medium text-gray-700 ml-1">{t('certificates.description')}</label>
                                             <textarea
                                                 placeholder={t('certificates.certificateDescription') || "Description (Optional)"}
                                                 value={cert.description || ""}
@@ -479,7 +481,7 @@ export default function Certificates({ userData, setUserDetails }) {
                                                 onChange={(e) =>
                                                     updateObjectInArray(certificates, setCertificates, index, "description", e.target.value)
                                                 }
-                                                className="w-full h-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white transition resize-none"
+                                                className="w-full h-24 sm:h-full p-2 sm:p-3 text-[10px] sm:text-base border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white transition resize-none"
                                             />
                                         </div>
                                     </div>
@@ -489,9 +491,9 @@ export default function Certificates({ userData, setUserDetails }) {
                                             type="button"
                                             onClick={() => saveCertificateItem(index)}
                                             disabled={savingIds.has(index)}
-                                            className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg text-sm font-medium flex items-center gap-2 transition-colors disabled:opacity-50"
+                                            className="bg-blue-600 hover:bg-blue-700 text-white px-3 py-1.5 sm:px-4 sm:py-2 rounded-lg text-[10px] sm:text-sm font-medium flex items-center gap-1.5 sm:gap-2 transition-colors disabled:opacity-50"
                                         >
-                                            {savingIds.has(index) ? <Loader size={12} className="animate-spin" /> : <CheckCheck size={16} />}
+                                            {savingIds.has(index) ? <Loader size={12} className="animate-spin" /> : <CheckCheck className="w-3 h-3 sm:w-4 sm:h-4" />}
                                             {t('certificates.save') || "Save"}
                                         </button>
                                     </div>
@@ -514,9 +516,9 @@ export default function Certificates({ userData, setUserDetails }) {
                             })
                         }
                     }}
-                    className={`w-full text-white py-2 rounded-lg flex items-center justify-center gap-2 transition-all duration-300 mt-2 ${certificates.length >= 10 ? 'bg-gray-400 cursor-not-allowed' : 'bg-gradient-to-r from-blue-500 to-indigo-600 hover:from-blue-600 hover:to-indigo-700'}`}
+                    className={`w-full text-white py-1.5 sm:py-2 rounded-lg flex items-center justify-center gap-2 transition-all duration-300 mt-2 text-xs sm:text-base ${certificates.length >= 10 ? 'bg-gray-400 cursor-not-allowed' : 'bg-gradient-to-r from-blue-500 to-indigo-600 hover:from-blue-600 hover:to-indigo-700'}`}
                 >
-                    <Plus size={18} /> {certificates.length >= 10 ? "10 Max" : t('certificates.addCertificate')}
+                    <Plus className="w-4 h-4 sm:w-[18px] sm:h-[18px]" /> {certificates.length >= 10 ? "10 Max" : t('certificates.addCertificate')}
                 </button>
             </div>
 
@@ -529,11 +531,11 @@ export default function Certificates({ userData, setUserDetails }) {
                             const currentOrder = certificates.filter(c => c._id).map(c => c._id);
                             return JSON.stringify(currentOrder) === JSON.stringify(originalOrder);
                         })()}
-                        className="bg-gray-800 hover:bg-gray-900 disabled:opacity-50 disabled:cursor-not-allowed text-white font-bold px-8 py-3 rounded-lg transition-all duration-300 flex items-center gap-2 transform hover:scale-105 shadow-lg"
+                        className="bg-gray-800 hover:bg-gray-900 disabled:opacity-50 disabled:cursor-not-allowed text-white font-bold px-4 py-2 sm:px-8 sm:py-3 rounded-lg transition-all duration-300 flex items-center gap-2 transform hover:scale-105 shadow-lg text-xs sm:text-base"
                     >
                         {loading ? (
                             <>
-                                <Loader size={20} className="animate-spin" /> {t('certificates.saving')}
+                                <Loader size={20} className="animate-spin w-4 h-4 sm:w-5 sm:h-5" /> {t('certificates.saving')}
                             </>
                         ) : (
                             `💾 ${t('certificates.saveOrder') || "Save Order"}`

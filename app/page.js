@@ -1,6 +1,5 @@
 import LandingPage from "./components/LandingPage/LandingPage";
 import { headers } from "next/headers";
-import { getDictionary } from "./translations/landing-page";
 import { DynamicSubdomainClient, DynamicCustomDomainClient } from './components/portfolio/ClientWrappers';
 
 async function fetchUserData(url) {
@@ -25,6 +24,8 @@ function getDomainFlags(host) {
   const isExternalCustomDomain = !isSubdomain &&
     !host.includes("dgtportfolio.com") &&
     !host.includes("localhost") &&
+    !host.startsWith("192.168.") &&
+    !host.startsWith("zona-unadamant-unoffensively.ngrok-free.dev") &&
     !host.includes("dgtportfolio.vercel.app");
   return { isSubdomain, isExternalCustomDomain };
 }

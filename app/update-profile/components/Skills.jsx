@@ -86,38 +86,42 @@ export default function Skills({ userData, setUserDetails }) {
       <div className="bg-gradient-to-br from-purple-50 to-pink-50 p-2 md:p-4 rounded-xl border border-purple-200 space-y-3">
         <div className="space-y-2">
           {skills.map((skill, index) => (
-            <div key={index} className={`flex gap-2 items-center transition-all duration-500 rounded-lg p-1 ${movedItemIndex === index ? 'bg-purple-100 ring-2 ring-purple-300' : ''}`}>
+            <div key={index} className={`flex gap-0.5 sm:gap-2 items-center transition-all duration-500 rounded-lg p-0.5 sm:p-1 ${movedItemIndex === index ? 'bg-purple-100 ring-2 ring-purple-300' : 'hover:bg-purple-50/50'}`}>
+              <div className="flex-shrink-0 w-4 h-4 sm:w-8 sm:h-8 flex items-center justify-center bg-purple-100 text-purple-700 rounded-full font-bold text-[8px] sm:text-sm border border-purple-200 shadow-sm">
+                {index + 1}
+              </div>
               <input
                 type="text"
                 value={skill}
                 maxLength={130}
                 onChange={(e) => updateArrayItem(skills, setSkills, index, e.target.value)}
-                className="flex-1 px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 bg-white transition"
+                className="flex-1 min-w-0 px-1 py-0.5 sm:px-3 sm:py-2 text-[9px] sm:text-base border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 bg-white transition"
+                placeholder={t('skills.placeholder') || `Skill ${index + 1}`}
               />
-              <div className="flex items-center gap-1 flex-shrink-0">
+              <div className="flex items-center gap-0 sm:gap-1 flex-shrink-0">
                 <button
                   type="button"
                   onClick={() => moveItemUp(index)}
                   disabled={index === 0}
-                  className="p-1.5 hover:bg-purple-100 rounded-lg transition-colors text-purple-600 disabled:opacity-30 disabled:cursor-not-allowed"
+                  className="p-0.5 sm:p-1.5 hover:bg-purple-100 rounded-lg transition-colors text-purple-600 disabled:opacity-30 disabled:cursor-not-allowed"
                 >
-                  <ArrowUp size={18} />
+                  <ArrowUp className="w-2.5 h-2.5 sm:w-[18px] sm:h-[18px]" />
                 </button>
                 <button
                   type="button"
                   onClick={() => moveItemDown(index)}
                   disabled={index === skills.length - 1}
-                  className="p-1.5 hover:bg-purple-100 rounded-lg transition-colors text-purple-600 disabled:opacity-30 disabled:cursor-not-allowed"
+                  className="p-0.5 sm:p-1.5 hover:bg-purple-100 rounded-lg transition-colors text-purple-600 disabled:opacity-30 disabled:cursor-not-allowed"
                 >
-                  <ArrowDown size={18} />
+                  <ArrowDown className="w-2.5 h-2.5 sm:w-[18px] sm:h-[18px]" />
                 </button>
-                <div className="w-px h-6 bg-purple-200 mx-1"></div>
+                <div className="w-px h-3 sm:h-6 bg-purple-200 mx-0.5 sm:mx-1"></div>
                 <button
                   type="button"
                   onClick={() => setItemToDelete(index)}
-                  className="hover:bg-red-100 rounded-lg p-2 transition-colors"
+                  className="p-0.5 sm:p-1.5 hover:bg-red-100 rounded-lg transition-colors text-red-500"
                 >
-                  <Trash2 size={18} className="text-red-500" />
+                  <Trash2 className="w-2.5 h-2.5 sm:w-[18px] sm:h-[18px]" />
                 </button>
               </div>
             </div>

@@ -45,7 +45,7 @@ export const authOptions : AuthOptions={
         fullname: user.name,
         email: user.email,
         urlimage: UrlImage,
-        bgcolorp:"#OA3C4D",
+        bgcolorp:"#1f2937",
         username:user.email?.split("@")[0],
         theme:1
       }, {
