@@ -133,19 +133,19 @@ export default function ThemeSlideshow() {
     >
 
       {/* Browser Header Window */}
-      <div className="flex items-center gap-3 px-4 py-3 border-b border-white/5 bg-black/40 backdrop-blur-md z-20 select-none">
+      <div className="relative flex items-center gap-2 md:gap-3 px-2.5 py-2 md:px-4 md:py-3 border-b border-white/5 bg-black/40 backdrop-blur-md z-20 select-none">
 
         {/* Window Controls */}
-        <div className="flex gap-1.5 group-hover:opacity-100 opacity-60 transition-opacity duration-300">
-          <div className="w-2.5 h-2.5 rounded-full bg-[#FF5F56] shadow-sm" />
-          <div className="w-2.5 h-2.5 rounded-full bg-[#FFBD2E] shadow-sm" />
-          <div className="w-2.5 h-2.5 rounded-full bg-[#27C93F] shadow-sm" />
+        <div className="flex gap-1.5 group-hover:opacity-100 opacity-60 transition-opacity duration-300 shrink-0">
+          <div className="w-2 h-2 md:w-2.5 md:h-2.5 rounded-full bg-[#FF5F56] shadow-sm" />
+          <div className="w-2 h-2 md:w-2.5 md:h-2.5 rounded-full bg-[#FFBD2E] shadow-sm" />
+          <div className="w-2 h-2 md:w-2.5 md:h-2.5 rounded-full bg-[#27C93F] shadow-sm" />
         </div>
 
         {/* Address Bar */}
-        <div className="ml-2 flex-1 max-w-sm bg-neutral-800/50 rounded-md flex items-center px-3 py-1 text-[11px] md:text-xs text-neutral-400 font-mono border border-white/5 transition-colors group-hover:bg-neutral-800/80 group-hover:text-neutral-300">
+        <div className="ml-2 flex-1 max-w-sm bg-neutral-800/50 rounded-md flex items-center px-2 py-0.5 md:px-3 md:py-1 text-[10px] md:text-xs text-neutral-400 font-mono border border-white/5 transition-colors group-hover:bg-neutral-800/80 group-hover:text-neutral-300 min-w-0">
           {/* Lock Icon SVG */}
-          <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="mr-2 opacity-50"><rect width="18" height="11" x="3" y="11" rx="2" ry="2" /><path d="M7 11V7a5 5 0 0 1 10 0v4" /></svg>
+          <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="mr-1.5 md:mr-2 opacity-50 shrink-0 w-3 h-3 md:w-auto md:h-auto"><rect width="18" height="11" x="3" y="11" rx="2" ry="2" /><path d="M7 11V7a5 5 0 0 1 10 0v4" /></svg>
           <span className="truncate">https://adam-carter.dgtportfolio.com</span>
         </div>
 
@@ -153,10 +153,10 @@ export default function ThemeSlideshow() {
         <div className="hidden md:block ml-auto opacity-30 hover:opacity-100 transition-opacity">
           <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="1" /><circle cx="19" cy="12" r="1" /><circle cx="5" cy="12" r="1" /></svg>
         </div>
-      </div>
 
-      {/* Progress Bar */}
-      <div className="absolute top-[49px] md:top-[53px] left-0 h-[1px] bg-gradient-to-r from-purple-500 to-blue-500 transition-all duration-75 ease-linear z-30 opacity-70" style={{ width: `${progress}%` }} />
+        {/* Progress Bar */}
+        <div className="absolute bottom-0 left-0 h-[1px] bg-gradient-to-r from-purple-500 to-blue-500 transition-all duration-75 ease-linear z-30 opacity-70" style={{ width: `${progress}%` }} />
+      </div>
 
       {/* Main Content Area */}
       <div className="relative flex-1 w-full overflow-hidden bg-neutral-900">
@@ -168,8 +168,8 @@ export default function ThemeSlideshow() {
           >
             <div className="w-full h-full relative overflow-hidden">
               <Image
-                width={1920}
-                height={1080}
+                width={500}
+                height={500}
                 src={theme.image}
                 alt={`Theme ${theme.id}`}
                 className={`w-full h-full object-cover object-top transition-transform [transition-duration:4000ms] ease-out ${index === currentIndex ? "scale-[1.02]" : "scale-100"}`}
