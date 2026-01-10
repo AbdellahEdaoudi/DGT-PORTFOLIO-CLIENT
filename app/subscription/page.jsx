@@ -3,7 +3,6 @@ import { useEffect, useState, useContext } from "react";
 import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
 import { MyContext } from "../context/context";
 import axios from "axios";
-import MagicalLoader from "../components/MagicalLoader";
 import Header from "../components/LandingPage/header";
 import { toast } from "react-toastify"
 import { Loader } from "../components/Icons";
@@ -95,7 +94,28 @@ export default function SubscriptionPage() {
       }}
     >
       {(loading || !plans) ? (
-        <MagicalLoader />
+        <div>
+          <Header lang={userDetails?.displayLanguage} />
+          <div className="min-h-screen bg-slate-950 p-6">
+          <div className="max-w-6xl mx-auto space-y-12 animate-pulse">
+            {/* Promo Section Skeleton */}
+            <div className="flex justify-center mb-8">
+              <div className="w-80 h-12 bg-slate-800 rounded-full"></div>
+            </div>
+            {/* Plans Grid Skeleton */}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+              {[1, 2, 3].map((i) => (
+                <div key={i} className="bg-slate-900/50 border border-slate-800 rounded-3xl p-8 space-y-6">
+                  <div className="h-8 w-32 bg-slate-800 rounded"></div>
+                  <div className="h-4 w-full bg-slate-800/60 rounded"></div>
+                  <div className="h-12 w-28 bg-slate-800 rounded"></div>
+                  <div className="h-24 w-full bg-slate-800/40 rounded-xl"></div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+        </div>
       ) : (
         <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-black flex flex-col pb-10 md:pb-0">
           <Header lang={userDetails?.displayLanguage} />

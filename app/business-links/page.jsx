@@ -8,7 +8,6 @@ import { toast } from "react-toastify";
 import DOMPurify from 'dompurify';
 import WarningModal from "./Pages/WarningModal"
 import ConfirmModal from "./Pages/ConfirmModal"
-import MagicalLoader from '../components/MagicalLoader';
 import Header from '../components/LandingPage/header';
 import { getTranslation } from '../translations/others';
 
@@ -136,7 +135,32 @@ function EditUserLinks() {
   };
 
 
-  if (!EmailUser || loadingAll) { return <MagicalLoader /> }
+  if (!EmailUser || loadingAll) { 
+    return (
+      <div>
+      <Header lang={userDetails?.displayLanguage} />
+      <div className="min-h-screen bg-cyan-950 p-4">
+        <div className="max-w-[110vh] mx-auto space-y-8 animate-pulse">
+          <div className="h-10 w-64 bg-cyan-900 rounded-lg mx-auto mb-8"></div>
+          <div className="bg-white/10 border border-white/5 rounded-xl p-6 space-y-6">
+            <div className="space-y-4">
+              <div className="h-4 w-24 bg-cyan-900/50 rounded"></div>
+              <div className="h-12 w-full bg-cyan-900/30 rounded-lg"></div>
+              <div className="h-4 w-24 bg-cyan-900/50 rounded"></div>
+              <div className="h-12 w-full bg-cyan-900/30 rounded-lg"></div>
+              <div className="h-12 w-full bg-cyan-900/60 rounded-lg"></div>
+            </div>
+          </div>
+          <div className="space-y-4">
+            {[1, 2, 3].map((i) => (
+              <div key={i} className="h-20 w-full bg-white/5 border border-white/5 rounded-xl"></div>
+            ))}
+          </div>
+        </div>
+      </div>
+      </div>
+    )
+}
 
 
   return (

@@ -100,7 +100,7 @@ export default function Services({ userData, setUserDetails }) {
                   maxLength={150}
                   onChange={(e) => updateArrayItem(services, setServices, index, e.target.value)}
                   className="flex-1 min-w-0 px-1 py-0.5 sm:px-3 sm:py-2 text-[9px] sm:text-base border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 bg-white transition"
-                  placeholder={t('services.servicePlaceholder') || `Service ${index + 1}`}
+                  placeholder={`Service ${index + 1}`}
                 />
                 <div className="flex items-center gap-0 sm:gap-1 flex-shrink-0">
                   <button

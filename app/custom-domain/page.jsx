@@ -5,7 +5,6 @@ import { toast } from 'react-toastify';
 import { Globe, CheckCircle, AlertCircle, ExternalLink, Loader2, Trash2, X } from '../components/Icons';
 import axios from 'axios';
 import Header from '../components/LandingPage/header';
-import MagicalLoader from '../components/MagicalLoader';
 import { getTranslation } from '../translations/others';
 
 export default function CustomDomainPage() {
@@ -82,7 +81,27 @@ export default function CustomDomainPage() {
     };
 
     if (isFetching) {
-        return <MagicalLoader />;
+        return (
+            <div>
+            <Header lang={userDetails?.displayLanguage} />
+            <div className="min-h-screen bg-slate-950">
+            <div className="max-w-3xl mx-auto pt-4 px-4 sm:px-6 animate-pulse">
+            <div className="mb-5 text-center space-y-4">
+            <div className="h-10 w-72 bg-slate-800 rounded-lg mx-auto"></div>
+            <div className="h-6 md:w-96 w-full bg-slate-800/60 rounded mx-auto"></div>
+            </div>
+            <div className="bg-slate-900/50 border border-slate-800 rounded-2xl p-8 space-y-8">
+            <div className="space-y-3">
+            <div className="h-4 w-32 bg-slate-800 rounded"></div>
+            <div className="h-14 w-full bg-slate-800/40 rounded-xl"></div>
+            <div className="h-28 w-full bg-slate-800/40 rounded-xl"></div>
+            </div>
+            <div className="h-12 w-full bg-slate-800 rounded-xl"></div>
+            </div>
+            </div>
+            </div>
+            </div>
+        );
     }
 
     return (
