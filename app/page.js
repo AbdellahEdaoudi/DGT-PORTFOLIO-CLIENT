@@ -13,49 +13,41 @@ async function fetchUserData(url) {
 }
 
 function getDomainFlags(host) {
-  const cleanHost = host.replace(/^www\./, "");
-
-  const isMainDomain =
-    cleanHost === "dgtportfolio.com" ||
-    cleanHost === "localhost:3000" ||
-    cleanHost === "dgtportfolio.vercel.app";
-
+  const reserved = ["dgtportfolio", "localhost:3000", "www"];
+  // isSubdomain
   const isSubdomain =
-    cleanHost.endsWith("dgtportfolio.com") &&
-    !isMainDomain;
-
-  const isCustomDomain =
-    !isSubdomain &&
-    !isMainDomain &&
-    !cleanHost.includes("localhost") &&
-    !cleanHost.includes("vercel.app") &&
-    !cleanHost.includes("ngrok") &&
-    !cleanHost.startsWith("192.168.");
-
-  return { isMainDomain, isSubdomain, isCustomDomain, cleanHost };
+    (host.endsWith("dgtportfolio.com") || host.endsWith("localhost:3000")) &&
+    host !== "dgtportfolio.com" &&
+    host !== "localhost:3000" &&
+    !reserved.includes(host.split(".")[0]);
+  // isExternalCustomDomain
+  const isExternalCustomDomain = !isSubdomain &&
+    !host.includes("dgtportfolio.com") &&
+    !host.includes("localhost") &&
+    !host.startsWith("192.168.") &&
+    !host.startsWith("zona-unadamant-unoffensively.ngrok-free.dev") &&
+    !host.includes("dgtportfolio.vercel.app");
+  return { isSubdomain, isExternalCustomDomain };
 }
 
 export async function generateMetadata() {
   // const host = "abdellah-edaoudi.dgtportfolio.com"
   // const host = "abdellah-edaoudi.site"
   const headersList = await headers();
-  const host = headersList.get("host") || "";
-  const { isMainDomain, isSubdomain, isCustomDomain, cleanHost } = getDomainFlags(host);
-
-  console.log("DEBUG - isMainDomain:", isMainDomain);
-  console.log("DEBUG - isSubdomain:", isSubdomain);
-  console.log("DEBUG - isCustomDomain:", isCustomDomain);
-
+  const host = headersList.get("host");
+  const { isSubdomain, isExternalCustomDomain } = getDomainFlags(host);
+  console.log("isSubdomain : " + isSubdomain);
+  console.log("isExternalCustomDomain : " + isExternalCustomDomain);
   let user = null;
   if (isSubdomain) {
-    user = await fetchUserData(`https://dgt-portfolio-server.vercel.app/users/metauser/${cleanHost.split(".")[0]}`);
+    user = await fetchUserData(`https://dgt-portfolio-server.vercel.app/users/metauser/${host.split(".")[0]}`);
   }
-  if (isCustomDomain) {
-    user = await fetchUserData(`https://dgt-portfolio-server.vercel.app/users/metacustomdomain/${cleanHost}`);
+  if (isExternalCustomDomain) {
+    user = await fetchUserData(`https://dgt-portfolio-server.vercel.app/users/metacustomdomain/${host}`);
   }
 
   if (user) {
-    const username = user.username || cleanHost.split(".")[0];
+    const username = user.username || host.split(".")[0];
     return {
       title: `${user.fullname} – Portfolio`,
       description: user.about || `Check out ${user.fullname}'s professional portfolio. View projects, skills, and contact information.`,
@@ -64,7 +56,7 @@ export async function generateMetadata() {
       openGraph: {
         title: `${user.fullname} – Portfolio`,
         description: user.about || `Check out ${user.fullname}'s professional portfolio. View projects, skills, and contact information.`,
-        url: isSubdomain ? `https://${username}.dgtportfolio.com` : `https://${cleanHost}`,
+        url: isSubdomain ? `https://${username}.dgtportfolio.com` : `https://${host}`,
         siteName: "DGT Portfolio",
         images: [{ url: user.urlimage, alt: `${user.fullname}'s Profile Picture` }],
         locale: user.displayLanguage === 'ar' ? 'ar_AR' : 'en_US',
@@ -77,30 +69,31 @@ export async function generateMetadata() {
         images: [user.urlimage],
       },
       alternates: {
-        canonical: isSubdomain ? `https://${username}.dgtportfolio.com` : baseUrl,
+        canonical: isSubdomain ? `https://${username}.dgtportfolio.com` : `https://${host}`,
       },
     };
-  } else if (isMainDomain) {
+  } else if (!isSubdomain && !isExternalCustomDomain) {
+    // Metadata for the Main Home Page (Default Language: English)
     return {
       alternates: {
-        canonical: baseUrl,
+        canonical: "https://dgtportfolio.com",
         languages: {
-          'en': `${baseUrl}/en`,
-          'es': `${baseUrl}/es`,
-          'fr': `${baseUrl}/fr`,
-          'ar': `${baseUrl}/ar`,
-          'de': `${baseUrl}/de`,
-          'ru': `${baseUrl}/ru`,
-          'ja': `${baseUrl}/ja`,
-          'zh': `${baseUrl}/zh`,
-          'nl': `${baseUrl}/nl`,
-          'pt': `${baseUrl}/pt`,
-          'it': `${baseUrl}/it`,
-          'tr': `${baseUrl}/tr`,
-          'ko': `${baseUrl}/ko`,
-          'hi': `${baseUrl}/hi`,
-          'id': `${baseUrl}/id`,
-          'pl': `${baseUrl}/pl`,
+          'en': 'https://dgtportfolio.com/en',
+          'es': 'https://dgtportfolio.com/es',
+          'fr': 'https://dgtportfolio.com/fr',
+          'ar': 'https://dgtportfolio.com/ar',
+          'de': 'https://dgtportfolio.com/de',
+          'ru': 'https://dgtportfolio.com/ru',
+          'ja': 'https://dgtportfolio.com/ja',
+          'zh': 'https://dgtportfolio.com/zh',
+          'nl': 'https://dgtportfolio.com/nl',
+          'pt': 'https://dgtportfolio.com/pt',
+          'it': 'https://dgtportfolio.com/it',
+          'tr': 'https://dgtportfolio.com/tr',
+          'ko': 'https://dgtportfolio.com/ko',
+          'hi': 'https://dgtportfolio.com/hi',
+          'id': 'https://dgtportfolio.com/id',
+          'pl': 'https://dgtportfolio.com/pl',
         },
       },
     };
@@ -108,69 +101,62 @@ export async function generateMetadata() {
 }
 
 export default async function Home() {
-  // const host = "abdellah-edaoudi.dgtportfolio.com"
-  // const host = "abdellah-edaoudi.site"
   const headersList = await headers();
-  const host = headersList.get("host") || "";
-  console.log("DEBUG - Home Host:", host);
-  const { isSubdomain, isCustomDomain, cleanHost } = getDomainFlags(host);
+  const host = headersList.get("host");
+  const { isSubdomain, isExternalCustomDomain } = getDomainFlags(host);
   let userSchema = null;
 
   try {
     if (isSubdomain) {
-      const user = await fetchUserData(`https://dgt-portfolio-server.vercel.app/users/metauser/${cleanHost.split(".")[0]}`);
+      const user = await fetchUserData(`https://dgt-portfolio-server.vercel.app/users/metauser/${host.split(".")[0]}`);
       if (user) {
         userSchema = {
           "@context": "https://schema.org",
           "@type": "Person",
           name: user.fullname,
           jobTitle: user.category || "Professional",
-          url: `https://${user.username || cleanHost.split(".")[0]}.dgtportfolio.com`,
+          url: `https://${user.username || host.split(".")[0]}.dgtportfolio.com`,
           description: user.about,
           sameAs: Object.values(user.socials || {}).filter(Boolean),
         };
       }
-    } else if (isCustomDomain) {
-      const user = await fetchUserData(`https://dgt-portfolio-server.vercel.app/users/metacustomdomain/${cleanHost}`);
+    } else if (isExternalCustomDomain) {
+      const user = await fetchUserData(`https://dgt-portfolio-server.vercel.app/users/metacustomdomain/${host}`);
       if (user) {
         userSchema = {
           "@context": "https://schema.org",
           "@type": "Person",
           name: user.fullname,
           jobTitle: user.category || "Professional",
-          url: `https://${cleanHost}`,
+          url: `https://${host}`,
           description: user.about,
           sameAs: Object.values(user.socials || {}).filter(Boolean),
         };
       }
-    } else {
-      userSchema = {
-        "@context": "https://schema.org",
-        "@type": "SoftwareApplication",
-        name: "DGT Portfolio",
-        applicationCategory: "DesignApplication",
-        operatingSystem: "Web",
-        url: "https://dgtportfolio.com",
-        description: "Build a clean, modern portfolio in minutes. No code required.",
-        offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
-        aggregateRating: { "@type": "AggregateRating", ratingValue: "4.8", ratingCount: "120" },
-      };
     }
   } catch (error) {
     console.error("Error generating user schema:", error);
     // Continue rendering without schema
   }
 
+  if (!isSubdomain && !isExternalCustomDomain) {
+    userSchema = {
+      "@context": "https://schema.org",
+      "@type": "SoftwareApplication",
+      name: "DGT Portfolio",
+      applicationCategory: "DesignApplication",
+      operatingSystem: "Web",
+      url: "https://dgtportfolio.com",
+      description: "Build a clean, modern portfolio in minutes. No code required.",
+      offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
+      aggregateRating: { "@type": "AggregateRating", ratingValue: "4.8", ratingCount: "120" },
+    };
+  }
+
   return (
     <div>
       {userSchema && <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(userSchema) }} />}
-      {isSubdomain ? (
-        <DynamicSubdomainClient username={cleanHost.split(".")[0]} />
-      ) : isCustomDomain ? (
-        <DynamicCustomDomainClient host={cleanHost} />
-      ) : (
-        <LandingPage lang={"en"} />
-      )}
+      {isSubdomain ? <DynamicSubdomainClient username={host.split(".")[0]} /> : isExternalCustomDomain ? <DynamicCustomDomainClient host={host} /> : <LandingPage lang={"en"} />}
     </div>
   );
 }
