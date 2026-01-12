@@ -13,12 +13,13 @@ async function fetchUserData(url) {
 }
 
 function getDomainFlags(host) {
-  const cleanHost = host.replace(/^www\./, "");
-
   const isMainDomain =
-    cleanHost === "dgtportfolio.com" ||
-    cleanHost === "localhost:3000" ||
-    cleanHost === "dgtportfolio.vercel.app";
+    host === "dgtportfolio.com" ||
+    host === "www.dgtportfolio.com" ||
+    host === "localhost:3000" ||
+    host === "dgtportfolio.vercel.app";
+
+  const cleanHost = host.replace(/^www\./, "");
 
   const isSubdomain =
     cleanHost.endsWith("dgtportfolio.com") &&
@@ -39,12 +40,13 @@ export async function generateMetadata() {
   // const host = "abdellah-edaoudi.dgtportfolio.com"
   // const host = "abdellah-edaoudi.site"
   const headersList = await headers();
-  const host = headersList.get("host");
+  const host = headersList.get("host") || "";
+  console.log("DEBUG - Host:", host);
   const { isMainDomain, isSubdomain, isCustomDomain, cleanHost } = getDomainFlags(host);
 
-  console.log("isMainDomain : " + isMainDomain);
-  console.log("isSubdomain : " + isSubdomain);
-  console.log("isCustomDomain : " + isCustomDomain);
+  console.log("DEBUG - isMainDomain:", isMainDomain);
+  console.log("DEBUG - isSubdomain:", isSubdomain);
+  console.log("DEBUG - isCustomDomain:", isCustomDomain);
 
   let user = null;
   if (isSubdomain) {
@@ -112,7 +114,8 @@ export default async function Home() {
   // const host = "abdellah-edaoudi.dgtportfolio.com"
   // const host = "abdellah-edaoudi.site"
   const headersList = await headers();
-  const host = headersList.get("host");
+  const host = headersList.get("host") || "";
+  console.log("DEBUG - Home Host:", host);
   const { isSubdomain, isCustomDomain, cleanHost } = getDomainFlags(host);
   let userSchema = null;
 
