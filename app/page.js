@@ -13,13 +13,12 @@ async function fetchUserData(url) {
 }
 
 function getDomainFlags(host) {
-  const isMainDomain =
-    host === "dgtportfolio.com" ||
-    host === "www.dgtportfolio.com" ||
-    host === "localhost:3000" ||
-    host === "dgtportfolio.vercel.app";
-
   const cleanHost = host.replace(/^www\./, "");
+
+  const isMainDomain =
+    cleanHost === "dgtportfolio.com" ||
+    cleanHost === "localhost:3000" ||
+    cleanHost === "dgtportfolio.vercel.app";
 
   const isSubdomain =
     cleanHost.endsWith("dgtportfolio.com") &&
@@ -41,7 +40,6 @@ export async function generateMetadata() {
   // const host = "abdellah-edaoudi.site"
   const headersList = await headers();
   const host = headersList.get("host") || "";
-  console.log("DEBUG - Host:", host);
   const { isMainDomain, isSubdomain, isCustomDomain, cleanHost } = getDomainFlags(host);
 
   console.log("DEBUG - isMainDomain:", isMainDomain);
@@ -79,31 +77,30 @@ export async function generateMetadata() {
         images: [user.urlimage],
       },
       alternates: {
-        canonical: isSubdomain ? `https://${username}.dgtportfolio.com` : `https://${cleanHost}`,
+        canonical: isSubdomain ? `https://${username}.dgtportfolio.com` : baseUrl,
       },
     };
   } else if (isMainDomain) {
-    // Metadata for the Main Home Page (Default Language: English)
     return {
       alternates: {
-        canonical: "https://dgtportfolio.com",
+        canonical: baseUrl,
         languages: {
-          'en': 'https://dgtportfolio.com/en',
-          'es': 'https://dgtportfolio.com/es',
-          'fr': 'https://dgtportfolio.com/fr',
-          'ar': 'https://dgtportfolio.com/ar',
-          'de': 'https://dgtportfolio.com/de',
-          'ru': 'https://dgtportfolio.com/ru',
-          'ja': 'https://dgtportfolio.com/ja',
-          'zh': 'https://dgtportfolio.com/zh',
-          'nl': 'https://dgtportfolio.com/nl',
-          'pt': 'https://dgtportfolio.com/pt',
-          'it': 'https://dgtportfolio.com/it',
-          'tr': 'https://dgtportfolio.com/tr',
-          'ko': 'https://dgtportfolio.com/ko',
-          'hi': 'https://dgtportfolio.com/hi',
-          'id': 'https://dgtportfolio.com/id',
-          'pl': 'https://dgtportfolio.com/pl',
+          'en': `${baseUrl}/en`,
+          'es': `${baseUrl}/es`,
+          'fr': `${baseUrl}/fr`,
+          'ar': `${baseUrl}/ar`,
+          'de': `${baseUrl}/de`,
+          'ru': `${baseUrl}/ru`,
+          'ja': `${baseUrl}/ja`,
+          'zh': `${baseUrl}/zh`,
+          'nl': `${baseUrl}/nl`,
+          'pt': `${baseUrl}/pt`,
+          'it': `${baseUrl}/it`,
+          'tr': `${baseUrl}/tr`,
+          'ko': `${baseUrl}/ko`,
+          'hi': `${baseUrl}/hi`,
+          'id': `${baseUrl}/id`,
+          'pl': `${baseUrl}/pl`,
         },
       },
     };
