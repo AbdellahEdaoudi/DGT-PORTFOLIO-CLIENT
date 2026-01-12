@@ -89,6 +89,8 @@ export default function Experience({ userData, setUserDetails }) {
     if (!item.company?.trim()) errors.company = true;
     if (!item.role?.trim()) errors.role = true;
     if (!item.description?.trim()) errors.description = true;
+    if (!item.startDate?.trim()) errors.startDate = true;
+    if (!item.endDate?.trim()) errors.endDate = true;
 
     if (Object.keys(errors).length > 0) {
       setValidationErrors(prev => ({ ...prev, [index]: errors }));
@@ -344,26 +346,43 @@ export default function Experience({ userData, setUserDetails }) {
                   </div>
 
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-1.5 sm:gap-2">
-                    <input
-                      type="text"
-                      placeholder={t('experience.startDate')}
-                      value={exp.startDate || ""}
-                      maxLength={20}
-                      onChange={(e) =>
-                        updateObjectInArray(experience, setExperience, index, "startDate", e.target.value)
-                      }
-                      className="px-2 py-1.5 sm:px-3 sm:py-2 text-[10px] sm:text-base border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-500 bg-white transition"
-                    />
-                    <input
-                      type="text"
-                      placeholder={t('experience.endDate')}
-                      value={exp.endDate || ""}
-                      maxLength={20}
-                      onChange={(e) =>
-                        updateObjectInArray(experience, setExperience, index, "endDate", e.target.value)
-                      }
-                      className="px-2 py-1.5 sm:px-3 sm:py-2 text-[10px] sm:text-base border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-500 bg-white transition"
-                    />
+                    <div>
+                      <input
+                        type="text"
+                        placeholder={t('experience.startDate')}
+                        value={exp.startDate || ""}
+                        maxLength={20}
+                        onChange={(e) =>
+                          updateObjectInArray(experience, setExperience, index, "startDate", e.target.value)
+                        }
+                        className={`w-full px-2 py-1.5 sm:px-3 sm:py-2 text-[10px] sm:text-base border rounded-lg focus:outline-none transition bg-white ${validationErrors[index]?.startDate ? 'border-red-500 ring-1 ring-red-100' : 'border-gray-300 focus:ring-2 focus:ring-amber-500'}`}
+                      />
+                      {validationErrors[index]?.startDate && (
+                        <p className="text-red-500 text-[9px] sm:text-xs mt-1 sm:mt-1.5 flex items-center gap-1 sm:gap-1.5 font-medium animate-in slide-in-from-top-1">
+                          <AlertCircle className="w-3 h-3 sm:w-[14px] sm:h-[14px]" />
+                          {t('experience.startDateRequired') || "Start date is required"}
+                        </p>
+                      )}
+                    </div>
+
+                    <div>
+                      <input
+                        type="text"
+                        placeholder={t('experience.endDate')}
+                        value={exp.endDate || ""}
+                        maxLength={20}
+                        onChange={(e) =>
+                          updateObjectInArray(experience, setExperience, index, "endDate", e.target.value)
+                        }
+                        className={`w-full px-2 py-1.5 sm:px-3 sm:py-2 text-[10px] sm:text-base border rounded-lg focus:outline-none transition bg-white ${validationErrors[index]?.endDate ? 'border-red-500 ring-1 ring-red-100' : 'border-gray-300 focus:ring-2 focus:ring-amber-500'}`}
+                      />
+                      {validationErrors[index]?.endDate && (
+                        <p className="text-red-500 text-[9px] sm:text-xs mt-1 sm:mt-1.5 flex items-center gap-1 sm:gap-1.5 font-medium animate-in slide-in-from-top-1">
+                          <AlertCircle className="w-3 h-3 sm:w-[14px] sm:h-[14px]" />
+                          {t('experience.endDateRequired') || "End date is required"}
+                        </p>
+                      )}
+                    </div>
                   </div>
 
                   <div className="flex justify-end pt-2">

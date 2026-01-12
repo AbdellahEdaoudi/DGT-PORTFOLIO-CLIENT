@@ -415,7 +415,7 @@ export default function ThemeThree({ userDetails, userLinks }) {
               {[
                 { name: "linkedin", url: userDetails.socials?.linkedin, icon: "/icons/linkedin.svg" },
                 { name: "github", url: userDetails.socials?.github, icon: "/icons/github.svg" },
-                { name: "facebook", url: userDetails.socials?.fb, icon: "/icons/facebook.svg" },
+                { name: "facebook", url: userDetails.socials?.facebook, icon: "/icons/facebook.svg" },
                 { name: "whatsapp", url: userDetails.socials?.whatsapp, icon: "/icons/whatsapp.svg" },
                 { name: "tiktok", url: userDetails.socials?.tiktok, icon: "/icons/tiktok.svg" },
                 { name: "reddit", url: userDetails.socials?.reddit, icon: "/icons/reddit.svg" },

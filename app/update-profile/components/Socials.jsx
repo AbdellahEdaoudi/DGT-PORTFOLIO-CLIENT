@@ -16,7 +16,7 @@ export default function Socials({ userData, setUserDetails }) {
     twitter: "/icons/twitter.svg",
     youtube: "/icons/youtube.svg",
     reddit: "/icons/reddit.svg",
-    fb: "/icons/facebook.svg",
+    facebook: "/icons/facebook.svg",
     whatsapp: "/icons/whatsapp.svg",
     telegram: "/icons/telegram.svg",
     tiktok: "/icons/tiktok.svg",

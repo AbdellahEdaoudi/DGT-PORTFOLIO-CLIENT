@@ -56,10 +56,14 @@ export default function Services({ userData, setUserDetails }) {
 
   const UpServices = async (e) => {
     e.preventDefault()
+    // Filter empty services to ensure data quality
+    const validServices = services.filter(s => s.trim() !== "");
+    setServices(validServices);
+
     setLoading(true)
     try {
       await axios.put(`/api/proxy/users/update/services`, {
-        services,
+        services: validServices,
       })
 
       // Update global state to reflect changes immediately without refresh

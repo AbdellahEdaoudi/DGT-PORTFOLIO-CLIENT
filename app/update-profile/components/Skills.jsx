@@ -54,9 +54,13 @@ export default function Skills({ userData, setUserDetails }) {
   };
 
   const UpSkills = async () => {
+    // Filter empty skills to ensure data quality
+    const validSkills = skills.filter(s => s.trim() !== "");
+    setSkills(validSkills);
+
     setLoading(true)
     try {
-      await axios.put(`/api/proxy/users/update/skills`, { skills })
+      await axios.put(`/api/proxy/users/update/skills`, { skills: validSkills })
 
       // Update global state to reflect changes immediately without refresh
       if (setUserDetails) {

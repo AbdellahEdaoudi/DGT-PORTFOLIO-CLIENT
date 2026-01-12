@@ -26,5 +26,5 @@ export default withAuth(async function middleware(request: NextRequest) {
 });
 
 export const config = {
-  matcher: ['/business-links', '/update-profile', '/support', '/subscription', '/admin', '/auth/:path*', '/api/proxy/users/:path*', '/api/proxy/alldata/:path*', '/api/proxy/links/:path*', '/custom-domain',],
+  matcher: ['/business-links', '/update-profile', '/support', '/subscription', '/admin', '/auth/:path*', '/api/proxy/:path*', '/custom-domain',],
 };

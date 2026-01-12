@@ -54,9 +54,13 @@ export default function Languages({ userData, setUserDetails }) {
   };
 
   const saveLanguages = async () => {
+    // Filter empty languages to ensure data quality
+    const validLanguages = languages.filter(l => l.trim() !== "");
+    setLanguages(validLanguages);
+
     setLoading(true);
     try {
-      await axios.put(`/api/proxy/users/update/languages`, { languages });
+      await axios.put(`/api/proxy/users/update/languages`, { languages: validLanguages });
 
       // Update global state to reflect changes immediately without refresh
       if (setUserDetails) {

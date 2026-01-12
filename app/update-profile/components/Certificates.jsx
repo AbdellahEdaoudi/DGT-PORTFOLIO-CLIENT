@@ -167,7 +167,8 @@ export default function Certificates({ userData, setUserDetails }) {
         const errors = {};
         // Validation
         if (!item.cfimage && !item.file) errors.image = true;
-        if (!item.title?.trim()) errors.title = true; // Title is now required
+        if (!item.title?.trim()) errors.title = true;
+        if (!item.description?.trim()) errors.description = true;
 
         if (Object.keys(errors).length > 0) {
             setValidationErrors(prev => ({ ...prev, [index]: errors }));
@@ -474,15 +475,21 @@ export default function Certificates({ userData, setUserDetails }) {
                                         <div className="flex flex-col gap-1 sm:gap-2">
                                             <label className="text-[10px] sm:text-sm font-medium text-gray-700 ml-1">{t('certificates.description')}</label>
                                             <textarea
-                                                placeholder={t('certificates.certificateDescription') || "Description (Optional)"}
+                                                placeholder={t('certificates.description') || "Description"}
                                                 value={cert.description || ""}
                                                 maxLength={200}
                                                 rows={5}
                                                 onChange={(e) =>
                                                     updateObjectInArray(certificates, setCertificates, index, "description", e.target.value)
                                                 }
-                                                className="w-full h-24 sm:h-full p-2 sm:p-3 text-[10px] sm:text-base border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white transition resize-none"
+                                                className={`w-full h-24 sm:h-full p-2 sm:p-3 text-[10px] sm:text-base border rounded-lg focus:outline-none transition bg-white resize-none ${validationErrors[index]?.description ? 'border-red-500 ring-1 ring-red-100' : 'border-gray-300 focus:ring-2 focus:ring-blue-500'}`}
                                             />
+                                            {validationErrors[index]?.description && (
+                                                <p className="text-red-500 text-[9px] sm:text-xs mt-1 sm:mt-1.5 flex items-center gap-1 sm:gap-1.5 font-medium animate-in slide-in-from-top-1">
+                                                    <AlertCircle className="w-3 h-3 sm:w-[14px] sm:h-[14px]" />
+                                                    {t('certificates.descriptionRequired') || "Description is required"}
+                                                </p>
+                                            )}
                                         </div>
                                     </div>
 
