@@ -13,21 +13,22 @@ async function fetchUserData(url) {
 }
 
 function getDomainFlags(host) {
-  const reserved = ["dgtportfolio", "localhost:3000", "www"];
+  const reserved = ["dgtportfolio", "localhost","www","api","admin"];
   // isSubdomain
   const isSubdomain =
-    (host.endsWith("dgtportfolio.com") || host.endsWith("localhost:3000")) &&
+    (host.endsWith(".dgtportfolio.com") || host.endsWith(".localhost:3000")) &&
     host !== "dgtportfolio.com" &&
     host !== "localhost:3000" &&
     !reserved.includes(host.split(".")[0]);
-  // isExternalCustomDomain
-  const isExternalCustomDomain = !isSubdomain &&
-    !host.includes("dgtportfolio.com") &&
+  // isCustomDomain
+  const isCustomDomain = !isSubdomain &&
+    !host.includes("dgtportfolio.") &&
     !host.includes("localhost") &&
-    !host.startsWith("192.168.") &&
-    !host.startsWith("zona-unadamant-unoffensively.ngrok-free.dev") &&
-    !host.includes("dgtportfolio.vercel.app");
-  return { isSubdomain, isExternalCustomDomain };
+    !host.includes("192.168.") &&
+    !host.includes("ngrok");
+  
+  const iswwwsubdomain = host.startsWith("www.") && !isSubdomain && !isCustomDomain;
+  return { isSubdomain, isCustomDomain, iswwwsubdomain };
 }
 
 export async function generateMetadata() {
@@ -35,14 +36,15 @@ export async function generateMetadata() {
   // const host = "abdellah-edaoudi.site"
   const headersList = await headers();
   const host = headersList.get("host");
-  const { isSubdomain, isExternalCustomDomain } = getDomainFlags(host);
+  const { isSubdomain, isCustomDomain, iswwwsubdomain } = getDomainFlags(host);
   console.log("isSubdomain : " + isSubdomain);
-  console.log("isExternalCustomDomain : " + isExternalCustomDomain);
+  console.log("isCustomDomain : " + isCustomDomain);
+  console.log("iswwwsubdomain : " + iswwwsubdomain);
   let user = null;
   if (isSubdomain) {
     user = await fetchUserData(`https://dgt-portfolio-server.vercel.app/users/metauser/${host.split(".")[0]}`);
   }
-  if (isExternalCustomDomain) {
+  if (isCustomDomain) {
     user = await fetchUserData(`https://dgt-portfolio-server.vercel.app/users/metacustomdomain/${host}`);
   }
 
@@ -72,8 +74,7 @@ export async function generateMetadata() {
         canonical: isSubdomain ? `https://${username}.dgtportfolio.com` : `https://${host}`,
       },
     };
-  } else if (!isSubdomain && !isExternalCustomDomain) {
-    // Metadata for the Main Home Page (Default Language: English)
+  } else {
     return {
       alternates: {
         canonical: "https://dgtportfolio.com",
@@ -103,7 +104,7 @@ export async function generateMetadata() {
 export default async function Home() {
   const headersList = await headers();
   const host = headersList.get("host");
-  const { isSubdomain, isExternalCustomDomain } = getDomainFlags(host);
+  const { isSubdomain, isCustomDomain, iswwwsubdomain } = getDomainFlags(host);
   let userSchema = null;
 
   try {
@@ -120,7 +121,7 @@ export default async function Home() {
           sameAs: Object.values(user.socials || {}).filter(Boolean),
         };
       }
-    } else if (isExternalCustomDomain) {
+    } else if (isCustomDomain) {
       const user = await fetchUserData(`https://dgt-portfolio-server.vercel.app/users/metacustomdomain/${host}`);
       if (user) {
         userSchema = {
@@ -133,14 +134,8 @@ export default async function Home() {
           sameAs: Object.values(user.socials || {}).filter(Boolean),
         };
       }
-    }
-  } catch (error) {
-    console.error("Error generating user schema:", error);
-    // Continue rendering without schema
-  }
-
-  if (!isSubdomain && !isExternalCustomDomain) {
-    userSchema = {
+    } else {
+      userSchema = {
       "@context": "https://schema.org",
       "@type": "SoftwareApplication",
       name: "DGT Portfolio",
@@ -151,12 +146,16 @@ export default async function Home() {
       offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
       aggregateRating: { "@type": "AggregateRating", ratingValue: "4.8", ratingCount: "120" },
     };
+    }
+  } catch (error) {
+    console.error("Error generating user schema:", error);
+    // Continue rendering without schema
   }
 
   return (
     <div>
       {userSchema && <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(userSchema) }} />}
-      {isSubdomain ? <DynamicSubdomainClient username={host.split(".")[0]} /> : isExternalCustomDomain ? <DynamicCustomDomainClient host={host} /> : <LandingPage lang={"en"} />}
+      {isSubdomain ? <DynamicSubdomainClient username={host.split(".")[0]} /> : isCustomDomain ? <DynamicCustomDomainClient host={host} /> : iswwwsubdomain ? <LandingPage lang={"en"} /> : <LandingPage lang={"en"} />}
     </div>
   );
 }
