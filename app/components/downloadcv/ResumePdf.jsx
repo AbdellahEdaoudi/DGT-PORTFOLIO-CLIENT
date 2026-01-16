@@ -12,11 +12,10 @@ Font.register({
 });
 
 Font.register({
-    family: 'Amiri',
+    family: 'Vazirmatn',
     fonts: [
-        { src: 'https://fonts.gstatic.com/s/amiri/v30/J7aRnpd8CGxBHqUp.ttf' }, // Regular
-        { src: 'https://fonts.gstatic.com/s/amiri/v30/J7acnpd8CGxBHp2VkZY4.ttf', fontWeight: 'bold' }, // Bold
-        { src: 'https://fonts.gstatic.com/s/amiri/v30/J7afnpd8CGxBHpUrtLY.ttf', fontStyle: 'italic' } // Italic
+        { src: 'https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/fonts/ttf/Vazirmatn-Regular.ttf' },
+        { src: 'https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/fonts/ttf/Vazirmatn-Bold.ttf', fontWeight: 'bold' }
     ]
 });
 
@@ -390,7 +389,7 @@ const ResumePdf = ({ userData }) => {
 
     const getFontFamily = (language) => {
         switch (language) {
-            case 'ar': return 'Amiri';
+            case 'ar': return 'Vazirmatn';
             case 'ja': return 'Noto Sans JP';
             case 'zh': return 'Noto Sans SC';
             case 'ko': return 'Noto Sans KR';
