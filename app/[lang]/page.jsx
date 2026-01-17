@@ -70,5 +70,9 @@ export async function generateMetadata(props) {
 
 export default async function Page(props) {
     const params = await props.params;
-    return <LandingPage lang={params.lang} />
+    return (
+        <div dir={params.lang === "ar" ? "rtl" : "ltr"}>
+            <LandingPage lang={params.lang} />
+        </div>
+    );
 }

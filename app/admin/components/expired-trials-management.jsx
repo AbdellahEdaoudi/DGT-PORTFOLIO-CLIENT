@@ -16,8 +16,8 @@ export default function ExpiredTrialsManagement({ data }) {
     useEffect(() => {
         if (data?.users && data?.subscription) {
             try {
-                const sevenDaysAgo = new Date();
-                sevenDaysAgo.setDate(sevenDaysAgo.getDate() - 7);
+                const twentyFourHoursAgo = new Date();
+                twentyFourHoursAgo.setHours(twentyFourHoursAgo.getHours() - 24);
 
                 const whitelist = [
                     "adam.carter.dev@gmail.com",
@@ -30,9 +30,9 @@ export default function ExpiredTrialsManagement({ data }) {
                     // 1. Whitelist check
                     if (whitelist.includes(user.email)) return false;
 
-                    // 2. Created > 7 days ago check
+                    // 2. Created > 24 hours ago check
                     const createdAt = new Date(user.createdAt);
-                    if (createdAt >= sevenDaysAgo) return false;
+                    if (createdAt >= twentyFourHoursAgo) return false;
 
                     // 3. Active Subscription Check
                     // Check if user has an ACTIVE subscription in data.subscription
