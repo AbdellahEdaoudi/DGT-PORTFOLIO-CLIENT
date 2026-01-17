@@ -36,5 +36,8 @@
         "noBusinessLinks": "No Business Links available.",
         "close": "Close"
     },
-    "welcometomyworld": "Welcome to my world"
+    "welcometomyworld": "Welcome to my world",
+    "readMore": "Read More",
+    "readLess": "Read Less",
+    "verified": "Verified"
 }

@@ -36,5 +36,8 @@
         "noBusinessLinks": "Nessun link aziendale disponibile.",
         "close": "Chiudi"
     },
-    "welcometomyworld": "Benvenuto nel mio mondo"
+    "welcometomyworld": "Benvenuto nel mio mondo",
+    "readMore": "Leggi di più",
+    "readLess": "Leggi meno",
+    "verified": "Verificado"
 }

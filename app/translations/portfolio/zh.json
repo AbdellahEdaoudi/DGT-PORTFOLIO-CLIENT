@@ -36,5 +36,8 @@
         "noBusinessLinks": "无可用商业链接。",
         "close": "关闭"
     },
-    "welcometomyworld": "欢迎来到我的世界"
+    "welcometomyworld": "欢迎来到我的世界",
+    "readMore": "阅读更多",
+    "readLess": "收起",
+    "verified": "已验证"
 }

@@ -36,5 +36,8 @@
         "noBusinessLinks": "Aucun lien commercial disponible.",
         "close": "Fermer"
     },
-    "welcometomyworld": "Bienvenue dans mon monde"
+    "welcometomyworld": "Bienvenue dans mon monde",
+    "readMore": "Lire la suite",
+    "readLess": "Lire moins",
+    "verified": "Vérifié"
 }

@@ -36,5 +36,8 @@
         "noBusinessLinks": "لا توجد روابط عمل متاحة.",
         "close": "إغلاق"
     },
-    "welcometomyworld": "مرحباً بك في عالمي"
+    "welcometomyworld": "مرحباً بك في عالمي",
+    "readMore": "اقرأ المزيد",
+    "readLess": "اقرأ أقل",
+    "verified": "متحقق"
 }

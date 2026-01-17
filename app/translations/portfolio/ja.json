@@ -36,5 +36,8 @@
         "noBusinessLinks": "利用可能なビジネスリンクはありません。",
         "close": "閉じる"
     },
-    "welcometomyworld": "私の世界へようこそ"
+    "welcometomyworld": "私の世界へようこそ",
+    "readMore": "続きを読む",
+    "readLess": "閉じる",
+    "verified": "認証済み"
 }

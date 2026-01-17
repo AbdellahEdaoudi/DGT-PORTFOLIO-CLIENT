@@ -36,5 +36,8 @@
         "noBusinessLinks": "Нет доступных бизнес-ссылок.",
         "close": "Закрыть"
     },
-    "welcometomyworld": "Добро пожаловать в мой мир"
+    "welcometomyworld": "Добро пожаловать в мой мир",
+    "readMore": "Читать далее",
+    "readLess": "Свернуть",
+    "verified": "Проверено"
 }

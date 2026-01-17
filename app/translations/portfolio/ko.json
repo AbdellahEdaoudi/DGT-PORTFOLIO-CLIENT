@@ -36,5 +36,8 @@
         "noBusinessLinks": "이용 가능한 비즈니스 링크가 없습니다.",
         "close": "닫기"
     },
-    "welcometomyworld": "저의 세계에 오신 것을 환영합니다"
+    "welcometomyworld": "저의 세계에 오신 것을 환영합니다",
+    "readMore": "더 보기",
+    "readLess": "접기",
+    "verified": "인증됨"
 }

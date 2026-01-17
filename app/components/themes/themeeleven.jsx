@@ -1,6 +1,6 @@
 "use client"
 import { useState, useEffect, useMemo } from "react"
-import { Layers, Rocket, Star, ArrowUpRight, Loader, FileDown, Award, Menu, X, ArrowUp } from "../Icons"
+import { Layers, Rocket, Star, ArrowUpRight, Loader, FileDown, Award, Menu, X, ArrowUp, ChevronDown, ChevronUp } from "../Icons"
 import QrcodeProfile from "../portfolio/QrcodeProfile"
 import UserLinks from "../portfolio/UserLinks"
 import Image from "next/image"
@@ -16,6 +16,15 @@ export default function ThemeEleven({ userDetails, userLinks }) {
     const [selectedImage, setSelectedImage] = useState(null);
     const [isNavOpen, setIsNavOpen] = useState(false);
     const [showScrollTop, setShowScrollTop] = useState(false);
+
+    const [expandedProjects, setExpandedProjects] = useState({});
+
+    const toggleProject = (index) => {
+        setExpandedProjects(prev => ({
+            ...prev,
+            [index]: !prev[index]
+        }));
+    };
 
     useEffect(() => {
         const handleScroll = () => {
@@ -205,26 +214,7 @@ export default function ThemeEleven({ userDetails, userLinks }) {
 
                         <div className={`text-center ${userDetails?.displayLanguage === 'ar' ? 'lg:text-right' : 'lg:text-left'}`}>
                             <div className="inline-block px-2 py-1 mb-2 border border-cyan-500/50 text-xs text-cyan-400 uppercase tracking-[0.2em] bg-cyan-950/50">
-                                {
-                                    {
-                                        en: 'Verified',
-                                        fr: 'Vérifié',
-                                        ar: 'متحقق',
-                                        de: 'Verifiziert',
-                                        ru: 'Проверено',
-                                        ja: '認証済み',
-                                        zh: '已验证',
-                                        es: 'Verificado',
-                                        pt: 'Verificado',
-                                        nl: 'Geverifieerd',
-                                        it: 'Verificato',
-                                        tr: 'Doğrulanmış',
-                                        ko: '인증됨',
-                                        id: 'Terverifikasi',
-                                        pl: 'Zweryfikowano',
-                                        hi: 'सत्यापित',
-                                    }[userDetails?.displayLanguage] || 'Verified'
-                                }
+                                {t('verified')}
                             </div>
                             <h1 className="text-3xl md:text-5xl font-bold mb-2 text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-purple-400 drop-shadow-[0_0_10px_rgba(34,211,238,0.5)]">
                                 {userDetails?.fullname}
@@ -295,7 +285,7 @@ export default function ThemeEleven({ userDetails, userLinks }) {
                                                         </span>
                                                     </div>
                                                     <p className="text-purple-300 text-sm mb-2">{exp.company}</p>
-                                                    <p className="text-cyan-100/60 text-sm">{exp.description}</p>
+                                                    <p className="text-cyan-100/60 text-sm whitespace-pre-wrap break-all">{exp.description}</p>
                                                 </div>
                                             ))}
                                         </div>
@@ -321,44 +311,72 @@ export default function ThemeEleven({ userDetails, userLinks }) {
                                             <span className="w-8 h-[1px] bg-cyan-500"></span> {t('projects')}
                                         </h2>
                                         <div className="grid gap-4">
-                                            {userDetails.projects.map((project, i) => (
-                                                <div key={i} className="flex flex-col sm:flex-row gap-4 bg-black/40 border border-cyan-500/20 p-4 hover:border-cyan-500/50 transition-all group">
-                                                    {project.image && (
-                                                        <div className="w-full sm:w-24 h-48 sm:h-24 bg-cyan-900/20 flex-shrink-0 overflow-hidden border border-cyan-500/20">
-                                                            <Image width={500} height={500}
-                                                                src={project.image}
-                                                                alt={project.title || "Project Image"}
-                                                                onClick={() => setSelectedImage(project.image)}
-                                                                className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500 cursor-pointer"
-                                                            />
-                                                        </div>
-                                                    )}
-                                                    <div className="flex-1">
-                                                        <div className="flex justify-between items-start">
-                                                            <h4 className="font-bold text-cyan-50 text-lg group-hover:text-cyan-400 transition-colors">{project.title}</h4>
-                                                            {project.link && (
-                                                                <a
-                                                                    href={project.link}
-                                                                    target="_blank"
-                                                                    rel="noopener noreferrer"
-                                                                    className="flex items-center gap-1 text-cyan-400 hover:text-white hover:underline transition-colors text-sm whitespace-nowrap"
-                                                                >
-                                                                    {t('viewProject')}
-                                                                    <ArrowUpRight size={16} />
-                                                                </a>
-                                                            )}
-                                                        </div>
-                                                        <p className="text-sm text-cyan-100/60 mt-1 line-clamp-2">{project.description}</p>
-                                                        <div className="flex gap-2 mt-3 flex-wrap">
-                                                            {project.technologies?.map((tech, j) => (
-                                                                <span key={j} className="text-[10px] uppercase text-cyan-300 bg-cyan-900/30 px-2 py-1 border border-cyan-500/20">
-                                                                    {tech}
-                                                                </span>
-                                                            ))}
+                                            {userDetails.projects.map((project, i) => {
+                                                const isExpanded = expandedProjects[i];
+                                                const shouldTruncate = project.description && project.description.length > 150; // Threshold for showing button
+
+                                                return (
+                                                    <div key={i} className="flex flex-col sm:flex-row gap-4 bg-black/40 border border-cyan-500/20 p-4 hover:border-cyan-500/50 transition-all group">
+                                                        {project.image && (
+                                                            <div className="w-full sm:w-24 h-48 sm:h-24 bg-cyan-900/20 flex-shrink-0 overflow-hidden border border-cyan-500/20">
+                                                                <Image width={500} height={500}
+                                                                    src={project.image}
+                                                                    alt={project.title || "Project Image"}
+                                                                    onClick={() => setSelectedImage(project.image)}
+                                                                    className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500 cursor-pointer"
+                                                                />
+                                                            </div>
+                                                        )}
+                                                        <div className="flex-1">
+                                                            <div className="flex justify-between items-start">
+                                                                <h4 className="font-bold text-cyan-50 text-lg group-hover:text-cyan-400 transition-colors">{project.title}</h4>
+                                                                {project.link && (
+                                                                    <a
+                                                                        href={project.link}
+                                                                        target="_blank"
+                                                                        rel="noopener noreferrer"
+                                                                        className="flex items-center gap-1 text-cyan-400 hover:text-white hover:underline transition-colors text-sm whitespace-nowrap"
+                                                                    >
+                                                                        {t('viewProject')}
+                                                                        <ArrowUpRight size={16} />
+                                                                    </a>
+                                                                )}
+                                                            </div>
+                                                            <div className="relative">
+                                                                <p className={`text-sm text-cyan-100/60 mt-1 whitespace-pre-wrap break-all ${isExpanded ? '' : 'line-clamp-2'}`}>
+                                                                    {project.description}
+                                                                </p>
+                                                                {shouldTruncate && (
+                                                                    <button
+                                                                        onClick={(e) => {
+                                                                            e.stopPropagation();
+                                                                            toggleProject(i);
+                                                                        }}
+                                                                        className="flex items-center gap-1 text-cyan-400 text-xs mt-2 hover:text-cyan-300 font-medium transition-colors cursor-pointer"
+                                                                    >
+                                                                        {isExpanded ? (
+                                                                            <>
+                                                                                {t('readLess')} <ChevronUp size={14} />
+                                                                            </>
+                                                                        ) : (
+                                                                            <>
+                                                                                {t('readMore')} <ChevronDown size={14} />
+                                                                            </>
+                                                                        )}
+                                                                    </button>
+                                                                )}
+                                                            </div>
+                                                            <div className="flex gap-2 mt-3 flex-wrap">
+                                                                {project.technologies?.map((tech, j) => (
+                                                                    <span key={j} className="text-[10px] uppercase text-cyan-300 bg-cyan-900/30 px-2 py-1 border border-cyan-500/20">
+                                                                        {tech}
+                                                                    </span>
+                                                                ))}
+                                                            </div>
                                                         </div>
                                                     </div>
-                                                </div>
-                                            ))}
+                                                );
+                                            })}
                                         </div>
                                     </section>
                                 ),

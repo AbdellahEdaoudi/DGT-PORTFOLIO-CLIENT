@@ -1,12 +1,18 @@
 "use client"
-import { useState, useRef } from "react"
+import { useState, useRef, useEffect } from "react"
+import { createPortal } from "react-dom"
 import { FileDown, Loader, X } from "../Icons"
 
 export default function DownloadResume({ userDetails, className }) {
     const [isDownloading, setIsDownloading] = useState(false);
+    const [mounted, setMounted] = useState(false);
     const isCancelledRef = useRef(false);
 
     const workerRef = useRef(null);
+
+    useEffect(() => {
+        setMounted(true);
+    }, []);
 
     const handleDownload = async () => {
         try {
@@ -192,8 +198,8 @@ export default function DownloadResume({ userDetails, className }) {
                 </div>
             </div>
 
-            {isDownloading && (
-                <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm p-4 animate-fadeIn">
+            {isDownloading && mounted && createPortal(
+                <div className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/80 backdrop-blur-sm p-4 animate-fadeIn">
                     <div className="bg-[#1a1f2e] border border-white/10 rounded-2xl p-8 max-w-sm w-full shadow-2xl flex flex-col items-center text-center">
 
                         <div className="relative mb-6">
@@ -215,7 +221,8 @@ export default function DownloadResume({ userDetails, className }) {
                         </button>
 
                     </div>
-                </div>
+                </div>,
+                document.body
             )}
         </>
     );
