@@ -22,6 +22,7 @@ function EditUserLinks() {
   const [namelink, setNamelink] = useState('');
   const [link, setLink] = useState('');
   const [highlightedLinkId, setHighlightedLinkId] = useState(null);
+  const [newlyAddedId, setNewlyAddedId] = useState(null);
 
   // Edit States
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
@@ -48,6 +49,8 @@ function EditUserLinks() {
         link: sanitizedLink
       });
       setUserLinks(prevLinks => [response.data.data, ...prevLinks]);
+      setNewlyAddedId(response.data.data._id);
+      setTimeout(() => setNewlyAddedId(null), 3000);
       toast(t('businessLinks.linkAddedSuccessfully'));
       setLink('');
       setNamelink('');
@@ -135,32 +138,32 @@ function EditUserLinks() {
   };
 
 
-  if (!EmailUser || loadingAll) { 
+  if (!EmailUser || loadingAll) {
     return (
       <div>
-      <Header lang={userDetails?.displayLanguage} />
-      <div className="min-h-screen bg-cyan-950 p-4">
-        <div className="max-w-[110vh] mx-auto space-y-8 animate-pulse">
-          <div className="h-10 w-64 bg-cyan-900 rounded-lg mx-auto mb-8"></div>
-          <div className="bg-white/10 border border-white/5 rounded-xl p-6 space-y-6">
-            <div className="space-y-4">
-              <div className="h-4 w-24 bg-cyan-900/50 rounded"></div>
-              <div className="h-12 w-full bg-cyan-900/30 rounded-lg"></div>
-              <div className="h-4 w-24 bg-cyan-900/50 rounded"></div>
-              <div className="h-12 w-full bg-cyan-900/30 rounded-lg"></div>
-              <div className="h-12 w-full bg-cyan-900/60 rounded-lg"></div>
+        <Header lang={userDetails?.displayLanguage} />
+        <div className="min-h-screen bg-cyan-950 p-4">
+          <div className="max-w-[110vh] mx-auto space-y-8 animate-pulse">
+            <div className="h-10 w-64 bg-cyan-900 rounded-lg mx-auto mb-8"></div>
+            <div className="bg-white/10 border border-white/5 rounded-xl p-6 space-y-6">
+              <div className="space-y-4">
+                <div className="h-4 w-24 bg-cyan-900/50 rounded"></div>
+                <div className="h-12 w-full bg-cyan-900/30 rounded-lg"></div>
+                <div className="h-4 w-24 bg-cyan-900/50 rounded"></div>
+                <div className="h-12 w-full bg-cyan-900/30 rounded-lg"></div>
+                <div className="h-12 w-full bg-cyan-900/60 rounded-lg"></div>
+              </div>
             </div>
-          </div>
-          <div className="space-y-4">
-            {[1, 2, 3].map((i) => (
-              <div key={i} className="h-20 w-full bg-white/5 border border-white/5 rounded-xl"></div>
-            ))}
+            <div className="space-y-4">
+              {[1, 2, 3].map((i) => (
+                <div key={i} className="h-20 w-full bg-white/5 border border-white/5 rounded-xl"></div>
+              ))}
+            </div>
           </div>
         </div>
       </div>
-      </div>
     )
-}
+  }
 
 
   return (
@@ -221,11 +224,11 @@ function EditUserLinks() {
               userLinks.length > 0 ? (
                 userLinks.map((lnk, i) => (
                   <div
-                    key={i}
+                    key={lnk._id || i}
                     className={`group flex justify-between items-center p-2.5 md:p-4 bg-white border rounded-xl hover:shadow-md transition-all duration-300 ${highlightedLinkId === lnk._id
                       ? 'border-teal-500 bg-teal-50 ring-2 ring-teal-200'
                       : 'border-gray-200'
-                      }`}
+                      } ${newlyAddedId === lnk._id ? 'animate-added-link' : ''}`}
                   >
                     <div className='flex items-center gap-2 md:gap-4 overflow-hidden'>
                       <div className='p-1.5 md:p-3 bg-teal-50 border border-teal-100 rounded-full text-teal-600 shrink-0'>
