@@ -231,6 +231,10 @@
         "savedSuccessfully": "Тема успешно сохранена!",
         "errorMessage": "Произошла ошибка при сохранении темы.",
         "save": "Сохранить тему",
-        "selectTheme": "Выбрать тему"
+        "selectTheme": "Выбрать тему",
+        "preview": "Предпросмотр",
+        "close": "Закрыть",
+        "selectThisTheme": "Выбрать эту тему",
+        "themeLabel": "Тема"
     }
 }

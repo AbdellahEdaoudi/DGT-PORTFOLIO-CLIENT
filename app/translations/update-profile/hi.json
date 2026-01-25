@@ -231,6 +231,10 @@
         "savedSuccessfully": "थीम सफलतापूर्वक सहेजी गई!",
         "errorMessage": "थीम सहेजते समय एक त्रुटि हुई।",
         "save": "थीम सहेजें",
-        "selectTheme": "थीम चुनें"
+        "selectTheme": "थीम चुनें",
+        "preview": "पूर्वावलोकन",
+        "close": "बंद करें",
+        "selectThisTheme": "यह थीम चुनें",
+        "themeLabel": "थीम"
     }
 }

@@ -231,6 +231,10 @@
         "savedSuccessfully": "Design erfolgreich gespeichert!",
         "errorMessage": "Beim Speichern des Designs ist ein Fehler aufgetreten.",
         "save": "Design speichern",
-        "selectTheme": "Design auswählen"
+        "selectTheme": "Design auswählen",
+        "preview": "Vorschau",
+        "close": "Schließen",
+        "selectThisTheme": "Dieses Thema wählen",
+        "themeLabel": "Thema"
     }
 }

@@ -232,6 +232,10 @@
         "savedSuccessfully": "تم حفظ التصميم بنجاح!",
         "errorMessage": "حدث خطأ أثناء حفظ التصميم.",
         "save": "حفظ التصميم",
-        "selectTheme": "اختر التصميم"
+        "selectTheme": "اختر التصميم",
+        "preview": "معاينة",
+        "close": "إغلاق",
+        "selectThisTheme": "اختيار هذا القالب",
+        "themeLabel": "المظهر"
     }
 }

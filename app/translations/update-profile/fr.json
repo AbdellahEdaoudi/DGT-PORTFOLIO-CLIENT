@@ -231,6 +231,10 @@
         "savedSuccessfully": "Thème enregistré avec succès !",
         "errorMessage": "Une erreur est survenue lors de l'enregistrement du thème.",
         "save": "Enregistrer le thème",
-        "selectTheme": "Sélectionner un thème"
+        "selectTheme": "Sélectionner un thème",
+        "preview": "Aperçu",
+        "close": "Fermer",
+        "selectThisTheme": "Choisir ce thème",
+        "themeLabel": "Thème"
     }
 }

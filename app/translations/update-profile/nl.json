@@ -231,6 +231,10 @@
         "savedSuccessfully": "Thema succesvol opgeslagen!",
         "errorMessage": "Er is een fout opgetreden bij het opslaan van het thema.",
         "save": "Thema opslaan",
-        "selectTheme": "Thema selecteren"
+        "selectTheme": "Thema selecteren",
+        "preview": "Voorbeeld",
+        "close": "Sluiten",
+        "selectThisTheme": "Selecteer dit thema",
+        "themeLabel": "Thema"
     }
 }

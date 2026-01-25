@@ -55,6 +55,8 @@ export default function PromoCodeManagement({ data, setData }) {
     } catch (err) {
       toast.error(err.response?.data?.message || "Error creating promo code");
       console.log(err);
+      setNewCode("");
+      setShowCreateModal(false);
     } finally {
       setLoadingCreate(false);
     }

@@ -232,6 +232,10 @@
         "savedSuccessfully": "Theme saved successfully!",
         "errorMessage": "An error occurred while saving the theme.",
         "save": "Save Theme",
-        "selectTheme": "Select Theme"
+        "selectTheme": "Select Theme",
+        "preview": "Preview",
+        "close": "Close",
+        "selectThisTheme": "Select This Theme",
+        "themeLabel": "Theme"
     }
 }

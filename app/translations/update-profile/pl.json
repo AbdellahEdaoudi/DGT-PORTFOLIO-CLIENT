@@ -231,6 +231,10 @@
         "savedSuccessfully": "Motyw zapisany pomyślnie!",
         "errorMessage": "Wystąpił błąd podczas zapisywania motywu.",
         "save": "Zapisz motyw",
-        "selectTheme": "Wybierz motyw"
+        "selectTheme": "Wybierz motyw",
+        "preview": "Podgląd",
+        "close": "Zamknij",
+        "selectThisTheme": "Wybierz ten motyw",
+        "themeLabel": "Motyw"
     }
 }

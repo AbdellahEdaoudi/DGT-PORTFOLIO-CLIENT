@@ -231,6 +231,10 @@
         "savedSuccessfully": "テーマが正常に保存されました！",
         "errorMessage": "テーマの保存中にエラーが発生しました。",
         "save": "テーマを保存",
-        "selectTheme": "テーマを選択"
+        "selectTheme": "テーマを選択",
+        "preview": "プレビュー",
+        "close": "閉じる",
+        "selectThisTheme": "このテーマを選択",
+        "themeLabel": "テーマ"
     }
 }

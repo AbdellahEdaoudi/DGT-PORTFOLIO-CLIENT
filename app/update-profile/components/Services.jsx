@@ -5,22 +5,106 @@ import React, { useState, useEffect } from 'react'
 import { createPortal } from 'react-dom'
 import { toast } from 'react-toastify'
 import { getTranslation } from '../../translations/update-profile'
+import {
+  DndContext,
+  closestCenter,
+  KeyboardSensor,
+  MouseSensor,
+  TouchSensor,
+  useSensor,
+  useSensors,
+} from '@dnd-kit/core';
+import {
+  arrayMove,
+  SortableContext,
+  sortableKeyboardCoordinates,
+  verticalListSortingStrategy,
+  useSortable,
+} from '@dnd-kit/sortable';
+import { CSS } from '@dnd-kit/utilities';
+
+// Sortable Item Wrapper
+const SortableItem = ({ id, children }) => {
+  const {
+    attributes,
+    listeners,
+    setNodeRef,
+    setActivatorNodeRef,
+    transform,
+    transition,
+    isDragging,
+  } = useSortable({ id });
+
+  const style = {
+    transform: CSS.Transform.toString(transform),
+    transition,
+    zIndex: isDragging ? 50 : 'auto',
+    position: 'relative',
+  };
+
+  return (
+    <div ref={setNodeRef} style={style} className={isDragging ? 'z-50' : ''}>
+      {children({ attributes, listeners, setActivatorNodeRef, isDragging })}
+    </div>
+  );
+};
 
 export default function Services({ userData, setUserDetails }) {
   const t = getTranslation(userData?.displayLanguage || 'en')
-  const [services, setServices] = useState(userData.services || [])
+
+  // Transform to objects with local ID
+  const [services, setServices] = useState(
+    (userData.services || []).map((s, i) => ({
+      value: s,
+      localId: `id-${i}-${Math.random().toString(36).substr(2, 9)}`
+    }))
+  )
   const [loading, setLoading] = useState(false)
   const [movedItemIndex, setMovedItemIndex] = useState(null)
   const [itemToDelete, setItemToDelete] = useState(null)
   const [mounted, setMounted] = useState(false)
 
+  // DnD Sensors
+  const sensors = useSensors(
+    useSensor(MouseSensor, {
+      activationConstraint: {
+        distance: 10,
+      },
+    }),
+    useSensor(TouchSensor, {
+      activationConstraint: {
+        delay: 250,
+        tolerance: 5,
+      },
+    }),
+    useSensor(KeyboardSensor, {
+      coordinateGetter: sortableKeyboardCoordinates,
+    })
+  );
+
   useEffect(() => {
     setMounted(true)
   }, [])
 
+  const handleDragEnd = (event) => {
+    const { active, over } = event;
+    if (active.id !== over?.id) {
+      setServices((items) => {
+        const oldIndex = items.findIndex((item) => item.localId === active.id);
+        const newIndex = items.findIndex((item) => item.localId === over.id);
+        const newItems = arrayMove(items, oldIndex, newIndex);
+
+        setMovedItemIndex(newIndex);
+        setTimeout(() => setMovedItemIndex(null), 1000);
+
+        return newItems;
+      });
+    }
+  };
+
   const updateArrayItem = (array, setArray, index, value) => {
     const updated = [...array]
-    updated[index] = value
+    updated[index] = { ...updated[index], value: value }
     setArray(updated)
   }
 
@@ -33,7 +117,10 @@ export default function Services({ userData, setUserDetails }) {
   // Helper functions for array management
   const addArrayItem = (array, setArray, newItem) => {
     if (array.length >= 10) return;
-    setArray([...array, newItem])
+    setArray([...array, {
+      value: newItem,
+      localId: `new-${Date.now()}`
+    }])
   }
 
   const moveItemUp = (index) => {
@@ -57,8 +144,7 @@ export default function Services({ userData, setUserDetails }) {
   const UpServices = async (e) => {
     e.preventDefault()
     // Filter empty services to ensure data quality
-    const validServices = services.filter(s => s.trim() !== "");
-    setServices(validServices);
+    const validServices = services.filter(s => s.value.trim() !== "").map(s => s.value);
 
     setLoading(true)
     try {
@@ -70,16 +156,21 @@ export default function Services({ userData, setUserDetails }) {
       if (setUserDetails) {
         setUserDetails(prev => ({
           ...prev,
-          services: services
+          services: validServices
         }));
       }
+
+      // Sync local state with validServices maintaining IDs if possible or regen
+      setServices(validServices.map((s, i) => ({
+        value: s,
+        localId: services[i] && services[i].value === s ? services[i].localId : `id-${Math.random().toString(36).substr(2, 9)}`
+      })));
 
       toast(<p className='flex gap-3 items-center'><CheckCheck className="text-teal-500" />
         {t('services.savedSuccessfully')}</p>, {
         autoClose: 2000,
       })
     } catch (error) {
-      // console.error("[v0] Error updating services:", error)
       toast.error(t('services.errorMessage'))
     } finally {
       setLoading(false)
@@ -92,49 +183,70 @@ export default function Services({ userData, setUserDetails }) {
       <div className="space-y-4">
         <h3 className="text-lg font-bold text-gray-800">💼 {t('services.title')}</h3>
         <div className="bg-gradient-to-br from-teal-50 to-green-50 p-2 md:p-4 rounded-xl border border-teal-200 space-y-3">
-          <div className="space-y-2">
-            {services.map((service, index) => (
-              <div key={index} className={`flex gap-0.5 sm:gap-2 items-center transition-all duration-500 rounded-lg p-0.5 sm:p-1 ${movedItemIndex === index ? 'bg-teal-100 ring-2 ring-teal-300' : 'hover:bg-teal-50/50'}`}>
-                <div className="flex-shrink-0 w-4 h-4 sm:w-8 sm:h-8 flex items-center justify-center bg-teal-100 text-teal-700 rounded-full font-bold text-[8px] sm:text-sm border border-teal-200 shadow-sm">
-                  {index + 1}
-                </div>
-                <input
-                  type="text"
-                  value={service}
-                  maxLength={150}
-                  onChange={(e) => updateArrayItem(services, setServices, index, e.target.value)}
-                  className="flex-1 min-w-0 px-1 py-0.5 sm:px-3 sm:py-2 text-[9px] sm:text-base border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 bg-white transition"
-                  placeholder={`Service ${index + 1}`}
-                />
-                <div className="flex items-center gap-0 sm:gap-1 flex-shrink-0">
-                  <button
-                    type="button"
-                    onClick={() => moveItemUp(index)}
-                    disabled={index === 0}
-                    className="p-0.5 sm:p-1.5 hover:bg-teal-100 rounded-lg transition-colors text-teal-600 disabled:opacity-30 disabled:cursor-not-allowed"
-                  >
-                    <ArrowUp className="w-2.5 h-2.5 sm:w-[18px] sm:h-[18px]" />
-                  </button>
-                  <button
-                    type="button"
-                    onClick={() => moveItemDown(index)}
-                    disabled={index === services.length - 1}
-                    className="p-0.5 sm:p-1.5 hover:bg-teal-100 rounded-lg transition-colors text-teal-600 disabled:opacity-30 disabled:cursor-not-allowed"
-                  >
-                    <ArrowDown className="w-2.5 h-2.5 sm:w-[18px] sm:h-[18px]" />
-                  </button>
-                  <div className="w-px h-3 sm:h-6 bg-teal-200 mx-0.5 sm:mx-1"></div>
-                  <button
-                    type="button"
-                    onClick={() => setItemToDelete(index)}
-                    className="p-0.5 sm:p-1.5 hover:bg-red-100 rounded-lg transition-colors text-red-500"
-                  >
-                    <Trash2 className="w-2.5 h-2.5 sm:w-[18px] sm:h-[18px]" />
-                  </button>
-                </div>
+          <DndContext
+            sensors={sensors}
+            collisionDetection={closestCenter}
+            onDragEnd={handleDragEnd}
+          >
+            <SortableContext
+              items={services.map(s => s.localId)}
+              strategy={verticalListSortingStrategy}
+            >
+              <div className="space-y-2">
+                {services.map((serviceObj, index) => (
+                  <SortableItem key={serviceObj.localId} id={serviceObj.localId}>
+                    {({ attributes, listeners, setActivatorNodeRef, isDragging }) => (
+                      <div className={`flex gap-0.5 sm:gap-2 items-center transition-all duration-500 rounded-lg p-0.5 sm:p-1 ${isDragging ? 'bg-teal-50 scale-[1.02] shadow-lg ring-1 ring-teal-300 z-50' : (movedItemIndex === index ? 'bg-teal-100 ring-2 ring-teal-300' : 'hover:bg-teal-50/50')}`}>
+                        {/* Draggable Number Handle */}
+                        <div
+                          ref={setActivatorNodeRef}
+                          {...listeners}
+                          {...attributes}
+                          className="flex-shrink-0 w-4 h-4 sm:w-8 sm:h-8 flex items-center justify-center bg-teal-100 text-teal-700 rounded-full font-bold text-[8px] sm:text-sm border border-teal-200 shadow-sm cursor-grab active:cursor-grabbing hover:bg-teal-200 transition-colors touch-none"
+                        >
+                          {index + 1}
+                        </div>
+                        <input
+                          type="text"
+                          value={serviceObj.value}
+                          maxLength={150}
+                          onChange={(e) => updateArrayItem(services, setServices, index, e.target.value)}
+                          className="flex-1 min-w-0 px-1 py-0.5 sm:px-3 sm:py-2 text-[9px] sm:text-base border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 bg-white transition"
+                          placeholder={`Service ${index + 1}`}
+                        />
+                        <div className="flex items-center gap-0 sm:gap-1 flex-shrink-0">
+                          <button
+                            type="button"
+                            onClick={() => moveItemUp(index)}
+                            disabled={index === 0}
+                            className="p-0.5 sm:p-1.5 hover:bg-teal-100 rounded-lg transition-colors text-teal-600 disabled:opacity-30 disabled:cursor-not-allowed hidden sm:block"
+                          >
+                            <ArrowUp className="w-2.5 h-2.5 sm:w-[18px] sm:h-[18px]" />
+                          </button>
+                          <button
+                            type="button"
+                            onClick={() => moveItemDown(index)}
+                            disabled={index === services.length - 1}
+                            className="p-0.5 sm:p-1.5 hover:bg-teal-100 rounded-lg transition-colors text-teal-600 disabled:opacity-30 disabled:cursor-not-allowed hidden sm:block"
+                          >
+                            <ArrowDown className="w-2.5 h-2.5 sm:w-[18px] sm:h-[18px]" />
+                          </button>
+                          <div className="w-px h-3 sm:h-6 bg-teal-200 mx-0.5 sm:mx-1"></div>
+                          <button
+                            type="button"
+                            onClick={() => setItemToDelete(index)}
+                            className="p-0.5 sm:p-1.5 hover:bg-red-100 rounded-lg transition-colors text-red-500"
+                          >
+                            <Trash2 className="w-2.5 h-2.5 sm:w-[18px] sm:h-[18px]" />
+                          </button>
+                        </div>
+                      </div>
+                    )}
+                  </SortableItem>
+                ))}
               </div>
-            ))}
-          </div>
+            </SortableContext>
+          </DndContext>
           <button
             type="button"
             disabled={services.length >= 10}
@@ -189,7 +301,7 @@ export default function Services({ userData, setUserDetails }) {
               <div className="text-gray-600 mb-6 text-base leading-relaxed">
                 <div className="flex flex-col gap-2">
                   <span className="font-semibold text-gray-800">Are you sure you want to delete this service?</span>
-                  <span className="font-bold text-black border-t pt-2 mt-1 break-all">"{services[itemToDelete] || t('services.thisService') || "this service"}"</span>
+                  <span className="font-bold text-black border-t pt-2 mt-1 break-all">"{services[itemToDelete]?.value || t('services.thisService') || "this service"}"</span>
                 </div>
               </div>
             </div>

@@ -231,6 +231,10 @@
         "savedSuccessfully": "Tema başarıyla kaydedildi!",
         "errorMessage": "Tema kaydedilirken bir hata oluştu.",
         "save": "Temayı Kaydet",
-        "selectTheme": "Tema Seç"
+        "selectTheme": "Tema Seç",
+        "preview": "Önizleme",
+        "close": "Kapat",
+        "selectThisTheme": "Bu Temayı Seç",
+        "themeLabel": "Tema"
     }
 }

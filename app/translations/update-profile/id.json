@@ -231,6 +231,10 @@
         "savedSuccessfully": "Tema berhasil disimpan!",
         "errorMessage": "Terjadi kesalahan saat menyimpan tema.",
         "save": "Simpan Tema",
-        "selectTheme": "Pilih Tema"
+        "selectTheme": "Pilih Tema",
+        "preview": "Pratinjau",
+        "close": "Tutup",
+        "selectThisTheme": "Pilih Tema Ini",
+        "themeLabel": "Tema"
     }
 }

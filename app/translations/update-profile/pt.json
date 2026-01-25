@@ -231,6 +231,10 @@
         "savedSuccessfully": "Tema salvo com sucesso!",
         "errorMessage": "Ocorreu um erro ao salvar o tema.",
         "save": "Salvar Tema",
-        "selectTheme": "Selecionar Tema"
+        "selectTheme": "Selecionar Tema",
+        "preview": "Pré-visualização",
+        "close": "Fechar",
+        "selectThisTheme": "Selecionar este tema",
+        "themeLabel": "Tema"
     }
 }

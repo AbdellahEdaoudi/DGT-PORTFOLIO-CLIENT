@@ -6,12 +6,60 @@ import { createPortal } from "react-dom";
 import { ArrowUp, ArrowDown, CheckCheck, Loader, Plus, Trash2, X, Pencil, AlertCircle, Upload, Award } from "../../components/Icons";
 import ImageModal from "../../components/portfolio/ImageModal";
 import { getTranslation } from '../../translations/update-profile'
+import {
+    DndContext,
+    closestCenter,
+    KeyboardSensor,
+    MouseSensor,
+    TouchSensor,
+    useSensor,
+    useSensors,
+} from '@dnd-kit/core';
+import {
+    arrayMove,
+    SortableContext,
+    sortableKeyboardCoordinates,
+    verticalListSortingStrategy,
+    useSortable,
+} from '@dnd-kit/sortable';
+import { CSS } from '@dnd-kit/utilities';
+
+// Sortable Item Wrapper
+const SortableItem = ({ id, children }) => {
+    const {
+        attributes,
+        listeners,
+        setNodeRef,
+        setActivatorNodeRef,
+        transform,
+        transition,
+        isDragging,
+    } = useSortable({ id });
+
+    const style = {
+        transform: CSS.Transform.toString(transform),
+        transition,
+        zIndex: isDragging ? 50 : 'auto',
+        position: 'relative',
+    };
+
+    return (
+        <div ref={setNodeRef} style={style} className={isDragging ? 'z-50' : ''}>
+            {children({ attributes, listeners, setActivatorNodeRef, isDragging })}
+        </div>
+    );
+};
 
 export default function Certificates({ userData, setUserDetails }) {
     const t = getTranslation(userData?.displayLanguage || 'en');
-    // Initialize with collapsed: true
+
+    // Initialize with collapsed: true and localId
     const [certificates, setCertificates] = useState(
-        (userData.certificates || []).map(e => ({ ...e, collapsed: true }))
+        (userData.certificates || []).map(e => ({
+            ...e,
+            collapsed: true,
+            localId: e._id || `id-${Math.random().toString(36).substr(2, 9)}`
+        }))
     );
     // Track original order for comparison
     const [originalOrder, setOriginalOrder] = useState(
@@ -29,6 +77,35 @@ export default function Certificates({ userData, setUserDetails }) {
     React.useEffect(() => {
         setMounted(true);
     }, []);
+
+    // DnD Sensors
+    const sensors = useSensors(
+        useSensor(MouseSensor, {
+            activationConstraint: {
+                distance: 10,
+            },
+        }),
+        useSensor(TouchSensor, {
+            activationConstraint: {
+                delay: 250,
+                tolerance: 5,
+            },
+        }),
+        useSensor(KeyboardSensor, {
+            coordinateGetter: sortableKeyboardCoordinates,
+        })
+    );
+
+    const handleDragEnd = (event) => {
+        const { active, over } = event;
+        if (active.id !== over?.id) {
+            setCertificates((items) => {
+                const oldIndex = items.findIndex((item) => item.localId === active.id);
+                const newIndex = items.findIndex((item) => item.localId === over.id);
+                return arrayMove(items, oldIndex, newIndex);
+            });
+        }
+    };
 
     // Compression Helper
     const compressImage = async (file) => {
@@ -69,7 +146,11 @@ export default function Certificates({ userData, setUserDetails }) {
     const addArrayItem = (array, setArray, newItem) => {
         if (array.length >= 10) return;
         const newIndex = array.length;
-        setArray([...array, { ...newItem, collapsed: false }]);
+        setArray([...array, {
+            ...newItem,
+            collapsed: false,
+            localId: `new-${Date.now()}`
+        }]);
         // Subtle highlight for the newly added item
         setHighlightedId(`new-${newIndex}`);
         setTimeout(() => setHighlightedId(null), 2000);
@@ -204,7 +285,11 @@ export default function Certificates({ userData, setUserDetails }) {
             const newCertList = res.data.certificates;
             const mergedCerts = newCertList.map((e, i) => {
                 const oldE = certificates.find(op => op._id === e._id) || (certificates[i] && !certificates[i]._id ? certificates[i] : null);
-                return { ...e, collapsed: oldE ? oldE.collapsed : true };
+                return {
+                    ...e,
+                    collapsed: oldE ? oldE.collapsed : true,
+                    localId: oldE ? oldE.localId : `id-${Math.random().toString(36).substr(2, 9)}`
+                };
             });
 
             setCertificates(mergedCerts);
@@ -253,7 +338,12 @@ export default function Certificates({ userData, setUserDetails }) {
         try {
             const res = await axios.delete(`/api/proxy/users/update/certificates/${item._id}`);
             const newCertList = res.data.certificates;
-            setCertificates(newCertList.map(e => ({ ...e, collapsed: true })));
+            // Preserving state consistency isn't critical for localId here as list is replaced but good practice
+            setCertificates(newCertList.map(e => ({
+                ...e,
+                collapsed: true,
+                localId: e._id || `id-${Math.random().toString(36).substr(2, 9)}`
+            })));
 
             if (setUserDetails) {
                 setUserDetails(prev => ({ ...prev, certificates: newCertList }));
@@ -287,7 +377,7 @@ export default function Certificates({ userData, setUserDetails }) {
             if (setUserDetails) {
                 setUserDetails(prev => ({
                     ...prev,
-                    certificates: certificates.map(({ collapsed, file, previewUrl, ...rest }) => rest)
+                    certificates: certificates.map(({ collapsed, file, previewUrl, localId, ...rest }) => rest)
                 }));
             }
 
@@ -316,199 +406,222 @@ export default function Certificates({ userData, setUserDetails }) {
             </h3>
 
             <div className="bg-gradient-to-br from-blue-50 to-indigo-50 p-2 md:p-4 rounded-xl border border-blue-200 space-y-3">
-                <div className="space-y-2">
-                    {certificates.map((cert, index) => (
-                        <div
-                            key={cert._id || index}
-                            className={`bg-white pb-1 border rounded-xl shadow-sm hover:shadow-md transition-all duration-500 overflow-hidden ${deletingIds.has(cert._id) ? 'opacity-60 grayscale pointer-events-none ring-2 ring-red-100 border-red-200 scale-[0.99]' :
-                                validationErrors[index] ? 'border-red-300 ring-1 ring-red-200' :
-                                    (highlightedId === cert._id || highlightedId === `new-${index}`) ? 'border-blue-400 bg-blue-50/50 shadow-md scale-[1.01]' :
-                                        'border-gray-200'
-                                }`}
-                        >
-                            {/* Header */}
-                            <div className="p-1 sm:p-4 flex items-center justify-between gap-1 sm:gap-3 bg-white">
-                                <div className="flex-grow flex items-center gap-1 sm:gap-3">
-                                    <div className="flex-shrink-0 w-4 h-4 sm:w-8 sm:h-8 flex items-center justify-center bg-blue-100 text-blue-700 rounded-full font-bold text-[8px] sm:text-sm border border-blue-200 shadow-sm">
-                                        {index + 1}
-                                    </div>
-                                    {/* Mini Preview in Header */}
-                                    <div className="w-6 h-6 sm:w-10 sm:h-10 rounded-md bg-gray-100 border border-gray-200 overflow-hidden flex-shrink-0 relative">
-                                        {(cert.previewUrl || cert.cfimage) ? (
-                                            <NextImage
-                                                src={cert.previewUrl || cert.cfimage}
-                                                alt="preview"
-                                                fill
-                                                className="object-cover"
-                                                unoptimized
-                                            />
-                                        ) : (
-                                            <Award className="text-gray-300 w-3 h-3 sm:w-6 sm:h-6 m-auto mt-1 sm:mt-2" />
-                                        )}
-                                    </div>
-                                    <div className="w-full">
-                                        <input
-                                            type="text"
-                                            placeholder={t('certificates.certificateTitle') || "Certificate Title"}
-                                            value={cert.title || ""}
-                                            maxLength={100}
-                                            onChange={(e) =>
-                                                updateObjectInArray(certificates, setCertificates, index, "title", e.target.value)
-                                            }
-                                            className={`w-full px-1 py-0.5 sm:px-3 sm:py-2 text-[9px] sm:text-base border rounded-lg focus:outline-none transition bg-white ${validationErrors[index]?.title ? 'border-red-500 ring-1 ring-red-100' : 'border-gray-300 focus:ring-2 focus:ring-blue-500'}`}
-                                            onClick={(e) => e.stopPropagation()} // Prevent expand
-                                        />
-                                        {validationErrors[index]?.title && (
-                                            <p className="text-red-500 text-[8px] sm:text-xs mt-0.5 sm:mt-1.5 flex items-center gap-1 font-medium animate-in slide-in-from-top-1">
-                                                <AlertCircle className="w-2.5 h-2.5 sm:w-[14px] sm:h-[14px]" />
-                                                {t('certificates.titleRequired') || "Title is required"}
-                                            </p>
-                                        )}
-                                    </div>
-                                </div>
-
-                                <div className="flex items-center gap-0 sm:gap-2 flex-shrink-0">
-                                    <button
-                                        type="button"
-                                        onClick={() => toggleCollapse(index)}
-                                        className={`p-0.5 sm:p-2 rounded-lg transition-colors flex items-center gap-1 sm:gap-2 text-[8px] sm:text-sm font-medium ${cert.collapsed ? 'bg-blue-50 text-blue-700 hover:bg-blue-100' : 'bg-gray-100 text-gray-700 hover:bg-gray-200'}`}
-                                        title={cert.collapsed ? t('certificates.edit') : t('certificates.collapse') || "Collapse"}
-                                    >
-                                        {cert.collapsed ? <Pencil className="w-2.5 h-2.5 sm:w-[16px] sm:h-[16px]" /> : <X className="w-2.5 h-2.5 sm:w-[16px] sm:h-[16px]" />}
-                                        <span className="hidden md:inline">{cert.collapsed ? t('certificates.edit') : (t('certificates.close') || "Close")}</span>
-                                    </button>
-
-                                    <div className="w-px h-3 sm:h-6 bg-gray-200 mx-0.5 sm:mx-1"></div>
-
-                                    <button
-                                        type="button"
-                                        onClick={() => moveItemUp(index)}
-                                        disabled={index === 0}
-                                        className="p-0.5 sm:p-1.5 hover:bg-gray-200 rounded-lg transition-colors disabled:opacity-30 disabled:cursor-not-allowed"
-                                    >
-                                        <ArrowUp className="w-2.5 h-2.5 sm:w-[16px] sm:h-[16px] text-gray-600" />
-                                    </button>
-                                    <button
-                                        type="button"
-                                        onClick={() => moveItemDown(index)}
-                                        disabled={index === certificates.length - 1}
-                                        className="p-0.5 sm:p-1.5 hover:bg-gray-200 rounded-lg transition-colors disabled:opacity-30 disabled:cursor-not-allowed"
-                                    >
-                                        <ArrowDown className="w-2.5 h-2.5 sm:w-[16px] sm:h-[16px] text-gray-600" />
-                                    </button>
-                                    <button
-                                        type="button"
-                                        onClick={() => setItemToDelete(index)}
-                                        className="p-0.5 sm:p-1.5 hover:bg-red-100 rounded-lg transition-colors text-red-500 ml-0.5 sm:ml-1"
-                                        disabled={deletingIds.has(cert._id)}
-                                    >
-                                        {deletingIds.has(cert._id) ? <Loader size={12} className="w-2.5 h-2.5 sm:w-[16px] sm:h-[16px] animate-spin" /> : <Trash2 className="w-2.5 h-2.5 sm:w-[16px] sm:h-[16px]" />}
-                                    </button>
-                                </div>
-                            </div>
-
-                            {!cert.collapsed && (
-                                <div className="p-3 md:p-4 border-t border-gray-100 space-y-3 bg-gray-50/50 animate-in fade-in slide-in-from-top-1 duration-200">
-                                    {/* Image Selector */}
-                                    <div className="grid grid-cols-1 md:grid-cols-2 gap-2 sm:gap-4">
-                                        <div className="flex flex-col gap-1 sm:gap-2">
-                                            <label className="text-[10px] sm:text-sm font-medium text-gray-700 ml-1">{t('certificates.certificateImage') || "Certificate Image"}</label>
-                                            {!(cert.cfimage || cert.previewUrl) ? (
-                                                <div className="relative">
-                                                    <input
-                                                        type="file"
-                                                        accept="image/*"
-                                                        onChange={(e) => updateFileInArray(index, e.target.files[0])}
-                                                        className="hidden"
-                                                        id={`cert-upload-${index}`}
-                                                    />
-                                                    <label
-                                                        htmlFor={`cert-upload-${index}`}
-                                                        className={`flex flex-col items-center justify-center gap-1 sm:gap-2 w-full h-24 sm:h-32 px-2 py-1.5 sm:px-3 sm:py-2 border-2 border-dashed ${validationErrors[index]?.image ? 'border-red-300 bg-red-50' : 'border-blue-400 bg-blue-50'} rounded-lg cursor-pointer hover:bg-blue-100 transition`}
+                <DndContext
+                    sensors={sensors}
+                    collisionDetection={closestCenter}
+                    onDragEnd={handleDragEnd}
+                >
+                    <SortableContext
+                        items={certificates.map(c => c.localId)}
+                        strategy={verticalListSortingStrategy}
+                    >
+                        <div className="space-y-2">
+                            {certificates.map((cert, index) => (
+                                <SortableItem key={cert.localId} id={cert.localId}>
+                                    {({ attributes, listeners, setActivatorNodeRef, isDragging }) => (
+                                        <div
+                                            key={cert._id || index}
+                                            className={`bg-white pb-1 border rounded-xl shadow-sm hover:shadow-md transition-all duration-500 overflow-hidden ${deletingIds.has(cert._id) ? 'opacity-60 grayscale pointer-events-none ring-2 ring-red-100 border-red-200 scale-[0.99]' :
+                                                    validationErrors[index] ? 'border-red-300 ring-1 ring-red-200' :
+                                                        (isDragging ? 'border-blue-400 bg-blue-50 shadow-lg scale-[1.02] z-50' :
+                                                            (highlightedId === cert._id || highlightedId === `new-${index}`) ? 'border-blue-400 bg-blue-50/50 shadow-md scale-[1.01]' :
+                                                                'border-gray-200')
+                                                }`}
+                                        >
+                                            {/* Header */}
+                                            <div className="p-1 sm:p-4 flex items-center justify-between gap-1 sm:gap-3 bg-white">
+                                                <div className="flex-grow flex items-center gap-1 sm:gap-3">
+                                                    {/* Draggable Number Handle */}
+                                                    <div
+                                                        ref={setActivatorNodeRef}
+                                                        {...listeners}
+                                                        {...attributes}
+                                                        className="flex-shrink-0 w-4 h-4 sm:w-8 sm:h-8 flex items-center justify-center bg-blue-100 text-blue-700 rounded-full font-bold text-[8px] sm:text-sm border border-blue-200 shadow-sm cursor-grab active:cursor-grabbing hover:bg-blue-200 transition-colors touch-none"
+                                                        title="Drag to reorder"
                                                     >
-                                                        <Upload className="text-blue-600 w-4 h-4 sm:w-6 sm:h-6" />
-                                                        <span className={`${validationErrors[index]?.image ? 'text-red-500' : 'text-blue-600'} text-[9px] sm:text-sm font-medium`}>
-                                                            {t('certificates.selectCertificateImage') || "Select Image (Required)"} *
-                                                        </span>
-                                                    </label>
-                                                    {validationErrors[index]?.image && (
-                                                        <p className="text-red-500 text-[9px] sm:text-xs mt-0.5 sm:mt-1.5 flex items-center gap-1 font-medium animate-in slide-in-from-top-1">
-                                                            <AlertCircle className="w-3 h-3 sm:w-[14px] sm:h-[14px]" />
-                                                            {t('certificates.imageRequired') || "Image is required"}
-                                                        </p>
-                                                    )}
+                                                        {index + 1}
+                                                    </div>
+                                                    {/* Mini Preview in Header */}
+                                                    <div className="w-6 h-6 sm:w-10 sm:h-10 rounded-md bg-gray-100 border border-gray-200 overflow-hidden flex-shrink-0 relative">
+                                                        {(cert.previewUrl || cert.cfimage) ? (
+                                                            <NextImage
+                                                                src={cert.previewUrl || cert.cfimage}
+                                                                alt="preview"
+                                                                fill
+                                                                className="object-cover"
+                                                                unoptimized
+                                                            />
+                                                        ) : (
+                                                            <Award className="text-gray-300 w-3 h-3 sm:w-6 sm:h-6 m-auto mt-1 sm:mt-2" />
+                                                        )}
+                                                    </div>
+                                                    <div className="w-full">
+                                                        <input
+                                                            type="text"
+                                                            placeholder={t('certificates.certificateTitle') || "Certificate Title"}
+                                                            value={cert.title || ""}
+                                                            maxLength={100}
+                                                            onChange={(e) =>
+                                                                updateObjectInArray(certificates, setCertificates, index, "title", e.target.value)
+                                                            }
+                                                            className={`w-full px-1 py-0.5 sm:px-3 sm:py-2 text-[9px] sm:text-base border rounded-lg focus:outline-none transition bg-white ${validationErrors[index]?.title ? 'border-red-500 ring-1 ring-red-100' : 'border-gray-300 focus:ring-2 focus:ring-blue-500'}`}
+                                                            onClick={(e) => e.stopPropagation()} // Prevent expand
+                                                        />
+                                                        {validationErrors[index]?.title && (
+                                                            <p className="text-red-500 text-[8px] sm:text-xs mt-0.5 sm:mt-1.5 flex items-center gap-1 font-medium animate-in slide-in-from-top-1">
+                                                                <AlertCircle className="w-2.5 h-2.5 sm:w-[14px] sm:h-[14px]" />
+                                                                {t('certificates.titleRequired') || "Title is required"}
+                                                            </p>
+                                                        )}
+                                                    </div>
                                                 </div>
-                                            ) : (
-                                                <div className="relative w-full h-32 sm:h-48 rounded-lg overflow-hidden border border-gray-200 group">
-                                                    <NextImage
-                                                        src={cert.previewUrl || cert.cfimage}
-                                                        alt="preview"
-                                                        fill
-                                                        className="object-contain bg-gray-900/5"
-                                                        unoptimized
-                                                    />
-                                                    <div className="absolute inset-0 bg-black/40 opacity-100 sm:opacity-0 sm:group-hover:opacity-100 transition-opacity flex items-center justify-center gap-2">
+
+                                                <div className="flex items-center gap-0 sm:gap-2 flex-shrink-0">
+                                                    <button
+                                                        type="button"
+                                                        onClick={() => toggleCollapse(index)}
+                                                        className={`p-0.5 sm:p-2 rounded-lg transition-colors flex items-center gap-1 sm:gap-2 text-[8px] sm:text-sm font-medium ${cert.collapsed ? 'bg-blue-50 text-blue-700 hover:bg-blue-100' : 'bg-gray-100 text-gray-700 hover:bg-gray-200'}`}
+                                                        title={cert.collapsed ? t('certificates.edit') : t('certificates.collapse') || "Collapse"}
+                                                    >
+                                                        {cert.collapsed ? <Pencil className="w-2.5 h-2.5 sm:w-[16px] sm:h-[16px]" /> : <X className="w-2.5 h-2.5 sm:w-[16px] sm:h-[16px]" />}
+                                                        <span className="hidden md:inline">{cert.collapsed ? t('certificates.edit') : (t('certificates.close') || "Close")}</span>
+                                                    </button>
+
+                                                    <div className="w-px h-3 sm:h-6 bg-gray-200 mx-0.5 sm:mx-1"></div>
+
+                                                    <button
+                                                        type="button"
+                                                        onClick={() => moveItemUp(index)}
+                                                        disabled={index === 0}
+                                                        className="p-0.5 sm:p-1.5 hover:bg-gray-200 rounded-lg transition-colors disabled:opacity-30 disabled:cursor-not-allowed hidden sm:block"
+                                                    >
+                                                        <ArrowUp className="w-2.5 h-2.5 sm:w-[16px] sm:h-[16px] text-gray-600" />
+                                                    </button>
+                                                    <button
+                                                        type="button"
+                                                        onClick={() => moveItemDown(index)}
+                                                        disabled={index === certificates.length - 1}
+                                                        className="p-0.5 sm:p-1.5 hover:bg-gray-200 rounded-lg transition-colors disabled:opacity-30 disabled:cursor-not-allowed hidden sm:block"
+                                                    >
+                                                        <ArrowDown className="w-2.5 h-2.5 sm:w-[16px] sm:h-[16px] text-gray-600" />
+                                                    </button>
+                                                    <button
+                                                        type="button"
+                                                        onClick={() => setItemToDelete(index)}
+                                                        className="p-0.5 sm:p-1.5 hover:bg-red-100 rounded-lg transition-colors text-red-500 ml-0.5 sm:ml-1"
+                                                        disabled={deletingIds.has(cert._id)}
+                                                    >
+                                                        {deletingIds.has(cert._id) ? <Loader size={12} className="w-2.5 h-2.5 sm:w-[16px] sm:h-[16px] animate-spin" /> : <Trash2 className="w-2.5 h-2.5 sm:w-[16px] sm:h-[16px]" />}
+                                                    </button>
+                                                </div>
+                                            </div>
+
+                                            {!cert.collapsed && (
+                                                <div className="p-3 md:p-4 border-t border-gray-100 space-y-3 bg-gray-50/50 animate-in fade-in slide-in-from-top-1 duration-200">
+                                                    {/* Image Selector */}
+                                                    <div className="grid grid-cols-1 md:grid-cols-2 gap-2 sm:gap-4">
+                                                        <div className="flex flex-col gap-1 sm:gap-2">
+                                                            <label className="text-[10px] sm:text-sm font-medium text-gray-700 ml-1">{t('certificates.certificateImage') || "Certificate Image"}</label>
+                                                            {!(cert.cfimage || cert.previewUrl) ? (
+                                                                <div className="relative">
+                                                                    <input
+                                                                        type="file"
+                                                                        accept="image/*"
+                                                                        onChange={(e) => updateFileInArray(index, e.target.files[0])}
+                                                                        className="hidden"
+                                                                        id={`cert-upload-${index}`}
+                                                                    />
+                                                                    <label
+                                                                        htmlFor={`cert-upload-${index}`}
+                                                                        className={`flex flex-col items-center justify-center gap-1 sm:gap-2 w-full h-24 sm:h-32 px-2 py-1.5 sm:px-3 sm:py-2 border-2 border-dashed ${validationErrors[index]?.image ? 'border-red-300 bg-red-50' : 'border-blue-400 bg-blue-50'} rounded-lg cursor-pointer hover:bg-blue-100 transition`}
+                                                                    >
+                                                                        <Upload className="text-blue-600 w-4 h-4 sm:w-6 sm:h-6" />
+                                                                        <span className={`${validationErrors[index]?.image ? 'text-red-500' : 'text-blue-600'} text-[9px] sm:text-sm font-medium`}>
+                                                                            {t('certificates.selectCertificateImage') || "Select Image (Required)"} *
+                                                                        </span>
+                                                                    </label>
+                                                                    {validationErrors[index]?.image && (
+                                                                        <p className="text-red-500 text-[9px] sm:text-xs mt-0.5 sm:mt-1.5 flex items-center gap-1 font-medium animate-in slide-in-from-top-1">
+                                                                            <AlertCircle className="w-3 h-3 sm:w-[14px] sm:h-[14px]" />
+                                                                            {t('certificates.imageRequired') || "Image is required"}
+                                                                        </p>
+                                                                    )}
+                                                                </div>
+                                                            ) : (
+                                                                <div className="relative w-full h-32 sm:h-48 rounded-lg overflow-hidden border border-gray-200 group">
+                                                                    <NextImage
+                                                                        src={cert.previewUrl || cert.cfimage}
+                                                                        alt="preview"
+                                                                        fill
+                                                                        className="object-contain bg-gray-900/5"
+                                                                        unoptimized
+                                                                    />
+                                                                    <div className="absolute inset-0 bg-black/40 opacity-100 sm:opacity-0 sm:group-hover:opacity-100 transition-opacity flex items-center justify-center gap-2">
+                                                                        <button
+                                                                            type="button"
+                                                                            onClick={() => setSelectedImage(cert.previewUrl || cert.cfimage)}
+                                                                            className="px-2 py-1 sm:px-3 sm:py-1 bg-white rounded-full text-[9px] sm:text-xs font-bold text-gray-800 hover:bg-gray-100"
+                                                                        >
+                                                                            {t('certificates.view')}
+                                                                        </button>
+                                                                        <button
+                                                                            type="button"
+                                                                            onClick={() => {
+                                                                                const updated = [...certificates];
+                                                                                updated[index] = { ...updated[index], file: null, previewUrl: null, cfimage: "" }; // Full clear
+                                                                                setCertificates(updated);
+                                                                            }}
+                                                                            className="px-2 py-1 sm:px-3 sm:py-1 bg-white rounded-full text-[9px] sm:text-xs font-bold text-red-600 hover:bg-red-50"
+                                                                        >
+                                                                            {t('certificates.remove')}
+                                                                        </button>
+                                                                    </div>
+                                                                </div>
+                                                            )}
+                                                        </div>
+
+                                                        {/* Description */}
+                                                        <div className="flex flex-col gap-1 sm:gap-2">
+                                                            <label className="text-[10px] sm:text-sm font-medium text-gray-700 ml-1">{t('certificates.description')}</label>
+                                                            <textarea
+                                                                placeholder={t('certificates.description') || "Description"}
+                                                                value={cert.description || ""}
+                                                                maxLength={200}
+                                                                rows={5}
+                                                                onChange={(e) =>
+                                                                    updateObjectInArray(certificates, setCertificates, index, "description", e.target.value)
+                                                                }
+                                                                className={`w-full h-24 sm:h-full p-2 sm:p-3 text-[10px] sm:text-base border rounded-lg focus:outline-none transition bg-white resize-none ${validationErrors[index]?.description ? 'border-red-500 ring-1 ring-red-100' : 'border-gray-300 focus:ring-2 focus:ring-blue-500'}`}
+                                                            />
+                                                            {validationErrors[index]?.description && (
+                                                                <p className="text-red-500 text-[9px] sm:text-xs mt-1 sm:mt-1.5 flex items-center gap-1 sm:gap-1.5 font-medium animate-in slide-in-from-top-1">
+                                                                    <AlertCircle className="w-3 h-3 sm:w-[14px] sm:h-[14px]" />
+                                                                    {t('certificates.descriptionRequired') || "Description is required"}
+                                                                </p>
+                                                            )}
+                                                        </div>
+                                                    </div>
+
+                                                    <div className="flex justify-end pt-2">
                                                         <button
                                                             type="button"
-                                                            onClick={() => setSelectedImage(cert.previewUrl || cert.cfimage)}
-                                                            className="px-2 py-1 sm:px-3 sm:py-1 bg-white rounded-full text-[9px] sm:text-xs font-bold text-gray-800 hover:bg-gray-100"
+                                                            onClick={() => saveCertificateItem(index)}
+                                                            disabled={savingIds.has(index)}
+                                                            className="bg-blue-600 hover:bg-blue-700 text-white px-3 py-1.5 sm:px-4 sm:py-2 rounded-lg text-[10px] sm:text-sm font-medium flex items-center gap-1.5 sm:gap-2 transition-colors disabled:opacity-50"
                                                         >
-                                                            {t('certificates.view')}
-                                                        </button>
-                                                        <button
-                                                            type="button"
-                                                            onClick={() => {
-                                                                const updated = [...certificates];
-                                                                updated[index] = { ...updated[index], file: null, previewUrl: null, cfimage: "" }; // Full clear
-                                                                setCertificates(updated);
-                                                            }}
-                                                            className="px-2 py-1 sm:px-3 sm:py-1 bg-white rounded-full text-[9px] sm:text-xs font-bold text-red-600 hover:bg-red-50"
-                                                        >
-                                                            {t('certificates.remove')}
+                                                            {savingIds.has(index) ? <Loader size={12} className="animate-spin" /> : <CheckCheck className="w-3 h-3 sm:w-4 sm:h-4" />}
+                                                            {t('certificates.save') || "Save"}
                                                         </button>
                                                     </div>
                                                 </div>
                                             )}
                                         </div>
-
-                                        {/* Description */}
-                                        <div className="flex flex-col gap-1 sm:gap-2">
-                                            <label className="text-[10px] sm:text-sm font-medium text-gray-700 ml-1">{t('certificates.description')}</label>
-                                            <textarea
-                                                placeholder={t('certificates.description') || "Description"}
-                                                value={cert.description || ""}
-                                                maxLength={200}
-                                                rows={5}
-                                                onChange={(e) =>
-                                                    updateObjectInArray(certificates, setCertificates, index, "description", e.target.value)
-                                                }
-                                                className={`w-full h-24 sm:h-full p-2 sm:p-3 text-[10px] sm:text-base border rounded-lg focus:outline-none transition bg-white resize-none ${validationErrors[index]?.description ? 'border-red-500 ring-1 ring-red-100' : 'border-gray-300 focus:ring-2 focus:ring-blue-500'}`}
-                                            />
-                                            {validationErrors[index]?.description && (
-                                                <p className="text-red-500 text-[9px] sm:text-xs mt-1 sm:mt-1.5 flex items-center gap-1 sm:gap-1.5 font-medium animate-in slide-in-from-top-1">
-                                                    <AlertCircle className="w-3 h-3 sm:w-[14px] sm:h-[14px]" />
-                                                    {t('certificates.descriptionRequired') || "Description is required"}
-                                                </p>
-                                            )}
-                                        </div>
-                                    </div>
-
-                                    <div className="flex justify-end pt-2">
-                                        <button
-                                            type="button"
-                                            onClick={() => saveCertificateItem(index)}
-                                            disabled={savingIds.has(index)}
-                                            className="bg-blue-600 hover:bg-blue-700 text-white px-3 py-1.5 sm:px-4 sm:py-2 rounded-lg text-[10px] sm:text-sm font-medium flex items-center gap-1.5 sm:gap-2 transition-colors disabled:opacity-50"
-                                        >
-                                            {savingIds.has(index) ? <Loader size={12} className="animate-spin" /> : <CheckCheck className="w-3 h-3 sm:w-4 sm:h-4" />}
-                                            {t('certificates.save') || "Save"}
-                                        </button>
-                                    </div>
-                                </div>
-                            )}
+                                    )}
+                                </SortableItem>
+                            ))}
                         </div>
-                    ))}
-                </div>
+                    </SortableContext>
+                </DndContext>
 
                 <button
                     type="button"

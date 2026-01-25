@@ -104,7 +104,7 @@ export default function AuthButtons({ lang }) {
           <Menu />
         </span>
         {/* SETTING [] */}
-        <nav dir={userDetails?.displayLanguage === "ar" ? "rtl" : "ltr"}
+        <nav
           className={`overflow-hidden transition-all duration-500 text-white bg-gray-800 
           rounded-md w-60 right-3 top-14 container absolute flex flex-col  
           ${setting ? " max-h-0 pointer-events-none" : "ring-2 max-h-96 p-4 pointer-events-auto"}`}
