@@ -116,7 +116,7 @@ export default function Theme({ userData, setUserDetails }) {
 
       {/* Full Preview Modal */}
       {mounted && previewTheme !== null && createPortal(
-        <div className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/80 backdrop-blur-sm p-4 animate-in fade-in duration-200" onClick={() => setPreviewTheme(null)}>
+        <div dir={userData?.displayLanguage === 'ar' ? 'rtl' : 'ltr'} className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/80 backdrop-blur-sm p-4 animate-in fade-in duration-200" onClick={() => setPreviewTheme(null)}>
           <div
             className="relative w-full max-w-sm sm:max-w-md md:max-w-2xl bg-gray-900 rounded-xl shadow-2xl overflow-hidden flex flex-col max-h-[90vh]"
             onClick={(e) => e.stopPropagation()}
