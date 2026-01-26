@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import { getServerSession } from "next-auth/next";
-import { authOptions } from "../../../../../../lib/nextAuth";
+import { authOptions } from "../../../../auth/nextAuth";
 import axios from "axios";
 import jwt from "jsonwebtoken";
 

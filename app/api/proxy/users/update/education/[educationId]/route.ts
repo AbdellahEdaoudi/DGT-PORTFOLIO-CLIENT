@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 import { getServerSession } from "next-auth/next";
 import axios from "axios";
 import jwt from "jsonwebtoken";
-import { authOptions } from "../../../../../../../lib/nextAuth";
+import { authOptions } from "../../../../../auth/nextAuth";
 
 export async function DELETE(req: Request, props: { params: Promise<{ educationId: string }> }) {
   try {

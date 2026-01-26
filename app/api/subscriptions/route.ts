@@ -1,7 +1,7 @@
 // app/api/subscriptions/route.ts
 import { NextRequest, NextResponse } from "next/server";
 import axios from "axios";
-import { authOptions } from "../../../lib/nextAuth";
+import { authOptions } from "../auth/nextAuth";
 import { getServerSession } from "next-auth";
 
 export async function POST(req: NextRequest) {

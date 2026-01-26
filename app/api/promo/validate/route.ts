@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import axios from "axios";
 import { getServerSession } from "next-auth";
-import { authOptions } from "../../../../lib/nextAuth";
+import { authOptions } from "../../auth/nextAuth";
 
 export async function POST(req: NextRequest) {
   const session = await getServerSession(authOptions);

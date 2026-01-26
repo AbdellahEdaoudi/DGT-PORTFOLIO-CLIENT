@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 import { getServerSession } from "next-auth/next";
 import axios from "axios";
 import jwt from "jsonwebtoken";
-import { authOptions } from "../../../../../../../lib/nextAuth"; // Adjusted path manually based on depth
+import { authOptions } from "../../../../../auth/nextAuth"; // Adjusted path manually based on depth
 
 export async function PUT(req: Request) {
   try {

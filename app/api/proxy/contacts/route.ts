@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 import { getServerSession } from "next-auth/next";
 import jwt from "jsonwebtoken";
 import axios from "axios";
-import { authOptions } from "../../../../lib/nextAuth";
+import { authOptions } from "../../auth/nextAuth";
 
 export async function POST(req: Request) {
   const session = await getServerSession(authOptions);
@@ -21,7 +21,7 @@ export async function POST(req: Request) {
 
     const backendUrl = process.env.BACKEND_URL;
     const response = await axios.post(`${backendUrl}/contacts`, body, {
-      headers: {Authorization: `Bearer ${token}`},
+      headers: { Authorization: `Bearer ${token}` },
     });
 
     return NextResponse.json(response.data, { status: response.status });
