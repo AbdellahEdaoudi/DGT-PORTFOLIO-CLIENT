@@ -225,7 +225,7 @@ function QrcodeProfile({ userDetails, className, isOpen, onClose }) {
                 <div className="flex items-center gap-3 min-w-0">
                   <LinkIcon size={16} className="text-gray-400 shrink-0" />
                   <span className={`text-sm font-medium truncate ${copied ? "text-green-700" : "text-gray-600"}`}>
-                    {PORTFOLIO}
+                    {PORTFOLIO.replace(/^https?:\/\//, "")}
                   </span>
                 </div>
                 {copied ? (
@@ -248,7 +248,7 @@ function QrcodeProfile({ userDetails, className, isOpen, onClose }) {
                 <div className="flex items-center gap-3 min-w-0">
                   <LinkIcon size={16} className="text-gray-400 shrink-0" />
                   <span className={`text-sm font-medium truncate ${copied2 ? "text-green-700" : "text-gray-600"}`}>
-                    {PORTFOLIO_2}
+                    {PORTFOLIO_2.replace(/^https?:\/\//, "")}
                   </span>
                 </div>
                 {copied2 ? (
