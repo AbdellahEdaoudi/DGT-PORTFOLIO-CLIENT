@@ -14,7 +14,11 @@ export const metadata = {
   title: "DGT Portfolio - Build Your Personal Portfolio Online",
   description: "No code, no hassle. Build a clean, modern portfolio in minutes. Showcase your career, skills, projects, and work links like never before—leave a lasting impression and unlock new opportunities.",
   keywords: ["DGT Portfolio", "Portfolio Builder", "Personal Portfolio", "Showcase Skills", "Interactive Portfolio", "No Code Portfolio"],
-  manifest: "/site.webmanifest",
+  appleWebApp: {
+    capable: true,
+    statusBarStyle: "default",
+    title: "DGT Portfolio",
+  },
   icons: {
     icon: "/logo.png",
     shortcut: "/logo.png",
