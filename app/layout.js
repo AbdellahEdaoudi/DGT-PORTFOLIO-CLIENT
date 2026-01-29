@@ -20,9 +20,9 @@ export const metadata = {
     title: "DGT Portfolio",
   },
   icons: {
-    icon: "/logo.png",
-    shortcut: "/logo.png",
-    apple: "/logo.png",
+    icon: "/logo.jpg",
+    shortcut: "/logo.jpg",
+    apple: "/logo.jpg",
   },
   openGraph: {
     title: "Build Your Personal Portfolio Online - DGT Portfolio",
@@ -31,7 +31,7 @@ export const metadata = {
     siteName: "DGT Portfolio",
     images: [
       {
-        url: "/logo.png",
+        url: "/logo.jpg",
         alt: "DGT Portfolio Logo",
       },
     ],
@@ -43,7 +43,7 @@ export const metadata = {
     card: "summary_large_image",
     title: "Build Your Personal Portfolio Online - DGT Portfolio",
     description: "No code, no hassle. Build a clean, modern portfolio in minutes. Showcase your career, skills, projects, and work links like never before—leave a lasting impression and unlock new opportunities.",
-    images: ["/logo.png"],
+    images: ["/logo.jpg"],
   },
   alternates: {
     canonical: './',
@@ -72,7 +72,6 @@ export default function RootLayout({ children }) {
     <html className="scroll-smooth" lang="en">
       <head>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"></link>
-        <link rel="preload" href="/LogoinQrcode.png" as="image" />
       </head>
       <body className={`${prompt.className} min-h-screen scrollbar-none bg-gray-800 g-gradient-to-r from-blue-500 to-purple-500`}>
         {/* Structured Data Script */}
@@ -98,7 +97,7 @@ export default function RootLayout({ children }) {
                 "@type": "Organization",
                 "name": "DGT Portfolio",
                 "url": "https://dgtportfolio.com",
-                "logo": "https://dgtportfolio.com/logo.png",
+                "logo": "https://dgtportfolio.com/logo.jpg",
                 "sameAs": [
                   "https://twitter.com/dgtportfolio",
                   "https://www.linkedin.com/company/dgtportfolio"

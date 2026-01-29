@@ -16,7 +16,7 @@ export default function GlobalLoader() {
                     {/* Logo */}
                     <div className="relative w-16 h-16">
                         <Image
-                            src="/LogoinQrcode.png"
+                            src="/Qrimage.jpg"
                             alt="DGT Portfolio Logo"
                             width={80}
                             height={80}

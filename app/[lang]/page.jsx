@@ -32,7 +32,7 @@ export async function generateMetadata(props) {
             type: "website",
             images: [
                 {
-                    url: "https://dgtportfolio.com/logo.png",
+                    url: "https://dgtportfolio.com/logo.jpg",
                     alt: "DGT Portfolio - Personal Portfolio Builder",
                 },
             ],
@@ -41,7 +41,7 @@ export async function generateMetadata(props) {
             card: "summary_large_image",
             title: meta.twitter.title,
             description: meta.twitter.description,
-            images: ["https://dgtportfolio.com/logo.png"],
+            images: ["https://dgtportfolio.com/logo.jpg"],
             creator: "@dgtportfolio",
         },
         alternates: {

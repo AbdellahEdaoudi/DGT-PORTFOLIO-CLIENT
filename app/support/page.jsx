@@ -125,7 +125,7 @@ export default function ContactForm() {
           <div className="lg:flex ">
             <div className="lg:w-1/2 bg-teal-800 p-4 lg:p-12">
               <Link href={"/"}>
-                <Image src={"/LogoinQrcode.png"} alt='LOGO' width={130} height={130} className="bg-white p-2 rounded-lg mb-5" />
+                <Image src={"/Logowbg.png"} alt='LOGO' width={130} height={130} className="bg-white p-2 rounded-lg mb-5" />
               </Link>
               <h2 className="text-3xl font-bold text-white mb-6">{t('support.getInTouch')}</h2>
               <p className="text-teal-100 mb-6">{t('support.weLoveToHear')}</p>

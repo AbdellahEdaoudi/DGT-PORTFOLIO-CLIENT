@@ -19,12 +19,6 @@ function QrcodeProfile({ userDetails, className, isOpen, onClose }) {
   const t = getTranslation(userDetails?.displayLanguage || 'en');
   const tp = (key) => t(`qrcode.${key}`);
 
-  // Preload the QR code logo to ensure it appears instantly
-  useEffect(() => {
-    const img = new Image();
-    img.src = "/LogoinQrcode.png";
-  }, []);
-
   // Lock body scroll when modal is open
   useEffect(() => {
     if (showModal) {
@@ -172,9 +166,9 @@ function QrcodeProfile({ userDetails, className, isOpen, onClose }) {
                   includeMargin={true}
                   level="H"
                   imageSettings={
-                    "/LogoinQrcode.png"
+                    "/Qrimage.jpg"
                       ? {
-                        src: "/LogoinQrcode.png",
+                        src: "/Qrimage.jpg",
                         x: undefined,
                         y: undefined,
                         height: 80,
@@ -198,9 +192,9 @@ function QrcodeProfile({ userDetails, className, isOpen, onClose }) {
                   includeMargin={true}
                   level="H"
                   imageSettings={
-                    "/LogoinQrcode.png"
+                    "/Qrimage.jpg"
                       ? {
-                        src: "/LogoinQrcode.png",
+                        src: "/Qrimage.jpg",
                         x: undefined,
                         y: undefined,
                         height: 40,

@@ -11,23 +11,37 @@ export default function manifest(): MetadataRoute.Manifest {
         theme_color: '#7c3aed', // Purple-600 like
         icons: [
             {
-                src: '/logo.png',
-                sizes: '512x512',
-                type: 'image/png',
+                src: '/favicon.ico',
+                sizes: '333x273',
+                type: 'image/x-icon',
+            },
+            {
+                src: '/logo.jpg',
+                sizes: '526x527',
+                type: 'image/jpeg',
                 purpose: 'maskable',
             },
             {
-                src: '/logo.png',
-                sizes: '192x192',
-                type: 'image/png',
-                purpose: 'any',
-            },
-            {
-                src: '/LogoinQrcode.png',
-                sizes: '512x512',
-                type: 'image/png',
+                src: '/logo.jpg',
+                sizes: '526x527',
+                type: 'image/jpeg',
                 purpose: 'any',
             }
         ],
+        screenshots: [
+            {
+                src: '/logo.jpg', // Temporary placeholder, should be a screenshot of the app
+                sizes: '526x527',
+                type: 'image/jpeg',
+                form_factor: 'wide',
+                label: 'Desktop View'
+            },
+            {
+                src: '/logo.jpg', // Temporary placeholder
+                sizes: '526x527',
+                type: 'image/jpeg',
+                label: 'Mobile View'
+            }
+        ]
     }
 }
