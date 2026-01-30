@@ -235,6 +235,8 @@
         "preview": "Aperçu",
         "close": "Fermer",
         "selectThisTheme": "Choisir ce thème",
-        "themeLabel": "Thème"
+        "themeLabel": "Thème",
+        "next": "Suivant",
+        "previous": "Précédent"
     }
 }

@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { toast } from "react-toastify";
-import { Loader, CheckCheck } from "../../components/Icons";
+import { Loader, CheckCheck, ArrowLeft, ArrowRight } from "../../components/Icons";
 import Image from "next/image";
 import { createPortal } from "react-dom";
 import { getTranslation } from '../../translations/update-profile'
@@ -18,6 +18,35 @@ export default function Theme({ userData, setUserDetails }) {
   useEffect(() => {
     setMounted(true);
   }, []);
+
+  const themes = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13];
+
+  const handleNextTheme = () => {
+    const currentIndex = themes.indexOf(previewTheme);
+    const nextIndex = (currentIndex + 1) % themes.length;
+    setPreviewTheme(themes[nextIndex]);
+  };
+
+  const handlePrevTheme = () => {
+    const currentIndex = themes.indexOf(previewTheme);
+    const prevIndex = (currentIndex - 1 + themes.length) % themes.length;
+    setPreviewTheme(themes[prevIndex]);
+  };
+
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (previewTheme === null) return;
+      if (e.key === "ArrowRight") {
+        userData?.displayLanguage === 'ar' ? handlePrevTheme() : handleNextTheme();
+      }
+      if (e.key === "ArrowLeft") {
+        userData?.displayLanguage === 'ar' ? handleNextTheme() : handlePrevTheme();
+      }
+      if (e.key === "Escape") setPreviewTheme(null);
+    };
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [previewTheme, userData?.displayLanguage]);
 
   const handleSave = async () => {
     if (!pendingTheme) return;
@@ -118,7 +147,7 @@ export default function Theme({ userData, setUserDetails }) {
       {mounted && previewTheme !== null && createPortal(
         <div dir={userData?.displayLanguage === 'ar' ? 'rtl' : 'ltr'} className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/80 backdrop-blur-sm p-4 animate-in fade-in duration-200" onClick={() => setPreviewTheme(null)}>
           <div
-            className="relative w-full max-w-sm sm:max-w-md md:max-w-2xl bg-gray-900 rounded-xl shadow-2xl overflow-hidden flex flex-col max-h-[90vh]"
+            className="relative w-full max-w-[95%] sm:max-w-md md:max-w-3xl bg-gray-900 rounded-xl shadow-2xl overflow-hidden flex flex-col h-[60vh] md:h-[85vh]"
             onClick={(e) => e.stopPropagation()}
           >
             <div className="flex items-center justify-between p-3 sm:p-4 border-b border-gray-800 bg-gray-900 z-10 shrink-0">
@@ -131,7 +160,47 @@ export default function Theme({ userData, setUserDetails }) {
               </button>
             </div>
 
-            <div className="overflow-y-auto flex-1 p-1 bg-gray-900 custom-scrollbar">
+            <div className="overflow-y-auto flex-1 p-1 bg-gray-900 custom-scrollbar relative group/modal">
+              {/* Navigation Arrows */}
+              <button
+                onClick={(e) => {
+                  e.stopPropagation();
+                  handlePrevTheme();
+                }}
+                className="fixed left-4 top-1/2 -translate-y-1/2 z-[10000] p-3 bg-black/50 hover:bg-black/80 text-white rounded-full transition-all backdrop-blur-md border border-white/10 shadow-xl hidden md:flex items-center justify-center hover:scale-110 active:scale-95"
+                title={t('theme.previous') || "Previous"}
+              >
+                <ArrowLeft size={28} />
+              </button>
+
+              <button
+                onClick={(e) => {
+                  e.stopPropagation();
+                  handleNextTheme();
+                }}
+                className="fixed right-4 top-1/2 -translate-y-1/2 z-[10000] p-3 bg-black/50 hover:bg-black/80 text-white rounded-full transition-all backdrop-blur-md border border-white/10 shadow-xl hidden md:flex items-center justify-center hover:scale-110 active:scale-95"
+                title={t('theme.next') || "Next"}
+              >
+                <ArrowRight size={28} />
+              </button>
+
+              {/* Mobile Navigation Bar */}
+              <div className="md:hidden flex justify-between items-center px-4 py-2 bg-gray-800/50 backdrop-blur-md sticky top-0 z-20 border-b border-white/5">
+                <button
+                  onClick={handlePrevTheme}
+                  className="flex items-center gap-1 text-gray-300 hover:text-white text-sm font-medium"
+                >
+                  <ArrowLeft size={18} /> {t('theme.previous') || "Prev"}
+                </button>
+                <span className="text-gray-400 text-xs font-mono">{themes.indexOf(previewTheme) + 1} / {themes.length}</span>
+                <button
+                  onClick={handleNextTheme}
+                  className="flex items-center gap-1 text-gray-300 hover:text-white text-sm font-medium"
+                >
+                  {t('theme.next') || "Next"} <ArrowRight size={18} />
+                </button>
+              </div>
+
               <div className="relative w-full">
                 <Image
                   src={`/themes/theme${previewTheme}.png`}

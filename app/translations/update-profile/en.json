@@ -236,6 +236,8 @@
         "preview": "Preview",
         "close": "Close",
         "selectThisTheme": "Select This Theme",
-        "themeLabel": "Theme"
+        "themeLabel": "Theme",
+        "next": "Next",
+        "previous": "Previous"
     }
 }

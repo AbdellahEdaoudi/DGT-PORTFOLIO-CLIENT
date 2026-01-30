@@ -235,6 +235,8 @@
         "preview": "Podgląd",
         "close": "Zamknij",
         "selectThisTheme": "Wybierz ten motyw",
-        "themeLabel": "Motyw"
+        "themeLabel": "Motyw",
+        "next": "Następny",
+        "previous": "Poprzedni"
     }
 }

@@ -235,6 +235,8 @@
         "preview": "プレビュー",
         "close": "閉じる",
         "selectThisTheme": "このテーマを選択",
-        "themeLabel": "テーマ"
+        "themeLabel": "テーマ",
+        "next": "次へ",
+        "previous": "前へ"
     }
 }

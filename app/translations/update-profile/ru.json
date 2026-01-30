@@ -235,6 +235,8 @@
         "preview": "Предпросмотр",
         "close": "Закрыть",
         "selectThisTheme": "Выбрать эту тему",
-        "themeLabel": "Тема"
+        "themeLabel": "Тема",
+        "next": "Следующий",
+        "previous": "Предыдущий"
     }
 }

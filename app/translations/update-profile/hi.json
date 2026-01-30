@@ -235,6 +235,8 @@
         "preview": "पूर्वावलोकन",
         "close": "बंद करें",
         "selectThisTheme": "यह थीम चुनें",
-        "themeLabel": "थीम"
+        "themeLabel": "थीम",
+        "next": "अगला",
+        "previous": "पिछला"
     }
 }

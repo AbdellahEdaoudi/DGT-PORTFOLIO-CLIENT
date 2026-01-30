@@ -235,6 +235,8 @@
         "preview": "Voorbeeld",
         "close": "Sluiten",
         "selectThisTheme": "Selecteer dit thema",
-        "themeLabel": "Thema"
+        "themeLabel": "Thema",
+        "next": "Volgende",
+        "previous": "Vorige"
     }
 }

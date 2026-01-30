@@ -235,6 +235,8 @@
         "preview": "Pratinjau",
         "close": "Tutup",
         "selectThisTheme": "Pilih Tema Ini",
-        "themeLabel": "Tema"
+        "themeLabel": "Tema",
+        "next": "Berikutnya",
+        "previous": "Sebelumnya"
     }
 }

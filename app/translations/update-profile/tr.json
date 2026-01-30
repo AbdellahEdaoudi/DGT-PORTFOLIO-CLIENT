@@ -235,6 +235,8 @@
         "preview": "Önizleme",
         "close": "Kapat",
         "selectThisTheme": "Bu Temayı Seç",
-        "themeLabel": "Tema"
+        "themeLabel": "Tema",
+        "next": "Sonraki",
+        "previous": "Önceki"
     }
 }

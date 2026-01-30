@@ -235,6 +235,8 @@
         "preview": "미리보기",
         "close": "닫기",
         "selectThisTheme": "이 테마 선택",
-        "themeLabel": "테마"
+        "themeLabel": "테마",
+        "next": "다음",
+        "previous": "이전"
     }
 }

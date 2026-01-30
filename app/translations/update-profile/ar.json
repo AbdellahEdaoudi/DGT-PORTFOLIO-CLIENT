@@ -236,6 +236,8 @@
         "preview": "معاينة",
         "close": "إغلاق",
         "selectThisTheme": "اختيار هذا القالب",
-        "themeLabel": "المظهر"
+        "themeLabel": "المظهر",
+        "next": "التالي",
+        "previous": "السابق"
     }
 }
