@@ -1,6 +1,28 @@
 import LandingPage from "../components/LandingPage/LandingPage"
 import { getMetadata } from "../translations/metadata"
 
+
+export async function generateStaticParams() {
+    return [
+        { lang: 'en' },
+        { lang: 'es' },
+        { lang: 'fr' },
+        { lang: 'ar' },
+        { lang: 'de' },
+        { lang: 'ru' },
+        { lang: 'ja' },
+        { lang: 'zh' },
+        { lang: 'nl' },
+        { lang: 'pt' },
+        { lang: 'it' },
+        { lang: 'tr' },
+        { lang: 'ko' },
+        { lang: 'hi' },
+        { lang: 'id' },
+        { lang: 'pl' },
+    ];
+}
+
 export async function generateMetadata(props) {
     const params = await props.params;
     const meta = await getMetadata(params.lang);
