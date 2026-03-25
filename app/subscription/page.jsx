@@ -15,22 +15,65 @@ export default function SubscriptionPage() {
   const { EmailUser, userDetails } = useContext(MyContext);
   const [promoCode, setPromoCode] = useState("");
   const [appliedPromo, setAppliedPromo] = useState(null);
+  const [activeSubscription, setActiveSubscription] = useState(null);
+  const [actionLoading, setActionLoading] = useState(false);
+  const [showCancelModal, setShowCancelModal] = useState(false);
 
   useEffect(() => {
-    fetch("/api/paypal/plans")
-      .then((res) => res.json())
-      .then((data) => {
-        setPlans(data.plans);
+    const fetchData = async () => {
+      setLoading(true);
+      try {
+        let hasActiveSub = false;
+        
+        // 1. Check for Active Subscription first
+        if (EmailUser) {
+          try {
+            const res = await axios.get(`/api/subscriptions/user/${EmailUser}`);
+            if (res.data && res.data.success) {
+              setActiveSubscription(res.data.data);
+              hasActiveSub = true;
+            }
+          } catch (err) {
+            console.log("No active subscription found.");
+          }
+        }
+
+        // 2. Fetch plans ONLY if the user doesn't have an active subscription
+        if (!hasActiveSub) {
+          const plansRes = await fetch("/api/paypal/plans");
+          const plansData = await plansRes.json();
+          setPlans(plansData.plans);
+        }
+      } catch (err) {
+        console.error("Error fetching data:", err);
+      } finally {
         setLoading(false);
-      }).catch((err) => {
-        console.error("Error fetching plans:", err);
-        setLoading(false);
-      });
-  }, []);
+      }
+    };
+
+    fetchData();
+  }, [EmailUser]);
+
+  const confirmCancelSubscription = async () => {
+    try {
+      setActionLoading(true);
+      const res = await axios.post(`/api/subscriptions/${activeSubscription._id}/cancel`);
+      if (res.data.success) {
+        toast.success(t('subscription.cancelSuccess'));
+        setActiveSubscription({ ...activeSubscription, status: "CANCELLED" });
+        setShowCancelModal(false);
+      }
+    } catch (err) {
+      console.error(err);
+      toast.error(t('subscription.cancelFailed'));
+    } finally {
+      setActionLoading(false);
+    }
+  };
 
   const handleApplyPromo = async () => {
     if (!promoCode.trim()) {
-      toast.error("Please enter a promo code");
+      toast.error(t('subscription.promoReq'));
       return;
     }
 
@@ -40,9 +83,9 @@ export default function SubscriptionPage() {
       if (res.data.valid) {
         setAppliedPromo(promoCode);
         setPlans(res.data.plans);
-        toast.success(`Promo code "${promoCode}" applied!`);
+        toast.success(t('subscription.promoApplied'));
       } else {
-        toast.error(res.data.msg || "Invalid promo code");
+        toast.error(res.data.msg || t('subscription.invalidPromo'));
         setAppliedPromo(null);
       }
     } catch (error) {
@@ -120,94 +163,173 @@ export default function SubscriptionPage() {
         <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-black flex flex-col pb-10 md:pb-0">
           <Header lang={userDetails?.displayLanguage} />
           {/* Promo Code Section */}
-          <div dir={userDetails?.displayLanguage === 'ar' ? 'rtl' : 'ltr'} className="flex flex-col items-center justify-center my-8 gap-2">
-            <div className="flex items-center shadow-lg shadow-purple-500/10 rounded-full ">
-              <input
-                type="text"
-                placeholder={t('subscription.placeholder')}
-                maxLength={30}
-                className={`w-56 md:w-64 bg-slate-800/80 text-white border border-r-0 border-purple-500/30 
-                  ${userDetails?.displayLanguage === 'ar' ? 'rounded-r-full' : 'rounded-l-full'} px-6 py-3 focus:outline-none focus:border-purple-500  placeholder-gray-400 transition-all`}
-                value={promoCode}
-                onChange={(e) => setPromoCode(e.target.value)}
-              />
-              <button
-                onClick={handleApplyPromo}
-                disabled={promoLoading}
-                className={`bg-gradient-to-r from-purple-600 to-cyan-600 hover:from-purple-500 hover:to-cyan-500 text-white px-8 py-3 
-                  ${userDetails?.displayLanguage === 'ar' ? 'rounded-l-full' : 'rounded-r-full'} font-bold transition-all duration-300 hover:shadow-lg hover:shadow-purple-500/25 ${promoLoading ? "opacity-50 cursor-not-allowed" : ""}`}
-              >
-                {promoLoading ? (
-                  <div className="flex items-center gap-2">
-                    <Loader className="animate-spin" /> {t('subscription.verifyingBtn')}
-                  </div>
-                ) : (
-                  t('subscription.applyBtn')
-                )}
-              </button>
-            </div>
-            {appliedPromo && (
-              <p className="text-green-400 text-sm font-medium animate-pulse">
-                ✓ Code {appliedPromo} applied
-              </p>
-            )}
-          </div>
-
-          <div dir={userDetails?.displayLanguage === 'ar' ? 'rtl' : 'ltr'} className="mx-auto grid grid-cols-1  md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {uiPlans.map((uiPlan, index) => {
-              const plan = plans[index];
-              if (!plan) return null;
-
-              return (
-                <div key={index} className={`relative p-8 rounded-3xl border transition-transform duration-300 hover:scale-105 shadow-lg ${uiPlan.highlight
-                  ? "bg-gradient-to-br from-cyan-500/20 to-purple-500/20 border-cyan-400/50 shadow-lg shadow-cyan-500/20 md:scale-105"
-                  : "bg-slate-800/50 border-purple-500/20 hover:border-purple-400/50 hover:bg-purple-500/10"
-                  }`}>
-                  {uiPlan.highlight && (
-                    <div className="absolute -top-4 left-1/2 -translate-x-1/2">
-                      <span className="bg-gradient-to-r from-cyan-400 to-purple-500 text-black px-4 py-1 rounded-full text-sm font-semibold">
-                        {t('subscription.recommended')}
-                      </span>
+          {(!activeSubscription || activeSubscription.status !== "ACTIVE") && (
+            <div dir={userDetails?.displayLanguage === 'ar' ? 'rtl' : 'ltr'} className="flex flex-col items-center justify-center my-8 gap-2">
+              <div className="flex items-center shadow-lg shadow-purple-500/10 rounded-full ">
+                <input
+                  type="text"
+                  placeholder={t('subscription.placeholder')}
+                  maxLength={30}
+                  className={`w-56 md:w-64 bg-slate-800/80 text-white border border-r-0 border-purple-500/30 
+                    ${userDetails?.displayLanguage === 'ar' ? 'rounded-r-full' : 'rounded-l-full'} px-6 py-3 focus:outline-none focus:border-purple-500  placeholder-gray-400 transition-all`}
+                  value={promoCode}
+                  onChange={(e) => setPromoCode(e.target.value)}
+                />
+                <button
+                  onClick={handleApplyPromo}
+                  disabled={promoLoading}
+                  className={`bg-gradient-to-r from-purple-600 to-cyan-600 hover:from-purple-500 hover:to-cyan-500 text-white px-8 py-3 
+                    ${userDetails?.displayLanguage === 'ar' ? 'rounded-l-full' : 'rounded-r-full'} font-bold transition-all duration-300 hover:shadow-lg hover:shadow-purple-500/25 ${promoLoading ? "opacity-50 cursor-not-allowed" : ""}`}
+                >
+                  {promoLoading ? (
+                    <div className="flex items-center gap-2">
+                      <Loader className="animate-spin" /> {t('subscription.verifyingBtn')}
                     </div>
+                  ) : (
+                    t('subscription.applyBtn')
                   )}
-                  <h3 className="text-2xl font-extrabold mb-2 text-white">{uiPlan.name}</h3>
-                  <p className="text-gray-500 mb-6">{uiPlan.description}</p>
-                  <div className="mb-8">
-                    <div className="flex items-baseline gap-2">
-                      <span className="text-5xl font-bold bg-gradient-to-r from-cyan-500 to-purple-500 bg-clip-text text-transparent">
-                        {uiPlan.price}
-                      </span>
-                      <span className="text-gray-400">{uiPlan.period}</span>
-                    </div>
-                  </div>
-                  <div className="relative w-full min-h-[100px]">
-                    <div className="absolute inset-0 bg-slate-700/30 animate-pulse rounded-lg" />
-                    <div className="relative z-10">
-                      <PayPalButtons
-                        style={{ layout: "vertical", color: "gold", shape: "rect", label: "subscribe", tagline: false }}
-                        createSubscription={(data, actions) => { return actions.subscription.create({ plan_id: plan.id, application_context: { shipping_preference: "NO_SHIPPING" } }) }}
-                        onError={(err) => console.error("PayPal Error:", err)}
-                        onApprove={async (data) => {
-                          try {
-                            await axios.post("/api/subscriptions", {
-                              userEmail: EmailUser,
-                              planId: plan.id,
-                              nameplan: plan.name,
-                              subscriptionID: data.subscriptionID,
-                              promoCode: appliedPromo,
-                            });
-                          } catch (err) {
-                            console.error("Error saving subscription:", err.response?.data || err.message);
-                            alert("An error occurred while saving the subscription. Please try again or contact support.");
-                          }
-                          window.location.href = "/success"
-                        }} />
-                    </div>
-                  </div>
+                </button>
+              </div>
+              {appliedPromo && (
+                <p className="text-green-400 text-sm font-medium animate-pulse">
+                  ✓ Code {appliedPromo} applied
+                </p>
+              )}
+            </div>
+          )}
+
+          {activeSubscription && activeSubscription.status === "ACTIVE" ? (
+             <div className="max-w-2xl mx-auto w-full px-6 mb-12 mt-10">
+               <div className="bg-gradient-to-br from-purple-900/40 to-slate-900/60 border border-purple-500/30 rounded-3xl p-8 backdrop-blur-sm shadow-xl relative overflow-hidden text-center md:text-start">
+                 <div className="absolute top-0 right-0 w-32 h-32 bg-purple-500/20 rounded-full blur-3xl" />
+                 
+                 <div className="flex flex-col md:flex-row items-center justify-between gap-6 relative z-10">
+                   <div>
+                     <span className="inline-block px-3 py-1 bg-green-500/20 text-green-400 border border-green-500/30 rounded-full text-xs font-bold tracking-wider mb-4">
+                       {t('subscription.activeSubscription')}
+                     </span>
+                     <h2 className="text-3xl font-bold text-white mb-2">{activeSubscription.nameplan}</h2>
+                     <p className="text-gray-400 max-w-sm">
+                       {t('subscription.portfolioVisible')}
+                     </p>
+                     
+                     {activeSubscription.expiresAt && (
+                       <p className="text-sm text-purple-300 mt-4 font-medium">
+                         {t('subscription.renewalDate')} {new Date(activeSubscription.expiresAt).toLocaleDateString()}
+                       </p>
+                     )}
+                   </div>
+                   
+                   <div className="flex-shrink-0">
+                     <button 
+                        onClick={() => setShowCancelModal(true)}
+                        disabled={actionLoading}
+                        className="px-6 py-3 bg-red-500/10 hover:bg-red-500/20 border border-red-500/50 text-red-400 rounded-full font-semibold transition-all shadow-lg shadow-red-500/10 disabled:opacity-50 flex items-center gap-2"
+                     >
+                        {actionLoading && <Loader className="w-4 h-4 animate-spin" />}
+                        {t('subscription.cancelSub')}
+                     </button>
+                   </div>
+                 </div>
+               </div>
+             </div>
+          ) : (
+             <div dir={userDetails?.displayLanguage === 'ar' ? 'rtl' : 'ltr'} className="mx-auto grid grid-cols-1  md:grid-cols-2 lg:grid-cols-3 gap-8">
+               {uiPlans.map((uiPlan, index) => {
+                 const plan = plans[index];
+                 if (!plan) return null;
+
+                 return (
+                   <div key={index} className={`relative p-8 rounded-3xl border transition-transform duration-300 hover:scale-105 shadow-lg ${uiPlan.highlight
+                     ? "bg-gradient-to-br from-cyan-500/20 to-purple-500/20 border-cyan-400/50 shadow-lg shadow-cyan-500/20 md:scale-105"
+                     : "bg-slate-800/50 border-purple-500/20 hover:border-purple-400/50 hover:bg-purple-500/10"
+                     }`}>
+                     {uiPlan.highlight && (
+                       <div className="absolute -top-4 left-1/2 -translate-x-1/2">
+                         <span className="bg-gradient-to-r from-cyan-400 to-purple-500 text-black px-4 py-1 rounded-full text-sm font-semibold">
+                           {t('subscription.recommended')}
+                         </span>
+                       </div>
+                     )}
+                     <h3 className="text-2xl font-extrabold mb-2 text-white">{uiPlan.name}</h3>
+                     <p className="text-gray-500 mb-6">{uiPlan.description}</p>
+                     <div className="mb-8">
+                       <div className="flex items-baseline gap-2">
+                         <span className="text-5xl font-bold bg-gradient-to-r from-cyan-500 to-purple-500 bg-clip-text text-transparent">
+                           {uiPlan.price}
+                         </span>
+                         <span className="text-gray-400">{uiPlan.period}</span>
+                       </div>
+                     </div>
+                     <div className="relative w-full min-h-[100px]">
+                       <div className="absolute inset-0 bg-slate-700/30 animate-pulse rounded-lg" />
+                       <div className="relative z-10">
+                         <PayPalButtons
+                           style={{ layout: "vertical", color: "gold", shape: "rect", label: "subscribe", tagline: false }}
+                           createSubscription={(data, actions) => { return actions.subscription.create({ plan_id: plan.id, application_context: { shipping_preference: "NO_SHIPPING" } }) }}
+                           onError={(err) => console.error("PayPal Error:", err)}
+                           onApprove={async (data) => {
+                             try {
+                               await axios.post("/api/subscriptions", {
+                                 userEmail: EmailUser,
+                                 planId: plan.id,
+                                 nameplan: plan.name,
+                                 subscriptionID: data.subscriptionID,
+                                 promoCode: appliedPromo,
+                               });
+                             } catch (err) {
+                               console.error("Error saving subscription:", err.response?.data || err.message);
+                               alert("An error occurred while saving the subscription. Please try again or contact support.");
+                             }
+                             window.location.href = "/success"
+                           }} />
+                       </div>
+                     </div>
+                   </div>
+                 );
+               })}
+             </div>
+          )}
+          
+          {showCancelModal && (
+            <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-sm p-4">
+              <div 
+                dir={userDetails?.displayLanguage === 'ar' ? 'rtl' : 'ltr'} 
+                className="bg-slate-900 border border-red-500/30 rounded-3xl p-8 max-w-md w-full shadow-2xl shadow-red-500/20 transform animate-in zoom-in-95 duration-200"
+              >
+                <div className="flex items-center justify-center w-16 h-16 rounded-full bg-red-500/10 mb-6 mx-auto">
+                  <svg className="w-8 h-8 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path>
+                  </svg>
                 </div>
-              );
-            })}
-          </div>
+                <h3 className="text-2xl font-bold text-white text-center mb-2">
+                   {t('subscription.confirmCancel')}
+                 </h3>
+                 <p className="text-gray-400 text-center mb-8">
+                   {t('subscription.cancelWarning')}
+                 </p>
+                
+                <div className="flex flex-col gap-3">
+                   <button 
+                     onClick={confirmCancelSubscription}
+                     disabled={actionLoading}
+                     className="w-full px-6 py-3 bg-red-600 hover:bg-red-700 text-white rounded-full font-bold transition-all shadow-lg flex justify-center items-center gap-2 disabled:opacity-50"
+                   >
+                     {actionLoading && <Loader className="w-5 h-5 animate-spin" />}
+                     {t('subscription.yesCancel')}
+                   </button>
+                   <button 
+                     onClick={() => setShowCancelModal(false)}
+                     disabled={actionLoading}
+                     className="w-full px-6 py-3 bg-slate-800 hover:bg-slate-700 text-gray-300 rounded-full font-bold transition-all disabled:opacity-50"
+                   >
+                     {t('subscription.keepSub')}
+                   </button>
+                </div>
+              </div>
+            </div>
+          )}
+
         </div>
       )}
     </PayPalScriptProvider>

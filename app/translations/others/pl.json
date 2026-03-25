@@ -108,6 +108,19 @@
         "recommended": "Polecane",
         "placeholder": "Kod Promocyjny",
         "applyBtn": "Zastosuj",
-        "verifyingBtn": "Weryfikacja..."
+        "verifyingBtn": "Weryfikacja...",
+        "activeSubscription": "AKTYWNA SUBSKRYPCJA",
+        "portfolioVisible": "Dzięki tej subskrypcji Twoje portfolio jest obecnie widoczne dla odwiedzających.",
+        "renewalDate": "Data Odnowienia/Wygaśnięcia:",
+        "cancelSub": "Anuluj Subskrypcję",
+        "confirmCancel": "Potwierdź Anulowanie",
+        "cancelWarning": "Czy na pewno chcesz anulować subskrypcję? Twoje portfolio nie będzie już widoczne dla odwiedzających po zakończeniu bieżącego cyklu.",
+        "yesCancel": "Tak, anuluj subskrypcję",
+        "keepSub": "Zachowaj moją subskrypcję",
+        "cancelSuccess": "Subskrypcja została pomyślnie anulowana.",
+        "cancelFailed": "Nie udało się anulować subskrypcji.",
+        "promoReq": "Podaj kod promocyjny",
+        "promoApplied": "Kod promocyjny został zastosowany!",
+        "invalidPromo": "Nieprawidłowy kod promocyjny"
     }
 }

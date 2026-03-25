@@ -108,6 +108,19 @@
         "recommended": "Recomendado",
         "placeholder": "Código Promocional",
         "applyBtn": "Aplicar",
-        "verifyingBtn": "Verificando..."
+        "verifyingBtn": "Verificando...",
+        "activeSubscription": "ASSINATURA ATIVA",
+        "portfolioVisible": "O seu portfólio está atualmente visível para os visitantes graças a esta assinatura.",
+        "renewalDate": "Data de Renovação/Expiração:",
+        "cancelSub": "Cancelar Assinatura",
+        "confirmCancel": "Confirmar Cancelamento",
+        "cancelWarning": "Tem a certeza absoluta de que deseja cancelar a sua assinatura? O seu portfólio deixará de estar visível para os visitantes quando o seu ciclo atual terminar.",
+        "yesCancel": "Sim, cancelar assinatura",
+        "keepSub": "Manter a minha assinatura",
+        "cancelSuccess": "Assinatura cancelada com sucesso.",
+        "cancelFailed": "Falha ao cancelar a assinatura.",
+        "promoReq": "Por favor, insira um código promocional",
+        "promoApplied": "Código promocional aplicado!",
+        "invalidPromo": "Código promocional inválido"
     }
 }

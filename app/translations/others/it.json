@@ -108,6 +108,19 @@
         "recommended": "Consigliato",
         "placeholder": "Codice Promo",
         "applyBtn": "Applica",
-        "verifyingBtn": "Verifica in corso..."
+        "verifyingBtn": "Verifica in corso...",
+        "activeSubscription": "ABBONAMENTO ATTIVO",
+        "portfolioVisible": "Il tuo portfolio è attualmente visibile ai visitatori grazie a questo abbonamento.",
+        "renewalDate": "Data di Rinnovo/Scadenza:",
+        "cancelSub": "Annulla Abbonamento",
+        "confirmCancel": "Conferma Annullamento",
+        "cancelWarning": "Sei assolutamente sicuro di voler annullare il tuo abbonamento? Il tuo portfolio non sarà più visibile ai visitatori al termine del ciclo attuale.",
+        "yesCancel": "Sì, annulla abbonamento",
+        "keepSub": "Mantieni il mio abbonamento",
+        "cancelSuccess": "Abbonamento annullato con successo.",
+        "cancelFailed": "Impossibile annullare l'abbonamento.",
+        "promoReq": "Inserisci un codice promozionale",
+        "promoApplied": "Codice promozionale applicato!",
+        "invalidPromo": "Codice promozionale non valido"
     }
 }

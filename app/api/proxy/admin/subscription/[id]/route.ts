@@ -38,3 +38,30 @@ export async function DELETE(
     );
   }
 }
+
+// POST to sync subscription with PayPal
+export async function POST(
+  req: Request,
+  { params }: { params: Promise<{ id: string }> }
+) {
+  const session = await getServerSession(authOptions);
+
+  if (!session?.user?.email || session?.user?.email !== process.env.EMAIL) {
+    return NextResponse.json({ message: "Unauthorized" }, { status: 401 });
+  }
+
+  const { id } = await params;
+
+  try {
+    const backendUrl = process.env.BACKEND_URL;
+    const response = await axios.post(`${backendUrl}/api/subscriptions/${id}/sync`);
+
+    return NextResponse.json(response.data, { status: response.status });
+  } catch (error: any) {
+    console.error("Error syncing subscription:", error.response?.data || error.message);
+    return NextResponse.json(
+      { message: error.response?.data?.message || "Server error syncing" },
+      { status: error.response?.status || 500 }
+    );
+  }
+}

@@ -108,6 +108,19 @@
         "recommended": "推荐",
         "placeholder": "促销代码",
         "applyBtn": "应用",
-        "verifyingBtn": "正在验证..."
+        "verifyingBtn": "正在验证...",
+        "activeSubscription": "活跃订阅",
+        "portfolioVisible": "由于此订阅，您的作品集当前对访问者可见。",
+        "renewalDate": "续订/到期日期：",
+        "cancelSub": "取消订阅",
+        "confirmCancel": "确认取消",
+        "cancelWarning": "您绝对确定要取消订阅吗？当前周期结束后，访问者将无法再看到您的作品集。",
+        "yesCancel": "是的，取消订阅",
+        "keepSub": "保留我的订阅",
+        "cancelSuccess": "成功取消订阅。",
+        "cancelFailed": "取消订阅失败。",
+        "promoReq": "请输入优惠码",
+        "promoApplied": "优惠码已应用！",
+        "invalidPromo": "无效的优惠码"
     }
 }

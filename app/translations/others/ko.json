@@ -108,6 +108,19 @@
         "recommended": "추천",
         "placeholder": "프로모션 코드",
         "applyBtn": "적용",
-        "verifyingBtn": "확인 중..."
+        "verifyingBtn": "확인 중...",
+        "activeSubscription": "활성 구독",
+        "portfolioVisible": "이 구독 덕분에 현재 방문자가 포트폴리오를 볼 수 있습니다.",
+        "renewalDate": "갱신/만료일:",
+        "cancelSub": "구독 취소",
+        "confirmCancel": "취소 확인",
+        "cancelWarning": "구독을 취소하시겠습니까? 현재 주기가 끝나면 방문자에게 포트폴리오가 더 이상 표시되지 않습니다.",
+        "yesCancel": "예, 구독을 취소합니다",
+        "keepSub": "구독 유지",
+        "cancelSuccess": "구독이 성공적으로 취소되었습니다.",
+        "cancelFailed": "구독을 취소하지 못했습니다.",
+        "promoReq": "프로모션 코드를 입력해주세요",
+        "promoApplied": "프로모션 코드가 적용되었습니다!",
+        "invalidPromo": "잘못된 프로모션 코드"
     }
 }

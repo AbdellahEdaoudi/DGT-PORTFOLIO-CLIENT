@@ -108,6 +108,19 @@
         "recommended": "Aanbevolen",
         "placeholder": "Promotiecode",
         "applyBtn": "Toepassen",
-        "verifyingBtn": "Verifiëren..."
+        "verifyingBtn": "Verifiëren...",
+        "activeSubscription": "ACTIEF ABONNEMENT",
+        "portfolioVisible": "Uw portfolio is momenteel zichtbaar voor bezoekers dankzij dit abonnement.",
+        "renewalDate": "Vernieuwings-/Vervaldatum:",
+        "cancelSub": "Abonnement Annuleren",
+        "confirmCancel": "Annulering Bevestigen",
+        "cancelWarning": "Weet u zeker dat u uw abonnement wilt annuleren? Uw portfolio is niet langer zichtbaar voor bezoekers zodra uw huidige cyclus afloopt.",
+        "yesCancel": "Ja, annuleer abonnement",
+        "keepSub": "Mijn abonnement behouden",
+        "cancelSuccess": "Abonnement succesvol geannuleerd.",
+        "cancelFailed": "Annuleren van abonnement is mislukt.",
+        "promoReq": "Voer een promotiecode in",
+        "promoApplied": "Promotiecode toegepast!",
+        "invalidPromo": "Ongeldige promotiecode"
     }
 }

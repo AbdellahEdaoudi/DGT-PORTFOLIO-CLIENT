@@ -108,6 +108,19 @@
         "recommended": "Recommended",
         "placeholder": "Promo Code",
         "applyBtn": "Apply",
-        "verifyingBtn": "Verifying..."
+        "verifyingBtn": "Verifying...",
+        "activeSubscription": "ACTIVE SUBSCRIPTION",
+        "portfolioVisible": "Your portfolio is currently visible to visitors thanks to this subscription.",
+        "renewalDate": "Renewal/Expiry Date:",
+        "cancelSub": "Cancel Subscription",
+        "confirmCancel": "Confirm Cancellation",
+        "cancelWarning": "Are you absolutely sure you want to cancel your subscription? Your portfolio will no longer be visible to visitors once your current cycle ends.",
+        "yesCancel": "Yes, Cancel Subscription",
+        "keepSub": "Keep my subscription",
+        "cancelSuccess": "Subscription cancelled successfully.",
+        "cancelFailed": "Failed to cancel subscription.",
+        "promoReq": "Please enter a promo code",
+        "promoApplied": "Promo code applied!",
+        "invalidPromo": "Invalid promo code"
     }
 }

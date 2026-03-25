@@ -108,6 +108,19 @@
         "recommended": "Önerilen",
         "placeholder": "Promosyon Kodu",
         "applyBtn": "Uygula",
-        "verifyingBtn": "Doğrulanıyor..."
+        "verifyingBtn": "Doğrulanıyor...",
+        "activeSubscription": "AKTİF ABONELİK",
+        "portfolioVisible": "Bu abonelik sayesinde portföyünüz şu anda ziyaretçiler tarafından görülebilir.",
+        "renewalDate": "Yenileme/Bitiş Tarihi:",
+        "cancelSub": "Aboneliği İptal Et",
+        "confirmCancel": "İptali Onayla",
+        "cancelWarning": "Aboneliğinizi iptal etmek istediğinizden emin misiniz? Geçerli döngünüz sona erdiğinde portföyünüz ziyaretçiler tarafından artık görülmeyecek.",
+        "yesCancel": "Evet, aboneliği iptal et",
+        "keepSub": "Aboneliğimi koru",
+        "cancelSuccess": "Abonelik başarıyla iptal edildi.",
+        "cancelFailed": "Abonelik iptal edilemedi.",
+        "promoReq": "Lütfen bir promosyon kodu girin",
+        "promoApplied": "Promosyon kodu uygulandı!",
+        "invalidPromo": "Geçersiz promosyon kodu"
     }
 }

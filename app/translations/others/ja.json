@@ -108,6 +108,19 @@
         "recommended": "推奨",
         "placeholder": "プロモーションコード",
         "applyBtn": "適用",
-        "verifyingBtn": "確認中..."
+        "verifyingBtn": "確認中...",
+        "activeSubscription": "アクティブなサブスクリプション",
+        "portfolioVisible": "このサブスクリプションのおかげで、あなたのポートフォリオは現在訪問者に公開されています。",
+        "renewalDate": "更新/有効期限：",
+        "cancelSub": "サブスクリプションをキャンセル",
+        "confirmCancel": "キャンセルを確認",
+        "cancelWarning": "本当にサブスクリプションをキャンセルしますか？現在および進行中のサイクルが終了すると、ポートフォリオは訪問者に表示されなくなります。",
+        "yesCancel": "はい、キャンセルします",
+        "keepSub": "サブスクリプションを維持する",
+        "cancelSuccess": "サブスクリプションのキャンセルに成功しました。",
+        "cancelFailed": "サブスクリプションのキャンセルに失敗しました。",
+        "promoReq": "プロモコードを入力してください",
+        "promoApplied": "プロモコードが適用されました！",
+        "invalidPromo": "無効なプロモコード"
     }
 }

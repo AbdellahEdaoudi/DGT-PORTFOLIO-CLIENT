@@ -108,6 +108,19 @@
         "recommended": "Empfohlen",
         "placeholder": "Promo-Code",
         "applyBtn": "Anwenden",
-        "verifyingBtn": "Überprüfen..."
+        "verifyingBtn": "Überprüfen...",
+        "activeSubscription": "AKTIVES ABONNEMENT",
+        "portfolioVisible": "Ihr Portfolio ist dank dieses Abonnements derzeit für Besucher sichtbar.",
+        "renewalDate": "Verlängerungs-/Ablaufdatum:",
+        "cancelSub": "Abonnement Kündigen",
+        "confirmCancel": "Kündigung Bestätigen",
+        "cancelWarning": "Sind Sie sicher, dass Sie Ihr Abonnement kündigen möchten? Ihr Portfolio wird nach Ablauf Ihres aktuellen Zyklus nicht mehr für Besucher sichtbar sein.",
+        "yesCancel": "Ja, Abonnement kündigen",
+        "keepSub": "Mein Abonnement behalten",
+        "cancelSuccess": "Abonnement erfolgreich gekündigt.",
+        "cancelFailed": "Abonnement konnte nicht gekündigt werden.",
+        "promoReq": "Bitte geben Sie einen Promo-Code ein",
+        "promoApplied": "Promo-Code angewendet!",
+        "invalidPromo": "Ungültiger Promo-Code"
     }
 }

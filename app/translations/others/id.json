@@ -108,6 +108,19 @@
         "recommended": "Direkomendasikan",
         "placeholder": "Kode Promo",
         "applyBtn": "Terapkan",
-        "verifyingBtn": "Memverifikasi..."
+        "verifyingBtn": "Memverifikasi...",
+        "activeSubscription": "LANGGANAN AKTIF",
+        "portfolioVisible": "Portofolio Anda saat ini dapat dilihat oleh pengunjung berkat langganan ini.",
+        "renewalDate": "Tanggal Perpanjangan/Berakhir:",
+        "cancelSub": "Batalkan Langganan",
+        "confirmCancel": "Konfirmasi Pembatalan",
+        "cancelWarning": "Apakah Anda benar-benar yakin ingin membatalkan langganan Anda? Portofolio Anda tidak akan lagi terlihat oleh pengunjung setelah siklus Anda saat ini berakhir.",
+        "yesCancel": "Ya, batalkan langganan",
+        "keepSub": "Pertahankan langganan saya",
+        "cancelSuccess": "Langganan berhasil dibatalkan.",
+        "cancelFailed": "Gagal membatalkan langganan.",
+        "promoReq": "Silakan masukkan kode promo",
+        "promoApplied": "Kode promo diterapkan!",
+        "invalidPromo": "Kode promo tidak valid"
     }
 }

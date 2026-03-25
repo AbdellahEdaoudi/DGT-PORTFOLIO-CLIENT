@@ -2,7 +2,7 @@
 
 import { useState } from "react"
 import { createPortal } from "react-dom"
-import { Search, AlertCircle, Loader } from "../../components/Icons"
+import { Search, AlertCircle, Loader, RefreshCw } from "../../components/Icons"
 import { toast } from "react-toastify"
 import axios from "axios"
 
@@ -10,7 +10,8 @@ export default function SubscriptionManagement({ data, setData }) {
   const [searchQuery, setSearchQuery] = useState("")
   const [deleteConfirm, setDeleteConfirm] = useState(null)
   const [loadingDeleteId, setLoadingDeleteId] = useState(null)
-
+  const [loadingSyncId, setLoadingSyncId] = useState(null)
+  console.log(data.subscription)
   const highlightText = (text, query) => {
     if (!text) return ""
     if (!query) return text
@@ -25,6 +26,28 @@ export default function SubscriptionManagement({ data, setData }) {
         part
       )
     )
+  }
+
+  const syncSubscription = async (id) => {
+    try {
+      setLoadingSyncId(id)
+      const res = await axios.post(`/api/proxy/admin/subscription/${id}`)
+      
+      if (res.data.success) {
+        setData((prev) => ({
+          ...prev,
+          subscription: prev.subscription.map((sub) => 
+            sub._id === id ? res.data.data : sub
+          ),
+        }))
+        toast.success(res.data.message || "Subscription synced with PayPal")
+      }
+    } catch (err) {
+      console.error(err)
+      toast.error(err.response?.data?.message || "Error syncing subscription")
+    } finally {
+      setLoadingSyncId(null)
+    }
   }
 
   const deleteSubscription = async (id) => {
@@ -138,16 +161,27 @@ export default function SubscriptionManagement({ data, setData }) {
                   </td>
 
                   <td className="px-3 py-2 text-right">
-                    <button
-                      onClick={() => setDeleteConfirm(sub)}
-                      className="inline-flex items-center justify-center px-2 py-1 bg-red-500/10 border border-red-500/20 rounded md:rounded-lg text-red-400 hover:bg-red-500/20 transition text-[9px] md:text-xs font-semibold"
-                    >
-                      {loadingDeleteId === sub._id ? (
-                        <Loader size={12} className="animate-spin" />
-                      ) : (
-                        "Delete"
-                      )}
-                    </button>
+                    <div className="flex justify-end items-center gap-2">
+                      <button
+                        onClick={() => syncSubscription(sub._id)}
+                        disabled={loadingSyncId === sub._id}
+                        title="Sync with PayPal"
+                        className="p-2 bg-cyan-500/10 border border-cyan-500/20 rounded-lg text-cyan-400 hover:bg-cyan-500/20 transition-all disabled:opacity-50"
+                      >
+                        <RefreshCw size={14} className={loadingSyncId === sub._id ? "animate-spin" : ""} />
+                      </button>
+                      <button
+                        onClick={() => setDeleteConfirm(sub)}
+                        disabled={loadingDeleteId === sub._id}
+                        className="inline-flex items-center justify-center px-2 py-1 bg-red-500/10 border border-red-500/20 rounded md:rounded-lg text-red-400 hover:bg-red-500/20 transition text-[9px] md:text-xs font-semibold"
+                      >
+                        {loadingDeleteId === sub._id ? (
+                          <Loader size={12} className="animate-spin" />
+                        ) : (
+                          "Delete"
+                        )}
+                      </button>
+                    </div>
                   </td>
                 </tr>
               ))}
