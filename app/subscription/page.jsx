@@ -165,7 +165,7 @@ export default function SubscriptionPage() {
           {/* Promo Code Section */}
           {(!activeSubscription || activeSubscription.status !== "ACTIVE") && (
             <div dir={userDetails?.displayLanguage === 'ar' ? 'rtl' : 'ltr'} className="flex flex-col items-center justify-center my-8 gap-2">
-              <div className="flex items-center shadow-lg shadow-purple-500/10 rounded-full ">
+              <div className="fle hidden items-center shadow-lg shadow-purple-500/10 rounded-full ">
                 <input
                   type="text"
                   placeholder={t('subscription.placeholder')}

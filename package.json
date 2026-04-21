@@ -24,7 +24,6 @@
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
     "core-js": "^3.46.0",
-    "dompurify": "^3.1.6",
     "downloadjs": "^1.4.7",
     "flag-icons": "^7.5.0",
     "he": "^1.2.0",
@@ -54,7 +53,11 @@
     "refractor": "^5.0.0",
     "tailwind-merge": "^2.3.0",
     "tailwindcss-animate": "^1.0.7",
-    "yaml": "^2.8.1"
+    "yaml": "^2.8.3"
+  },
+  "overrides": {
+    "dompurify": "3.4.1",
+    "serialize-javascript": "7.0.5"
   },
   "devDependencies": {
     "@types/node": "25.0.2",
