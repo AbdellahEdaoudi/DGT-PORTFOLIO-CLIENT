@@ -12,7 +12,9 @@
         "personalInfo": "Personal Information",
         "save": "Save",
         "saving": "Saving...",
-        "savedSuccessfully": "Saved successfully!"
+        "savedSuccessfully": "Saved successfully!",
+        "displayEmail": "Display Email",
+        "displayEmailHint": "This email will be shown on your portfolio (not your login email)."
     },
     "about": {
         "summary": "Summary",

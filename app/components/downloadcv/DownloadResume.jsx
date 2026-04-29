@@ -191,11 +191,6 @@ export default function DownloadResume({ userDetails, className }) {
                     <FileDown size={20} />
                     <span className="hidden md:block">{t.title}</span>
                 </button>
-                {/* Custom Tooltip */}
-                <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-3 px-3 py-1.5 bg-gray-900/90 text-white text-xs font-medium rounded-lg opacity-0 group-hover:opacity-100 transition-all duration-300 pointer-events-none whitespace-nowrap shadow-xl backdrop-blur-sm z-50 translate-y-2 group-hover:translate-y-0">
-                    {t.title}
-                    <div className="absolute top-full left-1/2 transform -translate-x-1/2 border-4 border-transparent border-t-gray-900/90"></div>
-                </div>
             </div>
 
             {isDownloading && mounted && createPortal(

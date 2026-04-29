@@ -11,7 +11,9 @@
         "usernameExists": "사용자 이름이 이미 존재합니다",
         "save": "저장",
         "saving": "저장 중...",
-        "savedSuccessfully": "성공적으로 저장되었습니다!"
+        "savedSuccessfully": "성공적으로 저장되었습니다!",
+        "displayEmail": "표시 이메일",
+        "displayEmailHint": "이 이메일은 포트폴리오에 표시됩니다 (로그인 이메일이 아닙니다)."
     },
     "about": {
         "summary": "요약",

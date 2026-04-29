@@ -164,10 +164,10 @@ export default function ThemeTwelve({ userDetails, userLinks }) {
                                         <div className="text-gray-300 mt-4 max-w-lg">
                                             <p className="mb-6">{userDetails?.about}</p>
                                             <div className="p-4 md:p-6 bg-white/5 backdrop-blur-sm rounded-xl border border-white/10">
-                                                {userDetails.email && (
+                                                {(userDetails.displayEmail || userDetails.email) && (
                                                     <div className="flex gap-2 items-start">
                                                         <span className="font-bold text-blue-400 whitespace-nowrap">Email:</span>
-                                                        <a href={`mailto:${userDetails.email}`} className="text-gray-300 hover:text-blue-300 transition break-all">{userDetails.email}</a>
+                                                        <a href={`mailto:${userDetails.displayEmail || userDetails.email}`} className="text-gray-300 hover:text-blue-300 transition break-all">{userDetails.displayEmail || userDetails.email}</a>
                                                     </div>
                                                 )}
                                                 {userDetails.country && (

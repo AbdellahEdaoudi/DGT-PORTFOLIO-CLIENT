@@ -21,6 +21,7 @@ function Userinfo({ userData, setUserDetails }) {
   const [phoneNumber, setPhoneNumber] = useState(user.phoneNumber || "")
   const [country, setCountry] = useState(user.country || "")
   const [category, setCategory] = useState(user.category || "")
+  const [displayEmail, setDisplayEmail] = useState(user.displayEmail || "")
   const [errormsg, setErrormsg] = useState("")
   // const PORTFOLIO = `https://${userData.username}.dgtportfolio.com`
   const PORTFOLIO_2 = `/dp/${userData?.username}`;
@@ -109,6 +110,7 @@ function Userinfo({ userData, setUserDetails }) {
       formData.append("phoneNumber", phoneNumber);
       formData.append("country", country);
       formData.append("category", category);
+      formData.append("displayEmail", displayEmail);
       formData.append("urlimage", imageFile || imagePreview || "");
 
       await axios.put(`/api/proxy/users/update/user-info`, formData);
@@ -125,6 +127,7 @@ function Userinfo({ userData, setUserDetails }) {
         phoneNumber,
         country,
         category,
+        displayEmail,
         urlimage: imagePreview || (prev?.urlimage || "")
       }));
       setErrormsg("")
@@ -239,6 +242,22 @@ function Userinfo({ userData, setUserDetails }) {
                 placeholder={t('userInfo.exampleSpecialization')}
                 className="w-full px-2 py-1.5 sm:px-4 sm:py-2 text-[10px] sm:text-base bg-white border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 transition"
               />
+            </div>
+            <div className="col-span-2">
+              <label className="block text-[10px] sm:text-sm font-bold text-gray-700 mb-1 sm:mb-2">
+                {t('userInfo.displayEmail') || 'Display Email'}
+              </label>
+              <input
+                type="email"
+                maxLength={100}
+                value={displayEmail}
+                onChange={(e) => setDisplayEmail(e.target.value)}
+                placeholder="contact@example.com"
+                className="w-full px-2 py-1.5 sm:px-4 sm:py-2 text-[10px] sm:text-base bg-white border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 transition"
+              />
+              <p className="mt-1 text-[8px] sm:text-xs text-gray-400">
+                {t('userInfo.displayEmailHint') || 'This email will be shown on your portfolio (not your login email).'}
+              </p>
             </div>
           </div>
         </div>

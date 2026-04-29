@@ -154,15 +154,15 @@ export default function ThemeThirteen({ userDetails, userLinks }) {
                                             <User className="text-blue-600" /> {t('aboutMe')}
                                         </h3>
                                         <div className="space-y-4 md:space-y-6">
-                                            {userDetails.email && (
+                                            {(userDetails.displayEmail || userDetails.email) && (
                                                 <div className="flex items-center gap-3 md:gap-4 p-3 md:p-4 bg-slate-50 rounded-2xl overflow-hidden border border-slate-100">
                                                     <div className="w-10 h-10 rounded-full bg-white shadow-sm flex items-center justify-center text-blue-600 shrink-0">
                                                         <Mail size={20} />
                                                     </div>
                                                     <div className="min-w-0">
                                                         <p className="text-xs font-semibold text-slate-400 uppercase tracking-wide">Email</p>
-                                                        <a href={`mailto:${userDetails.email}`} className="text-slate-900 hover:text-blue-600 transition break-all text-sm md:text-base font-bold">
-                                                            {userDetails.email}
+                                                        <a href={`mailto:${userDetails.displayEmail || userDetails.email}`} className="text-slate-900 hover:text-blue-600 transition break-all text-sm md:text-base font-bold">
+                                                            {userDetails.displayEmail || userDetails.email}
                                                         </a>
                                                     </div>
                                                 </div>

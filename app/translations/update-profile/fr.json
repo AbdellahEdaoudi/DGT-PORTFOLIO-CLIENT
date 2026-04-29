@@ -11,7 +11,9 @@
         "usernameExists": "Ce nom d'utilisateur existe déjà",
         "save": "Enregistrer",
         "saving": "Enregistrement...",
-        "savedSuccessfully": "Enregistré avec succès !"
+        "savedSuccessfully": "Enregistré avec succès !",
+        "displayEmail": "E-mail affiché",
+        "displayEmailHint": "Cet e-mail sera affiché sur votre portfolio (pas votre e-mail de connexion)."
     },
     "about": {
         "summary": "Résumé",

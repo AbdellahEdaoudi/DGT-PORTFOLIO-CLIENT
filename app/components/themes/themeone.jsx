@@ -251,11 +251,11 @@ export default function Themeone({ userDetails, userLinks, bgcolor }) {
                           </a>
                         </div>
                       )}
-                      {userDetails?.email && (
+                      {(userDetails?.displayEmail || userDetails?.email) && (
                         <div className="flex items-center gap-2 text-white/80">
                           <Mail size={18} />
-                          <a href={`mailto:${userDetails?.email}`} className="hover:text-white transition-colors">
-                            {userDetails?.email}
+                          <a href={`mailto:${userDetails?.displayEmail || userDetails?.email}`} className="hover:text-white transition-colors">
+                            {userDetails?.displayEmail || userDetails?.email}
                           </a>
                         </div>
                       )}

@@ -11,7 +11,9 @@
         "usernameExists": "Gebruikersnaam bestaat al",
         "save": "Opslaan",
         "saving": "Opslaan...",
-        "savedSuccessfully": "Succesvol opgeslagen!"
+        "savedSuccessfully": "Succesvol opgeslagen!",
+        "displayEmail": "Weergave-e-mail",
+        "displayEmailHint": "Dit e-mailadres wordt weergegeven op uw portfolio (niet uw inlog-e-mail)."
     },
     "about": {
         "summary": "Samenvatting",

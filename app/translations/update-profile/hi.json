@@ -11,7 +11,9 @@
         "usernameExists": "उपयोगकर्ता नाम पहले से मौजूद है",
         "save": "सहेजें",
         "saving": "सहेजा जा रहा है...",
-        "savedSuccessfully": "सफलतापूर्वक सहेजा गया!"
+        "savedSuccessfully": "सफलतापूर्वक सहेजा गया!",
+        "displayEmail": "प्रदर्शित ईमेल",
+        "displayEmailHint": "यह ईमेल आपके पोर्टफोलियो पर दिखाया जाएगा (लॉगिन ईमेल नहीं)।"
     },
     "about": {
         "summary": "सारांश",

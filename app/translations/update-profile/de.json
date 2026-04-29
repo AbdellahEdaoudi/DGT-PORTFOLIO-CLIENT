@@ -11,7 +11,9 @@
         "usernameExists": "Benutzername existiert bereits",
         "save": "Speichern",
         "saving": "Speichern...",
-        "savedSuccessfully": "Erfolgreich gespeichert!"
+        "savedSuccessfully": "Erfolgreich gespeichert!",
+        "displayEmail": "Angezeigte E-Mail",
+        "displayEmailHint": "Diese E-Mail wird in Ihrem Portfolio angezeigt (nicht Ihre Anmelde-E-Mail)."
     },
     "about": {
         "summary": "Zusammenfassung",

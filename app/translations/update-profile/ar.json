@@ -12,7 +12,9 @@
         "personalInfo": "المعلومات الشخصية",
         "save": "حفظ",
         "saving": "جاري الحفظ...",
-        "savedSuccessfully": "تم الحفظ بنجاح!"
+        "savedSuccessfully": "تم الحفظ بنجاح!",
+        "displayEmail": "البريد الإلكتروني للعرض",
+        "displayEmailHint": "سيظهر هذا البريد في ملفك الشخصي (وليس بريد تسجيل الدخول)."
     },
     "about": {
         "summary": "نبذة عني",

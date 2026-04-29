@@ -11,7 +11,9 @@
         "usernameExists": "用户名已存在",
         "save": "保存",
         "saving": "保存中...",
-        "savedSuccessfully": "保存成功！"
+        "savedSuccessfully": "保存成功！",
+        "displayEmail": "显示邮箱",
+        "displayEmailHint": "此邮箱将显示在您的作品集中（不是您的登录邮箱）。"
     },
     "about": {
         "summary": "摘要",

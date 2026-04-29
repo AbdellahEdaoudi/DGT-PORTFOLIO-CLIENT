@@ -163,15 +163,15 @@ export default function ThemeSeven({ userDetails, userLinks }) {
                                             <User className="text-red-400" /> {t('aboutMe')}
                                         </h3>
                                         <div className="space-y-4 md:space-y-6">
-                                            {userDetails.email && (
+                                            {(userDetails.displayEmail || userDetails.email) && (
                                                 <div className="flex items-center gap-3 md:gap-4 p-3 md:p-4 bg-white/5 rounded-2xl overflow-hidden">
                                                     <div className="w-10 h-10 rounded-full bg-orange-500/20 flex items-center justify-center text-orange-400 shrink-0">
                                                         <Mail size={20} />
                                                     </div>
                                                     <div className="min-w-0">
                                                         <p className="text-sm text-gray-400">Email</p>
-                                                        <a href={`mailto:${userDetails.email}`} className="text-white hover:text-red-300 transition break-all text-sm md:text-base">
-                                                            {userDetails.email}
+                                                        <a href={`mailto:${userDetails.displayEmail || userDetails.email}`} className="text-white hover:text-red-300 transition break-all text-sm md:text-base">
+                                                            {userDetails.displayEmail || userDetails.email}
                                                         </a>
                                                     </div>
                                                 </div>

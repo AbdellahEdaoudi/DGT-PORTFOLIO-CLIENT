@@ -234,6 +234,49 @@ export default function ThemeEleven({ userDetails, userLinks }) {
                                     {userDetails?.about}
                                 </p>
                             </div>
+
+                            {(userDetails?.displayEmail || userDetails?.email) && (
+                                <div className="p-4 mt-2 border border-cyan-500/20 bg-cyan-950/20 rounded-lg backdrop-blur-sm relative overflow-hidden">
+                                    <div className="absolute top-0 left-0 w-2 h-2 border-t border-l border-cyan-500"></div>
+                                    <div className="absolute top-0 right-0 w-2 h-2 border-t border-r border-cyan-500"></div>
+                                    <div className="absolute bottom-0 left-0 w-2 h-2 border-b border-l border-cyan-500"></div>
+                                    <div className="absolute bottom-0 right-0 w-2 h-2 border-b border-r border-cyan-500"></div>
+                                    <p className="text-xs text-cyan-500 uppercase tracking-widest mb-1 font-mono"> EMAIL</p>
+                                    <a
+                                        href={`mailto:${userDetails.displayEmail || userDetails.email}`}
+                                        className="text-cyan-100 hover:text-cyan-400 transition-colors text-sm break-all font-mono"
+                                    >
+                                        {userDetails.displayEmail || userDetails.email}
+                                    </a>
+                                </div>
+                            )}
+
+                            {userDetails?.phoneNumber && (
+                                <div className="p-4 mt-2 border border-cyan-500/20 bg-cyan-950/20 rounded-lg backdrop-blur-sm relative overflow-hidden">
+                                    <div className="absolute top-0 left-0 w-2 h-2 border-t border-l border-cyan-500"></div>
+                                    <div className="absolute top-0 right-0 w-2 h-2 border-t border-r border-cyan-500"></div>
+                                    <div className="absolute bottom-0 left-0 w-2 h-2 border-b border-l border-cyan-500"></div>
+                                    <div className="absolute bottom-0 right-0 w-2 h-2 border-b border-r border-cyan-500"></div>
+                                    <p className="text-xs text-cyan-500 uppercase tracking-widest mb-1 font-mono"> PHONE</p>
+                                    <a
+                                        href={`tel:${userDetails.phoneNumber}`}
+                                        className="text-cyan-100 hover:text-cyan-400 transition-colors text-sm font-mono"
+                                    >
+                                        {userDetails.phoneNumber}
+                                    </a>
+                                </div>
+                            )}
+
+                            {userDetails?.country && (
+                                <div className="p-4 mt-2 border border-cyan-500/20 bg-cyan-950/20 rounded-lg backdrop-blur-sm relative overflow-hidden">
+                                    <div className="absolute top-0 left-0 w-2 h-2 border-t border-l border-cyan-500"></div>
+                                    <div className="absolute top-0 right-0 w-2 h-2 border-t border-r border-cyan-500"></div>
+                                    <div className="absolute bottom-0 left-0 w-2 h-2 border-b border-l border-cyan-500"></div>
+                                    <div className="absolute bottom-0 right-0 w-2 h-2 border-b border-r border-cyan-500"></div>
+                                    <p className="text-xs text-cyan-500 uppercase tracking-widest mb-1 font-mono"> COUNTRY</p>
+                                    <p className="text-cyan-100 text-sm font-mono">{userDetails.country}</p>
+                                </div>
+                            )}
                         </div>
                     </div>
 

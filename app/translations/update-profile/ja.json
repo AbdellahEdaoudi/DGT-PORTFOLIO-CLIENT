@@ -11,7 +11,9 @@
         "usernameExists": "ユーザー名は既に存在します",
         "save": "保存",
         "saving": "保存中...",
-        "savedSuccessfully": "正常に保存されました！"
+        "savedSuccessfully": "正常に保存されました！",
+        "displayEmail": "表示メール",
+        "displayEmailHint": "このメールはポートフォリオに表示されます（ログインメールではありません）。"
     },
     "about": {
         "summary": "概要",

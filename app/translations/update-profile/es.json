@@ -11,7 +11,9 @@
         "usernameExists": "El nombre de usuario ya existe",
         "save": "Guardar",
         "saving": "Guardando...",
-        "savedSuccessfully": "¡Guardado exitosamente!"
+        "savedSuccessfully": "¡Guardado exitosamente!",
+        "displayEmail": "Correo visible",
+        "displayEmailHint": "Este correo se mostrará en tu portafolio (no tu correo de inicio de sesión)."
     },
     "about": {
         "summary": "Resumen",

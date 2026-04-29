@@ -11,7 +11,9 @@
         "usernameExists": "Il nome utente esiste già",
         "save": "Salva",
         "saving": "Salvataggio...",
-        "savedSuccessfully": "Salvato con successo!"
+        "savedSuccessfully": "Salvato con successo!",
+        "displayEmail": "Email visualizzata",
+        "displayEmailHint": "Questa email verrà mostrata nel tuo portfolio (non la tua email di accesso)."
     },
     "about": {
         "summary": "Riepilogo",
