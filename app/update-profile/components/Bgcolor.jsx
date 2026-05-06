@@ -1,12 +1,13 @@
 "use client";
 import React, { useState } from "react";
 import axios from "axios";
-import { toast } from "react-toastify";
+import { useToast } from "../../components/Toast";
 import { CheckCheck, Loader } from "../../components/Icons";
 import Themeone from "../../components/themes/themeone";
 import { getTranslation } from '../../translations/update-profile'
 
 export default function Bgcolor({ userData, setUserDetails }) {
+  const toast = useToast();
   const t = getTranslation(userData?.displayLanguage || 'en');
   const [bgcolorp, setBgcolorp] = useState(userData.bgcolorp || "#1f2937");
   const [loading, setLoading] = useState(false);
@@ -18,12 +19,7 @@ export default function Bgcolor({ userData, setUserDetails }) {
       if (setUserDetails) {
         setUserDetails(prev => ({ ...prev, bgcolorp: bgcolorp }))
       }
-      toast(
-        <p className="flex gap-3 items-center">
-          <CheckCheck /> {t('bgColor.savedSuccessfully')}
-        </p>,
-        { autoClose: 2000 }
-      );
+      toast.success(t('bgColor.savedSuccessfully'));
     } catch (error) {
       console.error("Error updating background color:", error);
       toast.error(t('bgColor.errorMessage'));

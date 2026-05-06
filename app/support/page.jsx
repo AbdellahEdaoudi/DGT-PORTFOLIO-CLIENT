@@ -3,7 +3,7 @@
 import React, { useContext, useState } from 'react';
 import axios from 'axios';
 import { MyContext } from '../context/context';
-import { toast } from 'react-toastify';
+import { useToast } from '../components/Toast';
 import { CheckCheck, Mail, Phone, Loader2, FolderOpen, MessageCircle, MapPin, ImagePlus, X, Loader } from '../components/Icons';
 
 import WarningModal from "./Pages/WarningModal"
@@ -14,6 +14,7 @@ import Header from '../components/LandingPage/header';
 import { getTranslation } from '../translations/others';
 
 export default function ContactForm() {
+  const toast = useToast()
   const [subject, setSubject] = useState('')
   const [message, setMessage] = useState('')
   const [attachment, setAttachment] = useState(null)
@@ -92,22 +93,16 @@ export default function ContactForm() {
     }
     try {
       await axios.post(`/api/proxy/contacts`, { email: EmailUser, subject, message, attachment });
-      toast(<p className='flex gap-3 items-center'><CheckCheck className="text-teal-500" /> {t('support.successMessage')}</p>, {
-        autoClose: 2000,
-      })
+      toast.success(t('support.successMessage'))
       setSubject('')
       setMessage('')
       setAttachment(null)
     } catch (error) {
       console.error('Error adding contact:', error)
       if (error.response && error.response.status === 429) {
-        toast.error(<p className='flex gap-3 items-center'>{t('support.tooManyRequests')}</p>, {
-          autoClose: 2000,
-        })
+        toast.error(t('support.tooManyRequests'))
       } else {
-        toast.error(<p className='flex gap-3 items-center'>{t('support.errorMessage')}</p>, {
-          autoClose: 2000,
-        })
+        toast.error(t('support.errorMessage'))
       }
     } finally {
       setLoading(false)

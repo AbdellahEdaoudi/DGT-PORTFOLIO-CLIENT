@@ -3,10 +3,11 @@ import axios from 'axios'
 import { CheckCheck, Loader, User, Sparkles, Lightbulb, Trash2, X, AlertCircle } from '../../components/Icons'
 import React, { useState, useEffect } from 'react'
 import { createPortal } from "react-dom"
-import { toast } from 'react-toastify'
+import { useToast } from '../../components/Toast'
 import { getTranslation } from '../../translations/update-profile'
 
 export default function About({ userData, setUserDetails }) {
+  const toast = useToast()
   const t = getTranslation(userData?.displayLanguage || 'en')
   const [about, setAbout] = useState(userData?.about || "")
   const [loading, setLoading] = useState(false)
@@ -33,10 +34,7 @@ export default function About({ userData, setUserDetails }) {
         }));
       }
 
-      toast(<p className='flex gap-3 items-center'><CheckCheck className="text-teal-500" />
-        {t('about.savedSuccessfully')}</p>, {
-        autoClose: 2000,
-      })
+      toast.success(t('about.savedSuccessfully'))
     } catch (error) {
       console.error(error)
       toast.error(t('about.errorMessage') || "Error saving")

@@ -2,7 +2,7 @@
 import { useState } from "react"
 import { createPortal } from "react-dom"
 import { Search, AlertCircle, Loader, X, ExternalLink } from "../../components/Icons"
-import { toast } from "react-toastify"
+import { useToast } from "../../components/Toast"
 import axios from "axios"
 import Image from "next/image"
 import ThemeOne from "../../components/themes/themeone"
@@ -18,6 +18,7 @@ import ThemeTen from "../../components/themes/themeten"
 import ThemeEleven from "../../components/themes/themeeleven"
 
 export default function UserManagement({ data, setData }) {
+  const toast = useToast()
   const [deleteConfirm, setDeleteConfirm] = useState(null)
   const [deleteConfirm2, setDeleteConfirm2] = useState(null)
   const [selectedUserLinks, setSelectedUserLinks] = useState(null)

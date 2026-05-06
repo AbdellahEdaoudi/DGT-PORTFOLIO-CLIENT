@@ -1,7 +1,7 @@
 "use client";
 import axios from "axios";
 import React, { useState } from "react";
-import { toast } from "react-toastify";
+import { useToast } from "../../components/Toast";
 import { createPortal } from "react-dom";
 import {
   ArrowUp,
@@ -61,6 +61,7 @@ const SortableItem = ({ id, children }) => {
 };
 
 export default function Experience({ userData, setUserDetails }) {
+  const toast = useToast();
   const t = getTranslation(userData?.displayLanguage || "en");
 
   // Initialize experience with collapsed: true and localId
@@ -337,13 +338,7 @@ export default function Experience({ userData, setUserDetails }) {
       const newOrder = experience.filter((e) => e._id).map((e) => e._id);
       setOriginalOrder(newOrder);
 
-      toast(
-        <p className="flex gap-3 items-center">
-          <CheckCheck className="text-amber-500" />{" "}
-          {t("experience.orderSaved") || "Order saved"}
-        </p>,
-        { autoClose: 2000 },
-      );
+      toast.success(t("experience.orderSaved") || "Order saved");
     } catch (error) {
       console.error("Error updating order:", error);
       toast.error(t("experience.errorMessage"));

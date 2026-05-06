@@ -1,7 +1,7 @@
 "use client"
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
-import { toast } from 'react-toastify'
+import { useToast } from '../../components/Toast'
 import {
     ArrowUp,
     ArrowDown,
@@ -153,6 +153,7 @@ import { getTranslation } from '../../translations/update-profile'
 import DragTutorial from './DragTutorial'
 
 export default function SectionOrdering({ userData, setUserDetails }) {
+    const toast = useToast()
     const t = getTranslation(userData?.displayLanguage || 'en')
     const [order, setOrder] = useState(userData?.sectionOrder && userData.sectionOrder.length > 0 ? userData.sectionOrder : DEFAULT_ORDER)
     const [originalOrder, setOriginalOrder] = useState(userData?.sectionOrder && userData.sectionOrder.length > 0 ? userData.sectionOrder : DEFAULT_ORDER)

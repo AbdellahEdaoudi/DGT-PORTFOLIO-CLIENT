@@ -2,10 +2,11 @@
 import { useState } from "react"
 import { Mail, Send, CheckCircle, AlertCircle, Copy, Users } from "../../components/Icons"
 import axios from "axios"
-import { toast } from "react-toastify"
+import { useToast } from "../../components/Toast"
 import Editor from "@monaco-editor/react"
 
 export default function BulkEmail({ data }) {
+    const toast = useToast()
     const [recipients, setRecipients] = useState("")
     const [subject, setSubject] = useState("")
     const [content, setContent] = useState("")

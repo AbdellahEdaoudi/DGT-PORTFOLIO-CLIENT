@@ -1,7 +1,7 @@
 import axios from "axios";
 import NextImage from "next/image";
 import React, { useState } from "react";
-import { toast } from "react-toastify";
+import { useToast } from "../../components/Toast";
 import { createPortal } from "react-dom";
 import {
   ArrowUp,
@@ -64,6 +64,7 @@ const SortableItem = ({ id, children }) => {
 };
 
 export default function Certificates({ userData, setUserDetails }) {
+  const toast = useToast();
   const t = getTranslation(userData?.displayLanguage || "en");
 
   // Initialize with collapsed: true and localId
@@ -438,13 +439,7 @@ export default function Certificates({ userData, setUserDetails }) {
       const newOrder = certificates.filter((c) => c._id).map((c) => c._id);
       setOriginalOrder(newOrder);
 
-      toast(
-        <p className="flex gap-3 items-center">
-          <CheckCheck className="text-blue-500" />{" "}
-          {t("certificates.orderSaved") || "Order saved"}
-        </p>,
-        { autoClose: 2000 },
-      );
+      toast.success(t("certificates.orderSaved") || "Order saved");
     } catch (error) {
       console.error("Error updating order:", error);
       toast.error(t("certificates.errorMessage"));

@@ -3,11 +3,12 @@ import 'flag-icons/css/flag-icons.min.css'
 import axios from 'axios'
 import { CheckCheck, Loader, Globe } from '../../components/Icons'
 import React, { useState } from 'react'
-import { toast } from 'react-toastify'
+import { useToast } from '../../components/Toast'
 import { getTranslation } from '../../translations/update-profile'
 
 
 function DisplayLanguage({ userData, setUserDetails }) {
+    const toast = useToast()
     const [displayLanguage, setDisplayLanguage] = useState(userData?.displayLanguage || "en")
     const t = getTranslation(displayLanguage || 'en');
     const [loading, setLoading] = useState(false)
@@ -18,11 +19,7 @@ function DisplayLanguage({ userData, setUserDetails }) {
 
         try {
             await axios.put(`/api/proxy/users/update/display-language`, { displayLanguage })
-            toast(<p className='flex gap-3 items-center'><CheckCheck className="text-teal-500" />
-                {t('userInfo.savedSuccessfully')}
-            </p>, {
-                autoClose: 2000,
-            })
+            toast.success(t('userInfo.savedSuccessfully'))
             setUserDetails(prev => ({
                 ...(prev || {}),
                 displayLanguage

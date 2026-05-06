@@ -2,7 +2,7 @@
 import axios from "axios";
 import React, { useState, useEffect } from "react";
 import { createPortal } from "react-dom";
-import { toast } from "react-toastify";
+import { useToast } from "../../components/Toast";
 import {
   CheckCheck,
   Loader,
@@ -60,6 +60,7 @@ const SortableItem = ({ id, children }) => {
 };
 
 export default function Languages({ userData, setUserDetails }) {
+  const toast = useToast();
   const t = getTranslation(userData?.displayLanguage || "en");
 
   // Transform to objects with local ID
@@ -185,13 +186,7 @@ export default function Languages({ userData, setUserDetails }) {
         })),
       );
 
-      toast(
-        <p className="flex gap-3 items-center">
-          <CheckCheck className="text-cyan-500" />{" "}
-          {t("languages.savedSuccessfully")}
-        </p>,
-        { autoClose: 2000 },
-      );
+      toast.success(t("languages.savedSuccessfully"));
     } catch (error) {
       console.error("Error updating languages:", error);
       toast.error(t("languages.errorMessage"));

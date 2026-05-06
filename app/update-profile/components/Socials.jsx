@@ -1,12 +1,13 @@
 "use client";
 import React, { useState } from "react";
-import { toast } from "react-toastify";
+import { useToast } from "../../components/Toast";
 import { CheckCheck, Loader } from "../../components/Icons";
 import axios from "axios";
 import Image from "next/image";
 import { getTranslation } from '../../translations/update-profile'
 
 export default function Socials({ userData, setUserDetails }) {
+  const toast = useToast();
   const t = getTranslation(userData?.displayLanguage || 'en');
   const user = userData || {};
   const [socials, setSocials] = useState(user.socials || {});
@@ -40,12 +41,7 @@ export default function Socials({ userData, setUserDetails }) {
         }));
       }
 
-      toast(
-        <p className="flex gap-3 items-center">
-          <CheckCheck className="text-teal-500" /> {t('socials.savedSuccessfully')}
-        </p>,
-        { autoClose: 2000 }
-      );
+      toast.success(t('socials.savedSuccessfully'));
     } catch (error) {
       console.error("Error updating socials:", error);
       toast.error(t('socials.errorMessage'));

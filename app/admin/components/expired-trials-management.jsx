@@ -4,10 +4,11 @@ import { useState, useEffect } from "react"
 import { createPortal } from "react-dom"
 import { Search, Mail, CheckCircle, RefreshCcw, XCircle } from "../../components/Icons"
 import axios from "axios"
-import { toast } from "react-toastify"
+import { useToast } from "../../components/Toast"
 import Image from "next/image"
 
 export default function ExpiredTrialsManagement({ data }) {
+    const toast = useToast()
     const [users, setUsers] = useState([])
     const [sending, setSending] = useState(false)
     const [filter, setFilter] = useState("")

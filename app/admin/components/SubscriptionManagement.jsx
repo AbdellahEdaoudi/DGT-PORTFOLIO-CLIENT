@@ -3,10 +3,11 @@
 import { useState } from "react"
 import { createPortal } from "react-dom"
 import { Search, AlertCircle, Loader, RefreshCw } from "../../components/Icons"
-import { toast } from "react-toastify"
+import { useToast } from "../../components/Toast"
 import axios from "axios"
 
 export default function SubscriptionManagement({ data, setData }) {
+  const toast = useToast()
   const [searchQuery, setSearchQuery] = useState("")
   const [deleteConfirm, setDeleteConfirm] = useState(null)
   const [loadingDeleteId, setLoadingDeleteId] = useState(null)

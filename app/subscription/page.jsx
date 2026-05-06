@@ -4,11 +4,12 @@ import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
 import { MyContext } from "../context/context";
 import axios from "axios";
 import Header from "../components/LandingPage/header";
-import { toast } from "react-toastify"
+import { useToast } from "../components/Toast"
 import { Loader } from "../components/Icons";
 import { getTranslation } from '../translations/others';
 
 export default function SubscriptionPage() {
+  const toast = useToast();
   const [plans, setPlans] = useState([]);
   const [loading, setLoading] = useState(true);
   const [promoLoading, setPromoLoading] = useState(false);
@@ -90,12 +91,7 @@ export default function SubscriptionPage() {
       }
     } catch (error) {
       if (error.response && error.response.status === 429) {
-        toast.error(
-          <p className="flex gap-3 items-center">
-            Too many requests! Please try again later.
-          </p>,
-          { autoClose: 3000 }
-        );
+        toast.error("Too many requests! Please try again later.");
       } else {
         const message =
           error.response?.data?.msg ||

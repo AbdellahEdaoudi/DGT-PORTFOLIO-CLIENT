@@ -1,14 +1,15 @@
 "use client"
 import axios from 'axios'
-import { CheckCheck, Loader, FileDown } from '../../components/Icons'
+import { Loader } from '../../components/Icons'
 import DownloadResume from '../../components/downloadcv/DownloadResume'
 import Image from 'next/image'
 import { useState } from 'react'
-import { toast } from 'react-toastify'
+import { useToast } from '../../components/Toast'
 import { getTranslation } from '../../translations/update-profile'
 import Link from 'next/link'
 
 function Userinfo({ userData, setUserDetails }) {
+  const toast = useToast()
   // Local translation helper
   const t = getTranslation(userData?.displayLanguage || 'en');
   const user = userData || {}
@@ -114,11 +115,7 @@ function Userinfo({ userData, setUserDetails }) {
       formData.append("urlimage", imageFile || imagePreview || "");
 
       await axios.put(`/api/proxy/users/update/user-info`, formData);
-      toast(<p className='flex gap-3 items-center'><CheckCheck className="text-teal-500" />
-        {t('userInfo.savedSuccessfully')}
-      </p>, {
-        autoClose: 2000,
-      })
+      toast.success(t('userInfo.savedSuccessfully'))
       setUserDetails(prev => ({
         ...(prev || {}),
         fullname,

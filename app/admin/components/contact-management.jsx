@@ -3,11 +3,12 @@
 import { useState } from "react"
 import { createPortal } from "react-dom"
 import { Search, AlertCircle, Loader, Eye, X, Maximize2, Mail, Type, Calendar, User, Paperclip, Clock } from "../../components/Icons"
-import { toast } from "react-toastify"
+import { useToast } from "../../components/Toast"
 import axios from "axios"
 import Image from "next/image"
 
 export default function ContactManagement({ data, setData }) {
+  const toast = useToast()
   const [searchQuery, setSearchQuery] = useState("")
   const [contactsData, setContactsData] = useState(data.contacts)
   const [selectedMessage, setSelectedMessage] = useState(null)

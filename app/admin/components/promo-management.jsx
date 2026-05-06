@@ -4,9 +4,10 @@ import { useState } from "react";
 import { createPortal } from "react-dom";
 import { Search, AlertCircle, Loader, Plus, X } from "../../components/Icons";
 import axios from "axios";
-import { toast } from "react-toastify";
+import { useToast } from "../../components/Toast";
 
 export default function PromoCodeManagement({ data, setData }) {
+  const toast = useToast();
   const [searchQuery, setSearchQuery] = useState("");
   const [deleteConfirm, setDeleteConfirm] = useState(null);
   const [loadingDeleteId, setLoadingDeleteId] = useState(null);

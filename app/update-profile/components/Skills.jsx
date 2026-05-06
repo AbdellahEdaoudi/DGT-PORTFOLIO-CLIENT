@@ -2,7 +2,7 @@
 import axios from "axios";
 import React, { useState, useEffect } from "react";
 import { createPortal } from "react-dom";
-import { toast } from "react-toastify";
+import { useToast } from "../../components/Toast";
 import {
   CheckCheck,
   GripVertical,
@@ -60,6 +60,7 @@ const SortableItem = ({ id, children }) => {
 };
 
 export default function Skills({ userData, setUserDetails }) {
+  const toast = useToast();
   const t = getTranslation(userData?.displayLanguage || "en");
 
   // Transform skills to object to track local order if needed, but here simple string array
@@ -189,13 +190,7 @@ export default function Skills({ userData, setUserDetails }) {
         })),
       );
 
-      toast(
-        <p className="flex gap-3 items-center">
-          <CheckCheck className="text-purple-500" />{" "}
-          {t("skills.savedSuccessfully")}
-        </p>,
-        { autoClose: 2000 },
-      );
+      toast.success(t("skills.savedSuccessfully"));
     } catch (error) {
       console.error("Error updating skills:", error);
       toast.error(t("skills.errorMessage"));

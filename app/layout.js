@@ -1,8 +1,7 @@
 import "./globals.css";
 import { Inter, Prompt } from "next/font/google";
 import { MyProvider } from "./context/context";
-import { ToastContainer } from "react-toastify";
-import 'react-toastify/dist/ReactToastify.css';
+import { ToastProvider } from "./components/Toast";
 import NextAuthProvider from "./api/auth/NextAuthProvider";
 import { Analytics } from "@vercel/analytics/react"
 
@@ -109,11 +108,12 @@ export default function RootLayout({ children }) {
           }}
         />
         <NextAuthProvider>
-          <MyProvider>
-            {children}
-          </MyProvider>
+          <ToastProvider>
+            <MyProvider>
+              {children}
+            </MyProvider>
+          </ToastProvider>
         </NextAuthProvider>
-        <ToastContainer />
         <Analytics />
       </body>
     </html>

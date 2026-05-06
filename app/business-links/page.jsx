@@ -4,7 +4,7 @@ import { createPortal } from "react-dom";
 import { Link, X, Edit3, Trash2, CheckCircle, Loader } from '../components/Icons';
 import { MyContext } from '../context/context';
 import axios from 'axios';
-import { toast } from "react-toastify";
+import { useToast } from "../components/Toast";
 import DOMPurify from 'dompurify';
 import WarningModal from "./Pages/WarningModal"
 import ConfirmModal from "./Pages/ConfirmModal"
@@ -12,6 +12,7 @@ import Header from '../components/LandingPage/header';
 import { getTranslation } from '../translations/others';
 
 function EditUserLinks() {
+  const toast = useToast();
   const { EmailUser, userLinks, setUserLinks, loadingAll, userDetails } = useContext(MyContext);
   const t = getTranslation(userDetails?.displayLanguage || 'en');
   const [loadingAction, setLoadingAction] = useState(null);
@@ -51,7 +52,7 @@ function EditUserLinks() {
       setUserLinks(prevLinks => [response.data.data, ...prevLinks]);
       setNewlyAddedId(response.data.data._id);
       setTimeout(() => setNewlyAddedId(null), 3000);
-      toast(t('businessLinks.linkAddedSuccessfully'));
+      toast.success(t('businessLinks.linkAddedSuccessfully'));
       setLink('');
       setNamelink('');
     } catch (error) {
@@ -90,12 +91,7 @@ function EditUserLinks() {
       setUserLinks(prevLinks =>
         prevLinks.map(item => (item._id === editLinkId ? response.data.data : item))
       );
-      toast(
-        <p className="flex gap-3 items-center">
-          <CheckCircle /> {t('businessLinks.linkUpdatedSuccessfully')}
-        </p>,
-        { autoClose: 3000 }
-      );
+      toast.success(t('businessLinks.linkUpdatedSuccessfully'));
       setIsEditModalOpen(false);
       setEditLinkId(null);
       setEditLinkUrl('');
@@ -122,7 +118,7 @@ function EditUserLinks() {
       setEditLinkId(null);
       setNamelink('');
       setLink('');
-      toast(t('businessLinks.linkDeletedSuccessfully'));
+      toast.success(t('businessLinks.linkDeletedSuccessfully'));
     } catch (error) {
       console.error('There was an error deleting the link!', error);
       toast.error(t('businessLinks.failedToDeleteLink'));

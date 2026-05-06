@@ -1,13 +1,14 @@
 "use client";
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { toast } from "react-toastify";
+import { useToast } from "../../components/Toast";
 import { Loader, CheckCheck, ArrowLeft, ArrowRight } from "../../components/Icons";
 import Image from "next/image";
 import { createPortal } from "react-dom";
 import { getTranslation } from '../../translations/update-profile'
 
 export default function Theme({ userData, setUserDetails }) {
+  const toast = useToast();
   const t = getTranslation(userData?.displayLanguage || 'en');
   const [selectedTheme, setSelectedTheme] = useState(userData.theme || 1);
   const [loading, setLoading] = useState(false);
@@ -56,12 +57,7 @@ export default function Theme({ userData, setUserDetails }) {
       setSelectedTheme(pendingTheme);
       setPendingTheme(null);
       setUserDetails({ ...userData, theme: pendingTheme });
-      toast(
-        <p className="flex gap-2 items-center">
-          <CheckCheck className="text-green-500" /> {t('theme.savedSuccessfully')}
-        </p>,
-        { autoClose: 1000 }
-      );
+      toast.success(t('theme.savedSuccessfully'));
     } catch (error) {
       console.error("Error updating theme:", error);
       toast.error(t('theme.errorMessage'));

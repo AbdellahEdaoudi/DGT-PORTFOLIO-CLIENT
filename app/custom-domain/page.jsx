@@ -1,13 +1,14 @@
 "use client"
 import { useState, useEffect, useContext } from 'react';
 import { MyContext } from '../context/context';
-import { toast } from 'react-toastify';
+import { useToast } from '../components/Toast';
 import { Globe, CheckCircle, AlertCircle, ExternalLink, Loader2, Trash2, X } from '../components/Icons';
 import axios from 'axios';
 import Header from '../components/LandingPage/header';
 import { getTranslation } from '../translations/others';
 
 export default function CustomDomainPage() {
+    const toast = useToast();
     const { EmailUser, userDetails } = useContext(MyContext);
     const t = getTranslation(userDetails?.displayLanguage || 'en');
     const [customDomain, setCustomDomain] = useState('');
