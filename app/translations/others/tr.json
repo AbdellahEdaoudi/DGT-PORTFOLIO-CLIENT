@@ -127,5 +127,13 @@
         "delete": "Sil",
         "cancel": "İptal",
         "close": "Kapat"
+    },
+    "accountNotFound": {
+        "title": "Hesap Bulunamadı",
+        "description": "Aradığınız hesabı bulamadık. Yeniden adlandırılmış olabilir veya kullanıcı abone olmamış olabilir",
+        "subscribe": "Şimdi Abone Ol",
+        "returnHome": "Ana Sayfaya Dön",
+        "contactSupport": "Destek ile İletişime Geç",
+        "rights": "Tüm hakları saklıdır."
     }
 }

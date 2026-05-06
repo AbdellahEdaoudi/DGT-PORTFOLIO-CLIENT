@@ -127,5 +127,13 @@
         "delete": "Excluir",
         "cancel": "Cancelar",
         "close": "Fechar"
+    },
+    "accountNotFound": {
+        "title": "Conta Não Encontrada",
+        "description": "Não conseguimos localizar a conta que você está procurando. Ela pode ter sido renomeada ou o usuário não está inscrito",
+        "subscribe": "Inscrever-se Agora",
+        "returnHome": "Voltar para Início",
+        "contactSupport": "Contatar Suporte",
+        "rights": "Todos los derechos reservados."
     }
 }

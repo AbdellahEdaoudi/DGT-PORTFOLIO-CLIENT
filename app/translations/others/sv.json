@@ -127,5 +127,13 @@
         "delete": "Ta bort",
         "cancel": "Avbryt",
         "close": "Stäng"
+    },
+    "accountNotFound": {
+        "title": "Kontot hittades inte",
+        "description": "Vi kunde inte hitta kontot du letar efter. Det kan ha ändrats eller så har användaren ingen prenumeration.",
+        "subscribe": "Prenumerera nu",
+        "returnHome": "Tillbaka till startsidan",
+        "contactSupport": "Kontakta support",
+        "rights": "Alla rättigheter förbehållna."
     }
 }

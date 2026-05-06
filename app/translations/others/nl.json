@@ -127,5 +127,13 @@
         "delete": "Verwijderen",
         "cancel": "Annuleren",
         "close": "Sluiten"
+    },
+    "accountNotFound": {
+        "title": "Account niet gefunden",
+        "description": "We konden het account dat u zoekt niet vinden. Het is mogelijk hernoemd of de gebruiker heeft geen abonnement",
+        "subscribe": "Nu abonneren",
+        "returnHome": "Terug naar startpagina",
+        "contactSupport": "Contact support",
+        "rights": "Alle rechten voorbehouden."
     }
 }

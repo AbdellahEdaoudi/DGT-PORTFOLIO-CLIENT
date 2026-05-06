@@ -127,5 +127,13 @@
         "delete": "删除",
         "cancel": "取消",
         "close": "关闭"
+    },
+    "accountNotFound": {
+        "title": "未找到帐户",
+        "description": "我们找不到您要查找的帐户。它可能已被重命名，或者用户尚未订阅",
+        "subscribe": "立即订阅",
+        "returnHome": "返回首页",
+        "contactSupport": "联系支持",
+        "rights": "版权所有。"
     }
 }

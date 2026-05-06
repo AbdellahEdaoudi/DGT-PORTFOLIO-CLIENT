@@ -127,5 +127,13 @@
         "delete": "Elimina",
         "cancel": "Annulla",
         "close": "Chiudi"
+    },
+    "accountNotFound": {
+        "title": "Account Non Trovato",
+        "description": "Non siamo riusciti a trovare l'account che stai cercando. Potrebbe essere stato rinominato o l'utente non è abbonato",
+        "subscribe": "Iscriviti Ora",
+        "returnHome": "Torna alla Home",
+        "contactSupport": "Contatta Supporto",
+        "rights": "Tutti i diritti riservati."
     }
 }

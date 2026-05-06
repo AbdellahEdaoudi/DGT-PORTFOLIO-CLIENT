@@ -22,9 +22,6 @@ const dictionaries = {
     en, ar, es, fr, ru, ja, zh, de, nl, pt, it, hi, tr, ko, id, pl, sv, vi
 };
 
-export const getOthersTranslation = (lang) => {
-    return dictionaries[lang] || dictionaries['en'];
-};
 
 export const getTranslation = (lang) => {
     const dict = dictionaries[lang] || dictionaries['en'];

@@ -127,5 +127,13 @@
         "delete": "Delete",
         "cancel": "Cancel",
         "close": "Close"
+    },
+    "accountNotFound": {
+        "title": "Account Not Found",
+        "description": "We couldn't locate the account you're looking for. It might be renamed or the user hasn't subscribed",
+        "subscribe": "Subscribe Now",
+        "returnHome": "Return to Home page",
+        "contactSupport": "Contact Support",
+        "rights": "All rights reserved."
     }
 }

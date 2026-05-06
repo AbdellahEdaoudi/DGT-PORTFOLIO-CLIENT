@@ -127,5 +127,13 @@
         "delete": "Löschen",
         "cancel": "Abbrechen",
         "close": "Schließen"
+    },
+    "accountNotFound": {
+        "title": "Konto nicht gefunden",
+        "description": "Wir konnten das gesuchte Konto nicht finden. Es wurde möglicherweise umbenannt oder der Benutzer hat kein Abonnement",
+        "subscribe": "Jetzt abonnieren",
+        "returnHome": "Zurück zur Startseite",
+        "contactSupport": "Support kontaktieren",
+        "rights": "Alle Rechte vorbehalten."
     }
 }

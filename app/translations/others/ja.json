@@ -127,5 +127,13 @@
         "delete": "削除",
         "cancel": "キャンセル",
         "close": "閉じる"
+    },
+    "accountNotFound": {
+        "title": "アカウントが見つかりません",
+        "description": "お探しのアカウントが見つかりませんでした。名前が変更されたか、ユーザーが登録していない可能性があります",
+        "subscribe": "今すぐ登録",
+        "returnHome": "ホームページに戻る",
+        "contactSupport": "サポートに連絡",
+        "rights": "無断複写・転載を禁じます。"
     }
 }

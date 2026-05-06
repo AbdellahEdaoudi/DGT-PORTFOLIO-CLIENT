@@ -127,5 +127,13 @@
         "delete": "Hapus",
         "cancel": "Batal",
         "close": "Tutup"
+    },
+    "accountNotFound": {
+        "title": "Akun Tidak Ditemukan",
+        "description": "Kami không thể tìm thấy tài khoản bạn tìm kiếm. Có thể nó đã được đổi tên hoặc người dùng chưa đăng ký",
+        "subscribe": "Đăng ký ngay",
+        "returnHome": "Quay lại trang chủ",
+        "contactSupport": "Liên hệ hỗ trợ",
+        "rights": "Bản quyền được bảo hộ."
     }
 }
