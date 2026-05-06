@@ -1,0 +1,91 @@
+{
+    "navbar": {
+        "features": "Funktioner",
+        "showcase": "Visa upp",
+        "pricing": "Prissättning",
+        "auth": {
+            "signIn": "Logga in",
+            "getStarted": "Kom igång",
+            "updateProfile": "Uppdatera profil",
+            "businessLinks": "Affärslänkar",
+            "support": "Support",
+            "signOut": "Logga ut",
+            "customDomain": "Anpassad domän",
+            "subscriptions": "Prenumerationer"
+        }
+    },
+    "hero": {
+        "title_part1": "Din portfolio,",
+        "title_part2": "förbättrad",
+        "description": "Ingen kod, inget krångel. Få en professionell portfolio på 5 minuter som ökar dina chanser att få jobb eller frilansuppdrag. Visa upp din karriär, dina färdigheter, projekt och arbetslänkar som aldrig förr - lämna ett varaktigt intryck och lås upp nya möjligheter.",
+        "free_trial": "Gratis i 7 dagar",
+        "start_building": "Börja bygga",
+        "watch_demo": "Se demo"
+    },
+    "features": {
+        "title": "Varför välja DGT Portfolio",
+        "subtitle": "Allt du behöver för att visa upp ditt bästa arbete och nå dina drömmöjligheter",
+        "items": [
+            {
+                "title": "Kodfri design",
+                "description": "Skapa fantastiska portfolios utan att skriva en enda rad kod"
+            },
+            {
+                "title": "Anpassad underdomän",
+                "description": "Få en personlig underdomän som <strong>dittnamn.dgtportfolio.com</strong> för din portfolio"
+            },
+            {
+                "title": "QR-kod profil",
+                "description": "Generera en QR-kod för din portfolio som du kan ladda ner eller dela direkt"
+            },
+            {
+                "title": "Flera teman",
+                "description": "Välj mellan olika teman för att personifiera din portfolios utseende och känsla"
+            },
+            {
+                "title": "Enkel länkdelning",
+                "description": "Dela din portfoliolänk var som helst med bara ett klick"
+            },
+            {
+                "title": "Blixtsnabb",
+                "description": "Otroligt snabba laddningstider som håller besökarna engagerade"
+            }
+        ]
+    },
+    "pricing": {
+        "title": "Enkel, transparent prissättning",
+        "subtitle": "Välj den perfekta planen för din kreativa portfolio",
+        "plans": [
+            {
+                "name": "Månadsplan",
+                "description": "$1 för månaden",
+                "price": "$1",
+                "period": "/månad",
+                "cta": "Prenumerera månadsvis"
+            },
+            {
+                "name": "6-månadersplan",
+                "description": "Bra erbjudande på medellång sikt",
+                "price": "$5",
+                "period": "/6 månader",
+                "cta": "Prenumerera 6 månader"
+            },
+            {
+                "name": "Årsplan",
+                "description": "Bästa värde",
+                "price": "$9",
+                "period": "/år",
+                "cta": "Prenumerera årsvis",
+                "badge": "Rekommenderas"
+            }
+        ]
+    },
+    "cta": {
+        "title": "Redo att visa din talang?",
+        "subtitle": "Gå med tusentals kreatörer som bygger sina drömportfolios idag",
+        "button": "Skapa din portfolio"
+    },
+    "footer": {
+        "rights": "Alla rättigheter förbehållna."
+    }
+}

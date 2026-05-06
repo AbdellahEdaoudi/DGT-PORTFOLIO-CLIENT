@@ -122,5 +122,10 @@
         "promoReq": "プロモコードを入力してください",
         "promoApplied": "プロモコードが適用されました！",
         "invalidPromo": "無効なプロモコード"
+    },
+    "confirmModal": {
+        "delete": "削除",
+        "cancel": "キャンセル",
+        "close": "閉じる"
     }
 }

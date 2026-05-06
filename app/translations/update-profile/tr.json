@@ -29,13 +29,15 @@
         "tip": "Özetinizi kısa ve ilgi çekici tutun. En güçlü becerilerinize ve müşterilere veya işverenlere sunduğunuz benzersiz değere odaklanın.",
         "confirmTitle": "Emin misiniz?",
         "confirmMessage": "Bu işlem özetinizdeki tüm metni silecek. Bu işlem geri alınamaz.",
-        "cancel": "İptal"
+        "cancel": "İptal",
+        "close": "Kapat"
     },
     "displayLanguage": {
         "title": "Görüntüleme Dili",
         "description": "Portföyünüzün ziyaretçilere gösterileceği dili seçin.",
         "save": "Kaydet",
-        "saving": "Kaydediliyor..."
+        "saving": "Kaydediliyor...",
+        "errorMessage": "Görüntüleme dili güncellenemedi"
     },
     "skills": {
         "title": "Beceriler",
@@ -46,7 +48,8 @@
         "saving": "Kaydediliyor...",
         "save": "Kaydet",
         "cancel": "İptal",
-        "delete": "Sil"
+        "delete": "Sil",
+        "maxLimit": "10 Maks"
     },
     "bgColor": {
         "title": "Arka plan rengi",
@@ -84,7 +87,8 @@
         "thisCertificate": "bu sertifika",
         "cancel": "İptal",
         "delete": "Sil",
-        "certificatePreview": "Sertifika Önizlemesi"
+        "certificatePreview": "Sertifika Önizlemesi",
+        "maxLimit": "10 Maks"
     },
     "education": {
         "title": "Eğitim",
@@ -115,7 +119,8 @@
         "saving": "Kaydediliyor...",
         "deleteConfirm": "Bu eğitimi silmek istediğinizden emin misiniz?",
         "thisEducation": "bu eğitim",
-        "cancel": "İptal"
+        "cancel": "İptal",
+        "maxLimit": "10 Maks"
     },
     "experience": {
         "title": "Deneyim",
@@ -146,7 +151,8 @@
         "saving": "Kaydediliyor...",
         "deleteConfirm": "Bu deneyimi silmek istediğinizden emin misiniz?",
         "thisExperience": "bu deneyim",
-        "cancel": "İptal"
+        "cancel": "İptal",
+        "maxLimit": "10 Maks"
     },
     "languages": {
         "title": "Diller",
@@ -158,7 +164,9 @@
         "deleteConfirm": "Bu dili silmek istediğinizden emin misiniz?",
         "thisLanguage": "bu dil",
         "cancel": "İptal",
-        "delete": "Sil"
+        "delete": "Sil",
+        "maxLimit": "10 Maks",
+        "close": "Kapat"
     },
     "projects": {
         "title": "Projeler",
@@ -189,7 +197,8 @@
         "saving": "Kaydediliyor...",
         "deleteConfirm": "Bu projeyi silmek istediğinizden emin misiniz?",
         "thisProject": "bu proje",
-        "cancel": "İptal"
+        "cancel": "İptal",
+        "maxLimit": "10 Maks"
     },
     "tabs": {
         "services": "Hizmetler",
@@ -218,7 +227,9 @@
         "deleteConfirm": "Bu hizmeti silmek istediğinizden emin misiniz?",
         "thisService": "bu hizmet",
         "cancel": "İptal",
-        "delete": "Sil"
+        "delete": "Sil",
+        "maxLimit": "10 Maks",
+        "close": "Kapat"
     },
     "socials": {
         "title": "Sosyal Medya Bağlantıları",
@@ -240,5 +251,20 @@
         "themeLabel": "Tema",
         "next": "Sonraki",
         "previous": "Önceki"
+    },
+    "sideTabs": {
+        "displayLanguage": "🌍 Görüntüleme Dili",
+        "about": "📝 Hakkında",
+        "skills": "💡 Yetenekler",
+        "services": "💼 Hizmetler",
+        "education": "🎓 Eğitim",
+        "experience": "⭐ Deneyim",
+        "projects": "🚀 Projeler",
+        "certificates": "🏅 Sertifikalar",
+        "languages": "🌐 Diller",
+        "socials": "🔗 Sosyal Medya",
+        "bgcolor": "🎨 Arka Plan Rengi",
+        "theme": "🧩 Tema",
+        "sectionOrdering": "🏗 Düzenleme"
     }
 }

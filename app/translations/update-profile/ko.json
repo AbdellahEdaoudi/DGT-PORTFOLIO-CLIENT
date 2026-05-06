@@ -29,13 +29,15 @@
         "tip": "요약을 간결하고 매력적으로 유지하세요. 가장 강력한 기술과 클라이언트 또는 고용주에게 제공하는 고유한 가치에 집중하세요.",
         "confirmTitle": "확실하십니까?",
         "confirmMessage": "이 작업은 요약의 모든 텍스트를 삭제합니다. 이 작업은 취소할 수 없습니다.",
-        "cancel": "취소"
+        "cancel": "취소",
+        "close": "닫기"
     },
     "displayLanguage": {
         "title": "표시 언어",
         "description": "방문자에게 포트폴리오가 표시될 언어를 선택하세요.",
         "save": "저장",
-        "saving": "저장 중..."
+        "saving": "저장 중...",
+        "errorMessage": "표시 언어 업데이트 실패"
     },
     "skills": {
         "title": "기술",
@@ -46,7 +48,8 @@
         "saving": "저장 중...",
         "save": "저장",
         "cancel": "취소",
-        "delete": "삭제"
+        "delete": "삭제",
+        "maxLimit": "최대 10개"
     },
     "bgColor": {
         "title": "배경색",
@@ -84,7 +87,8 @@
         "thisCertificate": "이 자격증",
         "cancel": "취소",
         "delete": "삭제",
-        "certificatePreview": "자격증 미리보기"
+        "certificatePreview": "자격증 미리보기",
+        "maxLimit": "최대 10개"
     },
     "education": {
         "title": "학력",
@@ -115,7 +119,8 @@
         "saving": "저장 중...",
         "deleteConfirm": "이 학력을 삭제하시겠습니까?",
         "thisEducation": "이 학력",
-        "cancel": "취소"
+        "cancel": "취소",
+        "maxLimit": "최대 10개"
     },
     "experience": {
         "title": "경력",
@@ -146,7 +151,8 @@
         "saving": "저장 중...",
         "deleteConfirm": "이 경력을 삭제하시겠습니까?",
         "thisExperience": "이 경력",
-        "cancel": "취소"
+        "cancel": "취소",
+        "maxLimit": "최대 10개"
     },
     "languages": {
         "title": "언어",
@@ -158,7 +164,9 @@
         "deleteConfirm": "이 언어를 삭제하시겠습니까?",
         "thisLanguage": "이 언어",
         "cancel": "취소",
-        "delete": "삭제"
+        "delete": "삭제",
+        "maxLimit": "최대 10개",
+        "close": "닫기"
     },
     "projects": {
         "title": "프로젝트",
@@ -189,7 +197,8 @@
         "saving": "저장 중...",
         "deleteConfirm": "이 프로젝트를 삭제하시겠습니까?",
         "thisProject": "이 프로젝트",
-        "cancel": "취소"
+        "cancel": "취소",
+        "maxLimit": "최대 10개"
     },
     "tabs": {
         "services": "서비스",
@@ -218,7 +227,9 @@
         "deleteConfirm": "이 서비스를 삭제하시겠습니까?",
         "thisService": "이 서비스",
         "cancel": "취소",
-        "delete": "삭제"
+        "delete": "삭제",
+        "maxLimit": "최대 10개",
+        "close": "닫기"
     },
     "socials": {
         "title": "소셜 미디어 링크",
@@ -240,5 +251,20 @@
         "themeLabel": "테마",
         "next": "다음",
         "previous": "이전"
+    },
+    "sideTabs": {
+        "displayLanguage": "🌍 표시 언어",
+        "about": "📝 정보",
+        "skills": "💡 기술",
+        "services": "💼 서비스",
+        "education": "🎓 교육",
+        "experience": "⭐ 경력",
+        "projects": "🚀 프로젝트",
+        "certificates": "🏅 자격증",
+        "languages": "🌐 언어",
+        "socials": "🔗 소셜 미디어",
+        "bgcolor": "🎨 배경색",
+        "theme": "🧩 테마",
+        "sectionOrdering": "🏗 배치"
     }
 }

@@ -20,6 +20,8 @@ export async function generateStaticParams() {
         { lang: 'hi' },
         { lang: 'id' },
         { lang: 'pl' },
+        { lang: 'sv' },
+        { lang: 'vi' }
     ];
 }
 

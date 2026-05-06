@@ -20,13 +20,15 @@ export default function LanguageSwitcher() {
         { code: "it", label: "Italiano", flag: "it" },
         { code: "nl", label: "Nederlands", flag: "nl" },
         { code: "ru", label: "Русский", flag: "ru" },
+        { code: "sv", label: "Svenska", flag: "se" },
         { code: "tr", label: "Türkçe", flag: "tr" },
+        { code: "hi", label: "हिन्दी", flag: "in" },
+        { code: "vi", label: "Tiếng Việt", flag: "vn" },
         { code: "id", label: "Bahasa Indonesia", flag: "id" },
         { code: "pl", label: "Polski", flag: "pl" },
         { code: "zh", label: "中文", flag: "cn" },
         { code: "ja", label: "日本語", flag: "jp" },
         { code: "ko", label: "한국어", flag: "kr" },
-        { code: "hi", label: "हिन्दी", flag: "in" },
     ]
 
     // Detect current language

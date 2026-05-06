@@ -714,7 +714,7 @@ export default function Projects({ userData, setUserDetails }) {
               <button
                 onClick={() => setProjectToDelete(null)}
                 className="absolute top-4 right-4 text-gray-400 hover:text-gray-600 transition p-1 rounded-full hover:bg-gray-100"
-                title="Close"
+                title={t("projects.close") || "Close"}
               >
                 <X className="w-5 h-5" />
               </button>
@@ -727,7 +727,8 @@ export default function Projects({ userData, setUserDetails }) {
                 <div className="text-gray-600 mb-6 text-base leading-relaxed">
                   <div className="flex flex-col gap-2">
                     <span className="font-semibold text-gray-800">
-                      Are you sure you want to delete this project?
+                      {t("projects.deleteConfirm") ||
+                        "Are you sure you want to delete this project?"}
                     </span>
                     <span className="font-bold text-black border-t pt-2 mt-1 break-all">
                       "

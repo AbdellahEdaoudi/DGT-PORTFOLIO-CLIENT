@@ -1,0 +1,131 @@
+{
+    "customDomain": {
+        "enterDomain": "Vui lòng nhập tên miền",
+        "verificationFailed": "Xác minh thất bại",
+        "domainRemovedSuccess": "Đã xóa tên miền thành công",
+        "errorRemovingDomain": "Lỗi khi xóa tên miền",
+        "title": "Tên miền tùy chỉnh",
+        "subtitle": "Kết nối tên miền riêng của bạn với hồ sơ",
+        "yourDomainName": "Tên miền của bạn",
+        "placeholder": "example.com",
+        "save": "Lưu",
+        "domainActiveVerified": "Tên miền đang hoạt động & Đã xác minh",
+        "verificationPending": "Đang chờ xác minh",
+        "domainConfigured": "Tên miền của bạn đã được cấu hình và hoạt động hoàn hảo!",
+        "verifyOwnership": "Vui lòng xác minh quyền sở hữu tên miền bằng cách cấu hình các bản ghi DNS",
+        "visitSite": "Truy cập trang web",
+        "removeDomain": "Xóa tên miền",
+        "dnsConfiguration": "Cấu hình DNS",
+        "connectDomainSteps": "Để kết nối tên miền của bạn, hãy làm theo các bước sau:",
+        "step1Login": "Đăng nhập vào nhà đăng ký tên miền của bạn (GoDaddy, Namecheap, v.v.)",
+        "step2Navigate": "Đi đến phần cài đặt DNS/quản lý DNS",
+        "step3AddRecord": "Thêm bản ghi A sau đây:",
+        "type": "Loại",
+        "name": "Tên",
+        "value": "Giá trị",
+        "note": "Ghi chú",
+        "dnsPropagationNote": "Quá trình cập nhật DNS có thể mất tới 48 giờ",
+        "verifyingDns": "Đang xác minh DNS...",
+        "verifyDnsConfiguration": "Xác minh cấu hình DNS",
+        "removeTitle": "Xóa tên miền tùy chỉnh?",
+        "removeDesc1": "Bạn có chắc muốn xóa ",
+        "removeDesc2": " khỏi hồ sơ của mình không?",
+        "cancel": "Hủy"
+    },
+    "businessLinks": {
+        "title": "Liên kết công việc",
+        "linkTitle": "Tiêu đề",
+        "exampleWebsite": "Trang web của tôi",
+        "link": "Liên kết",
+        "exampleUrl": "https://example.com",
+        "addLink": "Thêm liên kết",
+        "linkAddedSuccessfully": "Đã thêm liên kết thành công",
+        "failedToAddLink": "Thêm liên kết thất bại",
+        "linkUpdatedSuccessfully": "Đã cập nhật liên kết thành công",
+        "failedToUpdateLink": "Cập nhật liên kết thất bại",
+        "linkDeletedSuccessfully": "Đã xóa liên kết thành công",
+        "failedToDeleteLink": "Xóa liên kết thất bại",
+        "edit": "Chỉnh sửa",
+        "delete": "Xóa",
+        "noLinksFound": "Chưa có liên kết nào được thêm.",
+        "deleteLinkConfirm": "Bạn có chắc muốn xóa liên kết này không?",
+        "updateLink": "Cập nhật liên kết"
+    },
+    "support": {
+        "successMessage": "Đã gửi tin nhắn thành công!",
+        "tooManyRequests": "Quá nhiều yêu cầu. Vui lòng thử lại sau.",
+        "errorMessage": "Đã xảy ra lỗi. Vui lòng thử lại.",
+        "getInTouch": "Liên hệ với chúng tôi",
+        "weLoveToHear": "Chúng tôi rất muốn nghe từ bạn! Hãy gửi tin nhắn cho chúng tôi và chúng tôi sẽ phản hồi sớm nhất có thể.",
+        "contactSupport": "Liên hệ hỗ trợ",
+        "email": "Email",
+        "enterEmail": "Nhập email của bạn",
+        "subject": "Chủ đề",
+        "enterSubject": "Nhập chủ đề",
+        "message": "Tin nhắn",
+        "enterMessage": "Nhập nội dung tin nhắn",
+        "attachment": "Tệp đính kèm",
+        "uploadImage": "Tải ảnh lên (Tùy chọn)",
+        "sending": "Đang gửi...",
+        "sendMessage": "Gửi tin nhắn"
+    },
+    "success": {
+        "paymentSuccessful": "Thanh toán thành công!",
+        "subscriptionActive": "Gói đăng ký của bạn hiện đã hoạt động. Cảm ơn bạn đã mua hàng!",
+        "goToHome": "Về trang chủ"
+    },
+    "subscription": {
+        "promoMonthly": {
+            "name": "Khuyến mãi hàng tháng",
+            "description": "Ưu đãi đặc biệt",
+            "period": "/tháng"
+        },
+        "promo6Month": {
+            "name": "Khuyến mãi 6 tháng",
+            "description": "Giá trị tốt cho 6 tháng",
+            "period": "/6 tháng"
+        },
+        "promoAnnual": {
+            "name": "Khuyến mãi hàng năm",
+            "description": "Ưu đãi tốt nhất trong năm",
+            "period": "/năm"
+        },
+        "subMonthly": {
+            "name": "Đăng ký hàng tháng",
+            "description": "$1 cho mỗi tháng",
+            "period": "/tháng"
+        },
+        "sub6Months": {
+            "name": "Đăng ký 6 tháng",
+            "description": "Ưu đãi trung hạn tuyệt vời",
+            "period": "/6 tháng"
+        },
+        "subYearly": {
+            "name": "Đăng ký hàng năm",
+            "description": "Giá trị tốt nhất",
+            "period": "/năm"
+        },
+        "recommended": "Đề xuất",
+        "placeholder": "Mã khuyến mãi",
+        "applyBtn": "Áp dụng",
+        "verifyingBtn": "Đang xác minh...",
+        "activeSubscription": "GÓI ĐĂNG KÝ ĐANG HOẠT ĐỘNG",
+        "portfolioVisible": "Hồ sơ của bạn hiện đang hiển thị với khách truy cập nhờ gói đăng ký này.",
+        "renewalDate": "Ngày gia hạn/hết hạn:",
+        "cancelSub": "Hủy đăng ký",
+        "confirmCancel": "Xác nhận hủy",
+        "cancelWarning": "Bạn có chắc chắn muốn hủy gói đăng ký của mình không? Hồ sơ của bạn sẽ không còn hiển thị với khách truy cập sau khi chu kỳ hiện tại kết thúc.",
+        "yesCancel": "Vâng, Hủy đăng ký",
+        "keepSub": "Giữ gói đăng ký của tôi",
+        "cancelSuccess": "Đã hủy gói đăng ký thành công.",
+        "cancelFailed": "Hủy gói đăng ký thất bại.",
+        "promoReq": "Vui lòng nhập mã khuyến mãi",
+        "promoApplied": "Đã áp dụng mã khuyến mãi!",
+        "invalidPromo": "Mã khuyến mãi không hợp lệ"
+    },
+    "confirmModal": {
+        "delete": "Xóa",
+        "cancel": "Hủy",
+        "close": "Đóng"
+    }
+}

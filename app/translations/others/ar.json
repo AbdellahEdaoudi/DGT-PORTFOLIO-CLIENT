@@ -122,5 +122,10 @@
         "promoReq": "الرجاء إدخال كود الخصم",
         "promoApplied": "تم تطبيق كود الخصم!",
         "invalidPromo": "كود خصم غير صالح"
+    },
+    "confirmModal": {
+        "delete": "حذف",
+        "cancel": "إلغاء",
+        "close": "إغلاق"
     }
 }

@@ -36,7 +36,7 @@ export const metadata = {
       },
     ],
     locale: "en_US",
-    alternateLocales: ["fr_FR", "es_ES", "ar_AR", "de_DE", "ru_RU", "ja_JP", "zh_CN", "nl_NL", "pt_PT", "it_IT", "tr_TR", "hi_IN", "ko_KR"],
+    alternateLocales: ["fr_FR", "es_ES", "ar_AR", "de_DE", "ru_RU", "ja_JP", "zh_CN", "nl_NL", "pt_PT", "it_IT", "tr_TR", "hi_IN", "ko_KR", "sv_SE", "vi_VN"],
     type: "website",
   },
   twitter: {
@@ -62,6 +62,8 @@ export const metadata = {
       'tr': '/tr',
       'hi': '/hi',
       'ko': '/ko',
+      'sv': '/sv',
+      'vi': '/vi',
     },
   },
 };

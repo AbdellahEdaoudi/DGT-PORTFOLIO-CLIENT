@@ -122,5 +122,10 @@
         "promoReq": "프로모션 코드를 입력해주세요",
         "promoApplied": "프로모션 코드가 적용되었습니다!",
         "invalidPromo": "잘못된 프로모션 코드"
+    },
+    "confirmModal": {
+        "delete": "삭제",
+        "cancel": "취소",
+        "close": "닫기"
     }
 }

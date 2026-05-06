@@ -15,9 +15,11 @@ import tr from './tr.json';
 import ko from './ko.json';
 import id from './id.json';
 import pl from './pl.json';
+import sv from './sv.json';
+import vi from './vi.json';
 
 const dictionaries = {
-    en, ar, es, fr, ru, ja, zh, de, nl, pt, it, hi, tr, ko, id, pl
+    en, ar, es, fr, ru, ja, zh, de, nl, pt, it, hi, tr, ko, id, pl, sv, vi
 };
 
 export const getPortfolioTranslation = (lang) => {

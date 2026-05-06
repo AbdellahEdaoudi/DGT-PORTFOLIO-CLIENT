@@ -95,6 +95,8 @@ export async function generateMetadata() {
           'hi': 'https://dgtportfolio.com/hi',
           'id': 'https://dgtportfolio.com/id',
           'pl': 'https://dgtportfolio.com/pl',
+          'sv': 'https://dgtportfolio.com/sv',
+          'vi': 'https://dgtportfolio.com/vi',
         },
       },
     };

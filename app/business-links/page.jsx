@@ -210,7 +210,7 @@ function EditUserLinks() {
                 ) : (userLinks.length >= 10 ? "10 Max" : t('businessLinks.addLink'))}
               </button>
             </form>
-            <WarningModal />
+            <WarningModal t={t} />
           </div>
           {/* Links */}
           <div className='space-y-3 grid grid-cols-1'>
@@ -286,6 +286,7 @@ function EditUserLinks() {
         isOpen={confirmOpen}
         onConfirm={handleConfirmDelete}
         onCancel={handleCancelDelete}
+        t={t}
         message={
           <div className="flex flex-col gap-2">
             <p>{t('businessLinks.deleteLinkConfirm')}</p>

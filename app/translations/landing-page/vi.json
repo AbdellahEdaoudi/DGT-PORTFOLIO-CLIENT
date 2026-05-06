@@ -1,0 +1,91 @@
+{
+    "navbar": {
+        "features": "Tính năng",
+        "showcase": "Trưng bày",
+        "pricing": "Bảng giá",
+        "auth": {
+            "signIn": "Đăng nhập",
+            "getStarted": "Bắt đầu",
+            "updateProfile": "Cập nhật hồ sơ",
+            "businessLinks": "Liên kết công việc",
+            "support": "Hỗ trợ",
+            "signOut": "Đăng xuất",
+            "customDomain": "Tên miền tùy chỉnh",
+            "subscriptions": "Gói đăng ký"
+        }
+    },
+    "hero": {
+        "title_part1": "Hồ sơ của bạn,",
+        "title_part2": "Đẳng cấp hơn",
+        "description": "Không cần code, không rắc rối. Có ngay hồ sơ chuyên nghiệp trong 5 phút giúp tăng cơ hội tìm việc làm hoặc dự án tự do. Trưng bày sự nghiệp, kỹ năng, dự án và các liên kết công việc của bạn hơn bao giờ hết - để lại ấn tượng khó phai và mở ra những cơ hội mới.",
+        "free_trial": "Miễn phí trong 7 ngày",
+        "start_building": "Bắt đầu xây dựng",
+        "watch_demo": "Xem bản demo"
+    },
+    "features": {
+        "title": "Tại sao chọn DGT Portfolio",
+        "subtitle": "Mọi thứ bạn cần để trưng bày những công trình tốt nhất và nắm bắt cơ hội mơ ước",
+        "items": [
+            {
+                "title": "Thiết kế không cần code",
+                "description": "Tạo hồ sơ ấn tượng mà không cần viết một dòng mã nào"
+            },
+            {
+                "title": "Tên miền phụ tùy chỉnh",
+                "description": "Có ngay tên miền phụ cá nhân như <strong>tenban.dgtportfolio.com</strong> cho hồ sơ của bạn"
+            },
+            {
+                "title": "Mã QR hồ sơ",
+                "description": "Tạo mã QR cho hồ sơ của bạn để tải về hoặc chia sẻ ngay lập tức"
+            },
+            {
+                "title": "Nhiều giao diện",
+                "description": "Chọn từ các giao diện khác nhau để cá nhân hóa diện mạo hồ sơ của bạn"
+            },
+            {
+                "title": "Chia sẻ liên kết dễ dàng",
+                "description": "Chia sẻ liên kết hồ sơ của bạn ở bất cứ đâu chỉ với một cú nhấp chuột"
+            },
+            {
+                "title": "Tốc độ cực nhanh",
+                "description": "Thời gian tải trang cực nhanh giúp giữ chân khách truy cập"
+            }
+        ]
+    },
+    "pricing": {
+        "title": "Bảng giá đơn giản, minh bạch",
+        "subtitle": "Chọn gói dịch vụ hoàn hảo cho hồ sơ sáng tạo của bạn",
+        "plans": [
+            {
+                "name": "Gói hàng tháng",
+                "description": "$1 cho mỗi tháng",
+                "price": "$1",
+                "period": "/tháng",
+                "cta": "Đăng ký hàng tháng"
+            },
+            {
+                "name": "Gói 6 tháng",
+                "description": "Ưu đãi trung hạn tuyệt vời",
+                "price": "$5",
+                "period": "/6 tháng",
+                "cta": "Đăng ký 6 tháng"
+            },
+            {
+                "name": "Gói hàng năm",
+                "description": "Giá trị tốt nhất",
+                "price": "$9",
+                "period": "/năm",
+                "cta": "Đăng ký hàng năm",
+                "badge": "Đề xuất"
+            }
+        ]
+    },
+    "cta": {
+        "title": "Sẵn sàng thể hiện tài năng của bạn?",
+        "subtitle": "Tham gia cùng hàng ngàn nhà sáng tạo đang xây dựng hồ sơ mơ ước của họ ngay hôm nay",
+        "button": "Tạo hồ sơ của bạn"
+    },
+    "footer": {
+        "rights": "Bản quyền đã được bảo hộ."
+    }
+}

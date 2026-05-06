@@ -305,7 +305,7 @@ export default function Services({ userData, setUserDetails }) {
             className={`w-full text-white py-2 rounded-lg flex items-center justify-center gap-2 transition-all duration-300 ${services.length >= 10 ? "bg-gray-400 cursor-not-allowed" : "bg-gradient-to-r from-teal-500 to-green-600 hover:from-teal-600 hover:to-green-700"}`}
           >
             <Plus size={18} />{" "}
-            {services.length >= 10 ? "10 Max" : t("services.addService")}
+            {services.length >= 10 ? t("services.maxLimit") : t("services.addService")}
           </button>
         </div>
       </div>
@@ -340,7 +340,7 @@ export default function Services({ userData, setUserDetails }) {
               <button
                 onClick={() => setItemToDelete(null)}
                 className="absolute top-4 right-4 text-gray-400 hover:text-gray-600 transition p-1 rounded-full hover:bg-gray-100"
-                title="Close"
+                title={t("services.close") || "Close"}
               >
                 <X className="w-5 h-5" />
               </button>
@@ -353,7 +353,8 @@ export default function Services({ userData, setUserDetails }) {
                 <div className="text-gray-600 mb-6 text-base leading-relaxed">
                   <div className="flex flex-col gap-2">
                     <span className="font-semibold text-gray-800">
-                      Are you sure you want to delete this service?
+                      {t("services.deleteConfirm") ||
+                        "Are you sure you want to delete this service?"}
                     </span>
                     <span className="font-bold text-black border-t pt-2 mt-1 break-all">
                       "

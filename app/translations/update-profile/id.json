@@ -29,13 +29,15 @@
         "tip": "Buat ringkasan Anda singkat dan menarik. Fokus pada keterampilan terkuat Anda dan nilai unik yang Anda tawarkan kepada klien atau pemberi kerja.",
         "confirmTitle": "Apakah Anda yakin?",
         "confirmMessage": "Tindakan ini akan menghapus semua teks dalam ringkasan Anda. Ini tidak dapat dibatalkan.",
-        "cancel": "Batal"
+        "cancel": "Batal",
+        "close": "Tutup"
     },
     "displayLanguage": {
         "title": "Bahasa Tampilan",
         "description": "Pilih bahasa di mana portofolio Anda akan ditampilkan kepada pengunjung.",
         "save": "Simpan",
-        "saving": "Menyimpan..."
+        "saving": "Menyimpan...",
+        "errorMessage": "Gagal memperbarui bahasa tampilan"
     },
     "skills": {
         "title": "Keahlian",
@@ -46,7 +48,8 @@
         "saving": "Menyimpan...",
         "save": "Simpan",
         "cancel": "Batal",
-        "delete": "Hapus"
+        "delete": "Hapus",
+        "maxLimit": "10 Maks"
     },
     "bgColor": {
         "title": "Warna Latar Belakang",
@@ -84,7 +87,8 @@
         "thisCertificate": "sertifikat ini",
         "cancel": "Batal",
         "delete": "Hapus",
-        "certificatePreview": "Pratinjau Sertifikat"
+        "certificatePreview": "Pratinjau Sertifikat",
+        "maxLimit": "10 Maks"
     },
     "education": {
         "title": "Pendidikan",
@@ -115,7 +119,8 @@
         "saving": "Menyimpan...",
         "deleteConfirm": "Apakah Anda yakin ingin menghapus pendidikan ini?",
         "thisEducation": "pendidikan ini",
-        "cancel": "Batal"
+        "cancel": "Batal",
+        "maxLimit": "10 Maks"
     },
     "experience": {
         "title": "Pengalaman",
@@ -146,7 +151,8 @@
         "saving": "Menyimpan...",
         "deleteConfirm": "Apakah Anda yakin ingin menghapus pengalaman ini?",
         "thisExperience": "pengalaman ini",
-        "cancel": "Batal"
+        "cancel": "Batal",
+        "maxLimit": "10 Maks"
     },
     "languages": {
         "title": "Bahasa",
@@ -158,7 +164,9 @@
         "deleteConfirm": "Apakah Anda yakin ingin menghapus bahasa ini?",
         "thisLanguage": "bahasa ini",
         "cancel": "Batal",
-        "delete": "Hapus"
+        "delete": "Hapus",
+        "maxLimit": "10 Maks",
+        "close": "Tutup"
     },
     "projects": {
         "title": "Proyek",
@@ -189,7 +197,8 @@
         "saving": "Menyimpan...",
         "deleteConfirm": "Apakah Anda yakin ingin menghapus proyek ini?",
         "thisProject": "proyek ini",
-        "cancel": "Batal"
+        "cancel": "Batal",
+        "maxLimit": "10 Maks"
     },
     "tabs": {
         "services": "Layanan",
@@ -218,7 +227,9 @@
         "deleteConfirm": "Apakah Anda yakin ingin menghapus layanan ini?",
         "thisService": "layanan ini",
         "cancel": "Batal",
-        "delete": "Hapus"
+        "delete": "Hapus",
+        "maxLimit": "10 Maks",
+        "close": "Tutup"
     },
     "socials": {
         "title": "Tautan Media Sosial",
@@ -240,5 +251,20 @@
         "themeLabel": "Tema",
         "next": "Berikutnya",
         "previous": "Sebelumnya"
+    },
+    "sideTabs": {
+        "displayLanguage": "🌍 Bahasa Tampilan",
+        "about": "📝 Tentang",
+        "skills": "💡 Keahlian",
+        "services": "💼 Layanan",
+        "education": "🎓 Pendidikan",
+        "experience": "⭐ Pengalaman",
+        "projects": "🚀 Proyek",
+        "certificates": "🏅 Sertifikat",
+        "languages": "🌐 Bahasa",
+        "socials": "🔗 Sosial",
+        "bgcolor": "🎨 Warna Latar",
+        "theme": "🧩 Tema",
+        "sectionOrdering": "🏗 Urutan"
     }
 }

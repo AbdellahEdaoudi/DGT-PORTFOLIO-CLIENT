@@ -29,13 +29,15 @@
         "tip": "Halten Sie Ihre Zusammenfassung kurz und ansprechend. Konzentrieren Sie sich auf Ihre stärksten Fähigkeiten und den einzigartigen Wert, den Sie Kunden oder Arbeitgebern bieten.",
         "confirmTitle": "Sind Sie sicher?",
         "confirmMessage": "Diese Aktion löscht den gesamten Text in Ihrer Zusammenfassung. Dies kann nicht rückgängig gemacht werden.",
-        "cancel": "Abbrechen"
+        "cancel": "Abbrechen",
+        "close": "Schließen"
     },
     "displayLanguage": {
         "title": "Anzeigesprache",
         "description": "Wählen Sie die Sprache, in der Ihr Portfolio Besuchern angezeigt werden soll.",
         "save": "Speichern",
-        "saving": "Speichern..."
+        "saving": "Speichern...",
+        "errorMessage": "Fehler beim Aktualisieren der Anzeigesprache"
     },
     "skills": {
         "title": "Fähigkeiten",
@@ -46,7 +48,8 @@
         "saving": "Speichern...",
         "save": "Speichern",
         "cancel": "Abbrechen",
-        "delete": "Löschen"
+        "delete": "Löschen",
+        "maxLimit": "10 Max"
     },
     "bgColor": {
         "title": "Hintergrundfarbe",
@@ -84,7 +87,8 @@
         "thisCertificate": "dieses Zertifikat",
         "cancel": "Abbrechen",
         "delete": "Löschen",
-        "certificatePreview": "Zertifikatsvorschau"
+        "certificatePreview": "Zertifikatsvorschau",
+        "maxLimit": "10 Max"
     },
     "education": {
         "title": "Ausbildung",
@@ -115,7 +119,8 @@
         "saving": "Speichern...",
         "deleteConfirm": "Sind Sie sicher, dass Sie diese Ausbildung löschen möchten?",
         "thisEducation": "diese Ausbildung",
-        "cancel": "Abbrechen"
+        "cancel": "Abbrechen",
+        "maxLimit": "10 Max"
     },
     "experience": {
         "title": "Erfahrung",
@@ -146,7 +151,8 @@
         "saving": "Speichern...",
         "deleteConfirm": "Sind Sie sicher, dass Sie diese Erfahrung löschen möchten?",
         "thisExperience": "diese Erfahrung",
-        "cancel": "Abbrechen"
+        "cancel": "Abbrechen",
+        "maxLimit": "10 Max"
     },
     "languages": {
         "title": "Sprachen",
@@ -158,7 +164,9 @@
         "deleteConfirm": "Sind Sie sicher, dass Sie diese Sprache löschen möchten?",
         "thisLanguage": "diese Sprache",
         "cancel": "Abbrechen",
-        "delete": "Löschen"
+        "delete": "Löschen",
+        "maxLimit": "10 Max",
+        "close": "Schließen"
     },
     "projects": {
         "title": "Projekte",
@@ -189,7 +197,8 @@
         "saving": "Speichern...",
         "deleteConfirm": "Sind Sie sicher, dass Sie dieses Projekt löschen möchten?",
         "thisProject": "dieses Projekt",
-        "cancel": "Abbrechen"
+        "cancel": "Abbrechen",
+        "maxLimit": "10 Max"
     },
     "tabs": {
         "services": "Dienstleistungen",
@@ -218,7 +227,9 @@
         "deleteConfirm": "Sind Sie sicher, dass Sie diese Dienstleistung löschen möchten?",
         "thisService": "diese Dienstleistung",
         "cancel": "Abbrechen",
-        "delete": "Löschen"
+        "delete": "Löschen",
+        "maxLimit": "10 Max",
+        "close": "Schließen"
     },
     "socials": {
         "title": "Social Media Links",
@@ -240,5 +251,20 @@
         "themeLabel": "Thema",
         "next": "Nächste",
         "previous": "Vorherige"
+    },
+    "sideTabs": {
+        "displayLanguage": "🌍 Anzeigesprache",
+        "about": "📝 Über",
+        "skills": "💡 Fähigkeiten",
+        "services": "💼 Dienstleistungen",
+        "education": "🎓 Bildung",
+        "experience": "⭐ Erfahrung",
+        "projects": "🚀 Projekte",
+        "certificates": "🏅 Zertifikate",
+        "languages": "🌐 Sprachen",
+        "socials": "🔗 Soziale Medien",
+        "bgcolor": "🎨 Hintergrundfarbe",
+        "theme": "🧩 Thema",
+        "sectionOrdering": "🏗 Anordnung"
     }
 }

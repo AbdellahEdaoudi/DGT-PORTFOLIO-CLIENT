@@ -122,5 +122,10 @@
         "promoReq": "Bitte geben Sie einen Promo-Code ein",
         "promoApplied": "Promo-Code angewendet!",
         "invalidPromo": "Ungültiger Promo-Code"
+    },
+    "confirmModal": {
+        "delete": "Löschen",
+        "cancel": "Abbrechen",
+        "close": "Schließen"
     }
 }

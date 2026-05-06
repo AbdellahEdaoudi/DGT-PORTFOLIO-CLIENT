@@ -122,5 +122,10 @@
         "promoReq": "Silakan masukkan kode promo",
         "promoApplied": "Kode promo diterapkan!",
         "invalidPromo": "Kode promo tidak valid"
+    },
+    "confirmModal": {
+        "delete": "Hapus",
+        "cancel": "Batal",
+        "close": "Tutup"
     }
 }

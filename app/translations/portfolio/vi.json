@@ -1,0 +1,43 @@
+{
+    "portfolio": "Hồ sơ",
+    "about": "Giới thiệu",
+    "aboutMe": "Về tôi",
+    "services": "Dịch vụ",
+    "workExperience": "Kinh nghiệm làm việc",
+    "experience": "Kinh nghiệm",
+    "skills": "Kỹ năng",
+    "projects": "Dự án",
+    "education": "Học vấn",
+    "certificates": "Chứng chỉ",
+    "languages": "Ngôn ngữ",
+    "viewProject": "Xem dự án",
+    "field": "Ngành học",
+    "followMe": "Theo dõi tôi",
+    "allRightsReserved": "Bản quyền đã được bảo hộ",
+    "country": "Quốc gia",
+    "phone": "Điện thoại",
+    "description": "Mô tả",
+    "helloIm": "Xin chào, tôi là",
+    "qrcode": {
+        "qrCodeProfile": "Mã QR",
+        "downloadQrCode": "Tải về",
+        "shareQrCode": "Chia sẻ QR",
+        "shareLink": "Chia sẻ liên kết",
+        "copyLink": "Sao chép liên kết",
+        "checkOutQrCode": "Hãy xem mã QR này!",
+        "sharingFailed": "Chia sẻ thất bại",
+        "webShareApiUnsupported": "Trình duyệt của bạn không hỗ trợ Web Share API.",
+        "successfulShare": "Chia sẻ thành công",
+        "errorSharing": "Lỗi khi chia sẻ",
+        "shareUnsupported": "Chia sẻ không được hỗ trợ trên trình duyệt này"
+    },
+    "userlinks": {
+        "businessLinks": "Liên kết công việc",
+        "noBusinessLinks": "Không có liên kết công việc nào.",
+        "close": "Đóng"
+    },
+    "welcometomyworld": "Chào mừng bạn đến với thế giới của tôi",
+    "readMore": "Đọc thêm",
+    "readLess": "Thu gọn",
+    "verified": "Đã xác minh"
+}

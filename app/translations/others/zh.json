@@ -122,5 +122,10 @@
         "promoReq": "请输入优惠码",
         "promoApplied": "优惠码已应用！",
         "invalidPromo": "无效的优惠码"
+    },
+    "confirmModal": {
+        "delete": "删除",
+        "cancel": "取消",
+        "close": "关闭"
     }
 }

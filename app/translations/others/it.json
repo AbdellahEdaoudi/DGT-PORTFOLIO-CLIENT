@@ -122,5 +122,10 @@
         "promoReq": "Inserisci un codice promozionale",
         "promoApplied": "Codice promozionale applicato!",
         "invalidPromo": "Codice promozionale non valido"
+    },
+    "confirmModal": {
+        "delete": "Elimina",
+        "cancel": "Annulla",
+        "close": "Chiudi"
     }
 }

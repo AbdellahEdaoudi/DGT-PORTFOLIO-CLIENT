@@ -29,13 +29,15 @@
         "tip": "サマリーは簡潔で魅力的なものにしてください。最も得意なスキルと、クライアントや雇用主に提供できる独自の価値に焦点を当ててください。",
         "confirmTitle": "よろしいですか？",
         "confirmMessage": "この操作により、サマリー内のすべてのテキストが削除されます。これは元に戻せません。",
-        "cancel": "キャンセル"
+        "cancel": "キャンセル",
+        "close": "閉じる"
     },
     "displayLanguage": {
         "title": "表示言語",
         "description": "訪問者にポートフォリオが表示される言語を選択してください。",
         "save": "保存",
-        "saving": "保存中..."
+        "saving": "保存中...",
+        "errorMessage": "表示言語の更新に失敗しました"
     },
     "skills": {
         "title": "スキル",
@@ -46,7 +48,8 @@
         "saving": "保存中...",
         "save": "保存",
         "cancel": "キャンセル",
-        "delete": "削除"
+        "delete": "削除",
+        "maxLimit": "最大10"
     },
     "bgColor": {
         "title": "背景色",
@@ -84,7 +87,8 @@
         "thisCertificate": "この証明書",
         "cancel": "キャンセル",
         "delete": "削除",
-        "certificatePreview": "証明書のプレビュー"
+        "certificatePreview": "証明書のプレビュー",
+        "maxLimit": "最大10"
     },
     "education": {
         "title": "学歴",
@@ -115,7 +119,8 @@
         "saving": "保存中...",
         "deleteConfirm": "この学歴を削除してもよろしいですか？",
         "thisEducation": "この学歴",
-        "cancel": "キャンセル"
+        "cancel": "キャンセル",
+        "maxLimit": "最大10"
     },
     "experience": {
         "title": "経験",
@@ -146,7 +151,8 @@
         "saving": "保存中...",
         "deleteConfirm": "この経験を削除してもよろしいですか？",
         "thisExperience": "この経験",
-        "cancel": "キャンセル"
+        "cancel": "キャンセル",
+        "maxLimit": "最大10"
     },
     "languages": {
         "title": "言語",
@@ -158,7 +164,9 @@
         "deleteConfirm": "この言語を削除してもよろしいですか？",
         "thisLanguage": "この言語",
         "cancel": "キャンセル",
-        "delete": "削除"
+        "delete": "削除",
+        "maxLimit": "最大10",
+        "close": "閉じる"
     },
     "projects": {
         "title": "プロジェクト",
@@ -189,7 +197,8 @@
         "saving": "保存中...",
         "deleteConfirm": "このプロジェクトを削除してもよろしいですか？",
         "thisProject": "このプロジェクト",
-        "cancel": "キャンセル"
+        "cancel": "キャンセル",
+        "maxLimit": "最大10"
     },
     "tabs": {
         "services": "サービス",
@@ -218,7 +227,9 @@
         "deleteConfirm": "このサービスを削除してもよろしいですか？",
         "thisService": "このサービス",
         "cancel": "キャンセル",
-        "delete": "削除"
+        "delete": "削除",
+        "maxLimit": "最大10",
+        "close": "閉じる"
     },
     "socials": {
         "title": "ソーシャルメディアリンク",
@@ -240,5 +251,20 @@
         "themeLabel": "テーマ",
         "next": "次へ",
         "previous": "前へ"
+    },
+    "sideTabs": {
+        "displayLanguage": "🌍 表示言語",
+        "about": "📝 について",
+        "skills": "💡 スキル",
+        "services": "💼 サービス",
+        "education": "🎓 学歴",
+        "experience": "⭐ 経験",
+        "projects": "🚀 プロジェクト",
+        "certificates": "🏅 証明書",
+        "languages": "🌐 言語",
+        "socials": "🔗 ソーシャル",
+        "bgcolor": "🎨 背景色",
+        "theme": "🧩 テーマ",
+        "sectionOrdering": "🏗 配置"
     }
 }

@@ -1,0 +1,131 @@
+{
+    "customDomain": {
+        "enterDomain": "Vänligen ange en domän",
+        "verificationFailed": "Verifiering misslyckades",
+        "domainRemovedSuccess": "Domän borttagen framgångsrikt",
+        "errorRemovingDomain": "Fel vid borttagning av domän",
+        "title": "Anpassad domän",
+        "subtitle": "Anslut din egen domän till din portfolio",
+        "yourDomainName": "Ditt domännamn",
+        "placeholder": "exempel.se",
+        "save": "Spara",
+        "domainActiveVerified": "Domän aktiv och verifierad",
+        "verificationPending": "Verifiering väntar",
+        "domainConfigured": "Din domän är konfigurerad och fungerar perfekt!",
+        "verifyOwnership": "Vänligen verifiera domänägande genom att konfigurera DNS-poster",
+        "visitSite": "Besök webbplats",
+        "removeDomain": "Ta bort domän",
+        "dnsConfiguration": "DNS-konfiguration",
+        "connectDomainSteps": "För att ansluta din domän, följ dessa steg:",
+        "step1Login": "Logga in på din domänregistrator (GoDaddy, Namecheap, etc.)",
+        "step2Navigate": "Navigera till DNS-inställningar/DNS-hantering",
+        "step3AddRecord": "Lägg till följande A-post:",
+        "type": "Typ",
+        "name": "Namn",
+        "value": "Värde",
+        "note": "Notera",
+        "dnsPropagationNote": "DNS-spridning kan ta upp till 48 timmar",
+        "verifyingDns": "Verifierar DNS...",
+        "verifyDnsConfiguration": "Verifiera DNS-konfiguration",
+        "removeTitle": "Ta bort anpassad domän?",
+        "removeDesc1": "Är du säker på att du vill ta bort ",
+        "removeDesc2": " från din portfolio?",
+        "cancel": "Avbryt"
+    },
+    "businessLinks": {
+        "title": "Affärslänkar",
+        "linkTitle": "Titel",
+        "exampleWebsite": "Min webbplats",
+        "link": "Länk",
+        "exampleUrl": "https://exempel.se",
+        "addLink": "Lägg till länk",
+        "linkAddedSuccessfully": "Länk tillagd framgångsrikt",
+        "failedToAddLink": "Misslyckades med att lägga till länk",
+        "linkUpdatedSuccessfully": "Länk uppdaterad framgångsrikt",
+        "failedToUpdateLink": "Misslyckades med att uppdatera länk",
+        "linkDeletedSuccessfully": "Länk borttagen framgångsrikt",
+        "failedToDeleteLink": "Misslyckades med att ta bort länk",
+        "edit": "Redigera",
+        "delete": "Ta bort",
+        "noLinksFound": "Inga länkar tillagda än.",
+        "deleteLinkConfirm": "Är du säker på att du vill ta bort denna länk?",
+        "updateLink": "Uppdatera länk"
+    },
+    "support": {
+        "successMessage": "Meddelande skickat framgångsrikt!",
+        "tooManyRequests": "För många förfrågningar. Försök igen senare.",
+        "errorMessage": "Ett fel uppstod. Försök igen.",
+        "getInTouch": "Kontakta oss",
+        "weLoveToHear": "Vi vill gärna höra från dig! Skicka ett meddelande så svarar vi så snart som möjligt.",
+        "contactSupport": "Kontakta support",
+        "email": "E-post",
+        "enterEmail": "Ange din e-post",
+        "subject": "Ämne",
+        "enterSubject": "Ange ämne",
+        "message": "Meddelande",
+        "enterMessage": "Ange ditt meddelande",
+        "attachment": "Bilaga",
+        "uploadImage": "Ladda upp bild (valfritt)",
+        "sending": "Skickar...",
+        "sendMessage": "Skicka meddelande"
+    },
+    "success": {
+        "paymentSuccessful": "Betalning lyckades!",
+        "subscriptionActive": "Din prenumeration är nu aktiv. Tack för ditt köp!",
+        "goToHome": "Gå till hem"
+    },
+    "subscription": {
+        "promoMonthly": {
+            "name": "Månadskampanj",
+            "description": "Specialerbjudande",
+            "period": "/månad"
+        },
+        "promo6Month": {
+            "name": "6-månaderskampanj",
+            "description": "Bra värde för 6 månader",
+            "period": "/6 månader"
+        },
+        "promoAnnual": {
+            "name": "Årskampanj",
+            "description": "Bästa dealen för året",
+            "period": "/år"
+        },
+        "subMonthly": {
+            "name": "Månadsprenumeration",
+            "description": "$1 för månaden",
+            "period": "/månad"
+        },
+        "sub6Months": {
+            "name": "6-månadersprenumeration",
+            "description": "Bra erbjudande på medellång sikt",
+            "period": "/6 månader"
+        },
+        "subYearly": {
+            "name": "Årsprenumeration",
+            "description": "Bästa värde",
+            "period": "/år"
+        },
+        "recommended": "Rekommenderas",
+        "placeholder": "Kampanjkod",
+        "applyBtn": "Använd",
+        "verifyingBtn": "Verifierar...",
+        "activeSubscription": "AKTIV PRENUMERATION",
+        "portfolioVisible": "Din portfolio är för närvarande synlig för besökare tack vare denna prenumeration.",
+        "renewalDate": "Förnyelse-/utgångsdatum:",
+        "cancelSub": "Avbryt prenumeration",
+        "confirmCancel": "Bekräfta avbrytande",
+        "cancelWarning": "Är du helt säker på att du vill avbryta din prenumeration? Din portfolio kommer inte längre att vara synlig för besökare när din nuvarande cykel tar slut.",
+        "yesCancel": "Ja, avbryt prenumeration",
+        "keepSub": "Behåll min prenumeration",
+        "cancelSuccess": "Prenumeration avbruten framgångsrikt.",
+        "cancelFailed": "Misslyckades med att avbryta prenumeration.",
+        "promoReq": "Vänligen ange en kampanjkod",
+        "promoApplied": "Kampanjkod använd!",
+        "invalidPromo": "Ogiltig kampanjkod"
+    },
+    "confirmModal": {
+        "delete": "Ta bort",
+        "cancel": "Avbryt",
+        "close": "Stäng"
+    }
+}

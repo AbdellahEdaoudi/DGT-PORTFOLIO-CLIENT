@@ -29,13 +29,15 @@
         "tip": "保持摘要简洁且引人入胜。专注于你最强的技能以及你为客户或雇主提供的独特价值。",
         "confirmTitle": "你确定吗？",
         "confirmMessage": "此操作将删除摘要中的所有文本。此操作无法撤销。",
-        "cancel": "取消"
+        "cancel": "取消",
+        "close": "关闭"
     },
     "displayLanguage": {
         "title": "显示语言",
         "description": "选择您的作品集向访问者显示的语言。",
         "save": "保存",
-        "saving": "保存中..."
+        "saving": "保存中...",
+        "errorMessage": "更新显示语言失败"
     },
     "skills": {
         "title": "技能",
@@ -46,7 +48,8 @@
         "saving": "保存中...",
         "save": "保存",
         "cancel": "取消",
-        "delete": "删除"
+        "delete": "删除",
+        "maxLimit": "最多10个"
     },
     "bgColor": {
         "title": "背景颜色",
@@ -84,7 +87,8 @@
         "thisCertificate": "此证书",
         "cancel": "取消",
         "delete": "删除",
-        "certificatePreview": "证书预览"
+        "certificatePreview": "证书预览",
+        "maxLimit": "最多10个"
     },
     "education": {
         "title": "教育经历",
@@ -115,7 +119,8 @@
         "saving": "保存中...",
         "deleteConfirm": "您确定要删除此教育经历吗？",
         "thisEducation": "此教育经历",
-        "cancel": "取消"
+        "cancel": "取消",
+        "maxLimit": "最多10个"
     },
     "experience": {
         "title": "经验",
@@ -146,7 +151,8 @@
         "saving": "保存中...",
         "deleteConfirm": "您确定要删除此经验吗？",
         "thisExperience": "此经验",
-        "cancel": "取消"
+        "cancel": "取消",
+        "maxLimit": "最多10个"
     },
     "languages": {
         "title": "语言",
@@ -158,7 +164,9 @@
         "deleteConfirm": "您确定要删除此语言吗？",
         "thisLanguage": "此语言",
         "cancel": "取消",
-        "delete": "删除"
+        "delete": "删除",
+        "maxLimit": "最多10个",
+        "close": "关闭"
     },
     "projects": {
         "title": "项目",
@@ -189,7 +197,8 @@
         "saving": "保存中...",
         "deleteConfirm": "您确定要删除此项目吗？",
         "thisProject": "此项目",
-        "cancel": "取消"
+        "cancel": "取消",
+        "maxLimit": "最多10个"
     },
     "tabs": {
         "services": "服务",
@@ -218,7 +227,9 @@
         "deleteConfirm": "您确定要删除此服务吗？",
         "thisService": "此服务",
         "cancel": "取消",
-        "delete": "删除"
+        "delete": "删除",
+        "maxLimit": "最多10个",
+        "close": "关闭"
     },
     "socials": {
         "title": "社交媒体链接",
@@ -240,5 +251,20 @@
         "themeLabel": "主题",
         "next": "下一步",
         "previous": "上一步"
+    },
+    "sideTabs": {
+        "displayLanguage": "🌍 显示语言",
+        "about": "📝 关于",
+        "skills": "💡 技能",
+        "services": "💼 服务",
+        "education": "🎓 教育",
+        "experience": "⭐ 经验",
+        "projects": "🚀 项目",
+        "certificates": "🏅 证书",
+        "languages": "🌐 语言",
+        "socials": "🔗 社交",
+        "bgcolor": "🎨 背景颜色",
+        "theme": "🧩 主题",
+        "sectionOrdering": "🏗 排列"
     }
 }

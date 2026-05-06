@@ -1,6 +1,6 @@
 import Image from "next/image";
 
-const WarningModal = () => (
+const WarningModal = ({ t }) => (
     <dialog id="my_modal_2" className="modal">
         <div className="modal-box">
             <Image
@@ -12,7 +12,7 @@ const WarningModal = () => (
             />
         </div>
         <form method="dialog" className="modal-backdrop">
-            <button>Close</button>
+            <button>{t ? t('confirmModal.close') : 'Close'}</button>
         </form>
     </dialog>
 );

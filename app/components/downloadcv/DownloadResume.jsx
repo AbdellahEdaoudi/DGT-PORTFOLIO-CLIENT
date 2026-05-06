@@ -175,6 +175,18 @@ export default function DownloadResume({ userDetails, className }) {
             loading: (name) => `Pobieranie CV dla ${name}...`,
             cancel: 'Anuluj',
         },
+        sv: {
+            waitTitle: 'Vänligen vänta...',
+            title: 'Ladda ner CV',
+            loading: (name) => `Laddar ner CV för ${name}...`,
+            cancel: 'Avbryt',
+        },
+        vi: {
+            waitTitle: 'Vui lòng chờ...',
+            title: 'Tải xuống CV',
+            loading: (name) => `Đang tải xuống CV cho ${name}...`,
+            cancel: 'Hủy',
+        },
     };
 
     const t = TRANSLATIONS[userDetails?.displayLanguage] || TRANSLATIONS['en'];

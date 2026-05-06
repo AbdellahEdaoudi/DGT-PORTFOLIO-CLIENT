@@ -122,5 +122,10 @@
         "promoReq": "Please enter a promo code",
         "promoApplied": "Promo code applied!",
         "invalidPromo": "Invalid promo code"
+    },
+    "confirmModal": {
+        "delete": "Delete",
+        "cancel": "Cancel",
+        "close": "Close"
     }
 }

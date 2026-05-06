@@ -29,13 +29,15 @@
         "tip": "Houd uw samenvatting beknopt en boeiend. Richt u op uw sterkste vaardigheden en de unieke waarde die u aan klanten of werkgevers biedt.",
         "confirmTitle": "Weet u het zeker?",
         "confirmMessage": "Deze actie verwijdert alle tekst in uw samenvatting. Dit kan niet ongedaan worden gemaakt.",
-        "cancel": "Annuleren"
+        "cancel": "Annuleren",
+        "close": "Sluiten"
     },
     "displayLanguage": {
         "title": "Weergavetaal",
         "description": "Kies de taal waarin uw portfolio aan bezoekers wordt getoond.",
         "save": "Opslaan",
-        "saving": "Opslaan..."
+        "saving": "Opslaan...",
+        "errorMessage": "Kan weergavetaal niet bijwerken"
     },
     "skills": {
         "title": "Vaardigheden",
@@ -46,7 +48,8 @@
         "saving": "Opslaan...",
         "save": "Opslaan",
         "cancel": "Annuleren",
-        "delete": "Verwijderen"
+        "delete": "Verwijderen",
+        "maxLimit": "10 Max"
     },
     "bgColor": {
         "title": "Achtergrondkleur",
@@ -84,7 +87,8 @@
         "thisCertificate": "dit certificaat",
         "cancel": "Annuleren",
         "delete": "Verwijderen",
-        "certificatePreview": "Certificaatvoorbeeld"
+        "certificatePreview": "Certificaatvoorbeeld",
+        "maxLimit": "10 Max"
     },
     "education": {
         "title": "Opleiding",
@@ -115,7 +119,8 @@
         "saving": "Opslaan...",
         "deleteConfirm": "Weet u zeker dat u deze opleiding wilt verwijderen?",
         "thisEducation": "deze opleiding",
-        "cancel": "Annuleren"
+        "cancel": "Annuleren",
+        "maxLimit": "10 Max"
     },
     "experience": {
         "title": "Ervaring",
@@ -146,7 +151,8 @@
         "saving": "Opslaan...",
         "deleteConfirm": "Weet u zeker dat u deze ervaring wilt verwijderen?",
         "thisExperience": "deze ervaring",
-        "cancel": "Annuleren"
+        "cancel": "Annuleren",
+        "maxLimit": "10 Max"
     },
     "languages": {
         "title": "Talen",
@@ -158,7 +164,9 @@
         "deleteConfirm": "Weet u zeker dat u deze taal wilt verwijderen?",
         "thisLanguage": "deze taal",
         "cancel": "Annuleren",
-        "delete": "Verwijderen"
+        "delete": "Verwijderen",
+        "maxLimit": "10 Max",
+        "close": "Sluiten"
     },
     "projects": {
         "title": "Projecten",
@@ -189,7 +197,8 @@
         "saving": "Opslaan...",
         "deleteConfirm": "Weet u zeker dat u dit project wilt verwijderen?",
         "thisProject": "dit project",
-        "cancel": "Annuleren"
+        "cancel": "Annuleren",
+        "maxLimit": "10 Max"
     },
     "tabs": {
         "services": "Diensten",
@@ -218,7 +227,9 @@
         "deleteConfirm": "Weet u zeker dat u deze dienst wilt verwijderen?",
         "thisService": "deze dienst",
         "cancel": "Annuleren",
-        "delete": "Verwijderen"
+        "delete": "Verwijderen",
+        "maxLimit": "10 Max",
+        "close": "Sluiten"
     },
     "socials": {
         "title": "Links naar sociale media",
@@ -240,5 +251,20 @@
         "themeLabel": "Thema",
         "next": "Volgende",
         "previous": "Vorige"
+    },
+    "sideTabs": {
+        "displayLanguage": "🌍 Weergavetaal",
+        "about": "📝 Over",
+        "skills": "💡 Vaardigheden",
+        "services": "💼 Diensten",
+        "education": "🎓 Opleiding",
+        "experience": "⭐ Ervaring",
+        "projects": "🚀 Projecten",
+        "certificates": "🏅 Certificaten",
+        "languages": "🌐 Talen",
+        "socials": "🔗 Socials",
+        "bgcolor": "🎨 Achtergrondkleur",
+        "theme": "🧩 Thema",
+        "sectionOrdering": "🏗 Rangschikking"
     }
 }

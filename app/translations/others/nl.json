@@ -122,5 +122,10 @@
         "promoReq": "Voer een promotiecode in",
         "promoApplied": "Promotiecode toegepast!",
         "invalidPromo": "Ongeldige promotiecode"
+    },
+    "confirmModal": {
+        "delete": "Verwijderen",
+        "cancel": "Annuleren",
+        "close": "Sluiten"
     }
 }

@@ -122,5 +122,10 @@
         "promoReq": "Lütfen bir promosyon kodu girin",
         "promoApplied": "Promosyon kodu uygulandı!",
         "invalidPromo": "Geçersiz promosyon kodu"
+    },
+    "confirmModal": {
+        "delete": "Sil",
+        "cancel": "İptal",
+        "close": "Kapat"
     }
 }

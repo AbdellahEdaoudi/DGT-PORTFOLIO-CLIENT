@@ -30,13 +30,15 @@
         "tip": "اجعل نبذتك قصيرة وجذابة. ركز على أقوى مهاراتك وما يمكنك تقديمه للعملاء أو أصحاب العمل.",
         "confirmTitle": "هل أنت متأكد؟",
         "confirmMessage": "سيؤدي هذا الإجراء إلى حذف كل النص الموجود في الملخص. لا يمكن التراجع عن هذا.",
-        "cancel": "إلغاء"
+        "cancel": "إلغاء",
+        "close": "إغلاق"
     },
     "displayLanguage": {
         "title": "لغة العرض",
         "description": "اختر اللغة التي سيتم بها عرض محفظتك للزوار.",
         "save": "حفظ",
-        "saving": "جاري الحفظ..."
+        "saving": "جاري الحفظ...",
+        "errorMessage": "فشل تحديث لغة العرض"
     },
     "skills": {
         "title": "المهارات",
@@ -47,7 +49,8 @@
         "saving": "جاري الحفظ...",
         "save": "حفظ",
         "cancel": "إلغاء",
-        "delete": "حذف"
+        "delete": "حذف",
+        "maxLimit": "الحد الأقصى 10"
     },
     "bgColor": {
         "title": "لون الخلفية",
@@ -85,7 +88,8 @@
         "thisCertificate": "هذه الشهادة",
         "cancel": "إلغاء",
         "delete": "حذف",
-        "certificatePreview": "معاينة الشهادة"
+        "certificatePreview": "معاينة الشهادة",
+        "maxLimit": "الحد الأقصى 10"
     },
     "education": {
         "title": "التعليم",
@@ -116,7 +120,8 @@
         "saving": "جاري الحفظ...",
         "deleteConfirm": "هل أنت متأكد أنك تريد حذف هذا المستوى التعليمي؟",
         "thisEducation": "هذا التعليم",
-        "cancel": "إلغاء"
+        "cancel": "إلغاء",
+        "maxLimit": "الحد الأقصى 10"
     },
     "experience": {
         "title": "الخبرة العملية",
@@ -147,7 +152,8 @@
         "saving": "جاري الحفظ...",
         "deleteConfirm": "هل أنت متأكد أنك تريد حذف هذه الخبرة؟",
         "thisExperience": "هذه الخبرة",
-        "cancel": "إلغاء"
+        "cancel": "إلغاء",
+        "maxLimit": "الحد الأقصى 10"
     },
     "languages": {
         "title": "اللغات",
@@ -159,7 +165,9 @@
         "deleteConfirm": "هل أنت متأكد أنك تريد حذف هذه اللغة؟",
         "thisLanguage": "هذه اللغة",
         "cancel": "إلغاء",
-        "delete": "حذف"
+        "delete": "حذف",
+        "maxLimit": "الحد الأقصى 10",
+        "close": "إغلاق"
     },
     "projects": {
         "title": "المشاريع",
@@ -190,7 +198,8 @@
         "saving": "جاري الحفظ...",
         "deleteConfirm": "هل أنت متأكد أنك تريد حذف هذا المشروع؟",
         "thisProject": "هذا المشروع",
-        "cancel": "إلغاء"
+        "cancel": "إلغاء",
+        "maxLimit": "الحد الأقصى 10"
     },
     "tabs": {
         "services": "الخدمات",
@@ -219,7 +228,9 @@
         "deleteConfirm": "هل أنت متأكد أنك تريد حذف هذه الخدمة؟",
         "thisService": "هذه الخدمة",
         "cancel": "إلغاء",
-        "delete": "حذف"
+        "delete": "حذف",
+        "maxLimit": "الحد الأقصى 10",
+        "close": "إغلاق"
     },
     "socials": {
         "title": "روابط التواصل الاجتماعي",
@@ -241,5 +252,20 @@
         "themeLabel": "المظهر",
         "next": "التالي",
         "previous": "السابق"
+    },
+    "sideTabs": {
+        "displayLanguage": "🌍 لغة العرض",
+        "about": "📝 نبذة",
+        "skills": "💡 المهارات",
+        "services": "💼 الخدمات",
+        "education": "🎓 التعليم",
+        "experience": "⭐ الخبرة",
+        "projects": "🚀 المشاريع",
+        "certificates": "🏅 الشهادات",
+        "languages": "🌐 اللغات",
+        "socials": "🔗 الشبكات الاجتماعية",
+        "bgcolor": "🎨 لون الخلفية",
+        "theme": "🧩 القوالب",
+        "sectionOrdering": "🏗 الترتيب"
     }
 }

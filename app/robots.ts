@@ -11,7 +11,6 @@ export default function robots(): MetadataRoute.Robots {
           '/admin',
           '/subscription',
           '/custom-domain',
-          '/dp/',
           '/update-profile',
           '/business-links',
           '/success',

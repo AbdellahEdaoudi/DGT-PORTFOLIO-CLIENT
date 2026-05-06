@@ -379,6 +379,32 @@ const translations = {
         viewProject: "Zobacz projekt",
         nameFallback: "Twoje Imię",
         titleFallback: "Tytuł Zawodowy"
+    },
+    sv: {
+        summary: "Professionell sammanfattning",
+        experience: "Erfarenhet",
+        skills: "Färdigheter",
+        projects: "Projekt",
+        education: "Utbildning",
+        languages: "Språk",
+        certificates: "Certifikat",
+        services: "Tjänster",
+        viewProject: "Visa projekt",
+        nameFallback: "Ditt namn",
+        titleFallback: "Yrkesroll"
+    },
+    vi: {
+        summary: "Tóm tắt chuyên môn",
+        experience: "Kinh nghiệm",
+        skills: "Kỹ năng",
+        projects: "Dự án",
+        education: "Học vấn",
+        languages: "Ngôn ngữ",
+        certificates: "Chứng chỉ",
+        services: "Dịch vụ",
+        viewProject: "Xem dự án",
+        nameFallback: "Tên của bạn",
+        titleFallback: "Chức danh nghề nghiệp"
     }
 };
 

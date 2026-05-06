@@ -1,0 +1,43 @@
+{
+    "portfolio": "Portfolio",
+    "about": "Om",
+    "aboutMe": "Om mig",
+    "services": "Tjänster",
+    "workExperience": "Arbetslivserfarenhet",
+    "experience": "Erfarenhet",
+    "skills": "Färdigheter",
+    "projects": "Projekt",
+    "education": "Utbildning",
+    "certificates": "Certifikat",
+    "languages": "Språk",
+    "viewProject": "Visa projekt",
+    "field": "Studieområde",
+    "followMe": "Följ mig",
+    "allRightsReserved": "Alla rättigheter förbehållna",
+    "country": "Land",
+    "phone": "Telefon",
+    "description": "Beskrivning",
+    "helloIm": "Hej, jag är",
+    "qrcode": {
+        "qrCodeProfile": "QR-kod",
+        "downloadQrCode": "Ladda ner",
+        "shareQrCode": "Dela QR",
+        "shareLink": "Dela länk",
+        "copyLink": "Kopiera länk",
+        "checkOutQrCode": "Kolla in denna QR-kod!",
+        "sharingFailed": "Delning misslyckades",
+        "webShareApiUnsupported": "Din webbläsare stöder inte Web Share API.",
+        "successfulShare": "Delning lyckades",
+        "errorSharing": "Fel vid delning",
+        "shareUnsupported": "Delning stöds inte i denna webbläsare"
+    },
+    "userlinks": {
+        "businessLinks": "Affärslänkar",
+        "noBusinessLinks": "Inga affärslänkar tillgängliga.",
+        "close": "Stäng"
+    },
+    "welcometomyworld": "Välkommen till min värld",
+    "readMore": "Läs mer",
+    "readLess": "Läs mindre",
+    "verified": "Verifierad"
+}

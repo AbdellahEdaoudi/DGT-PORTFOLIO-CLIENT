@@ -29,7 +29,7 @@ function DisplayLanguage({ userData, setUserDetails }) {
             }))
         } catch (error) {
             console.error("Error updating display language:", error)
-            toast.error("Failed to update display language")
+            toast.error(t("displayLanguage.errorMessage") || "Failed to update display language")
         } finally {
             setLoading(false)
         }
@@ -45,6 +45,8 @@ function DisplayLanguage({ userData, setUserDetails }) {
         { value: "de", label: "Deutsch", description: "Portfolio auf Deutsch anzeigen", flag: "de" },
         { value: "ar", label: "العربية", description: "عرض المحفظة باللغة العربية", flag: "sa" },
         { value: "nl", label: "Nederlands", description: "Portfolio in het Nederlands weergeven", flag: "nl" },
+        { value: "sv", label: "Svenska", description: "Visa portfölj på svenska", flag: "se" },
+        { value: "vi", label: "Tiếng Việt", description: "Hiển thị hồ sơ bằng tiếng Việt", flag: "vn" },
         { value: "tr", label: "Türkçe", description: "Portföyü Türkçe göster", flag: "tr" },
         { value: "ru", label: "Русский", description: "Показать портфолио на русском", flag: "ru" },
         { value: "ja", label: "日本語", description: "ポートフォリオを日本語で表示", flag: "jp" },

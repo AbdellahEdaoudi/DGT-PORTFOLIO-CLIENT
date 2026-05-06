@@ -653,7 +653,7 @@ export default function Education({ userData, setUserDetails }) {
           className={`w-full text-white py-1.5 sm:py-2 rounded-lg flex items-center justify-center gap-2 transition-all duration-300 mt-2 text-xs sm:text-base ${education.length >= 10 ? "bg-gray-400 cursor-not-allowed" : "bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700"}`}
         >
           <Plus className="w-4 h-4 sm:w-[18px] sm:h-[18px]" />{" "}
-          {education.length >= 10 ? "10 Max" : t("education.addEducation")}
+          {education.length >= 10 ? t("education.maxLimit") : t("education.addEducation")}
         </button>
       </div>
 
@@ -702,7 +702,7 @@ export default function Education({ userData, setUserDetails }) {
               <button
                 onClick={() => setItemToDelete(null)}
                 className="absolute top-4 right-4 text-gray-400 hover:text-gray-600 transition p-1 rounded-full hover:bg-gray-100"
-                title="Close"
+                title={t("education.close") || "Close"}
               >
                 <X className="w-5 h-5" />
               </button>
@@ -715,7 +715,8 @@ export default function Education({ userData, setUserDetails }) {
                 <div className="text-gray-600 mb-6 text-base leading-relaxed">
                   <div className="flex flex-col gap-2">
                     <span className="font-semibold text-gray-800">
-                      Are you sure you want to delete this education?
+                      {t("education.deleteConfirm") ||
+                        "Are you sure you want to delete this education?"}
                     </span>
                     <span className="font-bold text-black border-t pt-2 mt-1 break-all">
                       "

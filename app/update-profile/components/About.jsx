@@ -204,7 +204,7 @@ export default function About({ userData, setUserDetails }) {
             <button
               onClick={() => setShowClearModal(false)}
               className="absolute top-4 right-4 text-gray-400 hover:text-gray-600 transition p-1 rounded-full hover:bg-gray-100"
-              title="Close"
+              title={t("about.close") || "Close"}
             >
               <X className="w-5 h-5" />
             </button>
