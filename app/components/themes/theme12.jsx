@@ -9,7 +9,7 @@ import { getTranslation } from "../../translations/portfolio";
 import ImageModal from "../portfolio/ImageModal"
 import DownloadResume from "../downloadcv/DownloadResume"
 
-export default function ThemeTwelve({ userDetails, userLinks }) {
+export default function Theme12({ userDetails, userLinks }) {
     const t = getTranslation(userDetails?.displayLanguage || 'en')
     const [expanded, setExpanded] = useState(false);
     const [showQR, setShowQR] = useState(false);

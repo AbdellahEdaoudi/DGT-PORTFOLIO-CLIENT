@@ -33,9 +33,11 @@ export default function SubscriptionPage() {
             if (res.data && res.data.success) {
               setActiveSubscription(res.data.data);
               hasActiveSub = true;
+            } else {
+              console.log(res.data.message || "No active subscription found.");
             }
           } catch (err) {
-            console.log("No active subscription found.");
+            console.log("Error checking subscription:", err.message);
           }
         }
 

@@ -9,7 +9,7 @@ import { getTranslation } from "../../translations/portfolio"
 import ImageModal from "../portfolio/ImageModal"
 import DownloadResume from "../downloadcv/DownloadResume"
 
-export default function ThemeEleven({ userDetails, userLinks }) {
+export default function Theme11({ userDetails, userLinks }) {
     const t = getTranslation(userDetails?.displayLanguage || 'en')
     const [showQR, setShowQR] = useState(false);
     const [showUserLinks, setShowUserLinks] = useState(false);
@@ -200,7 +200,7 @@ export default function ThemeEleven({ userDetails, userLinks }) {
                         <div className="relative group">
                             <div className="absolute inset-0 bg-gradient-to-b from-cyan-500 to-purple-600 rounded-full blur opacity-20 group-hover:opacity-40 transition-opacity duration-500"></div>
                             <div className="relative w-48 h-48 md:w-64 md:h-64 mx-auto rounded-full overflow-hidden border-4 border-cyan-500/30 shadow-[0_0_30px_rgba(34,211,238,0.2)]">
-                                <Image
+                                <Image priority
                                     src={userDetails?.urlimage}
                                     alt={userDetails?.fullname || "Profile"}
                                     width={500}

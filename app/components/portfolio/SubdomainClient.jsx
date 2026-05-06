@@ -4,19 +4,19 @@ import axios from 'axios'
 import { MyContext } from '../../context/context'
 import MagicalLoader from '../MagicalLoader'
 import AccountNotFound from "./AccountNotFound"
-import Themeone from "../themes/themeone"
-import ThemeTwo from "../themes/themetwo"
-import ThemeThree from "../themes/themethree"
-import ThemeFour from "../themes/themefour"
-import ThemeFive from "../themes/themefive"
-import ThemeSix from "../themes/themesix"
-import ThemeSeven from "../themes/themeseven"
-import ThemeEight from "../themes/themeeight"
-import ThemeNine from "../themes/themenine"
-import ThemeTen from "../themes/themeten"
-import ThemeEleven from "../themes/themeeleven"
-import ThemeTwelve from "../themes/themetwelve"
-import ThemeThirteen from '../themes/themethirteen'
+import Theme1 from "../themes/theme1"
+import Theme2 from "../themes/theme2"
+import Theme3 from "../themes/theme3"
+import Theme4 from "../themes/theme4"
+import Theme5 from "../themes/theme5"
+import Theme6 from "../themes/theme6"
+import Theme7 from "../themes/theme7"
+import Theme8 from "../themes/theme8"
+import Theme9 from "../themes/theme9"
+import Theme10 from "../themes/theme10"
+import Theme11 from "../themes/theme11"
+import Theme12 from "../themes/theme12"
+import Theme13 from '../themes/theme13'
 
 export default function SubdomainClient({ username }) {
   const [userDetails, setUserDetails] = useState(null)
@@ -73,33 +73,33 @@ export default function SubdomainClient({ username }) {
   const renderTheme = () => {
     switch (userDetails?.theme) {
       case 1:
-        return <Themeone userDetails={userDetails} userLinks={userLinks} />
+        return <Theme1 userDetails={userDetails} userLinks={userLinks} />
       case 2:
-        return <ThemeTwo userDetails={userDetails} userLinks={userLinks} />
+        return <Theme2 userDetails={userDetails} userLinks={userLinks} />
       case 3:
-        return <ThemeThree userDetails={userDetails} userLinks={userLinks} />
+        return <Theme3 userDetails={userDetails} userLinks={userLinks} />
       case 4:
-        return <ThemeFour userDetails={userDetails} userLinks={userLinks} />
+        return <Theme4 userDetails={userDetails} userLinks={userLinks} />
       case 5:
-        return <ThemeFive userDetails={userDetails} userLinks={userLinks} />
+        return <Theme5 userDetails={userDetails} userLinks={userLinks} />
       case 6:
-        return <ThemeSix userDetails={userDetails} userLinks={userLinks} />
+        return <Theme6 userDetails={userDetails} userLinks={userLinks} />
       case 7:
-        return <ThemeSeven userDetails={userDetails} userLinks={userLinks} />
+        return <Theme7 userDetails={userDetails} userLinks={userLinks} />
       case 8:
-        return <ThemeEight userDetails={userDetails} userLinks={userLinks} />
+        return <Theme8 userDetails={userDetails} userLinks={userLinks} />
       case 9:
-        return <ThemeNine userDetails={userDetails} userLinks={userLinks} />
+        return <Theme9 userDetails={userDetails} userLinks={userLinks} />
       case 10:
-        return <ThemeTen userDetails={userDetails} userLinks={userLinks} />
+        return <Theme10 userDetails={userDetails} userLinks={userLinks} />
       case 11:
-        return <ThemeEleven userDetails={userDetails} userLinks={userLinks} />
+        return <Theme11 userDetails={userDetails} userLinks={userLinks} />
       case 12:
-        return <ThemeTwelve userDetails={userDetails} userLinks={userLinks} />
+        return <Theme12 userDetails={userDetails} userLinks={userLinks} />
       case 13:
-        return <ThemeThirteen userDetails={userDetails} userLinks={userLinks} />
+        return <Theme13 userDetails={userDetails} userLinks={userLinks} />
       default:
-        return userDetails ? <Themeone userDetails={userDetails} userLinks={userLinks} /> :
+        return userDetails ? <Theme1 userDetails={userDetails} userLinks={userLinks} /> :
           <MagicalLoader />
     }
   }

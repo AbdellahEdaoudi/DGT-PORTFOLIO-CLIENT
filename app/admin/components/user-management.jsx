@@ -5,17 +5,17 @@ import { Search, AlertCircle, Loader, X, ExternalLink } from "../../components/I
 import { useToast } from "../../components/Toast"
 import axios from "axios"
 import Image from "next/image"
-import ThemeOne from "../../components/themes/themeone"
-import ThemeTwo from "../../components/themes/themetwo"
-import ThemeThree from "../../components/themes/themethree"
-import ThemeFour from "../../components/themes/themefour"
-import ThemeFive from "../../components/themes/themefive"
-import ThemeSix from "../../components/themes/themesix"
-import ThemeSeven from "../../components/themes/themeseven"
-import ThemeEight from "../../components/themes/themeeight"
-import ThemeNine from "../../components/themes/themenine"
-import ThemeTen from "../../components/themes/themeten"
-import ThemeEleven from "../../components/themes/themeeleven"
+import ThemeOne from "../../components/themes/theme1"
+import Theme2 from "../../components/themes/theme2"
+import Theme3 from "../../components/themes/theme3"
+import Theme4 from "../../components/themes/theme4"
+import Theme5 from "../../components/themes/theme5"
+import Theme6 from "../../components/themes/theme6"
+import Theme7 from "../../components/themes/theme7"
+import Theme8 from "../../components/themes/theme8"
+import Theme9 from "../../components/themes/theme9"
+import Theme10 from "../../components/themes/theme10"
+import Theme11 from "../../components/themes/theme11"
 
 export default function UserManagement({ data, setData }) {
   const toast = useToast()
@@ -44,16 +44,16 @@ export default function UserManagement({ data, setData }) {
 
     switch (Number(themeId)) {
       case 1: return <ThemeOne userDetails={userDetails} />;
-      case 2: return <ThemeTwo userDetails={userDetails} />;
-      case 3: return <ThemeThree userDetails={userDetails} />;
-      case 4: return <ThemeFour userDetails={userDetails} />;
-      case 5: return <ThemeFive userDetails={userDetails} />;
-      case 6: return <ThemeSix userDetails={userDetails} />;
-      case 7: return <ThemeSeven userDetails={userDetails} />;
-      case 8: return <ThemeEight userDetails={userDetails} />;
-      case 9: return <ThemeNine userDetails={userDetails} />;
-      case 10: return <ThemeTen userDetails={userDetails} />;
-      case 11: return <ThemeEleven userDetails={userDetails} />;
+      case 2: return <Theme2 userDetails={userDetails} />;
+      case 3: return <Theme3 userDetails={userDetails} />;
+      case 4: return <Theme4 userDetails={userDetails} />;
+      case 5: return <Theme5 userDetails={userDetails} />;
+      case 6: return <Theme6 userDetails={userDetails} />;
+      case 7: return <Theme7 userDetails={userDetails} />;
+      case 8: return <Theme8 userDetails={userDetails} />;
+      case 9: return <Theme9 userDetails={userDetails} />;
+      case 10: return <Theme10 userDetails={userDetails} />;
+      case 11: return <Theme11 userDetails={userDetails} />;
       default: return <ThemeOne userDetails={userDetails} />;
     }
   }
@@ -349,9 +349,9 @@ export default function UserManagement({ data, setData }) {
             <div className="h-10 bg-slate-800 border-b border-slate-700 flex items-center justify-center px-4 shrink-0">
               <span className="text-xs text-slate-400 font-mono">
                 Previewing {
-                  ["ThemeOne", "ThemeTwo", "ThemeThree", "ThemeFour",
-                    "ThemeFive", "ThemeSix", "ThemeSeven", "ThemeEight",
-                    "ThemeNine", "ThemeTen", "ThemeEleven"][Number(selectedPreviewUser.theme || 1) - 1] || "ThemeOne"
+                  ["ThemeOne", "Theme2", "Theme3", "Theme4",
+                    "Theme5", "Theme6", "Theme7", "Theme8",
+                    "Theme9", "Theme10", "Theme11"][Number(selectedPreviewUser.theme || 1) - 1] || "ThemeOne"
                 } for {selectedPreviewUser.fullname}
               </span>
             </div>

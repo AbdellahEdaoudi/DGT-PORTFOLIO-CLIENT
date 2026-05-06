@@ -9,7 +9,7 @@ import { getTranslation } from "../../translations/portfolio"
 import ImageModal from "../portfolio/ImageModal"
 import DownloadResume from "../downloadcv/DownloadResume"
 
-export default function ThemeEight({ userDetails, userLinks }) {
+export default function Theme8({ userDetails, userLinks }) {
     const t = getTranslation(userDetails?.displayLanguage || 'en')
     const [activeTab, setActiveTab] = useState("about")
     const [showQR, setShowQR] = useState(false);
@@ -93,7 +93,7 @@ export default function ThemeEight({ userDetails, userLinks }) {
                         <div className="relative group">
                             <div className="absolute -inset-1 bg-gradient-to-r from-yellow-600 to-amber-600 rounded-[2rem] blur opacity-40 group-hover:opacity-75 transition duration-1000 group-hover:duration-200 animate-tilt"></div>
                             <div className="relative">
-                                <Image width={500} height={500}
+                                <Image priority width={500} height={500}
                                     src={userDetails?.urlimage}
                                     alt={userDetails?.fullname}
                                     className="w-64 h-64 md:w-80 md:h-80 rounded-[1.8rem] object-cover border-2 border-white/10 shadow-2xl transform transition duration-500 hover:scale-[1.02]"

@@ -9,7 +9,7 @@ import { getTranslation } from "../../translations/portfolio"
 import ImageModal from "../portfolio/ImageModal"
 import DownloadResume from "../downloadcv/DownloadResume"
 
-export default function ThemeFive({ userDetails, userLinks }) {
+export default function Theme5({ userDetails, userLinks }) {
   const t = getTranslation(userDetails?.displayLanguage || 'en')
   const [showQR, setShowQR] = useState(false)
   const [showUserLinks, setShowUserLinks] = useState(false)

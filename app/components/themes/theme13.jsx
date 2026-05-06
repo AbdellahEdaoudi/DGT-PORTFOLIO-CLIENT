@@ -9,7 +9,7 @@ import { getTranslation } from "../../translations/portfolio"
 import ImageModal from "../portfolio/ImageModal"
 import DownloadResume from "../downloadcv/DownloadResume"
 
-export default function ThemeTen({ userDetails, userLinks }) {
+export default function Theme13({ userDetails, userLinks }) {
     const t = getTranslation(userDetails?.displayLanguage || 'en')
     const [activeTab, setActiveTab] = useState("about")
     const [showQR, setShowQR] = useState(false);
@@ -21,26 +21,20 @@ export default function ThemeTen({ userDetails, userLinks }) {
 
     return (
         <div
+            style={{ backgroundColor: "#F8FAFC" }} // Slate-50 for a cleaner off-white
             dir={userDetails?.displayLanguage === 'ar' ? 'rtl' : 'ltr'}
-            className="min-h-screen bg-[#020617] text-slate-200 overflow-hidden relative selection:bg-indigo-500 selection:text-white">
+            className="min-h-screen text-slate-900 overflow-hidden relative selection:bg-indigo-100 selection:text-indigo-900"
+        >
             <ImageModal
                 isOpen={!!selectedImage}
                 onClose={() => setSelectedImage(null)}
                 imageSrc={selectedImage}
             />
-
-            {/* Background Effects (Dark/Indigo based) */}
+            {/* Background Mesh Gradient - Subtle and Professional */}
             <div className="fixed inset-0 -z-10 overflow-hidden pointer-events-none">
-                <div className="absolute top-0 left-0 w-[500px] h-[500px] bg-indigo-900/20 rounded-full filter blur-[100px] opacity-40 animate-blob"></div>
-                <div
-                    className="absolute top-0 right-0 w-[500px] h-[500px] bg-violet-900/20 rounded-full filter blur-[100px] opacity-40 animate-blob"
-                    style={{ animationDelay: "2s" }}
-                ></div>
-                <div
-                    className="absolute -bottom-32 left-1/3 w-[600px] h-[600px] bg-slate-800/20 rounded-full filter blur-[100px] opacity-40 animate-blob"
-                    style={{ animationDelay: "4s" }}
-                ></div>
-                <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-5 mix-blend-overlay"></div>
+                <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(circle_at_50%_0%,rgba(224,242,254,0.7),transparent_50%)]"></div>
+                <div className="absolute top-1/4 -right-20 w-[600px] h-[600px] bg-blue-100/50 rounded-full blur-[100px] mix-blend-multiply opacity-60"></div>
+                <div className="absolute -bottom-20 -left-20 w-[600px] h-[600px] bg-indigo-100/50 rounded-full blur-[100px] mix-blend-multiply opacity-60"></div>
             </div>
 
             <div className="relative z-10 px-4 md:px-8 max-w-6xl mx-auto">
@@ -48,99 +42,97 @@ export default function ThemeTen({ userDetails, userLinks }) {
                 <header className="pt-8 pb-10">
                     {/* Toolbar */}
                     <div className="flex justify-between items-center mb-8">
-                        <h1 className="text-slate-100 text-2xl font-bold cursor-pointer hover:text-indigo-400 transition-colors">
+                        <h1 className="text-slate-900 text-2xl font-extrabold tracking-tight cursor-pointer hover:text-blue-600 transition-colors">
                             <Link href={"https://dgtportfolio.com"}>{t('portfolio')}</Link>
                         </h1>
                         <div className="flex gap-3">
                             {/* Copy Link */}
-                            <DownloadResume userDetails={userDetails} className="text-white bg-white/10 hover:bg-white/20 font-bold px-5 py-3 rounded-lg transition-all duration-300 flex items-center gap-2 transform hover:scale-105 shadow-lg" />
+                            <DownloadResume userDetails={userDetails} className="text-slate-700 bg-white border border-slate-200 hover:border-blue-500/50 hover:bg-slate-50 font-bold px-5 py-3 rounded-xl transition-all duration-300 flex items-center gap-2 transform hover:scale-105 shadow-sm hover:shadow-md" />
                             {/* QR Code */}
                             <div
                                 onClick={() => setShowQR(true)}
-                                className="flex items-center gap-2 px-2 bg-slate-800/50 hover:bg-slate-700 rounded-lg text-slate-300 transition-all duration-300 border border-slate-700 hover:border-indigo-500/50 cursor-pointer"
+                                className="flex items-center gap-2 px-3 bg-white border border-slate-200 hover:border-blue-500/50 hover:bg-slate-50 rounded-xl text-slate-700 transition-all duration-300 cursor-pointer shadow-sm hover:shadow-md"
                             >
-                                <QrcodeProfile userDetails={userDetails} className="text-slate-300 border-none hover:bg-transparent" isOpen={showQR} onClose={() => setShowQR(false)} />
+                                <QrcodeProfile userDetails={userDetails} className="text-slate-700 border-none bg-transparent hover:bg-transparent shadow-none" isOpen={showQR} onClose={() => setShowQR(false)} />
                             </div>
                             {/* User Links */}
                             {userLinks?.length > 0 && (
                                 <div
                                     onClick={() => setShowUserLinks(true)}
-                                    className="flex items-center gap-2 px-2 bg-slate-800/50 hover:bg-slate-700 rounded-lg text-slate-300 transition-all duration-300 border border-slate-700 hover:border-indigo-500/50 cursor-pointer">
-                                    <UserLinks lang={userDetails?.displayLanguage} userLinks={userLinks} className="text-slate-300 border-none hover:bg-transparent" isOpen={showUserLinks} onClose={() => setShowUserLinks(false)} />
+                                    className="flex items-center gap-2 px-3 bg-white border border-slate-200 hover:border-blue-500/50 hover:bg-slate-50 rounded-xl text-slate-700 transition-all duration-300 cursor-pointer shadow-sm hover:shadow-md">
+                                    <UserLinks lang={userDetails?.displayLanguage} userLinks={userLinks} className="text-slate-700 border-none bg-transparent hover:bg-transparent shadow-none" isOpen={showUserLinks} onClose={() => setShowUserLinks(false)} />
                                 </div>
                             )}
                         </div>
                     </div>
 
                     {/* Hero Section */}
-                    <div className="flex flex-col-reverse md:flex-row gap-10 items-center justify-between mb-8">
+                    <div className={`flex flex-col-reverse md:flex-row gap-10 items-center justify-between mb-8`}>
                         <div className={`flex-1 text-center  ${userDetails?.displayLanguage === 'ar' ? 'md:text-right' : 'md:text-left'}`}>
-                            <div className="inline-block px-3 py-1 mb-4 text-xs tracking-wider text-indigo-400 uppercase bg-indigo-950/50 rounded-full border border-indigo-900/50">
+                            <div className="inline-block px-3 py-1 mb-4 text-xs font-semibold tracking-wide text-blue-700 uppercase bg-blue-50 rounded-full border border-blue-100 shadow-sm">
                                 {t('welcometomyworld')}
                             </div>
-                            <h1 className="text-5xl md:text-7xl font-bold mb-6 tracking-tight leading-tight text-white">
+                            <h1 className="text-5xl md:text-7xl font-extrabold mb-6 tracking-tight leading-none text-slate-900 drop-shadow-sm">
                                 {userDetails?.fullname}
                             </h1>
-                            <p className="text-2xl md:text-3xl font-bold text-indigo-400 mb-6 flex items-center justify-center md:justify-start gap-2">
-                                <Sparkles size={24} className="text-violet-400" />
-                                {userDetails?.category}
-                                <Sparkles size={24} className="text-violet-400" />
+                            <p className="text-2xl md:text-3xl font-bold text-slate-700 mb-6 flex items-center justify-center md:justify-start gap-2">
+                                <Sparkles size={24} className="text-amber-400 fill-amber-400" />
+                                <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-indigo-600">
+                                    {userDetails?.category}
+                                </span>
+                                <Sparkles size={24} className="text-amber-400 fill-amber-400" />
                             </p>
-                            <p className={`text-md  text-slate-400 max-w-2xl leading-relaxed mx-auto md:mx-0 ${userDetails?.displayLanguage === 'ar' ? 'text-right' : 'text-left'}`}>
+                            <p className={`text-base md:text-lg text-slate-600 max-w-2xl leading-relaxed mx-auto md:mx-0 font-medium ${userDetails?.displayLanguage === 'ar' ? 'text-right' : 'text-left'}`}>
                                 {userDetails?.about}
                             </p>
                         </div>
-                        <div className="relative group">
-                            <div className="absolute -inset-1 bg-gradient-to-r from-indigo-500 to-violet-500 rounded-[2rem] blur opacity-30 group-hover:opacity-60 transition duration-1000 group-hover:duration-200 animate-tilt"></div>
-                            <div className="relative">
-                                <Image width={500} height={500}
+                        <div className="relative group perspective-1000">
+                            <div className="absolute -inset-3 bg-gradient-to-r from-blue-500 to-indigo-500 rounded-[2rem] blur-lg opacity-20 group-hover:opacity-40 transition duration-1000 group-hover:duration-200"></div>
+                            <div className="relative transform transition-all duration-500 hover:rotate-2">
+                                <Image priority width={500} height={500}
                                     src={userDetails?.urlimage}
                                     alt={userDetails?.fullname}
-                                    className="w-64 h-64 md:w-80 md:h-80 rounded-[1.8rem] object-cover border-4 border-slate-800 shadow-2xl transform transition duration-500 hover:scale-[1.02]"
+                                    className="w-64 h-64 md:w-80 md:h-80 rounded-[1.8rem] object-cover border-[4px] border-white shadow-xl"
                                 />
                             </div>
                         </div>
                     </div>
 
                     {/* Navigation Tabs */}
-                    <div className="flex justify-center md:justify-start pb-2">
-                        <div className="flex flex-wrap justify-center md:justify-start gap-2 p-1 bg-slate-900/50 backdrop-blur-xl rounded-2xl border border-slate-800 w-full md:w-auto">
+                    <div className="flex justify-center md:justify-start pb-4">
+                        <div className="flex flex-wrap justify-center md:justify-start gap-2 p-1.5 bg-white rounded-2xl border border-slate-200 shadow-sm w-full md:w-auto">
                             {(() => {
-                                const sectionOrder = userDetails.sectionOrder && userDetails.sectionOrder.length > 0
+                                const sectionOrder = userDetails?.sectionOrder && userDetails.sectionOrder?.length > 0
                                     ? userDetails.sectionOrder
-                                    : ["services", "experience", "projects", "skills", "education", "certificates"];
+                                    : ["services", "experience", "skills", "projects", "education", "certificates"];
 
-                                const tabsMap = {
+                                const tabData = {
+                                    about: { key: "about", label: t('aboutMe'), icon: User },
                                     services: { key: "services", label: t('services'), icon: Layers, condition: userDetails?.services?.length > 0 },
-                                    experience: { key: "experience", label: t('experience'), icon: Briefcase, condition: userDetails?.experience?.length > 0 },
+                                    experience: { key: "experience", label: t('workExperience'), icon: Briefcase, condition: userDetails?.experience?.length > 0 },
                                     projects: { key: "projects", label: t('projects'), icon: Code2, condition: userDetails?.projects?.length > 0 },
                                     skills: { key: "skills", label: t('skills'), icon: Zap, condition: userDetails?.skills?.length > 0 },
                                     education: { key: "education", label: t('education'), icon: GraduationCap, condition: userDetails?.education?.length > 0 },
                                     certificates: { key: "certificates", label: t('certificates'), icon: Award, condition: userDetails?.certificates?.length > 0 },
                                 };
 
-                                const aboutTab = { key: "about", label: t('about'), icon: User };
+                                // Ensure 'about' is first, then the user ordered sections
+                                const tabsToRender = ["about", ...sectionOrder]
+                                    .map(key => tabData[key])
+                                    .filter(tab => tab && tab.condition !== false);
 
-                                const orderedTabs = [
-                                    aboutTab,
-                                    ...sectionOrder
-                                        .filter(key => tabsMap[key])
-                                        .map(key => tabsMap[key])
-                                        .filter(tab => tab.condition !== false)
-                                ];
-
-                                return orderedTabs.map((tab) => {
-                                    const Icon = tab.icon;
+                                return tabsToRender.map((tab) => {
+                                    const Icon = tab.icon || User;
                                     return (
                                         <button
                                             key={tab.key}
                                             onClick={() => setActiveTab(tab.key)}
-                                            className={`flex items-center gap-2 px-4 py-2 md:px-5 md:py-2.5 rounded-xl transition-all duration-300 whitespace-nowrap text-sm md:text-base ${activeTab === tab.key
-                                                ? "bg-indigo-600 text-white shadow-lg shadow-indigo-500/25"
-                                                : "text-slate-400 hover:text-white hover:bg-slate-800"
+                                            className={`flex items-center gap-2 px-5 py-2.5 rounded-xl transition-all duration-300 whitespace-nowrap text-sm font-medium ${activeTab === tab.key
+                                                ? "bg-slate-900 text-white shadow-lg shadow-slate-900/20 transform scale-[1.02]"
+                                                : "text-slate-500 hover:text-slate-900 hover:bg-slate-50"
                                                 }`}
                                         >
-                                            <Icon size={16} className="md:w-[18px] md:h-[18px]" />
+                                            <Icon size={18} />
                                             {tab.label}
                                         </button>
                                     );
@@ -151,49 +143,49 @@ export default function ThemeTen({ userDetails, userLinks }) {
                 </header>
 
                 {/* Main Content Area */}
-                <main className="min-h-[400px] pb-20">
+                <main className="min-h-[400px] pb-24">
                     {userDetails && (
                         <div className="animate-fadeIn">
                             {/* About Tab */}
                             {activeTab === "about" && (
                                 <div className="grid md:grid-cols-2 gap-4 md:gap-8">
-                                    <div className="bg-slate-900/50 backdrop-blur-md rounded-3xl p-5 md:p-8 border border-slate-800 shadow-lg">
-                                        <h3 className="text-2xl mb-6 flex items-center gap-2 text-white">
-                                            <User className="text-indigo-500" /> {t('aboutMe')}
+                                    <div className="bg-white rounded-3xl p-5 md:p-8 border border-slate-100 shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:shadow-[0_8px_30px_rgb(0,0,0,0.08)] transition-all duration-300">
+                                        <h3 className="text-2xl mb-6 flex items-center gap-2 text-slate-800 font-bold">
+                                            <User className="text-blue-600" /> {t('aboutMe')}
                                         </h3>
                                         <div className="space-y-4 md:space-y-6">
                                             {(userDetails.displayEmail || userDetails.email) && (
-                                                <div className="flex items-center gap-3 md:gap-4 p-3 md:p-4 bg-slate-800/50 rounded-2xl overflow-hidden border border-slate-700/50">
-                                                    <div className="w-10 h-10 rounded-full bg-indigo-900/50 flex items-center justify-center text-indigo-400 shrink-0">
+                                                <div className="flex items-center gap-3 md:gap-4 p-3 md:p-4 bg-slate-50 rounded-2xl overflow-hidden border border-slate-100">
+                                                    <div className="w-10 h-10 rounded-full bg-white shadow-sm flex items-center justify-center text-blue-600 shrink-0">
                                                         <Mail size={20} />
                                                     </div>
                                                     <div className="min-w-0">
-                                                        <p className="text-sm text-slate-400">Email</p>
-                                                        <a href={`mailto:${userDetails.displayEmail || userDetails.email}`} className="text-slate-200 hover:text-indigo-400 transition break-all text-sm md:text-base font-medium">
+                                                        <p className="text-xs font-semibold text-slate-400 uppercase tracking-wide">Email</p>
+                                                        <a href={`mailto:${userDetails.displayEmail || userDetails.email}`} className="text-slate-900 hover:text-blue-600 transition break-all text-sm md:text-base font-bold">
                                                             {userDetails.displayEmail || userDetails.email}
                                                         </a>
                                                     </div>
                                                 </div>
                                             )}
                                             {userDetails.country && (
-                                                <div className="flex items-center gap-3 md:gap-4 p-3 md:p-4 bg-slate-800/50 rounded-2xl border border-slate-700/50">
-                                                    <div className="w-10 h-10 rounded-full bg-violet-900/50 flex items-center justify-center text-violet-400 shrink-0">
+                                                <div className="flex items-center gap-3 md:gap-4 p-3 md:p-4 bg-slate-50 rounded-2xl border border-slate-100">
+                                                    <div className="w-10 h-10 rounded-full bg-white shadow-sm flex items-center justify-center text-indigo-600 shrink-0">
                                                         <Globe size={20} />
                                                     </div>
                                                     <div>
-                                                        <p className="text-sm text-slate-400">{t('country')}</p>
-                                                        <p className="text-slate-200 font-medium">{userDetails.country}</p>
+                                                        <p className="text-xs font-semibold text-slate-400 uppercase tracking-wide">{t('country')}</p>
+                                                        <p className="text-slate-900 font-bold">{userDetails.country}</p>
                                                     </div>
                                                 </div>
                                             )}
                                             {userDetails.phoneNumber && (
-                                                <div className="flex items-center gap-3 md:gap-4 p-3 md:p-4 bg-slate-800/50 rounded-2xl border border-slate-700/50">
-                                                    <div className="w-10 h-10 rounded-full bg-blue-900/50 flex items-center justify-center text-blue-400 shrink-0">
+                                                <div className="flex items-center gap-3 md:gap-4 p-3 md:p-4 bg-slate-50 rounded-2xl border border-slate-100">
+                                                    <div className="w-10 h-10 rounded-full bg-white shadow-sm flex items-center justify-center text-emerald-600 shrink-0">
                                                         <Briefcase size={20} />
                                                     </div>
                                                     <div>
-                                                        <p className="text-sm text-slate-400">{t('phone')}</p>
-                                                        <p className="text-slate-200 font-medium">{userDetails.phoneNumber}</p>
+                                                        <p className="text-xs font-semibold text-slate-400 uppercase tracking-wide">{t('phone')}</p>
+                                                        <p className="text-slate-900 font-bold">{userDetails.phoneNumber}</p>
                                                     </div>
                                                 </div>
                                             )}
@@ -201,17 +193,17 @@ export default function ThemeTen({ userDetails, userLinks }) {
                                     </div>
 
                                     {userDetails?.languages?.length > 0 && (
-                                        <div className="bg-slate-900/50 backdrop-blur-md rounded-3xl p-8 border border-slate-800 shadow-lg">
-                                            <h3 className="text-2xl mb-6 flex items-center gap-2 text-white">
-                                                <Globe className="text-violet-500" /> {t('languages')}
+                                        <div className="bg-white rounded-3xl p-8 border border-slate-100 shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:shadow-[0_8px_30px_rgb(0,0,0,0.08)] transition-all duration-300">
+                                            <h3 className="text-2xl mb-6 flex items-center gap-2 text-slate-800 font-bold">
+                                                <Globe className="text-indigo-600" /> {t('languages')}
                                             </h3>
                                             <div className="grid gap-3">
                                                 {userDetails.languages?.map((lang, i) => (
                                                     <div
                                                         key={i}
-                                                        className="flex items-center p-4 bg-slate-800/50 rounded-2xl border border-slate-700/50 hover:bg-slate-800 transition-colors"
+                                                        className="flex items-center p-4 bg-slate-50 rounded-2xl border border-slate-100 hover:border-indigo-200 transition-colors"
                                                     >
-                                                        <span className="text-slate-200 font-medium">{lang}</span>
+                                                        <span className="text-slate-700 font-bold text-lg">{lang}</span>
                                                     </div>
                                                 ))}
                                             </div>
@@ -226,13 +218,13 @@ export default function ThemeTen({ userDetails, userLinks }) {
                                     {userDetails.services?.map((service, i) => (
                                         <div
                                             key={i}
-                                            className="group p-6 bg-slate-900/50 backdrop-blur-md border border-slate-800 rounded-3xl hover:bg-slate-800 hover:shadow-xl transition-all duration-300 hover:-translate-y-1"
+                                            className="group p-6 bg-white rounded-3xl border border-slate-100 shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:shadow-[0_20px_40px_rgb(0,0,0,0.08)] hover:-translate-y-1 transition-all duration-300"
                                         >
-                                            <div className="w-12 h-12 rounded-2xl bg-indigo-900/30 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
-                                                <Layers className="text-indigo-400" size={24} />
+                                            <div className="w-12 h-12 rounded-2xl bg-blue-50 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                                                <Layers size={24} className="text-blue-600" />
                                             </div>
-                                            <h4 className="text-lg text-white font-bold mb-2">{service}</h4>
-                                            <p className="text-sm text-slate-400"></p>
+                                            <h4 className="text-lg text-slate-900 font-bold mb-2">{service}</h4>
+                                            <p className="text-slate-500 font-medium text-sm leading-relaxed"></p>
                                         </div>
                                     ))}
                                 </div>
@@ -244,7 +236,7 @@ export default function ThemeTen({ userDetails, userLinks }) {
                                     {userDetails.projects?.map((project, i) => (
                                         <div
                                             key={i}
-                                            className="group bg-slate-900/50 backdrop-blur-md border border-slate-800 rounded-3xl overflow-hidden hover:shadow-2xl transition-all duration-500"
+                                            className="group bg-white rounded-3xl border border-slate-100 shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:shadow-[0_20px_40px_rgb(0,0,0,0.08)] overflow-hidden transition-all duration-500"
                                         >
                                             <div className="flex flex-col md:flex-row">
                                                 {project.image && (
@@ -257,12 +249,12 @@ export default function ThemeTen({ userDetails, userLinks }) {
                                                             onClick={() => setSelectedImage(project.image)}
                                                             className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 cursor-pointer"
                                                         />
-                                                        <div className="absolute inset-0 bg-gradient-to-r from-violet-900/50 to-transparent mix-blend-multiply pointer-events-none"></div>
+                                                        <div className="absolute inset-0 bg-black/0 group-hover:bg-black/5 transition-colors duration-300 pointer-events-none"></div>
                                                     </div>
                                                 )}
                                                 <div className="flex-1 p-4 md:p-8">
                                                     <div className="flex justify-between items-start mb-4">
-                                                        <h3 className="text-2xl font-bold text-white group-hover:text-indigo-400 transition-colors">
+                                                        <h3 className="text-2xl font-semibold text-slate-900 group-hover:text-blue-600 transition-colors">
                                                             {project.title}
                                                         </h3>
                                                         {project.link && (
@@ -270,7 +262,7 @@ export default function ThemeTen({ userDetails, userLinks }) {
                                                                 href={project.link}
                                                                 target="_blank"
                                                                 rel="noreferrer"
-                                                                className="p-2 bg-slate-800 rounded-full hover:bg-indigo-600 hover:text-white transition-all duration-300 text-slate-400"
+                                                                className="p-2 bg-slate-100 rounded-full hover:bg-blue-600 hover:text-white transition-all duration-300 text-slate-600 shadow-sm"
                                                             >
                                                                 <Globe size={20} />
                                                             </a>
@@ -279,7 +271,7 @@ export default function ThemeTen({ userDetails, userLinks }) {
 
                                                     <p
                                                         onClick={() => setExpanded(expanded === i ? null : i)}
-                                                        className={`text-slate-400 whitespace-pre-wrap mb-6 leading-relaxed cursor-pointer hover:text-slate-200 transition-colors ${expanded === i ? "line-clamp-none" : "line-clamp-4"
+                                                        className={`text-slate-600 whitespace-pre-wrap mb-6 leading-relaxed cursor-pointer hover:text-slate-900 transition-colors ${expanded === i ? "line-clamp-none" : "line-clamp-4"
                                                             }`}
                                                     >
                                                         {project.description}
@@ -289,7 +281,7 @@ export default function ThemeTen({ userDetails, userLinks }) {
                                                         {project.technologies?.map((tech, j) => (
                                                             <span
                                                                 key={j}
-                                                                className="px-3 py-1 bg-indigo-950/30 border border-indigo-900/50 rounded-full text-xs text-indigo-300 font-medium"
+                                                                className="px-3 py-1 bg-slate-50 border border-slate-200 rounded-full text-xs text-blue-600 font-bold"
                                                             >
                                                                 {tech}
                                                             </span>
@@ -306,22 +298,22 @@ export default function ThemeTen({ userDetails, userLinks }) {
                             {activeTab === "experience" && (
                                 <div className="grid gap-6">
                                     {userDetails.experience?.map((exp, i) => (
-                                        <div key={i} className="p-5 md:p-6 bg-slate-900/50 backdrop-blur-md rounded-3xl border border-slate-800 hover:shadow-lg transition-all duration-300">
+                                        <div key={i} className="p-5 md:p-6 bg-white rounded-3xl border border-slate-100 shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:shadow-[0_20px_40px_rgb(0,0,0,0.08)] hover:border-blue-200 transition-all duration-300">
                                             <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-4 gap-4">
                                                 <div className="flex items-center gap-4">
-                                                    <div className="w-12 h-12 rounded-2xl bg-indigo-900/30 flex items-center justify-center text-indigo-400 shrink-0">
+                                                    <div className="w-12 h-12 rounded-2xl bg-blue-50 flex items-center justify-center text-blue-600 shrink-0 shadow-sm">
                                                         <Briefcase size={24} />
                                                     </div>
                                                     <div>
-                                                        <h3 className="text-xl text-white font-bold mb-1">{exp.role}</h3>
-                                                        <div className="text-indigo-400 text-sm font-medium">{exp.company}</div>
+                                                        <h3 className="text-xl text-slate-900 font-bold mb-1">{exp.role}</h3>
+                                                        <div className="text-blue-600 text-sm">{exp.company}</div>
                                                     </div>
                                                 </div>
-                                                <span className="text-xs px-3 py-1 rounded-full bg-slate-800 text-slate-300 border border-slate-700 whitespace-nowrap font-medium">
+                                                <span className="text-xs px-3 py-1 rounded-full bg-slate-100 text-slate-600 font-bold border border-slate-200 whitespace-nowrap">
                                                     {exp.startDate} - {exp.endDate}
                                                 </span>
                                             </div>
-                                            <p className="text-slate-400 text-sm leading-relaxed whitespace-pre-wrap pl-0 sm:pl-[4rem]">
+                                            <p className="text-slate-600 text-sm leading-relaxed whitespace-pre-wrap pl-0 sm:pl-[4rem] font-medium">
                                                 {exp.description}
                                             </p>
                                         </div>
@@ -335,13 +327,13 @@ export default function ThemeTen({ userDetails, userLinks }) {
                                     {userDetails.skills?.map((skill, i) => (
                                         <div
                                             key={i}
-                                            className="group relative p-4 md:p-6 bg-slate-900/50 backdrop-blur-md border border-slate-800 rounded-2xl hover:bg-slate-800 hover:shadow-lg transition-all duration-300 overflow-hidden"
+                                            className="group relative p-4 md:p-6 bg-white rounded-2xl border border-slate-100 shadow-sm hover:shadow-lg transition-all duration-300 overflow-hidden"
                                         >
                                             <div className="flex items-center gap-3">
-                                                <div className="p-2 rounded-full bg-slate-800 flex items-center justify-center group-hover:scale-110 transition-transform duration-300 shadow-sm">
-                                                    <Zap size={20} className="text-yellow-500" />
+                                                <div className="p-2 rounded-full bg-amber-50 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                                                    <Zap size={20} className="text-amber-500 fill-amber-500" />
                                                 </div>
-                                                <span className="text-slate-300 font-medium group-hover:text-white transition-colors text-start">{skill}</span>
+                                                <span className="text-slate-700 font-bold group-hover:text-slate-900 transition-colors">{skill}</span>
                                             </div>
                                         </div>
                                     ))}
@@ -354,23 +346,24 @@ export default function ThemeTen({ userDetails, userLinks }) {
                                     {userDetails.education?.map((edu, i) => (
                                         <div
                                             key={i}
-                                            className="relative p-4 md:p-8 bg-slate-900/50 backdrop-blur-md border border-slate-800 rounded-3xl hover:shadow-xl transition-all duration-300 group overflow-hidden"
+                                            className="relative p-4 md:p-8 bg-white rounded-3xl border border-slate-100 shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:shadow-[0_20px_40px_rgb(0,0,0,0.08)] transition-all duration-300 group overflow-hidden"
                                         >
-                                            <div className={`absolute top-0 ${userDetails.displayLanguage === "ar" ? "left-0" : "right-0"} p-8 opacity-10 group-hover:opacity-20 transition-opacity transform group-hover:scale-110 duration-500 ${edu.field ? "" : "hidden"}`}>
-                                                <GraduationCap size={100} />
+                                            <div className={`absolute top-0 ${userDetails.displayLanguage === "ar" ? "left-0" : "right-0"} p-8 opacity-5 group-hover:opacity-10 transition-opacity transform group-hover:scale-110 duration-500 ${edu.field ? "" : "hidden"}`}>
+                                                <GraduationCap size={100} className="text-slate-900" />
                                             </div>
                                             <div className="relative z-10">
                                                 <div className="flex items-center justify-between">
-                                                    <h3 className="text-xl text-white font-bold mb-2">{edu.degree || "Degree"}</h3>
-                                                    <span className="inline-block px-3 py-1 mb-4 text-xs text-indigo-300 bg-indigo-950/30 rounded-full border border-indigo-900/50 font-medium">
+                                                    <h3 className="text-xl text-slate-900 font-bold mb-2">{edu.degree || "Degree"}</h3>
+                                                    <span className="inline-block px-3 py-1 mb-4 text-xs font-bold text-blue-700 bg-blue-50 rounded-full border border-blue-100 uppercase tracking-wider">
                                                         {edu.startYear} - {edu.endYear || "Present"}
                                                     </span>
                                                 </div>
-                                                <p className="text-lg text-indigo-400 font-medium mb-4">{edu.school}</p>
+                                                <p className="text-lg text-blue-600 font-semibold mb-4">{edu.school}</p>
+
                                                 {edu.field && (
-                                                    <div className="p-4 bg-slate-800/50 rounded-lg border-l-4 border-indigo-500/50">
-                                                        <p className="text-xs text-slate-500 uppercase tracking-wider mb-2">{t('field')}</p>
-                                                        <p className="text-sm md:text-base text-slate-300 leading-relaxed">
+                                                    <div className="p-4 bg-slate-50 rounded-lg border-l-4 border-blue-500">
+                                                        <p className="text-xs text-slate-400 font-bold uppercase tracking-wider mb-2">{t('field')}</p>
+                                                        <p className="text-sm md:text-base text-slate-700 font-medium leading-relaxed">
                                                             {edu.field}
                                                         </p>
                                                     </div>
@@ -387,22 +380,22 @@ export default function ThemeTen({ userDetails, userLinks }) {
                                     {userDetails.certificates?.map((cert, i) => (
                                         <div
                                             key={i}
-                                            className="group relative bg-slate-900/50 backdrop-blur-md border border-slate-800 rounded-3xl hover:bg-slate-800 hover:shadow-xl transition-all duration-300 overflow-hidden flex flex-col"
+                                            className="relative bg-white rounded-3xl border border-slate-100 overflow-hidden shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:shadow-[0_20px_40px_rgb(0,0,0,0.08)] transition-all duration-300 group flex flex-col"
                                         >
                                             {cert.cfimage && (
-                                                <div className="relative h-56 w-full bg-slate-900 overflow-hidden cursor-pointer border-b border-slate-700/50 flex items-center justify-center p-4" onClick={() => setSelectedImage(cert.cfimage)}>
+                                                <div className="relative h-56 w-full bg-slate-50 overflow-hidden cursor-pointer flex items-center justify-center p-4 border-b border-slate-50" onClick={() => setSelectedImage(cert.cfimage)}>
                                                     <Image
                                                         src={cert.cfimage}
                                                         alt={cert.description || "Certificate"}
                                                         fill
-                                                        className="object-contain p-2 hover:scale-105 transition-transform duration-500"
+                                                        className="object-contain p-2 group-hover:scale-105 transition-transform duration-500 drop-shadow-lg"
                                                     />
                                                 </div>
                                             )}
 
-                                            <div className="p-4 relative z-10 flex-1">
+                                            <div className="p-4 relative z-10 flex-1 bg-white">
                                                 {cert.description && (
-                                                    <div className="text-slate-200 font-medium break-all">{cert.description}</div>
+                                                    <div className="text-slate-700 font-medium break-all">{cert.description}</div>
                                                 )}
                                             </div>
                                         </div>
@@ -414,22 +407,22 @@ export default function ThemeTen({ userDetails, userLinks }) {
                 </main>
 
                 {/* Footer */}
-                <footer className="border-t border-slate-800 py-12">
-                    <div className="flex flex-col items-center gap-8">
-                        <div className="flex flex-wrap justify-center gap-4">
+                <footer className="border-t border-slate-200 py-12 mt-10 bg-slate-50/50 -mx-4 md:-mx-6 px-4 md:px-6">
+                    <div className="flex flex-col items-center gap-8 max-w-5xl mx-auto">
+                        <div className="flex flex-wrap justify-center gap-6">
                             {[
-                                { name: "linkedin", url: userDetails.socials?.linkedin, icon: "/icons/linkedin.svg" },
-                                { name: "github", url: userDetails.socials?.github, icon: "/icons/github.svg" },
-                                { name: "facebook", url: userDetails.socials?.facebook, icon: "/icons/facebook.svg" },
-                                { name: "whatsapp", url: userDetails.socials?.whatsapp, icon: "/icons/whatsapp.svg" },
-                                { name: "tiktok", url: userDetails.socials?.tiktok, icon: "/icons/tiktok.svg" },
-                                { name: "reddit", url: userDetails.socials?.reddit, icon: "/icons/reddit.svg" },
-                                { name: "twitch", url: userDetails.socials?.twitch, icon: "/icons/twitch.svg" },
-                                { name: "instagram", url: userDetails.socials?.instagram, icon: "/icons/instagram.svg" },
-                                { name: "snapchat", url: userDetails.socials?.snapchat, icon: "/icons/snapchat.svg" },
-                                { name: "twitter", url: userDetails.socials?.twitter, icon: "/icons/twitter.svg" },
-                                { name: "youtube", url: userDetails.socials?.youtube, icon: "/icons/youtube.svg" },
-                                { name: "telegram", url: userDetails.socials?.telegram, icon: "/icons/telegram.svg" },
+                                { name: "linkedin", url: userDetails?.socials?.linkedin, icon: "/icons/linkedin.svg" },
+                                { name: "github", url: userDetails?.socials?.github, icon: "/icons/github.svg" },
+                                { name: "facebook", url: userDetails?.socials?.facebook, icon: "/icons/facebook.svg" },
+                                { name: "whatsapp", url: userDetails?.socials?.whatsapp, icon: "/icons/whatsapp.svg" },
+                                { name: "tiktok", url: userDetails?.socials?.tiktok, icon: "/icons/tiktok.svg" },
+                                { name: "reddit", url: userDetails?.socials?.reddit, icon: "/icons/reddit.svg" },
+                                { name: "twitch", url: userDetails?.socials?.twitch, icon: "/icons/twitch.svg" },
+                                { name: "instagram", url: userDetails?.socials?.instagram, icon: "/icons/instagram.svg" },
+                                { name: "snapchat", url: userDetails?.socials?.snapchat, icon: "/icons/snapchat.svg" },
+                                { name: "twitter", url: userDetails?.socials?.twitter, icon: "/icons/twitter.svg" },
+                                { name: "youtube", url: userDetails?.socials?.youtube, icon: "/icons/youtube.svg" },
+                                { name: "telegram", url: userDetails?.socials?.telegram, icon: "/icons/telegram.svg" },
                             ]
                                 .filter((item) => item.url)
                                 .map((item, i) => (
@@ -438,14 +431,14 @@ export default function ThemeTen({ userDetails, userLinks }) {
                                         key={i}
                                         target="_blank"
                                         rel="noreferrer"
-                                        className="p-3 rounded-2xl bg-slate-800 border border-slate-700 hover:bg-indigo-600 hover:border-indigo-500 hover:scale-110 hover:-translate-y-1 transition-all duration-300 group shadow-lg"
+                                        className="p-4 rounded-2xl bg-white border border-slate-200 hover:border-blue-300 hover:shadow-lg hover:-translate-y-1 transition-all duration-300 group shadow-sm"
                                     >
                                         <Image width={500} height={500} src={item.icon} alt={item.name} className="w-6 h-6 transition-opacity" />
                                     </a>
                                 ))}
                         </div>
-                        <p className="text-slate-500 text-sm">
-                            © {new Date().getFullYear()} {userDetails.fullname}. {t('allRightsReserved')} ©
+                        <p dir={userDetails?.displayLanguage === 'ar' ? 'rtl' : 'ltr'} className="text-slate-400 font-medium text-sm">
+                            © {new Date().getFullYear()} {userDetails?.fullname}. {t('allRightsReserved')} ©
                         </p>
                     </div>
                 </footer>
@@ -461,18 +454,14 @@ export default function ThemeTen({ userDetails, userLinks }) {
           animation: blob 10s infinite;
         }
         .animate-fadeIn {
-          animation: fadeIn 0.5s ease-out forwards;
+          animation: fadeIn 0.6s cubic-bezier(0.22, 1, 0.36, 1) forwards;
         }
         @keyframes fadeIn {
-          from { opacity: 0; transform: translateY(10px); }
+          from { opacity: 0; transform: translateY(20px); }
           to { opacity: 1; transform: translateY(0); }
         }
-        .scrollbar-hide::-webkit-scrollbar {
-            display: none;
-        }
-        .scrollbar-hide {
-            -ms-overflow-style: none;
-            scrollbar-width: none;
+        .perspective-1000 {
+            perspective: 1000px;
         }
       `}</style>
         </div>

@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import { useToast } from "../../components/Toast";
 import { CheckCheck, Loader } from "../../components/Icons";
-import Themeone from "../../components/themes/themeone";
+import Theme1 from "../../components/themes/theme1";
 import { getTranslation } from '../../translations/update-profile'
 
 export default function Bgcolor({ userData, setUserDetails }) {
@@ -54,7 +54,7 @@ export default function Bgcolor({ userData, setUserDetails }) {
           )}
         </button>
       </div>
-      <Themeone userDetails={userData} bgcolor={bgcolorp} />
+      <Theme1 userDetails={userData} bgcolor={bgcolorp} />
     </div>
   );
 }

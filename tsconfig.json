@@ -30,7 +30,8 @@
     "**/*.tsx",
     "**/*.js",
     "**/*.jsx",
-    "app/**/*"
+    "app/**/*",
+    ".next/dev/types/**/*.ts"
   ],
   "exclude": [
     "node_modules"

@@ -22,7 +22,7 @@ import { getTranslation } from "../../translations/portfolio"
 import ImageModal from "../portfolio/ImageModal"
 import DownloadResume from "../downloadcv/DownloadResume"
 
-export default function Themeone({ userDetails, userLinks, bgcolor }) {
+export default function Theme1({ userDetails, userLinks, bgcolor }) {
   const t = getTranslation(userDetails?.displayLanguage || 'en')
   const [showQR, setShowQR] = useState(false);
   const [showUserLinks, setShowUserLinks] = useState(false);
@@ -212,7 +212,7 @@ export default function Themeone({ userDetails, userLinks, bgcolor }) {
                     <div className="relative w-24 h-24 md:w-40 md:h-40 shrink-0">
                       <div className="absolute inset-0 bg-gradient-to-br from-white/20 to-white/5 rounded-full blur-xl"></div>
                       {userDetails?.urlimage ? (
-                        <Image width={500} height={500}
+                        <Image priority width={500} height={500}
                           src={userDetails?.urlimage}
                           alt={userDetails?.fullname || "Profile Picture"}
                           className="relative z-10 w-full h-full rounded-full object-cover border-4 border-white/30 shadow-2xl"
