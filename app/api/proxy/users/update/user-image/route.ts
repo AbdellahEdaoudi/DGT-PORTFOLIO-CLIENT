@@ -17,22 +17,22 @@ export async function PUT(req: Request) {
       { expiresIn: "15m" }
     );
     const backendUrl = process.env.BACKEND_URL;
-    const body = await req.json();
+    const formData = await req.formData();
 
-    console.log("🔹 Sending update to backend:", `${backendUrl}/users/update/user-info`);
-    const response = await axios.put(`${backendUrl}/users/update/user-info`, body, {
+    console.log("🔹 Sending image update to backend:", `${backendUrl}/users/update/user-image`);
+    const response = await axios.put(`${backendUrl}/users/update/user-image`, formData, {
       headers: {
         Authorization: `Bearer ${token}`,
-        "Content-Type": "application/json",
+        "Content-Type": "multipart/form-data",
       },
     });
     return NextResponse.json(response.data, { status: response.status });
   } catch (error: any) {
-    console.error("❌ Error updating user:", error.response?.data || error.message);
+    console.error("❌ Error updating user image:", error.response?.data || error.message);
     const statusCode = error.response?.status || 500;
     return NextResponse.json(
       {
-        message: "Failed to update user",
+        message: "Failed to update user image",
         error: error.response?.data || error.message,
       },
       { status: statusCode }

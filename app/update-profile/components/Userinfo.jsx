@@ -13,7 +13,8 @@ function Userinfo({ userData, setUserDetails }) {
   // Local translation helper
   const t = getTranslation(userData?.displayLanguage || 'en');
   const user = userData || {}
-  const [imagePreview, setImagePreview] = useState(user.urlimage || "")
+  const DEFAULT_AVATAR = "https://res.cloudinary.com/dssrnghtr/image/upload/v1761258566/dgmlr4uuim5swutkp6a8.png";
+  const [imagePreview, setImagePreview] = useState(user.urlimage || DEFAULT_AVATAR)
   const [imageFile, setImageFile] = useState(null)
   const [loading, setLoading] = useState(false)
   const [fullname, setFullname] = useState(user.fullname || "")
@@ -103,18 +104,36 @@ function Userinfo({ userData, setUserDetails }) {
     setLoading(true);
 
     try {
-      const formData = new FormData();
-      // Basic fields
-      formData.append("fullname", fullname);
-      formData.append("email", email);
-      formData.append("username", username);
-      formData.append("phoneNumber", phoneNumber);
-      formData.append("country", country);
-      formData.append("category", category);
-      formData.append("displayEmail", displayEmail);
-      formData.append("urlimage", imageFile || imagePreview || "");
+      // 1. Update Text Information first (JSON)
+      const userInfoData = {
+        fullname,
+        email,
+        username,
+        phoneNumber,
+        country,
+        category,
+        displayEmail
+      };
 
-      await axios.put(`/api/proxy/users/update/user-info`, formData);
+      await axios.put(`/api/proxy/users/update/user-info`, userInfoData, {
+        headers: { 'Content-Type': 'application/json' }
+      });
+
+      // 2. Update Profile Picture separately if it was changed (or deleted)
+      const finalUrl = imageFile === "DELETE_IMAGE" ? DEFAULT_AVATAR : imagePreview;
+      
+      if (imageFile !== null) {
+        const imageFormData = new FormData();
+        if (imageFile !== "DELETE_IMAGE") {
+          // Sending the new file
+          imageFormData.append("urlimage", imageFile);
+        }
+        // If imageFile === "DELETE_IMAGE" we don't append anything
+        // so req.file will be undefined and the backend sets the default image.
+        
+        await axios.put(`/api/proxy/users/update/user-image`, imageFormData);
+      }
+
       toast.success(t('userInfo.savedSuccessfully'))
       setUserDetails(prev => ({
         ...(prev || {}),
@@ -125,21 +144,25 @@ function Userinfo({ userData, setUserDetails }) {
         country,
         category,
         displayEmail,
-        urlimage: imagePreview || (prev?.urlimage || "")
+        urlimage: (imageFile && imageFile !== "DELETE_IMAGE") ? imagePreview : finalUrl
       }));
+      
+      setImageFile(null);
       setErrormsg("")
     } catch (error) {
+      let msg = t('userInfo.errorMessage') || "Error updating profile";
       if (error.response?.data?.error) {
         const errorData = error.response.data.error;
-        // Check if errorData is an object with an 'error' property
         if (typeof errorData === 'object' && errorData.error) {
-          setErrormsg(String(errorData.error));
+          msg = String(errorData.error);
         } else {
-          setErrormsg(typeof errorData === 'object' ? JSON.stringify(errorData) : String(errorData));
+          msg = typeof errorData === 'object' ? JSON.stringify(errorData) : String(errorData);
         }
       } else if (error.response?.status === 400) {
-        setErrormsg(t('userInfo.usernameExists'))
+        msg = t('userInfo.usernameExists');
       }
+      // setErrormsg(msg);
+      toast.error(msg);
       // console.error("Error updating profile:", error);
     } finally {
       setLoading(false);
@@ -151,21 +174,39 @@ function Userinfo({ userData, setUserDetails }) {
       {/* Profile Image Section */}
       <div className="flex flex-col md:flex-row items-start justify-between gap-3 md:gap-8">
         <div className="flex flex-col items-center bg-gradient-to-br from-gray-50 to-gray-100 shadow-xl border-2 border-gray-200 rounded-xl sm:rounded-2xl p-4 sm:p-6 w-full md:w-1/3">
-          <Link href={userData.username ? `${PORTFOLIO_2}` : `/update-profile`}>
-            <Image
-              onClick={() => {
-                if (!userData.username) {
-                  setErrormsg(t('userInfo.usernameRequired'))
-                }
-              }}
-              src={imagePreview}
-              alt="Profile"
-              className="rounded-full cursor-pointer w-24 h-24 sm:w-40 sm:h-40 object-cover border-4 border-teal-500 shadow-lg"
-              width={160}
-              height={160}
-              priority
-            />
-          </Link>
+          <div className="relative group/img">
+            <Link href={userData.username ? `${PORTFOLIO_2}` : `/update-profile`}>
+              <Image
+                onClick={() => {
+                  if (!userData.username) {
+                    setErrormsg(t('userInfo.usernameRequired'))
+                  }
+                }}
+                src={imagePreview}
+                alt="Profile"
+                className="rounded-full cursor-pointer w-24 h-24 sm:w-40 sm:h-40 object-cover border-4 border-teal-500 shadow-lg transition-transform hover:scale-105"
+                width={160}
+                height={160}
+                priority
+              />
+            </Link>
+
+            {/* Absolute Remove Icon */}
+            {imagePreview && imagePreview !== DEFAULT_AVATAR && (
+              <button
+                type="button"
+                onClick={(e) => {
+                  e.preventDefault();
+                  setImagePreview(DEFAULT_AVATAR);
+                  setImageFile("DELETE_IMAGE");
+                }}
+                className="absolute top-0 right-0 bg-red-500 text-white p-1.5 rounded-full shadow-lg hover:bg-red-600 transition-all duration-300 transform hover:scale-110 active:scale-95"
+                title={t('userInfo.removeImage')}
+              >
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+              </button>
+            )}
+          </div>
           <label className="mt-3 sm:mt-4 bg-gradient-to-r from-teal-400 to-green-500 hover:from-teal-500 hover:to-green-600 text-white font-semibold rounded-full px-4 py-1.5 sm:px-6 sm:py-2 text-xs sm:text-base cursor-pointer transition duration-300 transform hover:scale-105">
             {t('userInfo.uploadImage')}
             <input type="file" accept="image/*" onChange={handleImageUpload} className="hidden" />
