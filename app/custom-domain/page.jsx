@@ -14,7 +14,7 @@ export default function CustomDomainPage() {
     const [customDomain, setCustomDomain] = useState('');
     const [isSaved, setIsSaved] = useState(false);
     const [isVerified, setIsVerified] = useState(false);
-    const [isLoading, setIsLoading] = useState(false);
+    const [loadingAction, setLoadingAction] = useState(null);
     const [isFetching, setIsFetching] = useState(true);
     const [showRemoveModal, setShowRemoveModal] = useState(false);
 
@@ -42,7 +42,7 @@ export default function CustomDomainPage() {
 
     const handleSave = async () => {
         if (!customDomain) return toast.error(t('customDomain.enterDomain'));
-        setIsLoading(true);
+        setLoadingAction('save');
         try {
             const res = await axios.post(`/api/proxy/custom-domain/set`, {
                 customDomain: customDomain.toLowerCase()
@@ -53,11 +53,11 @@ export default function CustomDomainPage() {
                 setIsVerified(false);
             } else toast.error(res.data.message);
         } catch (e) { toast.error(e.response?.data?.message || 'Error'); }
-        finally { setIsLoading(false); }
+        finally { setLoadingAction(null); }
     };
 
     const handleVerify = async () => {
-        setIsLoading(true);
+        setLoadingAction('verify');
         try {
             const res = await axios.post(`/api/proxy/custom-domain/verify`, {});
             if (res.data.status) {
@@ -65,11 +65,11 @@ export default function CustomDomainPage() {
                 setIsVerified(true);
             } else toast.error(res.data.message);
         } catch (e) { toast.error(e.response?.data?.message || t('customDomain.verificationFailed')); }
-        finally { setIsLoading(false); }
+        finally { setLoadingAction(null); }
     };
 
     const confirmRemove = async () => {
-        setIsLoading(true);
+        setLoadingAction('remove');
         setShowRemoveModal(false);
         try {
             await axios.delete(`/api/proxy/custom-domain/remove`);
@@ -78,7 +78,7 @@ export default function CustomDomainPage() {
             setIsVerified(false);
             toast.success(t('customDomain.domainRemovedSuccess'));
         } catch (e) { toast.error(t('customDomain.errorRemovingDomain')); }
-        finally { setIsLoading(false); }
+        finally { setLoadingAction(null); }
     };
 
     if (isFetching) {
@@ -122,19 +122,29 @@ export default function CustomDomainPage() {
                                 <input
                                     type="text"
                                     value={customDomain}
-                                    onChange={(e) => { setCustomDomain(e.target.value); setIsSaved(false); }}
-                                    placeholder={t('customDomain.placeholder')}
+                                    onChange={(e) => { 
+                                        let val = e.target.value.toLowerCase()
+                                            .replace('https://', '')
+                                            .replace('http://', '')
+                                            .replace(/\/$/, ''); // Removes trailing slash
+                                        setCustomDomain(val); 
+                                        setIsSaved(false); 
+                                    }}
+                                    placeholder={t('customDomain.placeholder') || "example.com"}
                                     className="w-full bg-slate-900/80 border border-slate-600 rounded-xl px-5 py-4 text-lg focus:ring-2 focus:ring-cyan-500 focus:border-transparent transition-all outline-none"
-                                    disabled={isVerified || isLoading}
+                                    disabled={isVerified || loadingAction !== null}
                                 />
+                                <p className="absolute -bottom-6 left-2 text-xs text-slate-400">
+                                    {userDetails?.displayLanguage === 'ar' ? 'مثال: example.com' : 'e.g. example.com'}
+                                </p>
                             </div>
                             {!isVerified && (
                                 <button
                                     onClick={handleSave}
-                                    disabled={isLoading}
+                                    disabled={loadingAction !== null}
                                     className="bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-500 hover:to-blue-500 text-white px-8 py-4 sm:py-0 rounded-xl font-bold transition-all disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2 shadow-lg shadow-cyan-900/20"
                                 >
-                                    {isLoading ? <Loader2 className="w-5 h-5 animate-spin" /> : t('customDomain.save')}
+                                    {loadingAction === 'save' ? <Loader2 className="w-5 h-5 animate-spin" /> : t('customDomain.save')}
                                 </button>
                             )}
                         </div>
@@ -160,10 +170,10 @@ export default function CustomDomainPage() {
                                     </button>
                                     <button
                                         onClick={() => setShowRemoveModal(true)}
-                                        disabled={isLoading}
+                                        disabled={loadingAction !== null}
                                         className="flex-1 bg-red-500/10 hover:bg-red-500/20 text-red-400 border border-red-500/20 py-3 rounded-xl font-semibold transition-colors flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
                                     >
-                                        {isLoading ? <Loader2 className="w-4 h-4 animate-spin" /> : <><Trash2 className="w-4 h-4" /> {t('customDomain.removeDomain')}</>}
+                                        {loadingAction === 'remove' ? <Loader2 className="w-4 h-4 animate-spin" /> : <><Trash2 className="w-4 h-4" /> {t('customDomain.removeDomain')}</>}
                                     </button>
                                 </div>
                             ) : (
@@ -195,10 +205,10 @@ export default function CustomDomainPage() {
 
                                     <button
                                         onClick={handleVerify}
-                                        disabled={isLoading}
+                                        disabled={loadingAction !== null}
                                         className="w-full bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-500 hover:to-blue-500 text-white py-4 rounded-xl font-bold transition-all shadow-lg shadow-cyan-900/20 flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
                                     >
-                                        {isLoading ? (
+                                        {loadingAction === 'verify' ? (
                                             <>
                                                 <Loader2 className="w-5 h-5 animate-spin" />
                                                 {t('customDomain.verifyingDns')}
@@ -206,6 +216,13 @@ export default function CustomDomainPage() {
                                         ) : (
                                             t('customDomain.verifyDnsConfiguration')
                                         )}
+                                    </button>
+                                    <button
+                                        onClick={() => setShowRemoveModal(true)}
+                                        disabled={loadingAction !== null}
+                                        className="w-full mt-3 bg-red-500/10 hover:bg-red-500/20 text-red-400 border border-red-500/20 py-4 rounded-xl font-bold transition-all flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
+                                    >
+                                        {loadingAction === 'remove' ? <Loader2 className="w-5 h-5 animate-spin" /> : <><Trash2 className="w-5 h-5" /> {t('customDomain.removeDomain')}</>}
                                     </button>
                                 </div>
                             )}
