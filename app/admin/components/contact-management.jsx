@@ -10,16 +10,16 @@ import Image from "next/image"
 export default function ContactManagement({ data, setData }) {
   const toast = useToast()
   const [searchQuery, setSearchQuery] = useState("")
-  const [contactsData, setContactsData] = useState(data.contacts)
+  const [contactsData, setContactsData] = useState(data?.contacts || [])
   const [selectedMessage, setSelectedMessage] = useState(null)
   const [deleteConfirm, setDeleteConfirm] = useState(null)
   const [loadingDelete, setLoadingDelete] = useState(null)
   const [selectedImage, setSelectedImage] = useState(null)
 
-  const filteredContacts = data.contacts.filter(
+  const filteredContacts = (data?.contacts || []).filter(
     (c) =>
-      c.email.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      c.subject.toLowerCase().includes(searchQuery.toLowerCase())
+      (c.email || "").toLowerCase().includes(searchQuery.toLowerCase()) ||
+      (c.subject || "").toLowerCase().includes(searchQuery.toLowerCase())
   )
 
   const deleteContact = async (id) => {
@@ -50,7 +50,7 @@ export default function ContactManagement({ data, setData }) {
             Messages & Contacts
           </h1>
           <div className="text-[10px] md:text-xs text-gray-500 font-medium">
-            Total: <span className="text-white">{data.contacts.length}</span>
+            Total: <span className="text-white">{(data?.contacts || []).length}</span>
           </div>
         </div>
 
