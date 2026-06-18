@@ -67,7 +67,12 @@
         "attachment": "添付ファイル",
         "uploadImage": "画像をアップロード（任意）",
         "sending": "送信中...",
-        "sendMessage": "メッセージを送信"
+        "sendMessage": "メッセージを送信",
+        "myMessages": "マイメッセージ",
+        "noMessages": "メッセージはまだありません",
+        "deleteTitle": "削除",
+        "messageDeleted": "メッセージを削除しました",
+        "failedToDelete": "削除に失敗しました"
     },
     "success": {
         "paymentSuccessful": "支払い成功！",

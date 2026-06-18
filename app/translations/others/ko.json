@@ -67,7 +67,12 @@
         "attachment": "첨부 파일",
         "uploadImage": "이미지 업로드 (선택 사항)",
         "sending": "전송 중...",
-        "sendMessage": "메시지 보내기"
+        "sendMessage": "메시지 보내기",
+        "myMessages": "내 메시지",
+        "noMessages": "아직 메시지가 없습니다",
+        "deleteTitle": "삭제",
+        "messageDeleted": "메시지가 삭제되었습니다",
+        "failedToDelete": "삭제 실패"
     },
     "success": {
         "paymentSuccessful": "결제 성공!",

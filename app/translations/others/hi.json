@@ -67,7 +67,12 @@
         "attachment": "संलग्नक",
         "uploadImage": "छवि अपलोड करें (वैकल्पिक)",
         "sending": "भेज रहा है...",
-        "sendMessage": "संदेश भेजें"
+        "sendMessage": "संदेश भेजें",
+        "myMessages": "मेरे संदेश",
+        "noMessages": "अभी तक कोई संदेश नहीं",
+        "deleteTitle": "हटाएं",
+        "messageDeleted": "संदेश हटा दिया गया",
+        "failedToDelete": "हटाने में विफल"
     },
     "success": {
         "paymentSuccessful": "भुगतान सफल!",

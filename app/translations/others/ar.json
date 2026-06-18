@@ -67,7 +67,12 @@
         "attachment": "مرفق",
         "uploadImage": "تحميل صورة (اختياري)",
         "sending": "جاري الإرسال...",
-        "sendMessage": "إرسال رسالة"
+        "sendMessage": "إرسال رسالة",
+        "myMessages": "رسائلي السابقة",
+        "noMessages": "لا توجد رسائل بعد",
+        "deleteTitle": "حذف",
+        "messageDeleted": "تم حذف الرسالة",
+        "failedToDelete": "فشل الحذف"
     },
     "success": {
         "paymentSuccessful": "تم الدفع بنجاح!",

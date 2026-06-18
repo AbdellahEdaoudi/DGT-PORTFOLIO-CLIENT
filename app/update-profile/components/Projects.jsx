@@ -14,6 +14,7 @@ import {
   Pencil,
   AlertCircle,
   GripVertical,
+  ImagePlus,
 } from "../../components/Icons";
 import { getTranslation } from "../../translations/update-profile";
 import {
@@ -82,9 +83,19 @@ export default function Projects({ userData, setUserDetails }) {
   const [savingIds, setSavingIds] = useState(new Set());
   const [deletingIds, setDeletingIds] = useState(new Set());
   const [validationErrors, setValidationErrors] = useState({});
-  const [projectToDelete, setProjectToDelete] = useState(null); // Index of project to delete
+  const [projectToDelete, setProjectToDelete] = useState(null);
   const [highlightedId, setHighlightedId] = useState(null);
   const [mounted, setMounted] = useState(false);
+
+  // Per-project image state: { [localId]: { preview: string|null, file: File|null } }
+  const [projectImages, setProjectImages] = useState(() => {
+    const init = {};
+    (userData.projects || []).forEach((p, i) => {
+      const localId = p._id || `id-${i}`;
+      init[localId] = { preview: p.image || null, file: null };
+    });
+    return init;
+  });
 
   React.useEffect(() => {
     setMounted(true);
@@ -119,19 +130,67 @@ export default function Projects({ userData, setUserDetails }) {
     }
   };
 
+  // Image compression handler (same as Userinfo.jsx)
+  const handleProjectImageUpload = (localId, e) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onloadend = () => {
+      const img = new window.Image();
+      img.onload = () => {
+        const canvas = document.createElement('canvas');
+        let width = img.width;
+        let height = img.height;
+        const maxSize = 1200;
+        if (width > height && width > maxSize) {
+          height = (height * maxSize) / width;
+          width = maxSize;
+        } else if (height > maxSize) {
+          width = (width * maxSize) / height;
+          height = maxSize;
+        }
+        canvas.width = width;
+        canvas.height = height;
+        canvas.getContext('2d').drawImage(img, 0, 0, width, height);
+        const targetSize = 200 * 1024;
+        const compressImage = (qual) => {
+          canvas.toBlob((blob) => {
+            if (blob.size > targetSize && qual > 0.1) {
+              compressImage(qual - 0.1);
+            } else {
+              const compressedFile = new File([blob], file.name, { type: 'image/jpeg', lastModified: Date.now() });
+              const previewReader = new FileReader();
+              previewReader.onloadend = () => {
+                setProjectImages(prev => ({
+                  ...prev,
+                  [localId]: { preview: previewReader.result, file: compressedFile },
+                }));
+              };
+              previewReader.readAsDataURL(compressedFile);
+            }
+          }, 'image/jpeg', qual);
+        };
+        compressImage(0.8);
+      };
+      img.src = reader.result;
+    };
+    reader.readAsDataURL(file);
+  };
+
   const addArrayItem = (array, setArray, newItem) => {
     if (array.length >= 10) return;
-    const newIndex = array.length;
+    const localId = `new-${Date.now()}`;
     setArray([
       ...array,
       {
         ...newItem,
         collapsed: false,
-        localId: `new-${Date.now()}`,
+        localId,
       },
     ]);
-    // Subtle highlight for the newly added item
-    setHighlightedId(`new-${newIndex}`);
+    // Init image state for new project
+    setProjectImages(prev => ({ ...prev, [localId]: { preview: null, file: null } }));
+    setHighlightedId(`new-${array.length}`);
     setTimeout(() => setHighlightedId(null), 2000);
   };
 
@@ -193,27 +252,45 @@ export default function Projects({ userData, setUserDetails }) {
   // 🟢 Save Single Project
   const saveProjectItem = async (index) => {
     const project = projects[index];
+    const imgState = projectImages[project.localId] || {};
     const errors = {};
     if (!project.title?.trim()) errors.title = true;
     if (!project.description?.trim()) errors.description = true;
     if (!project.link?.trim()) errors.link = true;
-    if (!project.image?.trim()) errors.image = true;
+    // Image is required: either existing URL or a newly uploaded file
+    if (!imgState.preview && !imgState.file) errors.image = true;
     if (!project.technologies || project.technologies.length === 0)
       errors.technologies = true;
 
     if (Object.keys(errors).length > 0) {
       setValidationErrors((prev) => ({ ...prev, [index]: errors }));
-      // Expand if collapsed to show errors
       if (project.collapsed) toggleCollapse(index);
       return;
     }
 
     setSavingIds((prev) => new Set(prev).add(index));
     try {
-      const { collapsed, localId, ...projectData } = project;
+      const { collapsed, localId, image, ...projectData } = project;
+
+      // Build FormData
+      const formData = new FormData();
+      Object.entries(projectData).forEach(([key, val]) => {
+        if (key === 'technologies') {
+          (val || []).forEach(t => formData.append('technologies[]', t));
+        } else if (val !== undefined && val !== null) {
+          formData.append(key, val);
+        }
+      });
+      // Append image: file if newly selected, else keep old URL
+      if (imgState.file) {
+        formData.append('image', imgState.file);
+      } else if (imgState.preview) {
+        formData.append('image', imgState.preview);
+      }
+
       const res = await axios.put(
         "/api/proxy/users/update/projects/item",
-        projectData,
+        formData
       );
 
       const newProjectsList = res.data.projects;
@@ -235,6 +312,15 @@ export default function Projects({ userData, setUserDetails }) {
         setUserDetails((prev) => ({ ...prev, projects: newProjectsList }));
       }
 
+      // Update projectImages with the final Cloudinary URL from server
+      const savedProject = mergedProjects[index];
+      if (savedProject) {
+        setProjectImages(prev => ({
+          ...prev,
+          [savedProject.localId]: { preview: savedProject.image || null, file: null },
+        }));
+      }
+
       toast.success(t("projects.savedSuccessfully"));
       setValidationErrors((prev) => {
         const next = { ...prev };
@@ -243,7 +329,6 @@ export default function Projects({ userData, setUserDetails }) {
       });
 
       // Trigger success effect
-      const savedProject = mergedProjects[index];
       if (savedProject && savedProject._id) {
         setHighlightedId(savedProject._id);
         setTimeout(() => setHighlightedId(null), 2000);
@@ -551,27 +636,53 @@ export default function Projects({ userData, setUserDetails }) {
                             </div>
 
                             <div>
-                              <input
-                                type="url"
-                                placeholder={t("projects.projectImage")}
-                                value={proj.image || ""}
-                                maxLength={1000}
-                                onChange={(e) =>
-                                  updateObjectInArray(
-                                    projects,
-                                    setProjects,
-                                    index,
-                                    "image",
-                                    e.target.value,
-                                  )
-                                }
-                                className={`w-full px-2 py-1.5 sm:px-3 sm:py-2 text-[10px] sm:text-base border rounded-lg focus:outline-none transition bg-white ${validationErrors[index]?.image ? "border-red-500 ring-1 ring-red-100" : "border-gray-300 focus:ring-2 focus:ring-green-500"}`}
-                              />
+                              {/* Image upload with preview */}
+                              <div className="flex items-center gap-2">
+                                <label
+                                  htmlFor={`proj-img-${proj.localId}`}
+                                  className={`cursor-pointer flex items-center gap-1.5 px-2 py-1.5 sm:px-3 sm:py-2 text-[10px] sm:text-sm border rounded-lg transition bg-white hover:bg-green-50 ${
+                                    validationErrors[index]?.image
+                                      ? "border-red-500 text-red-500"
+                                      : "border-gray-300 text-green-700 hover:border-green-400"
+                                  }`}
+                                >
+                                  <ImagePlus className="w-3 h-3 sm:w-4 sm:h-4" />
+                                  <span>{t("projects.projectImage") || "Project Image"}</span>
+                                  <input
+                                    id={`proj-img-${proj.localId}`}
+                                    type="file"
+                                    accept="image/*"
+                                    className="hidden"
+                                    onChange={(e) => handleProjectImageUpload(proj.localId, e)}
+                                  />
+                                </label>
+                                {/* Preview thumbnail */}
+                                {projectImages[proj.localId]?.preview && (
+                                  <div className="relative flex-shrink-0">
+                                    <img
+                                      src={projectImages[proj.localId].preview}
+                                      alt="preview"
+                                      className="w-10 h-10 sm:w-14 sm:h-14 object-cover rounded-lg border border-green-200 shadow-sm"
+                                    />
+                                    <button
+                                      type="button"
+                                      onClick={() =>
+                                        setProjectImages(prev => ({
+                                          ...prev,
+                                          [proj.localId]: { preview: null, file: null },
+                                        }))
+                                      }
+                                      className="absolute -top-1.5 -right-1.5 bg-red-500 text-white rounded-full p-0.5 hover:bg-red-600 shadow transition-colors"
+                                    >
+                                      <X size={10} />
+                                    </button>
+                                  </div>
+                                )}
+                              </div>
                               {validationErrors[index]?.image && (
                                 <p className="text-red-500 text-[9px] sm:text-xs mt-1 sm:mt-1.5 flex items-center gap-1 sm:gap-1.5 font-medium animate-in slide-in-from-top-1">
                                   <AlertCircle className="w-3 h-3 sm:w-[14px] sm:h-[14px]" />
-                                  {t("projects.imageRequired") ||
-                                    "Image is required"}
+                                  {t("projects.imageRequired") || "Image is required"}
                                 </p>
                               )}
                             </div>

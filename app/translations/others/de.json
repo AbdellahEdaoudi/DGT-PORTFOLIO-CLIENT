@@ -67,7 +67,12 @@
         "attachment": "Anhang",
         "uploadImage": "Bild Hochladen (Optional)",
         "sending": "Senden...",
-        "sendMessage": "Nachricht Senden"
+        "sendMessage": "Nachricht Senden",
+        "myMessages": "Meine Nachrichten",
+        "noMessages": "Noch keine Nachrichten",
+        "deleteTitle": "Löschen",
+        "messageDeleted": "Nachricht gelöscht",
+        "failedToDelete": "Löschen fehlgeschlagen"
     },
     "success": {
         "paymentSuccessful": "Zahlung Erfolgreich!",

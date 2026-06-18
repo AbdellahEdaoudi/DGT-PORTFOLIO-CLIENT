@@ -67,7 +67,12 @@
         "attachment": "Вложение",
         "uploadImage": "Загрузить изображение (необязательно)",
         "sending": "Отправка...",
-        "sendMessage": "Отправить сообщение"
+        "sendMessage": "Отправить сообщение",
+        "myMessages": "Мои сообщения",
+        "noMessages": "Сообщений пока нет",
+        "deleteTitle": "Удалить",
+        "messageDeleted": "Сообщение удалено",
+        "failedToDelete": "Не удалось удалить"
     },
     "success": {
         "paymentSuccessful": "Оплата прошла успешно!",

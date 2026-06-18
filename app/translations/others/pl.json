@@ -67,7 +67,12 @@
         "attachment": "Załącznik",
         "uploadImage": "Prześlij Obraz (Opcjonalnie)",
         "sending": "Wysyłanie...",
-        "sendMessage": "Wyślij Wiadomość"
+        "sendMessage": "Wyślij Wiadomość",
+        "myMessages": "Moje wiadomości",
+        "noMessages": "Brak wiadomości",
+        "deleteTitle": "Usuń",
+        "messageDeleted": "Wiadomość usunięta",
+        "failedToDelete": "Usunięcie nie powiodło się"
     },
     "success": {
         "paymentSuccessful": "Płatność Udana!",

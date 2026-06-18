@@ -67,7 +67,12 @@
         "attachment": "Tệp đính kèm",
         "uploadImage": "Tải ảnh lên (Tùy chọn)",
         "sending": "Đang gửi...",
-        "sendMessage": "Gửi tin nhắn"
+        "sendMessage": "Gửi tin nhắn",
+        "myMessages": "Tin nhắn của tôi",
+        "noMessages": "Chưa có tin nhắn nào",
+        "deleteTitle": "Xóa",
+        "messageDeleted": "Đã xóa tin nhắn",
+        "failedToDelete": "Xóa thất bại"
     },
     "success": {
         "paymentSuccessful": "Thanh toán thành công!",

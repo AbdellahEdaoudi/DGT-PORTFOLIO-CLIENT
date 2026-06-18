@@ -67,7 +67,12 @@
         "attachment": "Bijlage",
         "uploadImage": "Afbeelding Uploaden (Optioneel)",
         "sending": "Verzenden...",
-        "sendMessage": "Verstuur Bericht"
+        "sendMessage": "Verstuur Bericht",
+        "myMessages": "Mijn berichten",
+        "noMessages": "Nog geen berichten",
+        "deleteTitle": "Verwijderen",
+        "messageDeleted": "Bericht verwijderd",
+        "failedToDelete": "Verwijderen mislukt"
     },
     "success": {
         "paymentSuccessful": "Betaling Geslaagd!",

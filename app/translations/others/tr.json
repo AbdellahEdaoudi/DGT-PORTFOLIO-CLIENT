@@ -67,7 +67,12 @@
         "attachment": "Ek",
         "uploadImage": "Resim Yükle (İsteğe Bağlı)",
         "sending": "Gönderiliyor...",
-        "sendMessage": "Mesaj Gönder"
+        "sendMessage": "Mesaj Gönder",
+        "myMessages": "Mesajlarım",
+        "noMessages": "Henüz mesaj yok",
+        "deleteTitle": "Sil",
+        "messageDeleted": "Mesaj silindi",
+        "failedToDelete": "Silme başarısız"
     },
     "success": {
         "paymentSuccessful": "Ödeme Başarılı!",

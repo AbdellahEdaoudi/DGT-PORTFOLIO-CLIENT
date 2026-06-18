@@ -67,7 +67,12 @@
         "attachment": "Anexo",
         "uploadImage": "Carregar Imagem (Opcional)",
         "sending": "Enviando...",
-        "sendMessage": "Enviar Mensagem"
+        "sendMessage": "Enviar Mensagem",
+        "myMessages": "Minhas mensagens",
+        "noMessages": "Nenhuma mensagem ainda",
+        "deleteTitle": "Excluir",
+        "messageDeleted": "Mensagem excluída",
+        "failedToDelete": "Falha ao excluir"
     },
     "success": {
         "paymentSuccessful": "Pagamento Bem-sucedido!",

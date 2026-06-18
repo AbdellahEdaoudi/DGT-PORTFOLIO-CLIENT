@@ -67,7 +67,12 @@
         "attachment": "附件",
         "uploadImage": "上传图片（可选）",
         "sending": "发送中...",
-        "sendMessage": "发送消息"
+        "sendMessage": "发送消息",
+        "myMessages": "我的消息",
+        "noMessages": "暂无消息",
+        "deleteTitle": "删除",
+        "messageDeleted": "消息已删除",
+        "failedToDelete": "删除失败"
     },
     "success": {
         "paymentSuccessful": "支付成功！",

@@ -67,7 +67,12 @@
         "attachment": "Pièce jointe",
         "uploadImage": "Télécharger une image (Optionnel)",
         "sending": "Envoi...",
-        "sendMessage": "Envoyer le message"
+        "sendMessage": "Envoyer le message",
+        "myMessages": "Mes messages",
+        "noMessages": "Aucun message pour l'instant",
+        "deleteTitle": "Supprimer",
+        "messageDeleted": "Message supprimé",
+        "failedToDelete": "Échec de la suppression"
     },
     "success": {
         "paymentSuccessful": "Paiement réussi!",

@@ -67,7 +67,12 @@
         "attachment": "Allegato",
         "uploadImage": "Carica Immagine (Opzionale)",
         "sending": "Invio...",
-        "sendMessage": "Invia Messaggio"
+        "sendMessage": "Invia Messaggio",
+        "myMessages": "I miei messaggi",
+        "noMessages": "Nessun messaggio ancora",
+        "deleteTitle": "Elimina",
+        "messageDeleted": "Messaggio eliminato",
+        "failedToDelete": "Eliminazione non riuscita"
     },
     "success": {
         "paymentSuccessful": "Pagamento Riuscito!",

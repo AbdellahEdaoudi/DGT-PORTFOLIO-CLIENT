@@ -67,7 +67,12 @@
         "attachment": "Lampiran",
         "uploadImage": "Unggah Gambar (Opsional)",
         "sending": "Mengirim...",
-        "sendMessage": "Kirim Pesan"
+        "sendMessage": "Kirim Pesan",
+        "myMessages": "Pesan Saya",
+        "noMessages": "Belum ada pesan",
+        "deleteTitle": "Hapus",
+        "messageDeleted": "Pesan dihapus",
+        "failedToDelete": "Gagal menghapus"
     },
     "success": {
         "paymentSuccessful": "Pembayaran Berhasil!",

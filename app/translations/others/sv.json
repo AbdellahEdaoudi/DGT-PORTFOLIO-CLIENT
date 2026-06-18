@@ -67,7 +67,12 @@
         "attachment": "Bilaga",
         "uploadImage": "Ladda upp bild (valfritt)",
         "sending": "Skickar...",
-        "sendMessage": "Skicka meddelande"
+        "sendMessage": "Skicka meddelande",
+        "myMessages": "Mina meddelanden",
+        "noMessages": "Inga meddelanden ännu",
+        "deleteTitle": "Ta bort",
+        "messageDeleted": "Meddelande borttaget",
+        "failedToDelete": "Borttagning misslyckades"
     },
     "success": {
         "paymentSuccessful": "Betalning lyckades!",

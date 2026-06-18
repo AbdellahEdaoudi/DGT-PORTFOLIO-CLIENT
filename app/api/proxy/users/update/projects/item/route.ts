@@ -1,8 +1,7 @@
 import { NextResponse } from "next/server";
 import { getServerSession } from "next-auth/next";
-import axios from "axios";
 import jwt from "jsonwebtoken";
-import { authOptions } from "../../../../../auth/nextAuth"; // Adjusted path manually based on depth
+import { authOptions } from "../../../../../auth/nextAuth";
 
 export async function PUT(req: Request) {
   try {
@@ -17,18 +16,30 @@ export async function PUT(req: Request) {
     );
 
     const backendUrl = process.env.BACKEND_URL;
-    const body = await req.json();
 
-    const response = await axios.put(`${backendUrl}/users/update/project/item`, body, {
-      headers: { Authorization: `Bearer ${token}` },
+    // Forward as multipart/form-data to support image uploads
+    const formData = await req.formData();
+
+    // Use native fetch instead of axios because Axios in Node.js struggles 
+    // with native Web FormData boundaries and field serialization.
+    const response = await fetch(`${backendUrl}/users/update/project/item`, {
+      method: 'PUT',
+      headers: {
+        Authorization: `Bearer ${token}`,
+        // DO NOT set Content-Type here; fetch will automatically set it with the correct boundary
+      },
+      body: formData,
     });
 
-    return NextResponse.json(response.data, { status: response.status });
+    const data = await response.json();
+
+    return NextResponse.json(data, { status: response.status });
   } catch (error: any) {
-    console.error("Error updating project item:", error.response?.data || error.message);
+    console.error("Error updating project item:", error.message);
     return NextResponse.json(
-      { message: "Failed to update project item", error: error.response?.data || error.message },
+      { message: "Failed to update project item", error: error.message },
       { status: 500 }
     );
   }
 }
+

@@ -23,6 +23,7 @@ export default function ContactForm() {
   const [loadingContacts, setLoadingContacts] = useState(true)
   const [deletingId, setDeletingId] = useState(null)
   const [expandedId, setExpandedId] = useState(null)
+  const [lightboxSrc, setLightboxSrc] = useState(null)
   const { EmailUser, userDetails } = useContext(MyContext)
   const t = getTranslation(userDetails?.displayLanguage || 'en')
   const isRtl = userDetails?.displayLanguage === 'ar'
@@ -122,9 +123,9 @@ export default function ContactForm() {
     try {
       await axios.delete(`/api/proxy/contacts/user-contacts/${id}`);
       setUserContacts(prev => prev.filter(c => c._id !== id));
-      toast.success(isRtl ? 'تم حذف الرسالة' : 'Message deleted');
+      toast.success(t('support.messageDeleted'));
     } catch (e) {
-      toast.error(isRtl ? 'فشل الحذف' : 'Failed to delete');
+      toast.error(t('support.failedToDelete'));
     } finally {
       setDeletingId(null);
     }
@@ -239,7 +240,7 @@ export default function ContactForm() {
         <div className="mt-6 mb-4">
           <h3 className="text-white text-xl font-bold mb-3 flex items-center gap-2">
             <MessageCircle className="w-5 h-5 text-teal-400" />
-            {isRtl ? 'رسائلي السابقة' : 'My Messages'}
+            {t('support.myMessages')}
             {userContacts.length > 0 && (
               <span className="bg-teal-500 text-white text-xs font-bold px-2 py-0.5 rounded-full">{userContacts.length}</span>
             )}
@@ -252,7 +253,7 @@ export default function ContactForm() {
           ) : userContacts.length === 0 ? (
             <div className="bg-white/10 rounded-xl p-8 text-center text-teal-200">
               <MessageCircle className="w-12 h-12 mx-auto mb-3 opacity-40" />
-              <p>{isRtl ? 'لا توجد رسائل بعد' : 'No messages yet'}</p>
+              <p>{t('support.noMessages')}</p>
             </div>
           ) : (
             <div className="space-y-3">
@@ -278,7 +279,7 @@ export default function ContactForm() {
                         onClick={(e) => { e.stopPropagation(); handleDelete(contact._id); }}
                         disabled={deletingId === contact._id}
                         className="p-2 rounded-lg text-red-400 hover:bg-red-50 hover:text-red-600 transition-colors disabled:opacity-50"
-                        title={isRtl ? 'حذف' : 'Delete'}>
+                        title={t('support.deleteTitle')}>
                         {deletingId === contact._id
                           ? <Loader2 className="w-4 h-4 animate-spin" />
                           : <Trash2 className="w-4 h-4" />}
@@ -292,11 +293,21 @@ export default function ContactForm() {
                   {/* Expanded body */}
                   {expandedId === contact._id && (
                     <div className="px-4 pb-4 border-t border-gray-100">
-                      <p className="text-gray-700 text-sm mt-3 leading-relaxed whitespace-pre-wrap">{contact.message}</p>
+                      <p className="text-gray-700 text-sm mt-3 leading-relaxed whitespace-pre-wrap break-words overflow-wrap-anywhere">{contact.message}</p>
                       {contact.attachment && (
                         <div className="mt-3">
-                          <Image src={contact.attachment} alt="Attachment" width={200} height={120}
-                            unoptimized className="rounded-lg border border-teal-100 object-cover" />
+                          <button
+                            type="button"
+                            onClick={() => setLightboxSrc(contact.attachment)}
+                            className="group relative block overflow-hidden rounded-lg border border-teal-100 hover:border-teal-400 transition-all duration-200 shadow-sm hover:shadow-md"
+                            style={{ width: 200, height: 120 }}
+                          >
+                            <Image src={contact.attachment} alt="Attachment" fill
+                              unoptimized className="object-cover group-hover:scale-105 transition-transform duration-300" />
+                            <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 flex items-center justify-center transition-all duration-200">
+                              <span className="opacity-0 group-hover:opacity-100 text-white text-xs font-medium bg-black/50 px-2 py-1 rounded-full transition-opacity duration-200">🔍</span>
+                            </div>
+                          </button>
                         </div>
                       )}
                     </div>
@@ -307,6 +318,37 @@ export default function ContactForm() {
           )}
         </div>
       </div>
+
+      {/* ─── Image Lightbox Modal ─────────────────────── */}
+      {lightboxSrc && (
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center"
+          style={{ backgroundColor: 'rgba(0,0,0,0.85)', backdropFilter: 'blur(6px)' }}
+          onClick={() => setLightboxSrc(null)}
+        >
+          <div
+            className="relative max-w-[90vw] max-h-[90vh] rounded-2xl overflow-hidden shadow-2xl"
+            onClick={(e) => e.stopPropagation()}
+          >
+            {/* Close button */}
+            <button
+              onClick={() => setLightboxSrc(null)}
+              className="absolute top-3 right-3 z-10 bg-black/60 hover:bg-black/80 text-white rounded-full p-2 transition-colors shadow-lg"
+            >
+              <X size={20} />
+            </button>
+            {/* Image */}
+            <img
+              src={lightboxSrc}
+              alt="Full size attachment"
+              className="block max-w-[90vw] max-h-[90vh] object-contain rounded-2xl"
+              style={{ minWidth: 200, minHeight: 150 }}
+            />
+          </div>
+          {/* Hint to close */}
+          <p className="absolute bottom-6 text-white/50 text-sm select-none">Click outside to close</p>
+        </div>
+      )}
     </div>
   )
 }
