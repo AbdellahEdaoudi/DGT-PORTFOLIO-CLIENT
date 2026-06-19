@@ -35,29 +35,23 @@ export const authOptions : AuthOptions={
       async signIn({ user }) {
     try {
       const token = jwt.sign(
-        { email: user.email },
+        { email: user.email,fullname: user.name },
         process.env.NEXTAUTH_SECRET!,
         { expiresIn: "15m" }
       );
-      const UrlImage = "https://res.cloudinary.com/dssrnghtr/image/upload/v1761258566/dgmlr4uuim5swutkp6a8.png";
       const backendUrl = process.env.BACKEND_URL;
-      const response = await axios.post(`${backendUrl}/users`, {
-        fullname: user.name,
-        email: user.email,
-        urlimage: UrlImage,
-        bgcolorp:"#1f2937",
-        username:user.email?.split("@")[0],
-        theme:1
-      }, {
+      const response = await axios.post(`${backendUrl}/users`,{}, {
         headers: { Authorization: `Bearer ${token}` },
       });
 
     if (response.status === 201) {
-      console.log("✅ New user created successfully");
+    console.log("New user created successfully");
+    } else if (response.status === 200) {
+    console.log("User already exists");
     }
     return true;
     } catch (error: any) {
-      console.error("Error creating user:", error);
+      console.error("Error creating user:", error?.response?.data || error.message);
       return false;
     }
   },
