@@ -1,0 +1,41 @@
+{
+    "waitTitle": "Vänligen vänta...",
+    "title": "Ladda ner CV",
+    "loading": "Laddar ner CV för {name}...",
+    "cancel": "Avbryt",
+    "customize": "Anpassa & Ladda ner",
+    "modalTitle": "Välj vad som ska inkluderas",
+    "modalSubtitle": "Välj avsnitt och objekt för ditt CV",
+    "downloadBtn": "Ladda ner PDF",
+    "cancelBtn": "Avbryt",
+    "allItems": "Alla objekt",
+    "sections": {
+        "summary": "Professionell sammanfattning",
+        "experience": "Erfarenhet",
+        "skills": "Färdigheter",
+        "projects": "Projekt",
+        "education": "Utbildning",
+        "languages": "Språk",
+        "certificates": "Certifikat",
+        "services": "Tjänster"
+    },
+    "pdf": {
+        "summary": "Professionell sammanfattning",
+        "experience": "Erfarenhet",
+        "skills": "Färdigheter",
+        "projects": "Projekt",
+        "education": "Utbildning",
+        "languages": "Språk",
+        "certificates": "Certifikat",
+        "services": "Tjänster",
+        "viewProject": "Visa projekt",
+        "nameFallback": "Namn",
+        "titleFallback": "Professionell",
+        "email": "E-post",
+        "phone": "Telefon",
+        "country": "Land",
+        "portfolio": "Portfolio",
+        "linkedin": "LinkedIn",
+        "github": "GitHub"
+    }
+}

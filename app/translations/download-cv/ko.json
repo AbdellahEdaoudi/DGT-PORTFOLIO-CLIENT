@@ -1,0 +1,41 @@
+{
+    "waitTitle": "잠시만 기다려 주세요...",
+    "title": "CV 다운로드",
+    "loading": "{name}의 CV 다운로드 중...",
+    "cancel": "취소",
+    "customize": "맞춤 설정 및 다운로드",
+    "modalTitle": "포함할 내용 선택",
+    "modalSubtitle": "CV에 포함할 섹션과 항목을 선택하세요",
+    "downloadBtn": "PDF 다운로드",
+    "cancelBtn": "취소",
+    "allItems": "모든 항목",
+    "sections": {
+        "summary": "전문 요약",
+        "experience": "경력",
+        "skills": "기술",
+        "projects": "프로젝트",
+        "education": "교육",
+        "languages": "언어",
+        "certificates": "자격증",
+        "services": "서비스"
+    },
+    "pdf": {
+        "summary": "전문 요약",
+        "experience": "경력",
+        "skills": "기술",
+        "projects": "프로젝트",
+        "education": "교육",
+        "languages": "언어",
+        "certificates": "자격증",
+        "services": "서비스",
+        "viewProject": "프로젝트 보기",
+        "nameFallback": "이름",
+        "titleFallback": "전문가",
+        "email": "이메일",
+        "phone": "전화",
+        "country": "국가",
+        "portfolio": "포트폴리오",
+        "linkedin": "LinkedIn",
+        "github": "GitHub"
+    }
+}

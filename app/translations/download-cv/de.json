@@ -1,0 +1,41 @@
+{
+    "waitTitle": "Bitte warten...",
+    "title": "Lebenslauf herunterladen",
+    "loading": "Lebenslauf von {name} wird heruntergeladen...",
+    "cancel": "Abbrechen",
+    "customize": "Anpassen & Herunterladen",
+    "modalTitle": "Inhalt auswählen",
+    "modalSubtitle": "Wählen Sie Abschnitte und Elemente für Ihren Lebenslauf aus",
+    "downloadBtn": "PDF herunterladen",
+    "cancelBtn": "Abbrechen",
+    "allItems": "Alle Elemente",
+    "sections": {
+        "summary": "Berufliche Zusammenfassung",
+        "experience": "Berufserfahrung",
+        "skills": "Fähigkeiten",
+        "projects": "Projekte",
+        "education": "Ausbildung",
+        "languages": "Sprachen",
+        "certificates": "Zertifikate",
+        "services": "Dienstleistungen"
+    },
+    "pdf": {
+        "summary": "Berufliche Zusammenfassung",
+        "experience": "Berufserfahrung",
+        "skills": "Fähigkeiten",
+        "projects": "Projekte",
+        "education": "Ausbildung",
+        "languages": "Sprachen",
+        "certificates": "Zertifikate",
+        "services": "Dienstleistungen",
+        "viewProject": "Projekt ansehen",
+        "nameFallback": "Name",
+        "titleFallback": "Fachmann",
+        "email": "E-Mail",
+        "phone": "Telefon",
+        "country": "Land",
+        "portfolio": "Portfolio",
+        "linkedin": "LinkedIn",
+        "github": "GitHub"
+    }
+}

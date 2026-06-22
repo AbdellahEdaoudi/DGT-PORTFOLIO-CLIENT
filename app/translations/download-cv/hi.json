@@ -1,0 +1,41 @@
+{
+    "waitTitle": "कृपया प्रतीक्षा करें...",
+    "title": "सीवी डाउनलोड करें",
+    "loading": "{name} का सीवी डाउनलोड हो रहा है...",
+    "cancel": "रद्द करें",
+    "customize": "कस्टमाइज़ और डाउनलोड",
+    "modalTitle": "क्या शामिल करें चुनें",
+    "modalSubtitle": "अपने सीवी के लिए अनुभाग और आइटम चुनें",
+    "downloadBtn": "PDF डाउनलोड करें",
+    "cancelBtn": "रद्द करें",
+    "allItems": "सभी आइटम",
+    "sections": {
+        "summary": "पेशेवर सारांश",
+        "experience": "अनुभव",
+        "skills": "कौशल",
+        "projects": "परियोजनाएं",
+        "education": "शिक्षा",
+        "languages": "भाषाएं",
+        "certificates": "प्रमाणपत्र",
+        "services": "सेवाएं"
+    },
+    "pdf": {
+        "summary": "पेशेवर सारांश",
+        "experience": "अनुभव",
+        "skills": "कौशल",
+        "projects": "परियोजनाएं",
+        "education": "शिक्षा",
+        "languages": "भाषाएं",
+        "certificates": "प्रमाणपत्र",
+        "services": "सेवाएं",
+        "viewProject": "प्रोजेक्ट देखें",
+        "nameFallback": "नाम",
+        "titleFallback": "पेशेवर",
+        "email": "ईमेल",
+        "phone": "फ़ोन",
+        "country": "देश",
+        "portfolio": "पोर्टफोलियो",
+        "linkedin": "LinkedIn",
+        "github": "GitHub"
+    }
+}

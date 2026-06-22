@@ -1,5 +1,4 @@
 
-import React from 'react';
 import { GripVertical } from '../../components/Icons';
 
 export default function DragTutorial() {

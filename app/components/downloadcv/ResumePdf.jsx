@@ -1,5 +1,5 @@
-import React from 'react';
 import { Page, Text, View, Document, StyleSheet, Image, Link, Font } from '@react-pdf/renderer';
+import { getDownloadCvTranslation } from '../../translations/download-cv';
 
 // Register fonts for multilingual support
 Font.register({
@@ -22,395 +22,328 @@ Font.register({
 Font.register({
     family: 'Noto Sans JP',
     fonts: [
-        { src: 'https://fonts.gstatic.com/s/notosansjp/v55/-F6jfjtqLzI2JPCgQBnw7HFyzSD-AsregP8VFBEj75s.ttf' }, // Regular
-        { src: 'https://fonts.gstatic.com/s/notosansjp/v55/-F6jfjtqLzI2JPCgQBnw7HFyzSD-AsregP8VFPYk75s.ttf', fontWeight: 'bold' } // Bold
+        { src: 'https://fonts.gstatic.com/s/notosansjp/v55/-F6jfjtqLzI2JPCgQBnw7HFyzSD-AsregP8VFBEj75s.ttf' },
+        { src: 'https://fonts.gstatic.com/s/notosansjp/v55/-F6jfjtqLzI2JPCgQBnw7HFyzSD-AsregP8VFPYk75s.ttf', fontWeight: 'bold' }
     ]
 });
 
 Font.register({
     family: 'Noto Sans SC',
     fonts: [
-        { src: 'https://fonts.gstatic.com/s/notosanssc/v39/k3kCo84MPvpLmixcA63oeAL7Iqp5IZJF9bmaG9_FnYw.ttf' }, // Regular
-        { src: 'https://fonts.gstatic.com/s/notosanssc/v39/k3kCo84MPvpLmixcA63oeAL7Iqp5IZJF9bmaGzjCnYw.ttf', fontWeight: 'bold' } // Bold
+        { src: 'https://fonts.gstatic.com/s/notosanssc/v39/k3kCo84MPvpLmixcA63oeAL7Iqp5IZJF9bmaG9_FnYw.ttf' },
+        { src: 'https://fonts.gstatic.com/s/notosanssc/v39/k3kCo84MPvpLmixcA63oeAL7Iqp5IZJF9bmaGzjCnYw.ttf', fontWeight: 'bold' }
     ]
 });
 
 Font.register({
     family: 'Noto Sans KR',
     fonts: [
-        { src: 'https://cdn.jsdelivr.net/npm/@fontsource/noto-sans-kr/files/noto-sans-kr-korean-400-normal.woff' }, // Regular
-        { src: 'https://cdn.jsdelivr.net/npm/@fontsource/noto-sans-kr/files/noto-sans-kr-korean-700-normal.woff', fontWeight: 'bold' } // Bold
+        { src: 'https://cdn.jsdelivr.net/npm/@fontsource/noto-sans-kr/files/noto-sans-kr-korean-400-normal.woff' },
+        { src: 'https://cdn.jsdelivr.net/npm/@fontsource/noto-sans-kr/files/noto-sans-kr-korean-700-normal.woff', fontWeight: 'bold' }
     ]
 });
 
 Font.register({
     family: 'Noto Sans Devanagari',
     fonts: [
-        { src: 'https://cdn.jsdelivr.net/npm/@fontsource/noto-sans-devanagari/files/noto-sans-devanagari-devanagari-400-normal.woff' }, // Regular
-        { src: 'https://cdn.jsdelivr.net/npm/@fontsource/noto-sans-devanagari/files/noto-sans-devanagari-devanagari-700-normal.woff', fontWeight: 'bold' } // Bold
+        { src: 'https://cdn.jsdelivr.net/npm/@fontsource/noto-sans-devanagari/files/noto-sans-devanagari-devanagari-400-normal.woff' },
+        { src: 'https://cdn.jsdelivr.net/npm/@fontsource/noto-sans-devanagari/files/noto-sans-devanagari-devanagari-700-normal.woff', fontWeight: 'bold' }
     ]
 });
+
+// ===================== DESIGN TOKENS =====================
+const COLORS = {
+    ink: '#111827',       // headings, name
+    body: '#374151',      // body text
+    muted: '#6B7280',     // dates, secondary text
+    subtitleAccent: '#2563EB', // professional blue
+    hairline: '#E5E7EB',  // section divider lines
+    tagBg: '#F3F4F6',
+    tagBorder: '#E5E7EB',
+};
 
 const styles = StyleSheet.create({
     page: {
         flexDirection: 'column',
         backgroundColor: '#FFFFFF',
-        padding: 30,
+        paddingTop: 40,
+        paddingBottom: 40,
+        paddingHorizontal: 45,
         fontSize: 10,
         lineHeight: 1.5,
-        color: '#374151',
+        color: COLORS.body,
     },
+
+    // ---------- HEADER ----------
     header: {
-        marginBottom: 15,
         flexDirection: 'row',
-        alignItems: 'flex-start',
         justifyContent: 'space-between',
-        borderBottomWidth: 1,
-        borderBottomColor: '#E5E7EB',
-        paddingBottom: 20,
+        alignItems: 'flex-start',
+        borderBottomWidth: 1.5,
+        borderBottomColor: COLORS.ink,
+        paddingBottom: 16,
+        marginBottom: 20,
     },
     headerLeft: {
-        flex: 1,
-        paddingRight: 20,
-    },
-    name: {
-        fontSize: 26,
-        fontWeight: 'bold',
-        color: '#111827',
-        marginBottom: 26, // Increased margin to prevent sticking
-        letterSpacing: -0.5,
-        textTransform: 'uppercase',
-    },
-    title: {
-        fontSize: 12,
-        color: '#374151', // Dark Gray/Black
-        fontWeight: 'bold',
-        marginBottom: 12,
-        textTransform: 'uppercase',
-        letterSpacing: 1.5,
-    },
-    contactRow: {
-        flexDirection: 'row',
-        flexWrap: 'wrap',
-        gap: 12,
-    },
-    contactItem: {
-        fontSize: 9,
-        color: '#6B7280',
         flexDirection: 'row',
         alignItems: 'center',
     },
     profileImage: {
-        width: 70,
-        height: 70,
-        borderRadius: 35,
+        width: 60,
+        height: 60,
+        borderRadius: 30,
         objectFit: 'cover',
-        marginLeft: 0,
+        marginRight: 16,
     },
+    nameBlock: {
+        justifyContent: 'center',
+        flexDirection: 'column',
+    },
+    name: {
+        fontSize: 22,
+        fontWeight: 'bold',
+        color: COLORS.ink,
+        lineHeight: 1.2,
+        marginBottom: 2,
+    },
+    title: {
+        fontSize: 11,
+        fontWeight: 'bold',
+        color: COLORS.subtitleAccent,
+        lineHeight: 1.2,
+        marginTop: 2,
+    },
+    contactBlock: {
+        alignItems: 'flex-end',
+        justifyContent: 'center',
+    },
+    contactLine: {
+        fontSize: 9,
+        color: COLORS.muted,
+        marginBottom: 3,
+        textAlign: 'right',
+        lineHeight: 1.3,
+    },
+    contactLink: {
+        fontSize: 9,
+        color: COLORS.ink,
+        marginBottom: 3,
+        textDecoration: 'none',
+        textAlign: 'right',
+    },
+    contactLinkInline: {
+        color: COLORS.ink,
+        textDecoration: 'none',
+        fontSize: 9,
+    },
+
+    // ---------- SECTION ----------
     section: {
         marginBottom: 20,
     },
     sectionTitle: {
-        fontSize: 11,
+        fontSize: 12,
         fontWeight: 'bold',
-        color: '#111827',
+        color: COLORS.ink,
         textTransform: 'uppercase',
-        letterSpacing: 1.2,
         marginBottom: 10,
-        borderLeftWidth: 3,
-        borderLeftColor: '#111827', // Black
-        paddingLeft: 8,
+        paddingBottom: 4,
+        borderBottomWidth: 1,
+        borderBottomColor: COLORS.hairline,
     },
-    item: {
-        marginBottom: 12,
+    summaryText: {
+        fontSize: 10,
+        color: COLORS.body,
+        textAlign: 'justify',
+        lineHeight: 1.6,
     },
-    itemHeader: {
+
+    // ---------- EXPERIENCE / GENERIC ENTRY ----------
+    entry: {
+        marginBottom: 14,
+    },
+    entryHeader: {
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'baseline',
-        marginBottom: 2,
     },
-    itemTitle: {
+    entryTitle: {
         fontSize: 11,
         fontWeight: 'bold',
-        color: '#1F2937',
+        color: COLORS.ink,
     },
-    itemSubtitle: {
+    entryDate: {
+        fontSize: 9,
+        color: COLORS.muted,
+        fontWeight: 'bold',
+    },
+    entrySubtitle: {
         fontSize: 10,
         fontWeight: 'bold',
-        color: '#374151', // Dark Gray/Black
-    },
-    itemDate: {
-        fontSize: 9,
-        color: '#9CA3AF',
-        fontStyle: 'italic', // Default to italic, will be overridden for CJK
-    },
-    description: {
-        fontSize: 10,
-        color: '#4B5563',
+        color: COLORS.subtitleAccent,
         marginTop: 2,
-        textAlign: 'justify',
+        marginBottom: 4,
     },
-    skillContainer: {
+    bulletRow: {
+        flexDirection: 'row',
+        marginBottom: 3,
+        paddingLeft: 4,
+    },
+    bulletDash: {
+        fontSize: 10,
+        color: COLORS.subtitleAccent,
+        width: 12,
+    },
+    bulletText: {
+        fontSize: 10,
+        color: COLORS.body,
+        flex: 1,
+        lineHeight: 1.5,
+    },
+
+    // ---------- TAGS (skills) ----------
+    tagRow: {
         flexDirection: 'row',
         flexWrap: 'wrap',
-        gap: 6,
     },
-    skillBadge: {
-        backgroundColor: '#F3F4F6', // Light Gray
-        color: '#1F2937', // Dark Gray/Black
-        paddingHorizontal: 8,
-        paddingVertical: 4,
-        borderRadius: 4,
+    tag: {
         fontSize: 9,
         fontWeight: 'bold',
+        color: COLORS.ink,
+        backgroundColor: COLORS.tagBg,
+        borderWidth: 0.5,
+        borderColor: COLORS.tagBorder,
+        borderRadius: 4,
+        paddingVertical: 4,
+        paddingHorizontal: 8,
+        marginRight: 6,
+        marginBottom: 6,
     },
-    link: {
-        color: '#111827', // Black
+
+    // ---------- EDUCATION ----------
+    eduEntry: {
+        marginBottom: 10,
+    },
+    eduDegree: {
+        fontSize: 10.5,
+        fontWeight: 'bold',
+        color: COLORS.ink,
+    },
+    eduSchool: {
+        fontSize: 9.5,
+        color: COLORS.body,
+        marginTop: 2,
+    },
+    eduYear: {
+        fontSize: 9,
+        color: COLORS.muted,
+        marginTop: 2,
+    },
+
+    // ---------- LANGUAGES ----------
+    langRow: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        marginBottom: 6,
+        borderBottomWidth: 0.5,
+        borderBottomColor: COLORS.hairline,
+        paddingBottom: 4,
+    },
+    langName: {
+        fontSize: 10,
+        color: COLORS.body,
+    },
+    langLevel: {
+        fontSize: 10,
+        fontWeight: 'bold',
+        color: COLORS.ink,
+    },
+
+    // ---------- PROJECTS ----------
+    projHeader: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'baseline',
+    },
+    projTitle: {
+        fontSize: 11,
+        fontWeight: 'bold',
+        color: COLORS.ink,
+    },
+    projLink: {
+        fontSize: 9,
+        color: COLORS.subtitleAccent,
+        fontWeight: 'bold',
         textDecoration: 'none',
+    },
+    projDesc: {
+        fontSize: 10,
+        color: COLORS.body,
+        marginTop: 3,
+        lineHeight: 1.5,
+    },
+    projTech: {
+        fontSize: 8.5,
+        color: COLORS.muted,
+        marginTop: 4,
+    },
+
+    // ---------- CERTIFICATES ----------
+    certRow: {
+        flexDirection: 'row',
+        alignItems: 'flex-start',
+        marginBottom: 4,
+    },
+    certDash: {
+        fontSize: 10,
+        color: COLORS.subtitleAccent,
+        width: 12,
+    },
+    certText: {
+        fontSize: 10,
+        color: COLORS.body,
+        flex: 1,
+        lineHeight: 1.5,
     },
 });
 
-const translations = {
-    en: {
-        summary: "Professional Summary",
-        experience: "Experience",
-        skills: "Skills",
-        projects: "Projects",
-        education: "Education",
-        languages: "Languages",
-        certificates: "Certificates",
-        services: "Services",
-        viewProject: "View Project",
-        nameFallback: "Your Name",
-        titleFallback: "Professional Title"
-    },
-    fr: {
-        summary: "Résumé Professionnel",
-        experience: "Expérience",
-        skills: "Compétences",
-        projects: "Projets",
-        education: "Éducation",
-        languages: "Langues",
-        certificates: "Certificats",
-        services: "Services",
-        viewProject: "Voir le projet",
-        nameFallback: "Votre Nom",
-        titleFallback: "Titre Professionnel"
-    },
-    ar: {
-        summary: "نبذة",
-        experience: "الخبرة",
-        skills: "المهارات",
-        projects: "المشاريع",
-        education: "التعليم",
-        languages: "اللغات",
-        certificates: "الشهادات",
-        services: "الخدمات",
-        viewProject: "عرض المشروع",
-        nameFallback: "الاسم",
-        titleFallback: "المسمى الوظيفي"
-    },
-    de: {
-        summary: "Berufliche Zusammenfassung",
-        experience: "Berufserfahrung",
-        skills: "Fähigkeiten",
-        projects: "Projekte",
-        education: "Ausbildung",
-        languages: "Sprachen",
-        certificates: "Zertifikate",
-        services: "Dienstleistungen",
-        viewProject: "Projekt ansehen",
-        nameFallback: "Ihr Name",
-        titleFallback: "Berufsbezeichnung"
-    },
-    ru: {
-        summary: "Профессиональное резюме",
-        experience: "Опыт работы",
-        skills: "Навыки",
-        projects: "Проекты",
-        education: "Образование",
-        languages: "Языки",
-        certificates: "Сертификаты",
-        services: "Услуги",
-        viewProject: "Посмотреть проект",
-        nameFallback: "Ваше Имя",
-        titleFallback: "Профессиональный заголовок"
-    },
-    ja: {
-        summary: "職務要約",
-        experience: "職歴",
-        skills: "スキル",
-        projects: "プロジェクト",
-        education: "学歴",
-        languages: "言語",
-        certificates: "証明書",
-        services: "サービス",
-        viewProject: "プロジェクトを見る",
-        nameFallback: "氏名",
-        titleFallback: "職種"
-    },
-    zh: {
-        summary: "专业摘要",
-        experience: "工作经验",
-        skills: "技能",
-        projects: "项目",
-        education: "教育",
-        languages: "语言",
-        certificates: "证书",
-        services: "服务",
-        viewProject: "查看项目",
-        nameFallback: "姓名",
-        titleFallback: "职位"
-    },
-    es: {
-        summary: "Resumen Profesional",
-        experience: "Experiencia",
-        skills: "Habilidades",
-        projects: "Proyectos",
-        education: "Educación",
-        languages: "Idiomas",
-        certificates: "Certificados",
-        services: "Servicios",
-        viewProject: "Ver Proyecto",
-        nameFallback: "Su Nombre",
-        titleFallback: "Título Profesional"
-    },
-    nl: {
-        summary: "Professionele Samenvatting",
-        experience: "Ervaring",
-        skills: "Vaardigheden",
-        projects: "Projecten",
-        education: "Opleiding",
-        languages: "Talen",
-        certificates: "Certificaten",
-        services: "Diensten",
-        viewProject: "Bekijk project",
-        nameFallback: "Uw Naam",
-        titleFallback: "Professionele Titel"
-    },
-    pt: {
-        summary: "Resumo Profissional",
-        experience: "Experiência",
-        skills: "Habilidades",
-        projects: "Projetos",
-        education: "Educação",
-        languages: "Idiomas",
-        certificates: "Certificados",
-        services: "Serviços",
-        viewProject: "Ver Projeto",
-        nameFallback: "Seu Nome",
-        titleFallback: "Título Profissional"
-    },
-    it: {
-        summary: "Riepilogo Professionale",
-        experience: "Esperienza",
-        skills: "Competenze",
-        projects: "Progetti",
-        education: "Istruzione",
-        languages: "Lingue",
-        certificates: "Certificati",
-        services: "Servizi",
-        viewProject: "Vedi Progetto",
-        nameFallback: "Il Tuo Nome",
-        titleFallback: "Titolo Professionale"
-    },
-    hi: {
-        summary: "पेशेवर सारांश",
-        experience: "अनुभव",
-        skills: "कौशल",
-        projects: "परियोजनाएं",
-        education: "शिक्षा",
-        languages: "भाषाएं",
-        certificates: "प्रमाणपत्र",
-        services: "सेवाएं",
-        viewProject: "परियोजना देखें",
-        nameFallback: "आपका नाम",
-        titleFallback: "पेशेवर शीर्षक"
-    },
-    tr: {
-        summary: "Profesyonel Özet",
-        experience: "Deneyim",
-        skills: "Beceriler",
-        projects: "Projeler",
-        education: "Eğitim",
-        languages: "Diller",
-        certificates: "Sertifikalar",
-        services: "Hizmetler",
-        viewProject: "Projeyi Görüntüle",
-        nameFallback: "Adınız",
-        titleFallback: "Profesyonel Unvan"
-    },
-    ko: {
-        summary: "전문 요약",
-        experience: "경력",
-        skills: "기술",
-        projects: "프로젝트",
-        education: "교육",
-        languages: "언어",
-        certificates: "자격증",
-        services: "서비스",
-        viewProject: "프로젝트 보기",
-        nameFallback: "당신의 이름",
-        titleFallback: "전문 직함"
-    },
-    id: {
-        summary: "Ringkasan Profesional",
-        experience: "Pengalaman",
-        skills: "Keahlian",
-        projects: "Proyek",
-        education: "Pendidikan",
-        languages: "Bahasa",
-        certificates: "Sertifikat",
-        services: "Layanan",
-        viewProject: "Lihat Proyek",
-        nameFallback: "Nama Anda",
-        titleFallback: "Gelar Profesional"
-    },
-    pl: {
-        summary: "Podsumowanie Zawodowe",
-        experience: "Doświadczenie",
-        skills: "Umiejętności",
-        projects: "Projekty",
-        education: "Edukacja",
-        languages: "Języki",
-        certificates: "Certyfikaty",
-        services: "Usługi",
-        viewProject: "Zobacz projekt",
-        nameFallback: "Twoje Imię",
-        titleFallback: "Tytuł Zawodowy"
-    },
-    sv: {
-        summary: "Professionell sammanfattning",
-        experience: "Erfarenhet",
-        skills: "Färdigheter",
-        projects: "Projekt",
-        education: "Utbildning",
-        languages: "Språk",
-        certificates: "Certifikat",
-        services: "Tjänster",
-        viewProject: "Visa projekt",
-        nameFallback: "Ditt namn",
-        titleFallback: "Yrkesroll"
-    },
-    vi: {
-        summary: "Tóm tắt chuyên môn",
-        experience: "Kinh nghiệm",
-        skills: "Kỹ năng",
-        projects: "Dự án",
-        education: "Học vấn",
-        languages: "Ngôn ngữ",
-        certificates: "Chứng chỉ",
-        services: "Dịch vụ",
-        viewProject: "Xem dự án",
-        nameFallback: "Tên của bạn",
-        titleFallback: "Chức danh nghề nghiệp"
-    }
-};
+// ===================== RTL OVERRIDES =====================
+const rtlStyles = StyleSheet.create({
+    page: { direction: 'rtl' },
+    header: { flexDirection: 'row-reverse' },
+    headerLeft: { flexDirection: 'row-reverse' },
+    profileImage: { marginRight: 0, marginLeft: 16 },
+    name: { textAlign: 'right' },
+    title: { textAlign: 'right' },
+    contactBlock: { alignItems: 'flex-start' },
+    contactLine: { textAlign: 'left' },
+    contactLink: { textAlign: 'left' },
+    sectionTitle: { textAlign: 'right' },
+    summaryText: { textAlign: 'right' },
+    entryHeader: { flexDirection: 'row-reverse' },
+    entryTitle: { textAlign: 'right' },
+    entrySubtitle: { textAlign: 'right' },
+    bulletRow: { flexDirection: 'row-reverse', paddingLeft: 0, paddingRight: 4 },
+    bulletText: { textAlign: 'right' },
+    tagRow: { flexDirection: 'row-reverse', justifyContent: 'flex-start' },
+    tag: { marginRight: 0, marginLeft: 6 },
+    eduDegree: { textAlign: 'right' },
+    eduSchool: { textAlign: 'right' },
+    eduYear: { textAlign: 'right' },
+    langRow: { flexDirection: 'row-reverse' },
+    projHeader: { flexDirection: 'row-reverse' },
+    projTitle: { textAlign: 'right' },
+    projDesc: { textAlign: 'right' },
+    projTech: { textAlign: 'right' },
+    certRow: { flexDirection: 'row-reverse' },
+    certText: { textAlign: 'right' },
+});
+
+// ===================== TRANSLATIONS (Moved to /translations/download-cv) =====================
 
 const ResumePdf = ({ userData }) => {
     const lang = userData?.displayLanguage || 'en';
-    const t = translations[lang] || translations['en'];
+    const t = getDownloadCvTranslation(lang).pdf;
     const isRTL = lang === 'ar';
 
     const getFontFamily = (language) => {
@@ -420,44 +353,42 @@ const ResumePdf = ({ userData }) => {
             case 'zh': return 'Noto Sans SC';
             case 'ko': return 'Noto Sans KR';
             case 'hi': return 'Noto Sans Devanagari';
-            case 'ru': return 'Roboto';
             default: return 'Roboto';
         }
     };
 
     const fontFamily = getFontFamily(lang);
-    const disableItalic = ['ja', 'zh', 'ko', 'hi'].includes(lang);
 
-    // Dynamic Styles Helper
     const s = (styleName, extra = {}) => {
         const base = styles[styleName];
         const rtl = isRTL ? rtlStyles[styleName] : {};
         return [base, rtl, extra];
     };
 
-    const formatDate = (dateString) => {
-        if (!dateString) return '';
-        return dateString;
-    };
-
-    // Render Function Validators
+    const formatDate = (dateString) => dateString || '';
     const hasData = (data) => data && data.length > 0;
 
-    // Render functions for each section
+    // ---------- SECTION RENDERERS ----------
+
     const renderExperience = () => (
         hasData(userData?.experience) && (
             <View style={styles.section} key="experience">
                 <Text style={s('sectionTitle')}>{t.experience}</Text>
                 {userData.experience.map((exp, index) => (
-                    <View key={index} style={styles.item}>
-                        <View style={s('itemHeader')}>
-                            <Text style={s('itemTitle')}>{exp.role}</Text>
-                            <Text style={[styles.itemDate, disableItalic && { fontStyle: 'normal' }]}>
+                    <View key={index} style={styles.entry} wrap={false}>
+                        <View style={s('entryHeader')}>
+                            <Text style={s('entryTitle')}>{exp.role}</Text>
+                            <Text style={styles.entryDate}>
                                 {formatDate(exp.startDate)} - {formatDate(exp.endDate)}
                             </Text>
                         </View>
-                        <Text style={s('itemSubtitle')}>{exp.company}</Text>
-                        <Text style={s('description')}>{exp.description}</Text>
+                        <Text style={s('entrySubtitle')}>{exp.company}</Text>
+                        {(exp.description || '').split('\n').map(str => str.replace(/^[-•]\s*/, '').trim()).filter(Boolean).map((line, i) => (
+                            <View key={i} style={s('bulletRow')}>
+                                <Text style={styles.bulletDash}>{isRTL ? '\u2013' : '\u2013'}</Text>
+                                <Text style={s('bulletText')}>{line}</Text>
+                            </View>
+                        ))}
                     </View>
                 ))}
             </View>
@@ -468,13 +399,15 @@ const ResumePdf = ({ userData }) => {
         hasData(userData?.skills) && (
             <View style={styles.section} key="skills">
                 <Text style={s('sectionTitle')}>{t.skills}</Text>
-                <View style={s('skillContainer')}>
-                    {userData.skills.map((skill, index) => (
-                        <Text key={index} style={styles.skillBadge}>
-                            {skill.name || skill}
-                        </Text>
-                    ))}
-                </View>
+                {userData.skills.map((skill, index) => {
+                    const line = (skill.name || skill).replace(/^[-•]\s*/, '').trim();
+                    return (
+                        <View key={index} style={s('bulletRow')}>
+                            <Text style={styles.bulletDash}>{isRTL ? '\u2013' : '\u2013'}</Text>
+                            <Text style={s('bulletText')}>{line}</Text>
+                        </View>
+                    );
+                })}
             </View>
         )
     );
@@ -484,22 +417,18 @@ const ResumePdf = ({ userData }) => {
             <View style={styles.section} key="projects">
                 <Text style={s('sectionTitle')}>{t.projects}</Text>
                 {userData.projects.map((proj, index) => (
-                    <View key={index} style={styles.item}>
-                        <View style={s('itemHeader')}>
-                            <Text style={s('itemTitle')}>{proj.title}</Text>
+                    <View key={index} style={{ marginBottom: 14 }} wrap={false}>
+                        <View style={s('projHeader')}>
+                            <Text style={s('projTitle')}>{proj.title}</Text>
                             {proj.link && (
-                                <Link src={proj.link} style={{ ...styles.link, fontSize: 9 }}>
+                                <Link src={proj.link} style={s('projLink')}>
                                     {t.viewProject}
                                 </Link>
                             )}
                         </View>
-                        <Text style={s('description')}>{proj.description}</Text>
+                        <Text style={s('projDesc')}>{proj.description}</Text>
                         {proj.technologies && proj.technologies.length > 0 && (
-                            <View style={[styles.skillContainer, isRTL ? rtlStyles.skillContainer : {}]}>
-                                {proj.technologies.map((tech, i) => (
-                                    <Text key={i} style={{ fontSize: 8, color: '#6B7280' }}>• {tech}</Text>
-                                ))}
-                            </View>
+                            <Text style={s('projTech')}>{proj.technologies.join('  \u00b7  ')}</Text>
                         )}
                     </View>
                 ))}
@@ -512,14 +441,10 @@ const ResumePdf = ({ userData }) => {
             <View style={styles.section} key="education">
                 <Text style={s('sectionTitle')}>{t.education}</Text>
                 {userData.education.map((edu, index) => (
-                    <View key={index} style={styles.item}>
-                        <View style={s('itemHeader')}>
-                            <Text style={s('itemTitle')}>{edu.school}</Text>
-                            <Text style={[styles.itemDate, disableItalic && { fontStyle: 'normal' }]}>
-                                {formatDate(edu.startYear)} - {formatDate(edu.endYear)}
-                            </Text>
-                        </View>
-                        <Text style={s('itemSubtitle')}>{edu.degree} {edu.field ? `in ${edu.field}` : ''}</Text>
+                    <View key={index} style={styles.eduEntry}>
+                        <Text style={s('eduDegree')}>{edu.degree}{edu.field ? ` \u2013 ${edu.field}` : ''}</Text>
+                        <Text style={s('eduSchool')}>{edu.school}</Text>
+                        <Text style={s('eduYear')}>{formatDate(edu.startYear)} - {formatDate(edu.endYear)}</Text>
                     </View>
                 ))}
             </View>
@@ -530,34 +455,32 @@ const ResumePdf = ({ userData }) => {
         hasData(userData?.languages) && (
             <View style={styles.section} key="languages">
                 <Text style={s('sectionTitle')}>{t.languages}</Text>
-                <View style={s('skillContainer')}>
-                    {userData.languages.map((lang, index) => (
-                        <Text key={index} style={styles.skillBadge}>
-                            {lang.language || lang} {lang.level ? `(${lang.level})` : ''}
-                        </Text>
-                    ))}
-                </View>
+                {userData.languages.map((language, index) => {
+                    const raw = language.language || language;
+                    const [name, level] = typeof raw === 'string' && raw.includes(':') ? raw.split(':').map(x => x.trim()) : [raw, language.level];
+                    return (
+                        <View key={index} style={s('langRow')}>
+                            <Text style={styles.langName}>{name}</Text>
+                            <Text style={styles.langLevel}>{level || ''}</Text>
+                        </View>
+                    );
+                })}
             </View>
         )
     );
 
-    // New: Certificates rendering
     const renderCertificates = () => (
         hasData(userData?.certificates) && (
             <View style={styles.section} key="certificates">
                 <Text style={s('sectionTitle')}>{t.certificates}</Text>
-                <View style={{ flexDirection: 'column', gap: 6 }}>
-                    {userData.certificates.map((cert, index) => (
-                        cert.description && (
-                            <View key={index} style={{ flexDirection: isRTL ? 'row-reverse' : 'row', alignItems: 'flex-start' }}>
-                                <Text style={{ fontSize: 10, color: '#374151', paddingHorizontal: 4 }}>•</Text>
-                                <Text style={{ fontSize: 10, color: '#4B5563', textAlign: isRTL ? 'right' : 'left', flex: 1 }}>
-                                    {cert.description}
-                                </Text>
-                            </View>
-                        )
-                    ))}
-                </View>
+                {userData.certificates.map((cert, index) => (
+                    cert.description && (
+                        <View key={index} style={s('certRow')}>
+                            <Text style={styles.certDash}>{'\u2013'}</Text>
+                            <Text style={s('certText')}>{cert.description}</Text>
+                        </View>
+                    )
+                ))}
             </View>
         )
     );
@@ -566,85 +489,111 @@ const ResumePdf = ({ userData }) => {
         hasData(userData?.services) && (
             <View style={styles.section} key="services">
                 <Text style={s('sectionTitle')}>{t.services}</Text>
-                <View style={s('skillContainer')}>
-                    {userData.services.map((service, index) => (
-                        <Text key={index} style={styles.skillBadge}>
-                            {typeof service === 'string' ? service : (service.name || service.title)}
-                        </Text>
-                    ))}
-                </View>
+                {userData.services.map((service, index) => {
+                    const line = (service || '').replace(/^[-•]\s*/, '').trim();
+                    return line ? (
+                        <View key={index} style={s('bulletRow')}>
+                            <Text style={styles.bulletDash}>{isRTL ? '\u2013' : '\u2013'}</Text>
+                            <Text style={s('bulletText')}>{line}</Text>
+                        </View>
+                    ) : null;
+                })}
             </View>
         )
     );
 
+    const defaultOrder = ["services", "experience", "projects", "education", "skills", "certificates", "languages"];
 
-    // Determine Section Order
-    const defaultOrder = ["experience", "skills", "projects", "education", "languages", "certificates", "services"];
-    // If userData.sectionOrder is present, use it. Append missing keys to ensure everything is rendered if data exists.
-    const userOrder = userData?.sectionOrder && userData.sectionOrder.length > 0 ? userData.sectionOrder : defaultOrder;
-
-    // Ensure we don't miss any sections if they have data but aren't in the custom order (fallback)
+    let userOrder = userData?.sectionOrder && userData.sectionOrder.length > 0 ? userData.sectionOrder : defaultOrder;
     const orderToRender = [...new Set([...userOrder, ...defaultOrder])];
 
     const renderSection = (key) => {
         switch (key) {
+            case 'services': return renderServices();
             case 'experience': return renderExperience();
             case 'skills': return renderSkills();
             case 'projects': return renderProjects();
             case 'education': return renderEducation();
             case 'languages': return renderLanguages();
             case 'certificates': return renderCertificates();
-            case 'services': return renderServices();
             default: return null;
         }
     };
 
+    const profileUrl = userData?.username
+        ? (userData.customDomainVerified && userData.customDomain
+            ? `https://${userData.customDomain}`
+            : `https://${userData.username}.dgtportfolio.com`)
+        : null;
+
     return (
         <Document>
             <Page size="A4" style={[styles.page, { fontFamily }, isRTL ? rtlStyles.page : {}]}>
-                {/* Header */}
-                <View style={[styles.header, isRTL ? rtlStyles.header : {}]}>
-                    <View style={s('headerLeft')}>
-                        <Text style={s('name')}>{userData?.fullname || t.nameFallback}</Text>
-                        <Text style={s('title')}>{userData?.category || t.titleFallback}</Text>
 
-                        <View style={s('contactRow')}>
-                            {userData?.email && (
-                                <Text style={styles.contactItem}>{userData.email}</Text>
-                            )}
-                            {userData?.phoneNumber && (
-                                <Text style={styles.contactItem}>• {userData.phoneNumber}</Text>
-                            )}
-                            {userData?.country && (
-                                <Text style={styles.contactItem}>• {userData.country}</Text>
-                            )}
-                            {userData?.username && (
-                                <Link
-                                    src={`${userData.customDomainVerified ? `https://${userData.customDomain}` : `https://${userData.username}.dgtportfolio.com`}`}
-                                    style={styles.contactItem}>
-                                    <Text style={styles.link}>• {userData.username}.dgtportfolio.com</Text>
-                                </Link>
-                            )}
+                {/* HEADER */}
+                <View style={s('header')}>
+                    <View style={s('headerLeft')}>
+                        {userData?.urlimage ? (
+                            <Image style={s('profileImage')} src={userData.urlimage} />
+                        ) : null}
+                        <View style={styles.nameBlock}>
+                            <Text style={s('name')}>{(userData?.fullname || t.nameFallback).toUpperCase()}</Text>
+                            <Text style={s('title')}>{(userData?.category || t.titleFallback).toUpperCase()}</Text>
                         </View>
                     </View>
-                    {userData?.urlimage && (
-                        <Image
-                            src={userData.urlimage}
-                            style={styles.profileImage}
-                            alt={`${userData?.fullname || 'Profile'} photo`}
-                        />
-                    )}
+
+                    <View style={s('contactBlock')}>
+                        {userData?.email && (
+                            <Text style={styles.contactLine}>
+                                {t.email}: {userData.email}
+                            </Text>
+                        )}
+                        {userData?.phoneNumber && (
+                            <Text style={styles.contactLine}>
+                                {t.phone}: {userData.phoneNumber}
+                            </Text>
+                        )}
+                        {userData?.country && (
+                            <Text style={styles.contactLine}>
+                                {t.country}: {userData.country}
+                            </Text>
+                        )}
+                        {profileUrl && (
+                            <Text style={styles.contactLine}>
+                                {t.portfolio}:{' '}
+                                <Link src={profileUrl} style={styles.contactLinkInline}>
+                                    {profileUrl.replace(/^https?:\/\//, '')}
+                                </Link>
+                            </Text>
+                        )}
+                        {userData?.socials?.linkedin && (
+                            <Text style={styles.contactLine}>
+                                {t.linkedin}:{' '}
+                                <Link src={userData.socials.linkedin} style={styles.contactLinkInline}>
+                                    {userData.socials.linkedin.replace(/^https?:\/\//, '')}
+                                </Link>
+                            </Text>
+                        )}
+                        {userData?.socials?.github && (
+                            <Text style={styles.contactLine}>
+                                {t.github}:{' '}
+                                <Link src={userData.socials.github} style={styles.contactLinkInline}>
+                                    {userData.socials.github.replace(/^https?:\/\//, '')}
+                                </Link>
+                            </Text>
+                        )}
+                    </View>
                 </View>
 
-                {/* Summary - usually fixed at top, but could be part of order if desired. Keeping fixed for now as it's an intro. */}
+                {/* SUMMARY */}
                 {userData?.about && (
                     <View style={styles.section}>
                         <Text style={s('sectionTitle')}>{t.summary}</Text>
-                        <Text style={s('description')}>{userData.about}</Text>
+                        <Text style={s('summaryText')}>{userData.about}</Text>
                     </View>
                 )}
 
-                {/* Dynamic Content Sections */}
+                {/* SECTIONS RENDERED SEQUENTIALLY */}
                 {orderToRender.map(key => renderSection(key))}
 
             </Page>
@@ -652,56 +601,5 @@ const ResumePdf = ({ userData }) => {
     );
 };
 
-// RTL Overrides
-const rtlStyles = StyleSheet.create({
-    page: {
-        direction: 'rtl',
-    },
-    header: {
-        flexDirection: 'row-reverse',
-    },
-    headerLeft: {
-        paddingRight: 0,
-        paddingLeft: 25,
-        alignItems: 'flex-end',
-    },
-    name: {
-        textAlign: 'right',
-        letterSpacing: 0,
-    },
-    title: {
-        textAlign: 'right',
-        letterSpacing: 0,
-    },
-    contactRow: {
-        flexDirection: 'row-reverse',
-        justifyContent: 'flex-start',
-    },
-    sectionTitle: {
-        textAlign: 'right',
-        borderLeftWidth: 0,
-        paddingLeft: 0,
-        borderRightWidth: 3,
-        borderRightColor: '#111827',
-        paddingRight: 8,
-        letterSpacing: 0,
-    },
-    itemHeader: {
-        flexDirection: 'row-reverse',
-    },
-    itemTitle: {
-        textAlign: 'right',
-    },
-    itemSubtitle: {
-        textAlign: 'right',
-    },
-    description: {
-        textAlign: 'right',
-    },
-    skillContainer: {
-        flexDirection: 'row-reverse',
-        justifyContent: 'flex-start',
-    },
-});
-
 export default ResumePdf;
+

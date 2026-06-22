@@ -1,0 +1,41 @@
+{
+    "waitTitle": "请稍候...",
+    "title": "下载简历",
+    "loading": "正在下载 {name} 的简历...",
+    "cancel": "取消",
+    "customize": "自定义并下载",
+    "modalTitle": "选择包含内容",
+    "modalSubtitle": "选择简历中要包含的部分和项目",
+    "downloadBtn": "下载PDF",
+    "cancelBtn": "取消",
+    "allItems": "所有项目",
+    "sections": {
+        "summary": "专业摘要",
+        "experience": "工作经验",
+        "skills": "技能",
+        "projects": "项目",
+        "education": "教育",
+        "languages": "语言",
+        "certificates": "证书",
+        "services": "服务"
+    },
+    "pdf": {
+        "summary": "专业摘要",
+        "experience": "工作经验",
+        "skills": "技能",
+        "projects": "项目",
+        "education": "教育",
+        "languages": "语言",
+        "certificates": "证书",
+        "services": "服务",
+        "viewProject": "查看项目",
+        "nameFallback": "姓名",
+        "titleFallback": "专业人士",
+        "email": "邮箱",
+        "phone": "电话",
+        "country": "国家",
+        "portfolio": "作品集",
+        "linkedin": "LinkedIn",
+        "github": "GitHub"
+    }
+}

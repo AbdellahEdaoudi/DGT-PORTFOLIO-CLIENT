@@ -1,0 +1,41 @@
+{
+    "waitTitle": "Пожалуйста, подождите...",
+    "title": "Скачать резюме",
+    "loading": "Загрузка резюме {name}...",
+    "cancel": "Отмена",
+    "customize": "Настроить и скачать",
+    "modalTitle": "Выберите содержимое",
+    "modalSubtitle": "Выберите разделы и элементы для вашего резюме",
+    "downloadBtn": "Скачать PDF",
+    "cancelBtn": "Отмена",
+    "allItems": "Все элементы",
+    "sections": {
+        "summary": "Профессиональное резюме",
+        "experience": "Опыт",
+        "skills": "Навыки",
+        "projects": "Проекты",
+        "education": "Образование",
+        "languages": "Языки",
+        "certificates": "Сертификаты",
+        "services": "Услуги"
+    },
+    "pdf": {
+        "summary": "Профессиональное резюме",
+        "experience": "Опыт",
+        "skills": "Навыки",
+        "projects": "Проекты",
+        "education": "Образование",
+        "languages": "Языки",
+        "certificates": "Сертификаты",
+        "services": "Услуги",
+        "viewProject": "Просмотреть проект",
+        "nameFallback": "Имя",
+        "titleFallback": "Профессионал",
+        "email": "Эл. почта",
+        "phone": "Телефон",
+        "country": "Страна",
+        "portfolio": "Портфолио",
+        "linkedin": "LinkedIn",
+        "github": "GitHub"
+    }
+}

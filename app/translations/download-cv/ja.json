@@ -1,0 +1,41 @@
+{
+    "waitTitle": "少々お待ちください...",
+    "title": "履歴書をダウンロード",
+    "loading": "{name}の履歴書をダウンロード中...",
+    "cancel": "キャンセル",
+    "customize": "カスタマイズしてダウンロード",
+    "modalTitle": "含める内容を選択",
+    "modalSubtitle": "履歴書に含めるセクションと項目を選択してください",
+    "downloadBtn": "PDFをダウンロード",
+    "cancelBtn": "キャンセル",
+    "allItems": "すべての項目",
+    "sections": {
+        "summary": "職務要約",
+        "experience": "職歴",
+        "skills": "スキル",
+        "projects": "プロジェクト",
+        "education": "学歴",
+        "languages": "言語",
+        "certificates": "証明書",
+        "services": "サービス"
+    },
+    "pdf": {
+        "summary": "職務要約",
+        "experience": "職歴",
+        "skills": "スキル",
+        "projects": "プロジェクト",
+        "education": "学歴",
+        "languages": "言語",
+        "certificates": "証明書",
+        "services": "サービス",
+        "viewProject": "プロジェクトを見る",
+        "nameFallback": "名前",
+        "titleFallback": "プロフェッショナル",
+        "email": "メール",
+        "phone": "電話",
+        "country": "国",
+        "portfolio": "ポートフォリオ",
+        "linkedin": "LinkedIn",
+        "github": "GitHub"
+    }
+}

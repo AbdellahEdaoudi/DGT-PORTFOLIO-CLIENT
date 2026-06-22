@@ -1,0 +1,41 @@
+{
+    "waitTitle": "Lütfen bekleyin...",
+    "title": "CV İndir",
+    "loading": "{name} kişisinin CV'si indiriliyor...",
+    "cancel": "İptal",
+    "customize": "Özelleştir ve İndir",
+    "modalTitle": "Neyi dahil edeceğinizi seçin",
+    "modalSubtitle": "CV'niz için bölümleri ve öğeleri seçin",
+    "downloadBtn": "PDF İndir",
+    "cancelBtn": "İptal",
+    "allItems": "Tüm öğeler",
+    "sections": {
+        "summary": "Profesyonel Özet",
+        "experience": "Deneyim",
+        "skills": "Beceriler",
+        "projects": "Projeler",
+        "education": "Eğitim",
+        "languages": "Diller",
+        "certificates": "Sertifikalar",
+        "services": "Hizmetler"
+    },
+    "pdf": {
+        "summary": "Profesyonel Özet",
+        "experience": "Deneyim",
+        "skills": "Beceriler",
+        "projects": "Projeler",
+        "education": "Eğitim",
+        "languages": "Diller",
+        "certificates": "Sertifikalar",
+        "services": "Hizmetler",
+        "viewProject": "Projeyi görüntüle",
+        "nameFallback": "İsim",
+        "titleFallback": "Profesyonel",
+        "email": "E-posta",
+        "phone": "Telefon",
+        "country": "Ülke",
+        "portfolio": "Portföy",
+        "linkedin": "LinkedIn",
+        "github": "GitHub"
+    }
+}

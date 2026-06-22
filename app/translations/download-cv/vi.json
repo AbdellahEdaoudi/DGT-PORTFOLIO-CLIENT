@@ -1,0 +1,41 @@
+{
+    "waitTitle": "Vui lòng chờ...",
+    "title": "Tải xuống CV",
+    "loading": "Đang tải xuống CV cho {name}...",
+    "cancel": "Hủy",
+    "customize": "Tùy chỉnh & Tải xuống",
+    "modalTitle": "Chọn nội dung cần đưa vào",
+    "modalSubtitle": "Chọn các phần và mục cho CV của bạn",
+    "downloadBtn": "Tải xuống PDF",
+    "cancelBtn": "Hủy",
+    "allItems": "Tất cả các mục",
+    "sections": {
+        "summary": "Tóm tắt chuyên môn",
+        "experience": "Kinh nghiệm",
+        "skills": "Kỹ năng",
+        "projects": "Dự án",
+        "education": "Học vấn",
+        "languages": "Ngôn ngữ",
+        "certificates": "Chứng chỉ",
+        "services": "Dịch vụ"
+    },
+    "pdf": {
+        "summary": "Tóm tắt chuyên môn",
+        "experience": "Kinh nghiệm",
+        "skills": "Kỹ năng",
+        "projects": "Dự án",
+        "education": "Học vấn",
+        "languages": "Ngôn ngữ",
+        "certificates": "Chứng chỉ",
+        "services": "Dịch vụ",
+        "viewProject": "Xem dự án",
+        "nameFallback": "Tên",
+        "titleFallback": "Chuyên gia",
+        "email": "Email",
+        "phone": "Điện thoại",
+        "country": "Quốc gia",
+        "portfolio": "Danh mục",
+        "linkedin": "LinkedIn",
+        "github": "GitHub"
+    }
+}

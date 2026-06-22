@@ -1,0 +1,41 @@
+{
+    "waitTitle": "Please wait...",
+    "title": "Download CV",
+    "loading": "Downloading CV for {name}...",
+    "cancel": "Cancel",
+    "customize": "Customize & Download",
+    "modalTitle": "Choose what to include",
+    "modalSubtitle": "Select the sections and items you want in your CV",
+    "downloadBtn": "Download PDF",
+    "cancelBtn": "Cancel",
+    "allItems": "All items",
+    "sections": {
+        "summary": "Professional Summary",
+        "experience": "Experience",
+        "skills": "Skills",
+        "projects": "Projects",
+        "education": "Education",
+        "languages": "Languages",
+        "certificates": "Certificates",
+        "services": "Services"
+    },
+    "pdf": {
+        "summary": "Professional Summary",
+        "experience": "Experience",
+        "skills": "Skills",
+        "projects": "Projects",
+        "education": "Education",
+        "languages": "Languages",
+        "certificates": "Certificates",
+        "services": "Services",
+        "viewProject": "View Project",
+        "nameFallback": "Name",
+        "titleFallback": "Professional",
+        "email": "Email",
+        "phone": "Phone",
+        "country": "Country",
+        "portfolio": "Portfolio",
+        "linkedin": "LinkedIn",
+        "github": "GitHub"
+    }
+}

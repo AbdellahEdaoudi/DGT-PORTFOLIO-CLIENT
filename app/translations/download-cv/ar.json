@@ -1,0 +1,41 @@
+{
+    "waitTitle": "المرجو الانتظار...",
+    "title": "تحميل السيرة الذاتية",
+    "loading": "جاري تحميل السيرة الذاتية لـ {name}...",
+    "cancel": "إلغاء",
+    "customize": "تخصيص وتحميل",
+    "modalTitle": "اختر ما تريد تضمينه",
+    "modalSubtitle": "حدد الأقسام والعناصر التي تريدها في سيرتك الذاتية",
+    "downloadBtn": "تحميل PDF",
+    "cancelBtn": "إلغاء",
+    "allItems": "جميع العناصر",
+    "sections": {
+        "summary": "النبذة المهنية",
+        "experience": "الخبرة",
+        "skills": "المهارات",
+        "projects": "المشاريع",
+        "education": "التعليم",
+        "languages": "اللغات",
+        "certificates": "الشهادات",
+        "services": "الخدمات"
+    },
+    "pdf": {
+        "summary": "النبذة المهنية",
+        "experience": "الخبرة",
+        "skills": "المهارات",
+        "projects": "المشاريع",
+        "education": "التعليم",
+        "languages": "اللغات",
+        "certificates": "الشهادات",
+        "services": "الخدمات",
+        "viewProject": "عرض المشروع",
+        "nameFallback": "الاسم",
+        "titleFallback": "محترف",
+        "email": "البريد الإلكتروني",
+        "phone": "الهاتف",
+        "country": "البلد",
+        "portfolio": "معرض الأعمال",
+        "linkedin": "لينكد إن",
+        "github": "جيتهاب"
+    }
+}

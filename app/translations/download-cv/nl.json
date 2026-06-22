@@ -1,0 +1,41 @@
+{
+    "waitTitle": "Even geduld a.u.b....",
+    "title": "CV downloaden",
+    "loading": "CV van {name} downloaden...",
+    "cancel": "Annuleren",
+    "customize": "Aanpassen & Downloaden",
+    "modalTitle": "Kies wat te includeren",
+    "modalSubtitle": "Selecteer secties en items voor uw CV",
+    "downloadBtn": "PDF downloaden",
+    "cancelBtn": "Annuleren",
+    "allItems": "Alle items",
+    "sections": {
+        "summary": "Professionele Samenvatting",
+        "experience": "Ervaring",
+        "skills": "Vaardigheden",
+        "projects": "Projecten",
+        "education": "Opleiding",
+        "languages": "Talen",
+        "certificates": "Certificaten",
+        "services": "Diensten"
+    },
+    "pdf": {
+        "summary": "Professionele Samenvatting",
+        "experience": "Ervaring",
+        "skills": "Vaardigheden",
+        "projects": "Projecten",
+        "education": "Opleiding",
+        "languages": "Talen",
+        "certificates": "Certificaten",
+        "services": "Diensten",
+        "viewProject": "Project bekijken",
+        "nameFallback": "Naam",
+        "titleFallback": "Professional",
+        "email": "E-mail",
+        "phone": "Telefoon",
+        "country": "Land",
+        "portfolio": "Portfolio",
+        "linkedin": "LinkedIn",
+        "github": "GitHub"
+    }
+}

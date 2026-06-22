@@ -1,0 +1,41 @@
+{
+    "waitTitle": "Por favor, aguarde...",
+    "title": "Baixar CV",
+    "loading": "Baixando CV de {name}...",
+    "cancel": "Cancelar",
+    "customize": "Personalizar e Baixar",
+    "modalTitle": "Escolha o que incluir",
+    "modalSubtitle": "Selecione as seções e itens para o seu CV",
+    "downloadBtn": "Baixar PDF",
+    "cancelBtn": "Cancelar",
+    "allItems": "Todos os itens",
+    "sections": {
+        "summary": "Resumo Profissional",
+        "experience": "Experiência",
+        "skills": "Habilidades",
+        "projects": "Projetos",
+        "education": "Educação",
+        "languages": "Idiomas",
+        "certificates": "Certificados",
+        "services": "Serviços"
+    },
+    "pdf": {
+        "summary": "Resumo Profissional",
+        "experience": "Experiência",
+        "skills": "Habilidades",
+        "projects": "Projetos",
+        "education": "Educação",
+        "languages": "Idiomas",
+        "certificates": "Certificados",
+        "services": "Serviços",
+        "viewProject": "Ver projeto",
+        "nameFallback": "Nome",
+        "titleFallback": "Profissional",
+        "email": "E-mail",
+        "phone": "Telefone",
+        "country": "País",
+        "portfolio": "Portfólio",
+        "linkedin": "LinkedIn",
+        "github": "GitHub"
+    }
+}

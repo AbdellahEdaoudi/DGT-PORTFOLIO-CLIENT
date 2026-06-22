@@ -1,0 +1,41 @@
+{
+    "waitTitle": "Attendere prego...",
+    "title": "Scarica CV",
+    "loading": "Scaricando il CV di {name}...",
+    "cancel": "Annulla",
+    "customize": "Personalizza e Scarica",
+    "modalTitle": "Scegli cosa includere",
+    "modalSubtitle": "Seleziona le sezioni e gli elementi per il tuo CV",
+    "downloadBtn": "Scarica PDF",
+    "cancelBtn": "Annulla",
+    "allItems": "Tutti gli elementi",
+    "sections": {
+        "summary": "Riepilogo Professionale",
+        "experience": "Esperienza",
+        "skills": "Competenze",
+        "projects": "Progetti",
+        "education": "Istruzione",
+        "languages": "Lingue",
+        "certificates": "Certificati",
+        "services": "Servizi"
+    },
+    "pdf": {
+        "summary": "Riepilogo Professionale",
+        "experience": "Esperienza",
+        "skills": "Competenze",
+        "projects": "Progetti",
+        "education": "Istruzione",
+        "languages": "Lingue",
+        "certificates": "Certificati",
+        "services": "Servizi",
+        "viewProject": "Vedi progetto",
+        "nameFallback": "Nome",
+        "titleFallback": "Professionista",
+        "email": "E-mail",
+        "phone": "Telefono",
+        "country": "Paese",
+        "portfolio": "Portfolio",
+        "linkedin": "LinkedIn",
+        "github": "GitHub"
+    }
+}

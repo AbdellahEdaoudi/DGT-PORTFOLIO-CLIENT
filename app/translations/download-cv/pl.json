@@ -1,0 +1,41 @@
+{
+    "waitTitle": "Proszę czekać...",
+    "title": "Pobierz CV",
+    "loading": "Pobieranie CV dla {name}...",
+    "cancel": "Anuluj",
+    "customize": "Dostosuj i Pobierz",
+    "modalTitle": "Wybierz co dołączyć",
+    "modalSubtitle": "Wybierz sekcje i elementy dla swojego CV",
+    "downloadBtn": "Pobierz PDF",
+    "cancelBtn": "Anuluj",
+    "allItems": "Wszystkie elementy",
+    "sections": {
+        "summary": "Podsumowanie Zawodowe",
+        "experience": "Doświadczenie",
+        "skills": "Umiejętności",
+        "projects": "Projekty",
+        "education": "Edukacja",
+        "languages": "Języki",
+        "certificates": "Certyfikaty",
+        "services": "Usługi"
+    },
+    "pdf": {
+        "summary": "Podsumowanie Zawodowe",
+        "experience": "Doświadczenie",
+        "skills": "Umiejętności",
+        "projects": "Projekty",
+        "education": "Edukacja",
+        "languages": "Języki",
+        "certificates": "Certyfikaty",
+        "services": "Usługi",
+        "viewProject": "Zobacz projekt",
+        "nameFallback": "Imię",
+        "titleFallback": "Profesjonalista",
+        "email": "E-mail",
+        "phone": "Telefon",
+        "country": "Kraj",
+        "portfolio": "Portfolio",
+        "linkedin": "LinkedIn",
+        "github": "GitHub"
+    }
+}

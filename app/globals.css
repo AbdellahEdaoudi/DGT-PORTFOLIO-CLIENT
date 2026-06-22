@@ -66,6 +66,26 @@
     .custom-scrollbar::-webkit-scrollbar-thumb:hover {
       background: rgba(139, 92, 246, 0.6);
     }
+
+    /* Modal scrollbar — slim blue, professional */
+    .modal-scrollbar::-webkit-scrollbar {
+      width: 4px;
+    }
+    .modal-scrollbar::-webkit-scrollbar-track {
+      background: transparent;
+    }
+    .modal-scrollbar::-webkit-scrollbar-thumb {
+      background: rgba(59, 130, 246, 0.25);
+      border-radius: 100px;
+      transition: background 0.2s ease;
+    }
+    .modal-scrollbar::-webkit-scrollbar-thumb:hover {
+      background: rgba(59, 130, 246, 0.6);
+    }
+    .modal-scrollbar {
+      scrollbar-width: thin;
+      scrollbar-color: rgba(59, 130, 246, 0.3) transparent;
+    }
   }
 
 @layer base {

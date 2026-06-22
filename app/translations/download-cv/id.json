@@ -1,0 +1,41 @@
+{
+    "waitTitle": "Mohon tunggu...",
+    "title": "Unduh CV",
+    "loading": "Mengunduh CV untuk {name}...",
+    "cancel": "Batal",
+    "customize": "Sesuaikan & Unduh",
+    "modalTitle": "Pilih apa yang disertakan",
+    "modalSubtitle": "Pilih bagian dan item untuk CV Anda",
+    "downloadBtn": "Unduh PDF",
+    "cancelBtn": "Batal",
+    "allItems": "Semua item",
+    "sections": {
+        "summary": "Ringkasan Profesional",
+        "experience": "Pengalaman",
+        "skills": "Keahlian",
+        "projects": "Proyek",
+        "education": "Pendidikan",
+        "languages": "Bahasa",
+        "certificates": "Sertifikat",
+        "services": "Layanan"
+    },
+    "pdf": {
+        "summary": "Ringkasan Profesional",
+        "experience": "Pengalaman",
+        "skills": "Keahlian",
+        "projects": "Proyek",
+        "education": "Pendidikan",
+        "languages": "Bahasa",
+        "certificates": "Sertifikat",
+        "services": "Layanan",
+        "viewProject": "Lihat proyek",
+        "nameFallback": "Nama",
+        "titleFallback": "Profesional",
+        "email": "Email",
+        "phone": "Telepon",
+        "country": "Negara",
+        "portfolio": "Portofolio",
+        "linkedin": "LinkedIn",
+        "github": "GitHub"
+    }
+}
