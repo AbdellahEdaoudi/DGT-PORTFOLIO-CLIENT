@@ -39,5 +39,11 @@
     "welcometomyworld": "Benvenuto nel mio mondo",
     "readMore": "Leggi di più",
     "readLess": "Leggi meno",
-    "verified": "Verificado"
+    "verified": "Verificado",
+    "errors": {
+        "noPaymentFound": "Nessun pagamento trovato per il tuo account. Completa il pagamento per continuare.",
+        "paymentNotActive": "Il tuo pagamento non è attivo. Completa il pagamento per riottenere l'accesso.",
+        "fetchingUserDetails": "Errore durante il recupero dei dettagli dell'utente:",
+        "networkError": "Errore di rete:"
+    }
 }

@@ -39,5 +39,11 @@
     "welcometomyworld": "مرحباً بك في عالمي",
     "readMore": "اقرأ المزيد",
     "readLess": "اقرأ أقل",
-    "verified": "متحقق"
+    "verified": "متحقق",
+    "errors": {
+        "noPaymentFound": "لم يتم العثور على مدفوعات لحسابك. يرجى إكمال الدفع للمتابعة.",
+        "paymentNotActive": "دفعك غير نشط. يرجى إكمال الدفع لاستعادة الوصول.",
+        "fetchingUserDetails": "خطأ في جلب تفاصيل المستخدم:",
+        "networkError": "خطأ في الشبكة:"
+    }
 }

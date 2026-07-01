@@ -15,7 +15,7 @@ export default function AuthButtons({ lang }) {
     updateProfile: t('navbar.auth.updateProfile') || "Update Profile",
     businessLinks: t('navbar.auth.businessLinks') || "Business Links",
     customDomain: t('navbar.auth.customDomain') || "Custom Domain",
-    subscriptions: t('navbar.auth.subscriptions') || "Subscriptions",
+    payment: t('navbar.auth.payment') || "Payment",
     support: t('navbar.auth.support') || "Support",
     signOut: t('navbar.auth.signOut') || "Sign Out",
   }
@@ -26,7 +26,8 @@ export default function AuthButtons({ lang }) {
   const { userDetails } = useContext(MyContext);
   // const PORTFOLIO = `http://${userDetails?.username}.localhost:3000`
   // const PORTFOLIO = `https://${userDetails?.username}.dgtportfolio.vercel.app`
-  const PORTFOLIO = `https://${userDetails?.username}.dgtportfolio.com`
+  // const PORTFOLIO = `https://${userDetails?.username}.dgtportfolio.com`
+  const PORTFOLIO = `/dp/${userDetails?.username}`
 
 
   // Click Outside to close menus
@@ -57,7 +58,7 @@ export default function AuthButtons({ lang }) {
     return (
       <div ref={navRef} className="relative flex items-center gap-5 z-50">
         {userDetails?.username ? (
-          <a href={PORTFOLIO} target="_blank"
+          <Link href={PORTFOLIO}
             className="flex items-center gap-2 cursor-pointer hover:scale-105 duration-500">
             <div className="relative p-[2px] rounded-full bg-gradient-to-b from-yellow-300 via-amber-500 to-yellow-600 shadow-md">
               <Image width={50} height={50}
@@ -73,7 +74,7 @@ export default function AuthButtons({ lang }) {
                 <path d="m9 12 2 2 4-4" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" fill="none" />
               </svg>
             </div>
-          </a>
+          </Link>
         ) : (
           <Link href="/update-profile"
             className="flex items-center gap-2 cursor-pointer hover:scale-105 duration-500">
@@ -143,14 +144,14 @@ export default function AuthButtons({ lang }) {
             </div>
           </Link>
           <Link
-            href={"/subscription"}
+            href={"/payment"}
             onClick={() => {
               setSetting(!setting);
             }}
             className="bg-gray-700 py-2 border-b flex items-center justify-center border-gray-600 hover:bg-gray-600 transition duration-300 rounded-sm hover:scale-105 text-center mb-2"
           >
             <div className="flex items-center gap-1">
-              <CreditCard /> {labels.subscriptions}
+              <CreditCard /> {labels.payment}
             </div>
           </Link>
           <Link

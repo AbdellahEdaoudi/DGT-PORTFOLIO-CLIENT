@@ -39,5 +39,11 @@
     "welcometomyworld": "私の世界へようこそ",
     "readMore": "続きを読む",
     "readLess": "閉じる",
-    "verified": "認証済み"
+    "verified": "認証済み",
+    "errors": {
+        "noPaymentFound": "アカウントの支払いが確認できませんでした。続行するには支払いを完了してください。",
+        "paymentNotActive": "支払いがアクティブではありません。アクセスを回復するには支払いを完了してください。",
+        "fetchingUserDetails": "ユーザー詳細の取得エラー:",
+        "networkError": "ネットワークエラー:"
+    }
 }

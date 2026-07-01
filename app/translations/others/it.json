@@ -30,7 +30,13 @@
         "removeTitle": "Rimuovere Dominio Personalizzato?",
         "removeDesc1": "Sei sicuro di voler rimuovere ",
         "removeDesc2": " dal tuo portfolio?",
-        "cancel": "Annulla"
+        "cancel": "Annulla",
+        "domainSavedVerify": "Dominio salvato. Si prega di verificare.",
+        "example": "es. example.com",
+        "errorSavingDomain": "Impossibile salvare il dominio. Riprova.",
+        "networkError": "Errore di rete, riprova più tardi.",
+        "domainVerifiedSuccess": "Dominio verificato con successo!",
+        "errorVerifyingDomain": "Impossibile verificare il dominio. Assicurati che i record DNS siano impostati correttamente."
     },
     "businessLinks": {
         "title": "Link Aziendali",
@@ -72,61 +78,63 @@
         "noMessages": "Nessun messaggio ancora",
         "deleteTitle": "Elimina",
         "messageDeleted": "Messaggio eliminato",
-        "failedToDelete": "Eliminazione non riuscita"
+        "failedToDelete": "Eliminazione fallita",
+        "maxMessagesReached": "Hai raggiunto il limite massimo di 2 messaggi.",
+        "maxMessagesInfo": "Hai raggiunto il limite massimo (2 messaggi). Elimina un messaggio per inviarne uno nuovo o attendi una risposta.",
+        "adminReply": "Risposta dell'amministratore",
+        "deleteConfirmText": "Sei sicuro di voler eliminare questo messaggio? Questa azione non può essere annullata.",
+        "cancel": "Annulla",
+        "delete": "Elimina"
     },
-    "success": {
-        "paymentSuccessful": "Pagamento Riuscito!",
-        "subscriptionActive": "Il tuo abbonamento è ora attivo. Grazie per l'acquisto!",
-        "goToHome": "Vai alla Home"
-    },
-    "subscription": {
-        "promoMonthly": {
-            "name": "Promo Mensile",
-            "description": "Offerta promozionale speciale",
-            "period": "/mese"
+    "payment": {
+        "lifetime": {
+            "name": "Piano a vita",
+            "description": "Crea il tuo portfolio professionale, genera il tuo CV e mantienilo online per sempre.",
+            "period": "Pagamento unico"
         },
-        "promo6Month": {
-            "name": "Promo 6 Mesi",
-            "description": "Ottimo valore per 6 mesi",
-            "period": "/6 mesi"
-        },
-        "promoAnnual": {
-            "name": "Promo Annuale",
-            "description": "Miglior offerta dell'anno",
-            "period": "/anno"
-        },
-        "subMonthly": {
-            "name": "Abbonati Mensilmente",
-            "description": "1$ per il mese",
-            "period": "/mese"
-        },
-        "sub6Months": {
-            "name": "Abbonati 6 Mesi",
-            "description": "Ottima offerta a medio termine",
-            "period": "/6 mesi"
-        },
-        "subYearly": {
-            "name": "Abbonati Annualmente",
-            "description": "Miglior valore",
-            "period": "/anno"
-        },
+        "bestValue": "Miglior valore",
         "recommended": "Consigliato",
-        "placeholder": "Codice Promo",
-        "applyBtn": "Applica",
-        "verifyingBtn": "Verifica in corso...",
-        "activeSubscription": "ABBONAMENTO ATTIVO",
-        "portfolioVisible": "Il tuo portfolio è attualmente visibile ai visitatori grazie a questo abbonamento.",
+        "whatsIncluded": "Cosa è incluso",
+        "features": [
+            "Accesso a vita — un solo pagamento",
+            "Sito web portfolio professionale",
+            "Generatore di CV integrato",
+            "Sottodominio portfolio personalizzato",
+            "Ottimizzato per la visibilità SEO",
+            "Più temi moderni",
+            "Tutti gli aggiornamenti futuri inclusi",
+            "Supporto clienti prioritario"
+        ],
+        "activePayment": "PIANO A VITA ATTIVO",
+        "portfolioVisible": "Il tuo portfolio è attualmente visibile ai visitatori con accesso completo a vita.",
+        "unlimitedAccess": "Accesso Illimitato",
         "renewalDate": "Data di Rinnovo/Scadenza:",
-        "cancelSub": "Annulla Abbonamento",
+        "cancelPayment": "Annulla Abbonamento",
         "confirmCancel": "Conferma Annullamento",
         "cancelWarning": "Sei assolutamente sicuro di voler annullare il tuo abbonamento? Il tuo portfolio non sarà più visibile ai visitatori al termine del ciclo attuale.",
         "yesCancel": "Sì, annulla abbonamento",
-        "keepSub": "Mantieni il mio abbonamento",
+        "keepPayment": "Mantieni il mio abbonamento",
         "cancelSuccess": "Abbonamento annullato con successo.",
         "cancelFailed": "Impossibile annullare l'abbonamento.",
-        "promoReq": "Inserisci un codice promozionale",
-        "promoApplied": "Codice promozionale applicato!",
-        "invalidPromo": "Codice promozionale non valido"
+        "processingPayment": "Elaborazione del pagamento, non chiudere la pagina...",
+        "processingDescription": "Conferma sicura del tuo abbonamento con il gateway di pagamento. Questo processo richiede alcuni secondi.",
+        "processingWarning": "⚠️ Si prega di non chiudere questa pagina o tornare indietro per evitare problemi di pagamento.",
+        "purchaseSuccess": "Abbonamento acquistato con successo!",
+        "paymentFailed": "Pagamento fallido. Riprova.",
+        "unexpectedError": "Si è verificato un errore durante il salvataggio del pagamento.",
+        "errors": {
+            "unauthorized": "Devi accedere per acquistare un abbonamento.",
+            "alreadyPaid": "Hai già un abbonamento a vita attivo.",
+            "orderAlreadyProcessed": "Questo pagamento è già stato elaborato. Contatta il supporto se pensi sia un errore.",
+            "paypalCaptureFailed": "Il pagamento non è stato acquisito. Potrebbe essere già stato elaborato. Contatta il supporto.",
+            "paypalAuthFailed": "Autenticazione del gateway di pagamento fallita. Contatta il supporto.",
+            "paypalGatewayError": "Impossibile connettersi al gateway di pagamento. Riprova più tardi.",
+            "paymentNotCompleted": "Il pagamento non è stato completato. Riprova.",
+            "cannotVerifyAmount": "Impossibile verificare l'importo del pagamento. Contatta il supporto.",
+            "invalidPaymentAmount": "Importo di pagamento non valido. Contatta il supporto.",
+            "serverUnreachable": "Impossibile connettersi al server. Riprova più tardi.",
+            "serverError": "Si è verificato un errore imprevisto. Riprova o contatta il supporto."
+        }
     },
     "confirmModal": {
         "delete": "Elimina",
@@ -135,10 +143,23 @@
     },
     "accountNotFound": {
         "title": "Account Non Trovato",
-        "description": "Non siamo riusciti a trovare l'account che stai cercando. Potrebbe essere stato rinominato o l'utente non è abbonato",
-        "subscribe": "Iscriviti Ora",
+        "description": "Non siamo riusciti a trovare l'account che stai cercando. Potrebbe essere stato rinominato o l'utente non ha completato il pagamento",
+        "payment": "Paga ora",
         "returnHome": "Torna alla Home",
         "contactSupport": "Contatta Supporto",
         "rights": "Tutti i diritti riservati."
+    },
+    "success": {
+        "paymentSuccessful": "🎉 Pagamento Effettuato! 🎉",
+        "welcomeMessage": "Benvenuto in DGT Portfolio",
+        "activationMessage": "Il tuo Piano a Vita è stato attivato con successo. Ora hai accesso illimitato a tutte le funzionalità.",
+        "features": {
+            "lifetime": "Accesso a vita attivato",
+            "cv": "Generatore di CV sbloccato",
+            "publishing": "Pubblicazione del portfolio abilitata",
+            "updates": "Aggiornamenti futuri inclusi"
+        },
+        "goToPortfolio": "Vedi Il Mio Portfolio",
+        "needHelp": "Hai bisogno di aiuto per iniziare? Contatta il nostro team di supporto in qualsiasi momento."
     }
 }

@@ -20,7 +20,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       priority: 0.7,
     },
     {
-      url: `${baseUrl}/subscription`,
+      url: `${baseUrl}/update-profile`,
       lastModified: new Date(),
       changeFrequency: 'monthly',
       priority: 0.8,
@@ -36,7 +36,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   const staticPages = [...basePages, ...languagePages]
 
-  // Fetch all active users with subscriptions
+  // Fetch all usernames 
   let userPages: MetadataRoute.Sitemap = []
   
   try {

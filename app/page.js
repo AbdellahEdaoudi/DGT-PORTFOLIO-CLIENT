@@ -13,7 +13,7 @@ async function fetchUserData(url) {
 }
 
 function getDomainFlags(host) {
-  const reserved = ["dgtportfolio", "localhost","www","api","admin"];
+  const reserved = ["dgtportfolio", "localhost", "www", "api", "admin"];
   // isSubdomain
   const isSubdomain =
     (host.endsWith(".dgtportfolio.com") || host.endsWith(".localhost:3000")) &&
@@ -26,7 +26,7 @@ function getDomainFlags(host) {
     !host.includes("localhost") &&
     !host.includes("192.168.") &&
     !host.includes("ngrok");
-  
+
   const iswwwsubdomain = host.startsWith("www.") && !isSubdomain && !isCustomDomain;
   return { isSubdomain, isCustomDomain, iswwwsubdomain };
 }
@@ -51,13 +51,22 @@ export async function generateMetadata() {
   if (user) {
     const username = user.username || host.split(".")[0];
     return {
-      title: `${user.fullname} – Portfolio`,
-      description: user.about || `Check out ${user.fullname}'s professional portfolio. View projects, skills, and contact information.`,
-      keywords: [`${user.fullname}`, `${user.category}`, "Portfolio", "Professional", "Projects", "Skills"],
+      title: `${user.fullname} | ${user.category} Portfolio`,
+      description: `Explore ${user.fullname}'s professional portfolio and discover projects, technical expertise, work experience, and professional services as a ${user.category}. Connect for collaborations and new opportunities.`,
+      keywords: [
+        user.fullname,
+        user.category,
+        `${user.fullname} Portfolio`,
+        `${user.category} Portfolio`,
+        `${user.fullname} Projects`,
+        `${user.fullname} Skills`,
+        "Professional Portfolio",
+        "Portfolio Website",
+      ],
       icons: { icon: user.urlimage, shortcut: user.urlimage, apple: user.urlimage },
       openGraph: {
-        title: `${user.fullname} – Portfolio`,
-        description: user.about || `Check out ${user.fullname}'s professional portfolio. View projects, skills, and contact information.`,
+        title: `${user.fullname} | ${user.category} Portfolio`,
+        description: `Explore ${user.fullname}'s professional portfolio and discover projects, technical expertise, work experience, and professional services as a ${user.category}. Connect for collaborations and new opportunities.`,
         url: isSubdomain ? `https://${username}.dgtportfolio.com` : `https://${host}`,
         siteName: "DGT Portfolio",
         images: [{ url: user.urlimage, alt: `${user.fullname}'s Profile Picture` }],
@@ -66,8 +75,8 @@ export async function generateMetadata() {
       },
       twitter: {
         card: "summary_large_image",
-        title: `${user.fullname} – Portfolio`,
-        description: user.about || `Check out ${user.fullname}'s professional portfolio. View projects, skills, and contact information.`,
+        title: `${user.fullname} | ${user.category} Portfolio`,
+        description: `Explore ${user.fullname}'s professional portfolio and discover projects, technical expertise, work experience, and professional services as a ${user.category}. Connect for collaborations and new opportunities.`,
         images: [user.urlimage],
       },
       alternates: {
@@ -138,16 +147,16 @@ export default async function Home() {
       }
     } else {
       userSchema = {
-      "@context": "https://schema.org",
-      "@type": "SoftwareApplication",
-      name: "DGT Portfolio",
-      applicationCategory: "DesignApplication",
-      operatingSystem: "Web",
-      url: "https://dgtportfolio.com",
-      description: "Build a clean, modern portfolio in minutes. No code required.",
-      offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
-      aggregateRating: { "@type": "AggregateRating", ratingValue: "4.8", ratingCount: "120" },
-    };
+        "@context": "https://schema.org",
+        "@type": "SoftwareApplication",
+        name: "DGT Portfolio",
+        applicationCategory: "DesignApplication",
+        operatingSystem: "Web",
+        url: "https://dgtportfolio.com",
+        description: "Build a clean, modern portfolio in minutes. No code required.",
+        offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
+        aggregateRating: { "@type": "AggregateRating", ratingValue: "4.8", ratingCount: "120" },
+      };
     }
   } catch (error) {
     console.error("Error generating user schema:", error);

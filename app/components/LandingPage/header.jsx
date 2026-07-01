@@ -1,5 +1,4 @@
 "use client"
-import React, { useEffect, useState } from 'react'
 import Image from "next/image"
 import AuthButtons from "./AuthButtons"
 import Link from 'next/link'

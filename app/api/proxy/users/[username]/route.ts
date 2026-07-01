@@ -19,14 +19,14 @@ export async function GET(
         return NextResponse.json({ message: msg }, { status: 404 });
       }
       
-      if (msg === "No subscription found for this user") {
+      if (msg === "No payment found for this user") {
         return NextResponse.json(
           { message: msg, email: err.response.data?.email }, 
           { status: 404 }
         );
       }
       
-      if (msg === "Your subscription is not active. Please renew or subscribe.") {
+      if (msg === "Your payment is not active. Please complete payment.") {
         return NextResponse.json({ message: msg }, { status: 403 });
       }
     }

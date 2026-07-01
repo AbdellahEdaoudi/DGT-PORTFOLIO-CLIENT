@@ -30,7 +30,13 @@
         "removeTitle": "사용자 지정 도메인을 제거하시겠습니까?",
         "removeDesc1": "포트폴리오에서 ",
         "removeDesc2": "을(를) 제거하시겠습니까?",
-        "cancel": "취소"
+        "cancel": "취소",
+        "domainSavedVerify": "도메인이 저장되었습니다. 확인해주세요.",
+        "example": "예: example.com",
+        "errorSavingDomain": "도메인 저장에 실패했습니다. 다시 시도해주세요.",
+        "networkError": "네트워크 오류입니다. 나중에 다시 시도해주세요.",
+        "domainVerifiedSuccess": "도메인이 성공적으로 확인되었습니다!",
+        "errorVerifyingDomain": "도메인 확인에 실패했습니다. DNS 레코드가 올바르게 설정되었는지 확인해주세요."
     },
     "businessLinks": {
         "title": "비즈니스 링크",
@@ -71,62 +77,64 @@
         "myMessages": "내 메시지",
         "noMessages": "아직 메시지가 없습니다",
         "deleteTitle": "삭제",
-        "messageDeleted": "메시지가 삭제되었습니다",
-        "failedToDelete": "삭제 실패"
+        "messageDeleted": "메시지 삭제됨",
+        "failedToDelete": "삭제 실패",
+        "maxMessagesReached": "You have reached the maximum limit of 2 messages.",
+        "maxMessagesInfo": "You have reached the maximum limit (2 messages). Please delete an existing message to send a new one or wait for a reply.",
+        "adminReply": "Admin Reply",
+        "deleteConfirmText": "이 메시지를 삭제하시겠습니까? 이 작업은 취소할 수 없습니다.",
+        "cancel": "취소",
+        "delete": "삭제"
     },
-    "success": {
-        "paymentSuccessful": "결제 성공!",
-        "subscriptionActive": "구독이 지금 활성화되었습니다. 구매해 주셔서 감사합니다!",
-        "goToHome": "홈으로 이동"
-    },
-    "subscription": {
-        "promoMonthly": {
-            "name": "프로모 월간",
-            "description": "특별 프로모션 혜택",
-            "period": "/월"
+    "payment": {
+        "lifetime": {
+            "name": "Lifetime Plan",
+            "description": "전문적인 포트폴리오를 만들고, 이력서를 생성하고, 영원히 온라인에 유지하세요.",
+            "period": "일회성 결제"
         },
-        "promo6Month": {
-            "name": "프로모 6개월",
-            "description": "6개월 동안 훌륭한 가치",
-            "period": "/6개월"
-        },
-        "promoAnnual": {
-            "name": "프로모 연간",
-            "description": "올해 최고의 딜",
-            "period": "/년"
-        },
-        "subMonthly": {
-            "name": "월간 구독",
-            "description": "월 $1",
-            "period": "/월"
-        },
-        "sub6Months": {
-            "name": "6개월 구독",
-            "description": "훌륭한 중기 제안",
-            "period": "/6개월"
-        },
-        "subYearly": {
-            "name": "연간 구독",
-            "description": "최고의 가치",
-            "period": "/년"
-        },
+        "bestValue": "최고의 가치",
         "recommended": "추천",
-        "placeholder": "프로모션 코드",
-        "applyBtn": "적용",
-        "verifyingBtn": "확인 중...",
-        "activeSubscription": "활성 구독",
-        "portfolioVisible": "이 구독 덕분에 현재 방문자가 포트폴리오를 볼 수 있습니다.",
+        "whatsIncluded": "포함된 항목",
+        "features": [
+            "평생 이용 — 단 한 번의 결제",
+            "전문 포트폴리오 웹사이트",
+            "내장 CV 생성기",
+            "맞춤형 포트폴리오 서브도메인",
+            "SEO 최적화 및 가시성",
+            "다양한 모던 테마",
+            "향후 모든 업데이트 포함",
+            "우선 고객 지원"
+        ],
+        "activePayment": "평생 플랜 활성화됨",
+        "portfolioVisible": "귀하의 포트폴리오는 현재 전체 평생 액세스 권한으로 방문자에게 표시됩니다.",
+        "unlimitedAccess": "무제한 액세스",
         "renewalDate": "갱신/만료일:",
-        "cancelSub": "구독 취소",
+        "cancelPayment": "구독 취소",
         "confirmCancel": "취소 확인",
         "cancelWarning": "구독을 취소하시겠습니까? 현재 주기가 끝나면 방문자에게 포트폴리오가 더 이상 표시되지 않습니다.",
         "yesCancel": "예, 구독을 취소합니다",
-        "keepSub": "구독 유지",
+        "keepPayment": "구독 유지",
         "cancelSuccess": "구독이 성공적으로 취소되었습니다.",
         "cancelFailed": "구독을 취소하지 못했습니다.",
-        "promoReq": "프로모션 코드를 입력해주세요",
-        "promoApplied": "프로모션 코드가 적용되었습니다!",
-        "invalidPromo": "잘못된 프로모션 코드"
+        "processingPayment": "결제를 처리하는 중입니다. 페이지를 닫지 마십시오...",
+        "processingDescription": "결제 게이트웨이로 구독을 안전하게 확인하는 중입니다. 이 과정은 몇 초 정도 걸립니다.",
+        "processingWarning": "⚠️ 결제 문제를 방지하려면 이 페이지를 닫거나 뒤로 가지 마십시오.",
+        "purchaseSuccess": "구독을 성공적으로 구매했습니다!",
+        "paymentFailed": "결제에 실패했습니다. 다시 시도해 주십시오.",
+        "unexpectedError": "결제를 저장하는 중 오류가 발생했습니다.",
+        "errors": {
+            "unauthorized": "구독을 구매하려면 로그인해야 합니다.",
+            "alreadyPaid": "이미 활성 평생 구독이 있습니다.",
+            "orderAlreadyProcessed": "이 결제는 이미 처리되었습니다. 이것이 오류라고 생각되면 지원팀에 문의하십시오.",
+            "paypalCaptureFailed": "결제를 캡처할 수 없습니다. 이미 처리되었을 수 있습니다. 지원팀에 문의하십시오.",
+            "paypalAuthFailed": "결제 게이트웨이 인증에 실패했습니다. 지원팀에 문의하십시오.",
+            "paypalGatewayError": "결제 게이트웨이에 연결할 수 없습니다. 나중에 다시 시도해 주십시오.",
+            "paymentNotCompleted": "결제가 완료되지 않았습니다. 다시 시도해 주십시오.",
+            "cannotVerifyAmount": "결제 금액을 확인할 수 없습니다. 지원팀에 문의하십시오.",
+            "invalidPaymentAmount": "잘못된 결제 금액입니다. 지원팀에 문의하십시오.",
+            "serverUnreachable": "서버에 연결할 수 없습니다. 나중에 다시 시도해 주십시오.",
+            "serverError": "예기치 않은 오류가 발생했습니다. 다시 시도하거나 지원팀에 문의하십시오."
+        }
     },
     "confirmModal": {
         "delete": "삭제",
@@ -135,10 +143,23 @@
     },
     "accountNotFound": {
         "title": "계정을 찾을 수 없음",
-        "description": "찾으시는 계정을 찾을 수 없습니다. 이름이 변경되었거나 사용자가 구독하지 않았을 수 있습니다",
-        "subscribe": "지금 구독하기",
+        "description": "찾으시는 계정을 찾을 수 없습니다. 이름이 변경되었거나 사용자가 결제를 완료하지 않았을 수 있습니다",
+        "payment": "지금 결제하기",
         "returnHome": "홈페이지로 돌아가기",
         "contactSupport": "고객 지원 문의",
         "rights": "모든 권리 보유."
+    },
+    "success": {
+        "paymentSuccessful": "🎉 결제 성공! 🎉",
+        "welcomeMessage": "DGT Portfolio에 오신 것을 환영합니다",
+        "activationMessage": "평생 요금제가 성공적으로 활성화되었습니다. 이제 모든 기능에 무제한으로 액세스할 수 있습니다。",
+        "features": {
+            "lifetime": "평생 액세스 활성화됨",
+            "cv": "이력서 생성기 잠금 해제됨",
+            "publishing": "포트폴리오 게시 활성화됨",
+            "updates": "향후 업데이트 포함"
+        },
+        "goToPortfolio": "내 포트폴리오 보기",
+        "needHelp": "시작하는 데 도움이 필요하신가요? 언제든지 지원팀에 문의하세요."
     }
 }

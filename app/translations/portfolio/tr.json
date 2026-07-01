@@ -39,5 +39,11 @@
     "welcometomyworld": "Dünyama hoş geldiniz",
     "readMore": "Daha fazla oku",
     "readLess": "Daha az oku",
-    "verified": "Doğrulanmış"
+    "verified": "Doğrulanmış",
+    "errors": {
+        "noPaymentFound": "Hesabınız için herhangi bir ödeme bulunamadı. Lütfen devam etmek için ödemeyi tamamlayın.",
+        "paymentNotActive": "Ödemeniz aktif değil. Lütfen erişimi yeniden kazanmak için ödemeyi tamamlayın.",
+        "fetchingUserDetails": "Kullanıcı ayrıntıları alınırken hata oluştu:",
+        "networkError": "Ağ hatası:"
+    }
 }

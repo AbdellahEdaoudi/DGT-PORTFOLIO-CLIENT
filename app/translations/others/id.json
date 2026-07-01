@@ -30,7 +30,13 @@
         "removeTitle": "Hapus Domain Kustom?",
         "removeDesc1": "Apakah Anda yakin ingin menghapus ",
         "removeDesc2": " dari portofolio Anda?",
-        "cancel": "Batal"
+        "cancel": "Batal",
+        "domainSavedVerify": "Domain disimpan. Silakan verifikasi.",
+        "example": "mis. example.com",
+        "errorSavingDomain": "Gagal menyimpan domain. Silakan coba lagi.",
+        "networkError": "Kesalahan jaringan, silakan coba lagi nanti.",
+        "domainVerifiedSuccess": "Domain berhasil diverifikasi!",
+        "errorVerifyingDomain": "Gagal memverifikasi domain. Pastikan catatan DNS diatur dengan benar."
     },
     "businessLinks": {
         "title": "Tautan Bisnis",
@@ -72,61 +78,63 @@
         "noMessages": "Belum ada pesan",
         "deleteTitle": "Hapus",
         "messageDeleted": "Pesan dihapus",
-        "failedToDelete": "Gagal menghapus"
+        "failedToDelete": "Gagal menghapus",
+        "maxMessagesReached": "You have reached the maximum limit of 2 messages.",
+        "maxMessagesInfo": "You have reached the maximum limit (2 messages). Please delete an existing message to send a new one or wait for a reply.",
+        "adminReply": "Admin Reply",
+        "deleteConfirmText": "Apakah Anda yakin ingin menghapus pesan ini? Tindakan ini tidak dapat dibatalkan.",
+        "cancel": "Batal",
+        "delete": "Hapus"
     },
-    "success": {
-        "paymentSuccessful": "Pembayaran Berhasil!",
-        "subscriptionActive": "Langganan Anda sekarang aktif. Terima kasih atas pembelian Anda!",
-        "goToHome": "Ke Beranda"
-    },
-    "subscription": {
-        "promoMonthly": {
-            "name": "Promo Bulanan",
-            "description": "Penawaran promo khusus",
-            "period": "/bulan"
+    "payment": {
+        "lifetime": {
+            "name": "Lifetime Plan",
+            "description": "Buat portofolio profesional Anda, hasilkan CV Anda, dan simpan online selamanya.",
+            "period": "Pembayaran satu kali"
         },
-        "promo6Month": {
-            "name": "Promo 6 Bulan",
-            "description": "Nilai luar biasa untuk 6 bulan",
-            "period": "/6 bulan"
-        },
-        "promoAnnual": {
-            "name": "Promo Tahunan",
-            "description": "Penawaran terbaik tahun ini",
-            "period": "/tahun"
-        },
-        "subMonthly": {
-            "name": "Berlangganan Bulanan",
-            "description": "$1 untuk sebulan",
-            "period": "/bulan"
-        },
-        "sub6Months": {
-            "name": "Berlangganan 6 Bulan",
-            "description": "Penawaran jangka menengah yang hebat",
-            "period": "/6 bulan"
-        },
-        "subYearly": {
-            "name": "Berlangganan Tahunan",
-            "description": "Nilai terbaik",
-            "period": "/tahun"
-        },
+        "bestValue": "Nilai Terbaik",
         "recommended": "Direkomendasikan",
-        "placeholder": "Kode Promo",
-        "applyBtn": "Terapkan",
-        "verifyingBtn": "Memverifikasi...",
-        "activeSubscription": "LANGGANAN AKTIF",
-        "portfolioVisible": "Portofolio Anda saat ini dapat dilihat oleh pengunjung berkat langganan ini.",
+        "whatsIncluded": "Apa yang termasuk",
+        "features": [
+            "Akses seumur hidup — satu kali pembayaran",
+            "Situs web portofolio profesional",
+            "Generator CV bawaan",
+            "Subdomain portofolio khusus",
+            "Dioptimalkan untuk SEO dan visibilitas",
+            "Berbagai tema modern",
+            "Semua pembaruan mendatang termasuk",
+            "Dukungan pelanggan prioritas"
+        ],
+        "activePayment": "PAKET SEUMUR HIDUP AKTIF",
+        "portfolioVisible": "Portofolio Anda saat ini dapat dilihat oleh pengunjung dengan akses seumur hidup penuh.",
+        "unlimitedAccess": "Akses Tanpa Batas",
         "renewalDate": "Tanggal Perpanjangan/Berakhir:",
-        "cancelSub": "Batalkan Langganan",
+        "cancelPayment": "Batalkan Langganan",
         "confirmCancel": "Konfirmasi Pembatalan",
         "cancelWarning": "Apakah Anda benar-benar yakin ingin membatalkan langganan Anda? Portofolio Anda tidak akan lagi terlihat oleh pengunjung setelah siklus Anda saat ini berakhir.",
         "yesCancel": "Ya, batalkan langganan",
-        "keepSub": "Pertahankan langganan saya",
+        "keepPayment": "Pertahankan langganan saya",
         "cancelSuccess": "Langganan berhasil dibatalkan.",
         "cancelFailed": "Gagal membatalkan langganan.",
-        "promoReq": "Silakan masukkan kode promo",
-        "promoApplied": "Kode promo diterapkan!",
-        "invalidPromo": "Kode promo tidak valid"
+        "processingPayment": "Memproses pembayaran, jangan tutup halaman...",
+        "processingDescription": "Mengonfirmasi langganan Anda secara aman dengan gateway pembayaran. Proses ini memakan waktu beberapa detik.",
+        "processingWarning": "⚠️ Jangan tutup halaman ini atau kembali untuk menghindari masalah pembayaran.",
+        "purchaseSuccess": "Langganan berhasil dibeli!",
+        "paymentFailed": "Pembayaran gagal. Silakan coba lagi.",
+        "unexpectedError": "Terjadi kesalahan saat menyimpan pembayaran.",
+        "errors": {
+            "unauthorized": "Anda harus masuk untuk membeli langganan.",
+            "alreadyPaid": "Anda sudah memiliki langganan seumur hidup yang aktif.",
+            "orderAlreadyProcessed": "Pembayaran ini sudah diproses. Hubungi dukungan jika Anda merasa ini adalah kesalahan.",
+            "paypalCaptureFailed": "Pembayaran tidak dapat diproses. Mungkin sudah diproses sebelumnya. Hubungi dukungan.",
+            "paypalAuthFailed": "Autentikasi gateway pembayaran gagal. Hubungi dukungan.",
+            "paypalGatewayError": "Tidak dapat terhubung ke gateway pembayaran. Coba lagi nanti.",
+            "paymentNotCompleted": "Pembayaran tidak selesai. Silakan coba lagi.",
+            "cannotVerifyAmount": "Jumlah pembayaran tidak dapat diverifikasi. Hubungi dukungan.",
+            "invalidPaymentAmount": "Jumlah pembayaran tidak valid. Hubungi dukungan.",
+            "serverUnreachable": "Tidak dapat terhubung ke server. Coba lagi nanti.",
+            "serverError": "Terjadi kesalahan tak terduga. Coba lagi atau hubungi dukungan."
+        }
     },
     "confirmModal": {
         "delete": "Hapus",
@@ -135,10 +143,23 @@
     },
     "accountNotFound": {
         "title": "Akun Tidak Ditemukan",
-        "description": "Kami không thể tìm thấy tài khoản bạn tìm kiếm. Có thể nó đã được đổi tên hoặc người dùng chưa đăng ký",
-        "subscribe": "Đăng ký ngay",
+        "description": "Kami tidak dapat menemukan akun yang Anda cari. Mungkin telah diganti namanya atau pengguna belum menyelesaikan pembayaran",
+        "payment": "Bayar Sekarang",
         "returnHome": "Quay lại trang chủ",
         "contactSupport": "Liên hệ hỗ trợ",
         "rights": "Bản quyền được bảo hộ."
+    },
+    "success": {
+        "paymentSuccessful": "🎉 Pembayaran Berhasil! 🎉",
+        "welcomeMessage": "Selamat datang di DGT Portfolio",
+        "activationMessage": "Paket Seumur Hidup Anda telah berhasil diaktifkan. Anda sekarang memiliki akses tak terbatas ke semua fitur.",
+        "features": {
+            "lifetime": "Akses seumur hidup diaktifkan",
+            "cv": "Pembuat CV terbuka",
+            "publishing": "Penerbitan portofolio diaktifkan",
+            "updates": "Pembaruan di masa mendatang disertakan"
+        },
+        "goToPortfolio": "Lihat Portofolio Saya",
+        "needHelp": "Butuh bantuan untuk memulai? Hubungi tim dukungan kami kapan saja."
     }
 }

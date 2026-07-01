@@ -30,7 +30,13 @@
         "removeTitle": "Ta bort anpassad domän?",
         "removeDesc1": "Är du säker på att du vill ta bort ",
         "removeDesc2": " från din portfolio?",
-        "cancel": "Avbryt"
+        "cancel": "Avbryt",
+        "domainSavedVerify": "Domän sparad. Vänligen verifiera den.",
+        "example": "t.ex. example.com",
+        "errorSavingDomain": "Misslyckades med att spara domän. Vänligen försök igen.",
+        "networkError": "Nätverksfel, vänligen försök igen senare.",
+        "domainVerifiedSuccess": "Domän verifierad framgångsrikt!",
+        "errorVerifyingDomain": "Misslyckades med att verifiera domän. Se till att DNS-posterna är korrekt inställda."
     },
     "businessLinks": {
         "title": "Affärslänkar",
@@ -71,62 +77,64 @@
         "myMessages": "Mina meddelanden",
         "noMessages": "Inga meddelanden ännu",
         "deleteTitle": "Ta bort",
-        "messageDeleted": "Meddelande borttaget",
-        "failedToDelete": "Borttagning misslyckades"
+        "messageDeleted": "Meddelandet har tagits bort",
+        "failedToDelete": "Kunde inte ta bort",
+        "maxMessagesReached": "You have reached the maximum limit of 2 messages.",
+        "maxMessagesInfo": "You have reached the maximum limit (2 messages). Please delete an existing message to send a new one or wait for a reply.",
+        "adminReply": "Admin Reply",
+        "deleteConfirmText": "Är du säker på att du vill ta bort det här meddelandet? Den här åtgärden kan inte ångras.",
+        "cancel": "Avbryt",
+        "delete": "Ta bort"
     },
-    "success": {
-        "paymentSuccessful": "Betalning lyckades!",
-        "subscriptionActive": "Din prenumeration är nu aktiv. Tack för ditt köp!",
-        "goToHome": "Gå till hem"
-    },
-    "subscription": {
-        "promoMonthly": {
-            "name": "Månadskampanj",
-            "description": "Specialerbjudande",
-            "period": "/månad"
+    "payment": {
+        "lifetime": {
+            "name": "Livstidsplan",
+            "description": "Skapa din professionella portfolio, generera ditt CV och håll det online för alltid.",
+            "period": "Engångsbetalning"
         },
-        "promo6Month": {
-            "name": "6-månaderskampanj",
-            "description": "Bra värde för 6 månader",
-            "period": "/6 månader"
-        },
-        "promoAnnual": {
-            "name": "Årskampanj",
-            "description": "Bästa dealen för året",
-            "period": "/år"
-        },
-        "subMonthly": {
-            "name": "Månadsprenumeration",
-            "description": "$1 för månaden",
-            "period": "/månad"
-        },
-        "sub6Months": {
-            "name": "6-månadersprenumeration",
-            "description": "Bra erbjudande på medellång sikt",
-            "period": "/6 månader"
-        },
-        "subYearly": {
-            "name": "Årsprenumeration",
-            "description": "Bästa värde",
-            "period": "/år"
-        },
+        "bestValue": "Bästa Värde",
         "recommended": "Rekommenderas",
-        "placeholder": "Kampanjkod",
-        "applyBtn": "Använd",
-        "verifyingBtn": "Verifierar...",
-        "activeSubscription": "AKTIV PRENUMERATION",
-        "portfolioVisible": "Din portfolio är för närvarande synlig för besökare tack vare denna prenumeration.",
+        "whatsIncluded": "Vad som ingår",
+        "features": [
+            "Livstidsåtkomst — en engångsbetalning",
+            "Professionell portfoliowebbplats",
+            "Inbyggd CV-generator",
+            "Eget portfolio-subdomän",
+            "SEO-optimerat för synlighet",
+            "Flera moderna teman",
+            "Alla framtida uppdateringar inkluderade",
+            "Prioriterad kundsupport"
+        ],
+        "activePayment": "LIVSTIDSPLAN AKTIV",
+        "portfolioVisible": "Din portfolio är för närvarande synlig för besökare med full livstidsåtkomst.",
+        "unlimitedAccess": "Obegränsad Tillgång",
         "renewalDate": "Förnyelse-/utgångsdatum:",
-        "cancelSub": "Avbryt prenumeration",
+        "cancelPayment": "Avbryt prenumeration",
         "confirmCancel": "Bekräfta avbrytande",
         "cancelWarning": "Är du helt säker på att du vill avbryta din prenumeration? Din portfolio kommer inte längre att vara synlig för besökare när din nuvarande cykel tar slut.",
         "yesCancel": "Ja, avbryt prenumeration",
-        "keepSub": "Behåll min prenumeration",
+        "keepPayment": "Behåll min prenumeration",
         "cancelSuccess": "Prenumeration avbruten framgångsrikt.",
         "cancelFailed": "Misslyckades med att avbryta prenumeration.",
-        "promoReq": "Vänligen ange en kampanjkod",
-        "promoApplied": "Kampanjkod använd!",
-        "invalidPromo": "Ogiltig kampanjkod"
+        "processingPayment": "Bearbetar betalning, vänligen stäng inte sidan...",
+        "processingDescription": "Bekräftar säkert din prenumeration med betalningsportalen. Denna process tar några sekunder.",
+        "processingWarning": "⚠️ Stäng inte den här sidan eller gå tillbaka för att undvika betalningsproblem.",
+        "purchaseSuccess": "Prenumeration köpt framgångsrikt!",
+        "paymentFailed": "Betalning misslyckades. Vänligen försök igen.",
+        "unexpectedError": "Ett fel uppstod när betalningen skulle sparas.",
+        "errors": {
+            "unauthorized": "Du måste vara inloggad för att köpa en prenumeration.",
+            "alreadyPaid": "Du har redan en aktiv livstidsprenumeration.",
+            "orderAlreadyProcessed": "Denna betalning har redan bearbetats. Kontakta support om du tror att detta är ett misstag.",
+            "paypalCaptureFailed": "Betalningen kunde inte registreras. Den kan redan ha bearbetats. Kontakta support.",
+            "paypalAuthFailed": "Autentisering av betalningsportalen misslyckades. Kontakta support.",
+            "paypalGatewayError": "Kunde inte ansluta till betalningsportalen. Vänligen försök igen senare.",
+            "paymentNotCompleted": "Betalningen slutfördes inte. Vänligen försök igen.",
+            "cannotVerifyAmount": "Kunde inte verifiera betalningsbeloppet. Kontakta support.",
+            "invalidPaymentAmount": "Ogiltigt betalningsbelopp. Kontakta support.",
+            "serverUnreachable": "Kan inte ansluta till servern. Vänligen försök igen senare.",
+            "serverError": "Ett oväntat fel uppstod. Försök igen eller kontakta support."
+        }
     },
     "confirmModal": {
         "delete": "Ta bort",
@@ -135,10 +143,23 @@
     },
     "accountNotFound": {
         "title": "Kontot hittades inte",
-        "description": "Vi kunde inte hitta kontot du letar efter. Det kan ha ändrats eller så har användaren ingen prenumeration.",
-        "subscribe": "Prenumerera nu",
+        "description": "Vi kunde inte hitta kontot du letar efter. Det kan ha ändrats eller så har användaren inte slutfört betalningen",
+        "payment": "Betala nu",
         "returnHome": "Tillbaka till startsidan",
         "contactSupport": "Kontakta support",
         "rights": "Alla rättigheter förbehållna."
+    },
+    "success": {
+        "paymentSuccessful": "🎉 Betalning Lyckades! 🎉",
+        "welcomeMessage": "Välkommen till DGT Portfolio",
+        "activationMessage": "Din livstidsplan har aktiverats. Du har nu obegränsad tillgång till alla funktioner.",
+        "features": {
+            "lifetime": "Livstidsåtkomst aktiverad",
+            "cv": "CV-generator upplåst",
+            "publishing": "Portfoliopublicering aktiverad",
+            "updates": "Framtida uppdateringar ingår"
+        },
+        "goToPortfolio": "Visa Min Portfolio",
+        "needHelp": "Behöver du hjälp med att komma igång? Kontakta vårt supportteam när som helst."
     }
 }

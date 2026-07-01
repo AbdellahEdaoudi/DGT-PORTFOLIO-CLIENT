@@ -11,73 +11,68 @@
             "support": "Support",
             "signOut": "Logga ut",
             "customDomain": "Anpassad domän",
-            "subscriptions": "Prenumerationer"
+            "payment": "Betalning"
         }
     },
     "hero": {
         "title_part1": "Din portfolio,",
         "title_part2": "förbättrad",
-        "description": "Ingen kod, inget krångel. Få en professionell portfolio på 5 minuter som ökar dina chanser att få jobb eller frilansuppdrag. Visa upp din karriär, dina färdigheter, projekt och arbetslänkar som aldrig förr - lämna ett varaktigt intryck och lås upp nya möjligheter.",
-        "free_trial": "Gratis i 7 dagar",
+        "description": "Skapa en professionell portfolio på bara 5 minuter—utan kodning. Visa upp dina färdigheter, erfarenheter och projekt i en vacker portfolio som hjälper rekryterare att snabbt förstå din profil och öka dina chanser att få ditt nästa jobb eller frilansuppdrag.",
+        "free_trial": "30 dagars gratis",
         "start_building": "Börja bygga",
         "watch_demo": "Se demo"
     },
     "features": {
         "title": "Varför välja DGT Portfolio",
-        "subtitle": "Allt du behöver för att visa upp ditt bästa arbete och nå dina drömmöjligheter",
+        "subtitle": "Skapa en professionell portfolio, visa upp dina färdigheter och stick ut för rekryterare — allt utan kodning.",
         "items": [
             {
-                "title": "Kodfri design",
-                "description": "Skapa fantastiska portfolios utan att skriva en enda rad kod"
+                "title": "Bygg utan kodning",
+                "description": "Skapa en professionell portfolio på några minuter utan att skriva en enda rad kod."
             },
             {
-                "title": "Anpassad underdomän",
-                "description": "Få en personlig underdomän som <strong>dittnamn.dgtportfolio.com</strong> för din portfolio"
+                "title": "Din egen portfoliolänk",
+                "description": "Få en personlig underdomän som <strong>dittnamn.dgtportfolio.com</strong> och dela den var som helst."
             },
             {
-                "title": "QR-kod profil",
-                "description": "Generera en QR-kod för din portfolio som du kan ladda ner eller dela direkt"
+                "title": "Professionell QR-kod",
+                "description": "Generera en QR-kod för din portfolio och dela den omedelbart online eller offline."
             },
             {
-                "title": "Flera teman",
-                "description": "Välj mellan olika teman för att personifiera din portfolios utseende och känsla"
+                "title": "Moderna portfolioteman",
+                "description": "Välj från vackert designade teman som matchar ditt personliga varumärke."
             },
             {
-                "title": "Enkel länkdelning",
-                "description": "Dela din portfoliolänk var som helst med bara ett klick"
+                "title": "Dela var som helst",
+                "description": "Skicka din portfolio med en enda länk på sociala medier, e-post eller jobbansökningar."
             },
             {
-                "title": "Blixtsnabb",
-                "description": "Otroligt snabba laddningstider som håller besökarna engagerade"
+                "title": "Snabb & SEO-optimerad",
+                "description": "Laddas snabbt och hjälper din portfolio att bli upptäckt av sökmotorer."
             }
         ]
     },
     "pricing": {
-        "title": "Enkel, transparent prissättning",
-        "subtitle": "Välj den perfekta planen för din kreativa portfolio",
-        "plans": [
-            {
-                "name": "Månadsplan",
-                "description": "$1 för månaden",
-                "price": "$1",
-                "period": "/månad",
-                "cta": "Prenumerera månadsvis"
-            },
-            {
-                "name": "6-månadersplan",
-                "description": "Bra erbjudande på medellång sikt",
-                "price": "$5",
-                "period": "/6 månader",
-                "cta": "Prenumerera 6 månader"
-            },
-            {
-                "name": "Årsplan",
-                "description": "Bästa värde",
-                "price": "$9",
-                "period": "/år",
-                "cta": "Prenumerera årsvis",
-                "badge": "Rekommenderas"
-            }
+        "title": "En betalning. Livstids portfolio.",
+        "subtitle": "Skapa din professionella portfolio, generera ditt CV och stanna online för alltid — utan prenumerationer eller återkommande avgifter.",
+        "recommended": "Bästa Värde",
+        "lifetime": {
+            "name": "Livstidsplan",
+            "description": "Bygg din portfolio en gång och behåll den online för alltid.",
+            "period": "betala en gång"
+        },
+        "cta": "Lås upp livstidsåtkomst",
+        "whatsIncluded": "Vad som ingår",
+        "noFees": "Ingen prenumeration • Inga månadsavgifter • Din för alltid",
+        "features": [
+            "Livstidsåtkomst — en engångsbetalning",
+            "Professionell portfoliowebbplats",
+            "Inbyggd CV-generator",
+            "Eget portfolio-subdomän",
+            "SEO-optimerat för synlighet",
+            "Flera moderna teman",
+            "Alla framtida uppdateringar inkluderade",
+            "Prioriterad kundsupport"
         ]
     },
     "cta": {

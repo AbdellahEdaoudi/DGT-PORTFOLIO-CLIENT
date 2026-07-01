@@ -1,4 +1,4 @@
-import { ArrowRight, Code2, Zap, Share2, Globe2, SquareMousePointer, QrCode, Layout } from "../Icons"
+import { ArrowRight, Code2, Zap, Share2, Globe2, SquareMousePointer, QrCode, Layout, Check } from "../Icons"
 import Image from "next/image"
 import ThemeSlideshow from "./ThemeSlideshow"
 import Navbar from "./Navbar"
@@ -21,7 +21,6 @@ export default function LandingPage({ lang }) {
   ]
 
   const featuresItems = t('features.items') || [];
-  const pricingPlans = t('pricing.plans') || [];
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-black text-white overflow-hidden">
@@ -127,59 +126,71 @@ export default function LandingPage({ lang }) {
         <div className="max-w-6xl mx-auto">
           {/* Header */}
           <div className="text-center mb-16">
-            <h2 className="text-5xl font-bold mb-4">{t('pricing.title')}</h2>
+            <h2 className="text-5xl font-bold mb-4">{t('pricing.title') || "One Price. Lifetime Access."}</h2>
             <p className="text-gray-400 max-w-2xl mx-auto">
-              {t('pricing.subtitle')}
+              {t('pricing.subtitle') || "Get full access to your creative portfolio, forever. No subscriptions, no hidden fees."}
             </p>
           </div>
 
-          {/* Pricing Cards */}
-          <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
-            {Array.isArray(pricingPlans) && pricingPlans.map((plan, index) => (
-              <div
-                key={index}
-                className={`relative p-8 rounded-2xl border transition-all duration-300 ${plan.badge
-                  ? "bg-gradient-to-br from-cyan-500/20 to-purple-500/20 border-cyan-400/50 shadow-lg shadow-cyan-500/20 md:scale-105"
-                  : "bg-slate-800/50 border-purple-500/20 hover:border-purple-400/50 hover:bg-purple-500/10"
-                  }`}
-              >
-                {/* Badge */}
-                {plan.badge && (
-                  <div className="absolute -top-4 left-1/2 -translate-x-1/2">
-                    <span className="bg-gradient-to-r from-cyan-400 to-purple-500 text-black px-4 py-1 rounded-full text-sm font-semibold">
-                      {plan.badge}
-                    </span>
+          {/* Pricing Card */}
+          <div className="flex justify-center max-w-4xl mx-auto mt-8">
+            <div className="relative w-full">
+              {/* Badge */}
+              <div className="absolute -top-4 left-1/2 -translate-x-1/2 z-20">
+                <span className="bg-gradient-to-r from-cyan-400 to-purple-500 text-black px-4 py-1 rounded-full text-sm font-semibold whitespace-nowrap shadow-md">
+                  {t('pricing.recommended') || "Recommended"}
+                </span>
+              </div>
+
+              <div className="rounded-3xl border shadow-lg bg-gradient-to-br from-cyan-500/20 to-purple-500/20 border-cyan-400/50 shadow-cyan-500/20 overflow-hidden">
+                <div className="grid md:grid-cols-2 gap-0">
+                  {/* Left: Price & CTA */}
+                  <div className="p-8 pt-10 flex flex-col justify-center border-b md:border-b-0 md:border-r border-cyan-400/20">
+                    <h3 className="text-2xl font-extrabold mb-2 text-white">
+                      {t('pricing.lifetime.name') || "Lifetime Portfolio"}
+                    </h3>
+                    <p className="text-gray-400 text-sm mb-6">
+                      {t('pricing.lifetime.description') || "Everything you need to showcase your work online."}
+                    </p>
+
+                    <div className="mb-8">
+                      <div className="flex items-baseline gap-2">
+                        <span className="text-5xl font-bold bg-gradient-to-r from-cyan-400 to-purple-400 bg-clip-text text-transparent">
+                          {lang === "ar" ? "١٠٠$" : "$100"}
+                        </span>
+                        <span className="text-gray-400">{t('pricing.lifetime.period') || "one-time"}</span>
+                      </div>
+                    </div>
+
+                    {/* CTA Button */}
+                    <Link href="/payment" className="block w-full">
+                      <button className="w-full py-3 px-6 rounded-full font-semibold transition-all duration-300 flex items-center justify-center gap-2 bg-gradient-to-r from-cyan-400 to-purple-500 text-black hover:shadow-lg hover:shadow-cyan-500/50">
+                        {t('pricing.cta') || "Start Building Your Portfolio"}
+                        <ArrowRight className="w-5 h-5" />
+                      </button>
+                    </Link>
+                    <p className="text-xs text-gray-500 text-center mt-3">
+                      {t('pricing.noFees') || "No subscription • No monthly fees • Yours forever"}
+                    </p>
                   </div>
-                )}
 
-                {/* Plan Name */}
-                <h3 className="text-2xl font-bold mb-2">{plan.name}</h3>
-                <p className="text-gray-400 text-sm mb-6">{plan.description}</p>
-
-                {/* Price */}
-                <div className="mb-8">
-                  <div className="flex items-baseline gap-2">
-                    <span className="text-5xl font-bold bg-gradient-to-r from-cyan-400 to-purple-400 bg-clip-text text-transparent">
-                      {plan.price}
-                    </span>
-                    <span className="text-gray-400">{plan.period}</span>
+                  {/* Right: Features grid */}
+                  <div className="p-8 pt-10 bg-slate-950/30 flex flex-col justify-center">
+                    <p className="text-gray-300 text-xs font-semibold uppercase tracking-wider mb-4">
+                      {t('pricing.whatsIncluded') || "What's included"}
+                    </p>
+                    <ul className="grid grid-cols-1 sm:grid-cols-2 gap-y-3 gap-x-4">
+                      {(t('pricing.features') || []).map((feature, idx) => (
+                        <li key={idx} className="flex items-start gap-2 text-gray-300 text-sm leading-snug">
+                          <Check className="w-4 h-4 text-cyan-400 flex-shrink-0 mt-0.5" />
+                          <span>{feature}</span>
+                        </li>
+                      ))}
+                    </ul>
                   </div>
                 </div>
-
-                {/* CTA Button */}
-                <Link href="/subscription" className="block">
-                  <button
-                    className={`w-full py-3 px-6 rounded-full font-semibold transition-all duration-300 flex items-center justify-center gap-2 ${plan.badge
-                      ? "bg-gradient-to-r from-cyan-400 to-purple-500 text-black hover:shadow-lg hover:shadow-cyan-500/50"
-                      : "border border-purple-500/50 text-white hover:bg-purple-500/20 hover:border-purple-400"
-                      }`}
-                  >
-                    {plan.cta}
-                    <ArrowRight className="w-4 h-4" />
-                  </button>
-                </Link>
               </div>
-            ))}
+            </div>
           </div>
         </div>
       </section>

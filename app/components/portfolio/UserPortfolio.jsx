@@ -2,6 +2,7 @@
 import React, { useContext, useEffect, useState } from 'react'
 import axios from 'axios'
 import { MyContext } from '../../context/context'
+import { getTranslation } from '../../translations/portfolio'
 import MagicalLoader from '../MagicalLoader'
 import AccountNotFound from "./AccountNotFound"
 import Theme1 from "../themes/theme1"
@@ -17,21 +18,53 @@ import Theme10 from "../themes/theme10"
 import Theme11 from "../themes/theme11"
 import Theme12 from "../themes/theme12"
 import Theme13 from '../themes/theme13'
+import { useToast } from '../Toast'
 
-export default function UserPortfolio({ params }) {
+export default function UserPortfolio({ username }) {
     const [userDetails, setUserDetails] = useState(null)
     const [userLinks, setUserLinks] = useState([])
     const [loadingUsers, setLoadingUsers] = useState(true)
-    const { EmailUser } = useContext(MyContext)
+    const { EmailUser} = useContext(MyContext)
+    const t = getTranslation(userDetails?.displayLanguage || 'en');
     const [notFound, setNotFound] = useState(false)
+    const toast = useToast();
 
     useEffect(() => {
         const fetchUsers = async () => {
             try {
-                const res = await axios.get(`/api/proxy/users/${params.username}`);
+                const cacheKey = `dp_${username}`;
+                const cachedData = localStorage.getItem(cacheKey);
 
+                let parsed = null;
+                if (cachedData) {
+                    parsed = JSON.parse(cachedData);
+                    try {
+                        const lastUpdateRes = await axios.get(`/api/proxy/last-updated/username/${username}`);
+                        if (lastUpdateRes.data?.success && lastUpdateRes.data?.lastUpdated) {
+                            const serverTime = lastUpdateRes.data.lastUpdated;
+                            const localTime = parsed.lastUpdated || 0;
+                            
+                            if (localTime >= serverTime) {
+                                setUserDetails(parsed.user);
+                                setUserLinks(parsed.links || []);
+                                setLoadingUsers(false);
+                                return;
+                            }
+                        }
+                    } catch (e) {
+                        console.error("Error checking last updated:", e);
+                    }
+                }
+
+                const res = await axios.get(`/api/proxy/users/${username}`);
                 setUserDetails(res.data.user);
                 setUserLinks(res.data.links || []);
+                
+                localStorage.setItem(cacheKey, JSON.stringify({
+                    user: res.data.user,
+                    links: res.data.links || [],
+                    lastUpdated: Date.now()
+                }));
 
             } catch (error) {
                 if (error.response) {
@@ -40,32 +73,31 @@ export default function UserPortfolio({ params }) {
                     if (error.response.status === 404) {
                         if (msg === "User not found") {
                             setNotFound(true);
-                        } else if (msg === "No subscription found for this user" && EmailUser !== ownerEmail) {
-                            // setNoSubscription(true);
+                        } else if (msg === "No payment found for this user" && EmailUser !== ownerEmail) {
+                            // setNoPayment(true);
                             setNotFound(true);
-                        } else if (msg === "No subscription found for this user" && EmailUser === ownerEmail) {
-                            alert("No subscription was found for your account. Please subscribe to continue.");
-                            window.location.href = "https://dgtportfolio.com/subscription"
+                        } else if (msg === "No payment found for this user" && EmailUser === ownerEmail) {
+                            toast.error(t("errors.noPaymentFound"));
+                            window.location.href = "https://dgtportfolio.com/payment"
                         }
                     } else if (error.response.status === 403 && EmailUser !== ownerEmail) {
-                        // setSubscriptionInactive(true);
+                        // setPaymentInactive(true);
                         setNotFound(true);
                     } else if (error.response.status === 403 && EmailUser === ownerEmail) {
-                        alert("Your subscription has expired or is inactive. Please renew it to regain access.");
-                        window.location.href = "https://dgtportfolio.com/subscription"
+                        toast.error(t("errors.paymentNotActive"));
+                        window.location.href = "https://dgtportfolio.com/payment"
                     } else {
-                        console.error("Error fetching user details:", error);
+                        console.error(t("errors.fetchingUserDetails"), error);
                     }
                 } else {
-                    console.error("Network error:", error);
+                    console.error(t("errors.networkError"), error);
                 }
             } finally {
                 setLoadingUsers(false);
             }
         };
-
         fetchUsers();
-    }, [params.username, EmailUser]);
+    }, [username, EmailUser]);
 
     if (loadingUsers) return <MagicalLoader />
     if (notFound) return <AccountNotFound />

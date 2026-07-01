@@ -396,10 +396,12 @@ export default function CloudinaryGallery() {
                         onClick={e => e.stopPropagation()}
                     >
                         <div className="relative w-full md:w-2/3 bg-black flex items-center justify-center h-[50vh] md:h-auto">
-                            <img
+                            <Image
                                 src={selectedImage.secure_url}
                                 alt="Preview"
-                                className="max-w-full max-h-full object-contain"
+                                fill
+                                className="object-contain"
+                                unoptimized
                             />
                         </div>
                         <div className="w-full md:w-1/3 p-4 md:p-6 sm:border-l border-purple-500/10 flex flex-col gap-4 overflow-y-auto bg-slate-900 h-full">

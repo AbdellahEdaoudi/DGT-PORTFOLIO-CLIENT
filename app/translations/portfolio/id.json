@@ -39,5 +39,11 @@
     "welcometomyworld": "Selamat datang di duniaku",
     "readMore": "Baca selengkapnya",
     "readLess": "Lebih sedikit",
-    "verified": "Terverifikasi"
+    "verified": "Terverifikasi",
+    "errors": {
+        "noPaymentFound": "Tidak ada pembayaran yang ditemukan untuk akun Anda. Harap selesaikan pembayaran untuk melanjutkan.",
+        "paymentNotActive": "Pembayaran Anda tidak aktif. Harap selesaikan pembayaran untuk mendapatkan kembali akses.",
+        "fetchingUserDetails": "Kesalahan saat mengambil detail pengguna:",
+        "networkError": "Kesalahan jaringan:"
+    }
 }

@@ -11,73 +11,68 @@
             "support": "Support",
             "signOut": "Abmelden",
             "customDomain": "Benutzerdefinierte Domain",
-            "subscriptions": "Abonnements"
+            "payment": "Zahlung"
         }
     },
     "hero": {
         "title_part1": "Ihr Portfolio,",
         "title_part2": "Erhöht",
-        "description": "Kein Code, kein Aufwand. Erhalten Sie in 5 Minuten ein professionelles Portfolio, das Ihre Chancen auf einen Job oder Freelance-Aufträge erhöht. Präsentieren Sie Ihre Karriere, Fähigkeiten, Projekte und Arbeitslinks wie nie zuvor. Hinterlassen Sie einen bleibenden Eindruck und erschließen Sie neue Möglichkeiten.",
-        "free_trial": "Kostenlos für 7 Tage",
+        "description": "Erstellen Sie in nur 5 Minuten ein professionelles Portfolio—ohne Programmierkenntnisse. Präsentieren Sie Ihre Fähigkeiten, Erfahrungen und Projekte in einem ansprechenden Portfolio, das Recruitern hilft, Ihr Profil schnell zu verstehen und Ihre Chancen auf Ihren nächsten Job oder Freelance-Auftrag zu erhöhen.",
+        "free_trial": "30 Tage kostenlos",
         "start_building": "Jetzt erstellen",
         "watch_demo": "Demo ansehen"
     },
     "features": {
         "title": "Warum DGT Portfolio wählen?",
-        "subtitle": "Alles, was Sie brauchen, um Ihre beste Arbeit zu präsentieren und Ihre Traumchancen zu ergreifen",
+        "subtitle": "Erstellen Sie ein professionelles Portfolio, präsentieren Sie Ihre Fähigkeiten und heben Sie sich bei Personalvermittlern ab — ganz ohne Programmierung.",
         "items": [
             {
-                "title": "Code-freies Design",
-                "description": "Erstellen Sie beeindruckende Portfolios ohne eine einzige Codezeile zu schreiben"
+                "title": "Ohne Programmierung erstellen",
+                "description": "Erstellen Sie in wenigen Minuten ein professionelles Portfolio, ohne eine einzige Codezeile zu schreiben."
             },
             {
-                "title": "Benutzerdefinierte Subdomain",
-                "description": "Erhalten Sie eine personalisierte Subdomain wie <strong>ihrname.dgtportfolio.com</strong> für Ihr Portfolio"
+                "title": "Ihr eigener Portfolio-Link",
+                "description": "Erhalten Sie eine personalisierte Subdomain wie <strong>ihrname.dgtportfolio.com</strong> und teilen Sie sie überall."
             },
             {
-                "title": "QR-Code-Profil",
-                "description": "Generieren Sie einen QR-Code für Ihr Portfolio, den Sie sofort herunterladen oder teilen können"
+                "title": "Professioneller QR-Code",
+                "description": "Generieren Sie einen QR-Code für Ihr Portfolio und teilen Sie ihn sofort online oder offline."
             },
             {
-                "title": "Mehrere Themes",
-                "description": "Wählen Sie aus verschiedenen Themes, um das Aussehen Ihres Portfolios zu personalisieren"
+                "title": "Moderne Portfolio-Themes",
+                "description": "Wählen Sie aus wunderschön gestalteten Themes, die zu Ihrer persönlichen Marke passen."
             },
             {
-                "title": "Einfaches Link-Teilen",
-                "description": "Teilen Sie Ihren Portfolio-Link überall mit nur einem Klick"
+                "title": "Überall teilen",
+                "description": "Senden Sie Ihr Portfolio mit einem einzigen Link auf Social Media, per E-Mail oder in Bewerbungen."
             },
             {
-                "title": "Blitzschnell",
-                "description": "Blitzschnelle Ladezeiten, die Besucher fesseln"
+                "title": "Schnell & SEO-optimiert",
+                "description": "Lädt schnell und hilft dabei, dass Ihr Portfolio von Suchmaschinen gefunden wird."
             }
         ]
     },
     "pricing": {
-        "title": "Einfache, transparente Preise",
-        "subtitle": "Wählen Sie den perfekten Plan für Ihr kreatives Portfolio",
-        "plans": [
-            {
-                "name": "Monatsplan",
-                "description": "1 $ für den Monat",
-                "price": "1 $",
-                "period": "/Monat",
-                "cta": "Monatlich abonnieren"
-            },
-            {
-                "name": "6-Monats-Plan",
-                "description": "Großartiges mittelfristiges Angebot",
-                "price": "5 $",
-                "period": "/6 Monate",
-                "cta": "6 Monate abonnieren"
-            },
-            {
-                "name": "Jahresplan",
-                "description": "Bester Wert",
-                "price": "9 $",
-                "period": "/Jahr",
-                "cta": "Jährlich abonnieren",
-                "badge": "Empfohlen"
-            }
+        "title": "Eine Zahlung. Lebenslanges Portfolio.",
+        "subtitle": "Erstellen Sie Ihr professionelles Portfolio, generieren Sie Ihren Lebenslauf und bleiben Sie für immer online — ohne Abonnements oder wiederkehrende Gebühren.",
+        "recommended": "Bester Wert",
+        "lifetime": {
+            "name": "Lebenslanger Plan",
+            "description": "Bauen Sie Ihr Portfolio einmal auf und behalten Sie es für immer online.",
+            "period": "einmalig zahlen"
+        },
+        "cta": "Lebenslangen Zugang freischalten",
+        "whatsIncluded": "Was ist enthalten",
+        "noFees": "Kein Abonnement • Keine monatlichen Gebühren • Für immer Ihres",
+        "features": [
+            "Lebenslanger Zugang — nur eine Zahlung",
+            "Professionelle Portfolio-Website",
+            "Integrierter Lebenslauf-Generator",
+            "Eigene Portfolio-Subdomain",
+            "SEO-optimiert für Sichtbarkeit",
+            "Mehrere moderne Themen",
+            "Alle zukünftigen Updates inklusive",
+            "Priorisierter Kundensupport"
         ]
     },
     "cta": {

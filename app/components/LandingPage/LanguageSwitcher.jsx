@@ -11,7 +11,7 @@ export default function LanguageSwitcher() {
 
     // Supported languages and their configuration
     const languages = [
-        { code: "en", label: "English", flag: "us" },
+        { code: "en", label: "English", flag: "gb" },
         { code: "fr", label: "Français", flag: "fr" },
         { code: "de", label: "Deutsch", flag: "de" },
         { code: "es", label: "Español", flag: "es" },
@@ -37,7 +37,7 @@ export default function LanguageSwitcher() {
     const isLangInPath = languages.some(l => l.code === currentLangCode)
     const currentLang = isLangInPath ? currentLangCode : "en"
 
-    const currentFlag = languages.find((l) => l.code === currentLang)?.flag || "us"
+    const currentFlag = languages.find((l) => l.code === currentLang)?.flag || "gb"
 
     // Handle click outside to close dropdown
     useEffect(() => {
@@ -71,7 +71,7 @@ export default function LanguageSwitcher() {
                 aria-label="Select Language"
             >
                 <span className={`fi fi-${currentFlag} rounded-sm`} />
-                <span className="uppercase text-sm font-semibold">{currentLang}</span>
+                <span className="uppercase text-sm font-semibold text-white">{currentLang}</span>
             </button>
 
             {isOpen && (

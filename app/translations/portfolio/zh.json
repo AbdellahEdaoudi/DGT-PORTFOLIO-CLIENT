@@ -39,5 +39,11 @@
     "welcometomyworld": "欢迎来到我的世界",
     "readMore": "阅读更多",
     "readLess": "收起",
-    "verified": "已验证"
+    "verified": "已验证",
+    "errors": {
+        "noPaymentFound": "未找到您帐户的付款记录。请完成付款以继续。",
+        "paymentNotActive": "您的付款无效。请完成付款以恢复访问权限。",
+        "fetchingUserDetails": "获取用户详细信息时出错：",
+        "networkError": "网络错误："
+    }
 }

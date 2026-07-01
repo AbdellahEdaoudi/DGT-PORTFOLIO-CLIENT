@@ -9,38 +9,24 @@ import { getTranslation } from '../translations/others';
 
 export default function CustomDomainPage() {
     const toast = useToast();
-    const { EmailUser, userDetails } = useContext(MyContext);
+    const { userDetails, loadingAll } = useContext(MyContext);
     const t = getTranslation(userDetails?.displayLanguage || 'en');
     const [customDomain, setCustomDomain] = useState('');
     const [isSaved, setIsSaved] = useState(false);
     const [isVerified, setIsVerified] = useState(false);
     const [loadingAction, setLoadingAction] = useState(null);
-    const [isFetching, setIsFetching] = useState(true);
     const [showRemoveModal, setShowRemoveModal] = useState(false);
 
     useEffect(() => {
-        if (!EmailUser) return;
-        const fetchSettings = async () => {
-            setIsFetching(true);
-            try {
-                const res = await axios.get(`/api/proxy/custom-domain/settings/${EmailUser}`);
-                if (res.data.status) {
-                    setCustomDomain(res.data.data.customDomain || '');
-                    setIsSaved(!!res.data.data.customDomain);
-                    setIsVerified(res.data.data.customDomainVerified || false);
-                }
-            } catch (e) {
-                console.error(e);
-            } finally {
-                setIsFetching(false);
-            }
-        };
-
-        fetchSettings();
-    }, [EmailUser]);
+        if (userDetails) {
+            setCustomDomain(userDetails?.customDomain || '');
+            setIsSaved(userDetails?.customDomain ? true : false);
+            setIsVerified(userDetails?.customDomainVerified || false);
+        }
+    }, [userDetails]);
 
 
-    const handleSave = async () => {
+    const SaveDomain = async () => {
         if (!customDomain) return toast.error(t('customDomain.enterDomain'));
         setLoadingAction('save');
         try {
@@ -48,27 +34,27 @@ export default function CustomDomainPage() {
                 customDomain: customDomain.toLowerCase()
             });
             if (res.data.status) {
-                toast.success(res.data.message);
+                toast.success(t('customDomain.domainSavedVerify'));
                 setIsSaved(true);
                 setIsVerified(false);
-            } else toast.error(res.data.message);
-        } catch (e) { toast.error(e.response?.data?.message || 'Error'); }
+            } else toast.error(t('customDomain.errorSavingDomain'));
+        } catch (e) { toast.error(t('customDomain.networkError')); }
         finally { setLoadingAction(null); }
     };
 
-    const handleVerify = async () => {
+    const VerifyDomain = async () => {
         setLoadingAction('verify');
         try {
             const res = await axios.post(`/api/proxy/custom-domain/verify`, {});
             if (res.data.status) {
-                toast.success(res.data.message);
+                toast.success(t('customDomain.domainVerifiedSuccess'));
                 setIsVerified(true);
-            } else toast.error(res.data.message);
-        } catch (e) { toast.error(e.response?.data?.message || t('customDomain.verificationFailed')); }
+            } else toast.error(t('customDomain.errorVerifyingDomain'));
+        } catch (e) { toast.error(t('customDomain.networkError')); }
         finally { setLoadingAction(null); }
     };
 
-    const confirmRemove = async () => {
+    const RemoveDomain = async () => {
         setLoadingAction('remove');
         setShowRemoveModal(false);
         try {
@@ -81,26 +67,26 @@ export default function CustomDomainPage() {
         finally { setLoadingAction(null); }
     };
 
-    if (isFetching) {
+    if (loadingAll) {
         return (
             <div>
-            <Header lang={userDetails?.displayLanguage} />
-            <div className="min-h-screen bg-slate-950">
-            <div className="max-w-3xl mx-auto pt-4 px-4 sm:px-6 animate-pulse">
-            <div className="mb-5 text-center space-y-4">
-            <div className="h-10 w-72 bg-slate-800 rounded-lg mx-auto"></div>
-            <div className="h-6 md:w-96 w-full bg-slate-800/60 rounded mx-auto"></div>
-            </div>
-            <div className="bg-slate-900/50 border border-slate-800 rounded-2xl p-8 space-y-8">
-            <div className="space-y-3">
-            <div className="h-4 w-32 bg-slate-800 rounded"></div>
-            <div className="h-14 w-full bg-slate-800/40 rounded-xl"></div>
-            <div className="h-28 w-full bg-slate-800/40 rounded-xl"></div>
-            </div>
-            <div className="h-12 w-full bg-slate-800 rounded-xl"></div>
-            </div>
-            </div>
-            </div>
+                <Header lang={userDetails?.displayLanguage} />
+                <div className="min-h-screen bg-slate-950">
+                    <div className="max-w-3xl mx-auto pt-4 px-4 sm:px-6 animate-pulse">
+                        <div className="mb-5 text-center space-y-4">
+                            <div className="h-10 w-72 bg-slate-800 rounded-lg mx-auto"></div>
+                            <div className="h-6 md:w-96 w-full bg-slate-800/60 rounded mx-auto"></div>
+                        </div>
+                        <div className="bg-slate-900/50 border border-slate-800 rounded-2xl p-8 space-y-8">
+                            <div className="space-y-3">
+                                <div className="h-4 w-32 bg-slate-800 rounded"></div>
+                                <div className="h-14 w-full bg-slate-800/40 rounded-xl"></div>
+                                <div className="h-28 w-full bg-slate-800/40 rounded-xl"></div>
+                            </div>
+                            <div className="h-12 w-full bg-slate-800 rounded-xl"></div>
+                        </div>
+                    </div>
+                </div>
             </div>
         );
     }
@@ -122,13 +108,13 @@ export default function CustomDomainPage() {
                                 <input
                                     type="text"
                                     value={customDomain}
-                                    onChange={(e) => { 
+                                    onChange={(e) => {
                                         let val = e.target.value.toLowerCase()
                                             .replace('https://', '')
                                             .replace('http://', '')
                                             .replace(/\/$/, ''); // Removes trailing slash
-                                        setCustomDomain(val); 
-                                        setIsSaved(false); 
+                                        setCustomDomain(val);
+                                        setIsSaved(false);
                                     }}
                                     placeholder={t('customDomain.placeholder') || "example.com"}
                                     className="w-full bg-slate-900/80 border border-slate-600 rounded-xl px-5 py-4 text-lg focus:ring-2 focus:ring-cyan-500 focus:border-transparent transition-all outline-none"
@@ -138,9 +124,9 @@ export default function CustomDomainPage() {
                                     {userDetails?.displayLanguage === 'ar' ? 'مثال: example.com' : 'e.g. example.com'}
                                 </p>
                             </div>
-                            {!isVerified && (
+                            {!isSaved && (
                                 <button
-                                    onClick={handleSave}
+                                    onClick={SaveDomain}
                                     disabled={loadingAction !== null}
                                     className="bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-500 hover:to-blue-500 text-white px-8 py-4 sm:py-0 rounded-xl font-bold transition-all disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2 shadow-lg shadow-cyan-900/20"
                                 >
@@ -204,7 +190,7 @@ export default function CustomDomainPage() {
                                     </div>
 
                                     <button
-                                        onClick={handleVerify}
+                                        onClick={VerifyDomain}
                                         disabled={loadingAction !== null}
                                         className="w-full bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-500 hover:to-blue-500 text-white py-4 rounded-xl font-bold transition-all shadow-lg shadow-cyan-900/20 flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
                                     >
@@ -229,48 +215,47 @@ export default function CustomDomainPage() {
                         </div>
                     )}
                 </div>
-            </div>
 
-            {/* Confirmation Modal */}
-            {showRemoveModal && (
-                <div className="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-50 p-4 animate-in fade-in duration-200">
-                    <div className="bg-slate-800 rounded-2xl p-6 max-w-md w-full border border-slate-700 shadow-2xl animate-in zoom-in-95 duration-200">
-                        <div className="flex items-start gap-4 mb-6">
-                            <div className="w-12 h-12 rounded-full bg-red-500/10 flex items-center justify-center flex-shrink-0">
-                                <AlertCircle className="w-6 h-6 text-red-400" />
+                {/* Confirmation Modal */}
+                {showRemoveModal && (
+                    <div className="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-50 p-4 animate-in fade-in duration-200">
+                        <div className="bg-slate-800 rounded-2xl p-6 max-w-md w-full border border-slate-700 shadow-2xl animate-in zoom-in-95 duration-200">
+                            <div className="flex items-start gap-4 mb-6">
+                                <div className="w-12 h-12 rounded-full bg-red-500/10 flex items-center justify-center flex-shrink-0">
+                                    <AlertCircle className="w-6 h-6 text-red-400" />
+                                </div>
+                                <div className="flex-1">
+                                    <h3 className="text-xl font-bold text-white mb-2">{t('customDomain.removeTitle')}</h3>
+                                    <p className="text-slate-400 text-sm leading-relaxed">
+                                        {t('customDomain.removeDesc1')} <span className="text-cyan-400 font-semibold">{customDomain}</span>{t('customDomain.removeDesc2')}
+                                    </p>
+                                </div>
+                                <button
+                                    onClick={() => setShowRemoveModal(false)}
+                                    className="text-slate-400 hover:text-white transition-colors"
+                                >
+                                    <X className="w-5 h-5" />
+                                </button>
                             </div>
-                            <div className="flex-1">
-                                <h3 className="text-xl font-bold text-white mb-2">{t('customDomain.removeTitle')}</h3>
-                                <p className="text-slate-400 text-sm leading-relaxed">
-                                    {t('customDomain.removeDesc1')} <span className="text-cyan-400 font-semibold">{customDomain}</span>{t('customDomain.removeDesc2')}
-                                </p>
-                            </div>
-                            <button
-                                onClick={() => setShowRemoveModal(false)}
-                                className="text-slate-400 hover:text-white transition-colors"
-                            >
-                                <X className="w-5 h-5" />
-                            </button>
-                        </div>
 
-                        <div className="flex flex-col-reverse sm:flex-row gap-3">
-                            <button
-                                onClick={() => setShowRemoveModal(false)}
-                                className="flex-1 bg-slate-700 hover:bg-slate-600 text-white py-3 rounded-xl font-semibold transition-colors"
-                            >
-                                {t('customDomain.cancel')}
-                            </button>
-                            <button
-                                onClick={confirmRemove}
-                                className="flex-1 bg-red-600 hover:bg-red-500 text-white py-3 rounded-xl font-semibold transition-colors flex items-center justify-center gap-2"
-                            >
-                                <Trash2 className="w-4 h-4" />
-                                {t('customDomain.removeDomain')}
-                            </button>
+                            <div className="flex flex-col-reverse sm:flex-row gap-3">
+                                <button
+                                    onClick={() => setShowRemoveModal(false)}
+                                    className="flex-1 bg-slate-700 hover:bg-slate-600 text-white py-3 rounded-xl font-semibold transition-colors"
+                                >
+                                    {t('customDomain.cancel')}
+                                </button>
+                                <button
+                                    onClick={RemoveDomain}
+                                    className="flex-1 bg-red-600 hover:bg-red-500 text-white py-3 rounded-xl font-semibold transition-colors flex items-center justify-center gap-2"
+                                >
+                                    {t('customDomain.removeDomain')}
+                                </button>
+                            </div>
                         </div>
                     </div>
-                </div>
-            )}
+                )}
+            </div>
         </div>
     );
 }

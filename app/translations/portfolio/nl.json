@@ -39,5 +39,11 @@
     "welcometomyworld": "Welkom in mijn wereld",
     "readMore": "Lees meer",
     "readLess": "Lees minder",
-    "verified": "Geverifieerd"
+    "verified": "Geverifieerd",
+    "errors": {
+        "noPaymentFound": "Er is geen betaling gevonden voor uw account. Voltooi de betaling om door te gaan.",
+        "paymentNotActive": "Uw betaling is niet actief. Voltooi de betaling om weer toegang te krijgen.",
+        "fetchingUserDetails": "Fout bij ophalen van gebruikersgegevens:",
+        "networkError": "Netwerkfout:"
+    }
 }

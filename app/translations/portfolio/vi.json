@@ -39,5 +39,11 @@
     "welcometomyworld": "Chào mừng bạn đến với thế giới của tôi",
     "readMore": "Đọc thêm",
     "readLess": "Thu gọn",
-    "verified": "Đã xác minh"
+    "verified": "Đã xác minh",
+    "errors": {
+        "noPaymentFound": "Không tìm thấy khoản thanh toán nào cho tài khoản của bạn. Vui lòng hoàn tất thanh toán để tiếp tục.",
+        "paymentNotActive": "Khoản thanh toán của bạn không hoạt động. Vui lòng hoàn tất thanh toán để lấy lại quyền truy cập.",
+        "fetchingUserDetails": "Lỗi khi tìm nạp thông tin chi tiết người dùng:",
+        "networkError": "Lỗi mạng:"
+    }
 }

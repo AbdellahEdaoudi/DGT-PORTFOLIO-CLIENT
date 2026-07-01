@@ -39,5 +39,11 @@
     "welcometomyworld": "Välkommen till min värld",
     "readMore": "Läs mer",
     "readLess": "Läs mindre",
-    "verified": "Verifierad"
+    "verified": "Verifierad",
+    "errors": {
+        "noPaymentFound": "Ingen betalning hittades för ditt konto. Vänligen slutför betalningen för att fortsätta.",
+        "paymentNotActive": "Din betalning är inte aktiv. Vänligen slutför betalningen för att återfå åtkomst.",
+        "fetchingUserDetails": "Fel vid hämtning av användaruppgifter:",
+        "networkError": "Nätverksfel:"
+    }
 }

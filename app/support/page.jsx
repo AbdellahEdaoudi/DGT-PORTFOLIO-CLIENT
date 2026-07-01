@@ -14,36 +14,18 @@ import Header from '../components/LandingPage/header';
 import { getTranslation } from '../translations/others';
 
 export default function ContactForm() {
+  const { EmailUser, userDetails, userContacts, setUserContacts, loadingAll} = useContext(MyContext)
+  const t = getTranslation(userDetails?.displayLanguage || 'en')
+  const isRtl = userDetails?.displayLanguage === 'ar'
   const toast = useToast()
   const [subject, setSubject] = useState('')
   const [message, setMessage] = useState('')
   const [attachment, setAttachment] = useState(null)
   const [loading, setLoading] = useState(false)
-  const [userContacts, setUserContacts] = useState([])
-  const [loadingContacts, setLoadingContacts] = useState(true)
   const [deletingId, setDeletingId] = useState(null)
   const [expandedId, setExpandedId] = useState(null)
   const [lightboxSrc, setLightboxSrc] = useState(null)
-  const { EmailUser, userDetails } = useContext(MyContext)
-  const t = getTranslation(userDetails?.displayLanguage || 'en')
-  const isRtl = userDetails?.displayLanguage === 'ar'
-
-  const fetchUserContacts = async () => {
-    if (!EmailUser) return;
-    setLoadingContacts(true);
-    try {
-      const res = await axios.get('/api/proxy/contacts/user-contacts');
-      setUserContacts(res.data || []);
-    } catch (e) {
-      console.error('Error fetching contacts:', e);
-    } finally {
-      setLoadingContacts(false);
-    }
-  };
-
-  useEffect(() => {
-    fetchUserContacts();
-  }, [EmailUser]);
+  const [deleteConfirm, setDeleteConfirm] = useState(null)
 
   const handleFileChange = (e) => {
     if (e.target && e.target.files && e.target.files.length > 0) {
@@ -92,20 +74,18 @@ export default function ContactForm() {
 
   const sendContact = async (e) => {
     e.preventDefault()
-    setLoading(true)
-    const regex = /<script.*?>.*?<\/script>|<iframe.*?>.*?<\/iframe>|javascript:|eval\(|alert\(|document\.cookie|window\.location|<a\s+href=["']?javascript:.*?["']?/i;
-    if (regex.test(subject) || regex.test(message)) {
-      setLoading(false)
-      document.getElementById('my_modal_2').showModal();
+    if (userContacts.length >= 2) {
+      toast.error(t('support.maxMessagesReached') || "Maximum 2 messages allowed");
       return;
     }
+    setLoading(true)
     try {
-      await axios.post(`/api/proxy/contacts`, { email: EmailUser, subject, message, attachment });
+      const res = await axios.post(`/api/proxy/contacts`, { email: EmailUser, subject, message, attachment });
       toast.success(t('support.successMessage'))
+      setUserContacts(prev => [...prev, res.data])
       setSubject('')
       setMessage('')
       setAttachment(null)
-      await fetchUserContacts();
     } catch (error) {
       console.error('Error adding contact:', error)
       if (error.response && error.response.status === 429) {
@@ -118,7 +98,7 @@ export default function ContactForm() {
     }
   }
 
-  const handleDelete = async (id) => {
+  const DeleteContactById = async (id) => {
     setDeletingId(id);
     try {
       await axios.delete(`/api/proxy/contacts/user-contacts/${id}`);
@@ -182,7 +162,10 @@ export default function ContactForm() {
                   </div>
                 </div>
                 <div>
-                  <label htmlFor="number" className="block text-sm font-medium text-teal-600 mb-1">{t('support.subject')} :</label>
+                  <div className="flex justify-between mb-1">
+                    <label htmlFor="subject" className="block text-sm font-medium text-teal-600">{t('support.subject')} :</label>
+                    <span className="text-xs text-teal-500">{subject.length}/100</span>
+                  </div>
                   <div className="relative">
                     <input type="text" id="subject" value={subject} maxLength={100} required
                       onChange={(e) => setSubject(e.target.value)}
@@ -192,7 +175,10 @@ export default function ContactForm() {
                   </div>
                 </div>
                 <div>
-                  <label htmlFor="message" className="block text-sm font-medium text-teal-600 mb-1">{t('support.message')} :</label>
+                  <div className="flex justify-between mb-1">
+                    <label htmlFor="message" className="block text-sm font-medium text-teal-600">{t('support.message')} :</label>
+                    <span className="text-xs text-teal-500">{message.length}/500</span>
+                  </div>
                   <div className="relative">
                     <textarea id="message" value={message} onChange={(e) => setMessage(e.target.value)}
                       className="pl-10 pt-2 border-teal-300 focus:border-teal-500 focus:ring-teal-500 w-full rounded-md border min-h-[80px] bg-background px-3 py-2 text-sm"
@@ -219,8 +205,13 @@ export default function ContactForm() {
                     )}
                   </div>
                 </div>
-                <button type="submit" disabled={loading}
-                  className="flex items-center justify-center gap-2 w-full bg-gradient-to-r from-teal-700 to-teal-800 text-white py-2 px-4 rounded-md hover:from-teal-800 hover:to-teal-900 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:ring-offset-2 transition-all duration-300">
+                {userContacts.length >= 2 && (
+                  <div className="bg-red-500/10 border border-red-500/30 text-red-500 text-sm p-3 rounded-md text-center">
+                    {t('support.maxMessagesInfo') || "You have reached the maximum limit (2 messages). Please delete an existing message to send a new one or wait for a reply."}
+                  </div>
+                )}
+                <button type="submit" disabled={loading || userContacts.length >= 2}
+                  className={`flex items-center justify-center gap-2 w-full text-white py-2 px-4 rounded-md transition-all duration-300 ${userContacts.length >= 2 ? 'bg-gray-500 cursor-not-allowed opacity-70' : 'bg-gradient-to-r from-teal-700 to-teal-800 hover:from-teal-800 hover:to-teal-900 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:ring-offset-2'}`}>
                   {loading ? (
                     <>
                       <Loader className="mr-2 h-4 w-4 animate-spin" />
@@ -246,7 +237,7 @@ export default function ContactForm() {
             )}
           </h3>
 
-          {loadingContacts ? (
+          {loadingAll ? (
             <div className="flex justify-center py-8">
               <Loader2 className="w-8 h-8 animate-spin text-teal-400" />
             </div>
@@ -276,7 +267,7 @@ export default function ContactForm() {
                     </div>
                     <div className="flex items-center gap-2 flex-shrink-0">
                       <button
-                        onClick={(e) => { e.stopPropagation(); handleDelete(contact._id); }}
+                        onClick={(e) => { e.stopPropagation(); setDeleteConfirm(contact._id); }}
                         disabled={deletingId === contact._id}
                         className="p-2 rounded-lg text-red-400 hover:bg-red-50 hover:text-red-600 transition-colors disabled:opacity-50"
                         title={t('support.deleteTitle')}>
@@ -294,6 +285,18 @@ export default function ContactForm() {
                   {expandedId === contact._id && (
                     <div className="px-4 pb-4 border-t border-gray-100">
                       <p className="text-gray-700 text-sm mt-3 leading-relaxed whitespace-pre-wrap break-words overflow-wrap-anywhere">{contact.message}</p>
+                      
+                      {contact.adminReply && (
+                        <div className="mt-4 p-3 bg-teal-50 border border-teal-100 rounded-lg max-h-48 overflow-y-auto teal-scrollbar">
+                          <span className="text-[10px] sm:text-xs font-bold text-teal-700 tracking-wider uppercase mb-1 block">
+                            {t('support.adminReply') || "Admin Reply"}
+                          </span>
+                          <p className="text-teal-900 text-sm leading-relaxed whitespace-pre-wrap break-words">
+                            {contact.adminReply}
+                          </p>
+                        </div>
+                      )}
+
                       {contact.attachment && (
                         <div className="mt-3">
                           <button
@@ -319,6 +322,44 @@ export default function ContactForm() {
         </div>
       </div>
 
+      {/* ─── Delete Confirm Modal ─────────────────────── */}
+      {deleteConfirm && (
+        <div className="fixed inset-0 bg-black/70 backdrop-blur-sm z-[9999] flex items-center justify-center p-4 animate-in fade-in duration-200"
+          onClick={() => setDeleteConfirm(null)}>
+          <div className="bg-white rounded-xl shadow-2xl max-w-sm w-full p-6 animate-in zoom-in-95 duration-200 relative"
+            onClick={(e) => e.stopPropagation()}>
+            <button 
+              onClick={() => setDeleteConfirm(null)}
+              className="absolute top-4 right-4 text-gray-400 hover:text-gray-600 hover:bg-gray-100 p-1 rounded-full transition-colors"
+            >
+              <X className="w-5 h-5" />
+            </button>
+            <div className="flex items-center gap-3 mb-4 pr-6">
+              <div className="w-10 h-10 rounded-full bg-red-100 flex items-center justify-center border border-red-200 shrink-0">
+                <Trash2 className="w-5 h-5 text-red-500" />
+              </div>
+              <h3 className="text-lg font-bold text-gray-800">{t('support.deleteTitle') || "Delete Message"}</h3>
+            </div>
+            <p className="text-gray-600 mb-6 text-sm leading-relaxed">{t('support.deleteConfirmText') || "Are you sure you want to delete this message? This action cannot be undone."}</p>
+            <div className="flex gap-3 justify-end">
+              <button 
+                onClick={() => setDeleteConfirm(null)}
+                className="px-4 py-2 text-gray-600 bg-gray-100 hover:bg-gray-200 rounded-lg transition-colors font-medium text-sm">
+                {t('support.cancel') || "Cancel"}
+              </button>
+              <button 
+                onClick={() => {
+                  DeleteContactById(deleteConfirm);
+                  setDeleteConfirm(null);
+                }}
+                className="px-4 py-2 bg-red-500 hover:bg-red-600 text-white rounded-lg transition-colors font-medium flex items-center gap-2 text-sm shadow-sm hover:shadow">
+                <Trash2 className="w-4 h-4" /> {t('support.delete') || "Delete"}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
       {/* ─── Image Lightbox Modal ─────────────────────── */}
       {lightboxSrc && (
         <div
@@ -338,11 +379,14 @@ export default function ContactForm() {
               <X size={20} />
             </button>
             {/* Image */}
-            <img
+            <Image
               src={lightboxSrc}
               alt="Full size attachment"
+              width={900}
+              height={700}
               className="block max-w-[90vw] max-h-[90vh] object-contain rounded-2xl"
               style={{ minWidth: 200, minHeight: 150 }}
+              unoptimized
             />
           </div>
           {/* Hint to close */}

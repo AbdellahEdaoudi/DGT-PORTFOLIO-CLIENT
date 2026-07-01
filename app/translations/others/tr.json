@@ -30,7 +30,13 @@
         "removeTitle": "Özel Alan Adını Kaldır?",
         "removeDesc1": "Portföyünüzden ",
         "removeDesc2": " alan adını kaldırmak istediğinizden emin misiniz?",
-        "cancel": "İptal"
+        "cancel": "İptal",
+        "domainSavedVerify": "Domain kaydedildi. Lütfen doğrulayın.",
+        "example": "örn: example.com",
+        "errorSavingDomain": "Alan adı kaydedilemedi. Lütfen tekrar deneyin.",
+        "networkError": "Ağ hatası, lütfen daha sonra tekrar deneyin.",
+        "domainVerifiedSuccess": "Alan adı başarıyla doğrulandı!",
+        "errorVerifyingDomain": "Alan adı doğrulanamadı. Lütfen DNS kayıtlarının doğru ayarlandığından emin olun."
     },
     "businessLinks": {
         "title": "İş Bağlantıları",
@@ -72,61 +78,63 @@
         "noMessages": "Henüz mesaj yok",
         "deleteTitle": "Sil",
         "messageDeleted": "Mesaj silindi",
-        "failedToDelete": "Silme başarısız"
+        "failedToDelete": "Silinemedi",
+        "maxMessagesReached": "Maksimum limit olan 2 mesaja ulaştınız.",
+        "maxMessagesInfo": "Maksimum limite (2 mesaj) ulaştınız. Lütfen yeni bir mesaj göndermek için mevcut bir mesajı silin veya yanıt bekleyin.",
+        "adminReply": "Yönetici Yanıtı",
+        "deleteConfirmText": "Bu mesajı silmek istediğinizden emin misiniz? Bu işlem geri alınamaz.",
+        "cancel": "İptal",
+        "delete": "Sil"
     },
-    "success": {
-        "paymentSuccessful": "Ödeme Başarılı!",
-        "subscriptionActive": "Aboneliğiniz şimdi aktif. Satın aldığınız için teşekkürler!",
-        "goToHome": "Ana Sayfaya Git"
-    },
-    "subscription": {
-        "promoMonthly": {
-            "name": "Aylık Promosyon",
-            "description": "Özel promosyon teklifi",
-            "period": "/ay"
+    "payment": {
+        "lifetime": {
+            "name": "Ömür Boyu Plan",
+            "description": "Profesyonel portföyünüzü oluşturun, CV'nizi hazırlayın ve sonsuza dek çevrimiçi tutun.",
+            "period": "Tek ödeme"
         },
-        "promo6Month": {
-            "name": "6 Aylık Promosyon",
-            "description": "6 ay için harika değer",
-            "period": "/6 ay"
-        },
-        "promoAnnual": {
-            "name": "Yıllık Promosyon",
-            "description": "Yılın en iyi teklifi",
-            "period": "/yıl"
-        },
-        "subMonthly": {
-            "name": "Aylık Abone Ol",
-            "description": "Ay için 1$",
-            "period": "/ay"
-        },
-        "sub6Months": {
-            "name": "6 Aylık Abone Ol",
-            "description": "Harika orta vadeli teklif",
-            "period": "/6 ay"
-        },
-        "subYearly": {
-            "name": "Yıllık Abone Ol",
-            "description": "En iyi değer",
-            "period": "/yıl"
-        },
+        "bestValue": "En İyi Fiyat",
         "recommended": "Önerilen",
-        "placeholder": "Promosyon Kodu",
-        "applyBtn": "Uygula",
-        "verifyingBtn": "Doğrulanıyor...",
-        "activeSubscription": "AKTİF ABONELİK",
-        "portfolioVisible": "Bu abonelik sayesinde portföyünüz şu anda ziyaretçiler tarafından görülebilir.",
+        "whatsIncluded": "Neler dahil",
+        "features": [
+            "Ömür boyu erişim — tek seferlik ödeme",
+            "Profesyonel portföy web sitesi",
+            "Yerleşik CV oluşturucu",
+            "Özel portföy alt alanı",
+            "SEO optimizasyonlu görünürlük",
+            "Birden fazla modern tema",
+            "Tüm gelecekteki güncellemeler dahil",
+            "Öncelikli müşteri desteği"
+        ],
+        "activePayment": "ÖMÜR BOYU PLAN AKTİF",
+        "portfolioVisible": "Portföyünüz şu anda tam ömür boyu erişime sahip ziyaretçiler tarafından görülebilir.",
+        "unlimitedAccess": "Sınırsız Erişim",
         "renewalDate": "Yenileme/Bitiş Tarihi:",
-        "cancelSub": "Aboneliği İptal Et",
+        "cancelPayment": "Aboneliği İptal Et",
         "confirmCancel": "İptali Onayla",
         "cancelWarning": "Aboneliğinizi iptal etmek istediğinizden emin misiniz? Geçerli döngünüz sona erdiğinde portföyünüz ziyaretçiler tarafından artık görülmeyecek.",
         "yesCancel": "Evet, aboneliği iptal et",
-        "keepSub": "Aboneliğimi koru",
+        "keepPayment": "Aboneliğimi koru",
         "cancelSuccess": "Abonelik başarıyla iptal edildi.",
         "cancelFailed": "Abonelik iptal edilemedi.",
-        "promoReq": "Lütfen bir promosyon kodu girin",
-        "promoApplied": "Promosyon kodu uygulandı!",
-        "invalidPromo": "Geçersiz promosyon kodu"
+        "processingPayment": "Ödeme işleniyor, lütfen sayfayı kapatmayın...",
+        "processingDescription": "Ödeme ağ geçidi ile aboneliğiniz güvenli bir şekilde onaylanıyor. Bu işlem birkaç saniye sürer.",
+        "processingWarning": "⚠️ Ödeme sorunlarını önlemek için lütfen bu sayfayı kapatmayın veya geri dönmeyin.",
+        "purchaseSuccess": "Abonelik başarıyla satın alındı!",
+        "paymentFailed": "Ödeme başarısız. Lütfen tekrar deneyin.",
+        "unexpectedError": "Ödeme kaydedilirken bir hata oluştu.",
+        "errors": {
+            "unauthorized": "Abonelik satın almak için giriş yapmalısınız.",
+            "alreadyPaid": "Zaten aktif bir ömür boyu aboneliğiniz var.",
+            "orderAlreadyProcessed": "Bu ödeme zaten işlenmiş. Bunun bir hata olduğunu düşünüyorsanız destek ile iletişime geçin.",
+            "paypalCaptureFailed": "Ödeme alınamadı. Zaten işlenmiş olabilir. Lütfen destek ile iletişime geçin.",
+            "paypalAuthFailed": "Ödeme ağ geçidi kimlik doğrulaması başarısız oldu. Lütfen destek ile iletişime geçin.",
+            "paypalGatewayError": "Ödeme ağ geçidine bağlanılamadı. Lütfen daha sonra tekrar deneyin.",
+            "paymentNotCompleted": "Ödeme tamamlanmadı. Lütfen tekrar deneyin.",
+            "cannotVerifyAmount": "Ödeme tutarı doğrulanamadı. Lütfen destek ile iletişime geçin.",
+            "invalidPaymentAmount": "Geçersiz ödeme tutarı. Lütfen destek ile iletişime geçin.",
+            "serverUnreachable": "Sunucuya bağlanılamıyor. Lütfen daha sonra tekrar deneyin.",
+            "serverError": "Beklenmeyen bir hata oluştu. Tekrar deneyin veya destek ile iletişime geçin."
+        }
     },
     "confirmModal": {
         "delete": "Sil",
@@ -135,10 +143,23 @@
     },
     "accountNotFound": {
         "title": "Hesap Bulunamadı",
-        "description": "Aradığınız hesabı bulamadık. Yeniden adlandırılmış olabilir veya kullanıcı abone olmamış olabilir",
-        "subscribe": "Şimdi Abone Ol",
+        "description": "Aradığınız hesabı bulamadık. Yeniden adlandırılmış olabilir veya kullanıcı ödemeyi tamamlamamış olabilir",
+        "payment": "Şimdi Öde",
         "returnHome": "Ana Sayfaya Dön",
         "contactSupport": "Destek ile İletişime Geç",
         "rights": "Tüm hakları saklıdır."
+    },
+    "success": {
+        "paymentSuccessful": "🎉 Ödeme Başarılı! 🎉",
+        "welcomeMessage": "DGT Portfolio'ya Hoş Geldiniz",
+        "activationMessage": "Ömür Boyu Planınız başarıyla etkinleştirildi. Artık tüm özelliklere sınırsız erişiminiz var.",
+        "features": {
+            "lifetime": "Ömür boyu erişim etkinleştirildi",
+            "cv": "Özgeçmiş oluşturucu açıldı",
+            "publishing": "Portföy yayını etkinleştirildi",
+            "updates": "Gelecekteki güncellemeler dahildir"
+        },
+        "goToPortfolio": "Portföyümü Görüntüle",
+        "needHelp": "Başlamak için yardıma mı ihtiyacınız var? Destek ekibimizle istediğiniz zaman iletişime geçin."
     }
 }

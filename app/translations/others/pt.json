@@ -30,7 +30,13 @@
         "removeTitle": "Remover Domínio Personalizado?",
         "removeDesc1": "Tem certeza de que deseja remover ",
         "removeDesc2": " do seu portfólio?",
-        "cancel": "Cancelar"
+        "cancel": "Cancelar",
+        "domainSavedVerify": "Domínio salvo. Verifique-o.",
+        "example": "ex: example.com",
+        "errorSavingDomain": "Falha ao salvar domínio. Por favor, tente novamente.",
+        "networkError": "Erro de rede, por favor, tente novamente mais tarde.",
+        "domainVerifiedSuccess": "Domínio verificado com sucesso!",
+        "errorVerifyingDomain": "Falha ao verificar domínio. Certifique-se de que os registros DNS estão configurados corretamente."
     },
     "businessLinks": {
         "title": "Links Comerciais",
@@ -71,62 +77,64 @@
         "myMessages": "Minhas mensagens",
         "noMessages": "Nenhuma mensagem ainda",
         "deleteTitle": "Excluir",
-        "messageDeleted": "Mensagem excluída",
-        "failedToDelete": "Falha ao excluir"
+        "messageDeleted": "Mensagem eliminada",
+        "failedToDelete": "Falha ao eliminar",
+        "maxMessagesReached": "Atingiu o limite máximo de 2 mensagens.",
+        "maxMessagesInfo": "Atingiu o limite máximo (2 mensagens). Elimine uma mensagem existente para enviar uma nova ou aguarde uma resposta.",
+        "adminReply": "Resposta do Administrador",
+        "deleteConfirmText": "Tem certeza de que deseja excluir esta mensagem? Esta ação não pode ser desfeita.",
+        "cancel": "Cancelar",
+        "delete": "Excluir"
     },
-    "success": {
-        "paymentSuccessful": "Pagamento Bem-sucedido!",
-        "subscriptionActive": "Sua assinatura agora está ativa. Obrigado por sua compra!",
-        "goToHome": "Ir para o Início"
-    },
-    "subscription": {
-        "promoMonthly": {
-            "name": "Promo Mensal",
-            "description": "Oferta promocional especial",
-            "period": "/mês"
+    "payment": {
+        "lifetime": {
+            "name": "Plano Vitalício",
+            "description": "Crie seu portfólio profissional, gere seu currículo e mantenha-o online para sempre.",
+            "period": "Pagamento único"
         },
-        "promo6Month": {
-            "name": "Promo 6 Meses",
-            "description": "Ótimo valor por 6 meses",
-            "period": "/6 meses"
-        },
-        "promoAnnual": {
-            "name": "Promo Anual",
-            "description": "Melhor oferta do ano",
-            "period": "/ano"
-        },
-        "subMonthly": {
-            "name": "Assinar Mensalmente",
-            "description": "$1 pelo mês",
-            "period": "/mês"
-        },
-        "sub6Months": {
-            "name": "Assinar 6 Meses",
-            "description": "Ótima oferta de médio prazo",
-            "period": "/6 meses"
-        },
-        "subYearly": {
-            "name": "Assinar Anualmente",
-            "description": "Melhor valor",
-            "period": "/ano"
-        },
+        "bestValue": "Melhor Valor",
         "recommended": "Recomendado",
-        "placeholder": "Código Promocional",
-        "applyBtn": "Aplicar",
-        "verifyingBtn": "Verificando...",
-        "activeSubscription": "ASSINATURA ATIVA",
-        "portfolioVisible": "O seu portfólio está atualmente visível para os visitantes graças a esta assinatura.",
+        "whatsIncluded": "O que está incluído",
+        "features": [
+            "Acesso vitalício — pagamento único",
+            "Site de portfólio profissional",
+            "Gerador de CV integrado",
+            "Subdomínio personalizado para portfólio",
+            "Otimizado para SEO e visibilidade",
+            "Vários temas modernos",
+            "Todas as atualizações futuras incluídas",
+            "Suporte ao cliente prioritário"
+        ],
+        "activePayment": "PLANO VITALÍCIO ATIVO",
+        "portfolioVisible": "O seu portfólio está atualmente visível para os visitantes com acesso vitalício completo.",
+        "unlimitedAccess": "Acesso Ilimitado",
         "renewalDate": "Data de Renovação/Expiração:",
-        "cancelSub": "Cancelar Assinatura",
+        "cancelPayment": "Cancelar Assinatura",
         "confirmCancel": "Confirmar Cancelamento",
         "cancelWarning": "Tem a certeza absoluta de que deseja cancelar a sua assinatura? O seu portfólio deixará de estar visível para os visitantes quando o seu ciclo atual terminar.",
         "yesCancel": "Sim, cancelar assinatura",
-        "keepSub": "Manter a minha assinatura",
+        "keepPayment": "Manter a minha assinatura",
         "cancelSuccess": "Assinatura cancelada com sucesso.",
         "cancelFailed": "Falha ao cancelar a assinatura.",
-        "promoReq": "Por favor, insira um código promocional",
-        "promoApplied": "Código promocional aplicado!",
-        "invalidPromo": "Código promocional inválido"
+        "processingPayment": "Processando pagamento, por favor não feche a página...",
+        "purchaseSuccess": "Assinatura comprada com sucesso!",
+        "paymentFailed": "Falha no pagamento. Por favor, tente novamente.",
+        "unexpectedError": "Ocorreu um erro ao salvar o pagamento.",
+        "processingDescription": "Confirmando de forma segura sua assinatura com o gateway de pagamento. Este processo leva alguns segundos.",
+        "processingWarning": "⚠️ Por favor, não feche esta página ou volte para evitar problemas de pagamento.",
+        "errors": {
+            "unauthorized": "Você deve estar logado para comprar uma assinatura.",
+            "alreadyPaid": "Você já possui uma assinatura vitalícia ativa.",
+            "orderAlreadyProcessed": "Este pagamento já foi processado. Entre em contato com o suporte se achar que isso é um erro.",
+            "paypalCaptureFailed": "O pagamento não pôde ser capturado. Ele pode já ter sido processado. Por favor, entre em contato com o suporte.",
+            "paypalAuthFailed": "Falha na autenticação do gateway de pagamento. Entre em contato com o suporte.",
+            "paypalGatewayError": "Não foi possível conectar ao gateway de pagamento. Tente novamente mais tarde.",
+            "paymentNotCompleted": "O pagamento não foi concluído. Por favor, tente novamente.",
+            "cannotVerifyAmount": "Não foi possível verificar o valor do pagamento. Entre em contato com o suporte.",
+            "invalidPaymentAmount": "Valor de pagamento inválido. Entre em contato com o suporte.",
+            "serverUnreachable": "Não é possível conectar ao servidor. Tente novamente mais tarde.",
+            "serverError": "Ocorreu um erro inesperado. Tente novamente ou entre em contato com o suporte."
+        }
     },
     "confirmModal": {
         "delete": "Excluir",
@@ -135,10 +143,23 @@
     },
     "accountNotFound": {
         "title": "Conta Não Encontrada",
-        "description": "Não conseguimos localizar a conta que você está procurando. Ela pode ter sido renomeada ou o usuário não está inscrito",
-        "subscribe": "Inscrever-se Agora",
+        "description": "Não conseguimos localizar a conta que você está procurando. Ela pode ter sido renomeada ou o usuário não concluiu o pagamento",
+        "payment": "Pagar agora",
         "returnHome": "Voltar para Início",
         "contactSupport": "Contatar Suporte",
         "rights": "Todos los derechos reservados."
+    },
+    "success": {
+        "paymentSuccessful": "🎉 Pagamento Bem-sucedido! 🎉",
+        "welcomeMessage": "Bem-vindo ao DGT Portfolio",
+        "activationMessage": "O seu Plano Vitalício foi ativado com sucesso. Agora você tem acesso ilimitado a todos os recursos.",
+        "features": {
+            "lifetime": "Acesso vitalício ativado",
+            "cv": "Gerador de currículos desbloqueado",
+            "publishing": "Publicação de portfólio ativada",
+            "updates": "Atualizações futuras incluídas"
+        },
+        "goToPortfolio": "Ver Meu Portfólio",
+        "needHelp": "Precisa de ajuda para começar? Contate a nossa equipa de suporte a qualquer momento."
     }
 }

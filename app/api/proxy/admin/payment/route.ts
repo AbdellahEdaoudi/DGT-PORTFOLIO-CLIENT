@@ -2,15 +2,16 @@ import { NextResponse } from "next/server";
 import { getServerSession } from "next-auth/next";
 import axios from "axios";
 import jwt from "jsonwebtoken";
-import { authOptions } from "../../../../auth/nextAuth";
+import { authOptions } from "../../../auth/nextAuth";
 
-export async function DELETE(req: Request, { params }: { params: Promise<{ id: string }> }) {
+// POST - Manually create a payment for a user
+export async function POST(req: Request) {
   const session = await getServerSession(authOptions);
   if (!session?.user?.email || session?.user?.email !== process.env.EMAIL) {
     return NextResponse.json({ message: "Unauthorized" }, { status: 401 });
   }
 
-  const { id } = await params;
+  const body = await req.json();
 
   const token = jwt.sign(
     { email: session.user.email },
@@ -20,17 +21,12 @@ export async function DELETE(req: Request, { params }: { params: Promise<{ id: s
 
   try {
     const backendUrl = process.env.BACKEND_URL;
-    if (!backendUrl) {
-      return NextResponse.json({ message: "BACKEND_URL not set" }, { status: 500 });
-    }
-
-    const response = await axios.delete(`${backendUrl}/admin/promo/${id}`, {
+    const response = await axios.post(`${backendUrl}/admin/payment`, body, {
       headers: { Authorization: `Bearer ${token}` },
     });
-
     return NextResponse.json(response.data, { status: response.status });
   } catch (error: any) {
-    console.error("❌ DELETE Error:", error.response?.data || error.message);
+    console.error("❌ POST Checkout Error:", error.response?.data || error.message);
     return NextResponse.json(
       { message: error.response?.data?.message || error.message },
       { status: error.response?.status || 500 }

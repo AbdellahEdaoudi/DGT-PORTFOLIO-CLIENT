@@ -5,9 +5,7 @@ import { Users, MessageSquare, Settings, LogOut, DollarSign } from "../component
 import AdminSidebar from "./components/admin-sidebar"
 import UserManagement from "./components/user-management"
 import ContactManagement from "./components/contact-management"
-import SubscriptionManagement from "./components/SubscriptionManagement"
-import PromoCodeManagement from "./components/promo-management"
-import ExpiredTrialsManagement from "./components/expired-trials-management"
+import PaymentManagement from "./components/paymentManagement"
 import BulkEmail from "./components/bulk-email"
 import CloudinaryGallery from "./components/cloudinary-gallery"
 import { signOut } from "next-auth/react"
@@ -155,26 +153,11 @@ export default function AdminDashboard() {
                     <div className="bg-slate-800/50 border border-purple-500/20 rounded-xl p-4 hover:border-purple-400/50 transition">
                       <div className="flex justify-between items-start">
                         <div>
-                          <p className="text-gray-400 text-xs mb-1">Subscriptions</p>
-                          <p className="text-2xl font-bold">{data.subscription?.length || 0}</p>
-
-                          {/* Active Subscriptions */}
+                          <p className="text-gray-400 text-xs mb-1">Payment</p>
+                          <p className="text-2xl font-bold">{data.payment?.length || 0}</p>
                           <p className="text-xs text-green-400 mt-1">
-                            Active: {data.subscription?.filter(sub => sub.status === "ACTIVE").length || 0}
+                            Active: {data.payment?.filter(item => item.status === "ACTIVE").length || 0}
                           </p>
-
-                          {/* Plan Breakdown */}
-                          <div className="mt-1 space-y-0.5">
-                            <p className="text-xs text-cyan-400">
-                              Monthly: {data.subscription?.filter(sub => sub.nameplan?.toLowerCase().includes("month") && !sub.nameplan?.includes("6")).length || 0}
-                            </p>
-                            <p className="text-xs text-cyan-400">
-                              6 Months: {data.subscription?.filter(sub => sub.nameplan?.includes("6")).length || 0}
-                            </p>
-                            <p className="text-xs text-cyan-400">
-                              Yearly: {data.subscription?.filter(sub => sub.nameplan?.toLowerCase().includes("year") || sub.nameplan?.toLowerCase().includes("annual")).length || 0}
-                            </p>
-                          </div>
                         </div>
                         <DollarSign className="w-6 h-6 text-green-400" />
                       </div>
@@ -185,11 +168,11 @@ export default function AdminDashboard() {
 
               {activeTab === "users" && <UserManagement data={data} setData={setData} />}
               {activeTab === "contacts" && <ContactManagement data={data} setData={setData} />}
-              {activeTab === "subscriptions" && <SubscriptionManagement data={data} setData={setData} />}
-              {activeTab === "promo" && (<PromoCodeManagement data={data} setData={setData} />)}
-              {activeTab === "expired" && <ExpiredTrialsManagement data={data} />}
+              {activeTab === "payment" && <PaymentManagement data={data} setData={setData} />}
               {activeTab === "bulk-email" && <BulkEmail data={data} />}
-              {activeTab === "cloudinary" && <CloudinaryGallery />}
+              <div className={activeTab === "cloudinary" ? "block" : "hidden"}>
+                <CloudinaryGallery />
+              </div>
 
             </div>
           </main>

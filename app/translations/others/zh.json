@@ -30,7 +30,13 @@
         "removeTitle": "移除自定义域名？",
         "removeDesc1": "您确定要从作品集中移除 ",
         "removeDesc2": " 吗？",
-        "cancel": "取消"
+        "cancel": "取消",
+        "domainSavedVerify": "域名已保存。请进行验证。",
+        "example": "例如: example.com",
+        "errorSavingDomain": "保存域名失败，请重试。",
+        "networkError": "网络错误，请稍后再试。",
+        "domainVerifiedSuccess": "域名验证成功！",
+        "errorVerifyingDomain": "验证域名失败，请确保DNS记录设置正确。"
     },
     "businessLinks": {
         "title": "商业链接",
@@ -72,61 +78,63 @@
         "noMessages": "暂无消息",
         "deleteTitle": "删除",
         "messageDeleted": "消息已删除",
-        "failedToDelete": "删除失败"
+        "failedToDelete": "删除失败",
+        "maxMessagesReached": "You have reached the maximum limit of 2 messages.",
+        "maxMessagesInfo": "You have reached the maximum limit (2 messages). Please delete an existing message to send a new one or wait for a reply.",
+        "adminReply": "Admin Reply",
+        "deleteConfirmText": "您确定要删除此消息吗？此操作无法撤消。",
+        "cancel": "取消",
+        "delete": "删除"
     },
-    "success": {
-        "paymentSuccessful": "支付成功！",
-        "subscriptionActive": "您的订阅现已激活。感谢您的购买！",
-        "goToHome": "返回首页"
-    },
-    "subscription": {
-        "promoMonthly": {
-            "name": "每月促销",
-            "description": "特别促销优惠",
-            "period": "/月"
+    "payment": {
+        "lifetime": {
+            "name": "终身计划",
+            "description": "创建您的专业作品集，生成简历，并永久保持在线。",
+            "period": "一次性付款"
         },
-        "promo6Month": {
-            "name": "6个月促销",
-            "description": "半年超值优惠",
-            "period": "/6个月"
-        },
-        "promoAnnual": {
-            "name": "年度促销",
-            "description": "年度最佳优惠",
-            "period": "/年"
-        },
-        "subMonthly": {
-            "name": "按月订阅",
-            "description": "每月$1",
-            "period": "/月"
-        },
-        "sub6Months": {
-            "name": "订阅6个月",
-            "description": "极佳的中期优惠",
-            "period": "/6个月"
-        },
-        "subYearly": {
-            "name": "按年订阅",
-            "description": "最佳价值",
-            "period": "/年"
-        },
+        "bestValue": "最佳价值",
         "recommended": "推荐",
-        "placeholder": "促销代码",
-        "applyBtn": "应用",
-        "verifyingBtn": "正在验证...",
-        "activeSubscription": "活跃订阅",
-        "portfolioVisible": "由于此订阅，您的作品集当前对访问者可见。",
+        "whatsIncluded": "包含内容",
+        "features": [
+            "终身访问 — 一次性付款",
+            "专业的作品集网站",
+            "内置简历生成器",
+            "自定义作品集子域名",
+            "针对搜索引擎优化",
+            "多种现代主题",
+            "包含所有未来更新",
+            "优先客户支持"
+        ],
+        "activePayment": "终身计划已激活",
+        "portfolioVisible": "您的作品集当前对具有完全终身访问权限的访问者可见。",
+        "unlimitedAccess": "无限制访问",
         "renewalDate": "续订/到期日期：",
-        "cancelSub": "取消订阅",
+        "cancelPayment": "取消订阅",
         "confirmCancel": "确认取消",
         "cancelWarning": "您绝对确定要取消订阅吗？当前周期结束后，访问者将无法再看到您的作品集。",
         "yesCancel": "是的，取消订阅",
-        "keepSub": "保留我的订阅",
+        "keepPayment": "保留我的订阅",
         "cancelSuccess": "成功取消订阅。",
         "cancelFailed": "取消订阅失败。",
-        "promoReq": "请输入优惠码",
-        "promoApplied": "优惠码已应用！",
-        "invalidPromo": "无效的优惠码"
+        "processingPayment": "正在处理付款，请不要关闭页面...",
+        "processingDescription": "正在安全地向支付网关确认您的订阅。此过程需要几秒钟。",
+        "processingWarning": "⚠️ 请不要关闭此页面或后退，以免出现支付问题。",
+        "purchaseSuccess": "订阅购买成功！",
+        "paymentFailed": "付款失败。请重试。",
+        "unexpectedError": "保存付款时发生错误。",
+        "errors": {
+            "unauthorized": "您必须登录才能购买订阅。",
+            "alreadyPaid": "您已经有一个活跃的终身订阅。",
+            "orderAlreadyProcessed": "此付款已处理。如果您认为这是一个错误，请联系支持部门。",
+            "paypalCaptureFailed": "无法获取付款。可能已处理过。请联系支持部门。",
+            "paypalAuthFailed": "支付网关身份验证失败。请联系支持部门。",
+            "paypalGatewayError": "无法连接到支付网关。请稍后再试。",
+            "paymentNotCompleted": "付款未完成。请重试。",
+            "cannotVerifyAmount": "无法验证付款金额。请联系支持部门。",
+            "invalidPaymentAmount": "付款金额无效。请联系支持部门。",
+            "serverUnreachable": "无法连接到服务器。请稍后再试。",
+            "serverError": "发生意外错误。请重试或联系支持部门。"
+        }
     },
     "confirmModal": {
         "delete": "删除",
@@ -135,10 +143,23 @@
     },
     "accountNotFound": {
         "title": "未找到帐户",
-        "description": "我们找不到您要查找的帐户。它可能已被重命名，或者用户尚未订阅",
-        "subscribe": "立即订阅",
+        "description": "我们找不到您要查找的帐户。它可能已被重命名，或者用户尚未完成支付",
+        "payment": "立即支付",
         "returnHome": "返回首页",
         "contactSupport": "联系支持",
         "rights": "版权所有。"
+    },
+    "success": {
+        "paymentSuccessful": "🎉 付款成功！ 🎉",
+        "welcomeMessage": "欢迎使用 DGT Portfolio",
+        "activationMessage": "您的终身计划已成功激活。现在您可以无限制地访问所有功能。",
+        "features": {
+            "lifetime": "终身访问已激活",
+            "cv": "简历生成器已解锁",
+            "publishing": "作品集发布已启用",
+            "updates": "包含未来更新"
+        },
+        "goToPortfolio": "查看我的作品集",
+        "needHelp": "需要帮助吗？随时联系我们的支持团队。"
     }
 }

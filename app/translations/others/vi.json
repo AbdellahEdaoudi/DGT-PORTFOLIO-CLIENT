@@ -30,7 +30,13 @@
         "removeTitle": "Xóa tên miền tùy chỉnh?",
         "removeDesc1": "Bạn có chắc muốn xóa ",
         "removeDesc2": " khỏi hồ sơ của mình không?",
-        "cancel": "Hủy"
+        "cancel": "Hủy",
+        "domainSavedVerify": "Đã lưu tên miền. Vui lòng xác minh nó.",
+        "example": "vd: example.com",
+        "errorSavingDomain": "Không thể lưu tên miền. Vui lòng thử lại.",
+        "networkError": "Lỗi mạng, vui lòng thử lại sau.",
+        "domainVerifiedSuccess": "Đã xác minh tên miền thành công!",
+        "errorVerifyingDomain": "Không thể xác minh tên miền. Vui lòng đảm bảo các bản ghi DNS được thiết lập chính xác."
     },
     "businessLinks": {
         "title": "Liên kết công việc",
@@ -71,62 +77,64 @@
         "myMessages": "Tin nhắn của tôi",
         "noMessages": "Chưa có tin nhắn nào",
         "deleteTitle": "Xóa",
-        "messageDeleted": "Đã xóa tin nhắn",
-        "failedToDelete": "Xóa thất bại"
+        "messageDeleted": "Tin nhắn đã bị xóa",
+        "failedToDelete": "Không xóa được",
+        "maxMessagesReached": "You have reached the maximum limit of 2 messages.",
+        "maxMessagesInfo": "You have reached the maximum limit (2 messages). Please delete an existing message to send a new one or wait for a reply.",
+        "adminReply": "Admin Reply",
+        "deleteConfirmText": "Bạn có chắc chắn muốn xóa tin nhắn này không? Hành động này không thể hoàn tác.",
+        "cancel": "Hủy",
+        "delete": "Xóa"
     },
-    "success": {
-        "paymentSuccessful": "Thanh toán thành công!",
-        "subscriptionActive": "Gói đăng ký của bạn hiện đã hoạt động. Cảm ơn bạn đã mua hàng!",
-        "goToHome": "Về trang chủ"
-    },
-    "subscription": {
-        "promoMonthly": {
-            "name": "Khuyến mãi hàng tháng",
-            "description": "Ưu đãi đặc biệt",
-            "period": "/tháng"
+    "payment": {
+        "lifetime": {
+            "name": "Lifetime Plan",
+            "description": "Tạo hồ sơ chuyên nghiệp, xuất CV của bạn và lưu giữ trực tuyến mãi mãi.",
+            "period": "Thanh toán một lần"
         },
-        "promo6Month": {
-            "name": "Khuyến mãi 6 tháng",
-            "description": "Giá trị tốt cho 6 tháng",
-            "period": "/6 tháng"
-        },
-        "promoAnnual": {
-            "name": "Khuyến mãi hàng năm",
-            "description": "Ưu đãi tốt nhất trong năm",
-            "period": "/năm"
-        },
-        "subMonthly": {
-            "name": "Đăng ký hàng tháng",
-            "description": "$1 cho mỗi tháng",
-            "period": "/tháng"
-        },
-        "sub6Months": {
-            "name": "Đăng ký 6 tháng",
-            "description": "Ưu đãi trung hạn tuyệt vời",
-            "period": "/6 tháng"
-        },
-        "subYearly": {
-            "name": "Đăng ký hàng năm",
-            "description": "Giá trị tốt nhất",
-            "period": "/năm"
-        },
+        "bestValue": "Giá trị tốt nhất",
         "recommended": "Đề xuất",
-        "placeholder": "Mã khuyến mãi",
-        "applyBtn": "Áp dụng",
-        "verifyingBtn": "Đang xác minh...",
-        "activeSubscription": "GÓI ĐĂNG KÝ ĐANG HOẠT ĐỘNG",
-        "portfolioVisible": "Hồ sơ của bạn hiện đang hiển thị với khách truy cập nhờ gói đăng ký này.",
+        "whatsIncluded": "Những gì bao gồm",
+        "features": [
+            "Truy cập trọn đời — chỉ một lần thanh toán",
+            "Trang web danh mục chuyên nghiệp",
+            "Trình tạo CV tích hợp",
+            "Tên miền phụ danh mục tùy chỉnh",
+            "Tối ưu hóa SEO và khả năng hiển thị",
+            "Nhiều chủ đề hiện đại",
+            "Tất cả các bản cập nhật tương lai bao gồm",
+            "Hỗ trợ khách hàng ưu tiên"
+        ],
+        "activePayment": "GÓI TRỌN ĐỜI ĐANG HOẠT ĐỘNG",
+        "portfolioVisible": "Hồ sơ của bạn hiện đang hiển thị với khách truy cập với quyền truy cập trọn đời đầy đủ.",
+        "unlimitedAccess": "Truy Cập Không Giới Hạn",
         "renewalDate": "Ngày gia hạn/hết hạn:",
-        "cancelSub": "Hủy đăng ký",
+        "cancelPayment": "Hủy đăng ký",
         "confirmCancel": "Xác nhận hủy",
         "cancelWarning": "Bạn có chắc chắn muốn hủy gói đăng ký của mình không? Hồ sơ của bạn sẽ không còn hiển thị với khách truy cập sau khi chu kỳ hiện tại kết thúc.",
         "yesCancel": "Vâng, Hủy đăng ký",
-        "keepSub": "Giữ gói đăng ký của tôi",
+        "keepPayment": "Giữ gói đăng ký của tôi",
         "cancelSuccess": "Đã hủy gói đăng ký thành công.",
         "cancelFailed": "Hủy gói đăng ký thất bại.",
-        "promoReq": "Vui lòng nhập mã khuyến mãi",
-        "promoApplied": "Đã áp dụng mã khuyến mãi!",
-        "invalidPromo": "Mã khuyến mãi không hợp lệ"
+        "processingPayment": "Đang xử lý thanh toán, vui lòng không đóng trang...",
+        "processingDescription": "Đang xác nhận an toàn đăng ký của bạn với cổng thanh toán. Quá trình này mất vài giây.",
+        "processingWarning": "⚠️ Vui lòng không đóng trang này hoặc quay lại để tránh các sự cố thanh toán.",
+        "purchaseSuccess": "Mua gói đăng ký thành công!",
+        "paymentFailed": "Thanh toán thất bại. Vui lòng thử lại.",
+        "unexpectedError": "Đã xảy ra lỗi khi lưu thanh toán.",
+        "errors": {
+            "unauthorized": "Bạn phải đăng nhập để mua gói đăng ký.",
+            "alreadyPaid": "Bạn đã có gói đăng ký trọn đời đang hoạt động.",
+            "orderAlreadyProcessed": "Thanh toán này đã được xử lý. Liên hệ hỗ trợ nếu bạn nghĩ đây là lỗi.",
+            "paypalCaptureFailed": "Không thể thu tiền thanh toán. Có thể nó đã được xử lý. Vui lòng liên hệ hỗ trợ.",
+            "paypalAuthFailed": "Xác thực cổng thanh toán thất bại. Vui lòng liên hệ hỗ trợ.",
+            "paypalGatewayError": "Không thể kết nối đến cổng thanh toán. Vui lòng thử lại sau.",
+            "paymentNotCompleted": "Thanh toán chưa hoàn tất. Vui lòng thử lại.",
+            "cannotVerifyAmount": "Không thể xác minh số tiền thanh toán. Vui lòng liên hệ hỗ trợ.",
+            "invalidPaymentAmount": "Số tiền thanh toán không hợp lệ. Vui lòng liên hệ hỗ trợ.",
+            "serverUnreachable": "Không thể kết nối với máy chủ. Vui lòng thử lại sau.",
+            "serverError": "Đã xảy ra lỗi không mong muốn. Thử lại hoặc liên hệ hỗ trợ."
+        }
     },
     "confirmModal": {
         "delete": "Xóa",
@@ -135,10 +143,23 @@
     },
     "accountNotFound": {
         "title": "Không tìm thấy tài khoản",
-        "description": "Chúng tôi không thể tìm thấy tài khoản bạn đang tìm kiếm. Nó có thể đã bị thay đổi hoặc người dùng không đăng ký.",
-        "subscribe": "Đăng ký ngay",
+        "description": "Chúng tôi không thể tìm thấy tài khoản bạn đang tìm kiếm. Có thể đã bị đổi tên hoặc người dùng chưa hoàn tất thanh toán",
+        "payment": "Thanh toán ngay",
         "returnHome": "Quay lại trang chủ",
         "contactSupport": "Liên hệ hỗ trợ",
         "rights": "Bản quyền đã được bảo hộ."
+    },
+    "success": {
+        "paymentSuccessful": "🎉 Thanh toán thành công! 🎉",
+        "welcomeMessage": "Chào mừng đến với DGT Portfolio",
+        "activationMessage": "Gói trọn đời của bạn đã được kích hoạt thành công. Giờ đây bạn có quyền truy cập không giới hạn vào tất cả các tính năng.",
+        "features": {
+            "lifetime": "Đã kích hoạt quyền truy cập trọn đời",
+            "cv": "Đã mở khóa trình tạo CV",
+            "publishing": "Đã bật xuất bản hồ sơ",
+            "updates": "Bao gồm các bản cập nhật trong tương lai"
+        },
+        "goToPortfolio": "Xem Hồ Sơ Của Tôi",
+        "needHelp": "Cần trợ giúp để bắt đầu? Hãy liên hệ với nhóm hỗ trợ của chúng tôi bất cứ lúc nào."
     }
 }

@@ -1,6 +1,7 @@
 "use client";
 import axios from "axios";
 import React, { useState } from "react";
+import Image from "next/image";
 import { useToast } from "../../components/Toast";
 import { createPortal } from "react-dom";
 import {
@@ -659,10 +660,13 @@ export default function Projects({ userData, setUserDetails }) {
                                 {/* Preview thumbnail */}
                                 {projectImages[proj.localId]?.preview && (
                                   <div className="relative flex-shrink-0">
-                                    <img
+                                    <Image
                                       src={projectImages[proj.localId].preview}
                                       alt="preview"
+                                      width={56}
+                                      height={56}
                                       className="w-10 h-10 sm:w-14 sm:h-14 object-cover rounded-lg border border-green-200 shadow-sm"
+                                      unoptimized
                                     />
                                     <button
                                       type="button"

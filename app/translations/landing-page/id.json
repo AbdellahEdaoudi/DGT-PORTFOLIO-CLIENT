@@ -11,73 +11,68 @@
             "support": "Dukungan",
             "signOut": "Keluar",
             "customDomain": "Domain Kustom",
-            "subscriptions": "Langganan"
+            "payment": "Pembayaran"
         }
     },
     "hero": {
         "title_part1": "Portofolio Anda,",
         "title_part2": "Meningkat",
-        "description": "Tanpa kode, tanpa repot. Dapatkan portofolio profesional dalam 5 menit yang meningkatkan peluang Anda mendapatkan pekerjaan atau proyek freelance. Tampilkan karier, keahlian, proyek, dan tautan kerja Anda dengan cara yang belum pernah ada sebelumnya, tinggalkan kesan mendalam dan buka peluang baru.",
-        "free_trial": "Gratis selama 7 hari",
+        "description": "Buat portofolio profesional hanya dalam 5 menit—tanpa perlu coding. Tampilkan keahlian, pengalaman, dan proyek Anda dalam satu portofolio indah yang membantu rekruter memahami profil Anda dengan cepat dan meningkatkan peluang Anda untuk mendapatkan pekerjaan atau kesempatan freelance berikutnya.",
+        "free_trial": "Coba gratis 30 hari",
         "start_building": "Mulai Membangun",
         "watch_demo": "Tonton Demo"
     },
     "features": {
         "title": "Mengapa memilih DGT Portfolio",
-        "subtitle": "Semua yang Anda butuhkan untuk menampilkan karya terbaik Anda dan mendapatkan peluang impian Anda",
+        "subtitle": "Buat portofolio profesional, pamerkan keahlian Anda, dan tampil menonjol di depan perekrut — semua tanpa coding.",
         "items": [
             {
-                "title": "Desain Tanpa Kode",
-                "description": "Buat portofolio menakjubkan tanpa menulis satu baris kode pun"
+                "title": "Bangun Tanpa Coding",
+                "description": "Buat portofolio profesional dalam hitungan menit tanpa menulis satu baris kode pun."
             },
             {
-                "title": "Subdomain Kustom",
-                "description": "Dapatkan subdomain kustom seperti <strong>namakamu.dgtportfolio.com</strong> untuk portofolio Anda"
+                "title": "Tautan Portofolio Anda Sendiri",
+                "description": "Dapatkan subdomain kustom seperti <strong>namakamu.dgtportfolio.com</strong> dan bagikan di mana saja."
             },
             {
-                "title": "Profil Kode QR",
-                "description": "Hasilkan kode QR untuk portofolio Anda yang dapat Anda unduh atau bagikan secara instan"
+                "title": "Kode QR Profesional",
+                "description": "Hasilkan kode QR untuk portofolio Anda dan bagikan secara instan secara online atau offline."
             },
             {
-                "title": "Banyak Tema",
-                "description": "Pilih dari berbagai tema untuk menyesuaikan tampilan dan nuansa portofolio Anda"
+                "title": "Tema Portofolio Modern",
+                "description": "Pilih dari tema-tema yang dirancang dengan indah yang sesuai dengan merek pribadi Anda."
             },
             {
-                "title": "Berbagi Mudah",
-                "description": "Bagikan tautan portofolio Anda di mana saja hanya dengan satu klik"
+                "title": "Bagikan di Mana Saja",
+                "description": "Kirim portofolio Anda dengan satu tautan di media sosial, email, atau lamaran pekerjaan."
             },
             {
-                "title": "Sangat Cepat",
-                "description": "Waktu muat yang sangat cepat yang membuat pengunjung tetap terlibat"
+                "title": "Cepat & Dioptimalkan SEO",
+                "description": "Memuat dengan cepat dan membantu portofolio Anda ditemukan oleh mesin pencari."
             }
         ]
     },
     "pricing": {
-        "title": "Harga Sederhana dan Transparan",
-        "subtitle": "Pilih paket yang sempurna untuk portofolio kreatif Anda",
-        "plans": [
-            {
-                "name": "Paket Bulanan",
-                "description": "$1 untuk sebulan",
-                "price": "$1",
-                "period": "/bulan",
-                "cta": "Berlangganan Bulanan"
-            },
-            {
-                "name": "Paket 6 Bulan",
-                "description": "Penawaran jangka menengah yang hebat",
-                "price": "$5",
-                "period": "/6 bulan",
-                "cta": "Berlangganan 6 Bulan"
-            },
-            {
-                "name": "Paket Tahunan",
-                "description": "Nilai terbaik",
-                "price": "$9",
-                "period": "/tahun",
-                "cta": "Berlangganan Tahunan",
-                "badge": "Direkomendasikan"
-            }
+        "title": "Satu Pembayaran. Portofolio Seumur Hidup.",
+        "subtitle": "Buat portofolio profesional Anda, buat CV Anda, dan tetap online selamanya — tanpa langganan atau biaya berulang.",
+        "recommended": "Nilai Terbaik",
+        "lifetime": {
+            "name": "Paket Seumur Hidup",
+            "description": "Bangun portofolio Anda sekali dan simpan online selamanya.",
+            "period": "bayar sekali"
+        },
+        "cta": "Buka Akses Seumur Hidup",
+        "whatsIncluded": "Apa yang termasuk",
+        "noFees": "Tanpa langganan • Tanpa biaya bulanan • Milik Anda selamanya",
+        "features": [
+            "Akses seumur hidup — satu kali pembayaran",
+            "Situs web portofolio profesional",
+            "Generator CV bawaan",
+            "Subdomain portofolio khusus",
+            "Dioptimalkan untuk SEO dan visibilitas",
+            "Berbagai tema modern",
+            "Semua pembaruan mendatang termasuk",
+            "Dukungan pelanggan prioritas"
         ]
     },
     "cta": {

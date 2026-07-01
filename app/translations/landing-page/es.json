@@ -11,73 +11,68 @@
             "support": "Soporte",
             "signOut": "Cerrar Sesión",
             "customDomain": "Dominio Personalizado",
-            "subscriptions": "Suscripciones"
+            "payment": "Pago"
         }
     },
     "hero": {
         "title_part1": "Tu Portafolio,",
         "title_part2": "Elevado",
-        "description": "Sin código, sin complicaciones. Obtén un portafolio profesional en 5 minutos que aumente tus posibilidades de conseguir un empleo o trabajo freelance. Muestra tu carrera, habilidades, proyectos y enlaces de trabajo como nunca antes. Deja una impresión duradera y desbloquea nuevas oportunidades.",
-        "free_trial": "Gratis por 7 días",
+        "description": "Crea un portafolio profesional en solo 5 minutos—sin necesidad de programar. Muestra tus habilidades, experiencia y proyectos en un portafolio atractivo que ayuda a los reclutadores a comprender rápidamente tu perfil y aumentar tus posibilidades de conseguir tu próximo empleo u oportunidad freelance.",
+        "free_trial": "30 días gratis",
         "start_building": "Comenzar a Construir",
         "watch_demo": "Ver Demo"
     },
     "features": {
         "title": "¿Por qué elegir DGT Portfolio?",
-        "subtitle": "Todo lo que necesitas para mostrar tu mejor trabajo y conseguir las oportunidades de tus sueños",
+        "subtitle": "Crea un portafolio profesional, muestra tus habilidades y destaca ante los reclutadores, todo sin saber programar.",
         "items": [
             {
-                "title": "Diseño Sin Código",
-                "description": "Crea portafolios impresionantes sin escribir una sola línea de código"
+                "title": "Construye sin programar",
+                "description": "Crea un portafolio profesional en minutos sin escribir una sola línea de código."
             },
             {
-                "title": "Subdominio Personalizado",
-                "description": "Obtén un subdominio personalizado como <strong>tu-nombre.dgtportfolio.com</strong> para tu portafolio"
+                "title": "Tu propio enlace de portafolio",
+                "description": "Obtén un subdominio personalizado como <strong>tu-nombre.dgtportfolio.com</strong> y compártelo en cualquier lugar."
             },
             {
-                "title": "Perfil con Código QR",
-                "description": "Genera un código QR para tu portafolio que puedes descargar o compartir al instante"
+                "title": "Código QR Profesional",
+                "description": "Genera un código QR para tu portafolio y compártelo al instante en línea o fuera de línea."
             },
             {
-                "title": "Múltiples Temas",
-                "description": "Elige entre diferentes temas para personalizar el aspecto de tu portafolio"
+                "title": "Temas modernos para portafolios",
+                "description": "Elige entre temas bellamente diseñados que se adapten a tu marca personal."
             },
             {
-                "title": "Fácil Compartir Enlaces",
-                "description": "Comparte el enlace de tu portafolio en cualquier lugar con un solo clic"
+                "title": "Comparte en cualquier lugar",
+                "description": "Envía tu portafolio con un solo enlace en redes sociales, correo electrónico o solicitudes de empleo."
             },
             {
-                "title": "Rápido como el Rayo",
-                "description": "Tiempos de carga ultrarrápidos que mantienen a los visitantes comprometidos"
+                "title": "Rápido y Optimizado para SEO",
+                "description": "Carga rápidamente y ayuda a que tu portafolio sea descubierto por los motores de búsqueda."
             }
         ]
     },
     "pricing": {
-        "title": "Precios Simples y Transparentes",
-        "subtitle": "Elige el plan perfecto para tu portafolio creativo",
-        "plans": [
-            {
-                "name": "Plan Mensual",
-                "description": "$1 por mes",
-                "price": "$1",
-                "period": "/mes",
-                "cta": "Suscribirse Mensualmente"
-            },
-            {
-                "name": "Plan de 6 Meses",
-                "description": "Gran oferta a medio plazo",
-                "price": "$5",
-                "period": "/6 meses",
-                "cta": "Suscribirse 6 Meses"
-            },
-            {
-                "name": "Plan Anual",
-                "description": "Mejor valor",
-                "price": "$9",
-                "period": "/año",
-                "cta": "Suscribirse Anualmente",
-                "badge": "Recomendado"
-            }
+        "title": "Un Solo Pago. Portafolio de por Vida.",
+        "subtitle": "Crea tu portafolio profesional, genera tu CV y mantente en línea para siempre, sin suscripciones ni tarifas recurrentes.",
+        "recommended": "Mejor Valor",
+        "lifetime": {
+            "name": "Plan de por vida",
+            "description": "Construye tu portafolio una vez y mantenlo en línea para siempre.",
+            "period": "pago único"
+        },
+        "cta": "Desbloquear acceso de por vida",
+        "whatsIncluded": "Qué incluye",
+        "noFees": "Sin suscripción • Sin cuotas mensuales • Tuyo para siempre",
+        "features": [
+            "Acceso de por vida — un solo pago",
+            "Sitio web de portafolio profesional",
+            "Generador de CV integrado",
+            "Subdominio personalizado para el portafolio",
+            "Optimizado para SEO y visibilidad",
+            "Múltiples temas modernos",
+            "Todas las actualizaciones futuras incluidas",
+            "Soporte al cliente prioritario"
         ]
     },
     "cta": {

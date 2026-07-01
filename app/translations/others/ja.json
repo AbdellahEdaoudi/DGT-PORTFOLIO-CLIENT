@@ -30,7 +30,13 @@
         "removeTitle": "カスタムドメインを削除しますか？",
         "removeDesc1": "ポートフォリオから ",
         "removeDesc2": " を削除してもよろしいですか？",
-        "cancel": "キャンセル"
+        "cancel": "キャンセル",
+        "domainSavedVerify": "ドメインが保存されました。確認してください。",
+        "example": "例: example.com",
+        "errorSavingDomain": "ドメインの保存に失敗しました。もう一度お試しください。",
+        "networkError": "ネットワークエラーです。後でもう一度お試しください。",
+        "domainVerifiedSuccess": "ドメインが正常に確認されました！",
+        "errorVerifyingDomain": "ドメインの確認に失敗しました。DNSレコードが正しく設定されていることを確認してください。"
     },
     "businessLinks": {
         "title": "ビジネスリンク",
@@ -72,61 +78,63 @@
         "noMessages": "メッセージはまだありません",
         "deleteTitle": "削除",
         "messageDeleted": "メッセージを削除しました",
-        "failedToDelete": "削除に失敗しました"
+        "failedToDelete": "削除に失敗しました",
+        "maxMessagesReached": "You have reached the maximum limit of 2 messages.",
+        "maxMessagesInfo": "You have reached the maximum limit (2 messages). Please delete an existing message to send a new one or wait for a reply.",
+        "adminReply": "Admin Reply",
+        "deleteConfirmText": "このメッセージを削除してもよろしいですか？この操作は元に戻せません。",
+        "cancel": "キャンセル",
+        "delete": "削除"
     },
-    "success": {
-        "paymentSuccessful": "支払い成功！",
-        "subscriptionActive": "サブスクリプションがアクティブになりました。ご購入ありがとうございます！",
-        "goToHome": "ホームへ移動"
-    },
-    "subscription": {
-        "promoMonthly": {
-            "name": "プロモ月額",
-            "description": "特別プロモオファー",
-            "period": "/月"
+    "payment": {
+        "lifetime": {
+            "name": "Lifetime Plan",
+            "description": "プロフェッショナルなポートフォリオを作成し、履歴書を生成して、永久にオンラインに保ちます。",
+            "period": "1回限りの支払い"
         },
-        "promo6Month": {
-            "name": "プロモ6ヶ月",
-            "description": "6ヶ月間のお得なプラン",
-            "period": "/6ヶ月"
-        },
-        "promoAnnual": {
-            "name": "プロモ年額",
-            "description": "年間ベストオファー",
-            "period": "/年"
-        },
-        "subMonthly": {
-            "name": "月額登録",
-            "description": "月額$1",
-            "period": "/月"
-        },
-        "sub6Months": {
-            "name": "6ヶ月登録",
-            "description": "お得な中期プラン",
-            "period": "/6ヶ月"
-        },
-        "subYearly": {
-            "name": "年額登録",
-            "description": "ベストバリュー",
-            "period": "/年"
-        },
+        "bestValue": "お値打ち",
         "recommended": "推奨",
-        "placeholder": "プロモーションコード",
-        "applyBtn": "適用",
-        "verifyingBtn": "確認中...",
-        "activeSubscription": "アクティブなサブスクリプション",
-        "portfolioVisible": "このサブスクリプションのおかげで、あなたのポートフォリオは現在訪問者に公開されています。",
+        "whatsIncluded": "含まれるもの",
+        "features": [
+            "生涯アクセス — 一回払いのみ",
+            "プロフェッショナルなポートフォリオサイト",
+            "内蔵CV生成ツール",
+            "カスタムポートフォリオサブドメイン",
+            "SEO最適化済み",
+            "複数のモダンテーマ",
+            "将来のすべてのアップデートを含む",
+            "優先カスタマーサポート"
+        ],
+        "activePayment": "ライフタイムプラン有効",
+        "portfolioVisible": "あなたのポートフォリオは現在、完全な生涯アクセス権を持つ訪問者に公開されています。",
+        "unlimitedAccess": "無制限アクセス",
         "renewalDate": "更新/有効期限：",
-        "cancelSub": "サブスクリプションをキャンセル",
+        "cancelPayment": "サブスクリプションをキャンセル",
         "confirmCancel": "キャンセルを確認",
         "cancelWarning": "本当にサブスクリプションをキャンセルしますか？現在および進行中のサイクルが終了すると、ポートフォリオは訪問者に表示されなくなります。",
         "yesCancel": "はい、キャンセルします",
-        "keepSub": "サブスクリプションを維持する",
+        "keepPayment": "サブスクリプションを維持する",
         "cancelSuccess": "サブスクリプションのキャンセルに成功しました。",
         "cancelFailed": "サブスクリプションのキャンセルに失敗しました。",
-        "promoReq": "プロモコードを入力してください",
-        "promoApplied": "プロモコードが適用されました！",
-        "invalidPromo": "無効なプロモコード"
+        "processingPayment": "支払いを処理しています。ページを閉じないでください...",
+        "processingDescription": "支払いゲートウェイでサブスクリプションを安全に確認しています。このプロセスには数秒かかります。",
+        "processingWarning": "⚠️ 支払いの問題を避けるため、このページを閉じたり戻ったりしないでください。",
+        "purchaseSuccess": "サブスクリプションの購入に成功しました！",
+        "paymentFailed": "支払いに失敗しました。もう一度お試しください。",
+        "unexpectedError": "支払いの保存中にエラーが発生しました。",
+        "errors": {
+            "unauthorized": "サブスクリプションを購入するにはログインする必要があります。",
+            "alreadyPaid": "すでに有効なライフタイムサブスクリプションをお持ちです。",
+            "orderAlreadyProcessed": "この支払いはすでに処理されています。これが間違いだと思う場合はサポートに連絡してください。",
+            "paypalCaptureFailed": "支払いをキャプチャできませんでした。すでに処理されている可能性があります。サポートに連絡してください。",
+            "paypalAuthFailed": "支払いゲートウェイの認証に失敗しました。サポートに連絡してください。",
+            "paypalGatewayError": "支払いゲートウェイに接続できませんでした。後でもう一度お試しください。",
+            "paymentNotCompleted": "支払いが完了していません。もう一度お試しください。",
+            "cannotVerifyAmount": "支払い金額を確認できませんでした。サポートに連絡してください。",
+            "invalidPaymentAmount": "無効な支払い金額です。サポートに連絡してください。",
+            "serverUnreachable": "サーバーに接続できません。後でもう一度お試しください。",
+            "serverError": "予期しないエラーが発生しました。もう一度お試しいただくか、サポートに連絡してください。"
+        }
     },
     "confirmModal": {
         "delete": "削除",
@@ -135,10 +143,23 @@
     },
     "accountNotFound": {
         "title": "アカウントが見つかりません",
-        "description": "お探しのアカウントが見つかりませんでした。名前が変更されたか、ユーザーが登録していない可能性があります",
-        "subscribe": "今すぐ登録",
+        "description": "お探しのアカウントが見つかりませんでした。名前が変更されたか、ユーザーが支払いを完了していない可能性があります",
+        "payment": "今すぐ支払う",
         "returnHome": "ホームページに戻る",
         "contactSupport": "サポートに連絡",
         "rights": "無断複写・転載を禁じます。"
+    },
+    "success": {
+        "paymentSuccessful": "🎉 支払い完了！ 🎉",
+        "welcomeMessage": "DGT Portfolio へようこそ",
+        "activationMessage": "ライフタイムプランが正常に有効化されました。これで全ての機能に無制限にアクセスできます。",
+        "features": {
+            "lifetime": "生涯アクセスが有効化されました",
+            "cv": "履歴書ジェネレーターのロックを解除",
+            "publishing": "ポートフォリオの公開が可能に",
+            "updates": "将来のアップデートも含まれます"
+        },
+        "goToPortfolio": "私のポートフォリオを見る",
+        "needHelp": "始めるのにサポートが必要ですか？いつでもサポートチームにお問い合わせください。"
     }
 }

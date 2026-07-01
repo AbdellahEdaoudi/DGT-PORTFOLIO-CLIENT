@@ -6,10 +6,8 @@ export default function AdminSidebar({ activeTab, setActiveTab }) {
   const menuItems = [
     { id: "overview", label: "Overview", icon: LayoutDashboard },
     { id: "users", label: "Users", icon: Users },
-    { id: "expired", label: "Expired Trials", icon: Clock },
     { id: "contacts", label: "Messages", icon: MessageSquare },
-    { id: "subscriptions", label: "Subscriptions", icon: DollarSign },
-    { id: "promo", label: "Promo Codes", icon: TagIcon },
+    { id: "payment", label: "Payment", icon: DollarSign },
     { id: "bulk-email", label: "Bulk Email", icon: Mail },
     { id: "cloudinary", label: "Cloudinary", icon: ImagePlus },
   ]

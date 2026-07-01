@@ -11,73 +11,68 @@
             "support": "支持",
             "signOut": "登出",
             "customDomain": "自定义域名",
-            "subscriptions": "订阅"
+            "payment": "支付"
         }
     },
     "hero": {
         "title_part1": "您的作品集，",
         "title_part2": "提升",
-        "description": "无需代码，无需麻烦。在5分钟内获得一个专业的作品集，提高您获得工作或自由职业机会的几率。以前所未有的方式展示您的职业生涯、技能、项目和工作链接。留下持久的印象并开启新的机会。",
-        "free_trial": "7 天免费试用",
+        "description": "只需5分钟即可创建专业作品集——无需编程。在一个精美的作品集中展示您的技能、经验和项目，帮助招聘人员快速了解您的档案，提高您获得下一份工作或自由职业机会的概率。",
+        "free_trial": "30天免费试用",
         "start_building": "开始构建",
         "watch_demo": "观看演示"
     },
     "features": {
         "title": "为什么选择DGT Portfolio？",
-        "subtitle": "展示您最佳作品并获得梦想机会所需的一切",
+        "subtitle": "创建一个专业的作品集，展示您的技能，并在招聘人员中脱颖而出——所有这一切都不需要编写代码。",
         "items": [
             {
-                "title": "无代码设计",
-                "description": "无需编写一行代码即可创建令人惊叹的作品集"
+                "title": "无需代码构建",
+                "description": "无需编写一行代码，几分钟内即可创建专业作品集。"
             },
             {
-                "title": "自定义子域名",
-                "description": "为您的作品集获取个性化子域名，如<strong>yourname.dgtportfolio.com</strong>"
+                "title": "您的专属作品集链接",
+                "description": "获取如 <strong>yourname.dgtportfolio.com</strong> 这样的个性化子域名，并在任何地方分享它。"
             },
             {
-                "title": "二维码个人资料",
-                "description": "为您的作品集生成二维码，可以立即下载或分享"
+                "title": "专业二维码",
+                "description": "为您的作品集生成二维码，在线或离线即时分享。"
             },
             {
-                "title": "多种主题",
-                "description": "从不同主题中选择以个性化您的作品集外观"
+                "title": "现代作品集主题",
+                "description": "从设计精美、符合您个人品牌的主题中进行选择。"
             },
             {
-                "title": "轻松链接分享",
-                "description": "只需一键即可在任何地方分享您的作品集链接"
+                "title": "随时随地分享",
+                "description": "通过社交媒体、电子邮件或求职申请中的单一链接发送您的作品集。"
             },
             {
-                "title": "闪电般快速",
-                "description": "闪电般的加载时间让访客保持参与"
+                "title": "快速且SEO优化",
+                "description": "加载速度快，帮助搜索引擎发现您的作品集。"
             }
         ]
     },
     "pricing": {
-        "title": "简单、透明的定价",
-        "subtitle": "为您的创意作品集选择完美的计划",
-        "plans": [
-            {
-                "name": "月度计划",
-                "description": "每月1美元",
-                "price": "1美元",
-                "period": "/月",
-                "cta": "按月订阅"
-            },
-            {
-                "name": "6个月计划",
-                "description": "超值中期优惠",
-                "price": "5美元",
-                "period": "/6个月",
-                "cta": "订阅6个月"
-            },
-            {
-                "name": "年度计划",
-                "description": "最佳价值",
-                "price": "9美元",
-                "period": "/年",
-                "cta": "按年订阅",
-                "badge": "推荐"
-            }
+        "title": "一次付款。终身作品集。",
+        "subtitle": "创建您的专业作品集，生成您的简历，并永久保持在线——没有订阅或经常性费用。",
+        "recommended": "最佳价值",
+        "lifetime": {
+            "name": "终身计划",
+            "description": "只需构建一次作品集，即可永久保持在线。",
+            "period": "一次性付款"
+        },
+        "cta": "解锁终身访问权限",
+        "whatsIncluded": "包含内容",
+        "noFees": "无订阅 • 无月费 • 永久属于您",
+        "features": [
+            "终身访问 — 一次性付款",
+            "专业的作品集网站",
+            "内置简历生成器",
+            "自定义作品集子域名",
+            "针对搜索引擎优化",
+            "多种现代主题",
+            "包含所有未来更新",
+            "优先客户支持"
         ]
     },
     "cta": {

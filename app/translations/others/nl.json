@@ -30,7 +30,13 @@
         "removeTitle": "Aangepast Domein Verwijderen?",
         "removeDesc1": "Weet je zeker dat je ",
         "removeDesc2": " van je portfolio wilt verwijderen?",
-        "cancel": "Annuleren"
+        "cancel": "Annuleren",
+        "domainSavedVerify": "Domein opgeslagen. Controleer het.",
+        "example": "bijv. example.com",
+        "errorSavingDomain": "Kan domein niet opslaan. Probeer het opnieuw.",
+        "networkError": "Netwerkfout, probeer het later opnieuw.",
+        "domainVerifiedSuccess": "Domein succesvol geverifieerd!",
+        "errorVerifyingDomain": "Kan domein niet verifiëren. Zorg ervoor dat de DNS-records correct zijn ingesteld."
     },
     "businessLinks": {
         "title": "Zakelijke Links",
@@ -72,61 +78,63 @@
         "noMessages": "Nog geen berichten",
         "deleteTitle": "Verwijderen",
         "messageDeleted": "Bericht verwijderd",
-        "failedToDelete": "Verwijderen mislukt"
+        "failedToDelete": "Verwijderen mislukt",
+        "maxMessagesReached": "U heeft het maximumlimiet van 2 berichten bereikt.",
+        "maxMessagesInfo": "U heeft het maximumlimiet (2 berichten) bereikt. Verwijder een bestaand bericht om een nieuw bericht te sturen of wacht op een reactie.",
+        "adminReply": "Reactie van de beheerder",
+        "deleteConfirmText": "Weet u zeker dat u dit bericht wilt verwijderen? Deze actie kan niet ongedaan worden gemaakt.",
+        "cancel": "Annuleren",
+        "delete": "Verwijderen"
     },
-    "success": {
-        "paymentSuccessful": "Betaling Geslaagd!",
-        "subscriptionActive": "Je abonnement is nu actief. Bedankt voor je aankoop!",
-        "goToHome": "Ga naar Home"
-    },
-    "subscription": {
-        "promoMonthly": {
-            "name": "Promo Maandelijks",
-            "description": "Speciale promo aanbieding",
-            "period": "/maand"
+    "payment": {
+        "lifetime": {
+            "name": "Levenslang Plan",
+            "description": "Maak uw professionele portfolio, genereer uw cv en houd het voor altijd online.",
+            "period": "Eenmalige betaling"
         },
-        "promo6Month": {
-            "name": "Promo 6 Maanden",
-            "description": "Grote waarde voor 6 maanden",
-            "period": "/6 maanden"
-        },
-        "promoAnnual": {
-            "name": "Promo Jaarlijks",
-            "description": "Beste deal van het jaar",
-            "period": "/jaar"
-        },
-        "subMonthly": {
-            "name": "Maandelijks Abonneren",
-            "description": "€1 voor de maand",
-            "period": "/maand"
-        },
-        "sub6Months": {
-            "name": "6 Maanden Abonneren",
-            "description": "Geweldige middellange termijn aanbieding",
-            "period": "/6 maanden"
-        },
-        "subYearly": {
-            "name": "Jaarlijks Abonneren",
-            "description": "Beste waarde",
-            "period": "/jaar"
-        },
+        "bestValue": "Beste waarde",
         "recommended": "Aanbevolen",
-        "placeholder": "Promotiecode",
-        "applyBtn": "Toepassen",
-        "verifyingBtn": "Verifiëren...",
-        "activeSubscription": "ACTIEF ABONNEMENT",
-        "portfolioVisible": "Uw portfolio is momenteel zichtbaar voor bezoekers dankzij dit abonnement.",
+        "whatsIncluded": "Wat is inbegrepen",
+        "features": [
+            "Levenslange toegang — eenmalige betaling",
+            "Professionele portfoliowebsite",
+            "Ingebouwde CV-generator",
+            "Eigen portfolio-subdomein",
+            "SEO-geoptimaliseerd voor zichtbaarheid",
+            "Meerdere moderne thema's",
+            "Alle toekomstige updates inbegrepen",
+            "Prioritaire klantenservice"
+        ],
+        "activePayment": "LEVENSLANG PLAN ACTIEF",
+        "portfolioVisible": "Uw portfolio is momenteel zichtbaar voor bezoekers met volledige levenslange toegang.",
+        "unlimitedAccess": "Onbeperkte Toegang",
         "renewalDate": "Vernieuwings-/Vervaldatum:",
-        "cancelSub": "Abonnement Annuleren",
+        "cancelPayment": "Abonnement Annuleren",
         "confirmCancel": "Annulering Bevestigen",
         "cancelWarning": "Weet u zeker dat u uw abonnement wilt annuleren? Uw portfolio is niet langer zichtbaar voor bezoekers zodra uw huidige cyclus afloopt.",
         "yesCancel": "Ja, annuleer abonnement",
-        "keepSub": "Mijn abonnement behouden",
+        "keepPayment": "Mijn abonnement behouden",
         "cancelSuccess": "Abonnement succesvol geannuleerd.",
         "cancelFailed": "Annuleren van abonnement is mislukt.",
-        "promoReq": "Voer een promotiecode in",
-        "promoApplied": "Promotiecode toegepast!",
-        "invalidPromo": "Ongeldige promotiecode"
+        "processingPayment": "Betaling verwerken, sluit de pagina niet...",
+        "processingDescription": "Uw abonnement wordt veilig bevestigd met de betaalgateway. Dit proces duurt een paar seconden.",
+        "processingWarning": "⚠️ Sluit deze pagina niet en ga niet terug om betalingsproblemen te voorkomen.",
+        "purchaseSuccess": "Abonnement succesvol aangeschaft!",
+        "paymentFailed": "Betaling mislukt. Probeer het opnieuw.",
+        "unexpectedError": "Er is een fout opgetreden bij het opslaan van de betaling.",
+        "errors": {
+            "unauthorized": "Je moet ingelogd zijn om een abonnement te kopen.",
+            "alreadyPaid": "Je hebt al een actief levenslang abonnement.",
+            "orderAlreadyProcessed": "Deze betaling is al verwerkt. Neem contact op met support als je denkt dat dit een fout is.",
+            "paypalCaptureFailed": "Betaling kon niet worden verwerkt. Mogelijk is deze al verwerkt. Neem contact op met support.",
+            "paypalAuthFailed": "Authenticatie van de betaalgateway is mislukt. Neem contact op met support.",
+            "paypalGatewayError": "Kan geen verbinding maken met de betaalgateway. Probeer het later opnieuw.",
+            "paymentNotCompleted": "Betaling is niet voltooid. Probeer het opnieuw.",
+            "cannotVerifyAmount": "Kon het betalingsbedrag niet verifiëren. Neem contact op met support.",
+            "invalidPaymentAmount": "Ongeldig betalingsbedrag. Neem contact op met support.",
+            "serverUnreachable": "Kan geen verbinding maken met de server. Probeer het later opnieuw.",
+            "serverError": "Er is een onverwachte fout opgetreden. Probeer het opnieuw of neem contact op met support."
+        }
     },
     "confirmModal": {
         "delete": "Verwijderen",
@@ -135,10 +143,23 @@
     },
     "accountNotFound": {
         "title": "Account niet gefunden",
-        "description": "We konden het account dat u zoekt niet vinden. Het is mogelijk hernoemd of de gebruiker heeft geen abonnement",
-        "subscribe": "Nu abonneren",
+        "description": "We konden het account dat u zoekt niet vinden. Het is mogelijk hernoemd of de gebruiker heeft de betaling niet voltooid",
+        "payment": "Nu betalen",
         "returnHome": "Terug naar startpagina",
         "contactSupport": "Contact support",
         "rights": "Alle rechten voorbehouden."
+    },
+    "success": {
+        "paymentSuccessful": "🎉 Betaling Succesvol! 🎉",
+        "welcomeMessage": "Welkom bij DGT Portfolio",
+        "activationMessage": "Uw Lifetime Plan is succesvol geactiveerd. U heeft nu onbeperkte toegang tot alle functies.",
+        "features": {
+            "lifetime": "Levenslange toegang geactiveerd",
+            "cv": "CV-generator ontgrendeld",
+            "publishing": "Portfolio publicatie ingeschakeld",
+            "updates": "Toekomstige updates inbegrepen"
+        },
+        "goToPortfolio": "Bekijk Mijn Portfolio",
+        "needHelp": "Hulp nodig bij het starten? Neem op elk moment contact op met ons ondersteuningsteam."
     }
 }

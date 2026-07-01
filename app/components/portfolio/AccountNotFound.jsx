@@ -6,7 +6,7 @@ import Link from "next/link"
 import { getTranslation } from "../../translations/others"
 
 const LANGUAGES = [
-  { code: "en", label: "English", country: "us" },
+  { code: "en", label: "English", country: "gb" },
   { code: "fr", label: "Français", country: "fr" },
   { code: "ar", label: "العربية", country: "sa" },
   { code: "de", label: "Deutsch", country: "de" },
@@ -162,8 +162,8 @@ export default function AccountNotFound() {
             {t('accountNotFound.description')}
           </p>
           <div className="space-y-4">
-            <Link href={"https://dgtportfolio.com/subscription"} className="w-full flex items-center justify-center gap-1 bg-gradient-to-r from-purple-600 to-cyan-600 hover:from-purple-500 hover:to-cyan-500 text-white py-2 px-4 rounded-md transition-all duration-300 transform hover:scale-105">
-              <CreditCard className="mr-2 h-4 w-4" /> {t('accountNotFound.subscribe')}
+            <Link href={"https://dgtportfolio.com/payment"} className="w-full flex items-center justify-center gap-1 bg-gradient-to-r from-purple-600 to-cyan-600 hover:from-purple-500 hover:to-cyan-500 text-white py-2 px-4 rounded-md transition-all duration-300 transform hover:scale-105">
+              <CreditCard className="mr-2 h-4 w-4" /> {t('accountNotFound.payment')}
             </Link>
 
             <Link href={"https://dgtportfolio.com/" + lang} className="w-full flex items-center justify-center gap-1 bg-[#00a896] hover:bg-[#008080] text-white py-2 px-4 rounded-md transition-all duration-300 transform hover:scale-105">

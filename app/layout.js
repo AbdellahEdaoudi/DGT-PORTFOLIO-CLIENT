@@ -10,8 +10,8 @@ const prompt = Prompt({ subsets: ['latin'], weight: '400' });
 
 export const metadata = {
   metadataBase: new URL('https://dgtportfolio.com'),
-  title: "DGT Portfolio - Build Your Personal Portfolio Online",
-  description: "No code, no hassle. Build a clean, modern portfolio in minutes. Showcase your career, skills, projects, and work links like never before—leave a lasting impression and unlock new opportunities.",
+  title: "DGT Portfolio - Build Your Professional Online Portfolio",
+  description: "Create a professional portfolio website in minutes with DGT Portfolio. Showcase your projects, skills, experience, services, and achievements without writing a single line of code.",
   keywords: ["DGT Portfolio", "Portfolio Builder", "Personal Portfolio", "Showcase Skills", "Interactive Portfolio", "No Code Portfolio"],
   appleWebApp: {
     capable: true,
@@ -24,8 +24,8 @@ export const metadata = {
     apple: "/logo.jpg",
   },
   openGraph: {
-    title: "Build Your Personal Portfolio Online - DGT Portfolio",
-    description: "No code, no hassle. Build a clean, modern portfolio in minutes. Showcase your career, skills, projects, and work links like never before—leave a lasting impression and unlock new opportunities.",
+    title: "Build Your Professional Online Portfolio - DGT Portfolio",
+    description: "Create a professional portfolio website in minutes with DGT Portfolio. Showcase your projects, skills, experience, services, and achievements without writing a single line of code.",
     url: "https://dgtportfolio.com",
     siteName: "DGT Portfolio",
     images: [
@@ -40,8 +40,8 @@ export const metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Build Your Personal Portfolio Online - DGT Portfolio",
-    description: "No code, no hassle. Build a clean, modern portfolio in minutes. Showcase your career, skills, projects, and work links like never before—leave a lasting impression and unlock new opportunities.",
+    title: "Build Your Professional Online Portfolio - DGT Portfolio",
+    description: "Create a professional portfolio website in minutes with DGT Portfolio. Showcase your projects, skills, experience, services, and achievements without writing a single line of code.",
     images: ["/logo.jpg"],
   },
   alternates: {

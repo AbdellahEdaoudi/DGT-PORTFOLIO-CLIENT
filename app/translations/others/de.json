@@ -30,7 +30,13 @@
         "removeTitle": "Benutzerdefinierte Domain Entfernen?",
         "removeDesc1": "Sind Sie sicher, dass Sie ",
         "removeDesc2": " von Ihrem Portfolio entfernen möchten?",
-        "cancel": "Abbrechen"
+        "cancel": "Abbrechen",
+        "domainSavedVerify": "Domain gespeichert. Bitte überprüfen.",
+        "example": "z.B. example.com",
+        "errorSavingDomain": "Domain konnte nicht gespeichert werden. Bitte versuchen Sie es erneut.",
+        "networkError": "Netzwerkfehler, bitte versuchen Sie es später erneut.",
+        "domainVerifiedSuccess": "Domain erfolgreich verifiziert!",
+        "errorVerifyingDomain": "Domain konnte nicht verifiziert werden. Bitte stellen Sie sicher, dass die DNS-Einträge korrekt gesetzt sind."
     },
     "businessLinks": {
         "title": "Geschäftslinks",
@@ -72,61 +78,63 @@
         "noMessages": "Noch keine Nachrichten",
         "deleteTitle": "Löschen",
         "messageDeleted": "Nachricht gelöscht",
-        "failedToDelete": "Löschen fehlgeschlagen"
+        "failedToDelete": "Löschen fehlgeschlagen",
+        "maxMessagesReached": "Sie haben das Limit von 2 Nachrichten erreicht.",
+        "maxMessagesInfo": "Sie haben das Limit (2 Nachrichten) erreicht. Bitte löschen Sie eine Nachricht, um eine neue zu senden.",
+        "adminReply": "Antwort des Administrators",
+        "deleteConfirmText": "Sind Sie sicher, dass Sie diese Nachricht löschen möchten? Diese Aktion kann nicht rückgängig gemacht werden.",
+        "cancel": "Abbrechen",
+        "delete": "Löschen"
     },
-    "success": {
-        "paymentSuccessful": "Zahlung Erfolgreich!",
-        "subscriptionActive": "Ihr Abonnement ist jetzt aktiv. Danke für Ihren Kauf!",
-        "goToHome": "Zur Startseite"
-    },
-    "subscription": {
-        "promoMonthly": {
-            "name": "Promo Monatlich",
-            "description": "Spezielles Promo-Angebot",
-            "period": "/Monat"
+    "payment": {
+        "lifetime": {
+            "name": "Lebenslanger Plan",
+            "description": "Erstellen Sie Ihr professionelles Portfolio, generieren Sie Ihren Lebenslauf und behalten Sie es für immer online.",
+            "period": "Einmalige Zahlung"
         },
-        "promo6Month": {
-            "name": "Promo 6 Monate",
-            "description": "Toller Wert für 6 Monate",
-            "period": "/6 Monate"
-        },
-        "promoAnnual": {
-            "name": "Promo Jährlich",
-            "description": "Bestes Angebot des Jahres",
-            "period": "/Jahr"
-        },
-        "subMonthly": {
-            "name": "Monatlich Abonnieren",
-            "description": "1 $ für den Monat",
-            "period": "/Monat"
-        },
-        "sub6Months": {
-            "name": "6 Monate Abonnieren",
-            "description": "Tolles mittelfristiges Angebot",
-            "period": "/6 Monate"
-        },
-        "subYearly": {
-            "name": "Jährlich Abonnieren",
-            "description": "Bester Wert",
-            "period": "/Jahr"
-        },
+        "bestValue": "Bester Wert",
         "recommended": "Empfohlen",
-        "placeholder": "Promo-Code",
-        "applyBtn": "Anwenden",
-        "verifyingBtn": "Überprüfen...",
-        "activeSubscription": "AKTIVES ABONNEMENT",
-        "portfolioVisible": "Ihr Portfolio ist dank dieses Abonnements derzeit für Besucher sichtbar.",
+        "whatsIncluded": "Was enthalten ist",
+        "features": [
+            "Lebenslanger Zugang — nur eine Zahlung",
+            "Professionelle Portfolio-Website",
+            "Integrierter Lebenslauf-Generator",
+            "Eigene Portfolio-Subdomain",
+            "SEO-optimiert für Sichtbarkeit",
+            "Mehrere moderne Themen",
+            "Alle zukünftigen Updates inklusive",
+            "Priorisierter Kundensupport"
+        ],
+        "activePayment": "LEBENSDAUER-PLAN AKTIV",
+        "portfolioVisible": "Ihr Portfolio ist derzeit für Besucher mit vollem lebenslangem Zugriff sichtbar.",
+        "unlimitedAccess": "Unbegrenzter Zugang",
         "renewalDate": "Verlängerungs-/Ablaufdatum:",
-        "cancelSub": "Abonnement Kündigen",
+        "cancelPayment": "Abonnement Kündigen",
         "confirmCancel": "Kündigung Bestätigen",
         "cancelWarning": "Sind Sie sicher, dass Sie Ihr Abonnement kündigen möchten? Ihr Portfolio wird nach Ablauf Ihres aktuellen Zyklus nicht mehr für Besucher sichtbar sein.",
         "yesCancel": "Ja, Abonnement kündigen",
-        "keepSub": "Mein Abonnement behalten",
+        "keepPayment": "Mein Abonnement behalten",
         "cancelSuccess": "Abonnement erfolgreich gekündigt.",
         "cancelFailed": "Abonnement konnte nicht gekündigt werden.",
-        "promoReq": "Bitte geben Sie einen Promo-Code ein",
-        "promoApplied": "Promo-Code angewendet!",
-        "invalidPromo": "Ungültiger Promo-Code"
+        "processingPayment": "Zahlung wird verarbeitet, bitte schließen Sie die Seite nicht...",
+        "processingDescription": "Sichere Bestätigung Ihres Abonnements mit dem Zahlungs-Gateway. Dieser Vorgang dauert einige Sekunden.",
+        "processingWarning": "⚠️ Bitte schließen Sie diese Seite nicht und gehen Sie nicht zurück, um Zahlungsprobleme zu vermeiden.",
+        "purchaseSuccess": "Abonnement erfolgreich gekauft!",
+        "paymentFailed": "Zahlung fehlgeschlagen. Bitte versuchen Sie es erneut.",
+        "unexpectedError": "Beim Speichern der Zahlung ist ein Fehler aufgetreten.",
+        "errors": {
+            "unauthorized": "Sie müssen angemeldet sein, um ein Abonnement zu kaufen.",
+            "alreadyPaid": "Sie haben bereits ein aktives lebenslängliches Abonnement.",
+            "orderAlreadyProcessed": "Diese Zahlung wurde bereits bearbeitet. Kontaktieren Sie den Support, wenn Sie denken, dass dies ein Fehler ist.",
+            "paypalCaptureFailed": "Die Zahlung konnte nicht erfasst werden. Sie wurde möglicherweise bereits bearbeitet. Bitte kontaktieren Sie den Support.",
+            "paypalAuthFailed": "Authentifizierung des Zahlungs-Gateways fehlgeschlagen. Bitte kontaktieren Sie den Support.",
+            "paypalGatewayError": "Verbindung zum Zahlungs-Gateway nicht möglich. Bitte versuchen Sie es später erneut.",
+            "paymentNotCompleted": "Zahlung wurde nicht abgeschlossen. Bitte versuchen Sie es erneut.",
+            "cannotVerifyAmount": "Zahlungsbetrag konnte nicht verifiziert werden. Bitte kontaktieren Sie den Support.",
+            "invalidPaymentAmount": "Ungültiger Zahlungsbetrag. Bitte kontaktieren Sie den Support.",
+            "serverUnreachable": "Verbindung zum Server nicht möglich. Bitte versuchen Sie es später erneut.",
+            "serverError": "Ein unerwarteter Fehler ist aufgetreten. Bitte versuchen Sie es erneut oder kontaktieren Sie den Support."
+        }
     },
     "confirmModal": {
         "delete": "Löschen",
@@ -135,10 +143,23 @@
     },
     "accountNotFound": {
         "title": "Konto nicht gefunden",
-        "description": "Wir konnten das gesuchte Konto nicht finden. Es wurde möglicherweise umbenannt oder der Benutzer hat kein Abonnement",
-        "subscribe": "Jetzt abonnieren",
+        "description": "Wir konnten das gesuchte Konto nicht finden. Es wurde möglicherweise umbenannt oder der Benutzer hat die Zahlung nicht abgeschlossen",
+        "payment": "Jetzt bezahlen",
         "returnHome": "Zurück zur Startseite",
         "contactSupport": "Support kontaktieren",
         "rights": "Alle Rechte vorbehalten."
+    },
+    "success": {
+        "paymentSuccessful": "🎉 Zahlung erfolgreich! 🎉",
+        "welcomeMessage": "Willkommen bei DGT Portfolio",
+        "activationMessage": "Ihr Lifetime-Plan wurde erfolgreich aktiviert. Sie haben jetzt unbegrenzten Zugriff auf alle Funktionen.",
+        "features": {
+            "lifetime": "Lebenslanger Zugriff aktiviert",
+            "cv": "Lebenslauf-Generator freigeschaltet",
+            "publishing": "Portfolio-Veröffentlichung aktiviert",
+            "updates": "Zukünftige Updates inklusive"
+        },
+        "goToPortfolio": "Mein Portfolio ansehen",
+        "needHelp": "Brauchen Sie Hilfe beim Einstieg? Kontaktieren Sie jederzeit unser Support-Team."
     }
 }

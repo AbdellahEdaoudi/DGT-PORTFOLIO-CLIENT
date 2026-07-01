@@ -4,7 +4,7 @@ import axios from "axios";
 import jwt from "jsonwebtoken";
 import { authOptions } from "../../../../auth/nextAuth";
 
-// DELETE subscription by ID
+// DELETE payment by ID
 export async function DELETE(
   req: Request,
   { params }: { params: Promise<{ id: string }> }
@@ -25,13 +25,13 @@ export async function DELETE(
 
   try {
     const backendUrl = process.env.BACKEND_URL;
-    const response = await axios.delete(`${backendUrl}/api/subscriptions/${id}`, {
+    const response = await axios.delete(`${backendUrl}/admin/payment/${id}`, {
       headers: { Authorization: `Bearer ${token}` },
     });
 
     return NextResponse.json(response.data, { status: response.status });
   } catch (error: any) {
-    console.error("Error deleting subscription:", error.response?.data || error.message);
+    console.error("Error deleting payment:", error.response?.data || error.message);
     return NextResponse.json(
       { message: error.response?.data?.message || error.message },
       { status: error.response?.status || 500 }
@@ -39,8 +39,8 @@ export async function DELETE(
   }
 }
 
-// POST to sync subscription with PayPal
-export async function POST(
+// PUT (Update) payment by ID
+export async function PUT(
   req: Request,
   { params }: { params: Promise<{ id: string }> }
 ) {
@@ -52,15 +52,23 @@ export async function POST(
 
   const { id } = await params;
 
+  const token = jwt.sign(
+    { email: session.user.email },
+    process.env.NEXTAUTH_SECRET as string,
+    { expiresIn: "15m" }
+  );
+
   try {
     const backendUrl = process.env.BACKEND_URL;
-    const response = await axios.post(`${backendUrl}/api/subscriptions/${id}/sync`);
+    const response = await axios.put(`${backendUrl}/admin/payment/${id}`, {}, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
 
     return NextResponse.json(response.data, { status: response.status });
   } catch (error: any) {
-    console.error("Error syncing subscription:", error.response?.data || error.message);
+    console.error("Error updating payment:", error.response?.data || error.message);
     return NextResponse.json(
-      { message: error.response?.data?.message || "Server error syncing" },
+      { message: error.response?.data?.message || error.message },
       { status: error.response?.status || 500 }
     );
   }
