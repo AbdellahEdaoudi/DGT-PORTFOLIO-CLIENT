@@ -88,7 +88,7 @@ export default function PaymentManagement({ data, setData }) {
       <div className="flex flex-col gap-2 md:gap-4">
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-2">
           <h1 className="text-sm md:text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 to-blue-600">
-            Payment Management {data.payment?.length > 0 ? `kaynin` : `nookaynin`}
+            Payment Management
           </h1>
           <div className="flex items-center gap-3">
             <div className="text-[10px] md:text-xs text-gray-500 font-medium">
