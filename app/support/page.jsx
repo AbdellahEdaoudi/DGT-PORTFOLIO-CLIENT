@@ -286,14 +286,32 @@ export default function ContactForm() {
                     <div className="px-4 pb-4 border-t border-gray-100">
                       <p className="text-gray-700 text-sm mt-3 leading-relaxed whitespace-pre-wrap break-words overflow-wrap-anywhere">{contact.message}</p>
                       
-                      {contact.adminReply && (
+                      {(contact.adminReply || contact.adminReplyImage) && (
                         <div className="mt-4 p-3 bg-teal-50 border border-teal-100 rounded-lg max-h-48 overflow-y-auto teal-scrollbar">
                           <span className="text-[10px] sm:text-xs font-bold text-teal-700 tracking-wider uppercase mb-1 block">
                             {t('support.adminReply') || "Admin Reply"}
                           </span>
-                          <p className="text-teal-900 text-sm leading-relaxed whitespace-pre-wrap break-words">
-                            {contact.adminReply}
-                          </p>
+                          {contact.adminReply && (
+                            <p className="text-teal-900 text-sm leading-relaxed whitespace-pre-wrap break-words mb-2">
+                              {contact.adminReply}
+                            </p>
+                          )}
+                          {contact.adminReplyImage && (
+                            <div className="mt-2">
+                              <button
+                                type="button"
+                                onClick={() => setLightboxSrc(contact.adminReplyImage)}
+                                className="group relative block overflow-hidden rounded-lg border border-teal-200 hover:border-teal-400 transition-all duration-200 shadow-sm hover:shadow-md"
+                                style={{ width: 200, height: 120 }}
+                              >
+                                <Image src={contact.adminReplyImage} alt="Admin Reply Attachment" fill
+                                  unoptimized className="object-cover group-hover:scale-105 transition-transform duration-300" />
+                                <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 flex items-center justify-center transition-all duration-200">
+                                  <span className="opacity-0 group-hover:opacity-100 text-white text-xs font-medium bg-black/50 px-2 py-1 rounded-full transition-opacity duration-200">🔍</span>
+                                </div>
+                              </button>
+                            </div>
+                          )}
                         </div>
                       )}
 
