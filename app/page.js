@@ -1,6 +1,6 @@
 import LandingPage from "./components/LandingPage/LandingPage";
 import { headers } from "next/headers";
-import { DynamicSubdomainClient, DynamicCustomDomainClient } from './components/portfolio/ClientWrappers';
+import { DynamicSubdomainClient } from './components/portfolio/ClientWrappers';
 
 async function fetchUserData(url) {
   try {
@@ -20,15 +20,9 @@ function getDomainFlags(host) {
     host !== "dgtportfolio.com" &&
     host !== "localhost:3000" &&
     !reserved.includes(host.split(".")[0]);
-  // isCustomDomain
-  const isCustomDomain = !isSubdomain &&
-    !host.includes("dgtportfolio.") &&
-    !host.includes("localhost") &&
-    !host.includes("192.168.") &&
-    !host.includes("ngrok");
 
-  const iswwwsubdomain = host.startsWith("www.") && !isSubdomain && !isCustomDomain;
-  return { isSubdomain, isCustomDomain, iswwwsubdomain };
+  const iswwwsubdomain = host.startsWith("www.") && !isSubdomain;
+  return { isSubdomain, iswwwsubdomain };
 }
 
 export async function generateMetadata() {
@@ -36,16 +30,12 @@ export async function generateMetadata() {
   // const host = "abdellah-edaoudi.site"
   const headersList = await headers();
   const host = headersList.get("host");
-  const { isSubdomain, isCustomDomain, iswwwsubdomain } = getDomainFlags(host);
+  const { isSubdomain, iswwwsubdomain } = getDomainFlags(host);
   console.log("isSubdomain : " + isSubdomain);
-  console.log("isCustomDomain : " + isCustomDomain);
   console.log("iswwwsubdomain : " + iswwwsubdomain);
   let user = null;
   if (isSubdomain) {
     user = await fetchUserData(`https://dgt-portfolio-server.vercel.app/users/metauser/${host.split(".")[0]}`);
-  }
-  if (isCustomDomain) {
-    user = await fetchUserData(`https://dgt-portfolio-server.vercel.app/users/metacustomdomain/${host}`);
   }
 
   if (user) {
@@ -115,7 +105,7 @@ export async function generateMetadata() {
 export default async function Home() {
   const headersList = await headers();
   const host = headersList.get("host");
-  const { isSubdomain, isCustomDomain, iswwwsubdomain } = getDomainFlags(host);
+  const { isSubdomain, iswwwsubdomain } = getDomainFlags(host);
   let userSchema = null;
 
   try {
@@ -128,19 +118,6 @@ export default async function Home() {
           name: user.fullname,
           jobTitle: user.category || "Professional",
           url: `https://${user.username || host.split(".")[0]}.dgtportfolio.com`,
-          description: user.about,
-          sameAs: Object.values(user.socials || {}).filter(Boolean),
-        };
-      }
-    } else if (isCustomDomain) {
-      const user = await fetchUserData(`https://dgt-portfolio-server.vercel.app/users/metacustomdomain/${host}`);
-      if (user) {
-        userSchema = {
-          "@context": "https://schema.org",
-          "@type": "Person",
-          name: user.fullname,
-          jobTitle: user.category || "Professional",
-          url: `https://${host}`,
           description: user.about,
           sameAs: Object.values(user.socials || {}).filter(Boolean),
         };
@@ -166,7 +143,7 @@ export default async function Home() {
   return (
     <div>
       {userSchema && <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(userSchema) }} />}
-      {isSubdomain ? <DynamicSubdomainClient username={host.split(".")[0]} /> : isCustomDomain ? <DynamicCustomDomainClient host={host} /> : iswwwsubdomain ? <LandingPage lang={"en"} /> : <LandingPage lang={"en"} />}
+      {isSubdomain ? <DynamicSubdomainClient username={host.split(".")[0]} /> : iswwwsubdomain ? <LandingPage lang={"en"} /> : <LandingPage lang={"en"} />}
     </div>
   );
 }

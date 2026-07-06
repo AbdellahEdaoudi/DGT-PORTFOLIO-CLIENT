@@ -132,17 +132,7 @@ export default function AuthButtons({ lang }) {
               <NotebookText className={` ${userDetails?.displayLanguage === "ar" ? "rotate-180" : ""}`} /> {labels.businessLinks}
             </div>
           </Link>
-          <Link
-            href={"/custom-domain"}
-            onClick={() => {
-              setSetting(!setting);
-            }}
-            className="bg-gray-700 py-2 border-b flex items-center justify-center border-gray-600 hover:bg-gray-600 transition duration-300 rounded-sm hover:scale-105 text-center mb-2"
-          >
-            <div className="flex items-center gap-1">
-              <Globe /> {labels.customDomain}
-            </div>
-          </Link>
+
           <Link
             href={"/payment"}
             onClick={() => {
