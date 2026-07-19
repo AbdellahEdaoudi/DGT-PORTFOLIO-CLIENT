@@ -172,7 +172,7 @@ export default function Theme1({ userDetails, userLinks, bgcolor }) {
               {/* Top toolbar */}
               <div className="flex md:flex-row flex-col gap-4 mb-5 justify-between items-center md:mb-10">
                 <h1 className="text-white text-2xl font-bold cursor-pointer">
-                  <Link href={"https://dgtportfolio.com"}>{t('portfolio')}</Link>
+                  <Link href={"https://mylio.site"}>{t('portfolio')}</Link>
                 </h1>
                 <div className="flex gap-3">
                   {/* // Download CV */}

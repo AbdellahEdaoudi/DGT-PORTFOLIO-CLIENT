@@ -13,7 +13,7 @@ async function fetchUserData(url) {
 export async function generateMetadata(props) {
   const params = await props.params;
   const user = await fetchUserData(`https://dgt-portfolio-server.vercel.app/users/metauser/${params.username}`);
-  const user_portfolio_url = `https://dgtportfolio.com/dp/${params.username}`;
+  const user_portfolio_url = `https://mylio.site/dp/${params.username}`;
 
   if (user) {
     return {
@@ -52,26 +52,26 @@ export async function generateMetadata(props) {
   } else {
     return {
       alternates: {
-        canonical: "https://dgtportfolio.com",
+        canonical: "https://mylio.site",
         languages: {
-          'en': 'https://dgtportfolio.com/en',
-          'es': 'https://dgtportfolio.com/es',
-          'fr': 'https://dgtportfolio.com/fr',
-          'ar': 'https://dgtportfolio.com/ar',
-          'de': 'https://dgtportfolio.com/de',
-          'ru': 'https://dgtportfolio.com/ru',
-          'ja': 'https://dgtportfolio.com/ja',
-          'zh': 'https://dgtportfolio.com/zh',
-          'nl': 'https://dgtportfolio.com/nl',
-          'pt': 'https://dgtportfolio.com/pt',
-          'it': 'https://dgtportfolio.com/it',
-          'tr': 'https://dgtportfolio.com/tr',
-          'ko': 'https://dgtportfolio.com/ko',
-          'hi': 'https://dgtportfolio.com/hi',
-          'id': 'https://dgtportfolio.com/id',
-          'pl': 'https://dgtportfolio.com/pl',
-          'sv': 'https://dgtportfolio.com/sv',
-          'vi': 'https://dgtportfolio.com/vi',
+          'en': 'https://mylio.site/en',
+          'es': 'https://mylio.site/es',
+          'fr': 'https://mylio.site/fr',
+          'ar': 'https://mylio.site/ar',
+          'de': 'https://mylio.site/de',
+          'ru': 'https://mylio.site/ru',
+          'ja': 'https://mylio.site/ja',
+          'zh': 'https://mylio.site/zh',
+          'nl': 'https://mylio.site/nl',
+          'pt': 'https://mylio.site/pt',
+          'it': 'https://mylio.site/it',
+          'tr': 'https://mylio.site/tr',
+          'ko': 'https://mylio.site/ko',
+          'hi': 'https://mylio.site/hi',
+          'id': 'https://mylio.site/id',
+          'pl': 'https://mylio.site/pl',
+          'sv': 'https://mylio.site/sv',
+          'vi': 'https://mylio.site/vi',
         },
       },
     };

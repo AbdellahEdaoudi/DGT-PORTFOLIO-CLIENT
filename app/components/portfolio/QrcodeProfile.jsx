@@ -5,8 +5,8 @@ import { createPortal } from "react-dom";
 import { getTranslation } from "../../translations/portfolio";
 
 function QrcodeProfile({ userDetails, className, isOpen, onClose }) {
-  const PORTFOLIO = userDetails?.customDomain && userDetails?.customDomainVerified ? `https://${userDetails?.customDomain}` : `https://${userDetails?.username}.dgtportfolio.com`;
-  const PORTFOLIO_2 = `https://dgtportfolio.com/dp/${userDetails?.username}`;
+  const PORTFOLIO = userDetails?.customDomain && userDetails?.customDomainVerified ? `https://${userDetails?.customDomain}` : `https://${userDetails?.username}.mylio.site`;
+  const PORTFOLIO_2 = `https://mylio.site/dp/${userDetails?.username}`;
 
   const qrCodeRef = useRef(null);
   const [copied, setCopied] = useState(false);
@@ -48,7 +48,7 @@ function QrcodeProfile({ userDetails, className, isOpen, onClose }) {
       if (canvas) {
         const link = document.createElement("a");
         link.href = canvas.toDataURL("image/png");
-        link.download = `${userDetails.username}.dgtportfolio.png`;
+        link.download = `${userDetails.username}.mylio.site.png`;
         link.click();
       }
     }
@@ -61,7 +61,7 @@ function QrcodeProfile({ userDetails, className, isOpen, onClose }) {
         canvas.toBlob((blob) => {
           const file = new File(
             [blob],
-            `${userDetails.username}.dgtportfolio.png`,
+            `${userDetails.username}.mylio.site.png`,
             { type: "image/png" }
           );
           navigator

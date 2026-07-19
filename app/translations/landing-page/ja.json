@@ -5,6 +5,7 @@
         "pricing": "料金",
         "auth": {
             "signIn": "サインイン",
+            "signInWithGoogle": "Google でログイン",
             "getStarted": "始める",
             "updateProfile": "プロフィールを更新",
             "businessLinks": "ビジネスリンク",
@@ -32,7 +33,7 @@
             },
             {
                 "title": "自分だけのポートフォリオリンク",
-                "description": "<strong>yourname.dgtportfolio.com</strong>のようなパーソナライズされたサブドメインを取得し、どこでも共有できます。"
+                "description": "<strong>yourname.mylio.site</strong>のようなパーソナライズされたサブドメインを取得し、どこでも共有できます。"
             },
             {
                 "title": "プロフェッショナルQRコード",

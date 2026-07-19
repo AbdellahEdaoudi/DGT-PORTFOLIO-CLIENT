@@ -13,11 +13,11 @@ async function fetchUserData(url) {
 }
 
 function getDomainFlags(host) {
-  const reserved = ["dgtportfolio", "localhost", "www", "api", "admin"];
+  const reserved = ["mylio", "localhost", "www", "api", "admin"];
   // isSubdomain
   const isSubdomain =
-    (host.endsWith(".dgtportfolio.com") || host.endsWith(".localhost:3000")) &&
-    host !== "dgtportfolio.com" &&
+    (host.endsWith(".mylio.site") || host.endsWith(".localhost:3000")) &&
+    host !== "mylio.site" &&
     host !== "localhost:3000" &&
     !reserved.includes(host.split(".")[0]);
 
@@ -26,7 +26,7 @@ function getDomainFlags(host) {
 }
 
 export async function generateMetadata() {
-  // const host = "abdellah-edaoudi.dgtportfolio.com"
+  // const host = "abdellah-edaoudi.mylio.site"
   // const host = "abdellah-edaoudi.site"
   const headersList = await headers();
   const host = headersList.get("host");
@@ -57,7 +57,7 @@ export async function generateMetadata() {
       openGraph: {
         title: `${user.fullname} | ${user.category} Portfolio`,
         description: `Explore ${user.fullname}'s professional portfolio and discover projects, technical expertise, work experience, and professional services as a ${user.category}. Connect for collaborations and new opportunities.`,
-        url: isSubdomain ? `https://${username}.dgtportfolio.com` : `https://${host}`,
+        url: isSubdomain ? `https://${username}.mylio.site` : `https://${host}`,
         siteName: "DGT Portfolio",
         images: [{ url: user.urlimage, alt: `${user.fullname}'s Profile Picture` }],
         locale: user.displayLanguage === 'ar' ? 'ar_AR' : 'en_US',
@@ -70,32 +70,32 @@ export async function generateMetadata() {
         images: [user.urlimage],
       },
       alternates: {
-        canonical: isSubdomain ? `https://${username}.dgtportfolio.com` : `https://${host}`,
+        canonical: isSubdomain ? `https://${username}.mylio.site` : `https://${host}`,
       },
     };
   } else {
     return {
       alternates: {
-        canonical: "https://dgtportfolio.com",
+        canonical: "https://mylio.site",
         languages: {
-          'en': 'https://dgtportfolio.com/en',
-          'es': 'https://dgtportfolio.com/es',
-          'fr': 'https://dgtportfolio.com/fr',
-          'ar': 'https://dgtportfolio.com/ar',
-          'de': 'https://dgtportfolio.com/de',
-          'ru': 'https://dgtportfolio.com/ru',
-          'ja': 'https://dgtportfolio.com/ja',
-          'zh': 'https://dgtportfolio.com/zh',
-          'nl': 'https://dgtportfolio.com/nl',
-          'pt': 'https://dgtportfolio.com/pt',
-          'it': 'https://dgtportfolio.com/it',
-          'tr': 'https://dgtportfolio.com/tr',
-          'ko': 'https://dgtportfolio.com/ko',
-          'hi': 'https://dgtportfolio.com/hi',
-          'id': 'https://dgtportfolio.com/id',
-          'pl': 'https://dgtportfolio.com/pl',
-          'sv': 'https://dgtportfolio.com/sv',
-          'vi': 'https://dgtportfolio.com/vi',
+          'en': 'https://mylio.site/en',
+          'es': 'https://mylio.site/es',
+          'fr': 'https://mylio.site/fr',
+          'ar': 'https://mylio.site/ar',
+          'de': 'https://mylio.site/de',
+          'ru': 'https://mylio.site/ru',
+          'ja': 'https://mylio.site/ja',
+          'zh': 'https://mylio.site/zh',
+          'nl': 'https://mylio.site/nl',
+          'pt': 'https://mylio.site/pt',
+          'it': 'https://mylio.site/it',
+          'tr': 'https://mylio.site/tr',
+          'ko': 'https://mylio.site/ko',
+          'hi': 'https://mylio.site/hi',
+          'id': 'https://mylio.site/id',
+          'pl': 'https://mylio.site/pl',
+          'sv': 'https://mylio.site/sv',
+          'vi': 'https://mylio.site/vi',
         },
       },
     };
@@ -117,7 +117,7 @@ export default async function Home() {
           "@type": "Person",
           name: user.fullname,
           jobTitle: user.category || "Professional",
-          url: `https://${user.username || host.split(".")[0]}.dgtportfolio.com`,
+          url: `https://${user.username || host.split(".")[0]}.mylio.site`,
           description: user.about,
           sameAs: Object.values(user.socials || {}).filter(Boolean),
         };
@@ -129,7 +129,7 @@ export default async function Home() {
         name: "DGT Portfolio",
         applicationCategory: "DesignApplication",
         operatingSystem: "Web",
-        url: "https://dgtportfolio.com",
+        url: "https://mylio.site",
         description: "Build a clean, modern portfolio in minutes. No code required.",
         offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
         aggregateRating: { "@type": "AggregateRating", ratingValue: "4.8", ratingCount: "120" },

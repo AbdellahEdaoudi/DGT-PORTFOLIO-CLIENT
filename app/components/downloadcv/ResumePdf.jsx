@@ -523,7 +523,7 @@ const ResumePdf = ({ userData }) => {
     const profileUrl = userData?.username
         ? (userData.customDomainVerified && userData.customDomain
             ? `https://${userData.customDomain}`
-            : `https://${userData.username}.dgtportfolio.com`)
+            : `https://${userData.username}.mylio.site`)
         : null;
 
     return (

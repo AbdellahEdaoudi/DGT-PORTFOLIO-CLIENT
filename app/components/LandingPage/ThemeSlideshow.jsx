@@ -146,7 +146,7 @@ export default function ThemeSlideshow() {
         <div className="ml-2 flex-1 max-w-sm bg-neutral-800/50 rounded-md flex items-center px-2 py-0.5 md:px-3 md:py-1 text-[10px] md:text-xs text-neutral-400 font-mono border border-white/5 transition-colors group-hover:bg-neutral-800/80 group-hover:text-neutral-300 min-w-0">
           {/* Lock Icon SVG */}
           <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="mr-1.5 md:mr-2 opacity-50 shrink-0 w-3 h-3 md:w-auto md:h-auto"><rect width="18" height="11" x="3" y="11" rx="2" ry="2" /><path d="M7 11V7a5 5 0 0 1 10 0v4" /></svg>
-          <span className="truncate">https://adam-carter.dgtportfolio.com</span>
+          <span className="truncate">https://adam-carter.mylio.site</span>
         </div>
 
         {/* Menu Icon (Visual only) */}

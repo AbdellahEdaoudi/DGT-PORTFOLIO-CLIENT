@@ -5,6 +5,7 @@
         "pricing": "Preços",
         "auth": {
             "signIn": "Entrar",
+            "signInWithGoogle": "Fazer login com o Google",
             "getStarted": "Começar",
             "updateProfile": "Atualizar Perfil",
             "businessLinks": "Links Comerciais",
@@ -32,7 +33,7 @@
             },
             {
                 "title": "Seu próprio link de portfólio",
-                "description": "Obtenha um subdomínio personalizado como <strong>seunome.dgtportfolio.com</strong> e compartilhe-o em qualquer lugar."
+                "description": "Obtenha um subdomínio personalizado como <strong>seunome.mylio.site</strong> e compartilhe-o em qualquer lugar."
             },
             {
                 "title": "Código QR profissional",

@@ -5,6 +5,7 @@
         "pricing": "가격",
         "auth": {
             "signIn": "로그인",
+            "signInWithGoogle": "Google로 로그인",
             "getStarted": "시작하기",
             "updateProfile": "프로필 업데이트",
             "businessLinks": "비즈니스 링크",
@@ -32,7 +33,7 @@
             },
             {
                 "title": "나만의 포트폴리오 링크",
-                "description": "<strong>yourname.dgtportfolio.com</strong>과 같은 개인화된 서브도메인을 얻고 어디서나 공유하세요."
+                "description": "<strong>yourname.mylio.site</strong>과 같은 개인화된 서브도메인을 얻고 어디서나 공유하세요."
             },
             {
                 "title": "전문 QR 코드",

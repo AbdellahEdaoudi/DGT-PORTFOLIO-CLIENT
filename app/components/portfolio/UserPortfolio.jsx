@@ -24,7 +24,7 @@ export default function UserPortfolio({ username }) {
     const [userDetails, setUserDetails] = useState(null)
     const [userLinks, setUserLinks] = useState([])
     const [loadingUsers, setLoadingUsers] = useState(true)
-    const { EmailUser} = useContext(MyContext)
+    const { EmailUser } = useContext(MyContext)
     const t = getTranslation(userDetails?.displayLanguage || 'en');
     const [notFound, setNotFound] = useState(false)
     const toast = useToast();
@@ -43,7 +43,7 @@ export default function UserPortfolio({ username }) {
                         if (lastUpdateRes.data?.success && lastUpdateRes.data?.lastUpdated) {
                             const serverTime = lastUpdateRes.data.lastUpdated;
                             const localTime = parsed.lastUpdated || 0;
-                            
+
                             if (localTime >= serverTime) {
                                 setUserDetails(parsed.user);
                                 setUserLinks(parsed.links || []);
@@ -59,7 +59,7 @@ export default function UserPortfolio({ username }) {
                 const res = await axios.get(`/api/proxy/users/${username}`);
                 setUserDetails(res.data.user);
                 setUserLinks(res.data.links || []);
-                
+
                 localStorage.setItem(cacheKey, JSON.stringify({
                     user: res.data.user,
                     links: res.data.links || [],
@@ -78,14 +78,14 @@ export default function UserPortfolio({ username }) {
                             setNotFound(true);
                         } else if (msg === "No payment found for this user" && EmailUser === ownerEmail) {
                             toast.error(t("errors.noPaymentFound"));
-                            window.location.href = "https://dgtportfolio.com/payment"
+                            window.location.href = "https://mylio.site/payment"
                         }
                     } else if (error.response.status === 403 && EmailUser !== ownerEmail) {
                         // setPaymentInactive(true);
                         setNotFound(true);
                     } else if (error.response.status === 403 && EmailUser === ownerEmail) {
                         toast.error(t("errors.paymentNotActive"));
-                        window.location.href = "https://dgtportfolio.com/payment"
+                        window.location.href = "https://mylio.site/payment"
                     } else {
                         console.error(t("errors.fetchingUserDetails"), error);
                     }

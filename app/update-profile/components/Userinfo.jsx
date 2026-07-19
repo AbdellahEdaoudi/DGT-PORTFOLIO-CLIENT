@@ -25,7 +25,7 @@ function Userinfo({ userData, setUserDetails }) {
   const [category, setCategory] = useState(user.category || "")
   const [displayEmail, setDisplayEmail] = useState(user.displayEmail || "")
   const [errormsg, setErrormsg] = useState("")
-  // const PORTFOLIO = `https://${userData.username}.dgtportfolio.com`
+  // const PORTFOLIO = `https://${userData.username}.mylio.site`
   const PORTFOLIO_2 = `/dp/${userData?.username}`;
 
   // Handle image upload with automatic compression
@@ -121,7 +121,7 @@ function Userinfo({ userData, setUserDetails }) {
 
       // 2. Update Profile Picture separately if it was changed (or deleted)
       const finalUrl = imageFile === "DELETE_IMAGE" ? DEFAULT_AVATAR : imagePreview;
-      
+
       if (imageFile !== null) {
         const imageFormData = new FormData();
         if (imageFile !== "DELETE_IMAGE") {
@@ -130,7 +130,7 @@ function Userinfo({ userData, setUserDetails }) {
         }
         // If imageFile === "DELETE_IMAGE" we don't append anything
         // so req.file will be undefined and the backend sets the default image.
-        
+
         await axios.put(`/api/proxy/users/update/user-image`, imageFormData);
       }
 
@@ -146,7 +146,7 @@ function Userinfo({ userData, setUserDetails }) {
         displayEmail,
         urlimage: (imageFile && imageFile !== "DELETE_IMAGE") ? imagePreview : finalUrl
       }));
-      
+
       setImageFile(null);
       setErrormsg("")
     } catch (error) {
@@ -203,7 +203,7 @@ function Userinfo({ userData, setUserDetails }) {
                 className="absolute top-0 right-0 bg-red-500 text-white p-1.5 rounded-full shadow-lg hover:bg-red-600 transition-all duration-300 transform hover:scale-110 active:scale-95"
                 title={t('userInfo.removeImage')}
               >
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><path d="M18 6 6 18" /><path d="m6 6 12 12" /></svg>
               </button>
             )}
           </div>
@@ -245,8 +245,8 @@ function Userinfo({ userData, setUserDetails }) {
               )}
               {username && (
                 <div className="flex flex-col gap-0.5 mt-1 ml-1">
-                  <p className="text-blue-500 text-[8px] sm:text-xs font-medium break-all leading-tight">{`l1: ${username}.dgtportfolio.com`}</p>
-                  <p className="text-blue-500 text-[8px] sm:text-xs font-medium break-all leading-tight">{`l2: dgtportfolio.com/dp/${username}`}</p>
+                  <p className="text-blue-500 text-[8px] sm:text-xs font-medium break-all leading-tight">{`l1: ${username}.mylio.site`}</p>
+                  <p className="text-blue-500 text-[8px] sm:text-xs font-medium break-all leading-tight">{`l2: mylio.site/dp/${username}`}</p>
                 </div>
               )}
             </div>

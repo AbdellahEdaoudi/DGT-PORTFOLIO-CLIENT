@@ -72,7 +72,7 @@ export default function Theme5({ userDetails, userLinks }) {
             {/* Toolbar */}
             <div className="flex md:flex-row flex-col justify-between items-center mb-12 gap-4 relative z-20">
               <h1 className="text-white text-2xl font-bold cursor-pointer hover:text-yellow-400 transition">
-                <Link href={"https://dgtportfolio.com"}>{t('portfolio')}</Link>
+                <Link href={"https://mylio.site"}>{t('portfolio')}</Link>
               </h1>
               <div className="flex flex-wrap gap-3">
                 {/* Copy Link */}

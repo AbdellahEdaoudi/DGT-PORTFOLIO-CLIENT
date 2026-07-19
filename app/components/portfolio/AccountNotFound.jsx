@@ -162,15 +162,15 @@ export default function AccountNotFound() {
             {t('accountNotFound.description')}
           </p>
           <div className="space-y-4">
-            <Link href={"https://dgtportfolio.com/payment"} className="w-full flex items-center justify-center gap-1 bg-gradient-to-r from-purple-600 to-cyan-600 hover:from-purple-500 hover:to-cyan-500 text-white py-2 px-4 rounded-md transition-all duration-300 transform hover:scale-105">
+            <Link href={"https://mylio.site/payment"} className="w-full flex items-center justify-center gap-1 bg-gradient-to-r from-purple-600 to-cyan-600 hover:from-purple-500 hover:to-cyan-500 text-white py-2 px-4 rounded-md transition-all duration-300 transform hover:scale-105">
               <CreditCard className="mr-2 h-4 w-4" /> {t('accountNotFound.payment')}
             </Link>
 
-            <Link href={"https://dgtportfolio.com/" + lang} className="w-full flex items-center justify-center gap-1 bg-[#00a896] hover:bg-[#008080] text-white py-2 px-4 rounded-md transition-all duration-300 transform hover:scale-105">
+            <Link href={"https://mylio.site/" + lang} className="w-full flex items-center justify-center gap-1 bg-[#00a896] hover:bg-[#008080] text-white py-2 px-4 rounded-md transition-all duration-300 transform hover:scale-105">
               <ArrowLeft className="mr-2 h-4 w-4" /> {t('accountNotFound.returnHome')}
             </Link>
 
-            <Link href={"https://dgtportfolio.com/support"} className="w-full flex items-center justify-center gap-1 bg-white border border-[#00a896] text-[#00a896] hover:bg-[#00a896] hover:text-white py-2 px-4 rounded-md transition-all duration-300">
+            <Link href={"https://mylio.site/support"} className="w-full flex items-center justify-center gap-1 bg-white border border-[#00a896] text-[#00a896] hover:bg-[#00a896] hover:text-white py-2 px-4 rounded-md transition-all duration-300">
               <LifeBuoy className="mr-2 h-4 w-4" /> {t('accountNotFound.contactSupport')}
             </Link>
           </div>

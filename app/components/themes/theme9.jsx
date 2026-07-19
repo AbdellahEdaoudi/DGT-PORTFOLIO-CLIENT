@@ -50,7 +50,7 @@ export default function Theme9({ userDetails, userLinks }) {
                     {/* Toolbar */}
                     <div className="flex justify-between items-center mb-8">
                         <h1 className="text-white text-2xl font-bold cursor-pointer hover:text-orange-400 transition-colors">
-                            <Link href={"https://dgtportfolio.com"}>{t('portfolio')}</Link>
+                            <Link href={"https://mylio.site"}>{t('portfolio')}</Link>
                         </h1>
                         <div className="flex gap-3">
                             {/* Copy Link */}

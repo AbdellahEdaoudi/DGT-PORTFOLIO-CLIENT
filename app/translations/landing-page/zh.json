@@ -5,6 +5,7 @@
         "pricing": "定价",
         "auth": {
             "signIn": "登录",
+            "signInWithGoogle": "使用 Google 登录",
             "getStarted": "开始使用",
             "updateProfile": "更新个人资料",
             "businessLinks": "商业链接",
@@ -32,7 +33,7 @@
             },
             {
                 "title": "您的专属作品集链接",
-                "description": "获取如 <strong>yourname.dgtportfolio.com</strong> 这样的个性化子域名，并在任何地方分享它。"
+                "description": "获取如 <strong>yourname.mylio.site</strong> 这样的个性化子域名，并在任何地方分享它。"
             },
             {
                 "title": "专业二维码",

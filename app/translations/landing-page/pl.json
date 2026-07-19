@@ -5,6 +5,7 @@
         "pricing": "Cennik",
         "auth": {
             "signIn": "Zaloguj się",
+            "signInWithGoogle": "Zaloguj się przez Google",
             "getStarted": "Rozpocznij",
             "updateProfile": "Aktualizuj profil",
             "businessLinks": "Linki biznesowe",
@@ -32,7 +33,7 @@
             },
             {
                 "title": "Twój własny link do portfolio",
-                "description": "Zdobądź spersonalizowaną subdomenę, taką jak <strong>twojanazwa.dgtportfolio.com</strong>, i udostępniaj ją wszędzie."
+                "description": "Zdobądź spersonalizowaną subdomenę, taką jak <strong>twojanazwa.mylio.site</strong>, i udostępniaj ją wszędzie."
             },
             {
                 "title": "Profesjonalny kod QR",

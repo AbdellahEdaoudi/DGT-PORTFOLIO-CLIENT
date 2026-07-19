@@ -9,7 +9,7 @@ const inter = Inter({ subsets: ['latin'] });
 const prompt = Prompt({ subsets: ['latin'], weight: '400' });
 
 export const metadata = {
-  metadataBase: new URL('https://dgtportfolio.com'),
+  metadataBase: new URL('https://mylio.site'),
   title: "DGT Portfolio - Build Your Professional Online Portfolio",
   description: "Create a professional portfolio website in minutes with DGT Portfolio. Showcase your projects, skills, experience, services, and achievements without writing a single line of code.",
   keywords: ["DGT Portfolio", "Portfolio Builder", "Personal Portfolio", "Showcase Skills", "Interactive Portfolio", "No Code Portfolio"],
@@ -26,7 +26,7 @@ export const metadata = {
   openGraph: {
     title: "Build Your Professional Online Portfolio - DGT Portfolio",
     description: "Create a professional portfolio website in minutes with DGT Portfolio. Showcase your projects, skills, experience, services, and achievements without writing a single line of code.",
-    url: "https://dgtportfolio.com",
+    url: "https://mylio.site",
     siteName: "DGT Portfolio",
     images: [
       {
@@ -86,10 +86,10 @@ export default function RootLayout({ children }) {
                 "@type": "WebSite",
                 "name": "DGT Portfolio",
                 "alternateName": "DGT Portfolio Builder",
-                "url": "https://dgtportfolio.com",
+                "url": "https://mylio.site",
                 "potentialAction": {
                   "@type": "SearchAction",
-                  "target": "https://dgtportfolio.com/search?q={search_term_string}",
+                  "target": "https://mylio.site/search?q={search_term_string}",
                   "query-input": "required name=search_term_string"
                 }
               },
@@ -97,8 +97,8 @@ export default function RootLayout({ children }) {
                 "@context": "https://schema.org",
                 "@type": "Organization",
                 "name": "DGT Portfolio",
-                "url": "https://dgtportfolio.com",
-                "logo": "https://dgtportfolio.com/logo.jpg",
+                "url": "https://mylio.site",
+                "logo": "https://mylio.site/logo.jpg",
                 "sameAs": [
                   "https://twitter.com/dgtportfolio",
                   "https://www.linkedin.com/company/dgtportfolio"

@@ -5,6 +5,7 @@
         "pricing": "الأسعار",
         "auth": {
             "signIn": "تسجيل الدخول",
+            "signInWithGoogle": "تسجيل الدخول باستخدام Google",
             "getStarted": "ابدأ الآن",
             "updateProfile": "تحديث الملف الشخصي",
             "businessLinks": "روابط الأعمال",
@@ -32,7 +33,7 @@
             },
             {
                 "title": "رابط محفظتك الخاص",
-                "description": "احصل على نطاق فرعي مخصص مثل <strong>yourname.dgtportfolio.com</strong> وشاركه في أي مكان."
+                "description": "احصل على نطاق فرعي مخصص مثل <strong>yourname.mylio.site</strong> وشاركه في أي مكان."
             },
             {
                 "title": "رمز QR احترافي",

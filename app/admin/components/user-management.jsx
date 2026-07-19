@@ -155,7 +155,7 @@ export default function UserManagement({ data, setData }) {
                   ).map((user) => {
                     const linksCount = data.links.filter((lnk) => lnk.useremail === user.email).length
                     const linksuser = data.links.filter((lnk) => lnk.useremail === user.email)
-                    const PORTFOLIO = `https://${user?.username}.dgtportfolio.com`
+                    const PORTFOLIO = `https://${user?.username}.mylio.site`
                     return (
                       <tr key={user._id} className="border-b border-purple-500/10 hover:bg-purple-500/10 transition">
                         <td className="px-4 py-2 text-white font-medium">

@@ -5,6 +5,7 @@
         "pricing": "Prezzi",
         "auth": {
             "signIn": "Accedi",
+            "signInWithGoogle": "Accedi con Google",
             "getStarted": "Inizia",
             "updateProfile": "Aggiorna Profilo",
             "businessLinks": "Link Aziendali",
@@ -32,7 +33,7 @@
             },
             {
                 "title": "Il tuo link personale",
-                "description": "Ottieni un sottodominio personalizzato come <strong>tuonome.dgtportfolio.com</strong> e condividilo ovunque."
+                "description": "Ottieni un sottodominio personalizzato come <strong>tuonome.mylio.site</strong> e condividilo ovunque."
             },
             {
                 "title": "Codice QR professionale",

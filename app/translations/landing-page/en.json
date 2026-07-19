@@ -5,6 +5,7 @@
         "pricing": "Pricing",
         "auth": {
             "signIn": "Sign In",
+            "signInWithGoogle": "Sign in with Google",
             "getStarted": "Get Started",
             "updateProfile": "Update Profile",
             "businessLinks": "Business Links",
@@ -32,7 +33,7 @@
             },
             {
                 "title": "Your Own Portfolio Link",
-                "description": "Get a personalized subdomain like <strong>yourname.dgtportfolio.com</strong> and share it anywhere."
+                "description": "Get a personalized subdomain like <strong>yourname.mylio.site</strong> and share it anywhere."
             },
             {
                 "title": "Professional QR Code",

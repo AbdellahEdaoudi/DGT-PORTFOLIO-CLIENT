@@ -45,7 +45,7 @@ export default function Theme11({ userDetails, userLinks }) {
             behavior: "smooth"
         });
     };
-    const PORTFOLIO = `https://${userDetails?.username}.dgtportfolio.com`
+    const PORTFOLIO = `https://${userDetails?.username}.mylio.site`
 
     // Generate random stars
     const [stars, setStars] = useState([]);
@@ -111,7 +111,7 @@ export default function Theme11({ userDetails, userLinks }) {
                 <header className="flex md:flex-row flex-col justify-between items-center mb-8 border-b border-cyan-900/50 pb-4 backdrop-blur-sm gap-4">
                     <div className="flex items-center gap-2">
                         <Rocket className="text-cyan-400" />
-                        <Link href="https://dgtportfolio.com" className="text-lg md:text-xl font-bold tracking-widest uppercase text-cyan-400 hover:text-cyan-300 shadow-cyan-500/50 drop-shadow-[0_0_5px_rgba(34,211,238,0.8)]">
+                        <Link href="https://mylio.site" className="text-lg md:text-xl font-bold tracking-widest uppercase text-cyan-400 hover:text-cyan-300 shadow-cyan-500/50 drop-shadow-[0_0_5px_rgba(34,211,238,0.8)]">
                             <span className="text-white">{t('portfolio')}</span>
                         </Link>
                         <Rocket className="text-cyan-400 md:hidden block" />

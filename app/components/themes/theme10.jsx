@@ -49,7 +49,7 @@ export default function Theme10({ userDetails, userLinks }) {
                     {/* Toolbar */}
                     <div className="flex justify-between items-center mb-8">
                         <h1 className="text-slate-100 text-2xl font-bold cursor-pointer hover:text-indigo-400 transition-colors">
-                            <Link href={"https://dgtportfolio.com"}>{t('portfolio')}</Link>
+                            <Link href={"https://mylio.site"}>{t('portfolio')}</Link>
                         </h1>
                         <div className="flex gap-3">
                             {/* Copy Link */}

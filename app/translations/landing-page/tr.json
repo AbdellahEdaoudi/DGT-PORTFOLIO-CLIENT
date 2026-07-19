@@ -5,6 +5,7 @@
         "pricing": "Fiyatlandırma",
         "auth": {
             "signIn": "Giriş Yap",
+            "signInWithGoogle": "Google ile giriş yap",
             "getStarted": "Başla",
             "updateProfile": "Profili Güncelle",
             "businessLinks": "İş Bağlantıları",
@@ -32,7 +33,7 @@
             },
             {
                 "title": "Kendi Portföy Bağlantınız",
-                "description": "Portföyünüz için <strong>adiniz.dgtportfolio.com</strong> gibi kişiselleştirilmiş bir alt alan adı edinin ve her yerde paylaşın."
+                "description": "Portföyünüz için <strong>adiniz.mylio.site</strong> gibi kişiselleştirilmiş bir alt alan adı edinin ve her yerde paylaşın."
             },
             {
                 "title": "Profesyonel QR Kodu",

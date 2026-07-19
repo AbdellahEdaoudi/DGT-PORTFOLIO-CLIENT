@@ -5,6 +5,7 @@
         "pricing": "Цены",
         "auth": {
             "signIn": "Войти",
+            "signInWithGoogle": "Войти через Google",
             "getStarted": "Начать",
             "updateProfile": "Обновить профиль",
             "businessLinks": "Бизнес-ссылки",
@@ -32,7 +33,7 @@
             },
             {
                 "title": "Ваша собственная ссылка на портфолио",
-                "description": "Получите персонализированный поддомен, такой как <strong>вашеимя.dgtportfolio.com</strong>, и делитесь им где угодно."
+                "description": "Получите персонализированный поддомен, такой как <strong>вашеимя.mylio.site</strong>, и делитесь им где угодно."
             },
             {
                 "title": "Профессиональный QR-код",

@@ -5,6 +5,7 @@
         "pricing": "Prissättning",
         "auth": {
             "signIn": "Logga in",
+            "signInWithGoogle": "Logga in med Google",
             "getStarted": "Kom igång",
             "updateProfile": "Uppdatera profil",
             "businessLinks": "Affärslänkar",
@@ -32,7 +33,7 @@
             },
             {
                 "title": "Din egen portfoliolänk",
-                "description": "Få en personlig underdomän som <strong>dittnamn.dgtportfolio.com</strong> och dela den var som helst."
+                "description": "Få en personlig underdomän som <strong>dittnamn.mylio.site</strong> och dela den var som helst."
             },
             {
                 "title": "Professionell QR-kod",

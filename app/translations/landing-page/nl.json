@@ -5,6 +5,7 @@
         "pricing": "Prijzen",
         "auth": {
             "signIn": "Inloggen",
+            "signInWithGoogle": "Inloggen met Google",
             "getStarted": "Starten",
             "updateProfile": "Profiel bijwerken",
             "businessLinks": "Zakelijke links",
@@ -32,7 +33,7 @@
             },
             {
                 "title": "Uw eigen portfolio-link",
-                "description": "Krijg een gepersonaliseerd subdomein zoals <strong>uw-naam.dgtportfolio.com</strong> en deel het overal."
+                "description": "Krijg een gepersonaliseerd subdomein zoals <strong>uw-naam.mylio.site</strong> en deel het overal."
             },
             {
                 "title": "Professionele QR-code",

@@ -71,7 +71,7 @@ export default function LanguageSwitcher() {
                 aria-label="Select Language"
             >
                 <span className={`fi fi-${currentFlag} rounded-sm`} />
-                <span className="uppercase text-sm font-semibold text-white">{currentLang}</span>
+                <span className="uppercase text-sm font-semibold text-white ">{currentLang}</span>
             </button>
 
             {isOpen && (

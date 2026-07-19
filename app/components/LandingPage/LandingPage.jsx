@@ -8,7 +8,7 @@ import LanguageSwitcher from "./LanguageSwitcher"
 import { getTranslation } from "../../translations/landing-page"
 
 export default function LandingPage({ lang }) {
-  const PORTFOLIO = `https://adam-carter.dgtportfolio.com`
+  const PORTFOLIO = `https://adam-carter.mylio.site`
   const t = getTranslation(lang || 'en');
 
   const featuresList = [

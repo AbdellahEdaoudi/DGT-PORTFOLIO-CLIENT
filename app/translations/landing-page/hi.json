@@ -5,6 +5,7 @@
         "pricing": "मूल्य निर्धारण",
         "auth": {
             "signIn": "साइन इन करें",
+            "signInWithGoogle": "Google के साथ साइन इन करें",
             "getStarted": "शुरू करें",
             "updateProfile": "प्रोफ़ाइल अपडेट करें",
             "businessLinks": "व्यापार लिंक",
@@ -32,7 +33,7 @@
             },
             {
                 "title": "आपका अपना पोर्टफोलियो लिंक",
-                "description": "अपने पोर्टफोलियो के लिए <strong>yourname.dgtportfolio.com</strong> जैसा व्यक्तिगत सबडोमेन प्राप्त करें और इसे कहीं भी साझा करें।"
+                "description": "अपने पोर्टफोलियो के लिए <strong>yourname.mylio.site</strong> जैसा व्यक्तिगत सबडोमेन प्राप्त करें और इसे कहीं भी साझा करें।"
             },
             {
                 "title": "पेशेवर क्यूआर कोड",

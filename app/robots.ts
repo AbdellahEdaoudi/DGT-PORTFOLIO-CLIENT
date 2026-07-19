@@ -16,6 +16,6 @@ export default function robots(): MetadataRoute.Robots {
         ],
       },
     ],
-    sitemap: 'https://dgtportfolio.com/sitemap.xml',
+    sitemap: 'https://mylio.site/sitemap.xml',
   }
 }

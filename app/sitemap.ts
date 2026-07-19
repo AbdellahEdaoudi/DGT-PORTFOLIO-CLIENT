@@ -1,11 +1,11 @@
 import { MetadataRoute } from 'next'
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const baseUrl = 'https://dgtportfolio.com'
-  
+  const baseUrl = 'https://mylio.site'
+
   // Static pages
   const languages = ['ar', 'es', 'fr', 'ru', 'ja', 'zh', 'de', 'nl', 'pt', 'it', 'hi', 'tr', 'ko', 'en', 'id', 'pl', 'sv', 'vi']
-  
+
   const basePages: MetadataRoute.Sitemap = [
     {
       url: baseUrl,
@@ -38,20 +38,20 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   // Fetch all usernames 
   let userPages: MetadataRoute.Sitemap = []
-  
+
   try {
     const backendUrl = process.env.BACKEND_URL || 'https://dgt-portfolio-server.vercel.app'
     const response = await fetch(`${backendUrl}/users/active-usernames`, {
       next: { revalidate: 3600 } // Revalidate every hour
     })
-    
+
     if (response.ok) {
       const data = await response.json()
       const usernames: string[] = data.usernames || []
-      
+
       // Add subdomain URLs for all users
       userPages = usernames.map((username) => ({
-        url: `https://${username}.dgtportfolio.com`,
+        url: `https://${username}.mylio.site`,
         lastModified: new Date(),
         changeFrequency: 'weekly' as const,
         priority: 0.9,
