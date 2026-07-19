@@ -5,6 +5,7 @@
         "pricing": "Цены",
         "auth": {
             "signIn": "Войти",
+            "signInWithGoogle": "Войти через Google",
             "getStarted": "Начать",
             "updateProfile": "Обновить профиль",
             "businessLinks": "Бизнес-ссылки",

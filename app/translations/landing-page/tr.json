@@ -5,6 +5,7 @@
         "pricing": "Fiyatlandırma",
         "auth": {
             "signIn": "Giriş Yap",
+            "signInWithGoogle": "Google ile giriş yap",
             "getStarted": "Başla",
             "updateProfile": "Profili Güncelle",
             "businessLinks": "İş Bağlantıları",

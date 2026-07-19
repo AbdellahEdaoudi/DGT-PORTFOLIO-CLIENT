@@ -5,6 +5,7 @@
         "pricing": "Prijzen",
         "auth": {
             "signIn": "Inloggen",
+            "signInWithGoogle": "Inloggen met Google",
             "getStarted": "Starten",
             "updateProfile": "Profiel bijwerken",
             "businessLinks": "Zakelijke links",

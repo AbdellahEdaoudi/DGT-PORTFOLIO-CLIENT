@@ -5,6 +5,7 @@
         "pricing": "料金",
         "auth": {
             "signIn": "サインイン",
+            "signInWithGoogle": "Google でログイン",
             "getStarted": "始める",
             "updateProfile": "プロフィールを更新",
             "businessLinks": "ビジネスリンク",

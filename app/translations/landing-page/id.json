@@ -5,6 +5,7 @@
         "pricing": "Harga",
         "auth": {
             "signIn": "Masuk",
+            "signInWithGoogle": "Masuk dengan Google",
             "getStarted": "Mulai",
             "updateProfile": "Perbarui Profil",
             "businessLinks": "Tautan Bisnis",

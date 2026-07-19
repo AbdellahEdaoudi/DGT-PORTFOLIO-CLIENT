@@ -5,6 +5,7 @@
         "pricing": "Preços",
         "auth": {
             "signIn": "Entrar",
+            "signInWithGoogle": "Fazer login com o Google",
             "getStarted": "Começar",
             "updateProfile": "Atualizar Perfil",
             "businessLinks": "Links Comerciais",

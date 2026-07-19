@@ -5,6 +5,7 @@
         "pricing": "Prissättning",
         "auth": {
             "signIn": "Logga in",
+            "signInWithGoogle": "Logga in med Google",
             "getStarted": "Kom igång",
             "updateProfile": "Uppdatera profil",
             "businessLinks": "Affärslänkar",

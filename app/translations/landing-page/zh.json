@@ -5,6 +5,7 @@
         "pricing": "定价",
         "auth": {
             "signIn": "登录",
+            "signInWithGoogle": "使用 Google 登录",
             "getStarted": "开始使用",
             "updateProfile": "更新个人资料",
             "businessLinks": "商业链接",

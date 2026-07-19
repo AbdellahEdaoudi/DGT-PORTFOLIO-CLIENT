@@ -2,7 +2,7 @@
 import { signIn, signOut, useSession } from "next-auth/react"
 import { useContext, useState, useEffect, useRef } from "react";
 import { MyContext } from "../../context/context";
-import { BookUser, LogOut, MessageSquare, NotebookText, Globe, Menu, CreditCard } from "../Icons";
+import { BookUser, LogOut, MessageSquare, NotebookText, GoogleIcon, Menu, CreditCard } from "../Icons";
 import Link from "next/link";
 import Image from "next/image";
 import { getTranslation } from "../../translations/landing-page";
@@ -11,6 +11,7 @@ export default function AuthButtons({ lang }) {
   const t = getTranslation(lang || 'en');
   const labels = {
     signIn: t('navbar.auth.signIn') || "Sign In",
+    signInWithGoogle: t('navbar.auth.signInWithGoogle') || "Sign in with Google",
     getStarted: t('navbar.auth.getStarted') || "Get Started",
     updateProfile: t('navbar.auth.updateProfile') || "Update Profile",
     businessLinks: t('navbar.auth.businessLinks') || "Business Links",
@@ -194,15 +195,10 @@ export default function AuthButtons({ lang }) {
     <div className="flex gap-4">
       <button
         onClick={() => signIn("google", { redirect: true, callbackUrl: "/" })}
-        className="md:block hidden px-6 py-2 rounded-full border border-purple-500/50 hover:border-purple-400 transition"
+        className="flex items-center gap-2 p-3 rounded-full  text-white bg-slate-900/50 font-semibold text-sm shadow-md hover:shadow-purple-500/50 hover:shadow-lg hover:scale-105 active:scale-95 transition-all duration-200 ring-1 ring-white/20"
       >
-        {labels.signIn}
-      </button>
-      <button
-        onClick={() => signIn("google", { redirect: true, callbackUrl: "/" })}
-        className="px-6 py-2 rounded-full bg-gradient-to-r from-cyan-400 to-purple-500 hover:shadow-lg hover:shadow-purple-500/50 transition"
-      >
-        {labels.getStarted}
+        <GoogleIcon />
+        {labels.signInWithGoogle}
       </button>
     </div>
   );

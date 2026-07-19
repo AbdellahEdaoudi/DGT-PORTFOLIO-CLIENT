@@ -5,6 +5,7 @@
         "pricing": "가격",
         "auth": {
             "signIn": "로그인",
+            "signInWithGoogle": "Google로 로그인",
             "getStarted": "시작하기",
             "updateProfile": "프로필 업데이트",
             "businessLinks": "비즈니스 링크",

@@ -5,6 +5,7 @@
         "pricing": "मूल्य निर्धारण",
         "auth": {
             "signIn": "साइन इन करें",
+            "signInWithGoogle": "Google के साथ साइन इन करें",
             "getStarted": "शुरू करें",
             "updateProfile": "प्रोफ़ाइल अपडेट करें",
             "businessLinks": "व्यापार लिंक",
