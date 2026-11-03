@@ -14,13 +14,13 @@ export default function GlobalLoader() {
                     <div className="absolute inset-0 rounded-full border-[3px] border-t-purple-600 border-r-transparent border-b-transparent border-l-transparent animate-spin"></div>
 
                     {/* Logo */}
-                    <div className="relative w-16 h-16">
+                    <div className="relative w-20 h-20 flex items-center justify-center">
                         <Image
-                            src="/Qrimage.jpg"
-                            alt="DGT Portfolio Logo"
-                            width={80}
-                            height={80}
-                            className="w-full h-full object-contain"
+                            src="/Logowbg.png"
+                            alt="Myportfolio Logo"
+                            width={160}
+                            height={120}
+                            className="w-full h-full object-contain drop-shadow-[0_0_15px_rgba(6,182,212,0.4)]"
                             priority
                         />
                     </div>
@@ -29,7 +29,7 @@ export default function GlobalLoader() {
                 {/* Brand Text */}
                 <div className="flex flex-col items-center gap-2">
                     <h2 className="text-2xl font-bold text-gray-900 tracking-tight">
-                        DGTPortfolio
+                        Myportfolio
                     </h2>
                     <div className="flex items-center gap-2">
                         <span className="text-sm font-medium text-gray-500">Loading</span>

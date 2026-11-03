@@ -1,16 +1,23 @@
 'use client';
 
-import { CheckCircle } from '../components/Icons';
+import { CheckCircle } from '../components/lucide-react';
 import Link from 'next/link';
-import { useContext } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { MyContext } from '../context/context';
 import { getTranslation } from '../translations/others';
 
 export default function Success() {
-  const { userDetails } = useContext(MyContext);
+  const { data } = useContext(MyContext);
+  const userDetails = data?.user;
   const currentLang = userDetails?.displayLanguage || 'en';
-  const t = getTranslation(currentLang);
+  const [dictionary, setDictionary] = useState({});
   const isAr = currentLang === 'ar';
+
+  useEffect(() => {
+    getTranslation(currentLang).then((dict) => setDictionary(dict || {}));
+  }, [currentLang]);
+
+  const content = dictionary?.success || {};
 
   return (
     <main className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-black flex items-center justify-center px-4 py-4" dir={isAr ? 'rtl' : 'ltr'}>
@@ -25,24 +32,24 @@ export default function Success() {
           </div>
 
           <h1 className="text-2xl sm:text-3xl font-extrabold text-white mb-1 drop-shadow-md tracking-tight">
-            {t('success.paymentSuccessful') || (isAr ? "🎉 تم الدفع بنجاح! 🎉" : "🎉 Payment Successful! 🎉")}
+            {content.paymentSuccessful || (isAr ? "🎉 تم الدفع بنجاح! 🎉" : "🎉 Payment Successful! 🎉")}
           </h1>
           
           <h2 className="text-lg sm:text-xl font-semibold text-green-400 mb-4">
-            {t('success.welcomeMessage') || (isAr ? "مرحباً بك في DGT Portfolio" : "Welcome to DGT Portfolio")}
+            {content.welcomeMessage || (isAr ? "مرحباً بك في Myportfolio" : "Welcome to Myportfolio")}
           </h2>
 
           <p className="text-gray-300 mb-5 leading-snug text-sm sm:text-base">
-            {t('success.activationMessage') || (isAr ? "تم تفعيل خطة مدى الحياة بنجاح. لديك الآن وصول غير محدود إلى جميع الميزات." : "Your Lifetime Plan has been activated successfully. You now have unlimited access to all portfolio features.")}
+            {content.activationMessage || (isAr ? "تم تفعيل خطة مدى الحياة بنجاح. لديك الآن وصول غير محدود إلى جميع الميزات." : "Your Lifetime Plan has been activated successfully. You now have unlimited access to all portfolio features.")}
           </p>
 
           <div className="bg-slate-900/50 rounded-xl p-4 mb-6 text-left border border-slate-700/50">
             <ul className="space-y-2">
               {[
-                t('success.features.lifetime') || (isAr ? "وصولك مدى الحياة مفعل الآن" : "Your lifetime access is now active"),
-                t('success.features.cv') || (isAr ? "مولد السيرة الذاتية جاهز للاستخدام" : "CV generator is ready to use"),
-                t('success.features.publishing') || (isAr ? "نشر البورتفوليو مفعل" : "Portfolio publishing is enabled"),
-                t('success.features.updates') || (isAr ? "ستتلقى جميع التحديثات المستقبلية تلقائياً" : "You will receive all future updates automatically")
+                content.features?.lifetime || (isAr ? "وصولك مدى الحياة مفعل الآن" : "Your lifetime access is now active"),
+                content.features?.cv || (isAr ? "مولد السيرة الذاتية جاهز للاستخدام" : "CV generator is ready to use"),
+                content.features?.publishing || (isAr ? "نشر البورتفوليو مفعل" : "Portfolio publishing is enabled"),
+                content.features?.updates || (isAr ? "ستتلقى جميع التحديثات المستقبلية تلقائياً" : "You will receive all future updates automatically")
               ].map((feature, idx) => (
                 <li key={idx} className="flex items-center gap-3 text-gray-200 text-sm sm:text-base">
                   <div className="w-4 h-4 rounded-full bg-green-500/20 flex items-center justify-center flex-shrink-0">
@@ -56,12 +63,12 @@ export default function Success() {
 
           <Link href={`/dp/${userDetails?.username || ''}`}>
             <button className="w-full bg-gradient-to-r from-green-500 to-emerald-600 text-white font-bold py-3 px-6 rounded-full shadow-lg shadow-green-500/30 hover:shadow-green-500/50 hover:scale-[1.02] transition-all duration-300">
-              {t('success.goToPortfolio') || (isAr ? "عرض البورتفوليو الخاص بي" : "View My Portfolio")}
+              {content.goToPortfolio || (isAr ? "عرض البورتفوليو الخاص بي" : "View My Portfolio")}
             </button>
           </Link>
 
           <p className="text-slate-400 text-xs sm:text-sm mt-5">
-            {t('success.needHelp') || (isAr ? "هل تحتاج مساعدة للبدء؟ تواصل مع فريق الدعم في أي وقت." : "Need help getting started? Contact our support team anytime.")}
+            {content.needHelp || (isAr ? "هل تحتاج مساعدة للبدء؟ تواصل مع فريق الدعم في أي وقت." : "Need help getting started? Contact our support team anytime.")}
           </p>
         </div>
       </div>

@@ -1,6 +1,8 @@
 "use client"
 import React, { useContext, useEffect, useState } from 'react'
-import axios from 'axios'
+import axios from 'axios';
+import { handleApiError } from "../../utils/apiErrorHandler";
+const SERVER_URL = process.env.NEXT_PUBLIC_SERVER_URL;
 import { MyContext } from '../../context/context'
 import { getTranslation } from '../../translations/portfolio'
 import MagicalLoader from '../MagicalLoader'
@@ -22,12 +24,21 @@ import { useToast } from '../Toast'
 
 export default function UserPortfolio({ username }) {
     const [userDetails, setUserDetails] = useState(null)
-    const [userLinks, setUserLinks] = useState([])
     const [loadingUsers, setLoadingUsers] = useState(true)
-    const { EmailUser } = useContext(MyContext)
-    const t = getTranslation(userDetails?.displayLanguage || 'en');
+    const { data } = useContext(MyContext)
+    const currentUsername = data?.user?.username || ""
+    const lang = userDetails?.displayLanguage || 'en';
+    const [dictionary, setDictionary] = useState(null);
     const [notFound, setNotFound] = useState(false)
     const toast = useToast();
+
+    useEffect(() => {
+        const loadTranslation = async () => {
+            const dict = await getTranslation(lang);
+            setDictionary(dict);
+        };
+        loadTranslation();
+    }, [lang]);
 
     useEffect(() => {
         const fetchUsers = async () => {
@@ -37,67 +48,63 @@ export default function UserPortfolio({ username }) {
 
                 let parsed = null;
                 if (cachedData) {
-                    parsed = JSON.parse(cachedData);
                     try {
-                        const lastUpdateRes = await axios.get(`/api/proxy/last-updated/username/${username}`);
-                        if (lastUpdateRes.data?.success && lastUpdateRes.data?.lastUpdated) {
-                            const serverTime = lastUpdateRes.data.lastUpdated;
-                            const localTime = parsed.lastUpdated || 0;
-
-                            if (localTime >= serverTime) {
-                                setUserDetails(parsed.user);
-                                setUserLinks(parsed.links || []);
-                                setLoadingUsers(false);
-                                return;
-                            }
+                        parsed = JSON.parse(cachedData);
+                        if (parsed?.user) {
+                            setUserDetails(parsed.user);
+                            setLoadingUsers(false);
                         }
                     } catch (e) {
-                        console.error("Error checking last updated:", e);
+                        // Ignore cache parse error
                     }
                 }
 
-                const res = await axios.get(`/api/proxy/users/${username}`);
-                setUserDetails(res.data.user);
-                setUserLinks(res.data.links || []);
+                const params = parsed?.user?.updatedAt ? { lastUpdated: parsed.user.updatedAt } : {};
+                const res = await axios.get(`${SERVER_URL}/api/users/${username}`, { params });
 
-                localStorage.setItem(cacheKey, JSON.stringify({
-                    user: res.data.user,
-                    links: res.data.links || [],
-                    lastUpdated: Date.now()
-                }));
+                if (res.data?.updated === false && parsed?.user) {
+                    return;
+                }
+
+                if (res.data?.user) {
+                    setUserDetails(res.data.user);
+
+                    localStorage.setItem(cacheKey, JSON.stringify({
+                        user: res.data.user,
+                        lastUpdated: Date.now()
+                    }));
+                }
 
             } catch (error) {
                 if (error.response) {
                     const msg = error.response.data.message;
-                    const ownerEmail = error.response.data.email || "not found";
+                    const ownerUsername = error.response.data.username || username;
                     if (error.response.status === 404) {
                         if (msg === "User not found") {
                             setNotFound(true);
-                        } else if (msg === "No payment found for this user" && EmailUser !== ownerEmail) {
-                            // setNoPayment(true);
+                        } else if (msg === "No payment found for this user" && currentUsername !== ownerUsername) {
                             setNotFound(true);
-                        } else if (msg === "No payment found for this user" && EmailUser === ownerEmail) {
-                            toast.error(t("errors.noPaymentFound"));
+                        } else if (msg === "No payment found for this user" && currentUsername === ownerUsername) {
+                            toast.error(dictionary?.errors?.noPaymentFound || "No payment was found for your account. Please complete payment to continue.");
                             window.location.href = "https://mylio.site/payment"
                         }
-                    } else if (error.response.status === 403 && EmailUser !== ownerEmail) {
-                        // setPaymentInactive(true);
+                    } else if (error.response.status === 403 && currentUsername !== ownerUsername) {
                         setNotFound(true);
-                    } else if (error.response.status === 403 && EmailUser === ownerEmail) {
-                        toast.error(t("errors.paymentNotActive"));
+                    } else if (error.response.status === 403 && currentUsername === ownerUsername) {
+                        toast.error(dictionary?.errors?.paymentNotActive || "Your payment is not active. Please complete payment to regain access.");
                         window.location.href = "https://mylio.site/payment"
                     } else {
-                        console.error(t("errors.fetchingUserDetails"), error);
+                        await handleApiError({ error, defaultErrorMsg: dictionary?.errors?.fetchingUserDetails || "Error fetching user details:", toast });
                     }
                 } else {
-                    console.error(t("errors.networkError"), error);
+                    await handleApiError({ error, defaultErrorMsg: dictionary?.errors?.networkError || "Network error:", toast });
                 }
             } finally {
                 setLoadingUsers(false);
             }
         };
         fetchUsers();
-    }, [username, EmailUser]);
+    }, [username, currentUsername]);
 
     if (loadingUsers) return <MagicalLoader />
     if (notFound) return <AccountNotFound />
@@ -105,38 +112,36 @@ export default function UserPortfolio({ username }) {
     const renderTheme = () => {
         switch (userDetails?.theme) {
             case 1:
-                return <Theme1 userDetails={userDetails} userLinks={userLinks} />
+                return <Theme1 userDetails={userDetails} content={dictionary} />
             case 2:
-                return <Theme2 userDetails={userDetails} userLinks={userLinks} />
+                return <Theme2 userDetails={userDetails} content={dictionary} />
             case 3:
-                return <Theme3 userDetails={userDetails} userLinks={userLinks} />
+                return <Theme3 userDetails={userDetails} content={dictionary} />
             case 4:
-                return <Theme4 userDetails={userDetails} userLinks={userLinks} />
+                return <Theme4 userDetails={userDetails} content={dictionary} />
             case 5:
-                return <Theme5 userDetails={userDetails} userLinks={userLinks} />
+                return <Theme5 userDetails={userDetails} content={dictionary} />
             case 6:
-                return <Theme6 userDetails={userDetails} userLinks={userLinks} />
+                return <Theme6 userDetails={userDetails} content={dictionary} />
             case 7:
-                return <Theme7 userDetails={userDetails} userLinks={userLinks} />
+                return <Theme7 userDetails={userDetails} content={dictionary} />
             case 8:
-                return <Theme8 userDetails={userDetails} userLinks={userLinks} />
+                return <Theme8 userDetails={userDetails} content={dictionary} />
             case 9:
-                return <Theme9 userDetails={userDetails} userLinks={userLinks} />
+                return <Theme9 userDetails={userDetails} content={dictionary} />
             case 10:
-                return <Theme10 userDetails={userDetails} userLinks={userLinks} />
+                return <Theme10 userDetails={userDetails} content={dictionary} />
             case 11:
-                return <Theme11 userDetails={userDetails} userLinks={userLinks} />
+                return <Theme11 userDetails={userDetails} content={dictionary} />
             case 12:
-                return <Theme12 userDetails={userDetails} userLinks={userLinks} />
+                return <Theme12 userDetails={userDetails} content={dictionary} />
             case 13:
-                return <Theme13 userDetails={userDetails} userLinks={userLinks} />
+                return <Theme13 userDetails={userDetails} content={dictionary} />
             default:
-                return userDetails ? <Theme1 userDetails={userDetails} userLinks={userLinks} /> :
+                return userDetails ? <Theme1 userDetails={userDetails} content={dictionary} /> :
                     <MagicalLoader />
         }
     }
 
     return <div>{renderTheme()}</div>
 }
-
-

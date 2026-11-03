@@ -1,4 +1,6 @@
-const dictionaries = {
+// Helper to dynamically load metadata for a given locale
+
+const metadataMap = {
     en: () => import('./en.json').then((module) => module.default),
     ar: () => import('./ar.json').then((module) => module.default),
     fr: () => import('./fr.json').then((module) => module.default),
@@ -17,12 +19,16 @@ const dictionaries = {
     pl: () => import('./pl.json').then((module) => module.default),
     sv: () => import('./sv.json').then((module) => module.default),
     vi: () => import('./vi.json').then((module) => module.default),
-}
+};
 
 export const getMetadata = async (locale) => {
     try {
-        return await dictionaries[locale]()
+        if (metadataMap[locale]) {
+            return await metadataMap[locale]();
+        }
+        return await metadataMap['en']();
     } catch (error) {
-        return await dictionaries['en']()
+        console.warn(`Failed to load metadata for locale "${locale}":`, error);
+        return await metadataMap['en']();
     }
-}
+};

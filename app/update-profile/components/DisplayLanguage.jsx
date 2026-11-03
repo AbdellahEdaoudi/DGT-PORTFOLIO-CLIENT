@@ -1,16 +1,15 @@
 "use client"
 import 'flag-icons/css/flag-icons.min.css'
-import axios from 'axios'
-import { CheckCheck, Loader, Globe } from '../../components/Icons'
-import React, { useState } from 'react'
+import axios from 'axios';
+import { handleApiError } from "../../utils/apiErrorHandler";
+const SERVER_URL = process.env.NEXT_PUBLIC_SERVER_URL;
+import { CheckCheck, Loader, Globe } from '../../components/lucide-react'
+import { useState } from 'react'
 import { useToast } from '../../components/Toast'
-import { getTranslation } from '../../translations/update-profile'
 
-
-function DisplayLanguage({ userData, setUserDetails }) {
+function DisplayLanguage({ data, setData, content }) {
     const toast = useToast()
-    const [displayLanguage, setDisplayLanguage] = useState(userData?.displayLanguage || "en")
-    const t = getTranslation(displayLanguage || 'en');
+    const [displayLanguage, setDisplayLanguage] = useState(data?.user?.displayLanguage || "en")
     const [loading, setLoading] = useState(false)
 
     const handleSave = async (e) => {
@@ -18,15 +17,26 @@ function DisplayLanguage({ userData, setUserDetails }) {
         setLoading(true)
 
         try {
-            await axios.put(`/api/proxy/users/update/display-language`, { displayLanguage })
-            toast.success(t('userInfo.savedSuccessfully'))
-            setUserDetails(prev => ({
-                ...(prev || {}),
-                displayLanguage
+            await axios.put(`${SERVER_URL}/api/users/update/display-language`, { displayLanguage }, { withCredentials: true })
+            toast.success(content?.savedSuccessfully || "Saved successfully!")
+            if (setData) {
+                setData(prev => ({
+                    ...prev,
+                    user: {
+                        ...(prev?.user || {}),
+                        displayLanguage
+                    }
+                }))
+            }
+            localStorage.setItem(`data_${data?.user?.username}`, JSON.stringify({
+                ...data,
+                user: {
+                    ...(data?.user || {}),
+                    displayLanguage
+                }
             }))
         } catch (error) {
-            console.error("Error updating display language:", error)
-            toast.error(t("displayLanguage.errorMessage") || "Failed to update display language")
+            await handleApiError({ error, defaultErrorMsg: content?.errorMessage || "Failed to update display language", toast });
         } finally {
             setLoading(false)
         }
@@ -57,7 +67,7 @@ function DisplayLanguage({ userData, setUserDetails }) {
     const currentFlag = languages.find(l => l.value === displayLanguage)?.flag || 'gb';
 
     return (
-        <form onSubmit={handleSave} className="relative w-full" dir={userData?.displayLanguage === 'ar' ? 'rtl' : 'ltr'}>
+        <form onSubmit={handleSave} className="relative w-full" dir={data?.user?.displayLanguage === 'ar' ? 'rtl' : 'ltr'}>
             <div className="bg-white/80 md:p-2 space-y-8">
 
                 {/* Header Section */}
@@ -68,10 +78,10 @@ function DisplayLanguage({ userData, setUserDetails }) {
                         </div>
                         <div className="space-y-1">
                             <h2 className="text-lg font-bold text-gray-800">
-                                {t('displayLanguage.title')}
+                                {content?.title || "Display Language"}
                             </h2>
                             <p className="text-gray-500 text-xs md:text-sm max-w-2xl">
-                                {t('displayLanguage.description')}
+                                {content?.description || "Choose the language in which your portfolio will be displayed to visitors."}
                             </p>
                         </div>
                     </div>
@@ -90,12 +100,12 @@ function DisplayLanguage({ userData, setUserDetails }) {
                         {loading ? (
                             <>
                                 <Loader size={20} className="animate-spin" />
-                                <span>{t('displayLanguage.saving')}</span>
+                                <span>{content?.saving || "Saving..."}</span>
                             </>
                         ) : (
                             <>
                                 <CheckCheck size={20} />
-                                <span>{t('displayLanguage.save')}</span>
+                                <span>{content?.save || "Save"}</span>
                             </>
                         )}
                     </button>
@@ -173,12 +183,12 @@ function DisplayLanguage({ userData, setUserDetails }) {
                         {loading ? (
                             <>
                                 <Loader size={20} className="animate-spin" />
-                                <span>{t('displayLanguage.saving')}</span>
+                                <span>{content?.saving || "Saving..."}</span>
                             </>
                         ) : (
                             <>
                                 <CheckCheck size={20} />
-                                <span>{t('displayLanguage.save')}</span>
+                                <span>{content?.save || "Save"}</span>
                             </>
                         )}
                     </button>

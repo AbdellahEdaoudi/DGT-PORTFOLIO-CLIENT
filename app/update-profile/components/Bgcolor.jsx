@@ -1,41 +1,54 @@
 "use client";
 import React, { useState } from "react";
 import axios from "axios";
+import { handleApiError } from "../../utils/apiErrorHandler";
 import { useToast } from "../../components/Toast";
-import { CheckCheck, Loader } from "../../components/Icons";
+import { CheckCheck, Loader } from "../../components/lucide-react";
 import Theme1 from "../../components/themes/theme1";
-import { getTranslation } from '../../translations/update-profile'
 
-export default function Bgcolor({ userData, setUserDetails }) {
+export default function Bgcolor({ data, setData, content }) {
   const toast = useToast();
-  const t = getTranslation(userData?.displayLanguage || 'en');
-  const [bgcolorp, setBgcolorp] = useState(userData.bgcolorp || "#1f2937");
+  const user = data?.user || {};
+  const [bgcolor, setBgcolor] = useState(user.bgcolor || "#1f2937");
   const [loading, setLoading] = useState(false);
+  const SERVER_URL = process.env.NEXT_PUBLIC_SERVER_URL;
 
   const saveBackgroundColor = async () => {
     setLoading(true);
     try {
-      await axios.put(`/api/proxy/users/update/bgcolor`, { bgcolorp });
-      if (setUserDetails) {
-        setUserDetails(prev => ({ ...prev, bgcolorp: bgcolorp }))
+      await axios.put(`${SERVER_URL}/api/users/update/bgcolor`, { bgcolor }, { withCredentials: true });
+      if (setData) {
+        setData(prev => ({
+          ...prev,
+          user: {
+            ...(prev?.user || {}),
+            bgcolor: bgcolor
+          }
+        }))
       }
-      toast.success(t('bgColor.savedSuccessfully'));
+      localStorage.setItem(`data_${data?.user?.username}`, JSON.stringify({
+        ...data,
+        user: {
+          ...(data?.user || {}),
+          bgcolor: bgcolor
+        }
+      }));
+      toast.success(content?.savedSuccessfully || "Saved successfully!");
     } catch (error) {
-      console.error("Error updating background color:", error);
-      toast.error(t('bgColor.errorMessage'));
+      await handleApiError({ error, defaultErrorMsg: content?.errorMessage || "Error saving", toast });
     } finally {
       setLoading(false);
     }
   };
 
   return (
-    <div className="" dir={userData?.displayLanguage === 'ar' ? 'rtl' : 'ltr'}>
+    <div className="" dir={user?.displayLanguage === 'ar' ? 'rtl' : 'ltr'}>
       <div>
-        <label className="block text-lg font-bold text-gray-800 mb-3">🎨 {t('bgColor.title')}</label>
+        <label className="block text-lg font-bold text-gray-800 mb-3">🎨 {content?.title || "Background Color"}</label>
         <input
           type="color"
-          value={bgcolorp}
-          onChange={(e) => setBgcolorp(e.target.value)}
+          value={bgcolor}
+          onChange={(e) => setBgcolor(e.target.value)}
           className="w-full h-12 rounded-lg cursor-pointer border-2 border-gray-300 transition hover:shadow-lg"
         />
       </div>
@@ -47,14 +60,14 @@ export default function Bgcolor({ userData, setUserDetails }) {
         >
           {loading ? (
             <>
-              <Loader size={20} className="animate-spin" /> {t('bgColor.saving')}
+              <Loader size={20} className="animate-spin" /> {content?.saving || "Saving..."}
             </>
           ) : (
-            `💾 ${t('bgColor.save')}`
+            `💾 ${content?.save || "Save"}`
           )}
         </button>
       </div>
-      <Theme1 userDetails={userData} bgcolor={bgcolorp} />
+      <Theme1 userDetails={user} bgcolor={bgcolor} />
     </div>
   );
 }

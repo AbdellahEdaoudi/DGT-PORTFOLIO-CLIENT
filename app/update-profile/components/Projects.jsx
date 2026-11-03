@@ -1,6 +1,9 @@
 "use client";
 import axios from "axios";
-import React, { useState } from "react";
+import imageCompression from "browser-image-compression";
+import { handleApiError } from "../../utils/apiErrorHandler";
+const SERVER_URL = process.env.NEXT_PUBLIC_SERVER_URL;
+import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import { useToast } from "../../components/Toast";
 import { createPortal } from "react-dom";
@@ -16,8 +19,7 @@ import {
   AlertCircle,
   GripVertical,
   ImagePlus,
-} from "../../components/Icons";
-import { getTranslation } from "../../translations/update-profile";
+} from "../../components/lucide-react";
 import {
   DndContext,
   closestCenter,
@@ -62,13 +64,13 @@ const SortableItem = ({ id, children }) => {
   );
 };
 
-export default function Projects({ userData, setUserDetails }) {
+export default function Projects({ data, setData, content }) {
   const toast = useToast();
-  const t = getTranslation(userData?.displayLanguage || "en");
-
+  const user = data?.user || {};
+  
   // Initialize projects with collapsed: true and localId
   const [projects, setProjects] = useState(
-    (userData.projects || []).map((p) => ({
+    (user.projects || []).map((p) => ({
       ...p,
       collapsed: true,
       localId: p._id || `id-${Math.random().toString(36).substr(2, 9)}`,
@@ -77,7 +79,7 @@ export default function Projects({ userData, setUserDetails }) {
 
   // Track original order for comparison
   const [originalOrder, setOriginalOrder] = useState(
-    (userData.projects || []).filter((p) => p._id).map((p) => p._id),
+    (user.projects || []).filter((p) => p._id).map((p) => p._id),
   );
 
   const [loading, setLoading] = useState(false);
@@ -91,7 +93,7 @@ export default function Projects({ userData, setUserDetails }) {
   // Per-project image state: { [localId]: { preview: string|null, file: File|null } }
   const [projectImages, setProjectImages] = useState(() => {
     const init = {};
-    (userData.projects || []).forEach((p, i) => {
+    (user.projects || []).forEach((p, i) => {
       const localId = p._id || `id-${i}`;
       init[localId] = { preview: p.image || null, file: null };
     });
@@ -131,51 +133,28 @@ export default function Projects({ userData, setUserDetails }) {
     }
   };
 
-  // Image compression handler (same as Userinfo.jsx)
-  const handleProjectImageUpload = (localId, e) => {
+  // Image compression handler
+  const handleProjectImageUpload = async (localId, e) => {
     const file = e.target.files?.[0];
     if (!file) return;
-    const reader = new FileReader();
-    reader.onloadend = () => {
-      const img = new window.Image();
-      img.onload = () => {
-        const canvas = document.createElement('canvas');
-        let width = img.width;
-        let height = img.height;
-        const maxSize = 1200;
-        if (width > height && width > maxSize) {
-          height = (height * maxSize) / width;
-          width = maxSize;
-        } else if (height > maxSize) {
-          width = (width * maxSize) / height;
-          height = maxSize;
-        }
-        canvas.width = width;
-        canvas.height = height;
-        canvas.getContext('2d').drawImage(img, 0, 0, width, height);
-        const targetSize = 200 * 1024;
-        const compressImage = (qual) => {
-          canvas.toBlob((blob) => {
-            if (blob.size > targetSize && qual > 0.1) {
-              compressImage(qual - 0.1);
-            } else {
-              const compressedFile = new File([blob], file.name, { type: 'image/jpeg', lastModified: Date.now() });
-              const previewReader = new FileReader();
-              previewReader.onloadend = () => {
-                setProjectImages(prev => ({
-                  ...prev,
-                  [localId]: { preview: previewReader.result, file: compressedFile },
-                }));
-              };
-              previewReader.readAsDataURL(compressedFile);
-            }
-          }, 'image/jpeg', qual);
-        };
-        compressImage(0.8);
-      };
-      img.src = reader.result;
-    };
-    reader.readAsDataURL(file);
+    try {
+      const compressedBlob = await imageCompression(file, {
+        maxSizeMB: 0.19,
+        maxWidthOrHeight: 1200,
+        useWebWorker: true,
+      });
+      const compressedFile = new File([compressedBlob], file.name, {
+        type: compressedBlob.type || file.type,
+        lastModified: Date.now(),
+      });
+      const dataUrl = await imageCompression.getDataUrlFromFile(compressedFile);
+      setProjectImages(prev => ({
+        ...prev,
+        [localId]: { preview: dataUrl, file: compressedFile },
+      }));
+    } catch (err) {
+      console.error("Image compression error:", err);
+    }
   };
 
   const addArrayItem = (array, setArray, newItem) => {
@@ -290,8 +269,9 @@ export default function Projects({ userData, setUserDetails }) {
       }
 
       const res = await axios.put(
-        "/api/proxy/users/update/projects/item",
-        formData
+        `${SERVER_URL}/api/users/update/projects/item`,
+        formData,
+        { withCredentials: true }
       );
 
       const newProjectsList = res.data.projects;
@@ -309,9 +289,22 @@ export default function Projects({ userData, setUserDetails }) {
       });
 
       setProjects(mergedProjects);
-      if (setUserDetails) {
-        setUserDetails((prev) => ({ ...prev, projects: newProjectsList }));
+      if (setData) {
+        setData((prev) => ({
+          ...prev,
+          user: {
+            ...(prev?.user || {}),
+            projects: newProjectsList,
+          },
+        }));
       }
+      localStorage.setItem(`data_${data?.user?.username}`, JSON.stringify({
+        ...data,
+        user: {
+          ...(data?.user || {}),
+          projects: newProjectsList,
+        },
+      }));
 
       // Update projectImages with the final Cloudinary URL from server
       const savedProject = mergedProjects[index];
@@ -322,7 +315,7 @@ export default function Projects({ userData, setUserDetails }) {
         }));
       }
 
-      toast.success(t("projects.savedSuccessfully"));
+      toast.success(content?.savedSuccessfully);
       setValidationErrors((prev) => {
         const next = { ...prev };
         delete next[index];
@@ -335,8 +328,7 @@ export default function Projects({ userData, setUserDetails }) {
         setTimeout(() => setHighlightedId(null), 2000);
       }
     } catch (error) {
-      console.error("Error saving project:", error);
-      toast.error(t("projects.errorMessage"));
+      await handleApiError({ error, defaultErrorMsg: content?.errorMessage, toast });
     } finally {
       setSavingIds((prev) => {
         const next = new Set(prev);
@@ -362,7 +354,8 @@ export default function Projects({ userData, setUserDetails }) {
     setDeletingIds((prev) => new Set(prev).add(project._id));
     try {
       const res = await axios.delete(
-        `/api/proxy/users/update/projects/${project._id}`,
+        `${SERVER_URL}/api/users/update/projects/${project._id}`,
+        { withCredentials: true },
       );
 
       const newProjectsList = res.data.projects;
@@ -375,15 +368,27 @@ export default function Projects({ userData, setUserDetails }) {
         })),
       );
 
-      if (setUserDetails) {
-        setUserDetails((prev) => ({ ...prev, projects: newProjectsList }));
+      if (setData) {
+        setData((prev) => ({
+          ...prev,
+          user: {
+            ...(prev?.user || {}),
+            projects: newProjectsList,
+          },
+        }));
       }
+      localStorage.setItem(`data_${data?.user?.username}`, JSON.stringify({
+        ...data,
+        user: {
+          ...(data?.user || {}),
+          projects: newProjectsList,
+        },
+      }));
       toast.success(
-        t("projects.deletedSuccessfully") || "Deleted successfully",
+        content?.deletedSuccessfully || "Deleted successfully",
       );
     } catch (error) {
-      console.error("Error deleting project:", error);
-      toast.error(t("projects.errorMessage"));
+      await handleApiError({ error, defaultErrorMsg: content?.errorMessage, toast });
     } finally {
       setDeletingIds((prev) => {
         const next = new Set(prev);
@@ -403,32 +408,46 @@ export default function Projects({ userData, setUserDetails }) {
 
       if (projectsWithIds.length !== projects.length) {
         toast.warning(
-          t("projects.saveNewItemsFirst") || "Please save new items first",
+          content?.saveNewItemsFirst || "Please save new items first",
         );
         setLoading(false);
         return;
       }
 
-      await axios.put(`/api/proxy/users/update/projects/order`, {
-        projects: projectsWithIds,
-      });
+      await axios.put(
+        `${SERVER_URL}/api/users/update/projects/order`,
+        {
+          projects: projectsWithIds,
+        },
+        { withCredentials: true },
+      );
 
       // Update global state
-      if (setUserDetails) {
-        setUserDetails((prev) => ({
+      const orderedProjects = projects.map(({ collapsed, localId, ...rest }) => rest);
+      if (setData) {
+        setData((prev) => ({
           ...prev,
-          projects: projects.map(({ collapsed, localId, ...rest }) => rest),
+          user: {
+            ...(prev?.user || {}),
+            projects: orderedProjects,
+          },
         }));
       }
+      localStorage.setItem(`data_${data?.user?.username}`, JSON.stringify({
+        ...data,
+        user: {
+          ...(data?.user || {}),
+          projects: orderedProjects,
+        },
+      }));
 
       // Update original order after successful save
       const newOrder = projects.filter((p) => p._id).map((p) => p._id);
       setOriginalOrder(newOrder);
 
-      toast.success(t("projects.orderSaved") || "Order saved");
+      toast.success(content?.orderSaved || "Order saved");
     } catch (error) {
-      console.error("Error updating order:", error);
-      toast.error(t("projects.errorMessage"));
+      await handleApiError({ error, defaultErrorMsg: content?.errorMessage, toast });
     } finally {
       setLoading(false);
     }
@@ -437,10 +456,10 @@ export default function Projects({ userData, setUserDetails }) {
   return (
     <div
       className="space-y-4"
-      dir={userData?.displayLanguage === "ar" ? "rtl" : "ltr"}
+      dir={user?.displayLanguage === "ar" ? "rtl" : "ltr"}
     >
       <h3 className="text-lg font-bold text-gray-800">
-        🚀 {t("projects.title")}
+        🚀 {content?.title}
       </h3>
 
       <div className="bg-gradient-to-br from-green-50 to-emerald-50 p-2 md:p-4 rounded-xl border border-green-200 space-y-3">
@@ -495,7 +514,7 @@ export default function Projects({ userData, setUserDetails }) {
                           <div className="w-full">
                             <input
                               type="text"
-                              placeholder={t("projects.projectTitle")}
+                              placeholder={content?.projectTitle}
                               value={proj.title}
                               maxLength={100}
                               onChange={(e) =>
@@ -513,7 +532,7 @@ export default function Projects({ userData, setUserDetails }) {
                             {validationErrors[index]?.title && (
                               <p className="text-red-500 text-[8px] sm:text-xs mt-0.5 sm:mt-1.5 flex items-center gap-1 font-medium animate-in slide-in-from-top-1">
                                 <AlertCircle className="w-2.5 h-2.5 sm:w-[14px] sm:h-[14px]" />
-                                {t("projects.titleRequired") ||
+                                {content?.titleRequired ||
                                   "Title is required"}
                               </p>
                             )}
@@ -527,8 +546,8 @@ export default function Projects({ userData, setUserDetails }) {
                             className={`p-0.5 sm:p-2 rounded-lg transition-colors flex items-center gap-1 sm:gap-2 text-[8px] sm:text-sm font-medium ${proj.collapsed ? "bg-green-50 text-green-700 hover:bg-green-100" : "bg-gray-100 text-gray-700 hover:bg-gray-200"}`}
                             title={
                               proj.collapsed
-                                ? t("projects.edit")
-                                : t("projects.collapse") || "Collapse"
+                                ? content?.edit
+                                : content?.collapse || "Collapse"
                             }
                           >
                             {proj.collapsed ? (
@@ -538,8 +557,8 @@ export default function Projects({ userData, setUserDetails }) {
                             )}
                             <span className="hidden md:inline">
                               {proj.collapsed
-                                ? t("projects.edit")
-                                : t("projects.close") || "Close"}
+                                ? content?.edit
+                                : content?.close || "Close"}
                             </span>
                           </button>
 
@@ -550,7 +569,7 @@ export default function Projects({ userData, setUserDetails }) {
                             onClick={() => moveItemUp(index)}
                             disabled={index === 0}
                             className="p-0.5 sm:p-1.5 hover:bg-gray-200 rounded-lg transition-colors disabled:opacity-30 disabled:cursor-not-allowed hidden sm:block"
-                            title={t("projects.moveUp") || "Move Up"}
+                            title={content?.moveUp || "Move Up"}
                           >
                             <ArrowUp className="w-2.5 h-2.5 sm:w-[16px] sm:h-[16px] text-gray-600" />
                           </button>
@@ -559,7 +578,7 @@ export default function Projects({ userData, setUserDetails }) {
                             onClick={() => moveItemDown(index)}
                             disabled={index === projects.length - 1}
                             className="p-0.5 sm:p-1.5 hover:bg-gray-200 rounded-lg transition-colors disabled:opacity-30 disabled:cursor-not-allowed hidden sm:block"
-                            title={t("projects.moveDown") || "Move Down"}
+                            title={content?.moveDown || "Move Down"}
                           >
                             <ArrowDown className="w-2.5 h-2.5 sm:w-[16px] sm:h-[16px] text-gray-600" />
                           </button>
@@ -567,7 +586,7 @@ export default function Projects({ userData, setUserDetails }) {
                             type="button"
                             onClick={() => setProjectToDelete(index)}
                             className="p-0.5 sm:p-1.5 hover:bg-red-100 rounded-lg transition-colors text-red-500 ml-0.5 sm:ml-1"
-                            title={t("projects.delete")}
+                            title={content?.delete}
                             disabled={deletingIds.has(proj._id)}
                           >
                             {deletingIds.has(proj._id) ? (
@@ -586,7 +605,7 @@ export default function Projects({ userData, setUserDetails }) {
                         <div className="p-3 md:p-4 border-t border-gray-100 space-y-3 bg-gray-50/50 animate-in fade-in slide-in-from-top-1 duration-200">
                           <div>
                             <textarea
-                              placeholder={t("projects.projectDescription")}
+                              placeholder={content?.projectDescription}
                               value={proj.description || ""}
                               maxLength={2000}
                               onChange={(e) =>
@@ -603,7 +622,7 @@ export default function Projects({ userData, setUserDetails }) {
                             {validationErrors[index]?.description && (
                               <p className="text-red-500 text-[9px] sm:text-xs mt-1 sm:mt-1.5 flex items-center gap-1 sm:gap-1.5 font-medium animate-in slide-in-from-top-1">
                                 <AlertCircle className="w-3 h-3 sm:w-[14px] sm:h-[14px]" />
-                                {t("projects.descriptionRequired") ||
+                                {content?.descriptionRequired ||
                                   "Description is required"}
                               </p>
                             )}
@@ -613,7 +632,7 @@ export default function Projects({ userData, setUserDetails }) {
                             <div>
                               <input
                                 type="url"
-                                placeholder={t("projects.projectLink")}
+                                placeholder={content?.projectLink}
                                 value={proj.link || ""}
                                 maxLength={1000}
                                 onChange={(e) =>
@@ -630,7 +649,7 @@ export default function Projects({ userData, setUserDetails }) {
                               {validationErrors[index]?.link && (
                                 <p className="text-red-500 text-[9px] sm:text-xs mt-1 sm:mt-1.5 flex items-center gap-1 sm:gap-1.5 font-medium animate-in slide-in-from-top-1">
                                   <AlertCircle className="w-3 h-3 sm:w-[14px] sm:h-[14px]" />
-                                  {t("projects.linkRequired") ||
+                                  {content?.linkRequired ||
                                     "Link is required"}
                                 </p>
                               )}
@@ -648,7 +667,7 @@ export default function Projects({ userData, setUserDetails }) {
                                   }`}
                                 >
                                   <ImagePlus className="w-3 h-3 sm:w-4 sm:h-4" />
-                                  <span>{t("projects.projectImage") || "Project Image"}</span>
+                                  <span>{content?.projectImage || "Project Image"}</span>
                                   <input
                                     id={`proj-img-${proj.localId}`}
                                     type="file"
@@ -686,7 +705,7 @@ export default function Projects({ userData, setUserDetails }) {
                               {validationErrors[index]?.image && (
                                 <p className="text-red-500 text-[9px] sm:text-xs mt-1 sm:mt-1.5 flex items-center gap-1 sm:gap-1.5 font-medium animate-in slide-in-from-top-1">
                                   <AlertCircle className="w-3 h-3 sm:w-[14px] sm:h-[14px]" />
-                                  {t("projects.imageRequired") || "Image is required"}
+                                  {content?.imageRequired || "Image is required"}
                                 </p>
                               )}
                             </div>
@@ -696,7 +715,7 @@ export default function Projects({ userData, setUserDetails }) {
                             <input
                               type="text"
                               placeholder={
-                                t("projects.technologies") + " (e.g. t1,t2,t3)"
+                                content?.technologies + " (e.g. t1,t2,t3)"
                               }
                               value={(proj.technologies || []).join(", ")}
                               onChange={(e) =>
@@ -715,7 +734,7 @@ export default function Projects({ userData, setUserDetails }) {
                             {validationErrors[index]?.technologies && (
                               <p className="text-red-500 text-[9px] sm:text-xs mt-1 sm:mt-1.5 flex items-center gap-1 sm:gap-1.5 font-medium animate-in slide-in-from-top-1">
                                 <AlertCircle className="w-3 h-3 sm:w-[14px] sm:h-[14px]" />
-                                {t("projects.technologiesRequired") ||
+                                {content?.technologiesRequired ||
                                   "Technologies are required"}
                               </p>
                             )}
@@ -747,7 +766,7 @@ export default function Projects({ userData, setUserDetails }) {
                               ) : (
                                 <CheckCheck className="w-3 h-3 sm:w-4 sm:h-4" />
                               )}
-                              {t("projects.save") || "Save"}
+                              {content?.save || "Save"}
                             </button>
                           </div>
                         </div>
@@ -775,7 +794,7 @@ export default function Projects({ userData, setUserDetails }) {
           className="w-full bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-600 hover:to-emerald-700 text-white py-1.5 sm:py-2 rounded-lg flex items-center justify-center gap-2 transition-all duration-300 mt-2 text-xs sm:text-base"
         >
           <Plus className="w-4 h-4 sm:w-[18px] sm:h-[18px]" />{" "}
-          {t("projects.addProject")}
+          {content?.addProject}
         </button>
       </div>
 
@@ -803,10 +822,10 @@ export default function Projects({ userData, setUserDetails }) {
                   size={20}
                   className="animate-spin w-4 h-4 sm:w-5 sm:h-5"
                 />{" "}
-                {t("projects.saving")}
+                {content?.saving}
               </>
             ) : (
-              `💾 ${t("projects.saveOrder") || "Save Order"}`
+              `💾 ${content?.saveOrder || "Save Order"}`
             )}
           </button>
         </div>
@@ -824,7 +843,7 @@ export default function Projects({ userData, setUserDetails }) {
               <button
                 onClick={() => setProjectToDelete(null)}
                 className="absolute top-4 right-4 text-gray-400 hover:text-gray-600 transition p-1 rounded-full hover:bg-gray-100"
-                title={t("projects.close") || "Close"}
+                title={content?.close || "Close"}
               >
                 <X className="w-5 h-5" />
               </button>
@@ -837,13 +856,13 @@ export default function Projects({ userData, setUserDetails }) {
                 <div className="text-gray-600 mb-6 text-base leading-relaxed">
                   <div className="flex flex-col gap-2">
                     <span className="font-semibold text-gray-800">
-                      {t("projects.deleteConfirm") ||
+                      {content?.deleteConfirm ||
                         "Are you sure you want to delete this project?"}
                     </span>
                     <span className="font-bold text-black border-t pt-2 mt-1 break-all">
                       "
                       {projects[projectToDelete]?.title ||
-                        t("projects.thisProject") ||
+                        content?.thisProject ||
                         "this project"}
                       "
                     </span>
@@ -856,14 +875,14 @@ export default function Projects({ userData, setUserDetails }) {
                   onClick={() => setProjectToDelete(null)}
                   className="flex-1 px-4 py-2.5 bg-gray-200 hover:bg-gray-300 text-gray-800 font-bold rounded-lg transition-all duration-200"
                 >
-                  {t("projects.cancel") || "Cancel"}
+                  {content?.cancel || "Cancel"}
                 </button>
                 <button
                   onClick={confirmDelete}
                   className="flex-1 px-4 py-2.5 bg-red-600 hover:bg-red-700 text-white font-medium rounded-lg shadow-md transition duration-200 flex items-center justify-center gap-2"
                 >
                   <Trash2 size={18} />
-                  <span>{t("projects.delete") || "Delete"}</span>
+                  <span>{content?.delete || "Delete"}</span>
                 </button>
               </div>
             </div>

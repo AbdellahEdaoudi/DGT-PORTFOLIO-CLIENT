@@ -1,19 +1,29 @@
 "use client"
-import { useState, useMemo } from "react"
-import { Mail, Code2, Briefcase, GraduationCap, Globe, Sparkles, User, Layers, Zap, Loader, FileDown, Award } from "../Icons"
+import { useState, useEffect, useMemo } from "react"
+import { Mail, Code2, Briefcase, GraduationCap, Globe, Sparkles, User, Layers, Zap, Loader, FileDown, Award } from "../lucide-react"
 import QrcodeProfile from "../portfolio/QrcodeProfile"
-import UserLinks from "../portfolio/UserLinks"
 import Image from "next/image"
 import Link from "next/link"
 import { getTranslation } from "../../translations/portfolio"
 import ImageModal from "../portfolio/ImageModal"
 import DownloadResume from "../downloadcv/DownloadResume"
 
-export default function Theme13({ userDetails, userLinks }) {
-    const t = getTranslation(userDetails?.displayLanguage || 'en')
+export default function Theme13({ userDetails, content: propContent, t: propT }) {
+    const [content, setContent] = useState(propContent || (typeof propT === 'object' ? propT : {}));
+
+    useEffect(() => {
+        if (propContent) {
+            setContent(propContent);
+            return;
+        }
+        if (typeof propT === 'object' && propT) {
+            setContent(propT);
+            return;
+        }
+        getTranslation(userDetails?.displayLanguage || 'en').then((dict) => setContent(dict || {}));
+    }, [userDetails?.displayLanguage, propContent, propT]);
     const [activeTab, setActiveTab] = useState("about")
     const [showQR, setShowQR] = useState(false);
-    const [showUserLinks, setShowUserLinks] = useState(false);
     const [expanded, setExpanded] = useState(false);
     const [selectedImage, setSelectedImage] = useState(null);
 
@@ -43,7 +53,7 @@ export default function Theme13({ userDetails, userLinks }) {
                     {/* Toolbar */}
                     <div className="flex justify-between items-center mb-8">
                         <h1 className="text-slate-900 text-2xl font-extrabold tracking-tight cursor-pointer hover:text-blue-600 transition-colors">
-                            <Link href={"https://mylio.site"}>{t('portfolio')}</Link>
+                            <Link href={"https://mylio.site"}>{content?.portfolio}</Link>
                         </h1>
                         <div className="flex gap-3">
                             {/* Copy Link */}
@@ -53,16 +63,8 @@ export default function Theme13({ userDetails, userLinks }) {
                                 onClick={() => setShowQR(true)}
                                 className="flex items-center gap-2 px-3 bg-white border border-slate-200 hover:border-blue-500/50 hover:bg-slate-50 rounded-xl text-slate-700 transition-all duration-300 cursor-pointer shadow-sm hover:shadow-md"
                             >
-                                <QrcodeProfile userDetails={userDetails} className="text-slate-700 border-none bg-transparent hover:bg-transparent shadow-none" isOpen={showQR} onClose={() => setShowQR(false)} />
+                                <QrcodeProfile userDetails={userDetails} className="text-slate-700 border-none bg-transparent hover:bg-transparent shadow-none" isOpen={showQR} onClose={() => setShowQR(false)} content={content} />
                             </div>
-                            {/* User Links */}
-                            {userLinks?.length > 0 && (
-                                <div
-                                    onClick={() => setShowUserLinks(true)}
-                                    className="flex items-center gap-2 px-3 bg-white border border-slate-200 hover:border-blue-500/50 hover:bg-slate-50 rounded-xl text-slate-700 transition-all duration-300 cursor-pointer shadow-sm hover:shadow-md">
-                                    <UserLinks lang={userDetails?.displayLanguage} userLinks={userLinks} className="text-slate-700 border-none bg-transparent hover:bg-transparent shadow-none" isOpen={showUserLinks} onClose={() => setShowUserLinks(false)} />
-                                </div>
-                            )}
                         </div>
                     </div>
 
@@ -70,7 +72,7 @@ export default function Theme13({ userDetails, userLinks }) {
                     <div className={`flex flex-col-reverse md:flex-row gap-10 items-center justify-between mb-8`}>
                         <div className={`flex-1 text-center  ${userDetails?.displayLanguage === 'ar' ? 'md:text-right' : 'md:text-left'}`}>
                             <div className="inline-block px-3 py-1 mb-4 text-xs font-semibold tracking-wide text-blue-700 uppercase bg-blue-50 rounded-full border border-blue-100 shadow-sm">
-                                {t('welcometomyworld')}
+                                {content?.welcometomyworld}
                             </div>
                             <h1 className="text-5xl md:text-7xl font-extrabold mb-6 tracking-tight leading-none text-slate-900 drop-shadow-sm">
                                 {userDetails?.fullname}
@@ -89,7 +91,7 @@ export default function Theme13({ userDetails, userLinks }) {
                         <div className="relative group perspective-1000">
                             <div className="absolute -inset-3 bg-gradient-to-r from-blue-500 to-indigo-500 rounded-[2rem] blur-lg opacity-20 group-hover:opacity-40 transition duration-1000 group-hover:duration-200"></div>
                             <div className="relative transform transition-all duration-500 hover:rotate-2">
-                                <Image priority width={500} height={500}
+                                <Image priority loading="eager" width={500} height={500}
                                     src={userDetails?.urlimage}
                                     alt={userDetails?.fullname}
                                     className="w-64 h-64 md:w-80 md:h-80 rounded-[1.8rem] object-cover border-[4px] border-white shadow-xl"
@@ -107,13 +109,13 @@ export default function Theme13({ userDetails, userLinks }) {
                                     : ["services", "experience", "skills", "projects", "education", "certificates"];
 
                                 const tabData = {
-                                    about: { key: "about", label: t('aboutMe'), icon: User },
-                                    services: { key: "services", label: t('services'), icon: Layers, condition: userDetails?.services?.length > 0 },
-                                    experience: { key: "experience", label: t('workExperience'), icon: Briefcase, condition: userDetails?.experience?.length > 0 },
-                                    projects: { key: "projects", label: t('projects'), icon: Code2, condition: userDetails?.projects?.length > 0 },
-                                    skills: { key: "skills", label: t('skills'), icon: Zap, condition: userDetails?.skills?.length > 0 },
-                                    education: { key: "education", label: t('education'), icon: GraduationCap, condition: userDetails?.education?.length > 0 },
-                                    certificates: { key: "certificates", label: t('certificates'), icon: Award, condition: userDetails?.certificates?.length > 0 },
+                                    about: { key: "about", label: content?.aboutMe, icon: User },
+                                    services: { key: "services", label: content?.services, icon: Layers, condition: userDetails?.services?.length > 0 },
+                                    experience: { key: "experience", label: content?.workExperience, icon: Briefcase, condition: userDetails?.experience?.length > 0 },
+                                    projects: { key: "projects", label: content?.projects, icon: Code2, condition: userDetails?.projects?.length > 0 },
+                                    skills: { key: "skills", label: content?.skills, icon: Zap, condition: userDetails?.skills?.length > 0 },
+                                    education: { key: "education", label: content?.education, icon: GraduationCap, condition: userDetails?.education?.length > 0 },
+                                    certificates: { key: "certificates", label: content?.certificates, icon: Award, condition: userDetails?.certificates?.length > 0 },
                                 };
 
                                 // Ensure 'about' is first, then the user ordered sections
@@ -151,30 +153,30 @@ export default function Theme13({ userDetails, userLinks }) {
                                 <div className="grid md:grid-cols-2 gap-4 md:gap-8">
                                     <div className="bg-white rounded-3xl p-5 md:p-8 border border-slate-100 shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:shadow-[0_8px_30px_rgb(0,0,0,0.08)] transition-all duration-300">
                                         <h3 className="text-2xl mb-6 flex items-center gap-2 text-slate-800 font-bold">
-                                            <User className="text-blue-600" /> {t('aboutMe')}
+                                            <User className="text-blue-600" /> {content?.aboutMe}
                                         </h3>
                                         <div className="space-y-4 md:space-y-6">
-                                            {(userDetails.displayEmail || userDetails.email) && (
+                                            {(userDetails.email) && (
                                                 <div className="flex items-center gap-3 md:gap-4 p-3 md:p-4 bg-slate-50 rounded-2xl overflow-hidden border border-slate-100">
                                                     <div className="w-10 h-10 rounded-full bg-white shadow-sm flex items-center justify-center text-blue-600 shrink-0">
                                                         <Mail size={20} />
                                                     </div>
                                                     <div className="min-w-0">
                                                         <p className="text-xs font-semibold text-slate-400 uppercase tracking-wide">Email</p>
-                                                        <a href={`mailto:${userDetails.displayEmail || userDetails.email}`} className="text-slate-900 hover:text-blue-600 transition break-all text-sm md:text-base font-bold">
-                                                            {userDetails.displayEmail || userDetails.email}
+                                                        <a href={`mailto:${userDetails.email}`} className="text-slate-900 hover:text-blue-600 transition break-all text-sm md:text-base font-bold">
+                                                            {userDetails.email}
                                                         </a>
                                                     </div>
                                                 </div>
                                             )}
-                                            {userDetails.country && (
+                                            {userDetails?.location && (
                                                 <div className="flex items-center gap-3 md:gap-4 p-3 md:p-4 bg-slate-50 rounded-2xl border border-slate-100">
                                                     <div className="w-10 h-10 rounded-full bg-white shadow-sm flex items-center justify-center text-indigo-600 shrink-0">
                                                         <Globe size={20} />
                                                     </div>
                                                     <div>
-                                                        <p className="text-xs font-semibold text-slate-400 uppercase tracking-wide">{t('country')}</p>
-                                                        <p className="text-slate-900 font-bold">{userDetails.country}</p>
+                                                        <p className="text-xs font-semibold text-slate-400 uppercase tracking-wide">{content?.location}</p>
+                                                        <p className="text-slate-900 font-bold">{userDetails.location}</p>
                                                     </div>
                                                 </div>
                                             )}
@@ -184,7 +186,7 @@ export default function Theme13({ userDetails, userLinks }) {
                                                         <Briefcase size={20} />
                                                     </div>
                                                     <div>
-                                                        <p className="text-xs font-semibold text-slate-400 uppercase tracking-wide">{t('phone')}</p>
+                                                        <p className="text-xs font-semibold text-slate-400 uppercase tracking-wide">{content?.phone}</p>
                                                         <p className="text-slate-900 font-bold">{userDetails.phoneNumber}</p>
                                                     </div>
                                                 </div>
@@ -195,7 +197,7 @@ export default function Theme13({ userDetails, userLinks }) {
                                     {userDetails?.languages?.length > 0 && (
                                         <div className="bg-white rounded-3xl p-8 border border-slate-100 shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:shadow-[0_8px_30px_rgb(0,0,0,0.08)] transition-all duration-300">
                                             <h3 className="text-2xl mb-6 flex items-center gap-2 text-slate-800 font-bold">
-                                                <Globe className="text-indigo-600" /> {t('languages')}
+                                                <Globe className="text-indigo-600" /> {content?.languages}
                                             </h3>
                                             <div className="grid gap-3">
                                                 {userDetails.languages?.map((lang, i) => (
@@ -362,7 +364,7 @@ export default function Theme13({ userDetails, userLinks }) {
 
                                                 {edu.field && (
                                                     <div className="p-4 bg-slate-50 rounded-lg border-l-4 border-blue-500">
-                                                        <p className="text-xs text-slate-400 font-bold uppercase tracking-wider mb-2">{t('field')}</p>
+                                                        <p className="text-xs text-slate-400 font-bold uppercase tracking-wider mb-2">{content?.field}</p>
                                                         <p className="text-sm md:text-base text-slate-700 font-medium leading-relaxed">
                                                             {edu.field}
                                                         </p>
@@ -438,7 +440,7 @@ export default function Theme13({ userDetails, userLinks }) {
                                 ))}
                         </div>
                         <p dir={userDetails?.displayLanguage === 'ar' ? 'rtl' : 'ltr'} className="text-slate-400 font-medium text-sm">
-                            © {new Date().getFullYear()} {userDetails?.fullname}. {t('allRightsReserved')} ©
+                            © {new Date().getFullYear()} {userDetails?.fullname}. {content?.allRightsReserved} ©
                         </p>
                     </div>
                 </footer>

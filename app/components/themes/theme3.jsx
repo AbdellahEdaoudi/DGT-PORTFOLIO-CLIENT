@@ -1,19 +1,29 @@
 "use client"
-import { useState, useMemo } from "react"
-import { Mail, Code2, Briefcase, GraduationCap, Globe, Sparkles, User, Layers, Zap, Loader, FileDown, Award } from "../Icons"
+import { useState, useEffect, useMemo } from "react"
+import { Mail, Code2, Briefcase, GraduationCap, Globe, Sparkles, User, Layers, Zap, Loader, FileDown, Award } from "../lucide-react"
 import QrcodeProfile from "../portfolio/QrcodeProfile"
-import UserLinks from "../portfolio/UserLinks"
 import Image from "next/image"
 import Link from "next/link"
 import { getTranslation } from "../../translations/portfolio"
 import ImageModal from "../portfolio/ImageModal"
 import DownloadResume from "../downloadcv/DownloadResume"
 
-export default function Theme3({ userDetails, userLinks }) {
-  const t = getTranslation(userDetails?.displayLanguage || 'en')
+export default function Theme3({ userDetails, content: propContent, t: propT }) {
+  const [content, setContent] = useState(propContent || (typeof propT === 'object' ? propT : {}));
+
+  useEffect(() => {
+    if (propContent) {
+      setContent(propContent);
+      return;
+    }
+    if (typeof propT === 'object' && propT) {
+      setContent(propT);
+      return;
+    }
+    getTranslation(userDetails?.displayLanguage || 'en').then((dict) => setContent(dict || {}));
+  }, [userDetails?.displayLanguage, propContent, propT]);
   const [activeTab, setActiveTab] = useState("about")
   const [showQR, setShowQR] = useState(false);
-  const [showUserLinks, setShowUserLinks] = useState(false);
   const [expanded, setExpanded] = useState(false);
   const [selectedImage, setSelectedImage] = useState(null);
 
@@ -48,7 +58,7 @@ export default function Theme3({ userDetails, userLinks }) {
           {/* Toolbar */}
           <div className="flex justify-between items-center mb-8">
             <h1 className="text-white text-2xl font-bold cursor-pointer hover:text-pink-400 transition-colors">
-              <Link href={"https://mylio.site"}>{t('portfolio')}</Link>
+              <Link href={"https://mylio.site"}>{content?.portfolio}</Link>
             </h1>
             <div className="flex gap-3">
               {/* Copy Link */}
@@ -58,16 +68,8 @@ export default function Theme3({ userDetails, userLinks }) {
                 onClick={() => setShowQR(true)}
                 className="flex items-center gap-2 px-2 bg-white/10 hover:bg-pink-500/20 rounded-lg text-white transition-all duration-300 backdrop-blur-md border border-white/10 hover:border-pink-500/50 cursor-pointer"
               >
-                <QrcodeProfile userDetails={userDetails} className="text-white border-none hover:bg-transparent" isOpen={showQR} onClose={() => setShowQR(false)} />
+                <QrcodeProfile userDetails={userDetails} className="text-white border-none hover:bg-transparent" isOpen={showQR} onClose={() => setShowQR(false)} content={content} />
               </div>
-              {/* User Links */}
-              {userLinks?.length > 0 && (
-                <div
-                  onClick={() => setShowUserLinks(true)}
-                  className="flex items-center gap-2 px-2 bg-white/10 hover:bg-pink-500/20 rounded-lg text-white transition-all duration-300 backdrop-blur-md border border-white/10 hover:border-pink-500/50 cursor-pointer">
-                  <UserLinks lang={userDetails?.displayLanguage} userLinks={userLinks} className="text-white border-none hover:bg-transparent" isOpen={showUserLinks} onClose={() => setShowUserLinks(false)} />
-                </div>
-              )}
             </div>
           </div>
 
@@ -75,7 +77,7 @@ export default function Theme3({ userDetails, userLinks }) {
           <div className="flex flex-col-reverse md:flex-row gap-10 items-center justify-between mb-8">
             <div className={`flex-1 text-center  ${userDetails?.displayLanguage === 'ar' ? 'md:text-right' : 'md:text-left'}`}>
               <div className="inline-block px-3 py-1 mb-4 text-xs tracking-wider text-pink-300 uppercase bg-pink-500/10 rounded-full border border-pink-500/20">
-                {t('welcometomyworld')}
+                {content?.welcometomyworld}
               </div>
               <h1 className="text-5xl md:text-7xl font-bold mb-6 tracking-tight leading-tight bg-clip-text text-transparent bg-gradient-to-r from-white via-pink-100 to-purple-200">
                 {userDetails?.fullname}
@@ -92,7 +94,7 @@ export default function Theme3({ userDetails, userLinks }) {
             <div className="relative group">
               <div className="absolute -inset-1 bg-gradient-to-r from-pink-600 to-purple-600 rounded-[2rem] blur opacity-40 group-hover:opacity-75 transition duration-1000 group-hover:duration-200 animate-tilt"></div>
               <div className="relative">
-                <Image priority width={500} height={500}
+                <Image priority loading="eager" width={500} height={500}
                   src={userDetails?.urlimage}
                   alt={userDetails?.fullname}
                   className="w-64 h-64 md:w-80 md:h-80 rounded-[1.8rem] object-cover border-2 border-white/10 shadow-2xl transform transition duration-500 hover:scale-[1.02]"
@@ -110,13 +112,13 @@ export default function Theme3({ userDetails, userLinks }) {
                   : ["services", "experience", "skills", "projects", "education", "certificates"];
 
                 const tabData = {
-                  about: { key: "about", label: t('about'), icon: User },
-                  services: { key: "services", label: t('services'), icon: Layers, condition: userDetails?.services?.length > 0 },
-                  experience: { key: "experience", label: t('experience'), icon: Briefcase, condition: userDetails?.experience?.length > 0 },
-                  projects: { key: "projects", label: t('projects'), icon: Code2, condition: userDetails?.projects?.length > 0 },
-                  skills: { key: "skills", label: t('skills'), icon: Zap, condition: userDetails?.skills?.length > 0 },
-                  education: { key: "education", label: t('education'), icon: GraduationCap, condition: userDetails?.education?.length > 0 },
-                  certificates: { key: "certificates", label: t('certificates') || "Certificates", icon: Award, condition: userDetails?.certificates?.length > 0 },
+                  about: { key: "about", label: content?.about, icon: User },
+                  services: { key: "services", label: content?.services, icon: Layers, condition: userDetails?.services?.length > 0 },
+                  experience: { key: "experience", label: content?.experience, icon: Briefcase, condition: userDetails?.experience?.length > 0 },
+                  projects: { key: "projects", label: content?.projects, icon: Code2, condition: userDetails?.projects?.length > 0 },
+                  skills: { key: "skills", label: content?.skills, icon: Zap, condition: userDetails?.skills?.length > 0 },
+                  education: { key: "education", label: content?.education, icon: GraduationCap, condition: userDetails?.education?.length > 0 },
+                  certificates: { key: "certificates", label: content?.certificates || "Certificates", icon: Award, condition: userDetails?.certificates?.length > 0 },
                 };
 
                 // Ensure 'about' is first, then the user ordered sections
@@ -154,30 +156,30 @@ export default function Theme3({ userDetails, userLinks }) {
                 <div className="grid md:grid-cols-2 gap-4 md:gap-8">
                   <div className="bg-white/5 backdrop-blur-md rounded-3xl p-5 md:p-8 border border-white/10 hover:border-pink-500/30 transition-all duration-300">
                     <h3 className="text-2xl mb-6 flex items-center gap-2 text-white">
-                      <User className="text-pink-400" /> {t('aboutMe')}
+                      <User className="text-pink-400" /> {content?.aboutMe}
                     </h3>
                     <div className="space-y-4 md:space-y-6">
-                      {(userDetails.displayEmail || userDetails.email) && (
+                      {(userDetails.email) && (
                         <div className="flex items-center gap-3 md:gap-4 p-3 md:p-4 bg-white/5 rounded-2xl overflow-hidden">
                           <div className="w-10 h-10 rounded-full bg-purple-500/20 flex items-center justify-center text-purple-400 shrink-0">
                             <Mail size={20} />
                           </div>
                           <div className="min-w-0">
                             <p className="text-sm text-gray-400">Email</p>
-                            <a href={`mailto:${userDetails.displayEmail || userDetails.email}`} className="text-white hover:text-pink-300 transition break-all text-sm md:text-base">
-                              {userDetails.displayEmail || userDetails.email}
+                            <a href={`mailto:${userDetails.email}`} className="text-white hover:text-pink-300 transition break-all text-sm md:text-base">
+                              {userDetails.email}
                             </a>
                           </div>
                         </div>
                       )}
-                      {userDetails.country && (
+                      {userDetails?.location && (
                         <div className="flex items-center gap-3 md:gap-4 p-3 md:p-4 bg-white/5 rounded-2xl">
                           <div className="w-10 h-10 rounded-full bg-pink-500/20 flex items-center justify-center text-pink-400 shrink-0">
                             <Globe size={20} />
                           </div>
                           <div>
-                            <p className="text-sm text-gray-400">{t('country')}</p>
-                            <p className="text-white">{userDetails.country}</p>
+                            <p className="text-sm text-gray-400">{content?.location}</p>
+                            <p className="text-white">{userDetails.location}</p>
                           </div>
                         </div>
                       )}
@@ -187,7 +189,7 @@ export default function Theme3({ userDetails, userLinks }) {
                             <Briefcase size={20} />
                           </div>
                           <div>
-                            <p className="text-sm text-gray-400">{t('phone')}</p>
+                            <p className="text-sm text-gray-400">{content?.phone}</p>
                             <p className="text-white">{userDetails.phoneNumber}</p>
                           </div>
                         </div>
@@ -198,7 +200,7 @@ export default function Theme3({ userDetails, userLinks }) {
                   {userDetails?.languages?.length > 0 && (
                     <div className="bg-white/5 backdrop-blur-md rounded-3xl p-8 border border-white/10 hover:border-pink-500/30 transition-all duration-300">
                       <h3 className="text-2xl mb-6 flex items-center gap-2 text-white">
-                        <Globe className="text-purple-400" /> {t('languages')}
+                        <Globe className="text-purple-400" /> {content?.languages}
                       </h3>
                       <div className="grid gap-3">
                         {userDetails.languages?.map((lang, i) => (
@@ -364,7 +366,7 @@ export default function Theme3({ userDetails, userLinks }) {
                         <p className="text-lg text-purple-300 mb-4">{edu.school}</p>
                         {edu.field && (
                           <div className="p-4 bg-slate-900/50 rounded-lg border-l-4 border-purple-500/50">
-                            <p className="text-xs text-gray-500 uppercase tracking-wider mb-2">{t('field')}</p>
+                            <p className="text-xs text-gray-500 uppercase tracking-wider mb-2">{content?.field}</p>
                             <p className="text-sm md:text-base text-gray-300 leading-relaxed">
                               {edu.field}
                             </p>
@@ -440,7 +442,7 @@ export default function Theme3({ userDetails, userLinks }) {
                 ))}
             </div>
             <p className="text-gray-500 text-sm">
-              © {new Date().getFullYear()} {userDetails.fullname}. {t('allRightsReserved')} ©
+              © {new Date().getFullYear()} {userDetails.fullname}. {content?.allRightsReserved} ©
             </p>
           </div>
         </footer>

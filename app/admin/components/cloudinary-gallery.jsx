@@ -1,8 +1,10 @@
 "use client"
 import { useState, useEffect } from "react"
-import axios from "axios"
+import axios from "axios";
+import { handleApiError } from "../../utils/apiErrorHandler";
+const SERVER_URL = process.env.NEXT_PUBLIC_SERVER_URL;
 import MagicalLoader from "../../components/MagicalLoader"
-import { Copy, ExternalLink, Trash2 as Trash, ImagePlus as ImageIcon, FolderOpen, ArrowLeft, Check, RefreshCcw } from "../../components/Icons"
+import { Copy, ExternalLink, Trash2 as Trash, ImagePlus as ImageIcon, FolderOpen, ArrowLeft, Check, RefreshCcw } from "../../components/lucide-react"
 import Image from "next/image"
 import { createPortal } from "react-dom"
 
@@ -26,11 +28,12 @@ export default function CloudinaryGallery() {
 
     const fetchImages = async (cursor = null, folder = "") => {
         try {
-            const res = await axios.get("/api/proxy/admin/cloudinary-images", {
+            const res = await axios.get(`${SERVER_URL}/api/admin/cloudinary-images`, {
                 params: {
                     next_cursor: cursor,
                     folder: folder
-                }
+                },
+                withCredentials: true
             })
 
             const newResources = res.data.resources || []
@@ -64,7 +67,7 @@ export default function CloudinaryGallery() {
 
             setNextCursor(newNextCursor)
         } catch (error) {
-            console.error("Error fetching images:", error)
+          await handleApiError({ error: error, defaultErrorMsg: "Operation failed." });
         } finally {
             setLoading(false)
             setLoadingMore(false)
@@ -126,8 +129,9 @@ export default function CloudinaryGallery() {
         setDeleteModal(prev => ({ ...prev, isDeleting: true }))
 
         try {
-            const res = await axios.delete("/api/proxy/admin/cloudinary-images", {
-                data: { public_id }
+            const res = await axios.delete(`${SERVER_URL}/api/admin/cloudinary-images`, {
+                data: { public_id },
+                withCredentials: true
             })
 
             if (res.status === 200) {
@@ -154,7 +158,7 @@ export default function CloudinaryGallery() {
                 setDeleteModal({ isOpen: false, publicId: null, isDeleting: false })
             }
         } catch (error) {
-            console.error("Delete error:", error)
+          await handleApiError({ error: error, defaultErrorMsg: "Operation failed." });
             alert("Failed to delete image")
             setDeleteModal(prev => ({ ...prev, isDeleting: false }))
         }

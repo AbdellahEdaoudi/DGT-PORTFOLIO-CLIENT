@@ -1,7 +1,7 @@
 "use client"
 import React, { useState, useEffect } from 'react';
 import { createPortal } from 'react-dom';
-import { X, Loader } from '../Icons';
+import { X, Loader } from '../lucide-react';
 import Image from 'next/image';
 
 const ImageModal = ({ isOpen, onClose, imageSrc, altText }) => {

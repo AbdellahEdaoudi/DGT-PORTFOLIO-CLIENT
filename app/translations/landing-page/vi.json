@@ -1,86 +1,87 @@
 {
-    "navbar": {
-        "features": "Tính năng",
-        "showcase": "Trưng bày",
-        "pricing": "Bảng giá",
-        "auth": {
-            "signIn": "Đăng nhập",
-            "getStarted": "Bắt đầu",
-            "updateProfile": "Cập nhật hồ sơ",
-            "businessLinks": "Liên kết công việc",
-            "support": "Hỗ trợ",
-            "signOut": "Đăng xuất",
-            "customDomain": "Tên miền tùy chỉnh",
-            "payment": "Thanh toán"
-        }
-    },
-    "hero": {
-        "title_part1": "Hồ sơ của bạn,",
-        "title_part2": "Đẳng cấp hơn",
-        "description": "Tạo danh mục chuyên nghiệp chỉ trong 5 phút—không cần lập trình. Trình bày kỹ năng, kinh nghiệm và dự án của bạn trong một danh mục đẹp giúp nhà tuyển dụng nhanh chóng hiểu hồ sơ của bạn và tăng cơ hội có được công việc hoặc cơ hội tự do tiếp theo.",
-        "free_trial": "Dùng thử miễn phí 30 ngày",
-        "start_building": "Bắt đầu xây dựng",
-        "watch_demo": "Xem bản demo"
-    },
-    "features": {
-        "title": "Tại sao chọn DGT Portfolio",
-        "subtitle": "Tạo hồ sơ chuyên nghiệp, thể hiện kỹ năng của bạn và nổi bật với nhà tuyển dụng — tất cả mà không cần mã hóa.",
-        "items": [
-            {
-                "title": "Xây dựng không cần mã hóa",
-                "description": "Tạo hồ sơ chuyên nghiệp trong vài phút mà không cần viết một dòng mã nào."
-            },
-            {
-                "title": "Liên kết hồ sơ của riêng bạn",
-                "description": "Nhận một miền phụ được cá nhân hóa như <strong>tenban.mylio.site</strong> và chia sẻ nó ở bất cứ đâu."
-            },
-            {
-                "title": "Mã QR chuyên nghiệp",
-                "description": "Tạo mã QR cho hồ sơ của bạn và chia sẻ nó ngay lập tức trực tuyến hoặc ngoại tuyến."
-            },
-            {
-                "title": "Chủ đề hồ sơ hiện đại",
-                "description": "Chọn từ các chủ đề được thiết kế đẹp mắt phù hợp với thương hiệu cá nhân của bạn."
-            },
-            {
-                "title": "Chia sẻ ở mọi nơi",
-                "description": "Gửi hồ sơ của bạn với một liên kết duy nhất trên mạng xã hội, email hoặc đơn xin việc."
-            },
-            {
-                "title": "Nhanh chóng & Tối ưu hóa SEO",
-                "description": "Tải nhanh chóng và giúp hồ sơ của bạn được các công cụ tìm kiếm phát hiện."
-            }
-        ]
-    },
-    "pricing": {
-        "title": "Thanh toán một lần. Hồ sơ trọn đời.",
-        "subtitle": "Tạo hồ sơ chuyên nghiệp của bạn, tạo CV và duy trì trực tuyến mãi mãi — không có đăng ký hoặc phí định kỳ.",
-        "recommended": "Giá trị tốt nhất",
-        "lifetime": {
-            "name": "Gói trọn đời",
-            "description": "Xây dựng hồ sơ của bạn một lần và giữ nó trực tuyến mãi mãi.",
-            "period": "thanh toán một lần"
-        },
-        "cta": "Mở khóa quyền truy cập trọn đời",
-        "whatsIncluded": "Bao gồm những gì",
-        "noFees": "Không đăng ký • Không phí hàng tháng • Là của bạn mãi mãi",
-        "features": [
-            "Truy cập trọn đời — chỉ một lần thanh toán",
-            "Trang web danh mục chuyên nghiệp",
-            "Trình tạo CV tích hợp",
-            "Tên miền phụ danh mục tùy chỉnh",
-            "Tối ưu hóa SEO và khả năng hiển thị",
-            "Nhiều chủ đề hiện đại",
-            "Tất cả các bản cập nhật tương lai bao gồm",
-            "Hỗ trợ khách hàng ưu tiên"
-        ]
-    },
-    "cta": {
-        "title": "Sẵn sàng thể hiện tài năng của bạn?",
-        "subtitle": "Tham gia cùng hàng ngàn nhà sáng tạo đang xây dựng hồ sơ mơ ước của họ ngay hôm nay",
-        "button": "Tạo hồ sơ của bạn"
-    },
-    "footer": {
-        "rights": "Bản quyền đã được bảo hộ."
+  "navbar": {
+    "features": "Tính năng",
+    "showcase": "Trưng bày",
+    "pricing": "Bảng giá",
+    "auth": {
+      "signIn": "Đăng nhập",
+      "getStarted": "Bắt đầu",
+      "updateProfile": "Cập nhật hồ sơ",
+      "businessLinks": "Liên kết công việc",
+      "support": "Hỗ trợ",
+      "signOut": "Đăng xuất",
+      "customDomain": "Tên miền tùy chỉnh",
+      "payment": "Thanh toán",
+      "register": "Đăng ký"
     }
+  },
+  "hero": {
+    "title_part1": "Hồ sơ của bạn,",
+    "title_part2": "Đẳng cấp hơn",
+    "description": "Tạo danh mục chuyên nghiệp chỉ trong 5 phút—không cần lập trình. Trình bày kỹ năng, kinh nghiệm và dự án của bạn trong một danh mục đẹp giúp nhà tuyển dụng nhanh chóng hiểu hồ sơ của bạn và tăng cơ hội có được công việc hoặc cơ hội tự do tiếp theo.",
+    "free_trial": "Dùng thử miễn phí 30 ngày",
+    "start_building": "Bắt đầu xây dựng",
+    "watch_demo": "Xem bản demo"
+  },
+  "features": {
+    "title": "Tại sao chọn Myportfolio",
+    "subtitle": "Tạo hồ sơ chuyên nghiệp, thể hiện kỹ năng của bạn và nổi bật với nhà tuyển dụng — tất cả mà không cần mã hóa.",
+    "items": [
+      {
+        "title": "Xây dựng không cần mã hóa",
+        "description": "Tạo hồ sơ chuyên nghiệp trong vài phút mà không cần viết một dòng mã nào."
+      },
+      {
+        "title": "Liên kết hồ sơ của riêng bạn",
+        "description": "Nhận một miền phụ được cá nhân hóa như <strong>tenban.mylio.site</strong> và chia sẻ nó ở bất cứ đâu."
+      },
+      {
+        "title": "Mã QR chuyên nghiệp",
+        "description": "Tạo mã QR cho hồ sơ của bạn và chia sẻ nó ngay lập tức trực tuyến hoặc ngoại tuyến."
+      },
+      {
+        "title": "Chủ đề hồ sơ hiện đại",
+        "description": "Chọn từ các chủ đề được thiết kế đẹp mắt phù hợp với thương hiệu cá nhân của bạn."
+      },
+      {
+        "title": "Chia sẻ ở mọi nơi",
+        "description": "Gửi hồ sơ của bạn với một liên kết duy nhất trên mạng xã hội, email hoặc đơn xin việc."
+      },
+      {
+        "title": "Nhanh chóng & Tối ưu hóa SEO",
+        "description": "Tải nhanh chóng và giúp hồ sơ của bạn được các công cụ tìm kiếm phát hiện."
+      }
+    ]
+  },
+  "pricing": {
+    "title": "Thanh toán một lần. Hồ sơ trọn đời.",
+    "subtitle": "Tạo hồ sơ chuyên nghiệp của bạn, tạo CV và duy trì trực tuyến mãi mãi — không có đăng ký hoặc phí định kỳ.",
+    "recommended": "Giá trị tốt nhất",
+    "lifetime": {
+      "name": "Gói trọn đời",
+      "description": "Xây dựng hồ sơ của bạn một lần và giữ nó trực tuyến mãi mãi.",
+      "period": "thanh toán một lần"
+    },
+    "cta": "Mở khóa quyền truy cập trọn đời",
+    "whatsIncluded": "Bao gồm những gì",
+    "noFees": "Không đăng ký • Không phí hàng tháng • Là của bạn mãi mãi",
+    "features": [
+      "Truy cập trọn đời — chỉ một lần thanh toán",
+      "Trang web danh mục chuyên nghiệp",
+      "Trình tạo CV tích hợp",
+      "Tên miền phụ danh mục tùy chỉnh",
+      "Tối ưu hóa SEO và khả năng hiển thị",
+      "Nhiều chủ đề hiện đại",
+      "Tất cả các bản cập nhật tương lai bao gồm",
+      "Hỗ trợ khách hàng ưu tiên"
+    ]
+  },
+  "cta": {
+    "title": "Sẵn sàng thể hiện tài năng của bạn?",
+    "subtitle": "Tham gia cùng hàng ngàn nhà sáng tạo đang xây dựng hồ sơ mơ ước của họ ngay hôm nay",
+    "button": "Tạo hồ sơ của bạn"
+  },
+  "footer": {
+    "rights": "Bản quyền đã được bảo hộ."
+  }
 }

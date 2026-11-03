@@ -1,10 +1,12 @@
 import { DynamicUserPortfolio } from "../../components/portfolio/ClientWrappers";
 
+const SERVER_URL = process.env.NEXT_PUBLIC_SERVER_URL || "https://dgt-portfolio-server.vercel.app";
+
 async function fetchUserData(url) {
   try {
     const res = await fetch(url, { cache: 'no-store' });
     const data = await res.json();
-    return data?.status ? data.user : null;
+    return data?.user || (data?.fullname ? data : null);
   } catch (error) {
     return null;
   }
@@ -12,7 +14,7 @@ async function fetchUserData(url) {
 
 export async function generateMetadata(props) {
   const params = await props.params;
-  const user = await fetchUserData(`https://dgt-portfolio-server.vercel.app/users/metauser/${params.username}`);
+  const user = await fetchUserData(`${SERVER_URL}/api/users/metauser/${params.username}`);
   const user_portfolio_url = `https://mylio.site/dp/${params.username}`;
 
   if (user) {
@@ -34,7 +36,7 @@ export async function generateMetadata(props) {
         title: `${user.fullname} | ${user.category} Portfolio`,
         description: `Explore ${user.fullname}'s professional portfolio and discover projects, technical expertise, work experience, and professional services as a ${user.category}. Connect for collaborations and new opportunities.`,
         url: user_portfolio_url,
-        siteName: "DGT Portfolio",
+        siteName: "Myportfolio",
         images: [{ url: user.urlimage, alt: `${user.fullname}'s Profile Picture` }],
         locale: user.displayLanguage === 'ar' ? 'ar_AR' : 'en_US',
         type: "profile",

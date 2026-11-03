@@ -1,87 +1,88 @@
 {
-    "navbar": {
-        "features": "Fitur",
-        "showcase": "Pameran",
-        "pricing": "Harga",
-        "auth": {
-            "signIn": "Masuk",
-            "signInWithGoogle": "Masuk dengan Google",
-            "getStarted": "Mulai",
-            "updateProfile": "Perbarui Profil",
-            "businessLinks": "Tautan Bisnis",
-            "support": "Dukungan",
-            "signOut": "Keluar",
-            "customDomain": "Domain Kustom",
-            "payment": "Pembayaran"
-        }
-    },
-    "hero": {
-        "title_part1": "Portofolio Anda,",
-        "title_part2": "Meningkat",
-        "description": "Buat portofolio profesional hanya dalam 5 menit—tanpa perlu coding. Tampilkan keahlian, pengalaman, dan proyek Anda dalam satu portofolio indah yang membantu rekruter memahami profil Anda dengan cepat dan meningkatkan peluang Anda untuk mendapatkan pekerjaan atau kesempatan freelance berikutnya.",
-        "free_trial": "Coba gratis 30 hari",
-        "start_building": "Mulai Membangun",
-        "watch_demo": "Tonton Demo"
-    },
-    "features": {
-        "title": "Mengapa memilih DGT Portfolio",
-        "subtitle": "Buat portofolio profesional, pamerkan keahlian Anda, dan tampil menonjol di depan perekrut — semua tanpa coding.",
-        "items": [
-            {
-                "title": "Bangun Tanpa Coding",
-                "description": "Buat portofolio profesional dalam hitungan menit tanpa menulis satu baris kode pun."
-            },
-            {
-                "title": "Tautan Portofolio Anda Sendiri",
-                "description": "Dapatkan subdomain kustom seperti <strong>namakamu.mylio.site</strong> dan bagikan di mana saja."
-            },
-            {
-                "title": "Kode QR Profesional",
-                "description": "Hasilkan kode QR untuk portofolio Anda dan bagikan secara instan secara online atau offline."
-            },
-            {
-                "title": "Tema Portofolio Modern",
-                "description": "Pilih dari tema-tema yang dirancang dengan indah yang sesuai dengan merek pribadi Anda."
-            },
-            {
-                "title": "Bagikan di Mana Saja",
-                "description": "Kirim portofolio Anda dengan satu tautan di media sosial, email, atau lamaran pekerjaan."
-            },
-            {
-                "title": "Cepat & Dioptimalkan SEO",
-                "description": "Memuat dengan cepat dan membantu portofolio Anda ditemukan oleh mesin pencari."
-            }
-        ]
-    },
-    "pricing": {
-        "title": "Satu Pembayaran. Portofolio Seumur Hidup.",
-        "subtitle": "Buat portofolio profesional Anda, buat CV Anda, dan tetap online selamanya — tanpa langganan atau biaya berulang.",
-        "recommended": "Nilai Terbaik",
-        "lifetime": {
-            "name": "Paket Seumur Hidup",
-            "description": "Bangun portofolio Anda sekali dan simpan online selamanya.",
-            "period": "bayar sekali"
-        },
-        "cta": "Buka Akses Seumur Hidup",
-        "whatsIncluded": "Apa yang termasuk",
-        "noFees": "Tanpa langganan • Tanpa biaya bulanan • Milik Anda selamanya",
-        "features": [
-            "Akses seumur hidup — satu kali pembayaran",
-            "Situs web portofolio profesional",
-            "Generator CV bawaan",
-            "Subdomain portofolio khusus",
-            "Dioptimalkan untuk SEO dan visibilitas",
-            "Berbagai tema modern",
-            "Semua pembaruan mendatang termasuk",
-            "Dukungan pelanggan prioritas"
-        ]
-    },
-    "cta": {
-        "title": "Siap Menampilkan Bakat Anda?",
-        "subtitle": "Bergabunglah dengan ribuan kreator yang membangun portofolio impian mereka hari ini",
-        "button": "Buat Portofolio Anda"
-    },
-    "footer": {
-        "rights": "Hak cipta dilindungi undang-undang."
+  "navbar": {
+    "features": "Fitur",
+    "showcase": "Pameran",
+    "pricing": "Harga",
+    "auth": {
+      "signIn": "Masuk",
+      "signInWithGoogle": "Masuk dengan Google",
+      "getStarted": "Mulai",
+      "updateProfile": "Perbarui Profil",
+      "businessLinks": "Tautan Bisnis",
+      "support": "Dukungan",
+      "signOut": "Keluar",
+      "customDomain": "Domain Kustom",
+      "payment": "Pembayaran",
+      "register": "Daftar"
     }
+  },
+  "hero": {
+    "title_part1": "Portofolio Anda,",
+    "title_part2": "Meningkat",
+    "description": "Buat portofolio profesional hanya dalam 5 menit—tanpa perlu coding. Tampilkan keahlian, pengalaman, dan proyek Anda dalam satu portofolio indah yang membantu rekruter memahami profil Anda dengan cepat dan meningkatkan peluang Anda untuk mendapatkan pekerjaan atau kesempatan freelance berikutnya.",
+    "free_trial": "Coba gratis 30 hari",
+    "start_building": "Mulai Membangun",
+    "watch_demo": "Tonton Demo"
+  },
+  "features": {
+    "title": "Mengapa memilih Myportfolio",
+    "subtitle": "Buat portofolio profesional, pamerkan keahlian Anda, dan tampil menonjol di depan perekrut — semua tanpa coding.",
+    "items": [
+      {
+        "title": "Bangun Tanpa Coding",
+        "description": "Buat portofolio profesional dalam hitungan menit tanpa menulis satu baris kode pun."
+      },
+      {
+        "title": "Tautan Portofolio Anda Sendiri",
+        "description": "Dapatkan subdomain kustom seperti <strong>namakamu.mylio.site</strong> dan bagikan di mana saja."
+      },
+      {
+        "title": "Kode QR Profesional",
+        "description": "Hasilkan kode QR untuk portofolio Anda dan bagikan secara instan secara online atau offline."
+      },
+      {
+        "title": "Tema Portofolio Modern",
+        "description": "Pilih dari tema-tema yang dirancang dengan indah yang sesuai dengan merek pribadi Anda."
+      },
+      {
+        "title": "Bagikan di Mana Saja",
+        "description": "Kirim portofolio Anda dengan satu tautan di media sosial, email, atau lamaran pekerjaan."
+      },
+      {
+        "title": "Cepat & Dioptimalkan SEO",
+        "description": "Memuat dengan cepat dan membantu portofolio Anda ditemukan oleh mesin pencari."
+      }
+    ]
+  },
+  "pricing": {
+    "title": "Satu Pembayaran. Portofolio Seumur Hidup.",
+    "subtitle": "Buat portofolio profesional Anda, buat CV Anda, dan tetap online selamanya — tanpa langganan atau biaya berulang.",
+    "recommended": "Nilai Terbaik",
+    "lifetime": {
+      "name": "Paket Seumur Hidup",
+      "description": "Bangun portofolio Anda sekali dan simpan online selamanya.",
+      "period": "bayar sekali"
+    },
+    "cta": "Buka Akses Seumur Hidup",
+    "whatsIncluded": "Apa yang termasuk",
+    "noFees": "Tanpa langganan • Tanpa biaya bulanan • Milik Anda selamanya",
+    "features": [
+      "Akses seumur hidup — satu kali pembayaran",
+      "Situs web portofolio profesional",
+      "Generator CV bawaan",
+      "Subdomain portofolio khusus",
+      "Dioptimalkan untuk SEO dan visibilitas",
+      "Berbagai tema modern",
+      "Semua pembaruan mendatang termasuk",
+      "Dukungan pelanggan prioritas"
+    ]
+  },
+  "cta": {
+    "title": "Siap Menampilkan Bakat Anda?",
+    "subtitle": "Bergabunglah dengan ribuan kreator yang membangun portofolio impian mereka hari ini",
+    "button": "Buat Portofolio Anda"
+  },
+  "footer": {
+    "rights": "Hak cipta dilindungi undang-undang."
+  }
 }

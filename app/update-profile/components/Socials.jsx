@@ -1,15 +1,15 @@
 "use client";
 import React, { useState } from "react";
 import { useToast } from "../../components/Toast";
-import { CheckCheck, Loader } from "../../components/Icons";
+import { CheckCheck, Loader } from "../../components/lucide-react";
 import axios from "axios";
+import { handleApiError } from "../../utils/apiErrorHandler";
+const SERVER_URL = process.env.NEXT_PUBLIC_SERVER_URL;
 import Image from "next/image";
-import { getTranslation } from '../../translations/update-profile'
 
-export default function Socials({ userData, setUserDetails }) {
+export default function Socials({ data, setData, content }) {
   const toast = useToast();
-  const t = getTranslation(userData?.displayLanguage || 'en');
-  const user = userData || {};
+  const user = data?.user || {};
   const [socials, setSocials] = useState(user.socials || {});
   const socialIcons = {
     github: "/icons/github.svg",
@@ -31,34 +31,42 @@ export default function Socials({ userData, setUserDetails }) {
   const saveSocials = async () => {
     setLoading(true);
     try {
-      await axios.put("/api/proxy/users/update/socials", { socials });
+      await axios.put(`${SERVER_URL}/api/users/update/socials`, { socials }, { withCredentials: true });
 
       // Update global state to reflect changes immediately without refresh
-      if (setUserDetails) {
-        setUserDetails(prev => ({
+      if (setData) {
+        setData(prev => ({
           ...prev,
-          socials: socials
+          user: {
+            ...(prev?.user || {}),
+            socials: socials
+          }
         }));
       }
+      localStorage.setItem(`data_${data?.user?.username}`, JSON.stringify({
+        ...data,
+        user: {
+          ...(data?.user || {}),
+          socials: socials
+        }
+      }));
 
-      toast.success(t('socials.savedSuccessfully'));
+      toast.success(content?.savedSuccessfully || "Saved successfully!");
     } catch (error) {
-      console.error("Error updating socials:", error);
-      toast.error(t('socials.errorMessage'));
+      await handleApiError({ error, defaultErrorMsg: content?.errorMessage || "Error saving", toast });
     } finally {
       setLoading(false);
     }
   };
 
   return (
-    <div className="relative w-full" dir={userData?.displayLanguage === 'ar' ? 'rtl' : 'ltr'}>
+    <div className="relative w-full" dir={user?.displayLanguage === 'ar' ? 'rtl' : 'ltr'}>
       <div className="p-2 space-y-6">
 
         {/* Header Section */}
-        {/* Header Section */}
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
           <h3 className="text-lg font-bold text-gray-800 flex items-center gap-2">
-            🔗 {t('socials.title')}
+            🔗 {content?.title || "Social Links"}
           </h3>
         </div>
 
@@ -75,7 +83,7 @@ export default function Socials({ userData, setUserDetails }) {
                 value={socials[key] || ""}
                 maxLength={500}
                 onChange={(e) => setSocials({ ...socials, [key]: e.target.value })}
-                placeholder={`${t('socials.enterUrl')} (${key})`}
+                placeholder={`${content?.enterUrl || "Enter URL"} (${key})`}
                 className="w-full bg-gray-50 text-gray-800 font-medium text-[10px] md:text-sm rounded md:rounded-lg px-2 py-1 md:px-3 md:py-2 outline-none border border-gray-300 focus:bg-white focus:border-teal-500 transition-all placeholder-gray-400"
               />
             </div>
@@ -95,11 +103,11 @@ export default function Socials({ userData, setUserDetails }) {
           >
             {loading ? (
               <>
-                <Loader size={14} className="animate-spin md:w-[18px] md:h-[18px]" /> {t('socials.saving')}...
+                <Loader size={14} className="animate-spin md:w-[18px] md:h-[18px]" /> {content?.saving || "Saving..."}...
               </>
             ) : (
               <>
-                💾 {t('socials.save')}
+                💾 {content?.save || "Save"}
               </>
             )}
           </button>

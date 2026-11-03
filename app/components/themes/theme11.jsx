@@ -1,18 +1,28 @@
 "use client"
 import { useState, useEffect, useMemo } from "react"
-import { Layers, Rocket, Star, ArrowUpRight, Loader, FileDown, Award, Menu, X, ArrowUp, ChevronDown, ChevronUp } from "../Icons"
+import { Layers, Rocket, Star, ArrowUpRight, Loader, FileDown, Award, Menu, X, ArrowUp, ChevronDown, ChevronUp } from "../lucide-react"
 import QrcodeProfile from "../portfolio/QrcodeProfile"
-import UserLinks from "../portfolio/UserLinks"
 import Image from "next/image"
 import Link from "next/link"
 import { getTranslation } from "../../translations/portfolio"
 import ImageModal from "../portfolio/ImageModal"
 import DownloadResume from "../downloadcv/DownloadResume"
 
-export default function Theme11({ userDetails, userLinks }) {
-    const t = getTranslation(userDetails?.displayLanguage || 'en')
+export default function Theme11({ userDetails, content: propContent, t: propT }) {
+    const [content, setContent] = useState(propContent || (typeof propT === 'object' ? propT : {}));
+
+    useEffect(() => {
+        if (propContent) {
+            setContent(propContent);
+            return;
+        }
+        if (typeof propT === 'object' && propT) {
+            setContent(propT);
+            return;
+        }
+        getTranslation(userDetails?.displayLanguage || 'en').then((dict) => setContent(dict || {}));
+    }, [userDetails?.displayLanguage, propContent, propT]);
     const [showQR, setShowQR] = useState(false);
-    const [showUserLinks, setShowUserLinks] = useState(false);
     const [selectedImage, setSelectedImage] = useState(null);
     const [isNavOpen, setIsNavOpen] = useState(false);
     const [showScrollTop, setShowScrollTop] = useState(false);
@@ -112,7 +122,7 @@ export default function Theme11({ userDetails, userLinks }) {
                     <div className="flex items-center gap-2">
                         <Rocket className="text-cyan-400" />
                         <Link href="https://mylio.site" className="text-lg md:text-xl font-bold tracking-widest uppercase text-cyan-400 hover:text-cyan-300 shadow-cyan-500/50 drop-shadow-[0_0_5px_rgba(34,211,238,0.8)]">
-                            <span className="text-white">{t('portfolio')}</span>
+                            <span className="text-white">{content?.portfolio}</span>
                         </Link>
                         <Rocket className="text-cyan-400 md:hidden block" />
                     </div>
@@ -120,13 +130,8 @@ export default function Theme11({ userDetails, userLinks }) {
                     <div className="flex gap-4">
                         <DownloadResume userDetails={userDetails} className="cursor-pointer px-5 py-2 border border-cyan-500/30 bg-cyan-950/30 rounded hover:bg-cyan-500/20 transition-all text-cyan-400 font-bold text-xs flex items-center" />
                         <div onClick={() => setShowQR(true)} className="cursor-pointer border border-cyan-500/30 bg-cyan-950/30 rounded hover:bg-cyan-500/20 transition-all text-cyan-400 font-bold text-xs flex items-center justify-center">
-                            <QrcodeProfile userDetails={userDetails} className="text-cyan-400 border-none bg-transparent hover:bg-transparent shadow-none" isOpen={showQR} onClose={() => setShowQR(false)} />
+                            <QrcodeProfile userDetails={userDetails} className="text-cyan-400 border-none bg-transparent hover:bg-transparent shadow-none" isOpen={showQR} onClose={() => setShowQR(false)} content={content} />
                         </div>
-                        {userLinks?.length > 0 && (
-                            <div onClick={() => setShowUserLinks(true)} className="cursor-pointer border border-cyan-500/30 bg-cyan-950/30 rounded hover:bg-cyan-500/20 transition-all text-cyan-400 font-bold text-xs flex items-center justify-center">
-                                <UserLinks lang={userDetails?.displayLanguage} userLinks={userLinks} className="text-cyan-400 border-none bg-transparent hover:bg-transparent shadow-none" isOpen={showUserLinks} onClose={() => setShowUserLinks(false)} />
-                            </div>
-                        )}
                         {/* Menu Button in Header */}
                         {activeSectionsCount >= 3 && (
                             <button
@@ -155,13 +160,13 @@ export default function Theme11({ userDetails, userLinks }) {
                                     : ["services", "experience", "skills", "projects", "education", "certificates", "languages"];
 
                                 const navItems = {
-                                    services: { id: "services", label: t('services'), icon: "💼", condition: userDetails?.services?.length > 0 },
-                                    experience: { id: "experience", label: t('workExperience'), icon: "⭐", condition: userDetails?.experience?.length > 0 },
-                                    skills: { id: "skills", label: t('skills'), icon: "💡", condition: userDetails?.skills?.length > 0 },
-                                    projects: { id: "projects", label: t('projects'), icon: "📁", condition: userDetails?.projects?.length > 0 },
-                                    education: { id: "education", label: t('education'), icon: "🎓", condition: userDetails?.education?.length > 0 },
-                                    certificates: { id: "certificates", label: t('certificates'), icon: "📜", condition: userDetails?.certificates?.length > 0 },
-                                    languages: { id: "languages", label: t('languages'), icon: "🌍", condition: userDetails?.languages?.length > 0 },
+                                    services: { id: "services", label: content?.services, icon: "💼", condition: userDetails?.services?.length > 0 },
+                                    experience: { id: "experience", label: content?.workExperience, icon: "⭐", condition: userDetails?.experience?.length > 0 },
+                                    skills: { id: "skills", label: content?.skills, icon: "💡", condition: userDetails?.skills?.length > 0 },
+                                    projects: { id: "projects", label: content?.projects, icon: "📁", condition: userDetails?.projects?.length > 0 },
+                                    education: { id: "education", label: content?.education, icon: "🎓", condition: userDetails?.education?.length > 0 },
+                                    certificates: { id: "certificates", label: content?.certificates, icon: "📜", condition: userDetails?.certificates?.length > 0 },
+                                    languages: { id: "languages", label: content?.languages, icon: "🌍", condition: userDetails?.languages?.length > 0 },
                                 };
 
                                 return sectionOrder
@@ -200,7 +205,7 @@ export default function Theme11({ userDetails, userLinks }) {
                         <div className="relative group">
                             <div className="absolute inset-0 bg-gradient-to-b from-cyan-500 to-purple-600 rounded-full blur opacity-20 group-hover:opacity-40 transition-opacity duration-500"></div>
                             <div className="relative w-48 h-48 md:w-64 md:h-64 mx-auto rounded-full overflow-hidden border-4 border-cyan-500/30 shadow-[0_0_30px_rgba(34,211,238,0.2)]">
-                                <Image priority
+                                <Image priority loading="eager"
                                     src={userDetails?.urlimage}
                                     alt={userDetails?.fullname || "Profile"}
                                     width={500}
@@ -214,7 +219,7 @@ export default function Theme11({ userDetails, userLinks }) {
 
                         <div className={`text-center ${userDetails?.displayLanguage === 'ar' ? 'lg:text-right' : 'lg:text-left'}`}>
                             <div className="inline-block px-2 py-1 mb-2 border border-cyan-500/50 text-xs text-cyan-400 uppercase tracking-[0.2em] bg-cyan-950/50">
-                                {t('verified')}
+                                {content?.verified}
                             </div>
                             <h1 className="text-3xl md:text-5xl font-bold mb-2 text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-purple-400 drop-shadow-[0_0_10px_rgba(34,211,238,0.5)]">
                                 {userDetails?.fullname}
@@ -235,7 +240,7 @@ export default function Theme11({ userDetails, userLinks }) {
                                 </p>
                             </div>
 
-                            {(userDetails?.displayEmail || userDetails?.email) && (
+                            {(userDetails?.email) && (
                                 <div className="p-4 mt-2 border border-cyan-500/20 bg-cyan-950/20 rounded-lg backdrop-blur-sm relative overflow-hidden">
                                     <div className="absolute top-0 left-0 w-2 h-2 border-t border-l border-cyan-500"></div>
                                     <div className="absolute top-0 right-0 w-2 h-2 border-t border-r border-cyan-500"></div>
@@ -243,10 +248,10 @@ export default function Theme11({ userDetails, userLinks }) {
                                     <div className="absolute bottom-0 right-0 w-2 h-2 border-b border-r border-cyan-500"></div>
                                     <p className="text-xs text-cyan-500 uppercase tracking-widest mb-1 font-mono"> EMAIL</p>
                                     <a
-                                        href={`mailto:${userDetails.displayEmail || userDetails.email}`}
+                                        href={`mailto:${userDetails.email}`}
                                         className="text-cyan-100 hover:text-cyan-400 transition-colors text-sm break-all font-mono"
                                     >
-                                        {userDetails.displayEmail || userDetails.email}
+                                        {userDetails.email}
                                     </a>
                                 </div>
                             )}
@@ -267,14 +272,14 @@ export default function Theme11({ userDetails, userLinks }) {
                                 </div>
                             )}
 
-                            {userDetails?.country && (
+                            {userDetails?.location && (
                                 <div className="p-4 mt-2 border border-cyan-500/20 bg-cyan-950/20 rounded-lg backdrop-blur-sm relative overflow-hidden">
                                     <div className="absolute top-0 left-0 w-2 h-2 border-t border-l border-cyan-500"></div>
                                     <div className="absolute top-0 right-0 w-2 h-2 border-t border-r border-cyan-500"></div>
                                     <div className="absolute bottom-0 left-0 w-2 h-2 border-b border-l border-cyan-500"></div>
                                     <div className="absolute bottom-0 right-0 w-2 h-2 border-b border-r border-cyan-500"></div>
-                                    <p className="text-xs text-cyan-500 uppercase tracking-widest mb-1 font-mono"> COUNTRY</p>
-                                    <p className="text-cyan-100 text-sm font-mono">{userDetails.country}</p>
+                                    <p className="text-xs text-cyan-500 uppercase tracking-widest mb-1 font-mono"> {content?.location || "LOCATION"}</p>
+                                    <p className="text-cyan-100 text-sm font-mono">{userDetails.location}</p>
                                 </div>
                             )}
                         </div>
@@ -294,7 +299,7 @@ export default function Theme11({ userDetails, userLinks }) {
                                     <section key="services" id="services" className="mb-20 scroll-mt-24">
                                         <h3 className="text-cyan-400 text-sm uppercase tracking-widest mb-4 flex items-center gap-2">
                                             <span className="w-8 h-[1px] bg-cyan-500"></span>
-                                            {t('services')}
+                                            {content?.services}
                                         </h3>
                                         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
                                             {userDetails.services.map((service, i) => (
@@ -309,7 +314,7 @@ export default function Theme11({ userDetails, userLinks }) {
                                 experience: userDetails.experience && userDetails.experience.length > 0 && (
                                     <section key="experience" id="experience" className="mb-20 scroll-mt-24">
                                         <h2 className="text-cyan-400 text-sm uppercase tracking-widest mb-4 flex items-center gap-2">
-                                            <span className="w-8 h-[1px] bg-cyan-500"></span> {t('workExperience')}
+                                            <span className="w-8 h-[1px] bg-cyan-500"></span> {content?.workExperience}
                                         </h2>
                                         <div className="space-y-4">
                                             {userDetails.experience.map((exp, i) => (
@@ -337,7 +342,7 @@ export default function Theme11({ userDetails, userLinks }) {
                                 skills: userDetails.skills && userDetails.skills.length > 0 && (
                                     <section key="skills" id="skills" className="mb-20 scroll-mt-24">
                                         <h2 className="text-cyan-400 text-sm uppercase tracking-widest mb-4 flex items-center gap-2">
-                                            <span className="w-8 h-[1px] bg-cyan-500"></span> {t('skills')}
+                                            <span className="w-8 h-[1px] bg-cyan-500"></span> {content?.skills}
                                         </h2>
                                         <div className="flex flex-wrap gap-2">
                                             {userDetails.skills.map((skill, i) => (
@@ -351,7 +356,7 @@ export default function Theme11({ userDetails, userLinks }) {
                                 projects: userDetails.projects && userDetails.projects.length > 0 && (
                                     <section key="projects" id="projects" className="mb-20 scroll-mt-24">
                                         <h2 className="text-cyan-400 text-sm uppercase tracking-widest mb-4 flex items-center gap-2">
-                                            <span className="w-8 h-[1px] bg-cyan-500"></span> {t('projects')}
+                                            <span className="w-8 h-[1px] bg-cyan-500"></span> {content?.projects}
                                         </h2>
                                         <div className="grid gap-4">
                                             {userDetails.projects.map((project, i) => {
@@ -380,7 +385,7 @@ export default function Theme11({ userDetails, userLinks }) {
                                                                         rel="noopener noreferrer"
                                                                         className="flex items-center gap-1 text-cyan-400 hover:text-white hover:underline transition-colors text-sm whitespace-nowrap"
                                                                     >
-                                                                        {t('viewProject')}
+                                                                        {content?.viewProject}
                                                                         <ArrowUpRight size={16} />
                                                                     </a>
                                                                 )}
@@ -399,11 +404,11 @@ export default function Theme11({ userDetails, userLinks }) {
                                                                     >
                                                                         {isExpanded ? (
                                                                             <>
-                                                                                {t('readLess')} <ChevronUp size={14} />
+                                                                                {content?.readLess} <ChevronUp size={14} />
                                                                             </>
                                                                         ) : (
                                                                             <>
-                                                                                {t('readMore')} <ChevronDown size={14} />
+                                                                                {content?.readMore} <ChevronDown size={14} />
                                                                             </>
                                                                         )}
                                                                     </button>
@@ -426,7 +431,7 @@ export default function Theme11({ userDetails, userLinks }) {
                                 education: userDetails.education && userDetails.education.length > 0 && (
                                     <section key="education" id="education" className="mb-20 scroll-mt-24">
                                         <h2 className="text-cyan-400 text-sm uppercase tracking-widest mb-4 flex items-center gap-2">
-                                            <span className="w-8 h-[1px] bg-cyan-500"></span> {t('education')}
+                                            <span className="w-8 h-[1px] bg-cyan-500"></span> {content?.education}
                                         </h2>
                                         <div className="space-y-4">
                                             {userDetails.education.map((edu, i) => (
@@ -452,7 +457,7 @@ export default function Theme11({ userDetails, userLinks }) {
                                 certificates: userDetails.certificates && userDetails.certificates.length > 0 && (
                                     <section key="certificates" id="certificates" className="mb-20 scroll-mt-24">
                                         <h2 className="text-cyan-400 text-sm uppercase tracking-widest mb-4 flex items-center gap-2">
-                                            <span className="w-8 h-[1px] bg-cyan-500"></span> {t('certificates') || "Certificates"}
+                                            <span className="w-8 h-[1px] bg-cyan-500"></span> {content?.certificates || "Certificates"}
                                         </h2>
                                         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                                             {userDetails.certificates.map((cert, i) => (
@@ -488,7 +493,7 @@ export default function Theme11({ userDetails, userLinks }) {
                                 languages: userDetails.languages && userDetails.languages.length > 0 && (
                                     <section key="languages" id="languages" className="mb-20 scroll-mt-24">
                                         <h2 className="text-cyan-400 text-sm uppercase tracking-widest mb-4 flex items-center gap-2">
-                                            <span className="w-8 h-[1px] bg-cyan-500"></span> {t('languages')}
+                                            <span className="w-8 h-[1px] bg-cyan-500"></span> {content?.languages}
                                         </h2>
                                         <div className="flex flex-wrap gap-2">
                                             {userDetails.languages.map((lang, i) => (
@@ -509,7 +514,7 @@ export default function Theme11({ userDetails, userLinks }) {
                             <section>
                                 <h3 className="text-cyan-400 text-sm uppercase tracking-widest mb-4 flex items-center gap-2">
                                     <span className="w-8 h-[1px] bg-cyan-500"></span>
-                                    {t('followMe')}
+                                    {content?.followMe}
                                 </h3>
                                 <div className="flex flex-wrap gap-4">
                                     {[

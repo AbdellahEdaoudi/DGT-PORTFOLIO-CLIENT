@@ -1,87 +1,88 @@
 {
-    "navbar": {
-        "features": "Funktionen",
-        "showcase": "Galerie",
-        "pricing": "Preise",
-        "auth": {
-            "signIn": "Anmelden",
-            "signInWithGoogle": "Mit Google anmelden",
-            "getStarted": "Loslegen",
-            "updateProfile": "Profil aktualisieren",
-            "businessLinks": "Geschäftslinks",
-            "support": "Support",
-            "signOut": "Abmelden",
-            "customDomain": "Benutzerdefinierte Domain",
-            "payment": "Zahlung"
-        }
-    },
-    "hero": {
-        "title_part1": "Ihr Portfolio,",
-        "title_part2": "Erhöht",
-        "description": "Erstellen Sie in nur 5 Minuten ein professionelles Portfolio—ohne Programmierkenntnisse. Präsentieren Sie Ihre Fähigkeiten, Erfahrungen und Projekte in einem ansprechenden Portfolio, das Recruitern hilft, Ihr Profil schnell zu verstehen und Ihre Chancen auf Ihren nächsten Job oder Freelance-Auftrag zu erhöhen.",
-        "free_trial": "30 Tage kostenlos",
-        "start_building": "Jetzt erstellen",
-        "watch_demo": "Demo ansehen"
-    },
-    "features": {
-        "title": "Warum DGT Portfolio wählen?",
-        "subtitle": "Erstellen Sie ein professionelles Portfolio, präsentieren Sie Ihre Fähigkeiten und heben Sie sich bei Personalvermittlern ab — ganz ohne Programmierung.",
-        "items": [
-            {
-                "title": "Ohne Programmierung erstellen",
-                "description": "Erstellen Sie in wenigen Minuten ein professionelles Portfolio, ohne eine einzige Codezeile zu schreiben."
-            },
-            {
-                "title": "Ihr eigener Portfolio-Link",
-                "description": "Erhalten Sie eine personalisierte Subdomain wie <strong>ihrname.mylio.site</strong> und teilen Sie sie überall."
-            },
-            {
-                "title": "Professioneller QR-Code",
-                "description": "Generieren Sie einen QR-Code für Ihr Portfolio und teilen Sie ihn sofort online oder offline."
-            },
-            {
-                "title": "Moderne Portfolio-Themes",
-                "description": "Wählen Sie aus wunderschön gestalteten Themes, die zu Ihrer persönlichen Marke passen."
-            },
-            {
-                "title": "Überall teilen",
-                "description": "Senden Sie Ihr Portfolio mit einem einzigen Link auf Social Media, per E-Mail oder in Bewerbungen."
-            },
-            {
-                "title": "Schnell & SEO-optimiert",
-                "description": "Lädt schnell und hilft dabei, dass Ihr Portfolio von Suchmaschinen gefunden wird."
-            }
-        ]
-    },
-    "pricing": {
-        "title": "Eine Zahlung. Lebenslanges Portfolio.",
-        "subtitle": "Erstellen Sie Ihr professionelles Portfolio, generieren Sie Ihren Lebenslauf und bleiben Sie für immer online — ohne Abonnements oder wiederkehrende Gebühren.",
-        "recommended": "Bester Wert",
-        "lifetime": {
-            "name": "Lebenslanger Plan",
-            "description": "Bauen Sie Ihr Portfolio einmal auf und behalten Sie es für immer online.",
-            "period": "einmalig zahlen"
-        },
-        "cta": "Lebenslangen Zugang freischalten",
-        "whatsIncluded": "Was ist enthalten",
-        "noFees": "Kein Abonnement • Keine monatlichen Gebühren • Für immer Ihres",
-        "features": [
-            "Lebenslanger Zugang — nur eine Zahlung",
-            "Professionelle Portfolio-Website",
-            "Integrierter Lebenslauf-Generator",
-            "Eigene Portfolio-Subdomain",
-            "SEO-optimiert für Sichtbarkeit",
-            "Mehrere moderne Themen",
-            "Alle zukünftigen Updates inklusive",
-            "Priorisierter Kundensupport"
-        ]
-    },
-    "cta": {
-        "title": "Bereit, Ihr Talent zu präsentieren?",
-        "subtitle": "Schließen Sie sich Tausenden von Kreativen an, die heute ihre Traumportfolios erstellen",
-        "button": "Erstellen Sie Ihr Portfolio"
-    },
-    "footer": {
-        "rights": "Alle Rechte vorbehalten."
+  "navbar": {
+    "features": "Funktionen",
+    "showcase": "Galerie",
+    "pricing": "Preise",
+    "auth": {
+      "signIn": "Anmelden",
+      "signInWithGoogle": "Mit Google anmelden",
+      "getStarted": "Loslegen",
+      "updateProfile": "Profil aktualisieren",
+      "businessLinks": "Geschäftslinks",
+      "support": "Support",
+      "signOut": "Abmelden",
+      "customDomain": "Benutzerdefinierte Domain",
+      "payment": "Zahlung",
+      "register": "Registrieren"
     }
+  },
+  "hero": {
+    "title_part1": "Ihr Portfolio,",
+    "title_part2": "Erhöht",
+    "description": "Erstellen Sie in nur 5 Minuten ein professionelles Portfolio—ohne Programmierkenntnisse. Präsentieren Sie Ihre Fähigkeiten, Erfahrungen und Projekte in einem ansprechenden Portfolio, das Recruitern hilft, Ihr Profil schnell zu verstehen und Ihre Chancen auf Ihren nächsten Job oder Freelance-Auftrag zu erhöhen.",
+    "free_trial": "30 Tage kostenlos",
+    "start_building": "Jetzt erstellen",
+    "watch_demo": "Demo ansehen"
+  },
+  "features": {
+    "title": "Warum Myportfolio wählen?",
+    "subtitle": "Erstellen Sie ein professionelles Portfolio, präsentieren Sie Ihre Fähigkeiten und heben Sie sich bei Personalvermittlern ab — ganz ohne Programmierung.",
+    "items": [
+      {
+        "title": "Ohne Programmierung erstellen",
+        "description": "Erstellen Sie in wenigen Minuten ein professionelles Portfolio, ohne eine einzige Codezeile zu schreiben."
+      },
+      {
+        "title": "Ihr eigener Portfolio-Link",
+        "description": "Erhalten Sie eine personalisierte Subdomain wie <strong>ihrname.mylio.site</strong> und teilen Sie sie überall."
+      },
+      {
+        "title": "Professioneller QR-Code",
+        "description": "Generieren Sie einen QR-Code für Ihr Portfolio und teilen Sie ihn sofort online oder offline."
+      },
+      {
+        "title": "Moderne Portfolio-Themes",
+        "description": "Wählen Sie aus wunderschön gestalteten Themes, die zu Ihrer persönlichen Marke passen."
+      },
+      {
+        "title": "Überall teilen",
+        "description": "Senden Sie Ihr Portfolio mit einem einzigen Link auf Social Media, per E-Mail oder in Bewerbungen."
+      },
+      {
+        "title": "Schnell & SEO-optimiert",
+        "description": "Lädt schnell und hilft dabei, dass Ihr Portfolio von Suchmaschinen gefunden wird."
+      }
+    ]
+  },
+  "pricing": {
+    "title": "Eine Zahlung. Lebenslanges Portfolio.",
+    "subtitle": "Erstellen Sie Ihr professionelles Portfolio, generieren Sie Ihren Lebenslauf und bleiben Sie für immer online — ohne Abonnements oder wiederkehrende Gebühren.",
+    "recommended": "Bester Wert",
+    "lifetime": {
+      "name": "Lebenslanger Plan",
+      "description": "Bauen Sie Ihr Portfolio einmal auf und behalten Sie es für immer online.",
+      "period": "einmalig zahlen"
+    },
+    "cta": "Lebenslangen Zugang freischalten",
+    "whatsIncluded": "Was ist enthalten",
+    "noFees": "Kein Abonnement • Keine monatlichen Gebühren • Für immer Ihres",
+    "features": [
+      "Lebenslanger Zugang — nur eine Zahlung",
+      "Professionelle Portfolio-Website",
+      "Integrierter Lebenslauf-Generator",
+      "Eigene Portfolio-Subdomain",
+      "SEO-optimiert für Sichtbarkeit",
+      "Mehrere moderne Themen",
+      "Alle zukünftigen Updates inklusive",
+      "Priorisierter Kundensupport"
+    ]
+  },
+  "cta": {
+    "title": "Bereit, Ihr Talent zu präsentieren?",
+    "subtitle": "Schließen Sie sich Tausenden von Kreativen an, die heute ihre Traumportfolios erstellen",
+    "button": "Erstellen Sie Ihr Portfolio"
+  },
+  "footer": {
+    "rights": "Alle Rechte vorbehalten."
+  }
 }

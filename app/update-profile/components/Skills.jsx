@@ -1,6 +1,8 @@
 "use client";
 import axios from "axios";
-import React, { useState, useEffect } from "react";
+import { handleApiError } from "../../utils/apiErrorHandler";
+const SERVER_URL = process.env.NEXT_PUBLIC_SERVER_URL;
+import { useState, useEffect } from "react";
 import { createPortal } from "react-dom";
 import { useToast } from "../../components/Toast";
 import {
@@ -13,8 +15,7 @@ import {
   ArrowDown,
   X,
   AlertCircle,
-} from "../../components/Icons";
-import { getTranslation } from "../../translations/update-profile";
+} from "../../components/lucide-react";
 import {
   DndContext,
   closestCenter,
@@ -59,14 +60,14 @@ const SortableItem = ({ id, children }) => {
   );
 };
 
-export default function Skills({ userData, setUserDetails }) {
+export default function Skills({ data, setData, content }) {
   const toast = useToast();
-  const t = getTranslation(userData?.displayLanguage || "en");
+  const user = data?.user || {};
 
   // Transform skills to object to track local order if needed, but here simple string array
   // So we map to objects with IDs for DnD stability
   const [skills, setSkills] = useState(
-    (userData.skills || []).map((s, i) => ({
+    (user.skills || []).map((s, i) => ({
       value: s,
       localId: `id-${i}-${Math.random().toString(36).substr(2, 9)}`,
     })),
@@ -167,17 +168,31 @@ export default function Skills({ userData, setUserDetails }) {
 
     setLoading(true);
     try {
-      await axios.put(`/api/proxy/users/update/skills`, {
-        skills: validSkills,
-      });
+      await axios.put(
+        `${SERVER_URL}/api/users/update/skills`,
+        {
+          skills: validSkills,
+        },
+        { withCredentials: true },
+      );
 
       // Update global state
-      if (setUserDetails) {
-        setUserDetails((prev) => ({
+      if (setData) {
+        setData((prev) => ({
           ...prev,
-          skills: validSkills,
+          user: {
+            ...(prev?.user || {}),
+            skills: validSkills,
+          },
         }));
       }
+      localStorage.setItem(`data_${data?.user?.username}`, JSON.stringify({
+        ...data,
+        user: {
+          ...(data?.user || {}),
+          skills: validSkills,
+        },
+      }));
 
       // Sync local state with validSkills to clean up
       setSkills(
@@ -190,10 +205,9 @@ export default function Skills({ userData, setUserDetails }) {
         })),
       );
 
-      toast.success(t("skills.savedSuccessfully"));
+      toast.success(content?.savedSuccessfully || "Saved successfully!");
     } catch (error) {
-      console.error("Error updating skills:", error);
-      toast.error(t("skills.errorMessage"));
+      await handleApiError({ error, defaultErrorMsg: content?.errorMessage || "Error saving", toast });
     } finally {
       setLoading(false);
     }
@@ -202,10 +216,10 @@ export default function Skills({ userData, setUserDetails }) {
   return (
     <div
       className="space-y-4"
-      dir={userData?.displayLanguage === "ar" ? "rtl" : "ltr"}
+      dir={user?.displayLanguage === "ar" ? "rtl" : "ltr"}
     >
       <h3 className="text-lg font-bold text-gray-800">
-        💡 {t("skills.title")}
+        💡 {content?.title || "Skills"}
       </h3>
       <div className="bg-gradient-to-br from-purple-50 to-pink-50 p-2 md:p-4 rounded-xl border border-purple-200 space-y-3">
         <DndContext
@@ -301,7 +315,7 @@ export default function Skills({ userData, setUserDetails }) {
           className={`w-full text-white py-2 rounded-lg flex items-center justify-center gap-2 transition-all duration-300 ${skills.length >= 10 ? "bg-gray-400 cursor-not-allowed" : "bg-gradient-to-r from-purple-500 to-pink-600 hover:from-purple-600 hover:to-pink-700"}`}
         >
           <Plus size={18} />{" "}
-          {skills.length >= 10 ? t("skills.maxLimit") : t("skills.addSkill")}
+          {skills.length >= 10 ? (content?.maxLimit || "10 Max") : (content?.addSkill || "Add Skill")}
         </button>
       </div>
       <div className="flex justify-end py-4 border-b-2 border-gray-200">
@@ -312,10 +326,10 @@ export default function Skills({ userData, setUserDetails }) {
         >
           {loading ? (
             <>
-              <Loader size={20} className="animate-spin" /> {t("skills.saving")}
+              <Loader size={20} className="animate-spin" /> {content?.saving || "Saving..."}
             </>
           ) : (
-            `💾 ${t("skills.save")}`
+            `💾 ${content?.save || "Save"}`
           )}
         </button>
       </div>
@@ -332,7 +346,7 @@ export default function Skills({ userData, setUserDetails }) {
               <button
                 onClick={() => setItemToDelete(null)}
                 className="absolute top-4 right-4 text-gray-400 hover:text-gray-600 transition p-1 rounded-full hover:bg-gray-100"
-                title={t("skills.close") || "Close"}
+                title={content?.close || "Close"}
               >
                 <X className="w-5 h-5" />
               </button>
@@ -345,7 +359,7 @@ export default function Skills({ userData, setUserDetails }) {
                 <div className="text-gray-600 mb-6 text-base leading-relaxed">
                   <div className="flex flex-col gap-2">
                     <span className="font-semibold text-gray-800">
-                      {t("skills.deleteConfirm") ||
+                      {content?.deleteConfirm ||
                         "Are you sure you want to delete this skill?"}
                     </span>
                     <span className="font-bold text-black border-t pt-2 mt-1 break-all">
@@ -360,14 +374,14 @@ export default function Skills({ userData, setUserDetails }) {
                   onClick={() => setItemToDelete(null)}
                   className="flex-1 px-4 py-2.5 bg-gray-200 hover:bg-gray-300 text-gray-800 font-bold rounded-lg transition-all duration-200"
                 >
-                  {t("skills.cancel") || "Cancel"}
+                  {content?.cancel || "Cancel"}
                 </button>
                 <button
                   onClick={confirmDelete}
                   className="flex-1 px-4 py-2.5 bg-red-600 hover:bg-red-700 text-white font-medium rounded-lg shadow-md transition duration-200 flex items-center justify-center gap-2"
                 >
                   <Trash2 size={18} />
-                  <span>{t("skills.delete") || "Delete"}</span>
+                  <span>{content?.delete || "Delete"}</span>
                 </button>
               </div>
             </div>

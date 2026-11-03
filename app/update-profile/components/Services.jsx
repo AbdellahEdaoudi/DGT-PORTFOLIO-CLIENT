@@ -1,5 +1,7 @@
 "use client";
 import axios from "axios";
+import { handleApiError } from "../../utils/apiErrorHandler";
+const SERVER_URL = process.env.NEXT_PUBLIC_SERVER_URL;
 import {
   CheckCheck,
   Loader,
@@ -10,11 +12,10 @@ import {
   X,
   AlertCircle,
   GripVertical,
-} from "../../components/Icons";
+} from "../../components/lucide-react";
 import React, { useState, useEffect } from "react";
 import { createPortal } from "react-dom";
 import { useToast } from "../../components/Toast";
-import { getTranslation } from "../../translations/update-profile";
 import {
   DndContext,
   closestCenter,
@@ -59,13 +60,13 @@ const SortableItem = ({ id, children }) => {
   );
 };
 
-export default function Services({ userData, setUserDetails }) {
+export default function Services({ data, setData, content }) {
   const toast = useToast();
-  const t = getTranslation(userData?.displayLanguage || "en");
+  const user = data?.user || {};
 
   // Transform to objects with local ID
   const [services, setServices] = useState(
-    (userData.services || []).map((s, i) => ({
+    (user.services || []).map((s, i) => ({
       value: s,
       localId: `id-${i}-${Math.random().toString(36).substr(2, 9)}`,
     })),
@@ -164,17 +165,31 @@ export default function Services({ userData, setUserDetails }) {
 
     setLoading(true);
     try {
-      await axios.put(`/api/proxy/users/update/services`, {
-        services: validServices,
-      });
+      await axios.put(
+        `${SERVER_URL}/api/users/update/services`,
+        {
+          services: validServices,
+        },
+        { withCredentials: true },
+      );
 
       // Update global state to reflect changes immediately without refresh
-      if (setUserDetails) {
-        setUserDetails((prev) => ({
+      if (setData) {
+        setData((prev) => ({
           ...prev,
-          services: validServices,
+          user: {
+            ...(prev?.user || {}),
+            services: validServices,
+          },
         }));
       }
+      localStorage.setItem(`data_${data?.user?.username}`, JSON.stringify({
+        ...data,
+        user: {
+          ...(data?.user || {}),
+          services: validServices,
+        },
+      }));
 
       // Sync local state with validServices maintaining IDs if possible or regen
       setServices(
@@ -187,20 +202,20 @@ export default function Services({ userData, setUserDetails }) {
         })),
       );
 
-      toast.success(t("services.savedSuccessfully"));
+      toast.success(content?.savedSuccessfully || "Saved successfully!");
     } catch (error) {
-      toast.error(t("services.errorMessage"));
+      await handleApiError({ error, defaultErrorMsg: content?.errorMessage || "Operation failed.", toast });
     } finally {
       setLoading(false);
     }
   };
 
   return (
-    <div dir={userData?.displayLanguage === "ar" ? "rtl" : "ltr"}>
+    <div dir={user?.displayLanguage === "ar" ? "rtl" : "ltr"}>
       {/* Services - Teal Style */}
       <div className="space-y-4">
         <h3 className="text-lg font-bold text-gray-800">
-          💼 {t("services.title")}
+          💼 {content?.title || "Services"}
         </h3>
         <div className="bg-gradient-to-br from-teal-50 to-green-50 p-2 md:p-4 rounded-xl border border-teal-200 space-y-3">
           <DndContext
@@ -298,7 +313,7 @@ export default function Services({ userData, setUserDetails }) {
             className={`w-full text-white py-2 rounded-lg flex items-center justify-center gap-2 transition-all duration-300 ${services.length >= 10 ? "bg-gray-400 cursor-not-allowed" : "bg-gradient-to-r from-teal-500 to-green-600 hover:from-teal-600 hover:to-green-700"}`}
           >
             <Plus size={18} />{" "}
-            {services.length >= 10 ? t("services.maxLimit") : t("services.addService")}
+            {services.length >= 10 ? (content?.maxLimit || "10 Max") : (content?.addService || "Add Service")}
           </button>
         </div>
       </div>
@@ -313,10 +328,10 @@ export default function Services({ userData, setUserDetails }) {
           {loading ? (
             <>
               <Loader size={20} className="animate-spin" />{" "}
-              {t("services.saving")}
+              {content?.saving || "Saving..."}
             </>
           ) : (
-            `💾 ${t("services.save")}`
+            `💾 ${content?.save || "Save"}`
           )}
         </button>
       </div>
@@ -333,7 +348,7 @@ export default function Services({ userData, setUserDetails }) {
               <button
                 onClick={() => setItemToDelete(null)}
                 className="absolute top-4 right-4 text-gray-400 hover:text-gray-600 transition p-1 rounded-full hover:bg-gray-100"
-                title={t("services.close") || "Close"}
+                title={content?.close || "Close"}
               >
                 <X className="w-5 h-5" />
               </button>
@@ -346,13 +361,13 @@ export default function Services({ userData, setUserDetails }) {
                 <div className="text-gray-600 mb-6 text-base leading-relaxed">
                   <div className="flex flex-col gap-2">
                     <span className="font-semibold text-gray-800">
-                      {t("services.deleteConfirm") ||
+                      {content?.deleteConfirm ||
                         "Are you sure you want to delete this service?"}
                     </span>
                     <span className="font-bold text-black border-t pt-2 mt-1 break-all">
                       "
                       {services[itemToDelete]?.value ||
-                        t("services.thisService") ||
+                        content?.thisService ||
                         "this service"}
                       "
                     </span>
@@ -365,14 +380,14 @@ export default function Services({ userData, setUserDetails }) {
                   onClick={() => setItemToDelete(null)}
                   className="flex-1 px-4 py-2.5 bg-gray-200 hover:bg-gray-300 text-gray-800 font-bold rounded-lg transition-all duration-200"
                 >
-                  {t("services.cancel") || "Cancel"}
+                  {content?.cancel || "Cancel"}
                 </button>
                 <button
                   onClick={confirmDelete}
                   className="flex-1 px-4 py-2.5 bg-red-600 hover:bg-red-700 text-white font-medium rounded-lg shadow-md transition duration-200 flex items-center justify-center gap-2"
                 >
                   <Trash2 size={18} />
-                  <span>{t("services.delete") || "Delete"}</span>
+                  <span>{content?.delete || "Delete"}</span>
                 </button>
               </div>
             </div>

@@ -1,87 +1,88 @@
 {
-    "navbar": {
-        "features": "Recursos",
-        "showcase": "Vitrine",
-        "pricing": "Preços",
-        "auth": {
-            "signIn": "Entrar",
-            "signInWithGoogle": "Fazer login com o Google",
-            "getStarted": "Começar",
-            "updateProfile": "Atualizar Perfil",
-            "businessLinks": "Links Comerciais",
-            "support": "Suporte",
-            "signOut": "Sair",
-            "customDomain": "Domínio Personalizado",
-            "payment": "Pagamento"
-        }
-    },
-    "hero": {
-        "title_part1": "Seu Portfólio,",
-        "title_part2": "Elevado",
-        "description": "Crie um portfólio profissional em apenas 5 minutos—sem necessidade de programação. Apresente suas habilidades, experiência e projetos em um portfólio bonito que ajuda os recrutadores a entender rapidamente seu perfil e aumentar suas chances de conseguir seu próximo emprego ou oportunidade freelance.",
-        "free_trial": "30 dias grátis",
-        "start_building": "Começar a Construir",
-        "watch_demo": "Assistir Demo"
-    },
-    "features": {
-        "title": "Por que escolher o DGT Portfolio?",
-        "subtitle": "Crie um portfólio profissional, mostre suas habilidades e destaque-se para os recrutadores — tudo sem programação.",
-        "items": [
-            {
-                "title": "Construa sem programar",
-                "description": "Crie um portfólio profissional em minutos sem escrever uma única linha de código."
-            },
-            {
-                "title": "Seu próprio link de portfólio",
-                "description": "Obtenha um subdomínio personalizado como <strong>seunome.mylio.site</strong> e compartilhe-o em qualquer lugar."
-            },
-            {
-                "title": "Código QR profissional",
-                "description": "Gere um código QR para seu portfólio e compartilhe instantaneamente online ou offline."
-            },
-            {
-                "title": "Temas modernos para portfólio",
-                "description": "Escolha entre temas lindamente desenhados que combinam com sua marca pessoal."
-            },
-            {
-                "title": "Compartilhe em qualquer lugar",
-                "description": "Envie seu portfólio com um único link nas redes sociais, e-mail ou candidaturas de emprego."
-            },
-            {
-                "title": "Rápido e otimizado para SEO",
-                "description": "Carrega rapidamente e ajuda seu portfólio a ser descoberto pelos motores de busca."
-            }
-        ]
-    },
-    "pricing": {
-        "title": "Um Único Pagamento. Portfólio Vitalício.",
-        "subtitle": "Crie seu portfólio profissional, gere seu currículo e mantenha-se online para sempre — sem assinaturas ou taxas recorrentes.",
-        "recommended": "Melhor Valor",
-        "lifetime": {
-            "name": "Plano Vitalício",
-            "description": "Construa seu portfólio uma vez e mantenha-o online para sempre.",
-            "period": "pagamento único"
-        },
-        "cta": "Desbloquear acesso vitalício",
-        "whatsIncluded": "O que está incluído",
-        "noFees": "Sem assinatura • Sem taxas mensais • Seu para sempre",
-        "features": [
-            "Acesso vitalício — pagamento único",
-            "Site de portfólio profissional",
-            "Gerador de CV integrado",
-            "Subdomínio personalizado para portfólio",
-            "Otimizado para SEO e visibilidade",
-            "Vários temas modernos",
-            "Todas as atualizações futuras incluídas",
-            "Suporte ao cliente prioritário"
-        ]
-    },
-    "cta": {
-        "title": "Pronto para Mostrar seu Talento?",
-        "subtitle": "Junte-se a milhares de criadores construindo seus portfólios dos sonhos hoje",
-        "button": "Crie Seu Portfólio"
-    },
-    "footer": {
-        "rights": "Todos os direitos reservados."
+  "navbar": {
+    "features": "Recursos",
+    "showcase": "Vitrine",
+    "pricing": "Preços",
+    "auth": {
+      "signIn": "Entrar",
+      "signInWithGoogle": "Fazer login com o Google",
+      "getStarted": "Começar",
+      "updateProfile": "Atualizar Perfil",
+      "businessLinks": "Links Comerciais",
+      "support": "Suporte",
+      "signOut": "Sair",
+      "customDomain": "Domínio Personalizado",
+      "payment": "Pagamento",
+      "register": "Registar"
     }
+  },
+  "hero": {
+    "title_part1": "Seu Portfólio,",
+    "title_part2": "Elevado",
+    "description": "Crie um portfólio profissional em apenas 5 minutos—sem necessidade de programação. Apresente suas habilidades, experiência e projetos em um portfólio bonito que ajuda os recrutadores a entender rapidamente seu perfil e aumentar suas chances de conseguir seu próximo emprego ou oportunidade freelance.",
+    "free_trial": "30 dias grátis",
+    "start_building": "Começar a Construir",
+    "watch_demo": "Assistir Demo"
+  },
+  "features": {
+    "title": "Por que escolher o Myportfolio?",
+    "subtitle": "Crie um portfólio profissional, mostre suas habilidades e destaque-se para os recrutadores — tudo sem programação.",
+    "items": [
+      {
+        "title": "Construa sem programar",
+        "description": "Crie um portfólio profissional em minutos sem escrever uma única linha de código."
+      },
+      {
+        "title": "Seu próprio link de portfólio",
+        "description": "Obtenha um subdomínio personalizado como <strong>seunome.mylio.site</strong> e compartilhe-o em qualquer lugar."
+      },
+      {
+        "title": "Código QR profissional",
+        "description": "Gere um código QR para seu portfólio e compartilhe instantaneamente online ou offline."
+      },
+      {
+        "title": "Temas modernos para portfólio",
+        "description": "Escolha entre temas lindamente desenhados que combinam com sua marca pessoal."
+      },
+      {
+        "title": "Compartilhe em qualquer lugar",
+        "description": "Envie seu portfólio com um único link nas redes sociais, e-mail ou candidaturas de emprego."
+      },
+      {
+        "title": "Rápido e otimizado para SEO",
+        "description": "Carrega rapidamente e ajuda seu portfólio a ser descoberto pelos motores de busca."
+      }
+    ]
+  },
+  "pricing": {
+    "title": "Um Único Pagamento. Portfólio Vitalício.",
+    "subtitle": "Crie seu portfólio profissional, gere seu currículo e mantenha-se online para sempre — sem assinaturas ou taxas recorrentes.",
+    "recommended": "Melhor Valor",
+    "lifetime": {
+      "name": "Plano Vitalício",
+      "description": "Construa seu portfólio uma vez e mantenha-o online para sempre.",
+      "period": "pagamento único"
+    },
+    "cta": "Desbloquear acesso vitalício",
+    "whatsIncluded": "O que está incluído",
+    "noFees": "Sem assinatura • Sem taxas mensais • Seu para sempre",
+    "features": [
+      "Acesso vitalício — pagamento único",
+      "Site de portfólio profissional",
+      "Gerador de CV integrado",
+      "Subdomínio personalizado para portfólio",
+      "Otimizado para SEO e visibilidade",
+      "Vários temas modernos",
+      "Todas as atualizações futuras incluídas",
+      "Suporte ao cliente prioritário"
+    ]
+  },
+  "cta": {
+    "title": "Pronto para Mostrar seu Talento?",
+    "subtitle": "Junte-se a milhares de criadores construindo seus portfólios dos sonhos hoje",
+    "button": "Crie Seu Portfólio"
+  },
+  "footer": {
+    "rights": "Todos os direitos reservados."
+  }
 }

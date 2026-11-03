@@ -1,5 +1,5 @@
 
-import { GripVertical } from '../../components/Icons';
+import { GripVertical } from '../../components/lucide-react';
 
 export default function DragTutorial() {
     return (

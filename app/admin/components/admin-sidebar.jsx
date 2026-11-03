@@ -1,5 +1,5 @@
 "use client"
-import { LayoutDashboard, Users, MessageSquare, Settings, DollarSign, TagIcon, Clock, Mail, ImagePlus } from "../../components/Icons"
+import { LayoutDashboard, Users, MessageSquare, Settings, DollarSign, TagIcon, Clock, Mail, ImagePlus } from "../../components/lucide-react"
 import Link from "next/link"
 
 export default function AdminSidebar({ activeTab, setActiveTab }) {
@@ -8,7 +8,6 @@ export default function AdminSidebar({ activeTab, setActiveTab }) {
     { id: "users", label: "Users", icon: Users },
     { id: "contacts", label: "Messages", icon: MessageSquare },
     { id: "payment", label: "Payment", icon: DollarSign },
-    { id: "bulk-email", label: "Bulk Email", icon: Mail },
     { id: "cloudinary", label: "Cloudinary", icon: ImagePlus },
   ]
 
@@ -17,7 +16,7 @@ export default function AdminSidebar({ activeTab, setActiveTab }) {
       {/* Logo */}
       <div className="px-4 py-4 border-b border-purple-500/20">
         <Link href={"/"} className="text-lg cursor-pointer font-bold bg-gradient-to-r from-cyan-400 to-purple-500 bg-clip-text text-transparent">
-          DGT-P Admin
+          Myportfolio Admin
         </Link>
       </div>
 

@@ -1,35 +1,62 @@
 "use client"
 
-import { useEffect, useState } from "react"
-import { Users, MessageSquare, Settings, LogOut, DollarSign } from "../components/Icons"
+import { useEffect, useState, useContext } from "react"
+import { Users, MessageSquare, Settings, LogOut, DollarSign } from "../components/lucide-react"
 import AdminSidebar from "./components/admin-sidebar"
 import UserManagement from "./components/user-management"
 import ContactManagement from "./components/contact-management"
 import PaymentManagement from "./components/paymentManagement"
-import BulkEmail from "./components/bulk-email"
 import CloudinaryGallery from "./components/cloudinary-gallery"
-import { signOut } from "next-auth/react"
+import { MyContext } from "../context/context"
 import axios from "axios"
+import { handleApiError } from "../utils/apiErrorHandler"
+const SERVER_URL = process.env.NEXT_PUBLIC_SERVER_URL;
 import MagicalLoader from "../components/MagicalLoader"
 import Image from "next/image"
 import Link from "next/link"
 
 
 export default function AdminDashboard() {
+  const { setData: setContextData } = useContext(MyContext);
   const [activeTab, setActiveTab] = useState("users")
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [unauthorized, setUnauthorized] = useState(false)
   const [isSidebarOpen, setIsSidebarOpen] = useState(false); // Mobile sidebar state
 
+  const handleLogout = async () => {
+    try {
+      await axios.post(`${SERVER_URL}/api/auth/logout`, {}, { withCredentials: true });
+    } catch (e) {
+      await handleApiError({ error: e, defaultErrorMsg: "Operation failed." });
+    }
+    if (typeof window !== "undefined") {
+      const uName = localStorage.getItem("username");
+      if (uName) {
+        localStorage.removeItem(`data_${uName}`);
+      }
+      localStorage.removeItem("username");
+      window.dispatchEvent(new Event("auth-change"));
+    }
+    if (setContextData) {
+      setContextData({ user: null, contacts: [], payment: null });
+    }
+    window.location.href = "/";
+  };
+
   useEffect(() => {
     const fetchAdminData = async () => {
       try {
-        const res = await axios.get("/api/proxy/admin/appdata")
+        const res = await axios.get(`${SERVER_URL}/api/admin/appdata`, { withCredentials: true })
         setData(res.data)
       } catch (err) {
-        if (err.response?.status === 401) {
-          setUnauthorized(true)
+        await handleApiError({
+          error: err,
+          defaultErrorMsg: "Failed to load admin data.",
+          setIsForbidden: () => setUnauthorized(true),
+        });
+        if (err.response?.status === 401 || err.response?.status === 403) {
+          setUnauthorized(true);
         }
       } finally {
         setLoading(false)
@@ -56,7 +83,7 @@ export default function AdminDashboard() {
           You are not authorized to view this page.
         </p>
         <button
-          onClick={() => signOut({ callbackUrl: "/", redirect: true, })}
+          onClick={handleLogout}
           className="bg-red-500 hover:bg-red-600 px-6 py-2 rounded-lg transition"
         >
           Sign Out
@@ -109,7 +136,7 @@ export default function AdminDashboard() {
                   </button>
 
                   <Link href={"/"} className="text-lg cursor-pointer md:text-xl font-bold bg-gradient-to-r from-cyan-400 via-purple-400 to-pink-400 bg-clip-text text-transparent truncate">
-                    DGT PORTFOLIO
+                    Myportfolio
                   </Link>
                 </div>
 
@@ -117,7 +144,7 @@ export default function AdminDashboard() {
                   <button className="p-1.5 hover:bg-purple-500/20 rounded-lg transition">
                     <Settings className="w-4 h-4 md:w-5 md:h-5" />
                   </button>
-                  <button onClick={() => signOut()} className="p-1.5 hover:bg-purple-500/20 rounded-lg transition">
+                  <button onClick={handleLogout} className="p-1.5 hover:bg-purple-500/20 rounded-lg transition">
                     <LogOut className="w-4 h-4 md:w-5 md:h-5" />
                   </button>
                 </div>
@@ -169,7 +196,6 @@ export default function AdminDashboard() {
               {activeTab === "users" && <UserManagement data={data} setData={setData} />}
               {activeTab === "contacts" && <ContactManagement data={data} setData={setData} />}
               {activeTab === "payment" && <PaymentManagement data={data} setData={setData} />}
-              {activeTab === "bulk-email" && <BulkEmail data={data} />}
               <div className={activeTab === "cloudinary" ? "block" : "hidden"}>
                 <CloudinaryGallery />
               </div>

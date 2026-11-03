@@ -1,87 +1,88 @@
 {
-    "navbar": {
-        "features": "Features",
-        "showcase": "Showcase",
-        "pricing": "Pricing",
-        "auth": {
-            "signIn": "Sign In",
-            "signInWithGoogle": "Sign in with Google",
-            "getStarted": "Get Started",
-            "updateProfile": "Update Profile",
-            "businessLinks": "Business Links",
-            "support": "Support",
-            "signOut": "Sign Out",
-            "customDomain": "Custom Domain",
-            "payment": "Payment"
-        }
-    },
-    "hero": {
-        "title_part1": "Your Portfolio,",
-        "title_part2": "Elevated",
-        "description": "Build a professional portfolio in just 5 minutes—no coding required. Showcase your skills, experience, and projects in one beautiful portfolio that helps recruiters quickly understand your profile and increase your chances of landing your next job or freelance opportunity.",
-        "free_trial": "Free 30-day trial",
-        "start_building": "Start Building",
-        "watch_demo": "Watch Demo"
-    },
-    "features": {
-        "title": "Why Choose DGT Portfolio",
-        "subtitle": "Create a professional portfolio, showcase your skills, and stand out to recruiters — all without coding.",
-        "items": [
-            {
-                "title": "Build Without Coding",
-                "description": "Create a professional portfolio in minutes without writing a single line of code."
-            },
-            {
-                "title": "Your Own Portfolio Link",
-                "description": "Get a personalized subdomain like <strong>yourname.mylio.site</strong> and share it anywhere."
-            },
-            {
-                "title": "Professional QR Code",
-                "description": "Generate a QR code for your portfolio and share it instantly online or offline."
-            },
-            {
-                "title": "Modern Portfolio Themes",
-                "description": "Choose from beautifully designed themes that match your personal brand."
-            },
-            {
-                "title": "Share Anywhere",
-                "description": "Send your portfolio with a single link on social media, email, or job applications."
-            },
-            {
-                "title": "Fast & SEO Optimized",
-                "description": "Load quickly and help your portfolio get discovered by search engines."
-            }
-        ]
-    },
-    "pricing": {
-        "title": "One Payment. Lifetime Portfolio.",
-        "subtitle": "Create your professional portfolio, generate your CV, and stay online forever — with no subscriptions or recurring fees.",
-        "recommended": "Best Value",
-        "lifetime": {
-            "name": "Lifetime Plan",
-            "description": "Build your portfolio once and keep it online forever.",
-            "period": "pay once"
-        },
-        "cta": "Unlock Lifetime Access",
-        "whatsIncluded": "What's included",
-        "noFees": "No subscription • No monthly fees • Yours forever",
-        "features": [
-            "Lifetime access — one payment only",
-            "Professional portfolio website",
-            "Built-in CV generator",
-            "Custom portfolio subdomain",
-            "SEO optimized for visibility",
-            "Multiple modern themes",
-            "All future updates included",
-            "Priority customer support"
-        ]
-    },
-    "cta": {
-        "title": "Ready to Showcase Your Talent?",
-        "subtitle": "Join thousands of creators building their dream portfolios today",
-        "button": "Create Your Portfolio"
-    },
-    "footer": {
-        "rights": "All rights reserved."
+  "navbar": {
+    "features": "Features",
+    "showcase": "Showcase",
+    "pricing": "Pricing",
+    "auth": {
+      "signIn": "Sign In",
+      "signInWithGoogle": "Sign in with Google",
+      "getStarted": "Get Started",
+      "updateProfile": "Update Profile",
+      "businessLinks": "Business Links",
+      "support": "Support",
+      "signOut": "Sign Out",
+      "customDomain": "Custom Domain",
+      "payment": "Payment",
+      "register": "Register"
     }
+  },
+  "hero": {
+    "title_part1": "Your Portfolio,",
+    "title_part2": "Elevated",
+    "description": "Build a professional portfolio in just 5 minutes—no coding required. Showcase your skills, experience, and projects in one beautiful portfolio that helps recruiters quickly understand your profile and increase your chances of landing your next job or freelance opportunity.",
+    "free_trial": "Free 30-day trial",
+    "start_building": "Start Building",
+    "watch_demo": "Watch Demo"
+  },
+  "features": {
+    "title": "Why Choose Myportfolio",
+    "subtitle": "Create a professional portfolio, showcase your skills, and stand out to recruiters — all without coding.",
+    "items": [
+      {
+        "title": "Build Without Coding",
+        "description": "Create a professional portfolio in minutes without writing a single line of code."
+      },
+      {
+        "title": "Your Own Portfolio Link",
+        "description": "Get a personalized subdomain like <strong>yourname.mylio.site</strong> and share it anywhere."
+      },
+      {
+        "title": "Professional QR Code",
+        "description": "Generate a QR code for your portfolio and share it instantly online or offline."
+      },
+      {
+        "title": "Modern Portfolio Themes",
+        "description": "Choose from beautifully designed themes that match your personal brand."
+      },
+      {
+        "title": "Share Anywhere",
+        "description": "Send your portfolio with a single link on social media, email, or job applications."
+      },
+      {
+        "title": "Fast & SEO Optimized",
+        "description": "Load quickly and help your portfolio get discovered by search engines."
+      }
+    ]
+  },
+  "pricing": {
+    "title": "One Payment. Lifetime Portfolio.",
+    "subtitle": "Create your professional portfolio, generate your CV, and stay online forever — with no subscriptions or recurring fees.",
+    "recommended": "Best Value",
+    "lifetime": {
+      "name": "Lifetime Plan",
+      "description": "Build your portfolio once and keep it online forever.",
+      "period": "pay once"
+    },
+    "cta": "Unlock Lifetime Access",
+    "whatsIncluded": "What's included",
+    "noFees": "No subscription • No monthly fees • Yours forever",
+    "features": [
+      "Lifetime access — one payment only",
+      "Professional portfolio website",
+      "Built-in CV generator",
+      "Custom portfolio subdomain",
+      "SEO optimized for visibility",
+      "Multiple modern themes",
+      "All future updates included",
+      "Priority customer support"
+    ]
+  },
+  "cta": {
+    "title": "Ready to Showcase Your Talent?",
+    "subtitle": "Join thousands of creators building their dream portfolios today",
+    "button": "Create Your Portfolio"
+  },
+  "footer": {
+    "rights": "All rights reserved."
+  }
 }

@@ -1,5 +1,7 @@
 "use client";
 import axios from "axios";
+import { handleApiError } from "../../utils/apiErrorHandler";
+const SERVER_URL = process.env.NEXT_PUBLIC_SERVER_URL;
 import React, { useState, useEffect } from "react";
 import { createPortal } from "react-dom";
 import { useToast } from "../../components/Toast";
@@ -13,8 +15,7 @@ import {
   X,
   AlertCircle,
   GripVertical,
-} from "../../components/Icons";
-import { getTranslation } from "../../translations/update-profile";
+} from "../../components/lucide-react";
 import {
   DndContext,
   closestCenter,
@@ -59,13 +60,13 @@ const SortableItem = ({ id, children }) => {
   );
 };
 
-export default function Languages({ userData, setUserDetails }) {
+export default function Languages({ data, setData, content }) {
   const toast = useToast();
-  const t = getTranslation(userData?.displayLanguage || "en");
+  const user = data?.user || {};
 
   // Transform to objects with local ID
   const [languages, setLanguages] = useState(
-    (userData.languages || []).map((l, i) => ({
+    (user.languages || []).map((l, i) => ({
       value: l,
       localId: `id-${i}-${Math.random().toString(36).substr(2, 9)}`,
     })),
@@ -163,17 +164,31 @@ export default function Languages({ userData, setUserDetails }) {
 
     setLoading(true);
     try {
-      await axios.put(`/api/proxy/users/update/languages`, {
-        languages: validLanguages,
-      });
+      await axios.put(
+        `${SERVER_URL}/api/users/update/languages`,
+        {
+          languages: validLanguages,
+        },
+        { withCredentials: true },
+      );
 
       // Update global state to reflect changes immediately without refresh
-      if (setUserDetails) {
-        setUserDetails((prev) => ({
+      if (setData) {
+        setData((prev) => ({
           ...prev,
-          languages: validLanguages,
+          user: {
+            ...(prev?.user || {}),
+            languages: validLanguages,
+          },
         }));
       }
+      localStorage.setItem(`data_${data?.user?.username}`, JSON.stringify({
+        ...data,
+        user: {
+          ...(data?.user || {}),
+          languages: validLanguages,
+        },
+      }));
 
       // Sync local state
       setLanguages(
@@ -186,10 +201,9 @@ export default function Languages({ userData, setUserDetails }) {
         })),
       );
 
-      toast.success(t("languages.savedSuccessfully"));
+      toast.success(content?.savedSuccessfully || "Saved successfully!");
     } catch (error) {
-      console.error("Error updating languages:", error);
-      toast.error(t("languages.errorMessage"));
+      await handleApiError({ error, defaultErrorMsg: content?.errorMessage || "Error saving", toast });
     } finally {
       setLoading(false);
     }
@@ -198,10 +212,10 @@ export default function Languages({ userData, setUserDetails }) {
   return (
     <div
       className="space-y-4"
-      dir={userData?.displayLanguage === "ar" ? "rtl" : "ltr"}
+      dir={user?.displayLanguage === "ar" ? "rtl" : "ltr"}
     >
       <h3 className="text-lg font-bold text-gray-800">
-        🌐 {t("languages.title")}
+        🌐 {content?.title || "Languages"}
       </h3>
 
       <div className="bg-gradient-to-br from-cyan-50 to-blue-50 p-2 md:p-4 rounded-xl border border-cyan-200 space-y-3">
@@ -299,7 +313,7 @@ export default function Languages({ userData, setUserDetails }) {
           className={`w-full text-white py-2 rounded-lg flex items-center justify-center gap-2 transition-all duration-300 ${languages.length >= 10 ? "bg-gray-400 cursor-not-allowed" : "bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-600 hover:to-blue-700"}`}
         >
           <Plus className="w-4 h-4 sm:w-[18px] sm:h-[18px]" />{" "}
-          {languages.length >= 10 ? t("languages.maxLimit") : t("languages.addLanguage")}
+          {languages.length >= 10 ? (content?.maxLimit || "10 Max") : (content?.addLanguage || "Add Language")}
         </button>
       </div>
 
@@ -312,10 +326,10 @@ export default function Languages({ userData, setUserDetails }) {
           {loading ? (
             <>
               <Loader size={20} className="animate-spin" />{" "}
-              {t("languages.saving")}
+              {content?.saving || "Saving..."}
             </>
           ) : (
-            `💾 ${t("languages.save")}`
+            `💾 ${content?.save || "Save"}`
           )}
         </button>
       </div>
@@ -332,7 +346,7 @@ export default function Languages({ userData, setUserDetails }) {
               <button
                 onClick={() => setItemToDelete(null)}
                 className="absolute top-4 right-4 text-gray-400 hover:text-gray-600 transition p-1 rounded-full hover:bg-gray-100"
-                title={t("languages.close") || "Close"}
+                title={content?.close || "Close"}
               >
                 <X className="w-5 h-5" />
               </button>
@@ -345,13 +359,13 @@ export default function Languages({ userData, setUserDetails }) {
                 <div className="text-gray-600 mb-6 text-base leading-relaxed">
                   <div className="flex flex-col gap-2">
                     <span className="font-semibold text-gray-800">
-                      {t("languages.deleteConfirm") ||
+                      {content?.deleteConfirm ||
                         "Are you sure you want to delete this language?"}
                     </span>
                     <span className="font-bold text-black border-t pt-2 mt-1 break-all">
                       "
                       {languages[itemToDelete]?.value ||
-                        t("languages.thisLanguage") ||
+                        content?.thisLanguage ||
                         "this language"}
                       "
                     </span>
@@ -364,14 +378,14 @@ export default function Languages({ userData, setUserDetails }) {
                   onClick={() => setItemToDelete(null)}
                   className="flex-1 px-4 py-2.5 bg-gray-200 hover:bg-gray-300 text-gray-800 font-bold rounded-lg transition-all duration-200"
                 >
-                  {t("languages.cancel") || "Cancel"}
+                  {content?.cancel || "Cancel"}
                 </button>
                 <button
                   onClick={confirmDelete}
                   className="flex-1 px-4 py-2.5 bg-red-600 hover:bg-red-700 text-white font-medium rounded-lg shadow-md transition duration-200 flex items-center justify-center gap-2"
                 >
                   <Trash2 size={18} />
-                  <span>{t("languages.delete") || "Delete"}</span>
+                  <span>{content?.delete || "Delete"}</span>
                 </button>
               </div>
             </div>

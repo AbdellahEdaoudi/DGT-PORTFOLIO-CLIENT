@@ -1,4 +1,4 @@
-import { ArrowRight, Code2, Zap, Share2, Globe2, SquareMousePointer, QrCode, Layout, Check } from "../Icons"
+import { ArrowRight, Code2, Zap, Share2, Globe2, SquareMousePointer, QrCode, Layout, Check } from "../lucide-react"
 import Image from "next/image"
 import ThemeSlideshow from "./ThemeSlideshow"
 import Navbar from "./Navbar"
@@ -7,9 +7,9 @@ import Link from "next/link"
 import LanguageSwitcher from "./LanguageSwitcher"
 import { getTranslation } from "../../translations/landing-page"
 
-export default function LandingPage({ lang }) {
+export default async function LandingPage({ lang }) {
   const PORTFOLIO = `https://adam-carter.mylio.site`
-  const t = getTranslation(lang || 'en');
+  const dictionary = await getTranslation(lang || 'en');
 
   const featuresList = [
     { icon: Code2 },
@@ -20,7 +20,7 @@ export default function LandingPage({ lang }) {
     { icon: Zap },
   ]
 
-  const featuresItems = t('features.items') || [];
+  const featuresItems = dictionary?.features?.items || [];
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-black text-white overflow-hidden">
@@ -36,28 +36,28 @@ export default function LandingPage({ lang }) {
       <Navbar>
         <div className=" mx-auto md:mx-3 px-6 py-6 flex justify-between items-center relative">
           <Link href={"/"}>
-            <div className="flex items-center gap-0.5 text-2xl font-bold bg-gradient-to-r from-cyan-400 to-purple-500 bg-clip-text text-transparent cursor-pointer">
-              <Image src={"/Logowbg.png"} width={500} height={500} className="w-12 h-10" alt="DGT Portfolio - Personal Portfolio Builder" />
-              <h1 className="md:block hidden">DGTPortfolio</h1>
+            <div className="flex items-center gap-2.5 text-2xl font-bold bg-gradient-to-r from-cyan-400 to-purple-500 bg-clip-text text-transparent cursor-pointer">
+              <Image src={"/Logowbg.png"} width={160} height={120} className="h-11 md:h-12 w-auto object-contain drop-shadow-[0_0_12px_rgba(6,182,212,0.4)]" alt="Myportfolio - Personal Portfolio Builder" priority />
+              <h1 className="md:block hidden">Myportfolio</h1>
             </div>
           </Link>
 
           {/* Desktop Menu */}
           <div className="hidden md:flex gap-8 items-center">
             <Link href={"#Features"} className="hover:text-cyan-400 transition">
-              {t('navbar.features')}
+              {dictionary?.navbar?.features}
             </Link>
             <Link href={PORTFOLIO} target="_blank" className="hover:text-cyan-400 transition">
-              {t('navbar.showcase')}
+              {dictionary?.navbar?.showcase}
             </Link>
             <Link href={"#pricing"} className="hover:text-cyan-400 transition">
-              {t('navbar.pricing')}
+              {dictionary?.navbar?.pricing}
             </Link>
           </div>
 
           <div className="flex items-center gap-4">
             <LanguageSwitcher />
-            <AuthButtons lang={lang || 'en'} />
+            <AuthButtons content={dictionary?.navbar?.auth} />
           </div>
         </div>
       </Navbar>
@@ -68,24 +68,24 @@ export default function LandingPage({ lang }) {
             <div className="space-y-4">
               <h1 className="text-6xl md:text-7xl font-bold leading-tight">
                 <span className="bg-gradient-to-r from-cyan-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">
-                  {t('hero.title_part1')}
+                  {dictionary?.hero?.title_part1}
                 </span>
                 <br />
-                <span className="text-white">{t('hero.title_part2')}</span>
+                <span className="text-white">{dictionary?.hero?.title_part2}</span>
               </h1>
               <p className="text-lg  text-gray-300 leading-relaxed">
-                {t('hero.description')}
+                {dictionary?.hero?.description}
                 <span className=" m-4 text-sm bg-gradient-to-r from-cyan-400 to-purple-500 text-black rounded-full px-3  py-1 font-semibold shadow-lg shadow-cyan-500/30">
-                  {t('hero.free_trial')}
+                  {dictionary?.hero?.free_trial}
                 </span>
               </p>
             </div>
             <div className="flex flex-col sm:flex-row gap-4">
               <Link href={"/update-profile"} className="px-6 py-3 md:px-8 md:py-4 bg-gradient-to-r from-cyan-400 to-purple-500 rounded-full font-semibold hover:shadow-lg hover:shadow-purple-500/50 transition flex items-center justify-center gap-2 text-sm md:text-base">
-                {t('hero.start_building')} <ArrowRight className="w-4 h-4 md:w-5 md:h-5" />
+                {dictionary?.hero?.start_building} <ArrowRight className="w-4 h-4 md:w-5 md:h-5" />
               </Link>
               <Link href={PORTFOLIO} target="_blank" className="px-6 py-3 md:px-8 md:py-4 border border-purple-500/50 rounded-full hover:bg-purple-500/10 transition text-center text-sm md:text-base">
-                {t('hero.watch_demo')}
+                {dictionary?.hero?.watch_demo}
               </Link>
             </div>
           </div>
@@ -97,9 +97,9 @@ export default function LandingPage({ lang }) {
       <section id="Features" className="px-6 pt-8 pb-8 md:py-12 border-t border-purple-500/20">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
-            <h2 className="text-5xl font-bold mb-4">{t('features.title')}</h2>
+            <h2 className="text-5xl font-bold mb-4">{dictionary?.features?.title}</h2>
             <p className="text-gray-400 max-w-2xl mx-auto">
-              {t('features.subtitle')}
+              {dictionary?.features?.subtitle}
             </p>
           </div>
           <div className="grid md:grid-cols-3 gap-8">
@@ -126,9 +126,9 @@ export default function LandingPage({ lang }) {
         <div className="max-w-6xl mx-auto">
           {/* Header */}
           <div className="text-center mb-16">
-            <h2 className="text-5xl font-bold mb-4">{t('pricing.title') || "One Price. Lifetime Access."}</h2>
+            <h2 className="text-5xl font-bold mb-4">{dictionary?.pricing?.title || "One Price. Lifetime Access."}</h2>
             <p className="text-gray-400 max-w-2xl mx-auto">
-              {t('pricing.subtitle') || "Get full access to your creative portfolio, forever. No subscriptions, no hidden fees."}
+              {dictionary?.pricing?.subtitle || "Get full access to your creative portfolio, forever. No subscriptions, no hidden fees."}
             </p>
           </div>
 
@@ -138,7 +138,7 @@ export default function LandingPage({ lang }) {
               {/* Badge */}
               <div className="absolute -top-4 left-1/2 -translate-x-1/2 z-20">
                 <span className="bg-gradient-to-r from-cyan-400 to-purple-500 text-black px-4 py-1 rounded-full text-sm font-semibold whitespace-nowrap shadow-md">
-                  {t('pricing.recommended') || "Recommended"}
+                  {dictionary?.pricing?.recommended || "Recommended"}
                 </span>
               </div>
 
@@ -147,10 +147,10 @@ export default function LandingPage({ lang }) {
                   {/* Left: Price & CTA */}
                   <div className="p-8 pt-10 flex flex-col justify-center border-b md:border-b-0 md:border-r border-cyan-400/20">
                     <h3 className="text-2xl font-extrabold mb-2 text-white">
-                      {t('pricing.lifetime.name') || "Lifetime Portfolio"}
+                      {dictionary?.pricing?.lifetime?.name || "Lifetime Portfolio"}
                     </h3>
                     <p className="text-gray-400 text-sm mb-6">
-                      {t('pricing.lifetime.description') || "Everything you need to showcase your work online."}
+                      {dictionary?.pricing?.lifetime?.description || "Everything you need to showcase your work online."}
                     </p>
 
                     <div className="mb-8">
@@ -158,29 +158,29 @@ export default function LandingPage({ lang }) {
                         <span className="text-5xl font-bold bg-gradient-to-r from-cyan-400 to-purple-400 bg-clip-text text-transparent">
                           {lang === "ar" ? "١٠٠$" : "$100"}
                         </span>
-                        <span className="text-gray-400">{t('pricing.lifetime.period') || "one-time"}</span>
+                        <span className="text-gray-400">{dictionary?.pricing?.lifetime?.period || "one-time"}</span>
                       </div>
                     </div>
 
                     {/* CTA Button */}
                     <Link href="/payment" className="block w-full">
                       <button className="w-full py-3 px-6 rounded-full font-semibold transition-all duration-300 flex items-center justify-center gap-2 bg-gradient-to-r from-cyan-400 to-purple-500 text-black hover:shadow-lg hover:shadow-cyan-500/50">
-                        {t('pricing.cta') || "Start Building Your Portfolio"}
+                        {dictionary?.pricing?.cta || "Start Building Your Portfolio"}
                         <ArrowRight className="w-5 h-5" />
                       </button>
                     </Link>
                     <p className="text-xs text-gray-500 text-center mt-3">
-                      {t('pricing.noFees') || "No subscription • No monthly fees • Yours forever"}
+                      {dictionary?.pricing?.noFees || "No subscription • No monthly fees • Yours forever"}
                     </p>
                   </div>
 
                   {/* Right: Features grid */}
                   <div className="p-8 pt-10 bg-slate-950/30 flex flex-col justify-center">
                     <p className="text-gray-300 text-xs font-semibold uppercase tracking-wider mb-4">
-                      {t('pricing.whatsIncluded') || "What's included"}
+                      {dictionary?.pricing?.whatsIncluded || "What's included"}
                     </p>
                     <ul className="grid grid-cols-1 sm:grid-cols-2 gap-y-3 gap-x-4">
-                      {(t('pricing.features') || []).map((feature, idx) => (
+                      {(dictionary?.pricing?.features || []).map((feature, idx) => (
                         <li key={idx} className="flex items-start gap-2 text-gray-300 text-sm leading-snug">
                           <Check className="w-4 h-4 text-cyan-400 flex-shrink-0 mt-0.5" />
                           <span>{feature}</span>
@@ -199,14 +199,14 @@ export default function LandingPage({ lang }) {
       <section className="px-6 py-20 border-t border-purple-500/20">
         <div className="max-w-4xl mx-auto text-center">
           <div className="bg-gradient-to-br from-purple-600/20 to-pink-600/20 border border-purple-500/50 rounded-3xl md:p-12 p-6">
-            <h2 className="text-2xl md:text-5xl font-bold mb-6">{t('cta.title')}</h2>
+            <h2 className="text-2xl md:text-5xl font-bold mb-6">{dictionary?.cta?.title}</h2>
             <p className=" md:text-xl text-gray-300 mb-8">
-              {t('cta.subtitle')}
+              {dictionary?.cta?.subtitle}
             </p>
             <Link className="text-sm md:text-base" href={"/update-profile"}>
               <button
                 className=" px-10 py-4 bg-gradient-to-r from-cyan-400 to-purple-500 rounded-full font-semibold hover:shadow-lg hover:shadow-purple-500/50 transition flex items-center gap-2 mx-auto">
-                {t('cta.button')} <ArrowRight className="w-5 h-5" />
+                {dictionary?.cta?.button} <ArrowRight className="w-5 h-5" />
               </button>
             </Link>
           </div>
@@ -215,7 +215,7 @@ export default function LandingPage({ lang }) {
 
       {/* Footer */}
       <footer className="border-t border-purple-500/20 px-6 py-12 text-gray-400 text-center">
-        <p> © {new Date().getFullYear()} <span className="font-semibold">DGT Portfolio</span>. {t('footer.rights')}</p>
+        <p> © {new Date().getFullYear()} <span className="font-semibold">Myportfolio</span>. {dictionary?.footer?.rights}</p>
       </footer>
     </div>
   )

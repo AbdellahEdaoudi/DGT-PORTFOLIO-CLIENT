@@ -1,87 +1,88 @@
 {
-    "navbar": {
-        "features": "Funktioner",
-        "showcase": "Visa upp",
-        "pricing": "Prissättning",
-        "auth": {
-            "signIn": "Logga in",
-            "signInWithGoogle": "Logga in med Google",
-            "getStarted": "Kom igång",
-            "updateProfile": "Uppdatera profil",
-            "businessLinks": "Affärslänkar",
-            "support": "Support",
-            "signOut": "Logga ut",
-            "customDomain": "Anpassad domän",
-            "payment": "Betalning"
-        }
-    },
-    "hero": {
-        "title_part1": "Din portfolio,",
-        "title_part2": "förbättrad",
-        "description": "Skapa en professionell portfolio på bara 5 minuter—utan kodning. Visa upp dina färdigheter, erfarenheter och projekt i en vacker portfolio som hjälper rekryterare att snabbt förstå din profil och öka dina chanser att få ditt nästa jobb eller frilansuppdrag.",
-        "free_trial": "30 dagars gratis",
-        "start_building": "Börja bygga",
-        "watch_demo": "Se demo"
-    },
-    "features": {
-        "title": "Varför välja DGT Portfolio",
-        "subtitle": "Skapa en professionell portfolio, visa upp dina färdigheter och stick ut för rekryterare — allt utan kodning.",
-        "items": [
-            {
-                "title": "Bygg utan kodning",
-                "description": "Skapa en professionell portfolio på några minuter utan att skriva en enda rad kod."
-            },
-            {
-                "title": "Din egen portfoliolänk",
-                "description": "Få en personlig underdomän som <strong>dittnamn.mylio.site</strong> och dela den var som helst."
-            },
-            {
-                "title": "Professionell QR-kod",
-                "description": "Generera en QR-kod för din portfolio och dela den omedelbart online eller offline."
-            },
-            {
-                "title": "Moderna portfolioteman",
-                "description": "Välj från vackert designade teman som matchar ditt personliga varumärke."
-            },
-            {
-                "title": "Dela var som helst",
-                "description": "Skicka din portfolio med en enda länk på sociala medier, e-post eller jobbansökningar."
-            },
-            {
-                "title": "Snabb & SEO-optimerad",
-                "description": "Laddas snabbt och hjälper din portfolio att bli upptäckt av sökmotorer."
-            }
-        ]
-    },
-    "pricing": {
-        "title": "En betalning. Livstids portfolio.",
-        "subtitle": "Skapa din professionella portfolio, generera ditt CV och stanna online för alltid — utan prenumerationer eller återkommande avgifter.",
-        "recommended": "Bästa Värde",
-        "lifetime": {
-            "name": "Livstidsplan",
-            "description": "Bygg din portfolio en gång och behåll den online för alltid.",
-            "period": "betala en gång"
-        },
-        "cta": "Lås upp livstidsåtkomst",
-        "whatsIncluded": "Vad som ingår",
-        "noFees": "Ingen prenumeration • Inga månadsavgifter • Din för alltid",
-        "features": [
-            "Livstidsåtkomst — en engångsbetalning",
-            "Professionell portfoliowebbplats",
-            "Inbyggd CV-generator",
-            "Eget portfolio-subdomän",
-            "SEO-optimerat för synlighet",
-            "Flera moderna teman",
-            "Alla framtida uppdateringar inkluderade",
-            "Prioriterad kundsupport"
-        ]
-    },
-    "cta": {
-        "title": "Redo att visa din talang?",
-        "subtitle": "Gå med tusentals kreatörer som bygger sina drömportfolios idag",
-        "button": "Skapa din portfolio"
-    },
-    "footer": {
-        "rights": "Alla rättigheter förbehållna."
+  "navbar": {
+    "features": "Funktioner",
+    "showcase": "Visa upp",
+    "pricing": "Prissättning",
+    "auth": {
+      "signIn": "Logga in",
+      "signInWithGoogle": "Logga in med Google",
+      "getStarted": "Kom igång",
+      "updateProfile": "Uppdatera profil",
+      "businessLinks": "Affärslänkar",
+      "support": "Support",
+      "signOut": "Logga ut",
+      "customDomain": "Anpassad domän",
+      "payment": "Betalning",
+      "register": "Registrera"
     }
+  },
+  "hero": {
+    "title_part1": "Din portfolio,",
+    "title_part2": "förbättrad",
+    "description": "Skapa en professionell portfolio på bara 5 minuter—utan kodning. Visa upp dina färdigheter, erfarenheter och projekt i en vacker portfolio som hjälper rekryterare att snabbt förstå din profil och öka dina chanser att få ditt nästa jobb eller frilansuppdrag.",
+    "free_trial": "30 dagars gratis",
+    "start_building": "Börja bygga",
+    "watch_demo": "Se demo"
+  },
+  "features": {
+    "title": "Varför välja Myportfolio",
+    "subtitle": "Skapa en professionell portfolio, visa upp dina färdigheter och stick ut för rekryterare — allt utan kodning.",
+    "items": [
+      {
+        "title": "Bygg utan kodning",
+        "description": "Skapa en professionell portfolio på några minuter utan att skriva en enda rad kod."
+      },
+      {
+        "title": "Din egen portfoliolänk",
+        "description": "Få en personlig underdomän som <strong>dittnamn.mylio.site</strong> och dela den var som helst."
+      },
+      {
+        "title": "Professionell QR-kod",
+        "description": "Generera en QR-kod för din portfolio och dela den omedelbart online eller offline."
+      },
+      {
+        "title": "Moderna portfolioteman",
+        "description": "Välj från vackert designade teman som matchar ditt personliga varumärke."
+      },
+      {
+        "title": "Dela var som helst",
+        "description": "Skicka din portfolio med en enda länk på sociala medier, e-post eller jobbansökningar."
+      },
+      {
+        "title": "Snabb & SEO-optimerad",
+        "description": "Laddas snabbt och hjälper din portfolio att bli upptäckt av sökmotorer."
+      }
+    ]
+  },
+  "pricing": {
+    "title": "En betalning. Livstids portfolio.",
+    "subtitle": "Skapa din professionella portfolio, generera ditt CV och stanna online för alltid — utan prenumerationer eller återkommande avgifter.",
+    "recommended": "Bästa Värde",
+    "lifetime": {
+      "name": "Livstidsplan",
+      "description": "Bygg din portfolio en gång och behåll den online för alltid.",
+      "period": "betala en gång"
+    },
+    "cta": "Lås upp livstidsåtkomst",
+    "whatsIncluded": "Vad som ingår",
+    "noFees": "Ingen prenumeration • Inga månadsavgifter • Din för alltid",
+    "features": [
+      "Livstidsåtkomst — en engångsbetalning",
+      "Professionell portfoliowebbplats",
+      "Inbyggd CV-generator",
+      "Eget portfolio-subdomän",
+      "SEO-optimerat för synlighet",
+      "Flera moderna teman",
+      "Alla framtida uppdateringar inkluderade",
+      "Prioriterad kundsupport"
+    ]
+  },
+  "cta": {
+    "title": "Redo att visa din talang?",
+    "subtitle": "Gå med tusentals kreatörer som bygger sina drömportfolios idag",
+    "button": "Skapa din portfolio"
+  },
+  "footer": {
+    "rights": "Alla rättigheter förbehållna."
+  }
 }

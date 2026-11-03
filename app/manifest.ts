@@ -2,8 +2,8 @@ import type { MetadataRoute } from 'next'
 
 export default function manifest(): MetadataRoute.Manifest {
     return {
-        name: 'DGT Portfolio - Build Your Personal Portfolio Online',
-        short_name: 'DGT Portfolio',
+        name: 'Myportfolio - Build Your Personal Portfolio Online',
+        short_name: 'Myportfolio',
         description: 'No code, no hassle. Build a clean, modern portfolio in minutes. Showcase your career, skills, projects, and work links like never before—leave a lasting impression and unlock new opportunities.',
         start_url: '/',
         display: 'standalone',

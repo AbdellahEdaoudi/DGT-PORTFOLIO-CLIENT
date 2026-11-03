@@ -1,35 +1,46 @@
 "use client";
-import { useState, useContext } from "react";
+import { useState, useContext, useEffect } from "react";
 import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
 import { MyContext } from "../context/context";
 import axios from "axios";
+import { handleApiError } from "../utils/apiErrorHandler";
+const SERVER_URL = process.env.NEXT_PUBLIC_SERVER_URL;
 import Header from "../components/LandingPage/header";
 import { useToast } from "../components/Toast";
 import { getTranslation } from "../translations/others";
-import { Check } from "../components/Icons";
+import { Check } from "../components/lucide-react";
 import Link from "next/link";
 import Image from "next/image";
 
 export default function PaymentPage() {
   const toast = useToast();
-  const { userDetails, loadingAll, userPayment } = useContext(MyContext);
+  const { data, loadingAll } = useContext(MyContext);
+  const userDetails = data?.user;
+  const userPayment = data?.payment;
   const [loading, setLoading] = useState(false);
   const currentLang = userDetails?.displayLanguage || "en";
-  const t = getTranslation(currentLang);
+  const [dictionary, setDictionary] = useState({});
+
+  useEffect(() => {
+    getTranslation(currentLang).then((dict) => setDictionary(dict || {}));
+  }, [currentLang]);
+
+  const content = dictionary?.payment || {};
+  const successContent = dictionary?.success || {};
 
   const ERROR_MESSAGES = {
-    UNAUTHORIZED: t("payment.errors.unauthorized"),
-    ALREADY_PAID: t("payment.errors.alreadyPaid"),
-    ORDER_ALREADY_PROCESSED: t("payment.errors.orderAlreadyProcessed"),
-    PAYPAL_CAPTURE_FAILED: t("payment.errors.paypalCaptureFailed"),
-    PAYPAL_AUTH_FAILED: t("payment.errors.paypalAuthFailed"),
-    PAYPAL_GATEWAY_ERROR: t("payment.errors.paypalGatewayError"),
-    PAYMENT_NOT_COMPLETED: t("payment.errors.paymentNotCompleted"),
-    CANNOT_VERIFY_AMOUNT: t("payment.errors.cannotVerifyAmount"),
-    INVALID_PAYMENT_AMOUNT: t("payment.errors.invalidPaymentAmount"),
-    SERVER_UNREACHABLE: t("payment.errors.serverUnreachable"),
-    SERVER_ERROR: t("payment.errors.serverError"),
-    MISSING_ORDER_ID: t("payment.errors.serverError"),
+    UNAUTHORIZED: content.errors?.unauthorized,
+    ALREADY_PAID: content.errors?.alreadyPaid,
+    ORDER_ALREADY_PROCESSED: content.errors?.orderAlreadyProcessed,
+    PAYPAL_CAPTURE_FAILED: content.errors?.paypalCaptureFailed,
+    PAYPAL_AUTH_FAILED: content.errors?.paypalAuthFailed,
+    PAYPAL_GATEWAY_ERROR: content.errors?.paypalGatewayError,
+    PAYMENT_NOT_COMPLETED: content.errors?.paymentNotCompleted,
+    CANNOT_VERIFY_AMOUNT: content.errors?.cannotVerifyAmount,
+    INVALID_PAYMENT_AMOUNT: content.errors?.invalidPaymentAmount,
+    SERVER_UNREACHABLE: content.errors?.serverUnreachable,
+    SERVER_ERROR: content.errors?.serverError,
+    MISSING_ORDER_ID: content.errors?.serverError,
   };
 
   return (
@@ -58,14 +69,14 @@ export default function PaymentPage() {
               </div>
             </div>
             <h2 className="text-2xl font-extrabold bg-gradient-to-r from-cyan-400 to-purple-400 bg-clip-text text-transparent mb-4">
-              {t("payment.processingPayment")}
+              {content.processingPayment}
             </h2>
             <p className="text-slate-400 leading-relaxed">
-              {t("payment.processingDescription") || "Securely confirming your payment with the gateway. This process takes a few seconds."}
+              {content.processingDescription || "Securely confirming your payment with the gateway. This process takes a few seconds."}
             </p>
             <div className="mt-8 px-4 py-3 bg-red-500/10 border border-red-500/20 rounded-xl">
               <p className="text-red-400 text-sm font-medium">
-                {t("payment.processingWarning") || "⚠️ Please do not close this page or go back to avoid payment issues."}
+                {content.processingWarning || "⚠️ Please do not close this page or go back to avoid payment issues."}
               </p>
             </div>
           </div>
@@ -85,16 +96,16 @@ export default function PaymentPage() {
               </div>
 
               <h3 className="text-2xl sm:text-3xl font-extrabold text-white mb-3 drop-shadow-md tracking-tight">
-                {t("payment.activePayment") || (currentLang === "ar" ? "خطة مدى الحياة مفعلة" : "LIFETIME PLAN ACTIVE")}
+                {content.activePayment || (currentLang === "ar" ? "خطة مدى الحياة مفعلة" : "LIFETIME PLAN ACTIVE")}
               </h3>
 
               <p className="text-slate-300 text-sm sm:text-base mb-8 leading-relaxed">
-                {t("payment.portfolioVisible") || (currentLang === "ar" ? "البورتفوليو الخاص بك مرئي حالياً للزوار مع وصول شامل مدى الحياة." : "Your portfolio is currently visible to visitors with full lifetime access.")}
+                {content.portfolioVisible || (currentLang === "ar" ? "البورتفوليو الخاص بك مرئي حالياً للزوار مع وصول شامل مدى الحياة." : "Your portfolio is currently visible to visitors with full lifetime access.")}
               </p>
 
               <div className="w-full p-5 bg-slate-900/50 rounded-2xl border border-slate-700/50 flex flex-col items-center justify-center mb-8">
                 <span className="text-emerald-400 text-lg sm:text-xl font-bold uppercase tracking-wider mb-2">
-                  {t("payment.lifetime.name")}
+                  {content.lifetime?.name}
                 </span>
                 <span className="flex items-center gap-2 text-slate-300 text-sm font-medium">
                   <div className="w-4 h-4 rounded-full bg-emerald-500/20 flex items-center justify-center">
@@ -102,13 +113,13 @@ export default function PaymentPage() {
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" d="M5 13l4 4L19 7"></path>
                     </svg>
                   </div>
-                  {t("payment.unlimitedAccess") || "Unlimited Access"}
+                  {content.unlimitedAccess || "Unlimited Access"}
                 </span>
               </div>
 
               <Link href={`/dp/${userDetails?.username || ""}`}>
                 <button className="w-full bg-gradient-to-r from-emerald-500 to-teal-600 text-white font-bold py-3.5 px-6 rounded-full shadow-lg shadow-emerald-500/30 hover:shadow-emerald-500/50 hover:scale-[1.02] transition-all duration-300">
-                  {t("success.goToPortfolio") || (currentLang === "ar" ? "عرض البورتفوليو الخاص بي" : "View My Portfolio")}
+                  {successContent.goToPortfolio || (currentLang === "ar" ? "عرض البورتفوليو الخاص بي" : "View My Portfolio")}
                 </button>
               </Link>
             </div>
@@ -121,7 +132,7 @@ export default function PaymentPage() {
             <div className="relative w-full max-w-4xl">
               <div className="absolute -top-4 left-1/2 -translate-x-1/2 z-20">
                 <span className="bg-gradient-to-r from-cyan-400 to-purple-500 text-black px-4 py-1 rounded-full text-sm font-semibold whitespace-nowrap shadow-md">
-                  {t("payment.bestValue") || "Best Value"}
+                  {content.bestValue || "Best Value"}
                 </span>
               </div>
 
@@ -130,10 +141,10 @@ export default function PaymentPage() {
                   {/* Left: Price & CTA */}
                   <div className="p-8 pt-10 flex flex-col justify-center border-b md:border-b-0 md:border-r border-cyan-400/20">
                     <h3 className="text-2xl font-extrabold mb-2 text-white">
-                      {t("payment.lifetime.name")}
+                      {content.lifetime?.name}
                     </h3>
                     <p className="text-gray-400 text-sm mb-6">
-                      {t("payment.lifetime.description")}
+                      {content.lifetime?.description}
                     </p>
 
                     <div className="mb-6">
@@ -142,7 +153,7 @@ export default function PaymentPage() {
                           {currentLang === "ar" ? "١٠٠$" : "$100"}
                         </span>
                         <span className="text-gray-400 text-lg">
-                          {t("payment.lifetime.period")}
+                          {content.lifetime?.period}
                         </span>
                       </div>
                     </div>
@@ -160,20 +171,19 @@ export default function PaymentPage() {
                               amount: { currency_code: "USD", value: "100" } }]
                             });
                           }}
-                          onError={() => { toast.error(t("payment.paymentFailed")); }}
+                          onError={() => { toast.error(content.paymentFailed); }}
                           onApprove={async (data) => {
                             if (loading) return;
                             setLoading(true);
                             try {
-                              toast.info(t("payment.processingPayment"));
-                              await axios.post("/api/proxy/payment", { orderId: data.orderID });
-                              toast.success(t("payment.purchaseSuccess"));
+                              toast.info(content.processingPayment);
+                              await axios.post(`${SERVER_URL}/api/payment`, { orderId: data.orderID }, { withCredentials: true });
+                              toast.success(content.purchaseSuccess);
                               window.location.href = "/success";
                             } catch (err) {
-                              const code = err.response?.data?.code || "SERVER_ERROR";
-                              const msg = ERROR_MESSAGES[code] || t("payment.errors.serverError");
-                              console.error("Checkout error:", code, err.response?.data?.message);
-                              toast.error(msg);
+                              const code = err.response?.data?.code;
+                              const msg = ERROR_MESSAGES[code] || content.errors?.serverError;
+                              await handleApiError({ error: err, defaultErrorMsg: msg, toast });
                             } finally {
                               setLoading(false);
                             }
@@ -186,10 +196,10 @@ export default function PaymentPage() {
                   {/* Right: Features grid */}
                   <div className="p-8 pt-10 bg-slate-950/30 flex flex-col justify-center">
                     <p className="text-gray-300 text-xs font-semibold uppercase tracking-wider mb-4">
-                      {t("payment.whatsIncluded") || "What's included"}
+                      {content.whatsIncluded || "What's included"}
                     </p>
                     <ul className="grid grid-cols-1 sm:grid-cols-2 gap-y-3 gap-x-4">
-                      {(t("payment.features") || []).map((feature, idx) => (
+                      {(content.features || []).map((feature, idx) => (
                         <li key={idx} className="flex items-start gap-2 text-gray-300 text-sm leading-snug">
                           <Check className="w-4 h-4 text-cyan-400 flex-shrink-0 mt-0.5" />
                           <span>{feature}</span>

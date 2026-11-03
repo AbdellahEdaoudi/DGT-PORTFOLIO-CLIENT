@@ -1,87 +1,88 @@
 {
-    "navbar": {
-        "features": "Caratteristiche",
-        "showcase": "Vetrina",
-        "pricing": "Prezzi",
-        "auth": {
-            "signIn": "Accedi",
-            "signInWithGoogle": "Accedi con Google",
-            "getStarted": "Inizia",
-            "updateProfile": "Aggiorna Profilo",
-            "businessLinks": "Link Aziendali",
-            "support": "Supporto",
-            "signOut": "Esci",
-            "customDomain": "Dominio Personalizzato",
-            "payment": "Pagamento"
-        }
-    },
-    "hero": {
-        "title_part1": "Il Tuo Portfolio,",
-        "title_part2": "Elevato",
-        "description": "Crea un portfolio professionale in soli 5 minuti—senza bisogno di programmare. Mostra le tue competenze, esperienze e progetti in un bellissimo portfolio che aiuta i recruiter a capire rapidamente il tuo profilo e ad aumentare le tue possibilità di ottenere il prossimo lavoro o opportunità freelance.",
-        "free_trial": "30 giorni gratis",
-        "start_building": "Inizia a Costruire",
-        "watch_demo": "Guarda Demo"
-    },
-    "features": {
-        "title": "Perché Scegliere DGT Portfolio",
-        "subtitle": "Crea un portfolio professionale, mostra le tue competenze e distinguiti davanti ai selezionatori — tutto senza programmare.",
-        "items": [
-            {
-                "title": "Costruisci senza programmare",
-                "description": "Crea un portfolio professionale in pochi minuti senza scrivere una singola riga di codice."
-            },
-            {
-                "title": "Il tuo link personale",
-                "description": "Ottieni un sottodominio personalizzato come <strong>tuonome.mylio.site</strong> e condividilo ovunque."
-            },
-            {
-                "title": "Codice QR professionale",
-                "description": "Genera un codice QR per il tuo portfolio e condividilo istantaneamente online o offline."
-            },
-            {
-                "title": "Temi portfolio moderni",
-                "description": "Scegli tra temi dal design accattivante che si adattano al tuo marchio personale."
-            },
-            {
-                "title": "Condividi ovunque",
-                "description": "Invia il tuo portfolio con un unico link sui social media, via email o nelle candidature di lavoro."
-            },
-            {
-                "title": "Veloce e ottimizzato SEO",
-                "description": "Carica rapidamente e aiuta il tuo portfolio a essere scoperto dai motori di ricerca."
-            }
-        ]
-    },
-    "pricing": {
-        "title": "Un solo pagamento. Portfolio a vita.",
-        "subtitle": "Crea il tuo portfolio professionale, genera il tuo CV e resta online per sempre — senza abbonamenti o costi ricorrenti.",
-        "recommended": "Miglior valore",
-        "lifetime": {
-            "name": "Piano a vita",
-            "description": "Costruisci il tuo portfolio una volta e mantienilo online per sempre.",
-            "period": "paga una volta"
-        },
-        "cta": "Sblocca l'accesso a vita",
-        "whatsIncluded": "Cosa è incluso",
-        "noFees": "Nessun abbonamento • Nessun costo mensile • Tuo per sempre",
-        "features": [
-            "Accesso a vita — un solo pagamento",
-            "Sito web portfolio professionale",
-            "Generatore di CV integrato",
-            "Sottodominio portfolio personalizzato",
-            "Ottimizzato per la visibilità SEO",
-            "Più temi moderni",
-            "Tutti gli aggiornamenti futuri inclusi",
-            "Supporto clienti prioritario"
-        ]
-    },
-    "cta": {
-        "title": "Pronto a Mostrare il Tuo Talento?",
-        "subtitle": "Unisciti a migliaia di creatori che costruiscono i loro portfoli dei sogni oggi",
-        "button": "Crea il Tuo Portfolio"
-    },
-    "footer": {
-        "rights": "Tutti i diritti riservati."
+  "navbar": {
+    "features": "Caratteristiche",
+    "showcase": "Vetrina",
+    "pricing": "Prezzi",
+    "auth": {
+      "signIn": "Accedi",
+      "signInWithGoogle": "Accedi con Google",
+      "getStarted": "Inizia",
+      "updateProfile": "Aggiorna Profilo",
+      "businessLinks": "Link Aziendali",
+      "support": "Supporto",
+      "signOut": "Esci",
+      "customDomain": "Dominio Personalizzato",
+      "payment": "Pagamento",
+      "register": "Registrati"
     }
+  },
+  "hero": {
+    "title_part1": "Il Tuo Portfolio,",
+    "title_part2": "Elevato",
+    "description": "Crea un portfolio professionale in soli 5 minuti—senza bisogno di programmare. Mostra le tue competenze, esperienze e progetti in un bellissimo portfolio che aiuta i recruiter a capire rapidamente il tuo profilo e ad aumentare le tue possibilità di ottenere il prossimo lavoro o opportunità freelance.",
+    "free_trial": "30 giorni gratis",
+    "start_building": "Inizia a Costruire",
+    "watch_demo": "Guarda Demo"
+  },
+  "features": {
+    "title": "Perché Scegliere Myportfolio",
+    "subtitle": "Crea un portfolio professionale, mostra le tue competenze e distinguiti davanti ai selezionatori — tutto senza programmare.",
+    "items": [
+      {
+        "title": "Costruisci senza programmare",
+        "description": "Crea un portfolio professionale in pochi minuti senza scrivere una singola riga di codice."
+      },
+      {
+        "title": "Il tuo link personale",
+        "description": "Ottieni un sottodominio personalizzato come <strong>tuonome.mylio.site</strong> e condividilo ovunque."
+      },
+      {
+        "title": "Codice QR professionale",
+        "description": "Genera un codice QR per il tuo portfolio e condividilo istantaneamente online o offline."
+      },
+      {
+        "title": "Temi portfolio moderni",
+        "description": "Scegli tra temi dal design accattivante che si adattano al tuo marchio personale."
+      },
+      {
+        "title": "Condividi ovunque",
+        "description": "Invia il tuo portfolio con un unico link sui social media, via email o nelle candidature di lavoro."
+      },
+      {
+        "title": "Veloce e ottimizzato SEO",
+        "description": "Carica rapidamente e aiuta il tuo portfolio a essere scoperto dai motori di ricerca."
+      }
+    ]
+  },
+  "pricing": {
+    "title": "Un solo pagamento. Portfolio a vita.",
+    "subtitle": "Crea il tuo portfolio professionale, genera il tuo CV e resta online per sempre — senza abbonamenti o costi ricorrenti.",
+    "recommended": "Miglior valore",
+    "lifetime": {
+      "name": "Piano a vita",
+      "description": "Costruisci il tuo portfolio una volta e mantienilo online per sempre.",
+      "period": "paga una volta"
+    },
+    "cta": "Sblocca l'accesso a vita",
+    "whatsIncluded": "Cosa è incluso",
+    "noFees": "Nessun abbonamento • Nessun costo mensile • Tuo per sempre",
+    "features": [
+      "Accesso a vita — un solo pagamento",
+      "Sito web portfolio professionale",
+      "Generatore di CV integrato",
+      "Sottodominio portfolio personalizzato",
+      "Ottimizzato per la visibilità SEO",
+      "Più temi moderni",
+      "Tutti gli aggiornamenti futuri inclusi",
+      "Supporto clienti prioritario"
+    ]
+  },
+  "cta": {
+    "title": "Pronto a Mostrare il Tuo Talento?",
+    "subtitle": "Unisciti a migliaia di creatori che costruiscono i loro portfoli dei sogni oggi",
+    "button": "Crea il Tuo Portfolio"
+  },
+  "footer": {
+    "rights": "Tutti i diritti riservati."
+  }
 }

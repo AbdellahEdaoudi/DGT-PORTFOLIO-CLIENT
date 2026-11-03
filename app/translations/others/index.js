@@ -1,29 +1,34 @@
+// This file can be used in both Server and Client Components
 
-import en from './en.json';
-import ar from './ar.json';
-import es from './es.json';
-import fr from './fr.json';
-import ru from './ru.json';
-import ja from './ja.json';
-import zh from './zh.json';
-import de from './de.json';
-import nl from './nl.json';
-import pt from './pt.json';
-import it from './it.json';
-import hi from './hi.json';
-import tr from './tr.json';
-import ko from './ko.json';
-import id from './id.json';
-import pl from './pl.json';
-import sv from './sv.json';
-import vi from './vi.json';
+const translations = {
+    en: () => import('./en.json').then((module) => module.default),
+    ar: () => import('./ar.json').then((module) => module.default),
+    es: () => import('./es.json').then((module) => module.default),
+    fr: () => import('./fr.json').then((module) => module.default),
+    ru: () => import('./ru.json').then((module) => module.default),
+    ja: () => import('./ja.json').then((module) => module.default),
+    zh: () => import('./zh.json').then((module) => module.default),
+    de: () => import('./de.json').then((module) => module.default),
+    nl: () => import('./nl.json').then((module) => module.default),
+    pt: () => import('./pt.json').then((module) => module.default),
+    it: () => import('./it.json').then((module) => module.default),
+    hi: () => import('./hi.json').then((module) => module.default),
+    tr: () => import('./tr.json').then((module) => module.default),
+    ko: () => import('./ko.json').then((module) => module.default),
+    id: () => import('./id.json').then((module) => module.default),
+    pl: () => import('./pl.json').then((module) => module.default),
+    sv: () => import('./sv.json').then((module) => module.default),
+    vi: () => import('./vi.json').then((module) => module.default),
+}
 
-const dictionaries = {
-    en, ar, es, fr, ru, ja, zh, de, nl, pt, it, hi, tr, ko, id, pl, sv, vi
-};
-
-
-export const getTranslation = (lang) => {
-    const dict = dictionaries[lang] || dictionaries['en'];
-    return (key) => key.split('.').reduce((obj, k) => (obj || {})[k], dict) || key;
-};
+export const getTranslation = async (locale) => {
+    try {
+        if (translations[locale]) {
+            return await translations[locale]();
+        }
+        return await translations['en']();
+    } catch (error) {
+        console.warn(`[i18n] Failed to load translations for locale "${locale}":`, error);
+        return await translations['en']();
+    }
+}

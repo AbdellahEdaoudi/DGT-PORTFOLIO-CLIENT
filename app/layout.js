@@ -2,21 +2,20 @@ import "./globals.css";
 import { Inter, Prompt } from "next/font/google";
 import { MyProvider } from "./context/context";
 import { ToastProvider } from "./components/Toast";
-import NextAuthProvider from "./api/auth/NextAuthProvider";
-import { Analytics } from "@vercel/analytics/react"
+import { Analytics } from "@vercel/analytics/react";
 
 const inter = Inter({ subsets: ['latin'] });
 const prompt = Prompt({ subsets: ['latin'], weight: '400' });
 
 export const metadata = {
   metadataBase: new URL('https://mylio.site'),
-  title: "DGT Portfolio - Build Your Professional Online Portfolio",
-  description: "Create a professional portfolio website in minutes with DGT Portfolio. Showcase your projects, skills, experience, services, and achievements without writing a single line of code.",
-  keywords: ["DGT Portfolio", "Portfolio Builder", "Personal Portfolio", "Showcase Skills", "Interactive Portfolio", "No Code Portfolio"],
+  title: "Myportfolio - Build Your Professional Online Portfolio",
+  description: "Create a professional portfolio website in minutes with Myportfolio. Showcase your projects, skills, experience, services, and achievements without writing a single line of code.",
+  keywords: ["Myportfolio", "Portfolio Builder", "Personal Portfolio", "Showcase Skills", "Interactive Portfolio", "No Code Portfolio"],
   appleWebApp: {
     capable: true,
     statusBarStyle: "default",
-    title: "DGT Portfolio",
+    title: "Myportfolio",
   },
   icons: {
     icon: "/logo.jpg",
@@ -24,14 +23,14 @@ export const metadata = {
     apple: "/logo.jpg",
   },
   openGraph: {
-    title: "Build Your Professional Online Portfolio - DGT Portfolio",
-    description: "Create a professional portfolio website in minutes with DGT Portfolio. Showcase your projects, skills, experience, services, and achievements without writing a single line of code.",
+    title: "Build Your Professional Online Portfolio - Myportfolio",
+    description: "Create a professional portfolio website in minutes with Myportfolio. Showcase your projects, skills, experience, services, and achievements without writing a single line of code.",
     url: "https://mylio.site",
-    siteName: "DGT Portfolio",
+    siteName: "Myportfolio",
     images: [
       {
         url: "/logo.jpg",
-        alt: "DGT Portfolio Logo",
+        alt: "Myportfolio Logo",
       },
     ],
     locale: "en_US",
@@ -40,8 +39,8 @@ export const metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Build Your Professional Online Portfolio - DGT Portfolio",
-    description: "Create a professional portfolio website in minutes with DGT Portfolio. Showcase your projects, skills, experience, services, and achievements without writing a single line of code.",
+    title: "Build Your Professional Online Portfolio - Myportfolio",
+    description: "Create a professional portfolio website in minutes with Myportfolio. Showcase your projects, skills, experience, services, and achievements without writing a single line of code.",
     images: ["/logo.jpg"],
   },
   alternates: {
@@ -67,7 +66,6 @@ export const metadata = {
   },
 };
 
-
 export default function RootLayout({ children }) {
   return (
     <html className="scroll-smooth" lang="en" data-scroll-behavior="smooth">
@@ -84,8 +82,8 @@ export default function RootLayout({ children }) {
               {
                 "@context": "https://schema.org",
                 "@type": "WebSite",
-                "name": "DGT Portfolio",
-                "alternateName": "DGT Portfolio Builder",
+                "name": "Myportfolio",
+                "alternateName": "Myportfolio Builder",
                 "url": "https://mylio.site",
                 "potentialAction": {
                   "@type": "SearchAction",
@@ -96,26 +94,25 @@ export default function RootLayout({ children }) {
               {
                 "@context": "https://schema.org",
                 "@type": "Organization",
-                "name": "DGT Portfolio",
+                "name": "Myportfolio",
                 "url": "https://mylio.site",
                 "logo": "https://mylio.site/logo.jpg",
                 "sameAs": [
-                  "https://twitter.com/dgtportfolio",
-                  "https://www.linkedin.com/company/dgtportfolio"
+                  "https://twitter.com/mylio",
+                  "https://www.linkedin.com/company/mylio"
                 ]
               }
             ])
           }}
         />
-        <NextAuthProvider>
-          <ToastProvider>
-            <MyProvider>
-              {children}
-            </MyProvider>
-          </ToastProvider>
-        </NextAuthProvider>
+        <ToastProvider>
+          <MyProvider>
+            {children}
+          </MyProvider>
+        </ToastProvider>
         <Analytics />
       </body>
     </html>
   );
 }
+

@@ -1,6 +1,5 @@
 "use client";
-import { createContext, useContext, useState, useCallback, useEffect } from 'react';
-import { AnimatePresence, motion } from 'framer-motion';
+import { createContext, useContext, useState, useCallback } from 'react';
 
 const ToastContext = createContext(null);
 
@@ -16,15 +15,10 @@ function ToastItem({ t, removeToast, icons }) {
   const [isPaused, setIsPaused] = useState(false);
 
   return (
-    <motion.div
-      layout
-      initial={{ opacity: 0, x: 50, scale: 0.9 }}
-      animate={{ opacity: 1, x: 0, scale: 1 }}
-      exit={{ opacity: 0, scale: 0.85, transition: { duration: 0.2 } }}
-      transition={{ type: "spring", stiffness: 500, damping: 30, mass: 1 }}
+    <div
       onMouseEnter={() => setIsPaused(true)}
       onMouseLeave={() => setIsPaused(false)}
-      className="pointer-events-auto cursor-default"
+      className="pointer-events-auto cursor-default transition-all duration-300 animate-in fade-in slide-in-from-right-5"
     >
       <style>{`
         @keyframes toast-progress {
@@ -88,7 +82,7 @@ function ToastItem({ t, removeToast, icons }) {
           </div>
         </div>
       </div>
-    </motion.div>
+    </div>
   );
 }
 
@@ -138,16 +132,14 @@ export function ToastProvider({ children }) {
     <ToastContext.Provider value={toast}>
       {children}
       <div className="fixed top-6 right-6 z-[100] flex flex-col items-end gap-3 pointer-events-none">
-        <AnimatePresence mode="popLayout" initial={false}>
-          {toasts.map((t) => (
-            <ToastItem
-              key={t.id}
-              t={t}
-              removeToast={removeToast}
-              icons={icons}
-            />
-          ))}
-        </AnimatePresence>
+        {toasts.map((t) => (
+          <ToastItem
+            key={t.id}
+            t={t}
+            removeToast={removeToast}
+            icons={icons}
+          />
+        ))}
       </div>
     </ToastContext.Provider>
   );

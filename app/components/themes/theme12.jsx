@@ -1,19 +1,29 @@
 "use client"
 import { useState, useEffect, useMemo } from "react"
-import { Sparkles, GraduationCap, Code, Globe, Share2, Loader, FileDown, Briefcase, Award, Menu, X, ArrowUp } from "../Icons"
+import { Sparkles, GraduationCap, Code, Globe, Share2, Loader, FileDown, Briefcase, Award, Menu, X, ArrowUp } from "../lucide-react"
 import QrcodeProfile from "../portfolio/QrcodeProfile";
-import UserLinks from "../portfolio/UserLinks";
 import Image from "next/image";
 import Link from "next/link";
 import { getTranslation } from "../../translations/portfolio";
 import ImageModal from "../portfolio/ImageModal"
 import DownloadResume from "../downloadcv/DownloadResume"
 
-export default function Theme12({ userDetails, userLinks }) {
-    const t = getTranslation(userDetails?.displayLanguage || 'en')
+export default function Theme12({ userDetails, content: propContent, t: propT }) {
+    const [content, setContent] = useState(propContent || (typeof propT === 'object' ? propT : {}));
+
+    useEffect(() => {
+        if (propContent) {
+            setContent(propContent);
+            return;
+        }
+        if (typeof propT === 'object' && propT) {
+            setContent(propT);
+            return;
+        }
+        getTranslation(userDetails?.displayLanguage || 'en').then((dict) => setContent(dict || {}));
+    }, [userDetails?.displayLanguage, propContent, propT]);
     const [expanded, setExpanded] = useState(false);
     const [showQR, setShowQR] = useState(false);
-    const [showUserLinks, setShowUserLinks] = useState(false);
     const [selectedImage, setSelectedImage] = useState(null);
     const [isNavOpen, setIsNavOpen] = useState(false);
     const [showScrollTop, setShowScrollTop] = useState(false);
@@ -65,7 +75,7 @@ export default function Theme12({ userDetails, userLinks }) {
                                 {/* Toolbar */}
                                 <div className="relative z-50 flex md:flex-row flex-col gap-4 justify-between  items-center mb-12">
                                     <h1 className="text-white text-2xl font-bold cursor-pointer hover:text-blue-400 transition-colors">
-                                        <Link href={"https://mylio.site"}>{t('portfolio')}</Link>
+                                        <Link href={"https://mylio.site"}>{content?.portfolio}</Link>
                                     </h1>
                                     <div className="flex gap-3">
                                         {/* Copy Link */}
@@ -75,16 +85,8 @@ export default function Theme12({ userDetails, userLinks }) {
                                             onClick={() => setShowQR(true)}
                                             className="flex items-center gap-2 px-2 bg-white/10 hover:bg-blue-500/20 rounded-lg text-white transition-all duration-300 backdrop-blur-md border border-white/10 hover:border-blue-500/50 cursor-pointer"
                                         >
-                                            <QrcodeProfile userDetails={userDetails} className="text-white border-none hover:bg-transparent" isOpen={showQR} onClose={() => setShowQR(false)} />
+                                            <QrcodeProfile userDetails={userDetails} className="text-white border-none hover:bg-transparent" isOpen={showQR} onClose={() => setShowQR(false)} content={content} />
                                         </div>
-                                        {/* User Links */}
-                                        {userLinks?.length > 0 && (
-                                            <div
-                                                onClick={() => setShowUserLinks(true)}
-                                                className="flex items-center gap-2 px-2 bg-white/10 hover:bg-blue-500/20 rounded-lg text-white transition-all duration-300 backdrop-blur-md border border-white/10 hover:border-blue-500/50 cursor-pointer">
-                                                <UserLinks lang={userDetails?.displayLanguage} userLinks={userLinks} className="text-white border-none hover:bg-transparent" isOpen={showUserLinks} onClose={() => setShowUserLinks(false)} />
-                                            </div>
-                                        )}
                                         {/* Menu Button in Header */}
                                         {activeSectionsCount >= 3 && (
                                             <button
@@ -113,13 +115,13 @@ export default function Theme12({ userDetails, userLinks }) {
                                                     : ["services", "experience", "skills", "projects", "education", "certificates", "languages"];
 
                                                 const navItems = {
-                                                    services: { id: "services", label: t('services'), icon: "💼", condition: userDetails?.services?.length > 0 },
-                                                    experience: { id: "experience", label: t('workExperience'), icon: "⭐", condition: userDetails?.experience?.length > 0 },
-                                                    skills: { id: "skills", label: t('skills'), icon: "💡", condition: userDetails?.skills?.length > 0 },
-                                                    projects: { id: "projects", label: t('projects'), icon: "📁", condition: userDetails?.projects?.length > 0 },
-                                                    education: { id: "education", label: t('education'), icon: "🎓", condition: userDetails?.education?.length > 0 },
-                                                    certificates: { id: "certificates", label: t('certificates'), icon: "📜", condition: userDetails?.certificates?.length > 0 },
-                                                    languages: { id: "languages", label: t('languages'), icon: "🌍", condition: userDetails?.languages?.length > 0 },
+                                                    services: { id: "services", label: content?.services, icon: "💼", condition: userDetails?.services?.length > 0 },
+                                                    experience: { id: "experience", label: content?.workExperience, icon: "⭐", condition: userDetails?.experience?.length > 0 },
+                                                    skills: { id: "skills", label: content?.skills, icon: "💡", condition: userDetails?.skills?.length > 0 },
+                                                    projects: { id: "projects", label: content?.projects, icon: "📁", condition: userDetails?.projects?.length > 0 },
+                                                    education: { id: "education", label: content?.education, icon: "🎓", condition: userDetails?.education?.length > 0 },
+                                                    certificates: { id: "certificates", label: content?.certificates, icon: "📜", condition: userDetails?.certificates?.length > 0 },
+                                                    languages: { id: "languages", label: content?.languages, icon: "🌍", condition: userDetails?.languages?.length > 0 },
                                                 };
 
                                                 return sectionOrder
@@ -154,7 +156,7 @@ export default function Theme12({ userDetails, userLinks }) {
                                 {/* Header Content */}
                                 <div className="flex flex-col-reverse md:flex-row gap-12 md:items-start items-center justify-between">
                                     <div className="">
-                                        <p className="text-blue-400 font-semibold uppercase tracking-widest mb-3 text-sm">{t('helloIm')}</p>
+                                        <p className="text-blue-400 font-semibold uppercase tracking-widest mb-3 text-sm">{content?.helloIm}</p>
                                         <h1 className="text-5xl md:text-6xl font-black mb-5">{userDetails?.fullname}</h1>
                                         <p className="text-2xl text-blue-300 font-semibold mb-5 flex items-center gap-2">
                                             <Sparkles size={24} className="text-blue-400" />
@@ -164,21 +166,21 @@ export default function Theme12({ userDetails, userLinks }) {
                                         <div className="text-gray-300 mt-4 max-w-lg">
                                             <p className="mb-6">{userDetails?.about}</p>
                                             <div className="p-4 md:p-6 bg-white/5 backdrop-blur-sm rounded-xl border border-white/10">
-                                                {(userDetails.displayEmail || userDetails.email) && (
+                                                {(userDetails.email) && (
                                                     <div className="flex gap-2 items-start">
                                                         <span className="font-bold text-blue-400 whitespace-nowrap">Email:</span>
-                                                        <a href={`mailto:${userDetails.displayEmail || userDetails.email}`} className="text-gray-300 hover:text-blue-300 transition break-all">{userDetails.displayEmail || userDetails.email}</a>
+                                                        <a href={`mailto:${userDetails.email}`} className="text-gray-300 hover:text-blue-300 transition break-all">{userDetails.email}</a>
                                                     </div>
                                                 )}
-                                                {userDetails.country && (
+                                                {userDetails?.location && (
                                                     <div className="flex gap-2 items-start">
-                                                        <span className="font-bold text-blue-400 whitespace-nowrap">{t('country')}:</span>
-                                                        <span className="text-gray-300">{userDetails.country}</span>
+                                                        <span className="font-bold text-blue-400 whitespace-nowrap">{content?.location}:</span>
+                                                        <span className="text-gray-300">{userDetails.location}</span>
                                                     </div>
                                                 )}
                                                 {userDetails.phoneNumber && (
                                                     <div className="flex gap-2 items-start">
-                                                        <span className="font-bold text-blue-400 whitespace-nowrap">{t('phone')}:</span>
+                                                        <span className="font-bold text-blue-400 whitespace-nowrap">{content?.phone}:</span>
                                                         <span className="text-gray-300">{userDetails.phoneNumber}</span>
                                                     </div>
                                                 )}
@@ -188,7 +190,7 @@ export default function Theme12({ userDetails, userLinks }) {
                                     <div className="relative flex-shrink-0 group">
                                         <div className="absolute inset-0 bg-gradient-to-br from-blue-500/30 to-blue-500/30 rounded-3xl blur-3xl group-hover:blur-2xl transition-all duration-500"></div>
                                         <div className="absolute -inset-1 bg-gradient-to-r from-blue-500 to-blue-500 rounded-3xl opacity-20 group-hover:opacity-40 transition-opacity duration-500"></div>
-                                        <Image width={320} height={320} priority
+                                        <Image width={320} height={320} priority loading="eager"
                                             src={userDetails?.urlimage}
                                             alt={userDetails?.fullname || "Profile"}
                                             className="relative rounded-3xl border-2 border-blue-500/40 group-hover:border-blue-500/60 transition-all duration-500 shadow-2xl w-56 h-56 md:w-80 md:h-80 object-cover"
@@ -212,7 +214,7 @@ export default function Theme12({ userDetails, userLinks }) {
                                             <div className="max-w-5xl mx-auto">
                                                 <div className="flex items-center gap-4 mb-8">
                                                     <Briefcase size={32} className="text-blue-400" />
-                                                    <h2 className="text-3xl font-bold">{t('services')}</h2>
+                                                    <h2 className="text-3xl font-bold">{content?.services}</h2>
                                                 </div>
                                                 <div className="grid md:grid-cols-2 gap-6">
                                                     {userDetails.services.map((service, i) => (
@@ -230,7 +232,7 @@ export default function Theme12({ userDetails, userLinks }) {
                                             <div className="max-w-5xl mx-auto">
                                                 <div className="flex items-center gap-4 mb-8">
                                                     <Briefcase size={32} className="text-blue-400" />
-                                                    <h2 className="text-3xl font-bold">{t('workExperience')}</h2>
+                                                    <h2 className="text-3xl font-bold">{content?.workExperience}</h2>
                                                 </div>
                                                 <div className="space-y-6">
                                                     {userDetails.experience.map((exp, i) => (
@@ -253,7 +255,7 @@ export default function Theme12({ userDetails, userLinks }) {
                                                                 </div>
                                                                 <p className="text-blue-400 font-semibold mb-3 text-lg">{exp.company}</p>
                                                                 <div className={`mt-3 p-4 bg-slate-900/50 rounded-lg  border-blue-500/50 ${userDetails.displayLanguage === "ar" ? "border-r-4" : "border-l-4"}`}>
-                                                                    <p className="text-xs text-gray-500 uppercase tracking-wider mb-2">{t('description')}</p>
+                                                                    <p className="text-xs text-gray-500 uppercase tracking-wider mb-2">{content?.description}</p>
                                                                     <p className={`text-gray-300 text-sm whitespace-pre-wrap leading-relaxed`}>
                                                                         {exp.description}
                                                                     </p>
@@ -270,7 +272,7 @@ export default function Theme12({ userDetails, userLinks }) {
                                             <div className="max-w-5xl mx-auto">
                                                 <div className="flex items-center gap-4 mb-8">
                                                     <Code size={32} className="text-blue-400" />
-                                                    <h2 className="text-3xl font-bold">{t('skills')}</h2>
+                                                    <h2 className="text-3xl font-bold">{content?.skills}</h2>
                                                 </div>
                                                 <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4">
                                                     {userDetails.skills.map((skill, i) => (
@@ -288,7 +290,7 @@ export default function Theme12({ userDetails, userLinks }) {
                                             <div className="max-w-5xl mx-auto">
                                                 <div className="flex items-center gap-4 mb-8">
                                                     <Briefcase size={32} className="text-blue-400" /> {/* Assuming Briefcase for projects, or a different icon if preferred */}
-                                                    <h2 className="text-3xl font-bold">{t('projects')}</h2>
+                                                    <h2 className="text-3xl font-bold">{content?.projects}</h2>
                                                 </div>
                                                 <div className="space-y-6">
                                                     {userDetails.projects.map((project, idx) => (
@@ -335,7 +337,7 @@ export default function Theme12({ userDetails, userLinks }) {
                                                                             className="inline-flex items-center gap-2 px-6 py-2 bg-blue-600/20 hover:bg-blue-600/40 border border-blue-500/50 rounded-lg text-blue-300 transition-all duration-300 font-medium"
                                                                         >
                                                                             <Globe size={18} />
-                                                                            {t('viewProject')}
+                                                                            {content?.viewProject}
                                                                         </a>
                                                                     )}
                                                                 </div>
@@ -351,7 +353,7 @@ export default function Theme12({ userDetails, userLinks }) {
                                             <div className="max-w-5xl mx-auto">
                                                 <div className="flex items-center gap-4 mb-8">
                                                     <GraduationCap size={32} className="text-blue-400" />
-                                                    <h2 className="text-3xl font-bold">{t('education')}</h2>
+                                                    <h2 className="text-3xl font-bold">{content?.education}</h2>
                                                 </div>
                                                 <div className="space-y-6">
                                                     {userDetails.education.map((edu, i) => (
@@ -377,7 +379,7 @@ export default function Theme12({ userDetails, userLinks }) {
 
                                                                 {edu.field && (
                                                                     <div className={`p-4 bg-slate-900/50 rounded-lg ${userDetails.displayLanguage === "ar" ? "border-r-4" : "border-l-4"} border-blue-500/50`}>
-                                                                        <p className="text-xs text-gray-500 uppercase tracking-wider mb-2">{t('field')}</p>
+                                                                        <p className="text-xs text-gray-500 uppercase tracking-wider mb-2">{content?.field}</p>
                                                                         <p className="text-sm md:text-base text-gray-300 leading-relaxed">
                                                                             {edu.field}
                                                                         </p>
@@ -395,7 +397,7 @@ export default function Theme12({ userDetails, userLinks }) {
                                             <div className="max-w-5xl mx-auto">
                                                 <div className="flex items-center gap-4 mb-8">
                                                     <Award size={32} className="text-blue-400" />
-                                                    <h2 className="text-3xl font-bold">{t('certificates')}</h2>
+                                                    <h2 className="text-3xl font-bold">{content?.certificates}</h2>
                                                 </div>
                                                 <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
                                                     {userDetails.certificates.map((cert, i) => (
@@ -431,7 +433,7 @@ export default function Theme12({ userDetails, userLinks }) {
                                             <div className="max-w-5xl mx-auto">
                                                 <div className="flex items-center gap-4 mb-8">
                                                     <Globe size={32} className="text-blue-400" />
-                                                    <h2 className="text-3xl font-bold">{t('languages')}</h2>
+                                                    <h2 className="text-3xl font-bold">{content?.languages}</h2>
                                                 </div>
                                                 <div className="flex flex-wrap gap-4">
                                                     {userDetails.languages.map((lang, i) => (
@@ -460,7 +462,7 @@ export default function Theme12({ userDetails, userLinks }) {
                                     <div className="max-w-5xl mx-auto">
                                         <div className="flex items-center gap-3 mb-8">
                                             <Share2 className="text-blue-400" size={30} />
-                                            <h2 className="text-3xl font-black">{t('followMe')}</h2>
+                                            <h2 className="text-3xl font-black">{content?.followMe}</h2>
                                         </div>
                                         <div className="flex gap-4 flex-wrap">
                                             {[
@@ -500,7 +502,7 @@ export default function Theme12({ userDetails, userLinks }) {
                         <footer className="border-t border-blue-500/20 bg-slate-950/50 backdrop-blur-md mt-12">
                             <div className="max-w-5xl mx-auto px-4 py-8 text-center">
                                 <p className="text-gray-400">
-                                    © {new Date().getFullYear()} {userDetails?.fullname}. {t('allRightsReserved')} ©
+                                    © {new Date().getFullYear()} {userDetails?.fullname}. {content?.allRightsReserved} ©
                                 </p>
                             </div>
                         </footer>

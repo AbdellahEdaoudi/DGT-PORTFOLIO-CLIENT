@@ -1,15 +1,15 @@
 "use client"
-import axios from 'axios'
-import { CheckCheck, Loader, User, Sparkles, Lightbulb, Trash2, X, AlertCircle } from '../../components/Icons'
-import React, { useState, useEffect } from 'react'
+import axios from 'axios';
+import { handleApiError } from "../../utils/apiErrorHandler";
+import { CheckCheck, Loader, User, Sparkles, Lightbulb, Trash2, X, AlertCircle } from '../../components/lucide-react'
+import { useState, useEffect } from 'react'
 import { createPortal } from "react-dom"
 import { useToast } from '../../components/Toast'
-import { getTranslation } from '../../translations/update-profile'
+const SERVER_URL = process.env.NEXT_PUBLIC_SERVER_URL;
 
-export default function About({ userData, setUserDetails }) {
+export default function About({ data, setData, content }) {
   const toast = useToast()
-  const t = getTranslation(userData?.displayLanguage || 'en')
-  const [about, setAbout] = useState(userData?.about || "")
+  const [about, setAbout] = useState(data?.user?.about || "")
   const [loading, setLoading] = useState(false)
   const [showClearModal, setShowClearModal] = useState(false)
   const [mounted, setMounted] = useState(false)
@@ -22,22 +22,31 @@ export default function About({ userData, setUserDetails }) {
     e.preventDefault()
     setLoading(true)
     try {
-      await axios.put(`/api/proxy/users/update/about`, {
+      await axios.put(`${SERVER_URL}/api/users/update/about`, {
         about,
-      })
+      }, { withCredentials: true })
 
       // Update global state to reflect changes immediately without refresh
-      if (setUserDetails) {
-        setUserDetails(prev => ({
+      if (setData) {
+        setData(prev => ({
           ...prev,
-          about: about
+          user: {
+            ...(prev?.user || {}),
+            about: about
+          }
         }));
       }
+      localStorage.setItem(`data_${data?.user?.username}`, JSON.stringify({
+        ...data,
+        user: {
+          ...(data?.user || {}),
+          about: about
+        }
+      }));
 
-      toast.success(t('about.savedSuccessfully'))
+      toast.success(content?.savedSuccessfully || "Saved successfully!")
     } catch (error) {
-      console.error(error)
-      toast.error(t('about.errorMessage') || "Error saving")
+      await handleApiError({ error, defaultErrorMsg: content?.errorMessage || "Error saving", toast });
     } finally {
       setLoading(false)
     }
@@ -56,16 +65,16 @@ export default function About({ userData, setUserDetails }) {
   const progress = (about.length / maxLength) * 100
 
   return (
-    <div className="space-y-8" dir={userData?.displayLanguage === 'ar' ? 'rtl' : 'ltr'}>
+    <div className="space-y-8" dir={data?.user?.displayLanguage === 'ar' ? 'rtl' : 'ltr'}>
       {/* Header Section */}
       <div className="flex flex-col md:flex-row md:items-center justify-between border-b border-gray-100">
         <div className="space-y-0.5 sm:space-y-1">
           <h3 className="text-sm sm:text-xl font-bold text-gray-800 flex items-center gap-1.5 sm:gap-2">
             <User className="text-teal-600 w-3 h-3 sm:w-6 sm:h-6" />
-            {t('about.summary')}
+            {content?.summary || "Summary"}
           </h3>
           <p className="text-[10px] sm:text-sm text-gray-500 max-w-2xl">
-            {t('about.description')}
+            {content?.description}
           </p>
         </div>
 
@@ -82,11 +91,11 @@ export default function About({ userData, setUserDetails }) {
         >
           {loading ? (
             <>
-              <Loader size={20} className="animate-spin" /> {t('about.saving')}
+              <Loader size={20} className="animate-spin" /> {content?.saving || "Saving..."}
             </>
           ) : (
             <>
-              <CheckCheck size={20} /> {t('about.save')}
+              <CheckCheck size={20} /> {content?.save || "Save"}
             </>
           )}
         </button>
@@ -103,7 +112,7 @@ export default function About({ userData, setUserDetails }) {
         <div className="bg-gray-50 border-b border-gray-100 px-2 py-1.5 sm:px-4 sm:py-3 flex justify-between items-center text-[10px] sm:text-sm text-gray-500">
           <div className="flex items-center gap-1 sm:gap-2">
             <Sparkles className="text-teal-500 w-3 h-3 sm:w-4 sm:h-4" />
-            <span className="font-medium text-gray-700">{t('about.bio')}</span>
+            <span className="font-medium text-gray-700">{content?.bio || "Bio"}</span>
           </div>
           {about.length > 0 && (
             <button
@@ -111,7 +120,7 @@ export default function About({ userData, setUserDetails }) {
               className="text-gray-400 hover:text-red-500 transition-colors flex items-center gap-1 sm:gap-1.5 text-[9px] sm:text-xs font-medium"
             >
               <Trash2 className="w-3 h-3 sm:w-[14px] sm:h-[14px]" />
-              {t('about.clear')}
+              {content?.clear || "Clear All"}
             </button>
           )}
         </div>
@@ -122,7 +131,7 @@ export default function About({ userData, setUserDetails }) {
             value={about}
             maxLength={maxLength}
             onChange={(e) => setAbout(e.target.value)}
-            placeholder={t('about.placeholder')}
+            placeholder={content?.placeholder}
             className="
                 w-full px-2 py-2 sm:px-5 sm:py-5 min-h-[150px] sm:min-h-[220px]
                 border-0 focus:ring-0 outline-none
@@ -167,11 +176,11 @@ export default function About({ userData, setUserDetails }) {
         >
           {loading ? (
             <>
-              <Loader size={16} className="animate-spin w-3 h-3 sm:w-5 sm:h-5" /> {t('about.saving')}
+              <Loader size={16} className="animate-spin w-3 h-3 sm:w-5 sm:h-5" /> {content?.saving || "Saving..."}
             </>
           ) : (
             <>
-              <CheckCheck className="w-3 h-3 sm:w-5 sm:h-5" /> {t('about.save')}
+              <CheckCheck className="w-3 h-3 sm:w-5 sm:h-5" /> {content?.save || "Save"}
             </>
           )}
         </button>
@@ -184,10 +193,10 @@ export default function About({ userData, setUserDetails }) {
         </div>
         <div className="space-y-0.5 sm:space-y-1">
           <h4 className="text-[10px] sm:text-sm font-bold text-gray-800">
-            {t('about.proTip')}
+            {content?.proTip || "Pro Tip"}
           </h4>
           <p className="text-[9px] sm:text-sm text-gray-600 leading-relaxed">
-            {t('about.tip')}
+            {content?.tip}
           </p>
         </div>
       </div>
@@ -202,7 +211,7 @@ export default function About({ userData, setUserDetails }) {
             <button
               onClick={() => setShowClearModal(false)}
               className="absolute top-4 right-4 text-gray-400 hover:text-gray-600 transition p-1 rounded-full hover:bg-gray-100"
-              title={t("about.close") || "Close"}
+              title={content?.close || "Close"}
             >
               <X className="w-5 h-5" />
             </button>
@@ -213,10 +222,10 @@ export default function About({ userData, setUserDetails }) {
 
             <div className="w-full mb-6">
               <h3 className="text-lg font-bold text-gray-800 mb-2">
-                {t('about.confirmTitle')}
+                {content?.confirmTitle || "Are you sure?"}
               </h3>
               <p className="text-gray-600 text-sm leading-relaxed">
-                {t('about.confirmMessage')}
+                {content?.confirmMessage}
               </p>
             </div>
 
@@ -225,14 +234,14 @@ export default function About({ userData, setUserDetails }) {
                 onClick={() => setShowClearModal(false)}
                 className="flex-1 px-4 py-2.5 bg-gray-100 hover:bg-gray-200 text-gray-700 font-bold rounded-lg transition-colors duration-200"
               >
-                {t('about.cancel') || "Cancel"}
+                {content?.cancel || "Cancel"}
               </button>
               <button
                 onClick={confirmClear}
                 className="flex-1 px-4 py-2.5 bg-red-600 hover:bg-red-700 text-white font-bold rounded-lg shadow-md transition-colors duration-200 flex items-center justify-center gap-2"
               >
                 <Trash2 size={18} />
-                <span>{t('about.clear') || "Clear All"}</span>
+                <span>{content?.clear || "Clear All"}</span>
               </button>
             </div>
           </div>

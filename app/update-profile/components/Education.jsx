@@ -1,5 +1,8 @@
+"use client";
 import axios from "axios";
-import React, { useState } from "react";
+import { handleApiError } from "../../utils/apiErrorHandler";
+const SERVER_URL = process.env.NEXT_PUBLIC_SERVER_URL;
+import React, { useState, useEffect } from "react";
 import { useToast } from "../../components/Toast";
 import { createPortal } from "react-dom";
 import {
@@ -13,8 +16,7 @@ import {
   Pencil,
   AlertCircle,
   GripVertical,
-} from "../../components/Icons";
-import { getTranslation } from "../../translations/update-profile";
+} from "../../components/lucide-react";
 import {
   DndContext,
   closestCenter,
@@ -59,13 +61,13 @@ const SortableItem = ({ id, children }) => {
   );
 };
 
-export default function Education({ userData, setUserDetails }) {
+export default function Education({ data, setData, content }) {
   const toast = useToast();
-  const t = getTranslation(userData?.displayLanguage || "en");
-
+  const user = data?.user || {};
+  
   // Initialize education with collapsed: true and localId
   const [education, setEducation] = useState(
-    (userData.education || []).map((e) => ({
+    (user.education || []).map((e) => ({
       ...e,
       collapsed: true,
       localId: e._id || `id-${Math.random().toString(36).substr(2, 9)}`,
@@ -74,7 +76,7 @@ export default function Education({ userData, setUserDetails }) {
 
   // Track original order for comparison
   const [originalOrder, setOriginalOrder] = useState(
-    (userData.education || []).filter((e) => e._id).map((e) => e._id),
+    (user.education || []).filter((e) => e._id).map((e) => e._id),
   );
 
   const [loading, setLoading] = useState(false);
@@ -211,8 +213,9 @@ export default function Education({ userData, setUserDetails }) {
       // Exclude localId and collapsed before sending to server
       const { collapsed, localId, ...itemData } = item;
       const res = await axios.put(
-        "/api/proxy/users/update/education/item",
+        `${SERVER_URL}/api/users/update/education/item`,
         itemData,
+        { withCredentials: true },
       );
 
       const newEducationList = res.data.education;
@@ -231,11 +234,24 @@ export default function Education({ userData, setUserDetails }) {
       });
 
       setEducation(mergedEducation);
-      if (setUserDetails) {
-        setUserDetails((prev) => ({ ...prev, education: newEducationList }));
+      if (setData) {
+        setData((prev) => ({
+          ...prev,
+          user: {
+            ...(prev?.user || {}),
+            education: newEducationList,
+          },
+        }));
       }
+      localStorage.setItem(`data_${data?.user?.username}`, JSON.stringify({
+        ...data,
+        user: {
+          ...(data?.user || {}),
+          education: newEducationList,
+        },
+      }));
 
-      toast.success(t("education.savedSuccessfully"));
+      toast.success(content?.savedSuccessfully);
       setValidationErrors((prev) => {
         const next = { ...prev };
         delete next[index];
@@ -249,8 +265,7 @@ export default function Education({ userData, setUserDetails }) {
         setTimeout(() => setHighlightedId(null), 2000);
       }
     } catch (error) {
-      console.error("Error saving education:", error);
-      toast.error(t("education.errorMessage"));
+      await handleApiError({ error, defaultErrorMsg: content?.errorMessage, toast });
     } finally {
       setSavingIds((prev) => {
         const next = new Set(prev);
@@ -276,7 +291,8 @@ export default function Education({ userData, setUserDetails }) {
     setDeletingIds((prev) => new Set(prev).add(item._id));
     try {
       const res = await axios.delete(
-        `/api/proxy/users/update/education/${item._id}`,
+        `${SERVER_URL}/api/users/update/education/${item._id}`,
+        { withCredentials: true },
       );
 
       const newEducationList = res.data.education;
@@ -289,15 +305,27 @@ export default function Education({ userData, setUserDetails }) {
         })),
       );
 
-      if (setUserDetails) {
-        setUserDetails((prev) => ({ ...prev, education: newEducationList }));
+      if (setData) {
+        setData((prev) => ({
+          ...prev,
+          user: {
+            ...(prev?.user || {}),
+            education: newEducationList,
+          },
+        }));
       }
+      localStorage.setItem(`data_${data?.user?.username}`, JSON.stringify({
+        ...data,
+        user: {
+          ...(data?.user || {}),
+          education: newEducationList,
+        },
+      }));
       toast.success(
-        t("education.deletedSuccessfully") || "Deleted successfully",
+        content?.deletedSuccessfully || "Deleted successfully",
       );
     } catch (error) {
-      console.error("Error deleting education:", error);
-      toast.error(t("education.errorMessage"));
+      await handleApiError({ error, defaultErrorMsg: content?.errorMessage, toast });
     } finally {
       setDeletingIds((prev) => {
         const next = new Set(prev);
@@ -317,32 +345,46 @@ export default function Education({ userData, setUserDetails }) {
 
       if (educationWithIds.length !== education.length) {
         toast.warning(
-          t("education.saveNewItemsFirst") || "Please save new items first",
+          content?.saveNewItemsFirst || "Please save new items first",
         );
         setLoading(false);
         return;
       }
 
-      await axios.put(`/api/proxy/users/update/education/order`, {
-        education: educationWithIds,
-      });
+      await axios.put(
+        `${SERVER_URL}/api/users/update/education/order`,
+        {
+          education: educationWithIds,
+        },
+        { withCredentials: true },
+      );
 
       // Update global state
-      if (setUserDetails) {
-        setUserDetails((prev) => ({
+      const orderedEducation = education.map(({ collapsed, localId, ...rest }) => rest);
+      if (setData) {
+        setData((prev) => ({
           ...prev,
-          education: education.map(({ collapsed, localId, ...rest }) => rest),
+          user: {
+            ...(prev?.user || {}),
+            education: orderedEducation,
+          },
         }));
       }
+      localStorage.setItem(`data_${data?.user?.username}`, JSON.stringify({
+        ...data,
+        user: {
+          ...(data?.user || {}),
+          education: orderedEducation,
+        },
+      }));
 
       // Update original order after successful save
       const newOrder = education.filter((e) => e._id).map((e) => e._id);
       setOriginalOrder(newOrder);
 
-      toast.success(t("education.orderSaved") || "Order saved");
+      toast.success(content?.orderSaved || "Order saved");
     } catch (error) {
-      console.error("Error updating order:", error);
-      toast.error(t("education.errorMessage"));
+      await handleApiError({ error, defaultErrorMsg: content?.errorMessage, toast });
     } finally {
       setLoading(false);
     }
@@ -351,10 +393,10 @@ export default function Education({ userData, setUserDetails }) {
   return (
     <div
       className="space-y-4"
-      dir={userData?.displayLanguage === "ar" ? "rtl" : "ltr"}
+      dir={user?.displayLanguage === "ar" ? "rtl" : "ltr"}
     >
       <h3 className="text-lg font-bold text-gray-800">
-        🎓 {t("education.title")}
+        🎓 {content?.title}
       </h3>
 
       <div className="bg-gradient-to-br from-blue-50 to-purple-50 p-2 md:p-4 rounded-xl border border-blue-200 space-y-3">
@@ -410,7 +452,7 @@ export default function Education({ userData, setUserDetails }) {
                           <div className="w-full">
                             <input
                               type="text"
-                              placeholder={t("education.school")}
+                              placeholder={content?.school}
                               value={edu.school}
                               maxLength={100}
                               onChange={(e) =>
@@ -428,7 +470,7 @@ export default function Education({ userData, setUserDetails }) {
                             {validationErrors[index]?.school && (
                               <p className="text-red-500 text-[8px] sm:text-xs mt-0.5 sm:mt-1.5 flex items-center gap-1 font-medium animate-in slide-in-from-top-1">
                                 <AlertCircle className="w-2.5 h-2.5 sm:w-[14px] sm:h-[14px]" />
-                                {t("education.schoolRequired") ||
+                                {content?.schoolRequired ||
                                   "School is required"}
                               </p>
                             )}
@@ -442,8 +484,8 @@ export default function Education({ userData, setUserDetails }) {
                             className={`p-0.5 sm:p-2 rounded-lg transition-colors flex items-center gap-1 sm:gap-2 text-[8px] sm:text-sm font-medium ${edu.collapsed ? "bg-blue-50 text-blue-700 hover:bg-blue-100" : "bg-gray-100 text-gray-700 hover:bg-gray-200"}`}
                             title={
                               edu.collapsed
-                                ? t("education.edit")
-                                : t("education.collapse") || "Collapse"
+                                ? content?.edit
+                                : content?.collapse || "Collapse"
                             }
                           >
                             {edu.collapsed ? (
@@ -453,8 +495,8 @@ export default function Education({ userData, setUserDetails }) {
                             )}
                             <span className="hidden md:inline">
                               {edu.collapsed
-                                ? t("education.edit")
-                                : t("education.close") || "Close"}
+                                ? content?.edit
+                                : content?.close || "Close"}
                             </span>
                           </button>
 
@@ -465,7 +507,7 @@ export default function Education({ userData, setUserDetails }) {
                             onClick={() => moveItemUp(index)}
                             disabled={index === 0}
                             className="p-0.5 sm:p-1.5 hover:bg-gray-200 rounded-lg transition-colors disabled:opacity-30 disabled:cursor-not-allowed hidden sm:block"
-                            title={t("education.moveUp") || "Move Up"}
+                            title={content?.moveUp || "Move Up"}
                           >
                             <ArrowUp className="w-2.5 h-2.5 sm:w-[16px] sm:h-[16px] text-gray-600" />
                           </button>
@@ -474,7 +516,7 @@ export default function Education({ userData, setUserDetails }) {
                             onClick={() => moveItemDown(index)}
                             disabled={index === education.length - 1}
                             className="p-0.5 sm:p-1.5 hover:bg-gray-200 rounded-lg transition-colors disabled:opacity-30 disabled:cursor-not-allowed hidden sm:block"
-                            title={t("education.moveDown") || "Move Down"}
+                            title={content?.moveDown || "Move Down"}
                           >
                             <ArrowDown className="w-2.5 h-2.5 sm:w-[16px] sm:h-[16px] text-gray-600" />
                           </button>
@@ -482,7 +524,7 @@ export default function Education({ userData, setUserDetails }) {
                             type="button"
                             onClick={() => setItemToDelete(index)}
                             className="p-0.5 sm:p-1.5 hover:bg-red-100 rounded-lg transition-colors text-red-500 ml-0.5 sm:ml-1"
-                            title={t("education.delete")}
+                            title={content?.delete}
                             disabled={deletingIds.has(edu._id)}
                           >
                             {deletingIds.has(edu._id) ? (
@@ -502,7 +544,7 @@ export default function Education({ userData, setUserDetails }) {
                           <div>
                             <input
                               type="text"
-                              placeholder={t("education.degree")}
+                              placeholder={content?.degree}
                               value={edu.degree || ""}
                               maxLength={100}
                               onChange={(e) =>
@@ -519,7 +561,7 @@ export default function Education({ userData, setUserDetails }) {
                             {validationErrors[index]?.degree && (
                               <p className="text-red-500 text-[9px] sm:text-xs mt-1 sm:mt-1.5 flex items-center gap-1 sm:gap-1.5 font-medium animate-in slide-in-from-top-1">
                                 <AlertCircle className="w-3 h-3 sm:w-[14px] sm:h-[14px]" />
-                                {t("education.degreeRequired") ||
+                                {content?.degreeRequired ||
                                   "Degree is required"}
                               </p>
                             )}
@@ -528,7 +570,7 @@ export default function Education({ userData, setUserDetails }) {
                           <div>
                             <input
                               type="text"
-                              placeholder={t("education.field")}
+                              placeholder={content?.field}
                               value={edu.field || ""}
                               maxLength={100}
                               onChange={(e) =>
@@ -545,7 +587,7 @@ export default function Education({ userData, setUserDetails }) {
                             {validationErrors[index]?.field && (
                               <p className="text-red-500 text-[9px] sm:text-xs mt-1 sm:mt-1.5 flex items-center gap-1 sm:gap-1.5 font-medium animate-in slide-in-from-top-1">
                                 <AlertCircle className="w-3 h-3 sm:w-[14px] sm:h-[14px]" />
-                                {t("education.fieldRequired") ||
+                                {content?.fieldRequired ||
                                   "Field is required"}
                               </p>
                             )}
@@ -555,7 +597,7 @@ export default function Education({ userData, setUserDetails }) {
                             <div>
                               <input
                                 type="text"
-                                placeholder={t("education.startYear")}
+                                placeholder={content?.startYear}
                                 value={edu.startYear || ""}
                                 maxLength={20}
                                 onChange={(e) =>
@@ -572,7 +614,7 @@ export default function Education({ userData, setUserDetails }) {
                               {validationErrors[index]?.startYear && (
                                 <p className="text-red-500 text-[9px] sm:text-xs mt-1 sm:mt-1.5 flex items-center gap-1 sm:gap-1.5 font-medium animate-in slide-in-from-top-1">
                                   <AlertCircle className="w-3 h-3 sm:w-[14px] sm:h-[14px]" />
-                                  {t("education.startYearRequired") ||
+                                  {content?.startYearRequired ||
                                     "Start year is required"}
                                 </p>
                               )}
@@ -581,7 +623,7 @@ export default function Education({ userData, setUserDetails }) {
                             <div>
                               <input
                                 type="text"
-                                placeholder={t("education.endYear")}
+                                placeholder={content?.endYear}
                                 maxLength={20}
                                 value={edu.endYear || ""}
                                 onChange={(e) =>
@@ -598,7 +640,7 @@ export default function Education({ userData, setUserDetails }) {
                               {validationErrors[index]?.endYear && (
                                 <p className="text-red-500 text-[9px] sm:text-xs mt-1 sm:mt-1.5 flex items-center gap-1 sm:gap-1.5 font-medium animate-in slide-in-from-top-1">
                                   <AlertCircle className="w-3 h-3 sm:w-[14px] sm:h-[14px]" />
-                                  {t("education.endYearRequired") ||
+                                  {content?.endYearRequired ||
                                     "End year is required"}
                                 </p>
                               )}
@@ -617,7 +659,7 @@ export default function Education({ userData, setUserDetails }) {
                               ) : (
                                 <CheckCheck className="w-3 h-3 sm:w-4 sm:h-4" />
                               )}
-                              {t("education.save") || "Save"}
+                              {content?.save || "Save"}
                             </button>
                           </div>
                         </div>
@@ -648,7 +690,7 @@ export default function Education({ userData, setUserDetails }) {
           className={`w-full text-white py-1.5 sm:py-2 rounded-lg flex items-center justify-center gap-2 transition-all duration-300 mt-2 text-xs sm:text-base ${education.length >= 10 ? "bg-gray-400 cursor-not-allowed" : "bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700"}`}
         >
           <Plus className="w-4 h-4 sm:w-[18px] sm:h-[18px]" />{" "}
-          {education.length >= 10 ? t("education.maxLimit") : t("education.addEducation")}
+          {education.length >= 10 ? content?.maxLimit : content?.addEducation}
         </button>
       </div>
 
@@ -676,10 +718,10 @@ export default function Education({ userData, setUserDetails }) {
                   size={20}
                   className="animate-spin w-4 h-4 sm:w-5 sm:h-5"
                 />{" "}
-                {t("education.saving")}
+                {content?.saving}
               </>
             ) : (
-              `💾 ${t("education.saveOrder") || "Save Order"}`
+              `💾 ${content?.saveOrder || "Save Order"}`
             )}
           </button>
         </div>
@@ -697,7 +739,7 @@ export default function Education({ userData, setUserDetails }) {
               <button
                 onClick={() => setItemToDelete(null)}
                 className="absolute top-4 right-4 text-gray-400 hover:text-gray-600 transition p-1 rounded-full hover:bg-gray-100"
-                title={t("education.close") || "Close"}
+                title={content?.close || "Close"}
               >
                 <X className="w-5 h-5" />
               </button>
@@ -710,13 +752,13 @@ export default function Education({ userData, setUserDetails }) {
                 <div className="text-gray-600 mb-6 text-base leading-relaxed">
                   <div className="flex flex-col gap-2">
                     <span className="font-semibold text-gray-800">
-                      {t("education.deleteConfirm") ||
+                      {content?.deleteConfirm ||
                         "Are you sure you want to delete this education?"}
                     </span>
                     <span className="font-bold text-black border-t pt-2 mt-1 break-all">
                       "
                       {education[itemToDelete]?.school ||
-                        t("education.thisEducation") ||
+                        content?.thisEducation ||
                         "this education"}
                       "
                     </span>
@@ -729,14 +771,14 @@ export default function Education({ userData, setUserDetails }) {
                   onClick={() => setItemToDelete(null)}
                   className="flex-1 px-4 py-2.5 bg-gray-200 hover:bg-gray-300 text-gray-800 font-bold rounded-lg transition-all duration-200"
                 >
-                  {t("education.cancel") || "Cancel"}
+                  {content?.cancel || "Cancel"}
                 </button>
                 <button
                   onClick={confirmDelete}
                   className="flex-1 px-4 py-2.5 bg-red-600 hover:bg-red-700 text-white font-medium rounded-lg shadow-md transition duration-200 flex items-center justify-center gap-2"
                 >
                   <Trash2 size={18} />
-                  <span>{t("education.delete") || "Delete"}</span>
+                  <span>{content?.delete || "Delete"}</span>
                 </button>
               </div>
             </div>

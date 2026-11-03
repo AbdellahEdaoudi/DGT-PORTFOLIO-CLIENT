@@ -1,6 +1,8 @@
 "use client"
 import React, { useState, useEffect } from 'react'
-import axios from 'axios'
+import axios from 'axios';
+import { handleApiError } from "../../utils/apiErrorHandler";
+const SERVER_URL = process.env.NEXT_PUBLIC_SERVER_URL;
 import { useToast } from '../../components/Toast'
 import {
     ArrowUp,
@@ -16,7 +18,7 @@ import {
     FolderOpen,
     Layers,
     CheckCircle
-} from '../../components/Icons'
+} from '../../components/lucide-react'
 import {
     DndContext,
     closestCenter,
@@ -149,14 +151,13 @@ function SortableSectionItem({ id, index, label, moveUp, moveDown, isFirst, isLa
         </div>
     )
 }
-import { getTranslation } from '../../translations/update-profile'
 import DragTutorial from './DragTutorial'
 
-export default function SectionOrdering({ userData, setUserDetails }) {
+export default function SectionOrdering({ data, setData, content }) {
     const toast = useToast()
-    const t = getTranslation(userData?.displayLanguage || 'en')
-    const [order, setOrder] = useState(userData?.sectionOrder && userData.sectionOrder.length > 0 ? userData.sectionOrder : DEFAULT_ORDER)
-    const [originalOrder, setOriginalOrder] = useState(userData?.sectionOrder && userData.sectionOrder.length > 0 ? userData.sectionOrder : DEFAULT_ORDER)
+    const user = data?.user || {}
+    const [order, setOrder] = useState(user?.sectionOrder && user.sectionOrder.length > 0 ? user.sectionOrder : DEFAULT_ORDER)
+    const [originalOrder, setOriginalOrder] = useState(user?.sectionOrder && user.sectionOrder.length > 0 ? user.sectionOrder : DEFAULT_ORDER)
     const [loading, setLoading] = useState(false)
     const [showTutorial, setShowTutorial] = useState(true)
     const [activeMovedItem, setActiveMovedItem] = useState(null)
@@ -186,12 +187,12 @@ export default function SectionOrdering({ userData, setUserDetails }) {
     )
 
     useEffect(() => {
-        const currentOrder = userData?.sectionOrder && userData.sectionOrder.length > 0 ? userData.sectionOrder : DEFAULT_ORDER
+        const currentOrder = user?.sectionOrder && user.sectionOrder.length > 0 ? user.sectionOrder : DEFAULT_ORDER
         const missing = DEFAULT_ORDER.filter(item => !currentOrder.includes(item))
         const finalOrder = missing.length > 0 ? [...currentOrder, ...missing] : currentOrder
         setOrder(finalOrder)
         setOriginalOrder(finalOrder)
-    }, [userData])
+    }, [user?.sectionOrder])
 
     const handleDragEnd = (event) => {
         const { active, over } = event
@@ -238,15 +239,27 @@ export default function SectionOrdering({ userData, setUserDetails }) {
     const saveOrder = async () => {
         setLoading(true)
         try {
-            await axios.put('/api/proxy/users/update/section-order', { sectionOrder: order })
-            if (setUserDetails) {
-                setUserDetails(prev => ({ ...prev, sectionOrder: order }))
+            await axios.put(`${SERVER_URL}/api/users/update/section-order`, { sectionOrder: order }, { withCredentials: true })
+            if (setData) {
+                setData(prev => ({
+                    ...prev,
+                    user: {
+                        ...(prev?.user || {}),
+                        sectionOrder: order
+                    }
+                }))
             }
+            localStorage.setItem(`data_${data?.user?.username}`, JSON.stringify({
+                ...data,
+                user: {
+                    ...(data?.user || {}),
+                    sectionOrder: order
+                }
+            }))
             setOriginalOrder(order) // Update original order after successful save
-            toast.success(t('sectionOrdering.savedSuccessfully'));
+            toast.success(content?.savedSuccessfully || "Section order saved successfully!");
         } catch (error) {
-            console.error(error)
-            toast.error(t('sectionOrdering.errorMessage'))
+            await handleApiError({ error, defaultErrorMsg: content?.errorMessage || "An error occurred while saving.", toast });
         } finally {
             setLoading(false)
         }
@@ -260,27 +273,27 @@ export default function SectionOrdering({ userData, setUserDetails }) {
 
     const getLabel = (key) => {
         const labels = {
-            services: t('tabs.services'),
-            experience: t('tabs.experience'),
-            skills: t('tabs.skills'),
-            projects: t('tabs.projects'),
-            education: t('tabs.education'),
-            certificates: t('tabs.certificates'),
-            languages: t('tabs.languages')
+            services: content?.tabs?.services || "Services",
+            experience: content?.tabs?.experience || "Experience",
+            skills: content?.tabs?.skills || "Skills",
+            projects: content?.tabs?.projects || "Projects",
+            education: content?.tabs?.education || "Education",
+            certificates: content?.tabs?.certificates || "Certificates",
+            languages: content?.tabs?.languages || "Languages"
         }
         return labels[key] || key
     }
 
     return (
-        <div className="space-y-6" dir={userData?.displayLanguage === 'ar' ? 'rtl' : 'ltr'}>
+        <div className="space-y-6" dir={user?.displayLanguage === 'ar' ? 'rtl' : 'ltr'}>
             <div className="flex items-center justify-between border-b border-gray-100">
                 <div className="space-y-1">
                     <h3 className="text-xs md:text-xl font-bold text-gray-800 flex items-center gap-2">
                         <LayoutList className="text-cyan-600" />
-                        {t('sectionOrdering.title')}
+                        {content?.title || "Section Ordering"}
                     </h3>
                     <p className="text-xs md:text-sm text-gray-500">
-                        {t('sectionOrdering.description')}
+                        {content?.description || "Drag and drop sections to reorder them on your profile."}
                     </p>
                 </div>
             </div>
@@ -333,11 +346,11 @@ export default function SectionOrdering({ userData, setUserDetails }) {
                     >
                         {loading ? (
                             <>
-                                <Loader size={16} className="animate-spin w-3 h-3 sm:w-5 sm:h-5" /> {t('sectionOrdering.saving')}
+                                <Loader size={16} className="animate-spin w-3 h-3 sm:w-5 sm:h-5" /> {content?.saving || "Saving..."}
                             </>
                         ) : (
                             <>
-                                <CheckCheck className="w-3 h-3 sm:w-5 sm:h-5" /> {t('sectionOrdering.save')}
+                                <CheckCheck className="w-3 h-3 sm:w-5 sm:h-5" /> {content?.save || "Save Order"}
                             </>
                         )}
                     </button>

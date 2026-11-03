@@ -2,79 +2,137 @@
   "fullname": "Adam Carter",
   "email": "adam.carter.dev@gmail.com",
   "username": "adam-carter",
-  "phoneNumber": "",
-  "country": "Canada",
-  "category": "Software Developer",
+  "phoneNumber": "+1 (416) 892-4519",
+  "location": "Toronto, Canada",
+  "category": "Senior Full Stack Engineer",
   "urlimage": "https://res.cloudinary.com/dvq120lcn/image/upload/v1725826386/opwxdb0gip8jirbae5ff.jpg",
-  "about": "Software Developer from Canada passionate about building\nperformant, reliable, and elegant web applications. Skilled in\nReact, Next.js, and NestJS, I focus on delivering digital solutions\nthat blend innovation with simplicity.",
-  "bgcolorp": "#050f15",
+  "about": "Senior Full Stack Software Engineer based in Toronto, Canada, with over 6 years of expertise building high-performance, resilient, and accessible web applications. Specializing in modern JavaScript/TypeScript ecosystems (React, Next.js, Node.js, NestJS) and distributed cloud architectures, I am dedicated to crafting clean code, intuitive user experiences, and scalable solutions that drive measurable business impact.",
+  "bgcolor": "#050f15",
+  "theme": 1,
+  "displayLanguage": "en",
   "languages": [
     "English : Native",
-    "French : Intermediate"
+    "French : Professional Working"
   ],
   "services": [
-    "I build fast, secure, and scalable web applications using modern technologies like Next.js and NestJS.",
-    "I design beautiful and responsive interfaces focused on usability and performance.",
-    "I develop APIs, handle integrations, and ensure clean, maintainable backend architectures."
+    "Full-Stack Web Architecture: End-to-end development of high-performance, scalable web applications using Next.js, React, Node.js, and TypeScript.",
+    "Cloud Infrastructure & DevOps: Architecting resilient cloud systems, microservices, containerization with Docker, and CI/CD pipelines on AWS.",
+    "API Design & Systems Integration: Engineering robust REST and GraphQL APIs with rock-solid security, rate limiting, and seamless third-party integrations.",
+    "UI/UX & Performance Optimization: Crafting responsive, accessible, pixel-perfect user interfaces with Tailwind CSS optimized for Core Web Vitals and speed."
   ],
   "skills": [
-    "Frontend: React.js, Next.js, TypeScript, Tailwind CSS",
-    "Backend: Node.js, NestJS, Express.js",
-    "Databases: MongoDB, PostgreSQL",
-    "Tools: Git, Docker, Vercel, Postman",
-    "Soft Skills: Teamwork, Communication, Problem Solving, Attention to Detail"
+    "Frontend: React.js, Next.js, TypeScript, Tailwind CSS, Redux Toolkit, React Query",
+    "Backend: Node.js, Express.js, NestJS, Python, GraphQL, RESTful APIs",
+    "Databases: PostgreSQL, MongoDB, Redis, Prisma ORM, Mongoose",
+    "DevOps & Cloud: AWS (S3, EC2, Lambda), Docker, CI/CD, Kubernetes, Vercel",
+    "Testing & Quality: Jest, Cypress, Microservices, System Architecture, Clean Code"
   ],
   "education": [
     {
       "school": "University of Toronto",
-      "degree": "Bachelor’s Degree",
-      "field": "Computer Science",
-      "startYear": "2018",
-      "endYear": "2022",
-      "_id": {
-        "$oid": "69113126bd7f3000c9495155"
-      }
+      "degree": "Bachelor of Science (B.Sc.)",
+      "field": "Computer Science – Software Engineering Specialist",
+      "startYear": "2015",
+      "endYear": "2019"
     }
   ],
   "experience": [
     {
       "company": "NorthCode Labs",
-      "role": "Software Developer",
-      "description": "● Developed web applications using the MERN stack and NestJS.\n● Designed and integrated RESTful APIs for multiple client projects.\n● Implemented authentication, role-based access, and data security using JWT.\n● Collaborated with UI/UX designers to create high-quality interfaces.\n● Deployed applications on Vercel and AWS for scalability.",
+      "role": "Senior Full Stack Engineer",
+      "description": "- Spearheaded the architectural migration of core SaaS platform to Next.js and NestJS, reducing initial load times by 42%.\n- Designed and scaled secure RESTful and GraphQL APIs handling over 1.5M daily requests with sub-100ms latency.\n- Implemented robust RBAC authorization, JWT authentication protocols, and end-to-end Redis caching strategies.\n- Mentored 6 distributed software engineers, instituted automated CI/CD pipelines, and boosted test coverage from 55% to 92%.",
       "startDate": "Jan 2023",
-      "endDate": "Present",
-      "_id": {
-        "$oid": "69113126bd7f3000c9495156"
-      }
+      "endDate": "Present"
+    },
+    {
+      "company": "Apex Digital Solutions",
+      "role": "Full Stack Developer",
+      "description": "- Engineered responsive client-facing web applications using React, TypeScript, Node.js, and PostgreSQL.\n- Built real-time collaborative workspace features utilizing WebSockets, reducing synchronization delays by 60%.\n- Streamlined database query execution and index optimization, cutting server response bottlenecks by 35%.\n- Collaborated closely with product managers and UX teams to deliver 12 major feature rollouts on schedule.",
+      "startDate": "Jun 2021",
+      "endDate": "Dec 2022"
+    },
+    {
+      "company": "Vanguard Tech Inc.",
+      "role": "Frontend Developer",
+      "description": "- Developed modular, reusable design system components using React and Tailwind CSS across 4 client portals.\n- Enhanced web accessibility (WCAG 2.1 AA compliant) and increased mobile engagement metrics by 28%.\n- Integrated third-party analytics, payment gateways (Stripe), and transactional email workflows.",
+      "startDate": "Sep 2019",
+      "endDate": "May 2021"
     }
   ],
   "projects": [
     {
-      "title": "TaskFlow – Productivity Dashboard",
-      "description": "TaskFlow is a productivity dashboard that helps teams and individuals organize their tasks, track progress, and manage time efficiently...",
+      "title": "TaskFlow – Enterprise Productivity & Collaboration Suite",
+      "description": "An enterprise-grade task management ecosystem featuring real-time kanban boards, automated workflow triggers, sprint analytics, and role-based workspace permissions. Built with Next.js, NestJS, and Redis, serving over 10,000 active team workspaces.",
       "link": "https://github.com/adamcarterdev/taskflow",
-      "image": "https://images.unsplash.com/photo-1556761175-5973dc0f32e7",
+      "image": "https://images.unsplash.com/photo-1556761175-5973dc0f32e7?w=1000&auto=format&fit=crop&q=80",
       "technologies": [
         "Next.js",
         "NestJS",
-        "MongoDB",
-        "JWT",
+        "TypeScript",
+        "PostgreSQL",
+        "Redis",
         "Tailwind CSS",
-        "Chart.js"
+        "Docker"
       ],
       "startDate": "Apr 2024",
-      "endDate": "Aug 2024",
-      "_id": {
-        "$oid": "69113126bd7f3000c9495157"
-      }
+      "endDate": "Sep 2024"
+    },
+    {
+      "title": "DevPulse – Developer Performance & Health Dashboard",
+      "description": "A developer analytics hub that aggregates GitHub commits, PR reviews, CI/CD pipeline metrics, and system uptime into actionable executive insights. Features customizable widgets and real-time webhook notifications.",
+      "link": "https://github.com/adamcarterdev/devpulse",
+      "image": "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1000&auto=format&fit=crop&q=80",
+      "technologies": [
+        "React",
+        "Node.js",
+        "Express",
+        "MongoDB",
+        "Chart.js",
+        "Tailwind CSS"
+      ],
+      "startDate": "Jan 2024",
+      "endDate": "Mar 2024"
+    },
+    {
+      "title": "NovaPay – Modern Multi-Currency Payment Gateway",
+      "description": "A secure, resilient checkout platform with automated invoice generation, webhook verification, multi-currency conversion, and fraud risk detection powered by Stripe and modern cryptography.",
+      "link": "https://github.com/adamcarterdev/novapay",
+      "image": "https://images.unsplash.com/photo-1559526324-4b87b5e36e44?w=1000&auto=format&fit=crop&q=80",
+      "technologies": [
+        "Next.js",
+        "TypeScript",
+        "PostgreSQL",
+        "Prisma",
+        "Stripe API",
+        "Tailwind CSS"
+      ],
+      "startDate": "Jul 2023",
+      "endDate": "Nov 2023"
+    }
+  ],
+  "certificates": [
+    {
+      "title": "AWS Certified Solutions Architect – Associate",
+      "description": "Amazon Web Services (AWS) credential validating expertise in designing distributed, scalable, and fault-tolerant cloud architectures.",
+      "cfimage": "/certificates/aws-certified.jpg"
+    },
+    {
+      "title": "Meta Certified Front-End Developer Specialization",
+      "description": "Advanced credential covering React architecture, UI/UX engineering, web accessibility (WCAG), and performance optimization.",
+      "cfimage": "/certificates/meta-frontend.jpg"
+    },
+    {
+      "title": "MongoDB Certified Developer Associate",
+      "description": "Demonstrated mastery in schema design, aggregation pipelines, performance indexing, and distributed data modeling.",
+      "cfimage": "/certificates/mongodb-certified.jpg"
     }
   ],
   "socials": {
     "github": "https://github.com/adamcarterdev",
     "linkedin": "https://www.linkedin.com/in/adamcarterdev",
+    "twitter": "https://twitter.com/adamcarterdev",
     "facebook": "",
     "instagram": "",
-    "twitter": "https://twitter.com/adamcarterdev",
     "youtube": "",
     "telegram": "",
     "snapchat": "",
@@ -83,11 +141,13 @@
     "reddit": "",
     "twitch": ""
   },
-  "__v": 0,
-  "updatedAt": {
-    "$date": "2025-11-19T14:47:58.233Z"
-  },
-  "createdAt": {
-    "$date": "2025-11-19T14:47:57.256Z"
-  }
+  "sectionOrder": [
+    "services",
+    "experience",
+    "skills",
+    "projects",
+    "education",
+    "certificates",
+    "languages"
+  ]
 }

@@ -20,9 +20,18 @@ import SectionOrdering from "./components/SectionOrdering"
 import { getTranslation } from "../translations/update-profile"
 
 export default function UpdateProfilePage() {
-  const { EmailUser, userLinks, userDetails, setUserDetails, loadingAll } = useContext(MyContext)
+  const { data, setData, loadingAll } = useContext(MyContext)
   const [activeTab, setActiveTab] = useState("displayLanguage")
-  const t = getTranslation(userDetails?.displayLanguage || "en")
+  const [dictionary, setDictionary] = useState(null)
+  const lang = data?.user?.displayLanguage || "en"
+
+  useEffect(() => {
+    const loadTranslation = async () => {
+      const dict = await getTranslation(lang)
+      setDictionary(dict)
+    }
+    loadTranslation()
+  }, [lang])
 
   useEffect(() => {
     const savedTab = localStorage.getItem("activeTab")
@@ -31,24 +40,24 @@ export default function UpdateProfilePage() {
     }
   }, [])
 
-  if (loadingAll || !EmailUser || !userDetails) {
+  if (loadingAll || !data?.user || !dictionary) {
     return <MagicalLoader />
   }
 
   const tabs = [
-    { id: "displayLanguage", label: t("sideTabs.displayLanguage"), component: DisplayLanguage },
-    { id: "about", label: t("sideTabs.about"), component: About },
-    { id: "skills", label: t("sideTabs.skills"), component: Skills },
-    { id: "services", label: t("sideTabs.services"), component: Services },
-    { id: "education", label: t("sideTabs.education"), component: Education },
-    { id: "experience", label: t("sideTabs.experience"), component: Experience },
-    { id: "projects", label: t("sideTabs.projects"), component: Projects },
-    { id: "certificates", label: t("sideTabs.certificates"), component: Certificates },
-    { id: "languages", label: t("sideTabs.languages"), component: Languages },
-    { id: "socials", label: t("sideTabs.socials"), component: Socials },
-    { id: "bgcolor", label: t("sideTabs.bgcolor"), component: Bgcolor },
-    { id: "theme", label: t("sideTabs.theme"), component: Theme },
-    { id: "sectionOrdering", label: t("sideTabs.sectionOrdering"), component: SectionOrdering },
+    { id: "displayLanguage", label: dictionary?.sideTabs?.displayLanguage || "Display Language", component: DisplayLanguage, content: dictionary?.displayLanguage },
+    { id: "about", label: dictionary?.sideTabs?.about || "About", component: About, content: dictionary?.about },
+    { id: "skills", label: dictionary?.sideTabs?.skills || "Skills", component: Skills, content: dictionary?.skills },
+    { id: "services", label: dictionary?.sideTabs?.services || "Services", component: Services, content: dictionary?.services },
+    { id: "education", label: dictionary?.sideTabs?.education || "Education", component: Education, content: dictionary?.education },
+    { id: "experience", label: dictionary?.sideTabs?.experience || "Experience", component: Experience, content: dictionary?.experience },
+    { id: "projects", label: dictionary?.sideTabs?.projects || "Projects", component: Projects, content: dictionary?.projects },
+    { id: "certificates", label: dictionary?.sideTabs?.certificates || "Certificates", component: Certificates, content: dictionary?.certificates },
+    { id: "languages", label: dictionary?.sideTabs?.languages || "Languages", component: Languages, content: dictionary?.languages },
+    { id: "socials", label: dictionary?.sideTabs?.socials || "Socials", component: Socials, content: dictionary?.socials },
+    { id: "bgcolor", label: dictionary?.sideTabs?.bgcolor || "Background Color", component: Bgcolor, content: dictionary?.bgColor },
+    { id: "theme", label: dictionary?.sideTabs?.theme || "Theme", component: Theme, content: dictionary?.theme },
+    { id: "sectionOrdering", label: dictionary?.sideTabs?.sectionOrdering || "Section Ordering", component: SectionOrdering, content: { ...dictionary?.sectionOrdering, tabs: dictionary?.tabs } },
   ]
 
   const currentTab = tabs.find((tab) => tab.id === activeTab)
@@ -56,15 +65,15 @@ export default function UpdateProfilePage() {
 
   return (
     <section>
-      <Header lang={userDetails?.displayLanguage} />
+      <Header lang={data?.user?.displayLanguage} />
       <div
-        style={{ backgroundColor: userDetails.bgcolorp }}
-        dir={userDetails?.displayLanguage === 'ar' ? 'rtl' : 'ltr'}
+        style={{ backgroundColor: data?.user?.bgcolor }}
+        dir={data?.user?.displayLanguage === 'ar' ? 'rtl' : 'ltr'}
         className="flex items-center justify-center pt-4 pb-6 duration-300 min-h-screen"
       >
         <div className="w-full max-w-5xl">
           <div className="md:mx-4 px-2 md:px-8 pb-14 bg-white rounded-2xl shadow-2xl space-y-8 pt-8">
-            <Userinfo userData={userDetails} setUserDetails={setUserDetails} />
+            <Userinfo data={data} setData={setData} content={dictionary?.userInfo} />
             <div className="grid grid-cols-3 md:grid-cols-4 gap-2 mb-8">
               {tabs.map((tab) => (
                 <button
@@ -76,14 +85,14 @@ export default function UpdateProfilePage() {
                   className={`md:px-4 py-2 rounded-lg font-semibold transition-all text-xs md:text-base ${activeTab === tab.id
                     ? "bg-teal-600 text-white"
                     : "bg-gray-200 text-gray-700 hover:bg-gray-300"
-                    } ${userDetails.theme !== 1 && tab.id === "bgcolor" ? "hidden" : ""}`}
+                    } ${data?.user?.theme !== 1 && tab.id === "bgcolor" ? "hidden" : ""}`}
                 >
                   {tab.label}
                 </button>
               ))}
             </div>
             <div className="text-xs md:text-base">
-              {userDetails && CurrentComponent && <CurrentComponent setUserDetails={setUserDetails} userData={userDetails} userLinks={userLinks} />}
+              {data?.user && CurrentComponent && <CurrentComponent data={data} setData={setData} content={currentTab?.content} />}
             </div>
           </div>
         </div>

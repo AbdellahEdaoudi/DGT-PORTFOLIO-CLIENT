@@ -1,169 +1,70 @@
 "use client"
-import axios from 'axios';
-import { useSession } from 'next-auth/react';
-import { createContext, useEffect, useState, useRef } from 'react';
-
+import { createContext, useEffect, useState } from 'react';
 import GlobalLoader from '../components/GlobalLoader';
 
 export const MyContext = createContext();
 
 export const MyProvider = ({ children }) => {
-  const [userDetails, setUserDetails] = useState(null);
-  const [userLinks, setUserLinks] = useState([]);
-  const [userContacts, setUserContacts] = useState([]);
-  const [userPayment, setUserPayment] = useState(null);
-  const { data, status } = useSession()
-  const EmailUser = data?.user?.email || ""
-  const [loadingAll, setLoadingAll] = useState(true);
-
-  const stateRef = useRef({
-    users: null,
-    links: [],
+  const [data, setData] = useState({
+    user: null,
     contacts: [],
     payment: null,
-    lastUpdated: null
   });
+  const [loadingAll, setLoadingAll] = useState(false);
+  const [authInitialized, setAuthInitialized] = useState(false);
 
+  // Sync auth & data from localStorage (data_username)
   useEffect(() => {
-    stateRef.current = {
-      users: userDetails,
-      links: userLinks,
-      contacts: userContacts,
-      payment: userPayment,
-      lastUpdated: stateRef.current.lastUpdated
-    };
-  }, [userDetails, userLinks, userContacts, userPayment]);
-
-  const updateLocalStorage = (key, value) => {
-    if (!EmailUser) return;
-    const newLastUpdated = Date.now();
-    stateRef.current.lastUpdated = newLastUpdated;
-    const currentData = { ...stateRef.current, [key]: value, lastUpdated: newLastUpdated };
-    localStorage.setItem(`appData_${EmailUser}`, JSON.stringify(currentData));
-  };
-
-  const localSetUserDetails = (newData) => {
-    const resolvedData = typeof newData === 'function' ? newData(stateRef.current.users) : newData;
-    setUserDetails(resolvedData);
-    updateLocalStorage('users', resolvedData);
-  };
-
-  const localSetUserLinks = (newData) => {
-    const resolvedData = typeof newData === 'function' ? newData(stateRef.current.links) : newData;
-    setUserLinks(resolvedData);
-    updateLocalStorage('links', resolvedData);
-  };
-
-  const localSetUserContacts = (newData) => {
-    const resolvedData = typeof newData === 'function' ? newData(stateRef.current.contacts) : newData;
-    setUserContacts(resolvedData);
-    updateLocalStorage('contacts', resolvedData);
-  };
-
-  useEffect(() => {
-    const fetchAllData = async () => {
-      try {
-        const cacheKey = `appData_${EmailUser}`;
-        const cachedData = localStorage.getItem(cacheKey);
-
-        let parsed = null;
-        if (cachedData) {
-          parsed = JSON.parse(cachedData);
-          
-          try {
-            const lastUpdateRes = await axios.get(`/api/proxy/last-updated`, {
-              validateStatus: () => true
-            });
-
-            if (lastUpdateRes.status === 401) {
-              window.location.href = "/api/auth/signin";
-              return;
+    const loadUser = () => {
+      if (typeof window !== "undefined") {
+        let loadedData = null;
+        try {
+          const username = localStorage.getItem("username");
+          if (username) {
+            const stored = localStorage.getItem(`data_${username}`);
+            if (stored) {
+              const parsed = JSON.parse(stored);
+              loadedData = parsed?.data ? parsed.data : parsed;
             }
-
-            if (lastUpdateRes.data?.success && lastUpdateRes.data?.lastUpdated) {
-              const serverTime = lastUpdateRes.data.lastUpdated;
-              if (parsed.lastUpdated && parsed.lastUpdated >= serverTime) {
-                setUserDetails(parsed.users || null);
-                setUserLinks(parsed.links || []);
-                setUserContacts(parsed.contacts || []);
-                setUserPayment(parsed.payment || null);
-                stateRef.current.lastUpdated = parsed.lastUpdated;
-                setLoadingAll(false);
-                return; 
-              }
-            }
-          } catch (e) {
-            console.error("Error checking last updated:", e);
           }
-
-          setUserDetails(parsed.users || null);
-          setUserLinks(parsed.links || []);
-          setUserContacts(parsed.contacts || []);
-          setUserPayment(parsed.payment || null);
-          setLoadingAll(false);
+        } catch (e) {
+          console.error("Failed to parse data from localStorage", e);
         }
 
-        const res = await axios.get(`/api/proxy/alldata`, {
-          validateStatus: () => true
-        });
-
-        if (res.status === 401) {
-          window.location.href = "/api/auth/signin";
-          return;
+        if (loadedData && loadedData.user) {
+          setData({
+            user: loadedData.user,
+            contacts: Array.isArray(loadedData.contacts) ? loadedData.contacts : [],
+            payment: loadedData.payment ?? null,
+          });
+        } else {
+          setData({ user: null, contacts: [], payment: null });
         }
-
-        const serverData = {
-          users: res.data.users || null,
-          links: res.data.links || [],
-          contacts: res.data.contacts || [],
-          payment: res.data.payment || null,
-          lastUpdated: Date.now()
-        };
-
-        stateRef.current.lastUpdated = serverData.lastUpdated;
-        setUserDetails(serverData.users);
-        setUserLinks(serverData.links);
-        setUserContacts(serverData.contacts);
-        setUserPayment(serverData.payment);
-
-        localStorage.setItem(cacheKey, JSON.stringify(serverData));
-
-      } catch (error) {
-        console.error("Error fetching your data:", error);
-      } finally {
-        setLoadingAll(false);
+        setAuthInitialized(true);
       }
     };
 
-    if (EmailUser) fetchAllData();
-  }, [EmailUser]);
+    loadUser();
 
-  useEffect(() => {
-    if (status === "loading" || (status === "authenticated" && loadingAll)) {
-      document.body.style.overflow = 'hidden';
-    } else {
-      document.body.style.overflow = 'unset';
-      window.scrollTo(0, 0);
-    }
+    window.addEventListener("auth-change", loadUser);
+    window.addEventListener("storage", loadUser);
 
-    return () => { document.body.style.overflow = 'unset'; }
-  }, [status, loadingAll]);
+    return () => {
+      window.removeEventListener("auth-change", loadUser);
+      window.removeEventListener("storage", loadUser);
+    };
+  }, []);
 
   return (
     <MyContext.Provider
       value={{
-        userDetails,
-        setUserDetails: localSetUserDetails,
-        userPayment,
-        userContacts,
-        setUserContacts: localSetUserContacts,
-        userLinks,
-        setUserLinks: localSetUserLinks,
-        EmailUser,
-        loadingAll
+        data,
+        setData,
+        loadingAll,
+        authInitialized
       }}
     >
-      {(status === "loading" || (status === "authenticated" && loadingAll)) && <GlobalLoader />}
+      {loadingAll && data?.user && <GlobalLoader />}
       {children}
     </MyContext.Provider>
   );

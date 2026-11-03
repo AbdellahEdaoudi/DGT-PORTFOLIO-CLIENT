@@ -1,87 +1,88 @@
 {
-    "navbar": {
-        "features": "Kenmerken",
-        "showcase": "Showcase",
-        "pricing": "Prijzen",
-        "auth": {
-            "signIn": "Inloggen",
-            "signInWithGoogle": "Inloggen met Google",
-            "getStarted": "Starten",
-            "updateProfile": "Profiel bijwerken",
-            "businessLinks": "Zakelijke links",
-            "support": "Ondersteuning",
-            "signOut": "Uitloggen",
-            "customDomain": "Aangepast domein",
-            "payment": "Betaling"
-        }
-    },
-    "hero": {
-        "title_part1": "Jouw Portfolio,",
-        "title_part2": "Verbeterd",
-        "description": "Maak in slechts 5 minuten een professioneel portfolio—zonder programmeerkennis. Laat uw vaardigheden, ervaring en projecten zien in één prachtig portfolio dat recruiters helpt uw profiel snel te begrijpen en uw kansen op uw volgende baan of freelanceopdracht te vergroten.",
-        "free_trial": "30 dagen gratis",
-        "start_building": "Begin met bouwen",
-        "watch_demo": "Bekijk demo"
-    },
-    "features": {
-        "title": "Waarom kiezen voor DGT Portfolio",
-        "subtitle": "Creëer een professioneel portfolio, toon uw vaardigheden en val op bij recruiters — allemaal zonder coderen.",
-        "items": [
-            {
-                "title": "Bouwen zonder coderen",
-                "description": "Maak binnen enkele minuten een professioneel portfolio zonder een enkele regel code te schrijven."
-            },
-            {
-                "title": "Uw eigen portfolio-link",
-                "description": "Krijg een gepersonaliseerd subdomein zoals <strong>uw-naam.mylio.site</strong> en deel het overal."
-            },
-            {
-                "title": "Professionele QR-code",
-                "description": "Genereer een QR-code voor uw portfolio en deel deze direct online of offline."
-            },
-            {
-                "title": "Moderne portfolio thema's",
-                "description": "Kies uit prachtig ontworpen thema's die passen bij uw persoonlijke merk."
-            },
-            {
-                "title": "Overal delen",
-                "description": "Stuur uw portfolio met een enkele link op sociale media, e-mail of sollicitaties."
-            },
-            {
-                "title": "Snel & SEO-geoptimaliseerd",
-                "description": "Laad snel en help uw portfolio ontdekt te worden door zoekmachines."
-            }
-        ]
-    },
-    "pricing": {
-        "title": "Eén betaling. Levenslang Portfolio.",
-        "subtitle": "Creëer uw professionele portfolio, genereer uw CV en blijf voor altijd online — zonder abonnementen of terugkerende kosten.",
-        "recommended": "Beste waarde",
-        "lifetime": {
-            "name": "Levenslang Plan",
-            "description": "Bouw uw portfolio één keer en houd het voor altijd online.",
-            "period": "één keer betalen"
-        },
-        "cta": "Ontgrendel levenslange toegang",
-        "whatsIncluded": "Wat is inbegrepen",
-        "noFees": "Geen abonnement • Geen maandelijkse kosten • Voor altijd van jou",
-        "features": [
-            "Levenslange toegang — eenmalige betaling",
-            "Professionele portfoliowebsite",
-            "Ingebouwde CV-generator",
-            "Eigen portfolio-subdomein",
-            "SEO-geoptimaliseerd voor zichtbaarheid",
-            "Meerdere moderne thema's",
-            "Alle toekomstige updates inbegrepen",
-            "Prioritaire klantenservice"
-        ]
-    },
-    "cta": {
-        "title": "Klaar om je talent te laten zien?",
-        "subtitle": "Sluit u aan bij duizenden makers die vandaag hun droomportfolio bouwen",
-        "button": "Maak uw portfolio"
-    },
-    "footer": {
-        "rights": "Alle rechten voorbehouden."
+  "navbar": {
+    "features": "Kenmerken",
+    "showcase": "Showcase",
+    "pricing": "Prijzen",
+    "auth": {
+      "signIn": "Inloggen",
+      "signInWithGoogle": "Inloggen met Google",
+      "getStarted": "Starten",
+      "updateProfile": "Profiel bijwerken",
+      "businessLinks": "Zakelijke links",
+      "support": "Ondersteuning",
+      "signOut": "Uitloggen",
+      "customDomain": "Aangepast domein",
+      "payment": "Betaling",
+      "register": "Registreren"
     }
+  },
+  "hero": {
+    "title_part1": "Jouw Portfolio,",
+    "title_part2": "Verbeterd",
+    "description": "Maak in slechts 5 minuten een professioneel portfolio—zonder programmeerkennis. Laat uw vaardigheden, ervaring en projecten zien in één prachtig portfolio dat recruiters helpt uw profiel snel te begrijpen en uw kansen op uw volgende baan of freelanceopdracht te vergroten.",
+    "free_trial": "30 dagen gratis",
+    "start_building": "Begin met bouwen",
+    "watch_demo": "Bekijk demo"
+  },
+  "features": {
+    "title": "Waarom kiezen voor Myportfolio",
+    "subtitle": "Creëer een professioneel portfolio, toon uw vaardigheden en val op bij recruiters — allemaal zonder coderen.",
+    "items": [
+      {
+        "title": "Bouwen zonder coderen",
+        "description": "Maak binnen enkele minuten een professioneel portfolio zonder een enkele regel code te schrijven."
+      },
+      {
+        "title": "Uw eigen portfolio-link",
+        "description": "Krijg een gepersonaliseerd subdomein zoals <strong>uw-naam.mylio.site</strong> en deel het overal."
+      },
+      {
+        "title": "Professionele QR-code",
+        "description": "Genereer een QR-code voor uw portfolio en deel deze direct online of offline."
+      },
+      {
+        "title": "Moderne portfolio thema's",
+        "description": "Kies uit prachtig ontworpen thema's die passen bij uw persoonlijke merk."
+      },
+      {
+        "title": "Overal delen",
+        "description": "Stuur uw portfolio met een enkele link op sociale media, e-mail of sollicitaties."
+      },
+      {
+        "title": "Snel & SEO-geoptimaliseerd",
+        "description": "Laad snel en help uw portfolio ontdekt te worden door zoekmachines."
+      }
+    ]
+  },
+  "pricing": {
+    "title": "Eén betaling. Levenslang Portfolio.",
+    "subtitle": "Creëer uw professionele portfolio, genereer uw CV en blijf voor altijd online — zonder abonnementen of terugkerende kosten.",
+    "recommended": "Beste waarde",
+    "lifetime": {
+      "name": "Levenslang Plan",
+      "description": "Bouw uw portfolio één keer en houd het voor altijd online.",
+      "period": "één keer betalen"
+    },
+    "cta": "Ontgrendel levenslange toegang",
+    "whatsIncluded": "Wat is inbegrepen",
+    "noFees": "Geen abonnement • Geen maandelijkse kosten • Voor altijd van jou",
+    "features": [
+      "Levenslange toegang — eenmalige betaling",
+      "Professionele portfoliowebsite",
+      "Ingebouwde CV-generator",
+      "Eigen portfolio-subdomein",
+      "SEO-geoptimaliseerd voor zichtbaarheid",
+      "Meerdere moderne thema's",
+      "Alle toekomstige updates inbegrepen",
+      "Prioritaire klantenservice"
+    ]
+  },
+  "cta": {
+    "title": "Klaar om je talent te laten zien?",
+    "subtitle": "Sluit u aan bij duizenden makers die vandaag hun droomportfolio bouwen",
+    "button": "Maak uw portfolio"
+  },
+  "footer": {
+    "rights": "Alle rechten voorbehouden."
+  }
 }

@@ -2,9 +2,11 @@
 
 import { useState } from "react"
 import { createPortal } from "react-dom"
-import { Search, AlertCircle, Loader, Plus, X } from "../../components/Icons"
+import { Search, AlertCircle, Loader, Plus, X } from "../../components/lucide-react"
 import { useToast } from "../../components/Toast"
-import axios from "axios"
+import axios from "axios";
+import { handleApiError } from "../../utils/apiErrorHandler";
+const SERVER_URL = process.env.NEXT_PUBLIC_SERVER_URL;
 
 export default function PaymentManagement({ data, setData }) {
   const toast = useToast()
@@ -13,26 +15,26 @@ export default function PaymentManagement({ data, setData }) {
   const [loadingDeleteId, setLoadingDeleteId] = useState(null)
   const [loadingUpdateId, setLoadingUpdateId] = useState(null)
   const [showAddModal, setShowAddModal] = useState(false)
-  const [addEmail, setAddEmail] = useState("")
+  const [addUsername, setAddUsername] = useState("")
   const [loadingAdd, setLoadingAdd] = useState(false)
 
   const filteredPayments = data.payment?.filter((item) =>
-    item.useremail?.toLowerCase().includes(searchQuery) ||
+    item.user?.username?.toLowerCase().includes(searchQuery) ||
+    item.user?.fullname?.toLowerCase().includes(searchQuery) ||
     item.status?.toLowerCase().includes(searchQuery)
   )
 
   const deletePayment = async (id) => {
     try {
       setLoadingDeleteId(id)
-      const res = await axios.delete(`/api/proxy/admin/payment/${id}`)
+      const res = await axios.delete(`${SERVER_URL}/api/admin/payment/${id}`, { withCredentials: true })
       setData((prev) => ({
         ...prev,
         payment: prev.payment.filter((item) => item._id !== id),
       }))
       toast.info(res.data?.message || "Payment deleted")
     } catch (err) {
-      console.error(err)
-      toast.error("Error deleting payment")
+      await handleApiError({ error: err, defaultErrorMsg: "Error deleting payment", toast });
     } finally {
       setLoadingDeleteId(null)
     }
@@ -41,7 +43,7 @@ export default function PaymentManagement({ data, setData }) {
   const updatePaymentStatus = async (id) => {
     try {
       setLoadingUpdateId(id)
-      const res = await axios.put(`/api/proxy/admin/payment/${id}`)
+      const res = await axios.put(`${SERVER_URL}/api/admin/payment/${id}`, {}, { withCredentials: true })
       setData((prev) => ({
         ...prev,
         payment: prev.payment.map((item) =>
@@ -50,18 +52,17 @@ export default function PaymentManagement({ data, setData }) {
       }))
       toast.success(res.data?.message || "Payment status updated")
     } catch (err) {
-      console.error(err)
-      toast.error(err.response?.data?.message || "Error updating status")
+      await handleApiError({ error: err, defaultErrorMsg: "Error updating status", toast });
     } finally {
       setLoadingUpdateId(null)
     }
   }
 
   const addPayment = async () => {
-    if (!addEmail.trim()) return toast.error("Please enter a user email")
+    if (!addUsername.trim()) return toast.error("Please enter a username")
     try {
       setLoadingAdd(true)
-      const res = await axios.post(`/api/proxy/admin/payment`, { useremail: addEmail.trim() })
+      const res = await axios.post(`${SERVER_URL}/api/admin/payment`, { username: addUsername.trim() }, { withCredentials: true })
       const newPayment = res.data.payment
       setData((prev) => {
         const exists = prev.payment?.find((item) => item._id === newPayment._id)
@@ -74,10 +75,9 @@ export default function PaymentManagement({ data, setData }) {
       })
       toast.success(res.data.message || "Payment created")
       setShowAddModal(false)
-      setAddEmail("")
+      setAddUsername("")
     } catch (err) {
-      console.error(err)
-      toast.error(err.response?.data?.message || "Error creating payment")
+      await handleApiError({ error: err, defaultErrorMsg: "Error creating payment", toast });
     } finally {
       setLoadingAdd(false)
     }
@@ -110,7 +110,7 @@ export default function PaymentManagement({ data, setData }) {
             <input
               onChange={(e) => setSearchQuery(e.target.value.toLowerCase())}
               type="text"
-              placeholder="Search by email or status..."
+              placeholder="Search by user or status..."
               className="w-full bg-slate-900/50 border border-purple-500/30 rounded-lg pl-9 pr-3 py-2 md:py-1.5 text-white placeholder-gray-500 focus:border-cyan-400/50 focus:outline-none transition text-xs md:text-sm"
             />
           </div>
@@ -122,7 +122,7 @@ export default function PaymentManagement({ data, setData }) {
           <table className="w-full">
             <thead className="bg-slate-950/30 border-b border-purple-500/20">
               <tr>
-                <th className="px-4 py-2.5 text-left text-[10px] md:text-xs font-semibold text-gray-300">Email</th>
+                <th className="px-4 py-2.5 text-left text-[10px] md:text-xs font-semibold text-gray-300">User</th>
                 <th className="px-4 py-2.5 text-left text-[10px] md:text-xs font-semibold text-gray-300">Status</th>
                 <th className="hidden md:table-cell px-4 py-2.5 text-left text-[10px] md:text-xs font-semibold text-gray-300">Amount</th>
                 <th className="hidden lg:table-cell px-4 py-2.5 text-left text-[10px] md:text-xs font-semibold text-gray-300">PayPal Order ID</th>
@@ -137,7 +137,10 @@ export default function PaymentManagement({ data, setData }) {
                 return (
                   <tr key={item._id} className="hover:bg-purple-500/5 transition">
                     <td className="px-4 py-2.5 text-white text-[11px] md:text-sm truncate max-w-[180px] sm:max-w-xs">
-                      {item.useremail.split('@')[0]}
+                      {item.user?.fullname || item.user?.username || "Unknown"}
+                      {item.user?.username && (
+                        <span className="text-gray-500 text-[10px] ml-1.5">@{item.user.username}</span>
+                      )}
                     </td>
                     <td className="px-4 py-2.5">
                       <button
@@ -207,31 +210,31 @@ export default function PaymentManagement({ data, setData }) {
           <div className="bg-slate-900 border border-cyan-500/20 rounded-xl max-w-sm w-full p-5 shadow-2xl">
             <div className="flex justify-between items-center mb-4">
               <h3 className="text-base font-bold text-white">Add Payment</h3>
-              <button onClick={() => { setShowAddModal(false); setAddEmail("") }} className="p-1 hover:bg-slate-800 rounded transition">
+              <button onClick={() => { setShowAddModal(false); setAddUsername("") }} className="p-1 hover:bg-slate-800 rounded transition">
                 <X size={16} className="text-gray-400" />
               </button>
             </div>
             <p className="text-xs text-gray-400 mb-4">
-              Enter the user email to manually grant Lifetime access (as if they paid).
+              Enter the username to manually grant Lifetime access (as if they paid).
             </p>
             <input
-              type="email"
-              value={addEmail}
-              onChange={(e) => setAddEmail(e.target.value)}
+              type="text"
+              value={addUsername}
+              onChange={(e) => setAddUsername(e.target.value)}
               onKeyDown={(e) => e.key === "Enter" && addPayment()}
-              placeholder="user@example.com"
+              placeholder="username"
               className="w-full bg-slate-800 border border-purple-500/30 rounded-lg px-3 py-2 text-white placeholder-gray-500 focus:border-cyan-400/50 focus:outline-none transition text-sm mb-4"
             />
             <div className="flex gap-2">
               <button
-                onClick={() => { setShowAddModal(false); setAddEmail("") }}
+                onClick={() => { setShowAddModal(false); setAddUsername("") }}
                 className="flex-1 px-3 py-2 bg-slate-800 border border-slate-700 rounded-lg text-white hover:bg-slate-700 transition text-xs font-medium"
               >
                 Cancel
               </button>
               <button
                 onClick={addPayment}
-                disabled={loadingAdd || !addEmail.trim()}
+                disabled={loadingAdd || !addUsername.trim()}
                 className="flex-1 px-3 py-2 bg-cyan-500/10 border border-cyan-500/30 rounded-lg text-cyan-400 hover:bg-cyan-500/20 transition text-xs font-bold disabled:opacity-50 flex items-center justify-center gap-1"
               >
                 {loadingAdd ? <Loader size={12} className="animate-spin" /> : "Confirm"}
@@ -257,7 +260,7 @@ export default function PaymentManagement({ data, setData }) {
               </div>
             </div>
             <p className="text-gray-300 text-xs sm:text-sm mb-6 leading-relaxed bg-slate-950/50 p-3 rounded-lg border border-slate-800">
-              Are you sure you want to delete the payment for <span className="text-white font-semibold">{deleteConfirm.useremail}</span>?
+              Are you sure you want to delete the payment for <span className="text-white font-semibold">{deleteConfirm.user?.username || deleteConfirm.user?.fullname || "this user"}</span>?
               This action cannot be undone.
             </p>
             <div className="flex gap-2">

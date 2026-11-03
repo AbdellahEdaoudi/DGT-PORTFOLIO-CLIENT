@@ -1,7 +1,6 @@
 "use client"
 import { useState, useEffect, useMemo } from "react"
-import { Zap, Mail, Briefcase, GraduationCap, Loader, FileDown, Globe, Award, Menu, X, ArrowUp, Wrench, Lightbulb, FolderOpen, Sparkles } from "../Icons"
-import UserLinks from "../portfolio/UserLinks"
+import { Zap, Mail, Briefcase, GraduationCap, Loader, FileDown, Globe, Award, Menu, X, ArrowUp, Wrench, Lightbulb, FolderOpen, Sparkles } from "../lucide-react"
 import QrcodeProfile from "../portfolio/QrcodeProfile"
 import Image from "next/image"
 import Link from "next/link"
@@ -9,10 +8,21 @@ import { getTranslation } from "../../translations/portfolio"
 import ImageModal from "../portfolio/ImageModal"
 import DownloadResume from "../downloadcv/DownloadResume"
 
-export default function Theme5({ userDetails, userLinks }) {
-  const t = getTranslation(userDetails?.displayLanguage || 'en')
+export default function Theme5({ userDetails, content: propContent, t: propT }) {
+  const [content, setContent] = useState(propContent || (typeof propT === 'object' ? propT : {}));
+
+  useEffect(() => {
+    if (propContent) {
+      setContent(propContent);
+      return;
+    }
+    if (typeof propT === 'object' && propT) {
+      setContent(propT);
+      return;
+    }
+    getTranslation(userDetails?.displayLanguage || 'en').then((dict) => setContent(dict || {}));
+  }, [userDetails?.displayLanguage, propContent, propT]);
   const [showQR, setShowQR] = useState(false)
-  const [showUserLinks, setShowUserLinks] = useState(false)
   const [expanded, setExpanded] = useState(false);
   const [selectedImage, setSelectedImage] = useState(null);
   const [isNavOpen, setIsNavOpen] = useState(false);
@@ -72,7 +82,7 @@ export default function Theme5({ userDetails, userLinks }) {
             {/* Toolbar */}
             <div className="flex md:flex-row flex-col justify-between items-center mb-12 gap-4 relative z-20">
               <h1 className="text-white text-2xl font-bold cursor-pointer hover:text-yellow-400 transition">
-                <Link href={"https://mylio.site"}>{t('portfolio')}</Link>
+                <Link href={"https://mylio.site"}>{content?.portfolio}</Link>
               </h1>
               <div className="flex flex-wrap gap-3">
                 {/* Copy Link */}
@@ -82,16 +92,8 @@ export default function Theme5({ userDetails, userLinks }) {
                   onClick={() => setShowQR(true)}
                   className="flex items-center gap-2 px-2 bg-white/10 hover:bg-yellow-500/20 rounded-lg text-white transition-all duration-300 backdrop-blur-md border border-white/10 hover:border-yellow-500/50 cursor-pointer"
                 >
-                  <QrcodeProfile userDetails={userDetails} className="text-white border-none hover:bg-transparent" isOpen={showQR} onClose={() => setShowQR(false)} />
+                  <QrcodeProfile userDetails={userDetails} className="text-white border-none hover:bg-transparent" isOpen={showQR} onClose={() => setShowQR(false)} content={content} />
                 </div>
-                {/* User Links */}
-                {userLinks?.length > 0 && (
-                  <div
-                    onClick={() => setShowUserLinks(true)}
-                    className="flex items-center gap-2 px-2 bg-white/10 hover:bg-yellow-500/20 rounded-lg text-white transition-all duration-300 backdrop-blur-md border border-white/10 hover:border-yellow-500/50 cursor-pointer">
-                    <UserLinks lang={userDetails?.displayLanguage} userLinks={userLinks} className="text-white border-none hover:bg-transparent" isOpen={showUserLinks} onClose={() => setShowUserLinks(false)} />
-                  </div>
-                )}
                 {/* Menu Button in Header */}
                 {activeSectionsCount >= 3 && (
                   <button
@@ -119,13 +121,13 @@ export default function Theme5({ userDetails, userLinks }) {
                       : ["services", "experience", "skills", "projects", "education", "certificates", "languages"];
 
                     const navItems = {
-                      services: { id: "services", label: t('services'), icon: "💼", condition: userDetails?.services?.length > 0 },
-                      experience: { id: "experience", label: t('workExperience'), icon: "⭐", condition: userDetails?.experience?.length > 0 },
-                      skills: { id: "skills", label: t('skills'), icon: "💡", condition: userDetails?.skills?.length > 0 },
-                      projects: { id: "projects", label: t('projects'), icon: "📁", condition: userDetails?.projects?.length > 0 },
-                      education: { id: "education", label: t('education'), icon: "🎓", condition: userDetails?.education?.length > 0 },
-                      certificates: { id: "certificates", label: t('certificates'), icon: "📜", condition: userDetails?.certificates?.length > 0 },
-                      languages: { id: "languages", label: t('languages'), icon: "🌍", condition: userDetails?.languages?.length > 0 },
+                      services: { id: "services", label: content?.services, icon: "💼", condition: userDetails?.services?.length > 0 },
+                      experience: { id: "experience", label: content?.workExperience, icon: "⭐", condition: userDetails?.experience?.length > 0 },
+                      skills: { id: "skills", label: content?.skills, icon: "💡", condition: userDetails?.skills?.length > 0 },
+                      projects: { id: "projects", label: content?.projects, icon: "📁", condition: userDetails?.projects?.length > 0 },
+                      education: { id: "education", label: content?.education, icon: "🎓", condition: userDetails?.education?.length > 0 },
+                      certificates: { id: "certificates", label: content?.certificates, icon: "📜", condition: userDetails?.certificates?.length > 0 },
+                      languages: { id: "languages", label: content?.languages, icon: "🌍", condition: userDetails?.languages?.length > 0 },
                     };
 
                     return sectionOrder
@@ -159,7 +161,7 @@ export default function Theme5({ userDetails, userLinks }) {
 
             <div className="flex flex-col-reverse md:flex-row gap-12 md:items-start items-center justify-between">
               <div className="">
-                <p className="text-yellow-400 font-semibold uppercase tracking-widest mb-3 text-sm">{t('helloIm')}</p>
+                <p className="text-yellow-400 font-semibold uppercase tracking-widest mb-3 text-sm">{content?.helloIm}</p>
                 <h1 className="text-5xl md:text-6xl font-black mb-5">{userDetails?.fullname}</h1>
                 <p className="text-2xl text-yellow-300 font-semibold mb-5 flex items-center gap-2">
                   <Sparkles size={24} className="text-yellow-400" />
@@ -169,21 +171,21 @@ export default function Theme5({ userDetails, userLinks }) {
                 <div className="text-gray-300 mt-4 max-w-lg">
                   <p className="mb-6">{userDetails?.about}</p>
                   <div className="p-4 md:p-6 bg-white/5 backdrop-blur-sm rounded-xl border border-white/10">
-                    {(userDetails.displayEmail || userDetails.email) && (
+                    {(userDetails.email) && (
                       <div className="flex gap-2 items-start">
                         <span className="font-bold text-yellow-400 whitespace-nowrap">Email:</span>
-                        <a href={`mailto:${userDetails.displayEmail || userDetails.email}`} className="text-gray-300 hover:text-yellow-300 transition break-all">{userDetails.displayEmail || userDetails.email}</a>
+                        <a href={`mailto:${userDetails.email}`} className="text-gray-300 hover:text-yellow-300 transition break-all">{userDetails.email}</a>
                       </div>
                     )}
-                    {userDetails.country && (
+                    {userDetails?.location && (
                       <div className="flex gap-2 items-start">
-                        <span className="font-bold text-yellow-400 whitespace-nowrap">{t('country')}:</span>
-                        <span className="text-gray-300">{userDetails.country}</span>
+                        <span className="font-bold text-yellow-400 whitespace-nowrap">{content?.location}:</span>
+                        <span className="text-gray-300">{userDetails.location}</span>
                       </div>
                     )}
                     {userDetails.phoneNumber && (
                       <div className="flex gap-2 items-start">
-                        <span className="font-bold text-yellow-400 whitespace-nowrap">{t('phone')}:</span>
+                        <span className="font-bold text-yellow-400 whitespace-nowrap">{content?.phone}:</span>
                         <span className="text-gray-300">{userDetails.phoneNumber}</span>
                       </div>
                     )}
@@ -193,7 +195,7 @@ export default function Theme5({ userDetails, userLinks }) {
               <div className="relative flex-shrink-0 group">
                 <div className="absolute inset-0 bg-gradient-to-br from-yellow-500/30 to-orange-600/30 rounded-3xl blur-3xl group-hover:blur-2xl transition-all duration-500"></div>
                 <div className="absolute -inset-1 bg-gradient-to-r from-yellow-500 to-orange-600 rounded-3xl opacity-20 group-hover:opacity-40 transition-opacity duration-500"></div>
-                <Image width={320} height={320} priority
+                <Image width={320} height={320} priority loading="eager"
                   src={userDetails.urlimage}
                   alt={userDetails.fullname}
                   className="relative rounded-3xl border-2 border-yellow-500/40 group-hover:border-yellow-500/60 transition-all duration-500 shadow-2xl w-56 h-56 md:w-80 md:h-80 object-cover"
@@ -213,7 +215,7 @@ export default function Theme5({ userDetails, userLinks }) {
                 <section key="services" id="services" className="scroll-mt-24 py-12 border-t border-zinc-800/50">
                   <div className="flex items-center gap-4 mb-8">
                     <Briefcase size={32} className="text-yellow-400" />
-                    <h2 className="text-3xl font-bold">{t('services')}</h2>
+                    <h2 className="text-3xl font-bold">{content?.services}</h2>
                   </div>
                   <div className="grid md:grid-cols-2 gap-6">
                     {userDetails.services.map((service, i) => (
@@ -229,7 +231,7 @@ export default function Theme5({ userDetails, userLinks }) {
                 <section key="experience" id="experience" className="py-12 border-t border-zinc-800/50 scroll-mt-24">
                   <div className="flex items-center gap-4 mb-8">
                     <Briefcase size={32} className="text-yellow-500" />
-                    <h2 className="text-3xl font-bold">{t('workExperience')}</h2>
+                    <h2 className="text-3xl font-bold">{content?.workExperience}</h2>
                   </div>
                   <div className="space-y-6">
                     {userDetails.experience.map((exp, i) => (
@@ -251,7 +253,7 @@ export default function Theme5({ userDetails, userLinks }) {
                             </span>
                           </div>
                           <p className="text-gray-200 font-semibold mb-3 text-lg">{exp.company}</p>
-                          <p className="text-xs text-gray-500 uppercase tracking-wider mb-2">{t('description')}</p>
+                          <p className="text-xs text-gray-500 uppercase tracking-wider mb-2">{content?.description}</p>
                           <p className={`mt-3 p-2 text-gray-300 text-sm whitespace-pre-wrap leading-relaxed border-yellow-500/50  rounded-lg  ${userDetails.displayLanguage === "ar" ? "border-r-4" : "border-l-4"}`}>{exp.description}</p>
                         </div>
                       </div>
@@ -263,7 +265,7 @@ export default function Theme5({ userDetails, userLinks }) {
                 <section key="skills" id="skills" className="py-12 border-t border-zinc-800/50 scroll-mt-24">
                   <div className="flex items-center gap-4 mb-8">
                     <Lightbulb size={32} className="text-yellow-500" />
-                    <h2 className="text-3xl font-bold">{t('skills')}</h2>
+                    <h2 className="text-3xl font-bold">{content?.skills}</h2>
                   </div>
                   <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
                     {userDetails.skills?.map((skill, i) => (
@@ -284,7 +286,7 @@ export default function Theme5({ userDetails, userLinks }) {
                   <div className="max-w-5xl mx-auto">
                     <div className="flex items-center gap-4 mb-8">
                       <FolderOpen size={32} className="text-yellow-500" />
-                      <h2 className="text-3xl font-bold">{t('projects')}</h2>
+                      <h2 className="text-3xl font-bold">{content?.projects}</h2>
                     </div>
                     <div className="space-y-6">
                       {userDetails.projects.map((project, idx) => (
@@ -331,7 +333,7 @@ export default function Theme5({ userDetails, userLinks }) {
                                   className="inline-flex items-center gap-2 px-6 py-2 bg-yellow-600/20 hover:bg-yellow-600/40 border border-yellow-500/50 rounded-lg text-yellow-300 transition-all duration-300 font-medium"
                                 >
                                   <Globe size={18} />
-                                  {t('viewProject')}
+                                  {content?.viewProject}
                                 </a>
                               )}
                             </div>
@@ -346,7 +348,7 @@ export default function Theme5({ userDetails, userLinks }) {
                 <section key="education" id="education" className="py-12 border-t border-zinc-800/50 scroll-mt-24">
                   <div className="flex items-center gap-4 mb-8">
                     <GraduationCap size={32} className="text-yellow-500" />
-                    <h2 className="text-3xl font-bold">{t('education')}</h2>
+                    <h2 className="text-3xl font-bold">{content?.education}</h2>
                   </div>
 
                   <div className="space-y-6">
@@ -382,7 +384,7 @@ export default function Theme5({ userDetails, userLinks }) {
                           {/* Field of study */}
                           {edu.field && (
                             <div className={`${userDetails.displayLanguage === "ar" ? "border-r-4" : "border-l-4"} border-yellow-500/50 p-4 bg-zinc-900/50 rounded-xl mb-3 ${userDetails.displayLanguage === "ar" ? "" : ""}`}>
-                              <p className="text-xs text-gray-500 uppercase tracking-wider mb-2">{t('field')}</p>
+                              <p className="text-xs text-gray-500 uppercase tracking-wider mb-2">{content?.field}</p>
                               <p className="text-sm sm:text-base text-gray-300 leading-relaxed">
                                 {edu.field}
                               </p>
@@ -407,7 +409,7 @@ export default function Theme5({ userDetails, userLinks }) {
                 <section key="certificates" id="certificates" className="py-12 border-t border-zinc-800/50 scroll-mt-24">
                   <div className="flex items-center gap-4 mb-8">
                     <span className="text-2xl">📜</span>
-                    <h2 className="text-3xl font-bold">{t('certificates') || "Certificates"}</h2>
+                    <h2 className="text-3xl font-bold">{content?.certificates || "Certificates"}</h2>
                   </div>
 
                   <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -443,7 +445,7 @@ export default function Theme5({ userDetails, userLinks }) {
                 <section key="languages" id="languages" className="py-12 border-t border-zinc-800/50 scroll-mt-24">
                   <h2 className="flex gap-2 text-3xl sm:text-4xl font-black mb-8">
                     <Globe className="text-yellow-400" size={32} />
-                    {t('languages')}</h2>
+                    {content?.languages}</h2>
                   <div className="flex flex-wrap gap-4">
                     {userDetails.languages.map((lang, i) => (
                       <div
@@ -500,7 +502,7 @@ export default function Theme5({ userDetails, userLinks }) {
                   )
                 )}
             </div>
-            <p className="text-gray-400">© {new Date().getFullYear()} {userDetails.fullname}. {t('allRightsReserved')} ©</p>
+            <p className="text-gray-400">© {new Date().getFullYear()} {userDetails.fullname}. {content?.allRightsReserved} ©</p>
           </div>
         </footer>
       )}
@@ -516,13 +518,13 @@ export default function Theme5({ userDetails, userLinks }) {
           </button>
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6 w-full max-w-5xl mx-auto">
             {[
-              { id: "services", label: t('services'), icon: "💼", condition: userDetails?.services?.length > 0 },
-              { id: "experience", label: t('workExperience'), icon: "⭐", condition: userDetails?.experience?.length > 0 },
-              { id: "skills", label: t('skills'), icon: "💡", condition: userDetails?.skills?.length > 0 },
-              { id: "projects", label: t('projects'), icon: "📁", condition: userDetails?.projects?.length > 0 },
-              { id: "education", label: t('education'), icon: "🎓", condition: userDetails?.education?.length > 0 },
-              { id: "certificates", label: t('certificates'), icon: "📜", condition: userDetails?.certificates?.length > 0 },
-              { id: "languages", label: t('languages'), icon: "🌍", condition: userDetails?.languages?.length > 0 },
+              { id: "services", label: content?.services, icon: "💼", condition: userDetails?.services?.length > 0 },
+              { id: "experience", label: content?.workExperience, icon: "⭐", condition: userDetails?.experience?.length > 0 },
+              { id: "skills", label: content?.skills, icon: "💡", condition: userDetails?.skills?.length > 0 },
+              { id: "projects", label: content?.projects, icon: "📁", condition: userDetails?.projects?.length > 0 },
+              { id: "education", label: content?.education, icon: "🎓", condition: userDetails?.education?.length > 0 },
+              { id: "certificates", label: content?.certificates, icon: "📜", condition: userDetails?.certificates?.length > 0 },
+              { id: "languages", label: content?.languages, icon: "🌍", condition: userDetails?.languages?.length > 0 },
             ]
               .filter(tab => tab.condition)
               .map((tab, index) => (

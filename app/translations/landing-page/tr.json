@@ -1,87 +1,88 @@
 {
-    "navbar": {
-        "features": "Özellikler",
-        "showcase": "Vitrin",
-        "pricing": "Fiyatlandırma",
-        "auth": {
-            "signIn": "Giriş Yap",
-            "signInWithGoogle": "Google ile giriş yap",
-            "getStarted": "Başla",
-            "updateProfile": "Profili Güncelle",
-            "businessLinks": "İş Bağlantıları",
-            "support": "Destek",
-            "signOut": "Çıkış Yap",
-            "customDomain": "Özel Alan Adı",
-            "payment": "Ödeme"
-        }
-    },
-    "hero": {
-        "title_part1": "Portföyünüz,",
-        "title_part2": "Yükseltildi",
-        "description": "Yalnızca 5 dakikada profesyonel bir portföy oluşturun—kodlama gerekmez. Becerilerinizi, deneyimlerinizi ve projelerinizi, işe alım uzmanlarının profilinizi hızla anlamasına yardımcı olan ve bir sonraki iş veya serbest çalışma fırsatınızı yakalama şansınızı artıran güzel bir portföyde sergileyin.",
-        "free_trial": "30 gün ücretsiz",
-        "start_building": "Oluşturmaya Başla",
-        "watch_demo": "Demoyu İzle"
-    },
-    "features": {
-        "title": "Neden DGT Portföyünü Seçmelisiniz?",
-        "subtitle": "Profesyonel bir portföy oluşturun, becerilerinizi sergileyin ve işe alım uzmanlarının dikkatini çekin - üstelik kod yazmadan.",
-        "items": [
-            {
-                "title": "Kod Yazmadan Oluşturun",
-                "description": "Tek bir satır kod yazmadan dakikalar içinde profesyonel bir portföy oluşturun."
-            },
-            {
-                "title": "Kendi Portföy Bağlantınız",
-                "description": "Portföyünüz için <strong>adiniz.mylio.site</strong> gibi kişiselleştirilmiş bir alt alan adı edinin ve her yerde paylaşın."
-            },
-            {
-                "title": "Profesyonel QR Kodu",
-                "description": "Portföyünüz için bir QR kodu oluşturun ve anında çevrimiçi veya çevrimdışı paylaşın."
-            },
-            {
-                "title": "Modern Portföy Temaları",
-                "description": "Kişisel markanıza uygun, güzel tasarlanmış temalar arasından seçim yapın."
-            },
-            {
-                "title": "Her Yerde Paylaşın",
-                "description": "Portföyünüzü sosyal medyada, e-postalarda veya iş başvurularında tek bir bağlantı ile gönderin."
-            },
-            {
-                "title": "Hızlı ve SEO Optimizasyonlu",
-                "description": "Hızlı yüklenir ve portföyünüzün arama motorları tarafından keşfedilmesine yardımcı olur."
-            }
-        ]
-    },
-    "pricing": {
-        "title": "Tek Ödeme. Ömür Boyu Portföy.",
-        "subtitle": "Profesyonel portföyünüzü oluşturun, CV'nizi oluşturun ve abonelik veya tekrarlayan ücretler olmadan sonsuza dek çevrimiçi kalın.",
-        "recommended": "En İyi Fiyat",
-        "lifetime": {
-            "name": "Ömür Boyu Plan",
-            "description": "Portföyünüzü bir kez oluşturun ve sonsuza dek çevrimiçi tutun.",
-            "period": "tek ödeme"
-        },
-        "cta": "Ömür boyu erişimin kilidini aç",
-        "whatsIncluded": "Neler dahil",
-        "noFees": "Abonelik yok • Aylık ücret yok • Sonsuza dek sizin",
-        "features": [
-            "Ömür boyu erişim — tek seferlik ödeme",
-            "Profesyonel portföy web sitesi",
-            "Yerleşik CV oluşturucu",
-            "Özel portföy alt alanı",
-            "SEO optimizasyonlu görünürlük",
-            "Birden fazla modern tema",
-            "Tüm gelecekteki güncellemeler dahil",
-            "Öncelikli müşteri desteği"
-        ]
-    },
-    "cta": {
-        "title": "Yeteneğinizi Sergilemeye Hazır mısınız?",
-        "subtitle": "Bugün hayallerindeki portföyleri oluşturan binlerce yaratıcıya katılın",
-        "button": "Portföyünüzü Oluşturun"
-    },
-    "footer": {
-        "rights": "Tüm hakları saklıdır."
+  "navbar": {
+    "features": "Özellikler",
+    "showcase": "Vitrin",
+    "pricing": "Fiyatlandırma",
+    "auth": {
+      "signIn": "Giriş Yap",
+      "signInWithGoogle": "Google ile giriş yap",
+      "getStarted": "Başla",
+      "updateProfile": "Profili Güncelle",
+      "businessLinks": "İş Bağlantıları",
+      "support": "Destek",
+      "signOut": "Çıkış Yap",
+      "customDomain": "Özel Alan Adı",
+      "payment": "Ödeme",
+      "register": "Kayıt Ol"
     }
+  },
+  "hero": {
+    "title_part1": "Portföyünüz,",
+    "title_part2": "Yükseltildi",
+    "description": "Yalnızca 5 dakikada profesyonel bir portföy oluşturun—kodlama gerekmez. Becerilerinizi, deneyimlerinizi ve projelerinizi, işe alım uzmanlarının profilinizi hızla anlamasına yardımcı olan ve bir sonraki iş veya serbest çalışma fırsatınızı yakalama şansınızı artıran güzel bir portföyde sergileyin.",
+    "free_trial": "30 gün ücretsiz",
+    "start_building": "Oluşturmaya Başla",
+    "watch_demo": "Demoyu İzle"
+  },
+  "features": {
+    "title": "Neden DGT Portföyünü Seçmelisiniz?",
+    "subtitle": "Profesyonel bir portföy oluşturun, becerilerinizi sergileyin ve işe alım uzmanlarının dikkatini çekin - üstelik kod yazmadan.",
+    "items": [
+      {
+        "title": "Kod Yazmadan Oluşturun",
+        "description": "Tek bir satır kod yazmadan dakikalar içinde profesyonel bir portföy oluşturun."
+      },
+      {
+        "title": "Kendi Portföy Bağlantınız",
+        "description": "Portföyünüz için <strong>adiniz.mylio.site</strong> gibi kişiselleştirilmiş bir alt alan adı edinin ve her yerde paylaşın."
+      },
+      {
+        "title": "Profesyonel QR Kodu",
+        "description": "Portföyünüz için bir QR kodu oluşturun ve anında çevrimiçi veya çevrimdışı paylaşın."
+      },
+      {
+        "title": "Modern Portföy Temaları",
+        "description": "Kişisel markanıza uygun, güzel tasarlanmış temalar arasından seçim yapın."
+      },
+      {
+        "title": "Her Yerde Paylaşın",
+        "description": "Portföyünüzü sosyal medyada, e-postalarda veya iş başvurularında tek bir bağlantı ile gönderin."
+      },
+      {
+        "title": "Hızlı ve SEO Optimizasyonlu",
+        "description": "Hızlı yüklenir ve portföyünüzün arama motorları tarafından keşfedilmesine yardımcı olur."
+      }
+    ]
+  },
+  "pricing": {
+    "title": "Tek Ödeme. Ömür Boyu Portföy.",
+    "subtitle": "Profesyonel portföyünüzü oluşturun, CV'nizi oluşturun ve abonelik veya tekrarlayan ücretler olmadan sonsuza dek çevrimiçi kalın.",
+    "recommended": "En İyi Fiyat",
+    "lifetime": {
+      "name": "Ömür Boyu Plan",
+      "description": "Portföyünüzü bir kez oluşturun ve sonsuza dek çevrimiçi tutun.",
+      "period": "tek ödeme"
+    },
+    "cta": "Ömür boyu erişimin kilidini aç",
+    "whatsIncluded": "Neler dahil",
+    "noFees": "Abonelik yok • Aylık ücret yok • Sonsuza dek sizin",
+    "features": [
+      "Ömür boyu erişim — tek seferlik ödeme",
+      "Profesyonel portföy web sitesi",
+      "Yerleşik CV oluşturucu",
+      "Özel portföy alt alanı",
+      "SEO optimizasyonlu görünürlük",
+      "Birden fazla modern tema",
+      "Tüm gelecekteki güncellemeler dahil",
+      "Öncelikli müşteri desteği"
+    ]
+  },
+  "cta": {
+    "title": "Yeteneğinizi Sergilemeye Hazır mısınız?",
+    "subtitle": "Bugün hayallerindeki portföyleri oluşturan binlerce yaratıcıya katılın",
+    "button": "Portföyünüzü Oluşturun"
+  },
+  "footer": {
+    "rights": "Tüm hakları saklıdır."
+  }
 }

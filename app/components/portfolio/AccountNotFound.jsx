@@ -1,35 +1,41 @@
 "use client"
 import "flag-icons/css/flag-icons.min.css"
 import { useState, useEffect } from 'react'
-import { ArrowLeft, LifeBuoy, User, CreditCard, Globe, ChevronDown } from "../Icons"
+import { ArrowLeft, LifeBuoy, User, CreditCard, Globe, ChevronDown } from "../lucide-react"
 import Link from "next/link"
 import { getTranslation } from "../../translations/others"
 
 const LANGUAGES = [
-  { code: "en", label: "English", country: "gb" },
-  { code: "fr", label: "Français", country: "fr" },
-  { code: "ar", label: "العربية", country: "sa" },
-  { code: "de", label: "Deutsch", country: "de" },
-  { code: "ru", label: "Русский", country: "ru" },
-  { code: "es", label: "Español", country: "es" },
-  { code: "pt", label: "Português", country: "pt" },
-  { code: "nl", label: "Nederlands", country: "nl" },
-  { code: "it", label: "Italiano", country: "it" },
-  { code: "vi", label: "Tiếng Việt", country: "vn" },
-  { code: "sv", label: "Svenska", country: "se" },
-  { code: "hi", label: "हिंदी", country: "in" },
-  { code: "tr", label: "Türkçe", country: "tr" },
-  { code: "pl", label: "Polski", country: "pl" },
-  { code: "id", label: "Bahasa Indonesia", country: "id" },
-  { code: "ko", label: "한국어", country: "kr" },
-  { code: "zh", label: "中文", country: "cn" },
-  { code: "ja", label: "日本語", country: "jp" },
+  { code: "en", label: "English", flag: "gb" },
+  { code: "fr", label: "Français", flag: "fr" },
+  { code: "ar", label: "العربية", flag: "sa" },
+  { code: "de", label: "Deutsch", flag: "de" },
+  { code: "ru", label: "Русский", flag: "ru" },
+  { code: "es", label: "Español", flag: "es" },
+  { code: "pt", label: "Português", flag: "pt" },
+  { code: "nl", label: "Nederlands", flag: "nl" },
+  { code: "it", label: "Italiano", flag: "it" },
+  { code: "vi", label: "Tiếng Việt", flag: "vn" },
+  { code: "sv", label: "Svenska", flag: "se" },
+  { code: "hi", label: "हिंदी", flag: "in" },
+  { code: "tr", label: "Türkçe", flag: "tr" },
+  { code: "pl", label: "Polski", flag: "pl" },
+  { code: "id", label: "Bahasa Indonesia", flag: "id" },
+  { code: "ko", label: "한국어", flag: "kr" },
+  { code: "zh", label: "中文", flag: "cn" },
+  { code: "ja", label: "日本語", flag: "jp" },
 ];
 
 export default function AccountNotFound() {
   const [lang, setLang] = useState('en')
   const [isLangOpen, setIsLangOpen] = useState(false)
-  const t = getTranslation(lang)
+  const [dictionary, setDictionary] = useState({})
+
+  useEffect(() => {
+    getTranslation(lang).then((dict) => setDictionary(dict || {}));
+  }, [lang])
+
+  const content = dictionary?.accountNotFound || {};
 
   const [particles, setParticles] = useState([])
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 })
@@ -120,7 +126,7 @@ export default function AccountNotFound() {
             className="w-full flex items-center justify-between bg-[#1e2124]/80 text-white border border-[#00a896]/30 hover:border-[#00a896] rounded-xl py-2.5 pl-3 pr-3 focus:outline-none focus:ring-2 focus:ring-[#00a896]/50 transition-all duration-300 backdrop-blur-md shadow-lg text-sm font-medium cursor-pointer"
           >
             <div className="flex items-center gap-2">
-              <span className={`fi fi-${LANGUAGES.find(l => l.code === lang)?.country} text-lg rounded-[2px] shadow-sm`}></span>
+              <span className={`fi fi-${LANGUAGES.find(l => l.code === lang)?.flag} text-lg rounded-[2px] shadow-sm`}></span>
               <span>
                 {LANGUAGES.find(l => l.code === lang)?.label}
               </span>
@@ -140,7 +146,7 @@ export default function AccountNotFound() {
                   className={`px-4 py-2 text-sm text-gray-200 hover:bg-[#00a896]/20 hover:text-white cursor-pointer transition-colors flex items-center justify-between ${lang === language.code ? 'bg-[#00a896]/10 text-[#00a896]' : ''}`}
                 >
                   <span className="flex items-center gap-3">
-                    <span className={`fi fi-${language.country} text-lg rounded-[2px] shadow-sm`}></span>
+                    <span className={`fi fi-${language.flag} text-lg rounded-[2px] shadow-sm`}></span>
                     {language.label}
                   </span>
                   {lang === language.code && <div className="h-1.5 w-1.5 rounded-full bg-[#00a896]" />}
@@ -157,27 +163,27 @@ export default function AccountNotFound() {
               <User className="text-[#1e2124] w-16 h-16" />
             </div>
           </div>
-          <h1 className="text-4xl font-bold text-white mb-4">{t('accountNotFound.title')}</h1>
+          <h1 className="text-4xl font-bold text-white mb-4">{content.title}</h1>
           <p className="text-gray-400 text-lg mb-8">
-            {t('accountNotFound.description')}
+            {content.description}
           </p>
           <div className="space-y-4">
             <Link href={"https://mylio.site/payment"} className="w-full flex items-center justify-center gap-1 bg-gradient-to-r from-purple-600 to-cyan-600 hover:from-purple-500 hover:to-cyan-500 text-white py-2 px-4 rounded-md transition-all duration-300 transform hover:scale-105">
-              <CreditCard className="mr-2 h-4 w-4" /> {t('accountNotFound.payment')}
+              <CreditCard className="mr-2 h-4 w-4" /> {content.payment}
             </Link>
 
             <Link href={"https://mylio.site/" + lang} className="w-full flex items-center justify-center gap-1 bg-[#00a896] hover:bg-[#008080] text-white py-2 px-4 rounded-md transition-all duration-300 transform hover:scale-105">
-              <ArrowLeft className="mr-2 h-4 w-4" /> {t('accountNotFound.returnHome')}
+              <ArrowLeft className="mr-2 h-4 w-4" /> {content.returnHome}
             </Link>
 
-            <Link href={"https://mylio.site/support"} className="w-full flex items-center justify-center gap-1 bg-white border border-[#00a896] text-[#00a896] hover:bg-[#00a896] hover:text-white py-2 px-4 rounded-md transition-all duration-300">
-              <LifeBuoy className="mr-2 h-4 w-4" /> {t('accountNotFound.contactSupport')}
+            <Link href={"https://mylio.site/support"} className="w-full flex items-center justify-center gap-1 bg-white border border-[#00a896] text-[#00a896] hover:bg-[#008080] hover:text-white py-2 px-4 rounded-md transition-all duration-300">
+              <LifeBuoy className="mr-2 h-4 w-4" /> {content.contactSupport}
             </Link>
           </div>
         </div>
       </main>
       <footer className="hidden bg-[#2a2e32] text-center py-4 text-gray-400 text-sm z-10">
-        <p>© {new Date().getFullYear()} DGT Portfolio. {t('accountNotFound.rights')}</p>
+        <p>© {new Date().getFullYear()} Myportfolio. {content.rights}</p>
       </footer>
     </div>
   )

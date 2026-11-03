@@ -1,6 +1,8 @@
 "use client";
 import axios from "axios";
-import React, { useState } from "react";
+import { handleApiError } from "../../utils/apiErrorHandler";
+const SERVER_URL = process.env.NEXT_PUBLIC_SERVER_URL;
+import React, { useState, useEffect } from "react";
 import { useToast } from "../../components/Toast";
 import { createPortal } from "react-dom";
 import {
@@ -14,8 +16,7 @@ import {
   Pencil,
   AlertCircle,
   GripVertical,
-} from "../../components/Icons";
-import { getTranslation } from "../../translations/update-profile";
+} from "../../components/lucide-react";
 import {
   DndContext,
   closestCenter,
@@ -60,13 +61,13 @@ const SortableItem = ({ id, children }) => {
   );
 };
 
-export default function Experience({ userData, setUserDetails }) {
+export default function Experience({ data, setData, content }) {
   const toast = useToast();
-  const t = getTranslation(userData?.displayLanguage || "en");
-
+  const user = data?.user || {};
+  
   // Initialize experience with collapsed: true and localId
   const [experience, setExperience] = useState(
-    (userData.experience || []).map((e) => ({
+    (user.experience || []).map((e) => ({
       ...e,
       collapsed: true,
       localId: e._id || `id-${Math.random().toString(36).substr(2, 9)}`,
@@ -75,7 +76,7 @@ export default function Experience({ userData, setUserDetails }) {
 
   // Track original order for comparison
   const [originalOrder, setOriginalOrder] = useState(
-    (userData.experience || []).filter((e) => e._id).map((e) => e._id),
+    (user.experience || []).filter((e) => e._id).map((e) => e._id),
   );
 
   const [loading, setLoading] = useState(false);
@@ -211,8 +212,9 @@ export default function Experience({ userData, setUserDetails }) {
     try {
       const { collapsed, localId, ...itemData } = item;
       const res = await axios.put(
-        "/api/proxy/users/update/experience/item",
+        `${SERVER_URL}/api/users/update/experience/item`,
         itemData,
+        { withCredentials: true },
       );
 
       const newExperienceList = res.data.experience;
@@ -230,11 +232,24 @@ export default function Experience({ userData, setUserDetails }) {
       });
 
       setExperience(mergedExperience);
-      if (setUserDetails) {
-        setUserDetails((prev) => ({ ...prev, experience: newExperienceList }));
+      if (setData) {
+        setData((prev) => ({
+          ...prev,
+          user: {
+            ...(prev?.user || {}),
+            experience: newExperienceList,
+          },
+        }));
       }
+      localStorage.setItem(`data_${data?.user?.username}`, JSON.stringify({
+        ...data,
+        user: {
+          ...(data?.user || {}),
+          experience: newExperienceList,
+        },
+      }));
 
-      toast.success(t("experience.savedSuccessfully"));
+      toast.success(content?.savedSuccessfully);
       setValidationErrors((prev) => {
         const next = { ...prev };
         delete next[index];
@@ -248,8 +263,7 @@ export default function Experience({ userData, setUserDetails }) {
         setTimeout(() => setHighlightedId(null), 2000);
       }
     } catch (error) {
-      console.error("Error saving experience:", error);
-      toast.error(t("experience.errorMessage"));
+      await handleApiError({ error, defaultErrorMsg: content?.errorMessage, toast });
     } finally {
       setSavingIds((prev) => {
         const next = new Set(prev);
@@ -275,7 +289,8 @@ export default function Experience({ userData, setUserDetails }) {
     setDeletingIds((prev) => new Set(prev).add(item._id));
     try {
       const res = await axios.delete(
-        `/api/proxy/users/update/experience/${item._id}`,
+        `${SERVER_URL}/api/users/update/experience/${item._id}`,
+        { withCredentials: true },
       );
 
       const newExperienceList = res.data.experience;
@@ -288,15 +303,27 @@ export default function Experience({ userData, setUserDetails }) {
         })),
       );
 
-      if (setUserDetails) {
-        setUserDetails((prev) => ({ ...prev, experience: newExperienceList }));
+      if (setData) {
+        setData((prev) => ({
+          ...prev,
+          user: {
+            ...(prev?.user || {}),
+            experience: newExperienceList,
+          },
+        }));
       }
+      localStorage.setItem(`data_${data?.user?.username}`, JSON.stringify({
+        ...data,
+        user: {
+          ...(data?.user || {}),
+          experience: newExperienceList,
+        },
+      }));
       toast.success(
-        t("experience.deletedSuccessfully") || "Deleted successfully",
+        content?.deletedSuccessfully || "Deleted successfully",
       );
     } catch (error) {
-      console.error("Error deleting experience:", error);
-      toast.error(t("experience.errorMessage"));
+      await handleApiError({ error, defaultErrorMsg: content?.errorMessage, toast });
     } finally {
       setDeletingIds((prev) => {
         const next = new Set(prev);
@@ -316,32 +343,46 @@ export default function Experience({ userData, setUserDetails }) {
 
       if (experienceWithIds.length !== experience.length) {
         toast.warning(
-          t("experience.saveNewItemsFirst") || "Please save new items first",
+          content?.saveNewItemsFirst || "Please save new items first",
         );
         setLoading(false);
         return;
       }
 
-      await axios.put(`/api/proxy/users/update/experience/order`, {
-        experience: experienceWithIds,
-      });
+      await axios.put(
+        `${SERVER_URL}/api/users/update/experience/order`,
+        {
+          experience: experienceWithIds,
+        },
+        { withCredentials: true },
+      );
 
       // Update global state
-      if (setUserDetails) {
-        setUserDetails((prev) => ({
+      const orderedExperience = experience.map(({ collapsed, localId, ...rest }) => rest);
+      if (setData) {
+        setData((prev) => ({
           ...prev,
-          experience: experience.map(({ collapsed, localId, ...rest }) => rest),
+          user: {
+            ...(prev?.user || {}),
+            experience: orderedExperience,
+          },
         }));
       }
+      localStorage.setItem(`data_${data?.user?.username}`, JSON.stringify({
+        ...data,
+        user: {
+          ...(data?.user || {}),
+          experience: orderedExperience,
+        },
+      }));
 
       // Update original order after successful save
       const newOrder = experience.filter((e) => e._id).map((e) => e._id);
       setOriginalOrder(newOrder);
 
-      toast.success(t("experience.orderSaved") || "Order saved");
+      toast.success(content?.orderSaved || "Order saved");
     } catch (error) {
-      console.error("Error updating order:", error);
-      toast.error(t("experience.errorMessage"));
+      await handleApiError({ error, defaultErrorMsg: content?.errorMessage, toast });
     } finally {
       setLoading(false);
     }
@@ -350,10 +391,10 @@ export default function Experience({ userData, setUserDetails }) {
   return (
     <div
       className="space-y-4"
-      dir={userData?.displayLanguage === "ar" ? "rtl" : "ltr"}
+      dir={user?.displayLanguage === "ar" ? "rtl" : "ltr"}
     >
       <h3 className="text-lg font-bold text-gray-800">
-        ⭐ {t("experience.title")}
+        ⭐ {content?.title}
       </h3>
 
       <div className="bg-gradient-to-br from-amber-50 to-orange-50 p-2 md:p-4 rounded-xl border border-amber-200 space-y-3">
@@ -408,7 +449,7 @@ export default function Experience({ userData, setUserDetails }) {
                           <div className="w-full">
                             <input
                               type="text"
-                              placeholder={t("experience.company")}
+                              placeholder={content?.company}
                               value={exp.company}
                               maxLength={100}
                               onChange={(e) =>
@@ -426,7 +467,7 @@ export default function Experience({ userData, setUserDetails }) {
                             {validationErrors[index]?.company && (
                               <p className="text-red-500 text-[8px] sm:text-xs mt-0.5 sm:mt-1.5 flex items-center gap-1 font-medium animate-in slide-in-from-top-1">
                                 <AlertCircle className="w-2.5 h-2.5 sm:w-[14px] sm:h-[14px]" />
-                                {t("experience.companyRequired") ||
+                                {content?.companyRequired ||
                                   "Company is required"}
                               </p>
                             )}
@@ -440,8 +481,8 @@ export default function Experience({ userData, setUserDetails }) {
                             className={`p-0.5 sm:p-2 rounded-lg transition-colors flex items-center gap-1 sm:gap-2 text-[8px] sm:text-sm font-medium ${exp.collapsed ? "bg-amber-50 text-amber-700 hover:bg-amber-100" : "bg-gray-100 text-gray-700 hover:bg-gray-200"}`}
                             title={
                               exp.collapsed
-                                ? t("experience.edit")
-                                : t("experience.collapse") || "Collapse"
+                                ? content?.edit
+                                : content?.collapse || "Collapse"
                             }
                           >
                             {exp.collapsed ? (
@@ -451,8 +492,8 @@ export default function Experience({ userData, setUserDetails }) {
                             )}
                             <span className="hidden md:inline">
                               {exp.collapsed
-                                ? t("experience.edit")
-                                : t("experience.close") || "Close"}
+                                ? content?.edit
+                                : content?.close || "Close"}
                             </span>
                           </button>
 
@@ -463,7 +504,7 @@ export default function Experience({ userData, setUserDetails }) {
                             onClick={() => moveItemUp(index)}
                             disabled={index === 0}
                             className="p-0.5 sm:p-1.5 hover:bg-gray-200 rounded-lg transition-colors disabled:opacity-30 disabled:cursor-not-allowed hidden sm:block"
-                            title={t("experience.moveUp") || "Move Up"}
+                            title={content?.moveUp || "Move Up"}
                           >
                             <ArrowUp className="w-2.5 h-2.5 sm:w-[16px] sm:h-[16px] text-gray-600" />
                           </button>
@@ -472,7 +513,7 @@ export default function Experience({ userData, setUserDetails }) {
                             onClick={() => moveItemDown(index)}
                             disabled={index === experience.length - 1}
                             className="p-0.5 sm:p-1.5 hover:bg-gray-200 rounded-lg transition-colors disabled:opacity-30 disabled:cursor-not-allowed hidden sm:block"
-                            title={t("experience.moveDown") || "Move Down"}
+                            title={content?.moveDown || "Move Down"}
                           >
                             <ArrowDown className="w-2.5 h-2.5 sm:w-[16px] sm:h-[16px] text-gray-600" />
                           </button>
@@ -480,7 +521,7 @@ export default function Experience({ userData, setUserDetails }) {
                             type="button"
                             onClick={() => setItemToDelete(index)}
                             className="p-0.5 sm:p-1.5 hover:bg-red-100 rounded-lg transition-colors text-red-500 ml-0.5 sm:ml-1"
-                            title={t("experience.delete")}
+                            title={content?.delete}
                             disabled={deletingIds.has(exp._id)}
                           >
                             {deletingIds.has(exp._id) ? (
@@ -500,7 +541,7 @@ export default function Experience({ userData, setUserDetails }) {
                           <div>
                             <input
                               type="text"
-                              placeholder={t("experience.role")}
+                              placeholder={content?.role}
                               value={exp.role || ""}
                               maxLength={100}
                               onChange={(e) =>
@@ -517,7 +558,7 @@ export default function Experience({ userData, setUserDetails }) {
                             {validationErrors[index]?.role && (
                               <p className="text-red-500 text-[9px] sm:text-xs mt-1 sm:mt-1.5 flex items-center gap-1 sm:gap-1.5 font-medium animate-in slide-in-from-top-1">
                                 <AlertCircle className="w-3 h-3 sm:w-[14px] sm:h-[14px]" />
-                                {t("experience.roleRequired") ||
+                                {content?.roleRequired ||
                                   "Role is required"}
                               </p>
                             )}
@@ -525,7 +566,7 @@ export default function Experience({ userData, setUserDetails }) {
 
                           <div>
                             <textarea
-                              placeholder={t("experience.description")}
+                              placeholder={content?.description}
                               value={exp.description || ""}
                               maxLength={2000}
                               onChange={(e) =>
@@ -542,7 +583,7 @@ export default function Experience({ userData, setUserDetails }) {
                             {validationErrors[index]?.description && (
                               <p className="text-red-500 text-[9px] sm:text-xs mt-1 sm:mt-1.5 flex items-center gap-1 sm:gap-1.5 font-medium animate-in slide-in-from-top-1">
                                 <AlertCircle className="w-3 h-3 sm:w-[14px] sm:h-[14px]" />
-                                {t("experience.descriptionRequired") ||
+                                {content?.descriptionRequired ||
                                   "Description is required"}
                               </p>
                             )}
@@ -552,7 +593,7 @@ export default function Experience({ userData, setUserDetails }) {
                             <div>
                               <input
                                 type="text"
-                                placeholder={t("experience.startDate")}
+                                placeholder={content?.startDate}
                                 value={exp.startDate || ""}
                                 maxLength={20}
                                 onChange={(e) =>
@@ -569,7 +610,7 @@ export default function Experience({ userData, setUserDetails }) {
                               {validationErrors[index]?.startDate && (
                                 <p className="text-red-500 text-[9px] sm:text-xs mt-1 sm:mt-1.5 flex items-center gap-1 sm:gap-1.5 font-medium animate-in slide-in-from-top-1">
                                   <AlertCircle className="w-3 h-3 sm:w-[14px] sm:h-[14px]" />
-                                  {t("experience.startDateRequired") ||
+                                  {content?.startDateRequired ||
                                     "Start date is required"}
                                 </p>
                               )}
@@ -578,7 +619,7 @@ export default function Experience({ userData, setUserDetails }) {
                             <div>
                               <input
                                 type="text"
-                                placeholder={t("experience.endDate")}
+                                placeholder={content?.endDate}
                                 value={exp.endDate || ""}
                                 maxLength={20}
                                 onChange={(e) =>
@@ -595,7 +636,7 @@ export default function Experience({ userData, setUserDetails }) {
                               {validationErrors[index]?.endDate && (
                                 <p className="text-red-500 text-[9px] sm:text-xs mt-1 sm:mt-1.5 flex items-center gap-1 sm:gap-1.5 font-medium animate-in slide-in-from-top-1">
                                   <AlertCircle className="w-3 h-3 sm:w-[14px] sm:h-[14px]" />
-                                  {t("experience.endDateRequired") ||
+                                  {content?.endDateRequired ||
                                     "End date is required"}
                                 </p>
                               )}
@@ -614,7 +655,7 @@ export default function Experience({ userData, setUserDetails }) {
                               ) : (
                                 <CheckCheck className="w-3 h-3 sm:w-4 sm:h-4" />
                               )}
-                              {t("experience.save") || "Save"}
+                              {content?.save || "Save"}
                             </button>
                           </div>
                         </div>
@@ -645,7 +686,7 @@ export default function Experience({ userData, setUserDetails }) {
           className={`w-full text-white py-1.5 sm:py-2 rounded-lg flex items-center justify-center gap-2 transition-all duration-300 mt-2 text-xs sm:text-base ${experience.length >= 10 ? "bg-gray-400 cursor-not-allowed" : "bg-gradient-to-r from-amber-500 to-orange-600 hover:from-amber-600 hover:to-orange-700"}`}
         >
           <Plus className="w-4 h-4 sm:w-[18px] sm:h-[18px]" />{" "}
-          {experience.length >= 10 ? t("experience.maxLimit") : t("experience.addExperience")}
+          {experience.length >= 10 ? content?.maxLimit : content?.addExperience}
         </button>
       </div>
 
@@ -673,10 +714,10 @@ export default function Experience({ userData, setUserDetails }) {
                   size={20}
                   className="animate-spin w-4 h-4 sm:w-5 sm:h-5"
                 />{" "}
-                {t("experience.saving")}
+                {content?.saving}
               </>
             ) : (
-              `💾 ${t("experience.saveOrder") || "Save Order"}`
+              `💾 ${content?.saveOrder || "Save Order"}`
             )}
           </button>
         </div>
@@ -694,7 +735,7 @@ export default function Experience({ userData, setUserDetails }) {
               <button
                 onClick={() => setItemToDelete(null)}
                 className="absolute top-4 right-4 text-gray-400 hover:text-gray-600 transition p-1 rounded-full hover:bg-gray-100"
-                title={t("experience.close") || "Close"}
+                title={content?.close || "Close"}
               >
                 <X className="w-5 h-5" />
               </button>
@@ -707,13 +748,13 @@ export default function Experience({ userData, setUserDetails }) {
                 <div className="text-gray-600 mb-6 text-base leading-relaxed">
                   <div className="flex flex-col gap-2">
                     <span className="font-semibold text-gray-800">
-                      {t("experience.deleteConfirm") ||
+                      {content?.deleteConfirm ||
                         "Are you sure you want to delete this experience?"}
                     </span>
                     <span className="font-bold text-black border-t pt-2 mt-1 break-all">
                       "
                       {experience[itemToDelete]?.company ||
-                        t("experience.thisExperience") ||
+                        content?.thisExperience ||
                         "this experience"}
                       "
                     </span>
@@ -726,14 +767,14 @@ export default function Experience({ userData, setUserDetails }) {
                   onClick={() => setItemToDelete(null)}
                   className="flex-1 px-4 py-2.5 bg-gray-200 hover:bg-gray-300 text-gray-800 font-bold rounded-lg transition-all duration-200"
                 >
-                  {t("experience.cancel") || "Cancel"}
+                  {content?.cancel || "Cancel"}
                 </button>
                 <button
                   onClick={confirmDelete}
                   className="flex-1 px-4 py-2.5 bg-red-600 hover:bg-red-700 text-white font-medium rounded-lg shadow-md transition duration-200 flex items-center justify-center gap-2"
                 >
                   <Trash2 size={18} />
-                  <span>{t("experience.delete") || "Delete"}</span>
+                  <span>{content?.delete || "Delete"}</span>
                 </button>
               </div>
             </div>

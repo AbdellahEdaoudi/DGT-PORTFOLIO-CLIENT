@@ -2,17 +2,22 @@ import LandingPage from "./components/LandingPage/LandingPage";
 import { headers } from "next/headers";
 import { DynamicSubdomainClient } from './components/portfolio/ClientWrappers';
 
+const SERVER_URL = process.env.NEXT_PUBLIC_SERVER_URL || "https://dgt-portfolio-server.vercel.app";
+
 async function fetchUserData(url) {
   try {
     const res = await fetch(url, { cache: 'no-store' });
     const data = await res.json();
-    return data?.status ? data.user : null;
+    return data?.user || (data?.fullname ? data : null);
   } catch (error) {
     return null;
   }
 }
 
 function getDomainFlags(host) {
+  if (!host || typeof host !== "string") {
+    return { isSubdomain: false, iswwwsubdomain: false };
+  }
   const reserved = ["mylio", "localhost", "www", "api", "admin"];
   // isSubdomain
   const isSubdomain =
@@ -29,17 +34,17 @@ export async function generateMetadata() {
   // const host = "abdellah-edaoudi.mylio.site"
   // const host = "abdellah-edaoudi.site"
   const headersList = await headers();
-  const host = headersList.get("host");
+  const host = headersList.get("host") || "";
   const { isSubdomain, iswwwsubdomain } = getDomainFlags(host);
-  console.log("isSubdomain : " + isSubdomain);
-  console.log("iswwwsubdomain : " + iswwwsubdomain);
+  const subdomainUser = isSubdomain ? host.split(".")[0].toLowerCase().trim() : "";
+
   let user = null;
-  if (isSubdomain) {
-    user = await fetchUserData(`https://dgt-portfolio-server.vercel.app/users/metauser/${host.split(".")[0]}`);
+  if (isSubdomain && subdomainUser) {
+    user = await fetchUserData(`${SERVER_URL}/api/users/metauser/${subdomainUser}`);
   }
 
   if (user) {
-    const username = user.username || host.split(".")[0];
+    const username = user.username || subdomainUser;
     return {
       title: `${user.fullname} | ${user.category} Portfolio`,
       description: `Explore ${user.fullname}'s professional portfolio and discover projects, technical expertise, work experience, and professional services as a ${user.category}. Connect for collaborations and new opportunities.`,
@@ -58,7 +63,7 @@ export async function generateMetadata() {
         title: `${user.fullname} | ${user.category} Portfolio`,
         description: `Explore ${user.fullname}'s professional portfolio and discover projects, technical expertise, work experience, and professional services as a ${user.category}. Connect for collaborations and new opportunities.`,
         url: isSubdomain ? `https://${username}.mylio.site` : `https://${host}`,
-        siteName: "DGT Portfolio",
+        siteName: "Myportfolio",
         images: [{ url: user.urlimage, alt: `${user.fullname}'s Profile Picture` }],
         locale: user.displayLanguage === 'ar' ? 'ar_AR' : 'en_US',
         type: "profile",
@@ -104,20 +109,21 @@ export async function generateMetadata() {
 
 export default async function Home() {
   const headersList = await headers();
-  const host = headersList.get("host");
+  const host = headersList.get("host") || "";
   const { isSubdomain, iswwwsubdomain } = getDomainFlags(host);
+  const subdomainUser = isSubdomain ? host.split(".")[0].toLowerCase().trim() : "";
   let userSchema = null;
 
   try {
-    if (isSubdomain) {
-      const user = await fetchUserData(`https://dgt-portfolio-server.vercel.app/users/metauser/${host.split(".")[0]}`);
+    if (isSubdomain && subdomainUser) {
+      const user = await fetchUserData(`${SERVER_URL}/api/users/metauser/${subdomainUser}`);
       if (user) {
         userSchema = {
           "@context": "https://schema.org",
           "@type": "Person",
           name: user.fullname,
           jobTitle: user.category || "Professional",
-          url: `https://${user.username || host.split(".")[0]}.mylio.site`,
+          url: `https://${user.username || subdomainUser}.mylio.site`,
           description: user.about,
           sameAs: Object.values(user.socials || {}).filter(Boolean),
         };
@@ -126,7 +132,7 @@ export default async function Home() {
       userSchema = {
         "@context": "https://schema.org",
         "@type": "SoftwareApplication",
-        name: "DGT Portfolio",
+        name: "Myportfolio",
         applicationCategory: "DesignApplication",
         operatingSystem: "Web",
         url: "https://mylio.site",
@@ -143,7 +149,7 @@ export default async function Home() {
   return (
     <div>
       {userSchema && <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(userSchema) }} />}
-      {isSubdomain ? <DynamicSubdomainClient username={host.split(".")[0]} /> : iswwwsubdomain ? <LandingPage lang={"en"} /> : <LandingPage lang={"en"} />}
+      {isSubdomain && subdomainUser ? <DynamicSubdomainClient username={subdomainUser} /> : <LandingPage lang={"en"} />}
     </div>
   );
 }

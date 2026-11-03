@@ -33,9 +33,9 @@ export async function generateMetadata(props) {
         title: meta.title,
         description: meta.description,
         keywords: meta.keywords,
-        authors: [{ name: "DGT Portfolio" }],
-        creator: "DGT Portfolio",
-        publisher: "DGT Portfolio",
+        authors: [{ name: "Myportfolio" }],
+        creator: "Myportfolio",
+        publisher: "Myportfolio",
         robots: {
             index: true,
             follow: true,
@@ -57,7 +57,7 @@ export async function generateMetadata(props) {
             images: [
                 {
                     url: "https://mylio.site/logo.jpg",
-                    alt: "DGT Portfolio - Personal Portfolio Builder",
+                    alt: "Myportfolio - Personal Portfolio Builder",
                 },
             ],
         },
@@ -66,7 +66,7 @@ export async function generateMetadata(props) {
             title: meta.twitter.title,
             description: meta.twitter.description,
             images: ["https://mylio.site/logo.jpg"],
-            creator: "@dgtportfolio",
+            creator: "@Myportfolio",
         },
         alternates: {
             canonical: `https://mylio.site/${params.lang}`,

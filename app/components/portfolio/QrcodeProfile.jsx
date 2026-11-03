@@ -1,10 +1,10 @@
 import React, { useRef, useState, useEffect } from "react";
 import QRCode from "qrcode.react";
-import { CheckCircle2, Copy, Download, LinkIcon, QrCode, Share2, X } from "../Icons";
+import { CheckCircle2, Copy, Download, LinkIcon, QrCode, Share2, X } from "../lucide-react";
 import { createPortal } from "react-dom";
 import { getTranslation } from "../../translations/portfolio";
 
-function QrcodeProfile({ userDetails, className, isOpen, onClose }) {
+function QrcodeProfile({ userDetails, className, isOpen, onClose, content: propContent, t: propT }) {
   const PORTFOLIO = userDetails?.customDomain && userDetails?.customDomainVerified ? `https://${userDetails?.customDomain}` : `https://${userDetails?.username}.mylio.site`;
   const PORTFOLIO_2 = `https://mylio.site/dp/${userDetails?.username}`;
 
@@ -15,9 +15,18 @@ function QrcodeProfile({ userDetails, className, isOpen, onClose }) {
   const isControlled = isOpen !== undefined;
   const showModal = isControlled ? isOpen : internalIsOpen;
 
-  // Translation function using the central system
-  const t = getTranslation(userDetails?.displayLanguage || 'en');
-  const tp = (key) => t(`qrcode.${key}`);
+  const lang = userDetails?.displayLanguage || 'en';
+  const [content, setContent] = useState(propContent || {});
+
+  useEffect(() => {
+    if (propContent) {
+      setContent(propContent);
+      return;
+    }
+    getTranslation(lang).then((dict) => setContent(dict || {}));
+  }, [lang, propContent]);
+
+  const qrContent = content?.qrcode || {};
 
   // Lock body scroll when modal is open
   useEffect(() => {
@@ -67,14 +76,14 @@ function QrcodeProfile({ userDetails, className, isOpen, onClose }) {
           navigator
             .share({
               files: [file],
-              title: tp("qrCodeProfile"),
-              text: tp("checkOutQrCode"),
+              title: qrContent.qrCodeProfile,
+              text: qrContent.checkOutQrCode,
             })
-            .catch((error) => console.error(tp("sharingFailed"), error));
+            .catch((error) => console.error(qrContent.sharingFailed, error));
         });
       }
     } else {
-      alert(tp("webShareApiUnsupported"));
+      alert(qrContent.webShareApiUnsupported);
     }
   };
 
@@ -86,10 +95,10 @@ function QrcodeProfile({ userDetails, className, isOpen, onClose }) {
         .share({
           url: url,
         })
-        .then(() => console.log(tp("successfulShare")))
-        .catch((error) => console.log(tp("errorSharing"), error));
+        .then(() => console.log(qrContent.successfulShare))
+        .catch((error) => console.log(qrContent.errorSharing, error));
     } else {
-      alert(tp("shareUnsupported"));
+      alert(qrContent.shareUnsupported);
     }
   };
 
@@ -120,7 +129,7 @@ function QrcodeProfile({ userDetails, className, isOpen, onClose }) {
       <div
         onClick={() => !isControlled && setInternalIsOpen(true)}
         className={`size-10 flex items-center justify-center transition-colors cursor-pointer ${className || "text-cyan-400 border border-cyan-500/30"}`}
-        title={tp("qrCodeProfile")}
+        title={qrContent.qrCodeProfile}
       >
         <QrCode size={22} />
       </div>
@@ -139,7 +148,7 @@ function QrcodeProfile({ userDetails, className, isOpen, onClose }) {
                   <QrCode size={18} />
                 </div>
                 <h2 className="text-lg font-bold text-gray-800">
-                  {tp("qrCodeProfile")}
+                  {qrContent.qrCodeProfile}
                 </h2>
               </div>
               <button
@@ -259,7 +268,7 @@ function QrcodeProfile({ userDetails, className, isOpen, onClose }) {
                   onClick={DownloadQRCode}
                 >
                   <Download size={18} className="text-blue-500 group-hover:scale-110 transition-transform" />
-                  <span className="text-sm font-medium">{tp("downloadQrCode")}</span>
+                  <span className="text-sm font-medium">{qrContent.downloadQrCode}</span>
                 </button>
 
                 <button
@@ -267,7 +276,7 @@ function QrcodeProfile({ userDetails, className, isOpen, onClose }) {
                   onClick={ShareQRCode}
                 >
                   <QrCode size={18} className="text-green-500 group-hover:scale-110 transition-transform" />
-                  <span className="text-sm font-medium">{tp("shareQrCode")}</span>
+                  <span className="text-sm font-medium">{qrContent.shareQrCode}</span>
                 </button>
 
                 <button
@@ -275,7 +284,7 @@ function QrcodeProfile({ userDetails, className, isOpen, onClose }) {
                   onClick={ShareLink}
                 >
                   <Share2 size={18} className="text-purple-500 group-hover:scale-110 transition-transform" />
-                  <span className="text-sm font-medium">{tp("shareLink")}</span>
+                  <span className="text-sm font-medium">{qrContent.shareLink}</span>
                 </button>
 
                 <button
@@ -283,7 +292,7 @@ function QrcodeProfile({ userDetails, className, isOpen, onClose }) {
                   onClick={copyProfileLink}
                 >
                   <Copy size={18} className="text-orange-500 group-hover:scale-110 transition-transform" />
-                  <span className="text-sm font-medium">{tp("copyLink")}</span>
+                  <span className="text-sm font-medium">{qrContent.copyLink}</span>
                 </button>
               </div>
 

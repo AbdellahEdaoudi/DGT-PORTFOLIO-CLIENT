@@ -13,19 +13,29 @@ import {
   X,
   ArrowUp,
   User,
-} from "../Icons"
+} from "../lucide-react"
 import QrcodeProfile from "../portfolio/QrcodeProfile"
-import UserLinks from "../portfolio/UserLinks"
 import Image from "next/image"
 import Link from "next/link"
 import { getTranslation } from "../../translations/portfolio"
 import ImageModal from "../portfolio/ImageModal"
 import DownloadResume from "../downloadcv/DownloadResume"
 
-export default function Theme1({ userDetails, userLinks, bgcolor }) {
-  const t = getTranslation(userDetails?.displayLanguage || 'en')
+export default function Theme1({ userDetails, bgcolor, content: propContent, t: propT }) {
+  const [content, setContent] = useState(propContent || (typeof propT === 'object' ? propT : {}));
+
+  useEffect(() => {
+    if (propContent) {
+      setContent(propContent);
+      return;
+    }
+    if (typeof propT === 'object' && propT) {
+      setContent(propT);
+      return;
+    }
+    getTranslation(userDetails?.displayLanguage || 'en').then((dict) => setContent(dict || {}));
+  }, [userDetails?.displayLanguage, propContent, propT]);
   const [showQR, setShowQR] = useState(false);
-  const [showUserLinks, setShowUserLinks] = useState(false);
   const [expanded, setExpanded] = useState(false);
   const [selectedImage, setSelectedImage] = useState(null);
   const [isNavOpen, setIsNavOpen] = useState(false);
@@ -66,7 +76,7 @@ export default function Theme1({ userDetails, userLinks, bgcolor }) {
   return (
     <div
       className="b min-h-screen relative overflow-hidden "
-      style={{ backgroundColor: bgcolor || userDetails?.bgcolorp || "#OA3C4D" }}
+      style={{ backgroundColor: bgcolor || userDetails?.bgcolor || "#OA3C4D" }}
       dir={userDetails?.displayLanguage === 'ar' ? 'rtl' : 'ltr'}
     >
 
@@ -95,13 +105,13 @@ export default function Theme1({ userDetails, userLinks, bgcolor }) {
             </button>
             <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6 w-full max-w-5xl mx-auto">
               {[
-                { id: "services", label: t('services'), icon: "💼", condition: userDetails?.services?.length > 0 },
-                { id: "experience", label: t('workExperience'), icon: "⭐", condition: userDetails?.experience?.length > 0 },
-                { id: "skills", label: t('skills'), icon: "💡", condition: userDetails?.skills?.length > 0 },
-                { id: "projects", label: t('projects'), icon: "📁", condition: userDetails?.projects?.length > 0 },
-                { id: "education", label: t('education'), icon: "🎓", condition: userDetails?.education?.length > 0 },
-                { id: "certificates", label: t('certificates'), icon: "📜", condition: userDetails?.certificates?.length > 0 },
-                { id: "languages", label: t('languages'), icon: "🌍", condition: userDetails?.languages?.length > 0 },
+                { id: "services", label: content?.services, icon: "💼", condition: userDetails?.services?.length > 0 },
+                { id: "experience", label: content?.workExperience, icon: "⭐", condition: userDetails?.experience?.length > 0 },
+                { id: "skills", label: content?.skills, icon: "💡", condition: userDetails?.skills?.length > 0 },
+                { id: "projects", label: content?.projects, icon: "📁", condition: userDetails?.projects?.length > 0 },
+                { id: "education", label: content?.education, icon: "🎓", condition: userDetails?.education?.length > 0 },
+                { id: "certificates", label: content?.certificates, icon: "📜", condition: userDetails?.certificates?.length > 0 },
+                { id: "languages", label: content?.languages, icon: "🌍", condition: userDetails?.languages?.length > 0 },
               ]
                 .filter(tab => tab.condition)
                 .map((tab, index) => (
@@ -134,13 +144,13 @@ export default function Theme1({ userDetails, userLinks, bgcolor }) {
         {/* Artistic Side Navigation */}
         <div className="hidden">
           {[
-            { id: "services", label: t('services'), icon: "💼", condition: userDetails?.services?.length > 0 },
-            { id: "experience", label: t('workExperience'), icon: "⭐", condition: userDetails?.experience?.length > 0 },
-            { id: "skills", label: t('skills'), icon: "💡", condition: userDetails?.skills?.length > 0 },
-            { id: "projects", label: t('projects'), icon: "📁", condition: userDetails?.projects?.length > 0 },
-            { id: "education", label: t('education'), icon: "🎓", condition: userDetails?.education?.length > 0 },
-            { id: "certificates", label: t('certificates'), icon: <Award size={18} />, condition: userDetails?.certificates?.length > 0 },
-            { id: "languages", label: t('languages'), icon: "🌍", condition: userDetails?.languages?.length > 0 },
+            { id: "services", label: content?.services, icon: "💼", condition: userDetails?.services?.length > 0 },
+            { id: "experience", label: content?.workExperience, icon: "⭐", condition: userDetails?.experience?.length > 0 },
+            { id: "skills", label: content?.skills, icon: "💡", condition: userDetails?.skills?.length > 0 },
+            { id: "projects", label: content?.projects, icon: "📁", condition: userDetails?.projects?.length > 0 },
+            { id: "education", label: content?.education, icon: "🎓", condition: userDetails?.education?.length > 0 },
+            { id: "certificates", label: content?.certificates, icon: <Award size={18} />, condition: userDetails?.certificates?.length > 0 },
+            { id: "languages", label: content?.languages, icon: "🌍", condition: userDetails?.languages?.length > 0 },
           ]
             .filter(tab => tab.condition)
             .map((tab) => (
@@ -172,7 +182,7 @@ export default function Theme1({ userDetails, userLinks, bgcolor }) {
               {/* Top toolbar */}
               <div className="flex md:flex-row flex-col gap-4 mb-5 justify-between items-center md:mb-10">
                 <h1 className="text-white text-2xl font-bold cursor-pointer">
-                  <Link href={"https://mylio.site"}>{t('portfolio')}</Link>
+                  <Link href={"https://mylio.site"}>{content?.portfolio}</Link>
                 </h1>
                 <div className="flex gap-3">
                   {/* // Download CV */}
@@ -182,17 +192,8 @@ export default function Theme1({ userDetails, userLinks, bgcolor }) {
                     onClick={() => setShowQR(true)}
                     className="flex items-center gap-2 px-2 cursor-pointer bg-white/10 hover:bg-white/20 rounded-lg text-white transition-all duration-300 backdrop-blur-md border border-white/10"
                   >
-                    <QrcodeProfile userDetails={userDetails} className="text-white border-none hover:bg-transparent" isOpen={showQR} onClose={() => setShowQR(false)} />
+                    <QrcodeProfile userDetails={userDetails} className="text-white border-none hover:bg-transparent" isOpen={showQR} onClose={() => setShowQR(false)} content={content} />
                   </div>
-                  {/* User Links */}
-                  {userLinks?.length > 0 && (
-                    <div
-                      onClick={() => setShowUserLinks(true)}
-                      className="flex items-center gap-2 px-2 bg-white/10 hover:bg-white/20 rounded-lg text-white transition-all duration-300 backdrop-blur-md border border-white/10 cursor-pointer"
-                    >
-                      <UserLinks lang={userDetails?.displayLanguage} userLinks={userLinks} className="text-white border-none hover:bg-transparent" isOpen={showUserLinks} onClose={() => setShowUserLinks(false)} />
-                    </div>
-                  )}
                   {/* Menu Button in Header */}
                   {activeSectionsCount >= 3 && (
                     <button
@@ -212,7 +213,7 @@ export default function Theme1({ userDetails, userLinks, bgcolor }) {
                     <div className="relative w-24 h-24 md:w-40 md:h-40 shrink-0">
                       <div className="absolute inset-0 bg-gradient-to-br from-white/20 to-white/5 rounded-full blur-xl"></div>
                       {userDetails?.urlimage ? (
-                        <Image priority width={500} height={500}
+                        <Image priority loading="eager" width={500} height={500}
                           src={userDetails?.urlimage}
                           alt={userDetails?.fullname || "Profile Picture"}
                           className="relative z-10 w-full h-full rounded-full object-cover border-4 border-white/30 shadow-2xl"
@@ -237,10 +238,10 @@ export default function Theme1({ userDetails, userLinks, bgcolor }) {
 
                     {/* Quick contact info */}
                     <div className="flex flex-wrap gap-4">
-                      {userDetails?.country && (
+                      {userDetails?.location && (
                         <div className="flex items-center gap-2 text-white/80">
                           <MapPin size={18} />
-                          <span>{userDetails.country}</span>
+                          <span>{userDetails.location}</span>
                         </div>
                       )}
                       {userDetails?.phoneNumber && (
@@ -251,11 +252,11 @@ export default function Theme1({ userDetails, userLinks, bgcolor }) {
                           </a>
                         </div>
                       )}
-                      {(userDetails?.displayEmail || userDetails?.email) && (
+                      {(userDetails?.email) && (
                         <div className="flex items-center gap-2 text-white/80">
                           <Mail size={18} />
-                          <a href={`mailto:${userDetails?.displayEmail || userDetails?.email}`} className="hover:text-white transition-colors">
-                            {userDetails?.displayEmail || userDetails?.email}
+                          <a href={`mailto:${userDetails?.email}`} className="hover:text-white transition-colors">
+                            {userDetails?.email}
                           </a>
                         </div>
                       )}
@@ -276,7 +277,7 @@ export default function Theme1({ userDetails, userLinks, bgcolor }) {
                   const sectionContent = {
                     services: userDetails.services && userDetails.services.length > 0 && (
                       <div id="services" key="services" className="mb-12 scroll-mt-24">
-                        <h3 className="text-2xl font-bold text-white mb-6">💼 {t('services')}</h3>
+                        <h3 className="text-2xl font-bold text-white mb-6">💼 {content?.services}</h3>
                         <div className="grid md:grid-cols-3 gap-4">
                           {userDetails.services.map((service, idx) => (
                             <div
@@ -292,7 +293,7 @@ export default function Theme1({ userDetails, userLinks, bgcolor }) {
                     experience: userDetails.experience && userDetails.experience.length > 0 && (
                       <div id="experience" key="experience" className="mb-12 scroll-mt-24">
                         <h3 className="text-2xl font-bold text-white mb-6 flex items-center gap-2">
-                          ⭐ {t('workExperience')}
+                          ⭐ {content?.workExperience}
                         </h3>
                         <div className="space-y-6">
                           {userDetails.experience?.map((exp, i) => (
@@ -319,7 +320,7 @@ export default function Theme1({ userDetails, userLinks, bgcolor }) {
                     skills: userDetails.skills && userDetails.skills.length > 0 && (
                       <div id="skills" key="skills" className="mb-12 scroll-mt-24">
                         <h3 className="text-2xl font-bold text-white mb-6 flex items-center gap-2">
-                          💡 {t('skills')}
+                          💡 {content?.skills}
                         </h3>
                         <div className="grid md:grid-cols-2 gap-4">
                           {userDetails.skills.map((skill, idx) => (
@@ -336,7 +337,7 @@ export default function Theme1({ userDetails, userLinks, bgcolor }) {
                     projects: userDetails.projects && userDetails.projects.length > 0 && (
                       <div id="projects" key="projects" className="mb-12 scroll-mt-24">
                         <h3 className="text-2xl font-bold text-white mb-6 flex items-center gap-2">
-                          📁 {t('projects')}
+                          📁 {content?.projects}
                         </h3>
                         <div className="space-y-6">
                           {userDetails.projects.map((project, idx) => (
@@ -380,7 +381,7 @@ export default function Theme1({ userDetails, userLinks, bgcolor }) {
                                     className="inline-flex items-center gap-2 px-4 py-2 bg-white/20 hover:bg-white/30 rounded-lg text-white transition-all duration-300"
                                   >
                                     <Globe size={16} />
-                                    {t('viewProject')}
+                                    {content?.viewProject}
                                   </a>
                                 </div>
                               </div>
@@ -392,7 +393,7 @@ export default function Theme1({ userDetails, userLinks, bgcolor }) {
                     education: userDetails.education && userDetails.education.length > 0 && (
                       <div id="education" key="education" className="mb-12 text-sm md:text-base scroll-mt-24">
                         <h3 className="text-2xl font-bold text-white mb-6 flex items-center gap-2">
-                          🎓 {t('education')}
+                          🎓 {content?.education}
                         </h3>
                         <div className="space-y-4">
                           {userDetails.education.map((edu, idx) => (
@@ -411,7 +412,7 @@ export default function Theme1({ userDetails, userLinks, bgcolor }) {
                               </div>
                               {edu.field && (
                                 <div className="mt-3 p-4 bg-black/30 rounded-lg border-l-4 border-white/30">
-                                  <p className="text-xs text-gray-400 uppercase tracking-wider mb-2">{t('field')}</p>
+                                  <p className="text-xs text-gray-400 uppercase tracking-wider mb-2">{content?.field}</p>
                                   <p className="text-sm md:text-base text-white/80 leading-relaxed">
                                     {edu.field}
                                   </p>
@@ -425,7 +426,7 @@ export default function Theme1({ userDetails, userLinks, bgcolor }) {
                     certificates: userDetails.certificates && userDetails.certificates.length > 0 && (
                       <div id="certificates" key="certificates" className="mb-12 text-sm md:text-base scroll-mt-24">
                         <h3 className="text-2xl font-bold text-white mb-6 flex items-center gap-2">
-                          📜 {t('certificates') || "Certificates"}
+                          📜 {content?.certificates || "Certificates"}
                         </h3>
                         <div className="grid md:grid-cols-2 gap-6">
                           {userDetails.certificates.map((cert, idx) => (
@@ -455,7 +456,7 @@ export default function Theme1({ userDetails, userLinks, bgcolor }) {
                     ),
                     languages: userDetails.languages && userDetails.languages.length > 0 && (
                       <div id="languages" key="languages" className="mb-12 scroll-mt-24">
-                        <h3 className="text-2xl font-bold text-white mb-6">🌍 {t('languages')}</h3>
+                        <h3 className="text-2xl font-bold text-white mb-6">🌍 {content?.languages}</h3>
                         <div className="grid md:grid-cols-3 gap-4">
                           {userDetails.languages.map((lang, idx) => (
                             <div
@@ -475,7 +476,7 @@ export default function Theme1({ userDetails, userLinks, bgcolor }) {
                 {/* Social Media */}
                 {userDetails.socials && Object.values(userDetails.socials).some(url => url) && (
                   <div className="mb-12">
-                    <h3 className="text-2xl font-bold text-white mb-6">{t('followMe')}</h3>
+                    <h3 className="text-2xl font-bold text-white mb-6">{content?.followMe}</h3>
                     <div className="flex gap-4 flex-wrap">
                       {[
                         { name: "linkedin", url: userDetails.socials.linkedin, icon: "/icons/linkedin.svg" },
@@ -514,7 +515,7 @@ export default function Theme1({ userDetails, userLinks, bgcolor }) {
           <footer className="border-t border-white/10 bg-black/20 backdrop-blur-md">
             <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8 text-center">
               <p className="text-white/60">
-                © {new Date().getFullYear()} {userDetails?.fullname}. {t('allRightsReserved')} ©
+                © {new Date().getFullYear()} {userDetails?.fullname}. {content?.allRightsReserved} ©
               </p>
             </div>
           </footer>

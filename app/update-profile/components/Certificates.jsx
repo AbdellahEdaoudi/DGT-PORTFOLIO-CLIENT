@@ -1,6 +1,10 @@
+"use client";
 import axios from "axios";
+import imageCompression from "browser-image-compression";
+import { handleApiError } from "../../utils/apiErrorHandler";
+const SERVER_URL = process.env.NEXT_PUBLIC_SERVER_URL;
 import NextImage from "next/image";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useToast } from "../../components/Toast";
 import { createPortal } from "react-dom";
 import {
@@ -16,9 +20,8 @@ import {
   Upload,
   Award,
   GripVertical,
-} from "../../components/Icons";
+} from "../../components/lucide-react";
 import ImageModal from "../../components/portfolio/ImageModal";
-import { getTranslation } from "../../translations/update-profile";
 import {
   DndContext,
   closestCenter,
@@ -63,13 +66,13 @@ const SortableItem = ({ id, children }) => {
   );
 };
 
-export default function Certificates({ userData, setUserDetails }) {
+export default function Certificates({ data, setData, content }) {
   const toast = useToast();
-  const t = getTranslation(userData?.displayLanguage || "en");
-
+  const user = data?.user || {};
+  
   // Initialize with collapsed: true and localId
   const [certificates, setCertificates] = useState(
-    (userData.certificates || []).map((e) => ({
+    (user.certificates || []).map((e) => ({
       ...e,
       collapsed: true,
       localId: e._id || `id-${Math.random().toString(36).substr(2, 9)}`,
@@ -77,7 +80,7 @@ export default function Certificates({ userData, setUserDetails }) {
   );
   // Track original order for comparison
   const [originalOrder, setOriginalOrder] = useState(
-    (userData.certificates || []).filter((c) => c._id).map((c) => c._id),
+    (user.certificates || []).filter((c) => c._id).map((c) => c._id),
   );
   const [savingIds, setSavingIds] = useState(new Set());
   const [deletingIds, setDeletingIds] = useState(new Set());
@@ -123,41 +126,14 @@ export default function Certificates({ userData, setUserDetails }) {
 
   // Compression Helper
   const compressImage = async (file) => {
-    return new Promise((resolve) => {
-      const reader = new FileReader();
-      reader.readAsDataURL(file);
-      reader.onload = (event) => {
-        const img = new Image();
-        img.src = event.target.result;
-        img.onload = () => {
-          const canvas = document.createElement("canvas");
-          let width = img.width;
-          let height = img.height;
-          const maxSize = 1200;
-          if (width > height && width > maxSize) {
-            height = (height * maxSize) / width;
-            width = maxSize;
-          } else if (height > maxSize) {
-            width = (width * maxSize) / height;
-            height = maxSize;
-          }
-          canvas.width = width;
-          canvas.height = height;
-          const ctx = canvas.getContext("2d");
-          ctx.drawImage(img, 0, 0, width, height);
-          canvas.toBlob(
-            (blob) => {
-              const compressedFile = new File([blob], file.name, {
-                type: "image/jpeg",
-                lastModified: Date.now(),
-              });
-              resolve(compressedFile);
-            },
-            "image/jpeg",
-            0.8,
-          );
-        };
-      };
+    const compressedBlob = await imageCompression(file, {
+      maxSizeMB: 0.19,
+      maxWidthOrHeight: 1200,
+      useWebWorker: true,
+    });
+    return new File([compressedBlob], file.name, {
+      type: compressedBlob.type || file.type,
+      lastModified: Date.now(),
     });
   };
 
@@ -193,7 +169,7 @@ export default function Certificates({ userData, setUserDetails }) {
   const updateFileInArray = async (index, file) => {
     if (!file) return;
     if (file.size > 5 * 1024 * 1024) {
-      toast.error(t("certificates.fileSizeError") || "File is too large");
+      toast.error(content?.fileSizeError || "File is too large");
       return;
     }
     try {
@@ -216,8 +192,7 @@ export default function Certificates({ userData, setUserDetails }) {
         }));
       }
     } catch (e) {
-      console.error("Compression error", e);
-      toast.error(t("certificates.errorMessage") || "Error processing image");
+      toast.error(content?.errorMessage || "Error processing image");
     }
   };
 
@@ -289,34 +264,21 @@ export default function Certificates({ userData, setUserDetails }) {
 
     setSavingIds((prev) => new Set(prev).add(index));
     try {
-      let finalImageUrl = item.cfimage || "";
+      const formData = new FormData();
+      if (item._id) formData.append("_id", item._id);
+      formData.append("title", item.title || "");
+      formData.append("description", item.description || "");
 
-      // 1. Upload Image if new file selected
       if (item.file) {
-        const formData = new FormData();
         formData.append("file", item.file);
-
-        const uploadRes = await axios.post(
-          "/api/proxy/users/update/certificates/upload",
-          formData,
-          {
-            headers: { "Content-Type": "multipart/form-data" },
-          },
-        );
-        finalImageUrl = uploadRes.data.url;
+      } else if (item.cfimage) {
+        formData.append("cfimage", item.cfimage);
       }
 
-      // 2. Save Item Data
-      const payload = {
-        _id: item._id, // if exists
-        title: item.title,
-        description: item.description,
-        cfimage: finalImageUrl,
-      };
-
       const res = await axios.put(
-        "/api/proxy/users/update/certificates/item",
-        payload,
+        `${SERVER_URL}/api/users/update/certificates/item`,
+        formData,
+        { withCredentials: true },
       );
 
       const newCertList = res.data.certificates;
@@ -334,11 +296,24 @@ export default function Certificates({ userData, setUserDetails }) {
       });
 
       setCertificates(mergedCerts);
-      if (setUserDetails) {
-        setUserDetails((prev) => ({ ...prev, certificates: newCertList }));
+      if (setData) {
+        setData((prev) => ({
+          ...prev,
+          user: {
+            ...(prev?.user || {}),
+            certificates: newCertList,
+          },
+        }));
       }
+      localStorage.setItem(`data_${data?.user?.username}`, JSON.stringify({
+        ...data,
+        user: {
+          ...(data?.user || {}),
+          certificates: newCertList,
+        },
+      }));
 
-      toast.success(t("certificates.savedSuccessfully"));
+      toast.success(content?.savedSuccessfully);
       setValidationErrors((prev) => {
         const next = { ...prev };
         delete next[index];
@@ -351,8 +326,7 @@ export default function Certificates({ userData, setUserDetails }) {
         setTimeout(() => setHighlightedId(null), 2000);
       }
     } catch (error) {
-      console.error("Error saving certificate:", error);
-      toast.error(t("certificates.errorMessage"));
+      await handleApiError({ error, defaultErrorMsg: content?.errorMessage, toast });
     } finally {
       setSavingIds((prev) => {
         const next = new Set(prev);
@@ -377,7 +351,8 @@ export default function Certificates({ userData, setUserDetails }) {
     setDeletingIds((prev) => new Set(prev).add(item._id));
     try {
       const res = await axios.delete(
-        `/api/proxy/users/update/certificates/${item._id}`,
+        `${SERVER_URL}/api/users/update/certificates/${item._id}`,
+        { withCredentials: true },
       );
       const newCertList = res.data.certificates;
       // Preserving state consistency isn't critical for localId here as list is replaced but good practice
@@ -389,15 +364,27 @@ export default function Certificates({ userData, setUserDetails }) {
         })),
       );
 
-      if (setUserDetails) {
-        setUserDetails((prev) => ({ ...prev, certificates: newCertList }));
+      if (setData) {
+        setData((prev) => ({
+          ...prev,
+          user: {
+            ...(prev?.user || {}),
+            certificates: newCertList,
+          },
+        }));
       }
+      localStorage.setItem(`data_${data?.user?.username}`, JSON.stringify({
+        ...data,
+        user: {
+          ...(data?.user || {}),
+          certificates: newCertList,
+        },
+      }));
       toast.success(
-        t("certificates.deletedSuccessfully") || "Deleted successfully",
+        content?.deletedSuccessfully || "Deleted successfully",
       );
     } catch (error) {
-      console.error("Error deleting certificate:", error);
-      toast.error(t("certificates.errorMessage"));
+      await handleApiError({ error, defaultErrorMsg: content?.errorMessage, toast });
     } finally {
       setDeletingIds((prev) => {
         const next = new Set(prev);
@@ -416,33 +403,47 @@ export default function Certificates({ userData, setUserDetails }) {
         .map((e) => ({ _id: e._id }));
       if (certificatesWithIds.length !== certificates.length) {
         toast.warning(
-          t("certificates.saveNewItemsFirst") || "Please save new items first",
+          content?.saveNewItemsFirst || "Please save new items first",
         );
         setLoading(false);
         return;
       }
 
-      await axios.put(`/api/proxy/users/update/certificates/order`, {
-        certificates: certificatesWithIds,
-      });
+      await axios.put(
+        `${SERVER_URL}/api/users/update/certificates/order`,
+        {
+          certificates: certificatesWithIds,
+        },
+        { withCredentials: true },
+      );
 
-      if (setUserDetails) {
-        setUserDetails((prev) => ({
+      const orderedCertificates = certificates.map(
+        ({ collapsed, file, previewUrl, localId, ...rest }) => rest,
+      );
+      if (setData) {
+        setData((prev) => ({
           ...prev,
-          certificates: certificates.map(
-            ({ collapsed, file, previewUrl, localId, ...rest }) => rest,
-          ),
+          user: {
+            ...(prev?.user || {}),
+            certificates: orderedCertificates,
+          },
         }));
       }
+      localStorage.setItem(`data_${data?.user?.username}`, JSON.stringify({
+        ...data,
+        user: {
+          ...(data?.user || {}),
+          certificates: orderedCertificates,
+        },
+      }));
 
       // Update original order after successful save
       const newOrder = certificates.filter((c) => c._id).map((c) => c._id);
       setOriginalOrder(newOrder);
 
-      toast.success(t("certificates.orderSaved") || "Order saved");
+      toast.success(content?.orderSaved || "Order saved");
     } catch (error) {
-      console.error("Error updating order:", error);
-      toast.error(t("certificates.errorMessage"));
+      await handleApiError({ error, defaultErrorMsg: content?.errorMessage, toast });
     } finally {
       setLoading(false);
     }
@@ -451,11 +452,11 @@ export default function Certificates({ userData, setUserDetails }) {
   return (
     <div
       className="space-y-4"
-      dir={userData?.displayLanguage === "ar" ? "rtl" : "ltr"}
+      dir={user?.displayLanguage === "ar" ? "rtl" : "ltr"}
     >
       <h3 className="text-lg font-bold text-gray-800 flex items-center gap-2">
         <Award className="text-blue-500" />{" "}
-        {t("certificates.title") || "Certificates"}
+        {content?.title || "Certificates"}
       </h3>
 
       <div className="bg-gradient-to-br from-blue-50 to-indigo-50 p-2 md:p-4 rounded-xl border border-blue-200 space-y-3">
@@ -525,7 +526,7 @@ export default function Certificates({ userData, setUserDetails }) {
                             <input
                               type="text"
                               placeholder={
-                                t("certificates.certificateTitle") ||
+                                content?.certificateTitle ||
                                 "Certificate Title"
                               }
                               value={cert.title || ""}
@@ -545,7 +546,7 @@ export default function Certificates({ userData, setUserDetails }) {
                             {validationErrors[index]?.title && (
                               <p className="text-red-500 text-[8px] sm:text-xs mt-0.5 sm:mt-1.5 flex items-center gap-1 font-medium animate-in slide-in-from-top-1">
                                 <AlertCircle className="w-2.5 h-2.5 sm:w-[14px] sm:h-[14px]" />
-                                {t("certificates.titleRequired") ||
+                                {content?.titleRequired ||
                                   "Title is required"}
                               </p>
                             )}
@@ -559,8 +560,8 @@ export default function Certificates({ userData, setUserDetails }) {
                             className={`p-0.5 sm:p-2 rounded-lg transition-colors flex items-center gap-1 sm:gap-2 text-[8px] sm:text-sm font-medium ${cert.collapsed ? "bg-blue-50 text-blue-700 hover:bg-blue-100" : "bg-gray-100 text-gray-700 hover:bg-gray-200"}`}
                             title={
                               cert.collapsed
-                                ? t("certificates.edit")
-                                : t("certificates.collapse") || "Collapse"
+                                ? content?.edit
+                                : content?.collapse || "Collapse"
                             }
                           >
                             {cert.collapsed ? (
@@ -570,8 +571,8 @@ export default function Certificates({ userData, setUserDetails }) {
                             )}
                             <span className="hidden md:inline">
                               {cert.collapsed
-                                ? t("certificates.edit")
-                                : t("certificates.close") || "Close"}
+                                ? content?.edit
+                                : content?.close || "Close"}
                             </span>
                           </button>
 
@@ -617,7 +618,7 @@ export default function Certificates({ userData, setUserDetails }) {
                           <div className="grid grid-cols-1 md:grid-cols-2 gap-2 sm:gap-4">
                             <div className="flex flex-col gap-1 sm:gap-2">
                               <label className="text-[10px] sm:text-sm font-medium text-gray-700 ml-1">
-                                {t("certificates.certificateImage") ||
+                                {content?.certificateImage ||
                                   "Certificate Image"}
                               </label>
                               {!(cert.cfimage || cert.previewUrl) ? (
@@ -642,16 +643,14 @@ export default function Certificates({ userData, setUserDetails }) {
                                     <span
                                       className={`${validationErrors[index]?.image ? "text-red-500" : "text-blue-600"} text-[9px] sm:text-sm font-medium`}
                                     >
-                                      {t(
-                                        "certificates.selectCertificateImage",
-                                      ) || "Select Image (Required)"}{" "}
+                                      {content?.selectCertificateImage || "Select Image (Required)"}{" "}
                                       *
                                     </span>
                                   </label>
                                   {validationErrors[index]?.image && (
                                     <p className="text-red-500 text-[9px] sm:text-xs mt-0.5 sm:mt-1.5 flex items-center gap-1 font-medium animate-in slide-in-from-top-1">
                                       <AlertCircle className="w-3 h-3 sm:w-[14px] sm:h-[14px]" />
-                                      {t("certificates.imageRequired") ||
+                                      {content?.imageRequired ||
                                         "Image is required"}
                                     </p>
                                   )}
@@ -673,26 +672,30 @@ export default function Certificates({ userData, setUserDetails }) {
                                           cert.previewUrl || cert.cfimage,
                                         )
                                       }
-                                      className="px-2 py-1 sm:px-3 sm:py-1 bg-white rounded-full text-[9px] sm:text-xs font-bold text-gray-800 hover:bg-gray-100"
+                                      className="px-2 py-1 sm:px-3 sm:py-1 bg-white rounded-full text-[9px] sm:text-xs font-bold text-gray-800 hover:bg-gray-100 transition-colors"
                                     >
-                                      {t("certificates.view")}
+                                      {content?.view || "View"}
                                     </button>
-                                    <button
-                                      type="button"
-                                      onClick={() => {
-                                        const updated = [...certificates];
-                                        updated[index] = {
-                                          ...updated[index],
-                                          file: null,
-                                          previewUrl: null,
-                                          cfimage: "",
-                                        }; // Full clear
-                                        setCertificates(updated);
+                                    <input
+                                      type="file"
+                                      accept="image/*"
+                                      id={`cert-change-${index}`}
+                                      className="hidden"
+                                      onChange={(e) => {
+                                        if (e.target.files?.[0]) {
+                                          updateFileInArray(
+                                            index,
+                                            e.target.files[0],
+                                          );
+                                        }
                                       }}
-                                      className="px-2 py-1 sm:px-3 sm:py-1 bg-white rounded-full text-[9px] sm:text-xs font-bold text-red-600 hover:bg-red-50"
+                                    />
+                                    <label
+                                      htmlFor={`cert-change-${index}`}
+                                      className="px-2 py-1 sm:px-3 sm:py-1 bg-blue-600 hover:bg-blue-700 text-white rounded-full text-[9px] sm:text-xs font-bold cursor-pointer transition-colors shadow-sm"
                                     >
-                                      {t("certificates.remove")}
-                                    </button>
+                                      {content?.update || "Update"}
+                                    </label>
                                   </div>
                                 </div>
                               )}
@@ -701,11 +704,11 @@ export default function Certificates({ userData, setUserDetails }) {
                             {/* Description */}
                             <div className="flex flex-col gap-1 sm:gap-2">
                               <label className="text-[10px] sm:text-sm font-medium text-gray-700 ml-1">
-                                {t("certificates.description")}
+                                {content?.description}
                               </label>
                               <textarea
                                 placeholder={
-                                  t("certificates.description") || "Description"
+                                  content?.description || "Description"
                                 }
                                 value={cert.description || ""}
                                 maxLength={200}
@@ -724,7 +727,7 @@ export default function Certificates({ userData, setUserDetails }) {
                               {validationErrors[index]?.description && (
                                 <p className="text-red-500 text-[9px] sm:text-xs mt-1 sm:mt-1.5 flex items-center gap-1 sm:gap-1.5 font-medium animate-in slide-in-from-top-1">
                                   <AlertCircle className="w-3 h-3 sm:w-[14px] sm:h-[14px]" />
-                                  {t("certificates.descriptionRequired") ||
+                                  {content?.descriptionRequired ||
                                     "Description is required"}
                                 </p>
                               )}
@@ -743,7 +746,7 @@ export default function Certificates({ userData, setUserDetails }) {
                               ) : (
                                 <CheckCheck className="w-3 h-3 sm:w-4 sm:h-4" />
                               )}
-                              {t("certificates.save") || "Save"}
+                              {content?.save || "Save"}
                             </button>
                           </div>
                         </div>
@@ -773,8 +776,8 @@ export default function Certificates({ userData, setUserDetails }) {
         >
           <Plus className="w-4 h-4 sm:w-[18px] sm:h-[18px]" />{" "}
           {certificates.length >= 10
-            ? t("certificates.maxLimit")
-            : t("certificates.addCertificate")}
+            ? content?.maxLimit
+            : content?.addCertificate}
         </button>
       </div>
 
@@ -802,10 +805,10 @@ export default function Certificates({ userData, setUserDetails }) {
                   size={20}
                   className="animate-spin w-4 h-4 sm:w-5 sm:h-5"
                 />{" "}
-                {t("certificates.saving")}
+                {content?.saving}
               </>
             ) : (
-              `💾 ${t("certificates.saveOrder") || "Save Order"}`
+              `💾 ${content?.saveOrder || "Save Order"}`
             )}
           </button>
         </div>
@@ -823,7 +826,7 @@ export default function Certificates({ userData, setUserDetails }) {
               <button
                 onClick={() => setItemToDelete(null)}
                 className="absolute top-4 right-4 text-gray-400 hover:text-gray-600 transition p-1 rounded-full hover:bg-gray-100"
-                title={t("certificates.close") || "Close"}
+                title={content?.close || "Close"}
               >
                 <X className="w-5 h-5" />
               </button>
@@ -836,13 +839,13 @@ export default function Certificates({ userData, setUserDetails }) {
                 <div className="text-gray-600 mb-6 text-base leading-relaxed">
                   <div className="flex flex-col gap-2">
                     <span className="font-semibold text-gray-800">
-                      {t("certificates.deleteConfirm") ||
+                      {content?.deleteConfirm ||
                         "Are you sure you want to delete this certificate?"}
                     </span>
                     <span className="font-bold text-black border-t pt-2 mt-1 break-all">
                       "
                       {certificates[itemToDelete]?.title ||
-                        t("certificates.thisCertificate") ||
+                        content?.thisCertificate ||
                         "this certificate"}
                       "
                     </span>
@@ -855,14 +858,14 @@ export default function Certificates({ userData, setUserDetails }) {
                   onClick={() => setItemToDelete(null)}
                   className="flex-1 px-4 py-2.5 bg-gray-200 hover:bg-gray-300 text-gray-800 font-bold rounded-lg transition-all duration-200"
                 >
-                  {t("certificates.cancel") || "Cancel"}
+                  {content?.cancel || "Cancel"}
                 </button>
                 <button
                   onClick={confirmDelete}
                   className="flex-1 px-4 py-2.5 bg-red-600 hover:bg-red-700 text-white font-medium rounded-lg shadow-md transition duration-200 flex items-center justify-center gap-2"
                 >
                   <Trash2 size={18} />
-                  <span>{t("certificates.delete") || "Delete"}</span>
+                  <span>{content?.delete || "Delete"}</span>
                 </button>
               </div>
             </div>
@@ -874,7 +877,7 @@ export default function Certificates({ userData, setUserDetails }) {
         isOpen={!!selectedImage}
         onClose={() => setSelectedImage(null)}
         imageSrc={selectedImage}
-        altText={t("certificates.certificatePreview") || "Certificate Preview"}
+        altText={content?.certificatePreview || "Certificate Preview"}
       />
     </div>
   );
